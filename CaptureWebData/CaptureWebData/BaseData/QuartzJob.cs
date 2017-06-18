@@ -56,6 +56,31 @@ namespace CaptureWebData
                // scheduler.DeleteJob(jy);
             }
         }
+        public void DeleteJob<T>() where T : IJob
+        {//删除上次运行程序没有关闭的作业
+            Type t = typeof(T);
+            string group = "PickUpDataResD";// new ConfigurationItems().AppNameEng;
+            DeleteJob(t.Name, group);
+            DeleteJob(t.FullName, group);
+
+        }
+        public void DeleteJob(string jobName,string group) 
+        {
+            JobKey key ;
+            if (string.IsNullOrEmpty(group))
+                key = new JobKey(jobName);
+            else
+                key = new JobKey(jobName, group);
+            if (scheduler == null)
+            {
+                scheduler = GetScheduler();
+            }
+            IJobDetail job = scheduler.GetJobDetail(key);
+            if (job != null)
+            {
+                scheduler.DeleteJob(key);
+            }
+        }
         public void CreateJobWithParam<T>(object param, DateTime start, int interval, int repeat) where T : IJob
         {
             CreateJobWithParam<T>(param, start, interval, repeat, new ConfigurationItems().AppNameEng);

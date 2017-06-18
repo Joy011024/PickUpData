@@ -53,6 +53,10 @@
       <Project>{20f7ef8c-d882-498a-9d4e-2e1f1a6ec2f2}</Project>
       <Name>Infrastructure.EFMsSQL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\InfrastructureRepository\InfrastructureRepository.IMainContext\InfrastructureRepository.IMainContext.csproj">
+      <Project>{a790a117-b949-47f8-8a62-9a22e996fcc8}</Project>
+      <Name>InfrastructureRepository.IMainContext</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

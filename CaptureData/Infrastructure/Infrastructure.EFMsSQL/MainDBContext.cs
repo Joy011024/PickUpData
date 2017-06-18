@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using InfrastructureRepository.IMainContext;
 namespace Infrastructure.EFMsSQL
 {
     class MainDbContext<T> : DbContext where T : class
@@ -25,7 +26,7 @@ namespace Infrastructure.EFMsSQL
         }
 
     }
-    public class MainRespority<T>   where  T: class
+    public class MainRespority<T>:IMainRepository<T>   where  T: class
     {
         public bool HasException { get; private set; }
         public string Message { get; private set; }

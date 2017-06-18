@@ -22,18 +22,25 @@ namespace SelfControlForm
         }
         void GetSelectTaPanel() 
         {
-            TabPage page = tab.SelectedTab;
-            Control ele = GetElement();
-            WebKitBrowser wkb;
-            if (ele == null) 
+            try
             {
-                ele = new WebKitBrowser();
-                ele.Dock = DockStyle.Fill;
-                page.Controls.Add(ele);
+                TabPage page = tab.SelectedTab;
+                Control ele = GetElement();
+                WebKitBrowser wkb;
+                if (ele == null)
+                {
+                    ele = new WebKitBrowser();
+                    ele.Dock = DockStyle.Fill;
+                    page.Controls.Add(ele);
+                }
+                wkb = (WebKitBrowser)ele;
+                string url = rtbUrl.Text;
+                wkb.Navigate(url);
             }
-            wkb = (WebKitBrowser)ele;
-            string url = rtbUrl.Text;
-            wkb.Navigate(url);
+            catch (Exception ex)
+            { 
+            
+            }
         }
         /// <summary>
         ///从容器中查找出谷歌内核

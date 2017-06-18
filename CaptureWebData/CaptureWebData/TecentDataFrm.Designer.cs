@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.webBrowserData = new SelfControlForm.WebBrowserData();
             this.btnQuery = new System.Windows.Forms.Button();
             this.lblTimeSpan = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,21 +45,15 @@
             this.cmbGender = new System.Windows.Forms.ComboBox();
             this.ckStartQuartz = new System.Windows.Forms.CheckBox();
             this.rtbTip = new System.Windows.Forms.RichTextBox();
+            this.btnDeleteQuartz = new System.Windows.Forms.Button();
+            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // webBrowserData
-            // 
-            this.webBrowserData.Call = null;
-            this.webBrowserData.Cookie = null;
-            this.webBrowserData.Location = new System.Drawing.Point(12, 12);
-            this.webBrowserData.Name = "webBrowserData";
-            this.webBrowserData.Size = new System.Drawing.Size(1014, 682);
-            this.webBrowserData.TabIndex = 0;
-            this.webBrowserData.Load += new System.EventHandler(this.webBrowserData_Load);
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(759, 2);
+            this.btnQuery.Location = new System.Drawing.Point(567, 190);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 1;
@@ -71,7 +64,7 @@
             // lblTimeSpan
             // 
             this.lblTimeSpan.AutoSize = true;
-            this.lblTimeSpan.Location = new System.Drawing.Point(1032, 120);
+            this.lblTimeSpan.Location = new System.Drawing.Point(563, 337);
             this.lblTimeSpan.Name = "lblTimeSpan";
             this.lblTimeSpan.Size = new System.Drawing.Size(77, 12);
             this.lblTimeSpan.TabIndex = 2;
@@ -80,7 +73,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1032, 186);
+            this.label1.Location = new System.Drawing.Point(563, 372);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 3;
@@ -88,22 +81,24 @@
             // 
             // txtTimeSpan
             // 
-            this.txtTimeSpan.Location = new System.Drawing.Point(1034, 149);
+            this.txtTimeSpan.Location = new System.Drawing.Point(655, 328);
             this.txtTimeSpan.Name = "txtTimeSpan";
-            this.txtTimeSpan.Size = new System.Drawing.Size(75, 21);
+            this.txtTimeSpan.Size = new System.Drawing.Size(103, 21);
             this.txtTimeSpan.TabIndex = 4;
+            this.txtTimeSpan.Text = "30";
             // 
             // txtRepeact
             // 
-            this.txtRepeact.Location = new System.Drawing.Point(1034, 218);
+            this.txtRepeact.Location = new System.Drawing.Point(655, 363);
             this.txtRepeact.Name = "txtRepeact";
-            this.txtRepeact.Size = new System.Drawing.Size(75, 21);
+            this.txtRepeact.Size = new System.Drawing.Size(103, 21);
             this.txtRepeact.TabIndex = 5;
+            this.txtRepeact.Text = "0";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1034, 291);
+            this.label2.Location = new System.Drawing.Point(2, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 6;
@@ -112,7 +107,7 @@
             // cmbProvince
             // 
             this.cmbProvince.FormattingEnabled = true;
-            this.cmbProvince.Location = new System.Drawing.Point(1034, 316);
+            this.cmbProvince.Location = new System.Drawing.Point(98, 25);
             this.cmbProvince.Name = "cmbProvince";
             this.cmbProvince.Size = new System.Drawing.Size(103, 20);
             this.cmbProvince.TabIndex = 7;
@@ -121,7 +116,7 @@
             // lblCity
             // 
             this.lblCity.AutoSize = true;
-            this.lblCity.Location = new System.Drawing.Point(1034, 348);
+            this.lblCity.Location = new System.Drawing.Point(6, 66);
             this.lblCity.Name = "lblCity";
             this.lblCity.Size = new System.Drawing.Size(35, 12);
             this.lblCity.TabIndex = 8;
@@ -130,7 +125,7 @@
             // cmbCity
             // 
             this.cmbCity.FormattingEnabled = true;
-            this.cmbCity.Location = new System.Drawing.Point(1034, 380);
+            this.cmbCity.Location = new System.Drawing.Point(98, 66);
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.Size = new System.Drawing.Size(103, 20);
             this.cmbCity.TabIndex = 9;
@@ -138,7 +133,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1036, 35);
+            this.label3.Location = new System.Drawing.Point(563, 298);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 10;
@@ -146,16 +141,16 @@
             // 
             // txtCurrentLimit
             // 
-            this.txtCurrentLimit.Location = new System.Drawing.Point(1034, 50);
+            this.txtCurrentLimit.Location = new System.Drawing.Point(655, 295);
             this.txtCurrentLimit.Name = "txtCurrentLimit";
-            this.txtCurrentLimit.Size = new System.Drawing.Size(75, 21);
+            this.txtCurrentLimit.Size = new System.Drawing.Size(103, 21);
             this.txtCurrentLimit.TabIndex = 11;
             this.txtCurrentLimit.Text = "30";
             // 
             // lblDistinct
             // 
             this.lblDistinct.AutoSize = true;
-            this.lblDistinct.Location = new System.Drawing.Point(1036, 423);
+            this.lblDistinct.Location = new System.Drawing.Point(6, 101);
             this.lblDistinct.Name = "lblDistinct";
             this.lblDistinct.Size = new System.Drawing.Size(17, 12);
             this.lblDistinct.TabIndex = 12;
@@ -164,7 +159,7 @@
             // cmbDistinct
             // 
             this.cmbDistinct.FormattingEnabled = true;
-            this.cmbDistinct.Location = new System.Drawing.Point(1038, 453);
+            this.cmbDistinct.Location = new System.Drawing.Point(98, 98);
             this.cmbDistinct.Name = "cmbDistinct";
             this.cmbDistinct.Size = new System.Drawing.Size(103, 20);
             this.cmbDistinct.TabIndex = 13;
@@ -172,7 +167,7 @@
             // lblGender
             // 
             this.lblGender.AutoSize = true;
-            this.lblGender.Location = new System.Drawing.Point(1036, 498);
+            this.lblGender.Location = new System.Drawing.Point(563, 252);
             this.lblGender.Name = "lblGender";
             this.lblGender.Size = new System.Drawing.Size(29, 12);
             this.lblGender.TabIndex = 14;
@@ -182,7 +177,7 @@
             // 
             this.cmbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGender.FormattingEnabled = true;
-            this.cmbGender.Location = new System.Drawing.Point(1036, 528);
+            this.cmbGender.Location = new System.Drawing.Point(655, 252);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(103, 20);
             this.cmbGender.TabIndex = 15;
@@ -190,7 +185,7 @@
             // ckStartQuartz
             // 
             this.ckStartQuartz.AutoSize = true;
-            this.ckStartQuartz.Location = new System.Drawing.Point(680, 8);
+            this.ckStartQuartz.Location = new System.Drawing.Point(665, 219);
             this.ckStartQuartz.Name = "ckStartQuartz";
             this.ckStartQuartz.Size = new System.Drawing.Size(72, 16);
             this.ckStartQuartz.TabIndex = 16;
@@ -199,38 +194,69 @@
             // 
             // rtbTip
             // 
-            this.rtbTip.Location = new System.Drawing.Point(1034, 570);
+            this.rtbTip.Location = new System.Drawing.Point(559, 541);
             this.rtbTip.Name = "rtbTip";
-            this.rtbTip.Size = new System.Drawing.Size(105, 114);
+            this.rtbTip.Size = new System.Drawing.Size(205, 155);
             this.rtbTip.TabIndex = 17;
             this.rtbTip.Text = "";
+            // 
+            // btnDeleteQuartz
+            // 
+            this.btnDeleteQuartz.Location = new System.Drawing.Point(567, 219);
+            this.btnDeleteQuartz.Name = "btnDeleteQuartz";
+            this.btnDeleteQuartz.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteQuartz.TabIndex = 18;
+            this.btnDeleteQuartz.Text = "关闭轮询";
+            this.btnDeleteQuartz.UseVisualStyleBackColor = true;
+            this.btnDeleteQuartz.Click += new System.EventHandler(this.btnDeleteQuartz_Click);
+            // 
+            // pickUpIEWebCookie
+            // 
+            this.pickUpIEWebCookie.CallBack = null;
+            this.pickUpIEWebCookie.Location = new System.Drawing.Point(12, 12);
+            this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
+            this.pickUpIEWebCookie.Size = new System.Drawing.Size(545, 694);
+            this.pickUpIEWebCookie.TabIndex = 19;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.cmbProvince);
+            this.groupBox1.Controls.Add(this.cmbDistinct);
+            this.groupBox1.Controls.Add(this.lblCity);
+            this.groupBox1.Controls.Add(this.lblDistinct);
+            this.groupBox1.Controls.Add(this.cmbCity);
+            this.groupBox1.Location = new System.Drawing.Point(559, 390);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(214, 125);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "所在地";
             // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1147, 708);
+            this.ClientSize = new System.Drawing.Size(781, 708);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.pickUpIEWebCookie);
+            this.Controls.Add(this.btnDeleteQuartz);
             this.Controls.Add(this.rtbTip);
             this.Controls.Add(this.ckStartQuartz);
             this.Controls.Add(this.cmbGender);
             this.Controls.Add(this.lblGender);
-            this.Controls.Add(this.cmbDistinct);
-            this.Controls.Add(this.lblDistinct);
             this.Controls.Add(this.txtCurrentLimit);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.cmbCity);
-            this.Controls.Add(this.lblCity);
-            this.Controls.Add(this.cmbProvince);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtRepeact);
             this.Controls.Add(this.txtTimeSpan);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTimeSpan);
             this.Controls.Add(this.btnQuery);
-            this.Controls.Add(this.webBrowserData);
             this.Name = "TecentDataFrm";
             this.Text = "TecentDataFrm";
             this.Load += new System.EventHandler(this.TecentDataFrm_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,7 +264,6 @@
 
         #endregion
 
-        private SelfControlForm.WebBrowserData webBrowserData;
         private System.Windows.Forms.Button btnQuery;
         private System.Windows.Forms.Label lblTimeSpan;
         private System.Windows.Forms.Label label1;
@@ -256,6 +281,9 @@
         private System.Windows.Forms.ComboBox cmbGender;
         private System.Windows.Forms.CheckBox ckStartQuartz;
         private System.Windows.Forms.RichTextBox rtbTip;
+        private System.Windows.Forms.Button btnDeleteQuartz;
+        private SelfControlForm.PickUpIEWebCookieData pickUpIEWebCookie;
+        private System.Windows.Forms.GroupBox groupBox1;
 
 
 

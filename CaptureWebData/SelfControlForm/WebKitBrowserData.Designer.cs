@@ -32,12 +32,12 @@
             this.tabPageHome = new System.Windows.Forms.TabPage();
             this.tabPageLogic = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPickUpCookie = new System.Windows.Forms.Button();
             this.btnBrowser = new System.Windows.Forms.Button();
             this.rtbUrl = new System.Windows.Forms.RichTextBox();
             this.lblUrl = new System.Windows.Forms.Label();
             this.rtbCookie = new System.Windows.Forms.RichTextBox();
             this.lblCookie = new System.Windows.Forms.Label();
-            this.btnPickUpCookie = new System.Windows.Forms.Button();
             this.lblTip = new System.Windows.Forms.Label();
             this.rtbTip = new System.Windows.Forms.RichTextBox();
             this.tab.SuspendLayout();
@@ -51,7 +51,7 @@
             this.tab.Location = new System.Drawing.Point(15, 48);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
-            this.tab.Size = new System.Drawing.Size(1035, 617);
+            this.tab.Size = new System.Drawing.Size(758, 509);
             this.tab.TabIndex = 0;
             // 
             // tabPageHome
@@ -59,7 +59,7 @@
             this.tabPageHome.Location = new System.Drawing.Point(4, 22);
             this.tabPageHome.Name = "tabPageHome";
             this.tabPageHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHome.Size = new System.Drawing.Size(1027, 606);
+            this.tabPageHome.Size = new System.Drawing.Size(750, 483);
             this.tabPageHome.TabIndex = 0;
             this.tabPageHome.Text = "依赖";
             this.tabPageHome.UseVisualStyleBackColor = true;
@@ -82,8 +82,18 @@
             this.panel1.Controls.Add(this.lblUrl);
             this.panel1.Location = new System.Drawing.Point(16, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1027, 39);
+            this.panel1.Size = new System.Drawing.Size(757, 39);
             this.panel1.TabIndex = 1;
+            // 
+            // btnPickUpCookie
+            // 
+            this.btnPickUpCookie.Location = new System.Drawing.Point(637, 8);
+            this.btnPickUpCookie.Name = "btnPickUpCookie";
+            this.btnPickUpCookie.Size = new System.Drawing.Size(75, 23);
+            this.btnPickUpCookie.TabIndex = 5;
+            this.btnPickUpCookie.Text = "提取cookie";
+            this.btnPickUpCookie.UseVisualStyleBackColor = true;
+            this.btnPickUpCookie.Click += new System.EventHandler(this.btnPickUpCookie_Click);
             // 
             // btnBrowser
             // 
@@ -114,37 +124,27 @@
             // 
             // rtbCookie
             // 
-            this.rtbCookie.Location = new System.Drawing.Point(66, 666);
+            this.rtbCookie.Location = new System.Drawing.Point(64, 557);
             this.rtbCookie.Name = "rtbCookie";
-            this.rtbCookie.Size = new System.Drawing.Size(603, 25);
+            this.rtbCookie.Size = new System.Drawing.Size(705, 25);
             this.rtbCookie.TabIndex = 0;
             this.rtbCookie.Text = "";
             // 
             // lblCookie
             // 
             this.lblCookie.AutoSize = true;
-            this.lblCookie.Location = new System.Drawing.Point(19, 672);
+            this.lblCookie.Location = new System.Drawing.Point(17, 560);
             this.lblCookie.Name = "lblCookie";
             this.lblCookie.Size = new System.Drawing.Size(41, 12);
             this.lblCookie.TabIndex = 2;
             this.lblCookie.Text = "Cookie";
-            // 
-            // btnPickUpCookie
-            // 
-            this.btnPickUpCookie.Location = new System.Drawing.Point(637, 8);
-            this.btnPickUpCookie.Name = "btnPickUpCookie";
-            this.btnPickUpCookie.Size = new System.Drawing.Size(75, 23);
-            this.btnPickUpCookie.TabIndex = 5;
-            this.btnPickUpCookie.Text = "提取cookie";
-            this.btnPickUpCookie.UseVisualStyleBackColor = true;
-            this.btnPickUpCookie.Click += new System.EventHandler(this.btnPickUpCookie_Click);
             // 
             // lblTip
             // 
             this.lblTip.AutoSize = true;
             this.lblTip.BackColor = System.Drawing.SystemColors.Control;
             this.lblTip.ForeColor = System.Drawing.Color.Red;
-            this.lblTip.Location = new System.Drawing.Point(681, 672);
+            this.lblTip.Location = new System.Drawing.Point(17, 586);
             this.lblTip.Name = "lblTip";
             this.lblTip.Size = new System.Drawing.Size(29, 12);
             this.lblTip.TabIndex = 3;
@@ -152,9 +152,9 @@
             // 
             // rtbTip
             // 
-            this.rtbTip.Location = new System.Drawing.Point(728, 666);
+            this.rtbTip.Location = new System.Drawing.Point(64, 588);
             this.rtbTip.Name = "rtbTip";
-            this.rtbTip.Size = new System.Drawing.Size(322, 25);
+            this.rtbTip.Size = new System.Drawing.Size(705, 25);
             this.rtbTip.TabIndex = 1;
             this.rtbTip.Text = "";
             // 
@@ -169,7 +169,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tab);
             this.Name = "WebKitBrowserData";
-            this.Size = new System.Drawing.Size(1053, 694);
+            this.Size = new System.Drawing.Size(782, 620);
             this.Load += new System.EventHandler(this.WebKitBrowserData_Load);
             this.tab.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

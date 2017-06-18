@@ -39,7 +39,7 @@ namespace CaptureWebData
         {
             Dictionary<string, object> fields = EGender.Men.GetEnumFieldAttributeDict("DescriptionAttribute", "Description");
             BindComboBoxDict(fields,cmbGender);
-            webBrowserData.Call = CallBack;
+            pickUpIEWebCookie.CallBack = CallBack;
             CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
             IEnumerable<NodeData> city = cds.QueryCityCategory();
             cityList = city.ToList();
@@ -154,6 +154,12 @@ namespace CaptureWebData
 
                 rtbTip.Text = "Error\r\n" + res.responseJson;
             }
+        }
+
+        private void btnDeleteQuartz_Click(object sender, EventArgs e)
+        {
+            QuartzJob job = new QuartzJob();
+            job.DeleteJob<JobAction<QQDataDA>>();
         }
     }
 }

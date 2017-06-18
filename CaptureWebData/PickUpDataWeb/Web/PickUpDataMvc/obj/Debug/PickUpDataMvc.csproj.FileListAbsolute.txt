@@ -37,4 +37,3 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\obj\Debug\PickUpDataMvc.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\obj\Debug\PickUpDataMvc.pdb
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\obj\Debug\PickUpDataMvc.csprojResolveAssemblyReference.cache

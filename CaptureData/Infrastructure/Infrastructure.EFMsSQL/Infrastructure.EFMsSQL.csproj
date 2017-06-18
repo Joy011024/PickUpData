@@ -46,6 +46,12 @@
     <Compile Include="MainDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InfrastructureRepository\InfrastructureRepository.IMainContext\InfrastructureRepository.IMainContext.csproj">
+      <Project>{a790a117-b949-47f8-8a62-9a22e996fcc8}</Project>
+      <Name>InfrastructureRepository.IMainContext</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

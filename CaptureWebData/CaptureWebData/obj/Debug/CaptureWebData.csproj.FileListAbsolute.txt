@@ -55,3 +55,6 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\Captur
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.exe.config
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.EleTestFrm.resources
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\InfrastructureRepository.IMainContext.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\InfrastructureRepository.IMainContext.pdb

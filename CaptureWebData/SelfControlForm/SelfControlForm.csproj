@@ -49,6 +49,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PickUpIEWebCookieData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PickUpIEWebCookieData.Designer.cs">
+      <DependentUpon>PickUpIEWebCookieData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebBrowserData.cs">
       <SubType>UserControl</SubType>
@@ -64,6 +70,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="PickUpIEWebCookieData.resx">
+      <DependentUpon>PickUpIEWebCookieData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WebBrowserData.resx">
       <DependentUpon>WebBrowserData.cs</DependentUpon>
     </EmbeddedResource>
