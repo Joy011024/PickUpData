@@ -1,0 +1,63 @@
+1.请求的URL： 
+
+http://jwgl.jxau.edu.cn/Common/BaseData/GetTreeListForCetCj/2ef83fd7-46c7-496b-8b81-c3d834c6853e
+
+2.请求参数：
+
+General：
+Request URL:http://jwgl.jxau.edu.cn/Common/BaseData/GetTreeListForCetCj/2ef83fd7-46c7-496b-8b81-c3d834c6853e
+Request Method:POST
+Status Code:200 OK
+Remote Address:220.175.15.203:80
+
+Response Headers:
+
+Cache-Control:private
+Content-Length:2044
+Content-Type:application/json; charset=utf-8
+Date:Mon, 08 May 2017 14:41:49 GMT
+Server:Microsoft-IIS/7.0
+X-Powered-By:ASP.NET
+
+Request Headers:
+
+Accept:*/*
+Accept-Encoding:gzip, deflate
+Accept-Language:zh-CN,zh;q=0.8
+Connection:keep-alive
+Content-Length:43
+Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+Cookie:ASP.NET_SessionId=hg0n0h0hikwljb3qemihilg2; 6671b234-4224-4f77-bb7d-200447314442=ticket=; 1d3f7d21-88bb-43b9-9b88-162e81be2c9d=ticket=; 2ef83fd7-46c7-496b-8b81-c3d834c6853e=ticket=373433640C1A39DF; Password=Password=
+Host:jwgl.jxau.edu.cn
+Origin:http://jwgl.jxau.edu.cn
+Referer:http://jwgl.jxau.edu.cn/XueJiManage/XueJiManage/XueJiManage/2ef83fd7-46c7-496b-8b81-c3d834c6853e
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36
+X-Requested-With:XMLHttpRequest
+
+Form Data:
+{//查找更节点列表
+	parentid:treeroot
+	method:POST
+	node:treeroot
+}
+
+{//查找子节点列表
+	parentid:1101
+	method:POST
+	node:1101
+}
+3.响应数据
+
+{
+	[
+		{
+			children:null,
+			iconCls:"Department",
+			id:"11010100",
+			leaf:false,
+			nodeType:null,
+			text:"农学(<font color=#0099FF>无</font>)"
+		}
+	]
+}
+}

@@ -1,0 +1,2 @@
+http://s.url.cn/qqfind/js/location.js 城市数据
+http://s.url.cn/qqfind/js/location4.js（需要转换为utf8的国家数据）

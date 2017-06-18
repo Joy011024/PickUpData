@@ -1,0 +1,36 @@
+1.请求Url：
+http://jwgl.jxau.edu.cn/Common/BaseData/GetKsXq/6671b234-4224-4f77-bb7d-200447314442
+2.请求param
+General:
+Request URL:http://jwgl.jxau.edu.cn/Common/BaseData/GetKsXq/6671b234-4224-4f77-bb7d-200447314442
+Request Method:POST
+Status Code:200 OK
+Remote Address:220.175.15.203:80
+Response Header：
+Cache-Control:private
+Content-Length:1161
+Content-Type:application/json; charset=utf-8
+Date:Mon, 08 May 2017 14:17:13 GMT
+Server:Microsoft-IIS/7.0
+X-Powered-By:ASP.NET
+Requestrian	Header:
+Accept:*/*
+Accept-Encoding:gzip, deflate
+Accept-Language:zh-CN,zh;q=0.8
+Connection:keep-alive
+Content-Length:0
+Cookie:ASP.NET_SessionId=hg0n0h0hikwljb3qemihilg2; 6671b234-4224-4f77-bb7d-200447314442=ticket=BE78E73288FBDCFA; Password=Password=
+Host:jwgl.jxau.edu.cn
+Origin:http://jwgl.jxau.edu.cn
+Referer:http://jwgl.jxau.edu.cn/PaikeManage/KebiaoInfo/GetStudentkebiao/6671b234-4224-4f77-bb7d-200447314442
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36
+X-Requested-With:XMLHttpRequest
+3.响应数据
+{	
+	Message:null,OtherData:null,Result:true,success:true,totalCount:0,
+	Data:[
+		{
+			ItemID:0,Key:"20171",Value:"20171"
+		}
+	]
+}

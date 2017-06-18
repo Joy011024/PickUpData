@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>第三方网页</title>
+    <script src="~/Script/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript">
+        function InitIpPage() {
+            var ifr = '<iframe id="iframeTh"  src="{src}" style="width:700px;height:600px;"></iframe>';
+            var btn = '<input type="button" id="btnPickUp" value="提取"/>';
+            debugger;
+            var bef = $('#iframeTh #ipInfo');//存在跨域访问问题
+        }
+        $(function () {
+            $('#btnGenerate').on('click', function (e) {
+                InitIpPage();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div >
+            <input type="button" id="btnGenerate" value="抽取" />
+        </div>
+        <iframe id="iframeTh"  src="https://www.qqzeng.com/ip/" style="width:700px;height:600px;"></iframe>
+    </div>
+</body>
+</html>

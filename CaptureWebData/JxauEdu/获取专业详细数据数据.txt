@@ -1,0 +1,65 @@
+2.获取专业数据
+
+http://jwgl.jxau.edu.cn/XueJiManage/XueJiManage/GetProfessionalListPaging/6671b234-4224-4f77-bb7d-200447314442
+General:
+	Request URL:http://jwgl.jxau.edu.cn/XueJiManage/XueJiManage/GetProfessionalListPaging/6671b234-4224-4f77-bb7d-200447314442
+	Request Method:POST
+	Status Code:200 OK
+	Remote Address:220.175.15.203:80
+Response Header:
+	Cache-Control:private
+	Content-Length:6307
+	Content-Type:application/json; charset=utf-8
+	Date:Mon, 08 May 2017 13:56:22 GMT
+	Server:Microsoft-IIS/7.0
+	X-Powered-By:ASP.NET
+Request Headertds:
+	Accept:*/*
+	Accept-Encoding:gzip, deflate
+	Accept-Language:zh-CN,zh;q=0.8
+	Connection:keep-alive
+	Content-Length:26
+	Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+	Cookie:ASP.NET_SessionId=hg0n0h0hikwljb3qemihilg2; 6671b234-4224-4f77-bb7d-200447314442=ticket=BE78E73288FBDCFA; Password=Password=
+	Host:jwgl.jxau.edu.cn
+	Origin:http://jwgl.jxau.edu.cn
+	Referer:http://jwgl.jxau.edu.cn/XueJiManage/XueJiManage/ProfessionalManage/6671b234-4224-4f77-bb7d-200447314442
+	User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36
+	X-Requested-With:XMLHttpRequest
+Form Data:
+	Dwdm:1101
+	start:0
+	limit:30
+
+请求返回数据：
+
+
+Data:
+[
+	{
+		Dwdm:"1101",
+		Dwmc:"农学院",
+		JieShao:"农学",
+		OrderBy:null,
+		Pycc:"本科",
+		Rxnf:0,
+		SetField:",[Dwdm],[Dwmc],[JieShao],[Pycc],[Rxnf],[Xw],[Xz],[Ywmc],[Zslb],[Zydm],[Zyfx],[Zyjc],[Zymc]",
+		Xw:"农学学士",
+		Xz:"四年",
+		Ywmc:"无",
+		Zslb:"秋季入学",
+		Zydm:"11010100",
+		Zyfx:"无",
+		Zyfxdm:null,
+		Zyjc:"农学",
+		Zymc:"农学",
+		limit:0,
+		start:0
+	}
+
+]
+Message:null
+OtherData:null
+Result:false
+success:true
+totalCount:16

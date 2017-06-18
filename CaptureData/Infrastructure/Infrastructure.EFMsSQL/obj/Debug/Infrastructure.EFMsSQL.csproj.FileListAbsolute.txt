@@ -1,0 +1,6 @@
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\Infrastructure.EFMsSQL.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\Infrastructure.EFMsSQL.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\EntityFramework.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\EntityFramework.xml
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.pdb

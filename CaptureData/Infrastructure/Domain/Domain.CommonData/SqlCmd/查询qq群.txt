@@ -1,0 +1,33 @@
+http://qun.qq.com/cgi-bin/group_search/pc_group_search POST
+
+
+
+Accept:application/json, text/javascript, */*; q=0.01
+Accept-Encoding:gzip, deflate
+Accept-Language:zh-CN,zh;q=0.8
+Content-Length:163
+Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+Cookie:pgv_pvi=2166054912; RK=5Q8eAGcqdH; tvfe_boss_uuid=4326f9f3a442deb4; pgv_si=s5240826880; pgv_info=ssid=s5407698800; pgv_pvid=3887722460; o_cookie=158055983; pac_uid=1_158055983; ptisp=; ptui_loginuin=158055983; ptcz=50381d247d471856795f71bee19f08d2d437f1a1e9ecc4a4d47d90b0744a7ddf; pt2gguin=o0158055983; uin=o0158055983; skey=@qdrgjtYa6
+Host:qun.qq.com
+Origin:http://find.qq.com
+Proxy-Connection:keep-alive
+Referer:http://find.qq.com/index.html?pe-online=on
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36
+
+k:½»ÓÑ
+n:8
+st:1
+iso:1
+src:1
+v:4903
+bkn:745070657
+isRecommend:false
+city_id:0
+from:1
+keyword:×ÀÓÎ
+sort:0
+wantnum:24
+page:0
+ldw:745070657
+
+k=%E4%BA%A4%E5%8F%8B&n=8&st=1&iso=1&src=1&v=4903&bkn=745070657&isRecommend=false&city_id=0&from=1&keyword=%E6%A1%8C%E6%B8%B8&sort=0&wantnum=24&page=0&ldw=745070657

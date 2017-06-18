@@ -1,0 +1,64 @@
+http://cgi.find.qq.com/qqfind/myinfo?ldw=283689745
+
+
+Accept:application/json, text/javascript, */*; q=0.01
+Accept-Encoding:gzip, deflate, sdch
+Accept-Language:zh-CN,zh;q=0.8
+Connection:keep-alive
+Cookie:pgv_pvi=2166054912; RK=5Q8eAGcqdH; tvfe_boss_uuid=4326f9f3a442deb4; pgv_si=s5240826880; pgv_info=ssid=s5407698800; pgv_pvid=3887722460; o_cookie=158055983; pac_uid=1_158055983; ptisp=; ptui_loginuin=158055983; ptcz=50381d247d471856795f71bee19f08d2d437f1a1e9ecc4a4d47d90b0744a7ddf; pt2gguin=o0158055983; uin=o0158055983; skey=@l3AuZFYe9; itkn=610722576
+Host:cgi.find.qq.com
+Origin:http://find.qq.com
+Referer:http://find.qq.com/index.html?pe-online=on
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36
+
+响应：
+{
+	retcode:0,
+	result:
+		{
+		allow:1,
+		birthday:{
+			day:1
+			month:3
+			year:1992
+		},
+		blood:5
+		cft_flag:0
+		city:"上饶"
+		city_id:"11"
+		college:"博文，江农，"
+		constel:2
+		country:"中国"
+		country_id:"1"
+		email:"158055983@qq.com"
+		extflag:131584
+		face:579
+		flag:512
+		gender:"male"
+		gender_id:1
+		gps_flag:1
+		h_city:"11"
+		h_country:"1"
+		h_province:"36"
+		h_zone:""
+		homepage:""
+		latitude:39.904989
+		lbs_addr_city:""
+		lbs_addr_country:"中国"
+		lbs_addr_province:""
+		longitude:116.405285
+		mobile:""
+		nick:"岁枯荣"
+		occupation:"高中生"
+		p2c:"0_0"
+		personal:""
+		phone:"(null)"
+		province:"江西"
+		province_id:"36"
+		reg_type:0
+		s_flag:0
+		shengxiao:9
+		zone_id:""
+	}
+
+}

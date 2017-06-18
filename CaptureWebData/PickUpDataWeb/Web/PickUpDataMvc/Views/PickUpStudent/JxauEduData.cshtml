@@ -1,0 +1,106 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>江西农业大学数据采集</title>
+    <style type="text/css">
+        .area {
+            margin-bottom:20px;
+            padding-bottom:10px;
+        }
+    </style>
+    <script src="~/Script/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript">
+        var param = {
+            account: {
+                UserName: "{u}",
+                PassWord: "psw",
+                validation: ""
+            },
+            test: {
+                Force: true,
+                UserName: 'superadmin',
+                Password:'hinacom'
+            }
+        };
+        var urls = {
+            login: 'http://jwgl.jxau.edu.cn/User/CheckLogin',
+            test: 'http://127.0.0.1:1180/REST/Account/Login'
+        }
+        function login() {
+            param.account.UserName = $('#txtUserName').val();
+            param.account.PassWord = $('#txtPsw').val();
+            $.ajax({
+                url: "/PickUpStudent/CrossDomainAjax",
+                data: {
+                    Url: urls.login,
+                    JsonString: JSON.stringify(param.account)
+                },
+                type: 'Post',
+                dataType:'json',
+               // dataType:'jsonp',
+                success: function (response,statue) {
+                    console.log(response);
+                    $('#spanOriginData').html(response);
+                },
+                error: function (response, statue) {
+                    console.log(response);
+                    $('#spanOriginData').html(response);
+                },
+                complete: function (response, statue) {
+                    $('#txtAjaxResponse').text(response.Data);
+                    console.log(response);
+                },
+                beforeSend: function (xhr) {
+                   // xhr.setRequestHeader("Access-Control-Allow-Origin", "http://jwgl.jxau.edu.cn");
+                    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                }
+            })
+        }
+        $(function () {
+            $('#btnLogin').click(function (event) {
+                login();
+            });
+        })
+    </script>
+</head>
+<body>
+    <div>
+        <div class="area">
+            <div>账户</div>
+            <div>
+                <span>用户名</span><span><input type="text" id="txtUserName" /></span>
+                <span>密码</span><span><input type="text" id="txtPsw" /></span>
+                <span><input type="button" id="btnLogin"  value="登录"/></span>
+            </div>
+        </div>
+        <div class="area">
+            <div>院系班级</div>
+            <div></div>
+        </div>
+        <div class="area">
+            <div>学生</div>
+            <div></div>
+        </div>
+        <div>
+            <div>
+                <span>请求响应</span>
+                <span>
+                    <textarea id="txtAjaxResponse"></textarea>
+                </span>
+            </div>
+            <div>
+                <span>原始响应</span>
+                <span>
+                    <span id="spanOriginData"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

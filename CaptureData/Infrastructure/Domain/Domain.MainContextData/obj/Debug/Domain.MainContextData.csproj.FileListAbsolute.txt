@@ -1,0 +1,4 @@
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Domain\Domain.MainContextData\bin\Debug\Domain.MainContextData.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Domain\Domain.MainContextData\bin\Debug\Domain.MainContextData.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Domain\Domain.MainContextData\obj\Debug\Domain.MainContextData.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Domain\Domain.MainContextData\obj\Debug\Domain.MainContextData.pdb
