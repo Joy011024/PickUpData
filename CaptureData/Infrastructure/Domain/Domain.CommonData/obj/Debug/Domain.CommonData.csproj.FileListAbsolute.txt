@@ -5,4 +5,3 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Domain\Domain.Commo
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Domain\Domain.CommonData\bin\Debug\EntityFramework.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Domain\Domain.CommonData\obj\Debug\Domain.CommonData.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Domain\Domain.CommonData\obj\Debug\Domain.CommonData.pdb
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Domain\Domain.CommonData\obj\Debug\Domain.CommonData.csprojResolveAssemblyReference.cache
