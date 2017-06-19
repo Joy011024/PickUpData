@@ -38,6 +38,10 @@ namespace CaptureWebData
         {
            return new FindQQDataService(ConnString).CountTodayPickUp();
         }
+        public PickUpStatic TodayStatic() 
+        {
+            return new FindQQDataService(ConnString).TodayStaticData();
+        }
     }
     
 }

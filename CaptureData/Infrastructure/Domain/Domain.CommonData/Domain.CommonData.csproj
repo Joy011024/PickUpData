@@ -51,6 +51,7 @@
     <Compile Include="BaseEnum.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="DelegateData.cs" />
+    <Compile Include="PickUpStatic.cs" />
     <Compile Include="TecentData\FindQQData.cs" />
     <Compile Include="IpModel\IpDataMapTable.cs" />
     <Compile Include="IpModel\IPData.cs" />
@@ -59,6 +60,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="SqlCmd\SP_PickUpStaticWithDay.sql" />
+    <Content Include="SqlCmd\SP_StaticCountToday.sql" />
     <Content Include="SqlCmd\TecentQQ.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

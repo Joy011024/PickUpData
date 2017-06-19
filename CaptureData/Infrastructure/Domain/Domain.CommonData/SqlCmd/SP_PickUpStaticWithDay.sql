@@ -13,4 +13,4 @@ declare @count int
 declare @primaryCount int
 select @count=count(uin), @primaryCount=count(distinct(uin)) from TecentQQData where convert(int,Createtime,112)=@di
 
-select @count as Total,@primaryCount as UinNumber,convert(varchar(10),@day,120) StaticDay
+select @count as Total,@primaryCount as IdTotal,convert(varchar(10),@day,120) StaticDay

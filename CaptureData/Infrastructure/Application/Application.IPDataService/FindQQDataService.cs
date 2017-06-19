@@ -34,6 +34,7 @@ namespace CaptureWebData
         /// </summary>
         public int CountTodayPickUp() 
         {
+            TodayStaticData();
             string sp = "exec SP_StaticCountToday";
             MainRespority<FindQQDataTable> main = new MainRespority<FindQQDataTable>(ConnString);
             List<int> ret= main.ExecuteSPSelect<int>(sp, null).ToList();
@@ -42,6 +43,14 @@ namespace CaptureWebData
                 return ret[0];
             }
             return 0;
+        }
+        public PickUpStatic TodayStaticData() 
+        {
+            DateTime today = DateTime.Now;
+            string sp = string.Format("exec SP_PickUpStaticWithDay '{0}'", today);
+            MainRespority<FindQQDataTable> main = new MainRespority<FindQQDataTable>(ConnString);
+            List<PickUpStatic> staticData=main.ExecuteSPSelect<PickUpStatic>(sp,null).ToList();
+            return staticData.FirstOrDefault();
         }
     }
 }

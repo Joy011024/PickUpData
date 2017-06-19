@@ -46,10 +46,10 @@
             this.ckStartQuartz = new System.Windows.Forms.CheckBox();
             this.rtbTip = new System.Windows.Forms.RichTextBox();
             this.btnDeleteQuartz = new System.Windows.Forms.Button();
-            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblTodayPickUp = new System.Windows.Forms.Label();
-            this.txtTodayPickUp = new System.Windows.Forms.TextBox();
+            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
+            this.lsbStatic = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -212,14 +212,6 @@
             this.btnDeleteQuartz.UseVisualStyleBackColor = true;
             this.btnDeleteQuartz.Click += new System.EventHandler(this.btnDeleteQuartz_Click);
             // 
-            // pickUpIEWebCookie
-            // 
-            this.pickUpIEWebCookie.CallBack = null;
-            this.pickUpIEWebCookie.Location = new System.Drawing.Point(12, 12);
-            this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
-            this.pickUpIEWebCookie.Size = new System.Drawing.Size(545, 694);
-            this.pickUpIEWebCookie.TabIndex = 19;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label2);
@@ -244,20 +236,29 @@
             this.lblTodayPickUp.TabIndex = 22;
             this.lblTodayPickUp.Text = "今日采集（条）";
             // 
-            // txtTodayPickUp
+            // pickUpIEWebCookie
             // 
-            this.txtTodayPickUp.Enabled = false;
-            this.txtTodayPickUp.Location = new System.Drawing.Point(655, 21);
-            this.txtTodayPickUp.Name = "txtTodayPickUp";
-            this.txtTodayPickUp.Size = new System.Drawing.Size(100, 21);
-            this.txtTodayPickUp.TabIndex = 23;
+            this.pickUpIEWebCookie.CallBack = null;
+            this.pickUpIEWebCookie.Location = new System.Drawing.Point(12, 12);
+            this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
+            this.pickUpIEWebCookie.Size = new System.Drawing.Size(545, 694);
+            this.pickUpIEWebCookie.TabIndex = 19;
+            // 
+            // lsbStatic
+            // 
+            this.lsbStatic.FormattingEnabled = true;
+            this.lsbStatic.ItemHeight = 12;
+            this.lsbStatic.Location = new System.Drawing.Point(567, 50);
+            this.lsbStatic.Name = "lsbStatic";
+            this.lsbStatic.Size = new System.Drawing.Size(191, 64);
+            this.lsbStatic.TabIndex = 24;
             // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 708);
-            this.Controls.Add(this.txtTodayPickUp);
+            this.Controls.Add(this.lsbStatic);
             this.Controls.Add(this.lblTodayPickUp);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pickUpIEWebCookie);
@@ -306,7 +307,7 @@
         private SelfControlForm.PickUpIEWebCookieData pickUpIEWebCookie;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblTodayPickUp;
-        private System.Windows.Forms.TextBox txtTodayPickUp;
+        private System.Windows.Forms.ListBox lsbStatic;
 
 
 

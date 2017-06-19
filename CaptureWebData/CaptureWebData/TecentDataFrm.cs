@@ -166,7 +166,11 @@ namespace CaptureWebData
         }
         private void QueryTodayPickUp() 
         {
-            txtTodayPickUp.Text = (new QQDataDA()).TodayCountStatic().ToString();
+            PickUpStatic pc = (new QQDataDA()).TodayStatic();
+            lsbStatic.Items.Clear();
+            lsbStatic.Items.Add( "日期\t"+pc.StaticDay);
+            lsbStatic.Items.Add("总计\t" + pc.Total );
+            lsbStatic.Items.Add("QQ号\t" + pc.IdTotal);
         }
     }
 }
