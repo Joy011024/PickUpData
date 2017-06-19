@@ -34,6 +34,10 @@ namespace CaptureWebData
                 return null;
             }
         }
+        public int CountTodayPickUp() 
+        {
+           return new FindQQDataService(ConnString).CountTodayPickUp();
+        }
     }
     
 }

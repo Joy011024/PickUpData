@@ -1,0 +1,16 @@
+http://qqweb.qq.com/m/relativegroup/index.html?source=qun_rec&keyword=%E5%A7%90&gpstype=1&sid=AWSAPtjyiVRg92WelXNMAqd0&_bid=165&lon=116289941&lat=40102419
+页面：
+调整数据查询接口：
+http://qun.qq.com/cgi-bin/group_search/group_search?callback=jsonp1&retype=2&keyword=%E5%BE%A1%E5%A7%90&page=0&wantnum=20&city_flag=0&distance=1&ver=1&from=9&bkn=689964161&style=1&lat=40102419&lon=116289941&_=1497771603380
+
+
+请求参数get：
+
+1.查找qq群
+source:qun_rec
+keyword:姐
+gpstype:1
+sid:AWSAPtjyiVRg92WelXNMAqd0
+_bid:165
+lon:116289941
+lat:40102419

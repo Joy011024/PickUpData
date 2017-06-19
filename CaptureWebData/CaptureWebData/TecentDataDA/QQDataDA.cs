@@ -187,6 +187,11 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
             }
             return logPath;
         }
+        public int TodayCountStatic() 
+        {
+            FindQQDataManage manage = new FindQQDataManage(new ConfigurationItems().TecentDA);
+            return manage.CountTodayPickUp();
+        }
     }
     /// <summary>
     /// 请求完毕返回数据

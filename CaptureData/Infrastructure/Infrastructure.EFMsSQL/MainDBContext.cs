@@ -85,5 +85,36 @@ namespace Infrastructure.EFMsSQL
         {
             return mainDB.Entity.Where(lambda);
         }
+        /// <summary>
+        /// 执行非查询操作的存储过程
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <param name="param"></param>
+        /// <returns>返回受影响的行数</returns>
+        public int ExecuteSPNoQuery(string cmd, params object[] param)
+        {
+            if (param == null)
+            {
+                param = new object[0];
+            }
+            int number = mainDB.Database.ExecuteSqlCommand(cmd, param);
+            return number;
+        }
+        /// <summary>
+        /// 执行查询操作的存储过程
+        /// </summary>
+        /// <typeparam name="R">返回的对象类型</typeparam>
+        /// <param name="cmd">执行的存储过程语句</param>
+        /// <param name="param">存储过程的参数</param>
+        /// <returns></returns>
+        public IEnumerable<R> ExecuteSPSelect<R>(string cmd, params object[] param)
+        {
+            if (param == null)
+            {
+                param = new object[0];
+            }
+            IEnumerable<R> obj = mainDB.Database.SqlQuery<R>(cmd, param);
+            return obj;
+        }
     }
 }

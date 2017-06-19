@@ -29,5 +29,19 @@ namespace CaptureWebData
             }
             catch (Exception ex) { }
         }
+        /// <summary>
+        /// 统计当前今天统计数目
+        /// </summary>
+        public int CountTodayPickUp() 
+        {
+            string sp = "exec SP_StaticCountToday";
+            MainRespority<FindQQDataTable> main = new MainRespority<FindQQDataTable>(ConnString);
+            List<int> ret= main.ExecuteSPSelect<int>(sp, null).ToList();
+            if (ret.Any()) 
+            {
+                return ret[0];
+            }
+            return 0;
+        }
     }
 }

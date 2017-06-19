@@ -48,6 +48,8 @@
             this.btnDeleteQuartz = new System.Windows.Forms.Button();
             this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblTodayPickUp = new System.Windows.Forms.Label();
+            this.txtTodayPickUp = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -233,11 +235,30 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "所在地";
             // 
+            // lblTodayPickUp
+            // 
+            this.lblTodayPickUp.AutoSize = true;
+            this.lblTodayPickUp.Location = new System.Drawing.Point(565, 24);
+            this.lblTodayPickUp.Name = "lblTodayPickUp";
+            this.lblTodayPickUp.Size = new System.Drawing.Size(89, 12);
+            this.lblTodayPickUp.TabIndex = 22;
+            this.lblTodayPickUp.Text = "今日采集（条）";
+            // 
+            // txtTodayPickUp
+            // 
+            this.txtTodayPickUp.Enabled = false;
+            this.txtTodayPickUp.Location = new System.Drawing.Point(655, 21);
+            this.txtTodayPickUp.Name = "txtTodayPickUp";
+            this.txtTodayPickUp.Size = new System.Drawing.Size(100, 21);
+            this.txtTodayPickUp.TabIndex = 23;
+            // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 708);
+            this.Controls.Add(this.txtTodayPickUp);
+            this.Controls.Add(this.lblTodayPickUp);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pickUpIEWebCookie);
             this.Controls.Add(this.btnDeleteQuartz);
@@ -284,6 +305,8 @@
         private System.Windows.Forms.Button btnDeleteQuartz;
         private SelfControlForm.PickUpIEWebCookieData pickUpIEWebCookie;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblTodayPickUp;
+        private System.Windows.Forms.TextBox txtTodayPickUp;
 
 
 

@@ -46,6 +46,7 @@ namespace CaptureWebData
             cityList.Add(new NodeData() { Name = "不限" });
             BindProvince();
             GetProcessPath();
+            QueryTodayPickUp();
         }
         void GetProcessPath() 
         {
@@ -103,6 +104,7 @@ namespace CaptureWebData
                 QQDataDA da = new QQDataDA();
                 da.QueryParam = param;
                 da.QueryQQData(Cookie);
+                QueryTodayPickUp();
             }
         }
 
@@ -154,12 +156,17 @@ namespace CaptureWebData
 
                 rtbTip.Text = "Error\r\n" + res.responseJson;
             }
+            QueryTodayPickUp();
         }
 
         private void btnDeleteQuartz_Click(object sender, EventArgs e)
         {
             QuartzJob job = new QuartzJob();
             job.DeleteJob<JobAction<QQDataDA>>();
+        }
+        private void QueryTodayPickUp() 
+        {
+            txtTodayPickUp.Text = (new QQDataDA()).TodayCountStatic().ToString();
         }
     }
 }
