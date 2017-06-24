@@ -93,7 +93,8 @@ namespace CaptureWebData
             }
             else if (ckStartQuartz.Checked && rbDepth.Checked) 
             {//该查询结果页轮询
-            
+                DelegateData.BaseDelegate del = QuartzForeachPage;
+                job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, null }, DateTime.Now.AddSeconds(interval), interval, repeact);
             }
             else if (ckStartQuartz.Checked)
             {
@@ -144,33 +145,7 @@ namespace CaptureWebData
             }
             PickUpQQDoResponse res = data as PickUpQQDoResponse;
             if (res == null) { return; }
-            FindQQResponse qqres = res.responseData;
-            if (qqres != null)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("code\t" + qqres.retcode);
-                sb.AppendLine("DB Total\t" + qqres.result.buddy.totalnum);
-                sb.AppendLine("now count\t" + qqres.result.buddy.info_list.Count);//info_list 可能出现为null的情况
-                rtbTip.Text = sb.ToString();
-                if (qqres.retcode != 0&&qqres.retcode!=6) 
-                {//延迟轮询的间隔
-                
-                }
-                else if (qqres.retcode == 6) 
-                {//已被腾讯封号
-                    job.DeleteJob<JobDelegateFunction>();
-                    job.DeleteJob<JobAction<QQDataDA>>();
-                    rtbTip.Text = "该账户本次检测被禁用";
-                }
-            }
-            else
-            {
-                rtbTip.Text = "Error\r\n" + res.responseJson;
-                //一旦出现数据异常（防止被腾讯检测导致封号），停止轮询
-                job.DeleteJob<JobDelegateFunction>();
-                job.DeleteJob<JobAction<QQDataDA>>();
-            }
-
+            QueryResponseAction(res);
             QueryTodayPickUp();
         }
 
@@ -266,8 +241,60 @@ namespace CaptureWebData
                 this.Invoke(bd, data);
                 return;
             }
+            QueryQQParam param = GetBaseQueryParam();
+            int page = 1;
+            string pageStr = txtPageIndex.Text;
+            int.TryParse(pageStr, out page);
+            param.page = page;
+            QQDataDA da = new QQDataDA();
+            da.QueryParam = param;
+            PickUpQQDoResponse response = da.QueryQQData(Cookie);
+            if (response == null)
+            {
+                rtbTip.Text = "No Cookie";
+                return;
+            }
+            FindQQResponse resp = response.responseData;
+            if (resp != null && resp.retcode == 0 && resp.result.buddy.totalnum > param.num)
+            {
+                txtPageIndex.Text = (resp.result.buddy.page + 1).ToString();
+            }
+            else 
+            {
+                txtPageIndex.Text = "1";
+            }
+            QueryResponseAction(response);
+            QueryTodayPickUp();
         }
+        void QueryResponseAction(PickUpQQDoResponse res)
+        {
+            if (res != null&&res.responseData!=null)
+            {
+                FindQQResponse qqres = res.responseData;
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("code\t" + qqres.retcode);
+                sb.AppendLine("DB Total\t" + qqres.result.buddy.totalnum);
+                sb.AppendLine("now count\t" + qqres.result.buddy.info_list.Count);//info_list 可能出现为null的情况
+                rtbTip.Text = sb.ToString();
+                if (qqres.retcode != 0 && qqres.retcode != 6)
+                {//延迟轮询的间隔
 
+                }
+                else if (res != null && res.responseData.retcode == 6)
+                {//已被腾讯封号
+                    job.DeleteJob<JobDelegateFunction>();
+                    job.DeleteJob<JobAction<QQDataDA>>();
+                    rtbTip.Text = "该账户本次检测被禁用";
+                }
+            }
+            else
+            {
+                rtbTip.Text = "Error\r\n" + res.responseJson;
+                //一旦出现数据异常（防止被腾讯检测导致封号），停止轮询
+                job.DeleteJob<JobDelegateFunction>();
+                job.DeleteJob<JobAction<QQDataDA>>();
+            }
+        }
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
