@@ -102,15 +102,15 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
             }
             
         }
-        public void QueryQQData(string cookie) 
+        public PickUpQQDoResponse QueryQQData(string cookie)
         {
-            if(string.IsNullOrEmpty(cookie))
+            if (string.IsNullOrEmpty(cookie))
             {
-                return;
+                return null;
             }
-            QueryTecentQQData(cookie);
+            return QueryTecentQQData(cookie);
         }
-        private void QueryTecentQQData(string cookie) 
+        private PickUpQQDoResponse QueryTecentQQData(string cookie) 
         {
             //从cookie中获取skey
             RequestHeaderHelper request = new RequestHeaderHelper();
@@ -139,7 +139,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
                 }
             }));
             th.Start();
-
+            return (PickUpQQDoResponse)obj;
         }
         private PickUpQQDoResponse ForeachFindQQ(QueryQQParam param, string cookie)
         {
@@ -153,11 +153,12 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
             JsonData jsondata = new JsonData();
             PickUpQQDoResponse pickup = new PickUpQQDoResponse();
             pickup.responseData= manage.SaveFindQQ(response);
+            pickup.cookie = cookie;
+            pickup.request = json;
+            pickup.responseJson = response;
             if (callback != null) 
             {
-                pickup.cookie = cookie;
-                pickup.request = json;
-                pickup.responseJson = response;
+               
             }
             return pickup;
         }

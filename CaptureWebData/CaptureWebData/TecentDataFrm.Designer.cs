@@ -48,14 +48,22 @@
             this.btnDeleteQuartz = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblTodayPickUp = new System.Windows.Forms.Label();
-            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
             this.lsbStatic = new System.Windows.Forms.ListBox();
+            this.gbPollingType = new System.Windows.Forms.GroupBox();
+            this.rbGuid = new System.Windows.Forms.RadioButton();
+            this.rbNormal = new System.Windows.Forms.RadioButton();
+            this.rbDepth = new System.Windows.Forms.RadioButton();
+            this.lblPageIndex = new System.Windows.Forms.Label();
+            this.txtPageIndex = new System.Windows.Forms.TextBox();
+            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
+            this.btnExit = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.gbPollingType.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(567, 190);
+            this.btnQuery.Location = new System.Drawing.Point(567, 242);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 1;
@@ -66,7 +74,7 @@
             // lblTimeSpan
             // 
             this.lblTimeSpan.AutoSize = true;
-            this.lblTimeSpan.Location = new System.Drawing.Point(563, 337);
+            this.lblTimeSpan.Location = new System.Drawing.Point(563, 350);
             this.lblTimeSpan.Name = "lblTimeSpan";
             this.lblTimeSpan.Size = new System.Drawing.Size(77, 12);
             this.lblTimeSpan.TabIndex = 2;
@@ -75,7 +83,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(563, 372);
+            this.label1.Location = new System.Drawing.Point(563, 385);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 3;
@@ -83,7 +91,7 @@
             // 
             // txtTimeSpan
             // 
-            this.txtTimeSpan.Location = new System.Drawing.Point(655, 328);
+            this.txtTimeSpan.Location = new System.Drawing.Point(655, 341);
             this.txtTimeSpan.Name = "txtTimeSpan";
             this.txtTimeSpan.Size = new System.Drawing.Size(103, 21);
             this.txtTimeSpan.TabIndex = 4;
@@ -91,7 +99,7 @@
             // 
             // txtRepeact
             // 
-            this.txtRepeact.Location = new System.Drawing.Point(655, 363);
+            this.txtRepeact.Location = new System.Drawing.Point(655, 376);
             this.txtRepeact.Name = "txtRepeact";
             this.txtRepeact.Size = new System.Drawing.Size(103, 21);
             this.txtRepeact.TabIndex = 5;
@@ -135,7 +143,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(563, 298);
+            this.label3.Location = new System.Drawing.Point(563, 311);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 10;
@@ -143,7 +151,7 @@
             // 
             // txtCurrentLimit
             // 
-            this.txtCurrentLimit.Location = new System.Drawing.Point(655, 295);
+            this.txtCurrentLimit.Location = new System.Drawing.Point(655, 308);
             this.txtCurrentLimit.Name = "txtCurrentLimit";
             this.txtCurrentLimit.Size = new System.Drawing.Size(103, 21);
             this.txtCurrentLimit.TabIndex = 11;
@@ -169,7 +177,7 @@
             // lblGender
             // 
             this.lblGender.AutoSize = true;
-            this.lblGender.Location = new System.Drawing.Point(563, 252);
+            this.lblGender.Location = new System.Drawing.Point(570, 279);
             this.lblGender.Name = "lblGender";
             this.lblGender.Size = new System.Drawing.Size(29, 12);
             this.lblGender.TabIndex = 14;
@@ -179,7 +187,7 @@
             // 
             this.cmbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGender.FormattingEnabled = true;
-            this.cmbGender.Location = new System.Drawing.Point(655, 252);
+            this.cmbGender.Location = new System.Drawing.Point(657, 276);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(103, 20);
             this.cmbGender.TabIndex = 15;
@@ -187,12 +195,13 @@
             // ckStartQuartz
             // 
             this.ckStartQuartz.AutoSize = true;
-            this.ckStartQuartz.Location = new System.Drawing.Point(665, 219);
+            this.ckStartQuartz.Location = new System.Drawing.Point(565, 144);
             this.ckStartQuartz.Name = "ckStartQuartz";
             this.ckStartQuartz.Size = new System.Drawing.Size(72, 16);
             this.ckStartQuartz.TabIndex = 16;
             this.ckStartQuartz.Text = "启用轮询";
             this.ckStartQuartz.UseVisualStyleBackColor = true;
+            this.ckStartQuartz.CheckedChanged += new System.EventHandler(this.ckStartQuartz_CheckedChanged);
             // 
             // rtbTip
             // 
@@ -204,7 +213,7 @@
             // 
             // btnDeleteQuartz
             // 
-            this.btnDeleteQuartz.Location = new System.Drawing.Point(567, 219);
+            this.btnDeleteQuartz.Location = new System.Drawing.Point(655, 140);
             this.btnDeleteQuartz.Name = "btnDeleteQuartz";
             this.btnDeleteQuartz.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteQuartz.TabIndex = 18;
@@ -220,7 +229,7 @@
             this.groupBox1.Controls.Add(this.lblCity);
             this.groupBox1.Controls.Add(this.lblDistinct);
             this.groupBox1.Controls.Add(this.cmbCity);
-            this.groupBox1.Location = new System.Drawing.Point(559, 390);
+            this.groupBox1.Location = new System.Drawing.Point(559, 410);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(214, 125);
             this.groupBox1.TabIndex = 21;
@@ -236,6 +245,79 @@
             this.lblTodayPickUp.TabIndex = 22;
             this.lblTodayPickUp.Text = "今日采集（条）";
             // 
+            // lsbStatic
+            // 
+            this.lsbStatic.FormattingEnabled = true;
+            this.lsbStatic.ItemHeight = 12;
+            this.lsbStatic.Location = new System.Drawing.Point(567, 50);
+            this.lsbStatic.Name = "lsbStatic";
+            this.lsbStatic.Size = new System.Drawing.Size(206, 88);
+            this.lsbStatic.TabIndex = 24;
+            // 
+            // gbPollingType
+            // 
+            this.gbPollingType.Controls.Add(this.rbDepth);
+            this.gbPollingType.Controls.Add(this.rbGuid);
+            this.gbPollingType.Controls.Add(this.rbNormal);
+            this.gbPollingType.Location = new System.Drawing.Point(567, 166);
+            this.gbPollingType.Name = "gbPollingType";
+            this.gbPollingType.Size = new System.Drawing.Size(202, 41);
+            this.gbPollingType.TabIndex = 25;
+            this.gbPollingType.TabStop = false;
+            this.gbPollingType.Text = "轮询方式";
+            // 
+            // rbGuid
+            // 
+            this.rbGuid.AutoSize = true;
+            this.rbGuid.Location = new System.Drawing.Point(68, 20);
+            this.rbGuid.Name = "rbGuid";
+            this.rbGuid.Size = new System.Drawing.Size(47, 16);
+            this.rbGuid.TabIndex = 1;
+            this.rbGuid.TabStop = true;
+            this.rbGuid.Text = "随机";
+            this.rbGuid.UseVisualStyleBackColor = true;
+            // 
+            // rbNormal
+            // 
+            this.rbNormal.AutoSize = true;
+            this.rbNormal.Location = new System.Drawing.Point(15, 20);
+            this.rbNormal.Name = "rbNormal";
+            this.rbNormal.Size = new System.Drawing.Size(47, 16);
+            this.rbNormal.TabIndex = 0;
+            this.rbNormal.TabStop = true;
+            this.rbNormal.Text = "常规";
+            this.rbNormal.UseVisualStyleBackColor = true;
+            // 
+            // rbDepth
+            // 
+            this.rbDepth.AutoSize = true;
+            this.rbDepth.Location = new System.Drawing.Point(121, 19);
+            this.rbDepth.Name = "rbDepth";
+            this.rbDepth.Size = new System.Drawing.Size(71, 16);
+            this.rbDepth.TabIndex = 2;
+            this.rbDepth.TabStop = true;
+            this.rbDepth.Text = "深度检索";
+            this.rbDepth.UseVisualStyleBackColor = true;
+            // 
+            // lblPageIndex
+            // 
+            this.lblPageIndex.AccessibleRole = System.Windows.Forms.AccessibleRole.SplitButton;
+            this.lblPageIndex.AutoSize = true;
+            this.lblPageIndex.Location = new System.Drawing.Point(567, 209);
+            this.lblPageIndex.Name = "lblPageIndex";
+            this.lblPageIndex.Size = new System.Drawing.Size(29, 12);
+            this.lblPageIndex.TabIndex = 26;
+            this.lblPageIndex.Tag = "1";
+            this.lblPageIndex.Text = "页码";
+            // 
+            // txtPageIndex
+            // 
+            this.txtPageIndex.Location = new System.Drawing.Point(655, 209);
+            this.txtPageIndex.Name = "txtPageIndex";
+            this.txtPageIndex.Size = new System.Drawing.Size(100, 21);
+            this.txtPageIndex.TabIndex = 27;
+            this.txtPageIndex.Text = "1";
+            // 
             // pickUpIEWebCookie
             // 
             this.pickUpIEWebCookie.CallBack = null;
@@ -244,27 +326,32 @@
             this.pickUpIEWebCookie.Size = new System.Drawing.Size(545, 694);
             this.pickUpIEWebCookie.TabIndex = 19;
             // 
-            // lsbStatic
+            // btnExit
             // 
-            this.lsbStatic.FormattingEnabled = true;
-            this.lsbStatic.ItemHeight = 12;
-            this.lsbStatic.Location = new System.Drawing.Point(567, 50);
-            this.lsbStatic.Name = "lsbStatic";
-            this.lsbStatic.Size = new System.Drawing.Size(191, 64);
-            this.lsbStatic.TabIndex = 24;
+            this.btnExit.Location = new System.Drawing.Point(698, 3);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.TabIndex = 28;
+            this.btnExit.Text = "退出";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 708);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.txtPageIndex);
+            this.Controls.Add(this.lblPageIndex);
+            this.Controls.Add(this.gbPollingType);
             this.Controls.Add(this.lsbStatic);
             this.Controls.Add(this.lblTodayPickUp);
+            this.Controls.Add(this.ckStartQuartz);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pickUpIEWebCookie);
             this.Controls.Add(this.btnDeleteQuartz);
             this.Controls.Add(this.rtbTip);
-            this.Controls.Add(this.ckStartQuartz);
             this.Controls.Add(this.cmbGender);
             this.Controls.Add(this.lblGender);
             this.Controls.Add(this.txtCurrentLimit);
@@ -279,6 +366,8 @@
             this.Load += new System.EventHandler(this.TecentDataFrm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbPollingType.ResumeLayout(false);
+            this.gbPollingType.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,6 +397,13 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblTodayPickUp;
         private System.Windows.Forms.ListBox lsbStatic;
+        private System.Windows.Forms.GroupBox gbPollingType;
+        private System.Windows.Forms.RadioButton rbGuid;
+        private System.Windows.Forms.RadioButton rbNormal;
+        private System.Windows.Forms.RadioButton rbDepth;
+        private System.Windows.Forms.Label lblPageIndex;
+        private System.Windows.Forms.TextBox txtPageIndex;
+        private System.Windows.Forms.Button btnExit;
 
 
 

@@ -61,9 +61,13 @@ namespace Domain.MainContextData
         /// </summary>
         public bool? IsRelease { get; set; }
         /// <summary>
-        /// 补丁许可使用人（默认提交补丁的操作人）
+        /// 补丁创建人（默认提交补丁的操作人）
         /// </summary>
         public string NPKAuthor { get; set; }
+        /// <summary>
+        /// 补丁提交人
+        /// </summary>
+        public string NpkSubmiter { get; set; }
         /// <summary>
         /// 补丁作用的数据库
         /// </summary>
@@ -71,9 +75,13 @@ namespace Domain.MainContextData
     }
     public enum ENPKCategory 
     {
+        [Description("数据库结构变动补丁")]
         DBStruct=1,
+        [Description("逻辑数据补丁包")]
         LogicData=2,
+        [Description("存储过程补丁包")]
         SP=3,
+        [Description("函数补丁包")]
         Fun=4
     }
     public enum ENPKErrorCategory

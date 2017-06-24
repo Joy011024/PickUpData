@@ -13,6 +13,7 @@ namespace CaptureWebData
 {
     public partial class TecentDataFrm : Form
     {
+        QuartzJob job = new QuartzJob();
         string NoLimit="不限";
         enum ComboboxItem 
         {
@@ -29,8 +30,12 @@ namespace CaptureWebData
         public TecentDataFrm()
         {
             InitializeComponent();
+            Test();
         }
-
+        void Test() 
+        {
+            ProcessHelp.ForeachProcess();   
+        }
         private void TecentDataFrm_Load(object sender, EventArgs e)
         {
             Init();
@@ -44,6 +49,7 @@ namespace CaptureWebData
             IEnumerable<NodeData> city = cds.QueryCityCategory();
             cityList = city.ToList();
             cityList.Add(new NodeData() { Name = "不限" });
+            gbPollingType.Enabled = false;
             BindProvince();
             GetProcessPath();
             QueryTodayPickUp();
@@ -78,23 +84,18 @@ namespace CaptureWebData
             string rep = txtRepeact.Text;
             int.TryParse(rep, out repeact);
             LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath+(new QQDataDA().GeneratePathTimeSpan(Cookie)),ELogType.SessionOrCookieLog);
-            QuartzJob job = new QuartzJob();
-            QueryQQParam param = new QueryQQParam();
-            NodeData pro = (NodeData)cmbProvince.SelectedItem;
-            param.province = pro.Code;
-            NodeData city = (NodeData)cmbCity.SelectedItem;
-            param.city = city.Code;
-            int limit = 30;
-            if (int.TryParse(txtCurrentLimit.Text,out limit)) 
-            {
-                param.num = limit;
+
+            QueryQQParam param = GetBaseQueryParam();
+            if (ckStartQuartz.Checked && rbGuid.Checked) 
+            {//开启随机轮询
+                DelegateData.BaseDelegate del = QuartzGuidForach;
+                job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, param}, DateTime.Now.AddSeconds(interval), interval, repeact);
             }
-            param.district = string.Empty;
-            string obj = ((KeyValuePair<string,object>)cmbGender.SelectedItem).Key as string ;
-            EGender gender;
-            Enum.TryParse(obj, out gender);
-            param.sex = gender.GetHashCode();
-            if (ckStartQuartz.Checked)
+            else if (ckStartQuartz.Checked && rbDepth.Checked) 
+            {//该查询结果页轮询
+            
+            }
+            else if (ckStartQuartz.Checked)
             {
                 DelegateData.BaseDelegate del = QuartzCallBack;
                 job.CreateJobWithParam<JobAction<QQDataDA>>(new object[] { Cookie, param, del }, DateTime.Now, interval, repeact);
@@ -103,8 +104,9 @@ namespace CaptureWebData
             {
                 QQDataDA da = new QQDataDA();
                 da.QueryParam = param;
-                da.QueryQQData(Cookie);
+                PickUpQQDoResponse response = da.QueryQQData(Cookie);
                 QueryTodayPickUp();
+                QuartzCallBack(response);
             }
         }
 
@@ -150,12 +152,25 @@ namespace CaptureWebData
                 sb.AppendLine("DB Total\t" + qqres.result.buddy.totalnum);
                 sb.AppendLine("now count\t" + qqres.result.buddy.info_list.Count);//info_list 可能出现为null的情况
                 rtbTip.Text = sb.ToString();
+                if (qqres.retcode != 0&&qqres.retcode!=6) 
+                {//延迟轮询的间隔
+                
+                }
+                else if (qqres.retcode == 6) 
+                {//已被腾讯封号
+                    job.DeleteJob<JobDelegateFunction>();
+                    job.DeleteJob<JobAction<QQDataDA>>();
+                    rtbTip.Text = "该账户本次检测被禁用";
+                }
             }
             else
             {
-
                 rtbTip.Text = "Error\r\n" + res.responseJson;
+                //一旦出现数据异常（防止被腾讯检测导致封号），停止轮询
+                job.DeleteJob<JobDelegateFunction>();
+                job.DeleteJob<JobAction<QQDataDA>>();
             }
+
             QueryTodayPickUp();
         }
 
@@ -168,9 +183,94 @@ namespace CaptureWebData
         {
             PickUpStatic pc = (new QQDataDA()).TodayStatic();
             lsbStatic.Items.Clear();
+            lsbStatic.Items.Add("时间戳"+DateTime.Now.ToString());
+            lsbStatic.Items.Add("库\t" + pc.DBTotal);
+            lsbStatic.Items.Add("库唯一\t"+pc.DBPrimaryTotal);
             lsbStatic.Items.Add( "日期\t"+pc.StaticDay);
-            lsbStatic.Items.Add("总计\t" + pc.Total );
-            lsbStatic.Items.Add("QQ号\t" + pc.IdTotal);
+            lsbStatic.Items.Add("今日总计\t" + pc.Total );
+            lsbStatic.Items.Add("今日QQ号\t" + pc.IdTotal);
+        }
+        void QuartzGuidForach(object quartzParam) 
+        {
+            if (this.InvokeRequired) 
+            {//是否通过其他形式调用
+                DelegateData.BaseDelegate bd = new DelegateData.BaseDelegate(QuartzGuidForach);
+                this.Invoke(bd, quartzParam);
+                return;
+            }
+            LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath + (new QQDataDA().GeneratePathTimeSpan(Cookie)), ELogType.SessionOrCookieLog);
+            QueryQQParam param = GetBaseQueryParam();           
+            QQDataDA da = new QQDataDA();
+            da.QueryParam = param;
+            PickUpQQDoResponse response= da.QueryQQData(Cookie);
+            QueryTodayPickUp();
+            //为下一次产生随机参数
+            Guid gid = Guid.NewGuid();
+            Random ran = new Random(gid.GetHashCode());
+            //所在城市联动
+            int szd = ran.Next(0, 8);
+            int ps = cmbProvince.Items.Count;
+            int guidP = ran.Next(0, ps);
+            cmbProvince.SelectedIndex = guidP;
+            QuartzCallBack(response);
+        }
+        /// <summary>
+        /// 提取查询qq数据使用的参数
+        /// </summary>
+        /// <returns></returns>
+        QueryQQParam GetBaseQueryParam() 
+        {
+            int interval = 0;
+            string inter = txtTimeSpan.Text;
+            int.TryParse(inter, out interval);
+            int repeact = 0;
+            string rep = txtRepeact.Text;
+            int.TryParse(rep, out repeact);
+            QueryQQParam param = new QueryQQParam();
+            NodeData pro = (NodeData)cmbProvince.SelectedItem;
+            param.province = pro.Code;
+            NodeData city = (NodeData)cmbCity.SelectedItem;
+            param.city = city.Code;
+            int limit = 30;
+            if (int.TryParse(txtCurrentLimit.Text, out limit))
+            {
+                param.num = limit;
+            }
+            EGender gender;
+            string obj = ((KeyValuePair<string, object>)cmbGender.SelectedItem).Key as string;
+            Enum.TryParse(obj, out gender);
+            param.sex = gender.GetHashCode();
+            return param;
+        }
+        private void ckStartQuartz_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox ck = sender as CheckBox;
+            if (ck.Checked)
+            {
+                rbNormal.Checked = true;
+                gbPollingType.Enabled = true;
+            }
+            else 
+            {
+                rbNormal.Checked = false;
+                rbGuid.Checked = false;
+                rbDepth.Checked = false;
+                gbPollingType.Enabled = false;
+            }
+        }
+        void QuartzForeachPage(object data) 
+        {
+            if (this.InvokeRequired)
+            {//是否通过其他形式调用
+                DelegateData.BaseDelegate bd = new DelegateData.BaseDelegate(QuartzForeachPage);
+                this.Invoke(bd, data);
+                return;
+            }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

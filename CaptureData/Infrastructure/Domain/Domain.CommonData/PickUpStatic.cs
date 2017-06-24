@@ -22,5 +22,13 @@ namespace Domain.CommonData
         /// 总数目
         /// </summary>
         public int Total { get; set; }
+        /// <summary>
+        /// 表中全部数量
+        /// </summary>
+        public int DBTotal { get; set; }
+        /// <summary>
+        /// 表中有效数量
+        /// </summary>
+        public int DBPrimaryTotal { get; set; }
     }
 }

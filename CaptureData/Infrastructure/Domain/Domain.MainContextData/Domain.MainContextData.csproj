@@ -43,11 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NpkResponseData.cs" />
+    <Compile Include="RequestParam\NPKRequestData.cs" />
     <Compile Include="NPKVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SqlCmd\NPKVersion.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ResponseData\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

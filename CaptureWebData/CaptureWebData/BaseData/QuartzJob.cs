@@ -7,6 +7,7 @@ using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Matchers;
 using System.Reflection;
+using Domain.CommonData;
 namespace CaptureWebData
 {
     /*
@@ -16,6 +17,10 @@ namespace CaptureWebData
      */
     public class QuartzJob
     {
+        /// <summary>
+        /// 如果在调度时传递参数，该参数对应的参数名
+        /// </summary>
+       public static string QuartzParam = "QuarztParam";
         static IScheduler scheduler { get; set; }
         public static IScheduler GetScheduler()
         {
@@ -78,6 +83,7 @@ namespace CaptureWebData
             IJobDetail job = scheduler.GetJobDetail(key);
             if (job != null)
             {
+                scheduler.PauseJob(key);//停止作业调度
                 scheduler.DeleteJob(key);
             }
         }
@@ -100,7 +106,7 @@ namespace CaptureWebData
                 key = new JobKey(jobName, jobGroup);
             }
             IJobDetail job = JobBuilder.Create<T>().WithIdentity(key).Build();
-            job.JobDataMap.Put("QuarztParam", param);
+            job.JobDataMap.Put(QuartzParam, param);
             //IJobListener jobListence = new DefineJobListener();
             //加上监听之后无效
             //IMatcher<JobKey> match = KeyMatcher<JobKey>.KeyEquals(job.Key); // Quartz.Impl.Matchers.KeyMatcher<TKey>
@@ -154,10 +160,30 @@ namespace CaptureWebData
             JobKey jobKey = context.JobDetail.Key;
             // 获取传递过来的参数            
             JobDataMap data = context.JobDetail.JobDataMap;
-            object objParam = data.Get("QuarztParam");
+            object objParam = data.Get(QuartzJob.QuartzParam);
             Type t = typeof(T);
             ConstructorInfo havaCon = t.GetConstructor(new Type[] { typeof(object) });
             object obj = (T)havaCon.Invoke(new object[] { objParam });
+        }
+    }
+    /// <summary>
+    ///轮询，将方法作为参数传递【首个参数为委托调用的函数，第二个参数为委托函数的参数】
+    /// </summary>
+    public class JobDelegateFunction : IJob 
+    {
+
+        public void Execute(IJobExecutionContext context)
+        {
+            JobDataMap data = context.JobDetail.JobDataMap;
+            object objParam = data.Get(QuartzJob.QuartzParam);//提取委托及对应的参数
+            object[] ps = objParam as object[];
+            if (ps.Length == 0) 
+            {//没有传递参数
+                return;
+            }
+            DelegateData.BaseDelegate bd = ps[0] as DelegateData.BaseDelegate;
+            object obj = ps.Length >= 2 ? ps[1] : null;
+            bd(obj);
         }
     }
 }

@@ -10,6 +10,9 @@ go
 SET QUOTED_IDENTIFIER ON
 GO
 
+if(object_id('DataBaseNPKVersion','u') is not null)
+	drop procedure DataBaseNPKVersion
+go
 SET ANSI_PADDING ON
 GO
 Create table DataBaseNPKVersion
@@ -27,5 +30,6 @@ Create table DataBaseNPKVersion
 	IsDelete bit ,--是否删除该补丁
 	IsRelease bit ,--补丁是否发布
 	NPKAuthor nvarchar(20),--本次补丁操作人
+	NpkSubmiter nvarchar(20),--补丁提交人
 	NPKDataBase varchar(30) --本次补丁针对的数据库
 )
