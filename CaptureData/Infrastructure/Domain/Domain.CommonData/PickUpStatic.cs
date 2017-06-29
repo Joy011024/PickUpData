@@ -31,4 +31,10 @@ namespace Domain.CommonData
         /// </summary>
         public int DBPrimaryTotal { get; set; }
     }
+    public class WaitGatherImage 
+    {
+        public Guid Id { get; set; }
+        public string Uin { get; set; }
+        public string HeadImageUrl { get; set; }
+    }
 }

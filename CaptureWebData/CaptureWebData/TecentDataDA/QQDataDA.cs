@@ -117,7 +117,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
             Dictionary<string,string> req= request.PickUpRequestHeader(findQQAcountRequestHeader);
             string key = request.SplitCookie(cookie)["skey"];
             //key = "@66i3M9kYA";//799103928
-            int n = 5381;
+            int n = 5381;//这一步生成腾讯需要的key
             int cal; 
             for (int r = 0, i = key.Length; r < i; ++r)
             {

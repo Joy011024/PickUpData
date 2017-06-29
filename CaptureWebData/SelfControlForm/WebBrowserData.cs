@@ -12,6 +12,10 @@ namespace SelfControlForm
 {
     public partial class WebBrowserData : UserControl
     {
+        /// <summary>
+        /// 获取到的请求头
+        /// </summary>
+        public string GatherRequestHeader { get; set; }
         public delegate void CallBack(object data);
         /// <summary>
         /// 触发的回调事件
@@ -59,6 +63,8 @@ namespace SelfControlForm
                 return string.Empty;
             }
             string cookie = wb.Document.Cookie;
+            //这里需要提取出请求的request header  接下来其他请求需要这里面的部分信息作为参数
+            object obj = wb.ActiveXInstance;
             rtbIeCookie.Text= cookie;
             return cookie;
         }

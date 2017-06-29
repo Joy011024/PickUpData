@@ -36,9 +36,13 @@ namespace CaptureWebData
                 {
                     string key = item.Substring(0, x).Trim();
                     string value = item.Substring(x + 1);
-                    if (request.ContainsKey(key))
+                    if (!request.ContainsKey(key))
                     {
                         request.Add(key, value);
+                    }
+                    else
+                    {
+                        request[header] = value;
                     }
                 }
             }

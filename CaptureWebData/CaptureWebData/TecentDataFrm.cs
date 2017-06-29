@@ -15,6 +15,7 @@ namespace CaptureWebData
     {
         QuartzJob job = new QuartzJob();
         string NoLimit="不限";
+        NodeData noLimitAddress = new NodeData() { Name = "不限" };
         enum ComboboxItem 
         {
             Name=1,
@@ -48,7 +49,7 @@ namespace CaptureWebData
             CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
             IEnumerable<NodeData> city = cds.QueryCityCategory();
             cityList = city.ToList();
-            cityList.Add(new NodeData() { Name = "不限" });
+            cityList.Add(noLimitAddress);
             gbPollingType.Enabled = false;
             BindProvince();
             GetProcessPath();
@@ -128,8 +129,15 @@ namespace CaptureWebData
         }
         void BindComboBox(string parentCode,ComboBox cmb) 
         {
-            List<NodeData> nodes = cityList.Where(c => c.ParentCode == parentCode || string.IsNullOrEmpty(c.Code)).OrderBy(t => t.Code).ToList();
-            nodes.Add(new NodeData() { Name = "不限" });
+            List<NodeData> nodes=new List<NodeData>();
+            if (string.IsNullOrEmpty(parentCode))
+            {//没有选择省/自治区
+                nodes.Add(noLimitAddress);
+            }
+            else
+            {
+                nodes = cityList.Where(c => c.ParentCode == parentCode || string.IsNullOrEmpty(c.Code)).OrderBy(t => t.Code).ToList();
+            }
             cmb.DataSource = nodes;
             cmb.DisplayMember = ComboboxItem.Name.ToString();
             cmb.ValueMember = ComboboxItem.Code.ToString();
@@ -145,6 +153,8 @@ namespace CaptureWebData
             }
             PickUpQQDoResponse res = data as PickUpQQDoResponse;
             if (res == null) { return; }
+            //如果此时检测返回集合为空，但是返回状态码不是错误，需要更改检测条件【腾讯防攻击检测】
+
             QueryResponseAction(res);
             QueryTodayPickUp();
         }
@@ -276,9 +286,21 @@ namespace CaptureWebData
                 sb.AppendLine("DB Total\t" + qqres.result.buddy.totalnum);
                 sb.AppendLine("now count\t" + qqres.result.buddy.info_list.Count);//info_list 可能出现为null的情况
                 rtbTip.Text = sb.ToString();
+                if (qqres.retcode == 0 && qqres.result.buddy.info_list.Count> 0)
+                {
+                    return;
+                }
+                else if (qqres.retcode == 0) 
+                {//数据读取正常
+                    //数据读取正常也可能出现腾讯没有提供返回数据（腾讯在进行防作弊检测）
+                    ProtectJob();
+                    return;
+                }
+                 
                 if (qqres.retcode != 0 && qqres.retcode != 6)
                 {//延迟轮询的间隔
-
+                    //更改轮询条件
+                    ProtectJob();
                 }
                 else if (res != null && res.responseData.retcode == 6)
                 {//已被腾讯封号
@@ -298,6 +320,27 @@ namespace CaptureWebData
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+        void GatherErrorSendEmail(string responseJson) 
+        {
+            
+        }
+        void ProtectJob() 
+        {
+            //更换查询条件 防止被检测为攻击
+            Guid gid = Guid.NewGuid();
+            int seed = gid.GetHashCode();
+            Random r = new Random(seed);
+            int pro = r.Next(0, cmbProvince.Items.Count);
+            cmbProvince.SelectedIndex = pro;
+            //随机检测是否选择市
+            int bindCity = r.Next(0, 2);
+            if (bindCity == 1)
+            {
+                int city = r.Next(0, cmbCity.Items.Count);
+                cmbCity.SelectedIndex = city;
+            }
+
         }
     }
 }

@@ -60,8 +60,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="SqlCmd\SP_ErrorGatherImageList.sql" />
+    <Content Include="SqlCmd\SP_GetWaitGatherImageList.sql" />
     <Content Include="SqlCmd\SP_PickUpStaticWithDay.sql" />
     <Content Include="SqlCmd\SP_StaticCountToday.sql" />
+    <Content Include="SqlCmd\SP_SuccessGatherImageList.sql" />
     <Content Include="SqlCmd\TecentQQ.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

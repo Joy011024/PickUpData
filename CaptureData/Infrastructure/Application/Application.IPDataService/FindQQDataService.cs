@@ -52,5 +52,6 @@ namespace CaptureWebData
             List<PickUpStatic> staticData=main.ExecuteSPSelect<PickUpStatic>(sp,null).ToList();
             return staticData.FirstOrDefault();
         }
+        
     }
 }

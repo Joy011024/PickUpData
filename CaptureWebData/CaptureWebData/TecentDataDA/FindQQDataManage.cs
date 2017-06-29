@@ -19,10 +19,6 @@ namespace CaptureWebData
             try 
             {
                 FindQQResponse find = findQQResponseJson.ConvertObject<FindQQResponse>();
-                if (find.retcode != 0) 
-                {
-                    return null;
-                }
                 List<FindQQ> qqs = find.result.buddy.info_list;
                 List<FindQQDataTable> table = qqs.Select(s=>s.ConvertMapModel<FindQQ, FindQQDataTable>(true)).ToList();
                 FindQQDataService service = new FindQQDataService(ConnString);
@@ -41,6 +37,10 @@ namespace CaptureWebData
         public PickUpStatic TodayStatic() 
         {
             return new FindQQDataService(ConnString).TodayStaticData();
+        }
+        public void GatherHeadImage(string uin,string imgDir) 
+        {
+            
         }
     }
     

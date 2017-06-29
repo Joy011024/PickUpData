@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NpkThirdPartService.MainContext", "..\CaptureData\Infrastructure\DistributedServices\NpkThirdPartService.MainContext\NpkThirdPartService.MainContext.csproj", "{EAE9C5FA-DC37-4A49-9488-C2CA7C9CAE63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatherImage", "GatherImage\GatherImage.csproj", "{F5C36711-8ED0-4C98-9637-EF381B992C05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{EAE9C5FA-DC37-4A49-9488-C2CA7C9CAE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAE9C5FA-DC37-4A49-9488-C2CA7C9CAE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAE9C5FA-DC37-4A49-9488-C2CA7C9CAE63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5C36711-8ED0-4C98-9637-EF381B992C05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5C36711-8ED0-4C98-9637-EF381B992C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5C36711-8ED0-4C98-9637-EF381B992C05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5C36711-8ED0-4C98-9637-EF381B992C05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

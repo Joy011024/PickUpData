@@ -25,4 +25,38 @@ namespace Domain.CommonData
         [System.ComponentModel.DataAnnotations.Schema.Column("HeadImageUrl")]
         public string Url { get; set; }
     }
+    public class QQFriend 
+    {
+        public Guid ID { get; set; }
+        public string QQFriendSort { get; set; }
+        public string Nick { get; set; }
+        /// <summary>
+        /// 昵称全拼
+        /// </summary>
+        public string NickSpell { get; set; }
+        /// <summary>
+        /// 邮箱【邮箱前缀可能和qq账户uin不一致】
+        /// </summary>
+        public string Email { get; set; }
+        public string UinHashCode { get; set; }
+        public string Param1 { get; set; }
+        public string Param2 { get; set; }
+        /// <summary>
+        /// qq号
+        /// </summary>
+        public string Uin { get; set; }
+        public string Remark { get; set; }
+        #region  --分组中的3个参数项
+        /// <summary>
+        /// qq好友数所属分组
+        /// </summary>
+        public string QQBelongClass { get; set; }
+        /// <summary>
+        /// qq分组的序号【序号是各自的组中的序号】
+        /// </summary>
+        public string QQBelongClassID { get; set; }
+        public string QQBelongClassParam { get; set; }
+        #endregion
+
+    }
 }
