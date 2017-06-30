@@ -76,13 +76,17 @@ namespace GatherImage
             Stream st = response.GetResponseStream();
             ImageHelper img = new ImageHelper();
             MemoryStream ms = img.ImageZip(st, 100);
-            string fileName=uin+"_"+ DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg";
+            string time = DateTime.Now.ToString("yyyyMMddHHmmssfff");
             string address = "Null";
+            string relative = address + "\\" + GetRelativePath;
+            string fileName =address+"_"+ uin + "_" + time + ".jpg";
             if (!string.IsNullOrEmpty(local) && local != LocalCityJoinSign)
             {
                 address = local.Split(new string[] { LocalCityJoinSign },StringSplitOptions.None)[0];
+                relative = address + "\\" + GetRelativePath;//获取所在的省份作为文件目录
+                fileName = local + "_" + uin + "_" + time + ".jpg";
             }
-            string relative = address + "\\" + GetRelativePath;
+            
             string file = img.SaveImage(ms, ImageDir + "\\"+relative, fileName);
             if (!string.IsNullOrEmpty(file))
             {
