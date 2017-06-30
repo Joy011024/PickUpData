@@ -34,6 +34,15 @@ namespace GatherImage
                 return ConfigurationManager.AppSettings["ImageDir"];
             }
         }
+
+        public string LocalCityJoinSign 
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["LocalCityJoinSign"];
+            }
+        }
+
         public string GetRelativePath
         {
             get 
@@ -61,17 +70,23 @@ namespace GatherImage
              }
              return result;
         }
-        string GatherImage(string url,string uin)
+        string GatherImage(string url,string uin,string local)
         {
             WebResponse response = HttpClientExtend.HttpWebRequestGet(url);
             Stream st = response.GetResponseStream();
             ImageHelper img = new ImageHelper();
             MemoryStream ms = img.ImageZip(st, 100);
             string fileName=uin+"_"+ DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg";
-            string file = img.SaveImage(ms, ImageDir + "\\" + GetRelativePath,  fileName);
+            string address = "Null";
+            if (!string.IsNullOrEmpty(local) && local != LocalCityJoinSign)
+            {
+                address = local.Split(new string[] { LocalCityJoinSign },StringSplitOptions.None)[0];
+            }
+            string relative = address + "\\" + GetRelativePath;
+            string file = img.SaveImage(ms, ImageDir + "\\"+relative, fileName);
             if (!string.IsNullOrEmpty(file))
             {
-                return GetRelativePath + "\\" + fileName;
+                return relative + "\\" + fileName;
             }
             return string.Empty;
         }
@@ -80,7 +95,7 @@ namespace GatherImage
             List<WaitGatherImage> waits = GetWaitGatherImageData();
             foreach  (WaitGatherImage item in waits)
             {
-                string path= GatherImage(item.HeadImageUrl,item.Uin);
+                string path= GatherImage(item.HeadImageUrl,item.Uin, item.LocalCity);
                 string sp = string.Empty;
                 if (!string.IsNullOrEmpty(path))
                 {

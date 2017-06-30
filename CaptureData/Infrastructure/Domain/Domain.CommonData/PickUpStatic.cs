@@ -36,5 +36,6 @@ namespace Domain.CommonData
         public Guid Id { get; set; }
         public string Uin { get; set; }
         public string HeadImageUrl { get; set; }
+        public string LocalCity { get; set; }
     }
 }

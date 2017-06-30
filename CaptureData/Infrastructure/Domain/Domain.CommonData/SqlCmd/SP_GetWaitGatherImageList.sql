@@ -3,7 +3,7 @@ if(object_id('SP_GetWaitGatherImageList','p') is not null)
 go
 create procedure SP_GetWaitGatherImageList
 as
-select top 200 ID,Uin,HeadImageUrl from TecentQQData 
+select top 200 ID,Uin,HeadImageUrl,province+'_'+city as LocalCity  from TecentQQData 
 where GatherImageTime is null 
 and HeadImageUrl not in(--头像提出腾讯提供的系统头像
     select distinct( ImageUrl) from IgnoreImage

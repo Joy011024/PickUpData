@@ -16,6 +16,12 @@ namespace CaptureWebData
         QuartzJob job = new QuartzJob();
         string NoLimit="不限";
         NodeData noLimitAddress = new NodeData() { Name = "不限" };
+        enum QQRetCode 
+        {
+            Normal=0,
+            Forbin=6,//禁用
+            CookieTimeOut = 100000
+        }
         enum ComboboxItem 
         {
             Name=1,
@@ -286,23 +292,29 @@ namespace CaptureWebData
                 sb.AppendLine("DB Total\t" + qqres.result.buddy.totalnum);
                 sb.AppendLine("now count\t" + qqres.result.buddy.info_list.Count);//info_list 可能出现为null的情况
                 rtbTip.Text = sb.ToString();
-                if (qqres.retcode == 0 && qqres.result.buddy.info_list.Count> 0)
+                if (qqres.retcode == QQRetCode.Normal.GetHashCode() && qqres.result.buddy.info_list.Count> 0)
                 {
                     return;
                 }
-                else if (qqres.retcode == 0) 
-                {//数据读取正常
+                else if (qqres.retcode ==QQRetCode.Normal.GetHashCode()) 
+                {//数据读取正常(但是当前没有查找到数据)
                     //数据读取正常也可能出现腾讯没有提供返回数据（腾讯在进行防作弊检测）
                     ProtectJob();
                     return;
                 }
-                 
-                if (qqres.retcode != 0 && qqres.retcode != 6)
+                if (qqres.retcode == QQRetCode.CookieTimeOut.GetHashCode())
+                { //该账户已退出登录
+                    rtbTip.Text = "该账户已退出";
+                    job.DeleteJob<JobDelegateFunction>();
+                    job.DeleteJob<JobAction<QQDataDA>>();
+                    return;
+                }
+                if ( qqres.retcode !=QQRetCode.Forbin.GetHashCode())
                 {//延迟轮询的间隔
                     //更改轮询条件
                     ProtectJob();
                 }
-                else if (res != null && res.responseData.retcode == 6)
+                else if (qqres.retcode == QQRetCode.Forbin.GetHashCode())
                 {//已被腾讯封号
                     job.DeleteJob<JobDelegateFunction>();
                     job.DeleteJob<JobAction<QQDataDA>>();
@@ -311,6 +323,14 @@ namespace CaptureWebData
             }
             else
             {
+                //返回消息转换为实体对象
+                FindQQResponse find = res.responseJson.ConvertObject<FindQQResponse>();
+                if (find.retcode != QQRetCode.Forbin.GetHashCode()&&find.retcode!=QQRetCode.CookieTimeOut.GetHashCode())
+                { //错误不是来自于账户不禁用
+                    ProtectJob();
+                    return;
+                }
+                //判断返回数据的情况
                 rtbTip.Text = "Error\r\n" + res.responseJson;
                 //一旦出现数据异常（防止被腾讯检测导致封号），停止轮询
                 job.DeleteJob<JobDelegateFunction>();

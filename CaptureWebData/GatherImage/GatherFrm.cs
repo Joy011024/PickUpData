@@ -34,5 +34,10 @@ namespace GatherImage
             DelegateData.BaseDelegate del = QuartRun;
             job.CreateJobWithParam<JobDelegateFunction>(new object[] {  del }, DateTime.Now, 30, 0);
         }
+
+        private void BtnClearPRocess_Click(object sender, EventArgs e)
+        {
+            lsbProcess.Items.Clear();
+        }
     }
 }

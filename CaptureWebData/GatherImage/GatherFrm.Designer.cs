@@ -29,23 +29,46 @@
         private void InitializeComponent()
         {
             this.btnStart = new System.Windows.Forms.Button();
+            this.lsbProcess = new System.Windows.Forms.ListBox();
+            this.BtnClearPRocess = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(101, 104);
+            this.btnStart.Location = new System.Drawing.Point(3, 12);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.Size = new System.Drawing.Size(99, 23);
             this.btnStart.TabIndex = 0;
-            this.btnStart.Text = "开始";
+            this.btnStart.Text = "开始采集头像";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // lsbProcess
+            // 
+            this.lsbProcess.FormattingEnabled = true;
+            this.lsbProcess.ItemHeight = 12;
+            this.lsbProcess.Location = new System.Drawing.Point(12, 45);
+            this.lsbProcess.Name = "lsbProcess";
+            this.lsbProcess.Size = new System.Drawing.Size(260, 208);
+            this.lsbProcess.TabIndex = 1;
+            // 
+            // BtnClearPRocess
+            // 
+            this.BtnClearPRocess.Location = new System.Drawing.Point(178, 11);
+            this.BtnClearPRocess.Name = "BtnClearPRocess";
+            this.BtnClearPRocess.Size = new System.Drawing.Size(75, 23);
+            this.BtnClearPRocess.TabIndex = 2;
+            this.BtnClearPRocess.Text = "清除进度";
+            this.BtnClearPRocess.UseVisualStyleBackColor = true;
+            this.BtnClearPRocess.Click += new System.EventHandler(this.BtnClearPRocess_Click);
             // 
             // GatherFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.BtnClearPRocess);
+            this.Controls.Add(this.lsbProcess);
             this.Controls.Add(this.btnStart);
             this.Name = "GatherFrm";
             this.Text = "Form1";
@@ -56,6 +79,8 @@
         #endregion
 
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.ListBox lsbProcess;
+        private System.Windows.Forms.Button BtnClearPRocess;
     }
 }
 
