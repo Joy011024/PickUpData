@@ -50,9 +50,9 @@
             this.lblTodayPickUp = new System.Windows.Forms.Label();
             this.lsbStatic = new System.Windows.Forms.ListBox();
             this.gbPollingType = new System.Windows.Forms.GroupBox();
+            this.rbDepth = new System.Windows.Forms.RadioButton();
             this.rbGuid = new System.Windows.Forms.RadioButton();
             this.rbNormal = new System.Windows.Forms.RadioButton();
-            this.rbDepth = new System.Windows.Forms.RadioButton();
             this.lblPageIndex = new System.Windows.Forms.Label();
             this.txtPageIndex = new System.Windows.Forms.TextBox();
             this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
@@ -139,6 +139,7 @@
             this.cmbCity.Name = "cmbCity";
             this.cmbCity.Size = new System.Drawing.Size(103, 20);
             this.cmbCity.TabIndex = 9;
+            this.cmbCity.SelectedIndexChanged += new System.EventHandler(this.cmbCity_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -266,6 +267,17 @@
             this.gbPollingType.TabStop = false;
             this.gbPollingType.Text = "轮询方式";
             // 
+            // rbDepth
+            // 
+            this.rbDepth.AutoSize = true;
+            this.rbDepth.Location = new System.Drawing.Point(121, 19);
+            this.rbDepth.Name = "rbDepth";
+            this.rbDepth.Size = new System.Drawing.Size(71, 16);
+            this.rbDepth.TabIndex = 2;
+            this.rbDepth.TabStop = true;
+            this.rbDepth.Text = "深度检索";
+            this.rbDepth.UseVisualStyleBackColor = true;
+            // 
             // rbGuid
             // 
             this.rbGuid.AutoSize = true;
@@ -287,17 +299,6 @@
             this.rbNormal.TabStop = true;
             this.rbNormal.Text = "常规";
             this.rbNormal.UseVisualStyleBackColor = true;
-            // 
-            // rbDepth
-            // 
-            this.rbDepth.AutoSize = true;
-            this.rbDepth.Location = new System.Drawing.Point(121, 19);
-            this.rbDepth.Name = "rbDepth";
-            this.rbDepth.Size = new System.Drawing.Size(71, 16);
-            this.rbDepth.TabIndex = 2;
-            this.rbDepth.TabStop = true;
-            this.rbDepth.Text = "深度检索";
-            this.rbDepth.UseVisualStyleBackColor = true;
             // 
             // lblPageIndex
             // 

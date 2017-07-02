@@ -42,6 +42,14 @@ namespace Infrastructure.ExtService
             System.Drawing.Image originImg = System.Drawing.Image.FromStream(originStram);
             return ImageZip(originImg, zipQuality);
         }
+        public MemoryStream OriginImage(Stream imgStream)
+        {
+            System.Drawing.Image originImg = System.Drawing.Image.FromStream(imgStream);
+            Bitmap source = new Bitmap(originImg);
+            MemoryStream img = new MemoryStream();//获取处理后的图像文件流
+            source.Save(img, ImageFormat.Jpeg);
+            return img;
+        }
         /// <summary>
         /// 生成缩略图
         /// </summary>

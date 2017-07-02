@@ -70,23 +70,36 @@ namespace GatherImage
              }
              return result;
         }
-        string GatherImage(string url,string uin,string local)
+        string GatherImage(string url, string uin, string local, bool isZipImage)
         {
             WebResponse response = HttpClientExtend.HttpWebRequestGet(url);
             Stream st = response.GetResponseStream();
             ImageHelper img = new ImageHelper();
-            MemoryStream ms = img.ImageZip(st, 100);
+            MemoryStream ms;
+            string imgType = "Zip_";
+            if (isZipImage)
+            {
+                ms = img.ImageZip(st, 100);
+            }
+            else 
+            {
+                ms = img.OriginImage(st);
+                imgType = "Ori_";
+            }
             string time = DateTime.Now.ToString("yyyyMMddHHmmssfff");
             string address = "Null";
             string relative = address + "\\" + GetRelativePath;
-            string fileName =address+"_"+ uin + "_" + time + ".jpg";
+            string fileName = imgType+address + "_" + uin + "_" + time + ".jpg";
             if (!string.IsNullOrEmpty(local) && local != LocalCityJoinSign)
             {
-                address = local.Split(new string[] { LocalCityJoinSign },StringSplitOptions.None)[0];
-                relative = address + "\\" + GetRelativePath;//获取所在的省份作为文件目录
-                fileName = local + "_" + uin + "_" + time + ".jpg";
+                string[] asd = local.Split(new string[] { LocalCityJoinSign }, StringSplitOptions.None);
+                address = asd[0];
+                if (!string.IsNullOrEmpty(address))
+                {
+                    relative = address + "\\" + asd [1]+"\\"+ GetRelativePath;//获取所在的省份作为文件目录
+                    fileName = local + "_" + uin + "_" + time + ".jpg";
+                }
             }
-            
             string file = img.SaveImage(ms, ImageDir + "\\"+relative, fileName);
             if (!string.IsNullOrEmpty(file))
             {
@@ -94,17 +107,23 @@ namespace GatherImage
             }
             return string.Empty;
         }
-        public void DownLoadImage() 
+        /// <summary>
+        /// 下载的图片是否为压缩图
+        /// </summary>
+        /// <param name="isZipImage">压缩图</param>
+        /// <returns></returns>
+        public List<string> DownLoadImage(bool isZipImage) 
         {
             List<WaitGatherImage> waits = GetWaitGatherImageData();
+            List<string> paths = new List<string>();
             foreach  (WaitGatherImage item in waits)
             {
-                string path= GatherImage(item.HeadImageUrl,item.Uin, item.LocalCity);
+                string path= GatherImage(item.HeadImageUrl,item.Uin, item.LocalCity,isZipImage);
                 string sp = string.Empty;
                 if (!string.IsNullOrEmpty(path))
                 {
                     sp = string.Format("exec [SP_SuccessGatherImageList] '{0}','{1}'", item.Id,path);
-                  
+                    paths.Add(path);
                 }
                 else 
                 {
@@ -113,7 +132,7 @@ namespace GatherImage
                 MainRespority<FindQQDataTable> main = new MainRespority<FindQQDataTable>(TecentDA);
                 main.ExecuteSPNoQuery(sp, null);
             }
-
+            return paths;
         }
     }
 }

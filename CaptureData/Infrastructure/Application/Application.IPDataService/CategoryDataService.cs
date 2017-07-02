@@ -20,22 +20,14 @@ namespace ApplicationService.IPDataService
                 DateTime now = DateTime.Now;
                 foreach (CategoryData item in data)
                 {
-                    item.Id = Guid.NewGuid().GetHashCode();
-                    if (item.Id < 0) 
-                    {
-                        item.Id = 0 - item.Id;
-                    }
+                    //item.Id = Guid.NewGuid().GetHashCode();
+                    //if (item.Id < 0) 
+                    //{
+                    //    item.Id = 0 - item.Id;
+                    //}
                     item.IsDelete = false;
                     item.CreateTime = now;
-                    data=data.Where(ch => {
-                        if (!string.IsNullOrEmpty(ch.ParentCode) && ch.ParentCode == item.Code) 
-                        {
-                            ch.ParentId = item.Id;
-                        }
-                        return true;
-                    }).ToList();
                 }
-
                 MainRespority<CategoryData> mr = new MainRespority<CategoryData>(ConnString);
                 mr.InsertList(data);
             }

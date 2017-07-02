@@ -14,18 +14,18 @@ namespace CaptureWebData
     public partial class TecentDataFrm : Form
     {
         QuartzJob job = new QuartzJob();
-        string NoLimit="不限";
-        NodeData noLimitAddress = new NodeData() { Name = "不限" };
-        enum QQRetCode 
+        string NoLimit = "不限";
+        CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
+        enum QQRetCode
         {
-            Normal=0,
-            Forbin=6,//禁用
+            Normal = 0,
+            Forbin = 6,//禁用
             CookieTimeOut = 100000
         }
-        enum ComboboxItem 
+        enum ComboboxItem
         {
-            Name=1,
-            Code=2
+            Name = 1,
+            Code = 2
         }
         enum ComboboxDictItem
         {
@@ -33,15 +33,15 @@ namespace CaptureWebData
             Value = 2
         }
         string Cookie { get; set; }
-        List<NodeData> cityList { get; set; }
+        List<CategoryData> cityList { get; set; }
         public TecentDataFrm()
         {
             InitializeComponent();
             Test();
         }
-        void Test() 
+        void Test()
         {
-            ProcessHelp.ForeachProcess();   
+            ProcessHelp.ForeachProcess();
         }
         private void TecentDataFrm_Load(object sender, EventArgs e)
         {
@@ -50,10 +50,10 @@ namespace CaptureWebData
         void Init()
         {
             Dictionary<string, object> fields = EGender.Men.GetEnumFieldAttributeDict("DescriptionAttribute", "Description");
-            BindComboBoxDict(fields,cmbGender);
+            BindComboBoxDict(fields, cmbGender);
             pickUpIEWebCookie.CallBack = CallBack;
             CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
-            IEnumerable<NodeData> city = cds.QueryCityCategory();
+            IEnumerable<CategoryData> city = cds.QueryCityCategory();
             cityList = city.ToList();
             cityList.Add(noLimitAddress);
             gbPollingType.Enabled = false;
@@ -61,17 +61,17 @@ namespace CaptureWebData
             GetProcessPath();
             QueryTodayPickUp();
         }
-        void GetProcessPath() 
+        void GetProcessPath()
         {
-            ConfigurationItems config=new ConfigurationItems();
+            ConfigurationItems config = new ConfigurationItems();
             rtbTip.Text = config.GetNowAssembly();//config.GetProcessPath();
             this.Text += config.JoinProcessPath();
         }
-        void CallBack(object cookie) 
+        void CallBack(object cookie)
         {
-            Cookie =cookie as string ;
+            Cookie = cookie as string;
         }
-        void BindComboBoxDict(Dictionary<string, object> fields,ComboBox cmb) 
+        void BindComboBoxDict(Dictionary<string, object> fields, ComboBox cmb)
         {
             foreach (KeyValuePair<string, object> item in fields)
             {
@@ -83,22 +83,22 @@ namespace CaptureWebData
         }
         private void btnQuery_Click(object sender, EventArgs e)
         {
-           // 
+            // 
             int interval = 0;
             string inter = txtTimeSpan.Text;
             int.TryParse(inter, out interval);
             int repeact = 0;
             string rep = txtRepeact.Text;
             int.TryParse(rep, out repeact);
-            LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath+(new QQDataDA().GeneratePathTimeSpan(Cookie)),ELogType.SessionOrCookieLog);
+            LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath + (new QQDataDA().GeneratePathTimeSpan(Cookie)), ELogType.SessionOrCookieLog);
 
             QueryQQParam param = GetBaseQueryParam();
-            if (ckStartQuartz.Checked && rbGuid.Checked) 
+            if (ckStartQuartz.Checked && rbGuid.Checked)
             {//开启随机轮询
                 DelegateData.BaseDelegate del = QuartzGuidForach;
-                job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, param}, DateTime.Now.AddSeconds(interval), interval, repeact);
+                job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, param }, DateTime.Now.AddSeconds(interval), interval, repeact);
             }
-            else if (ckStartQuartz.Checked && rbDepth.Checked) 
+            else if (ckStartQuartz.Checked && rbDepth.Checked)
             {//该查询结果页轮询
                 DelegateData.BaseDelegate del = QuartzForeachPage;
                 job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, null }, DateTime.Now.AddSeconds(interval), interval, repeact);
@@ -122,39 +122,42 @@ namespace CaptureWebData
         {
 
         }
-        void BindProvince() 
+        void BindProvince()
         {
-            BindComboBox("1", cmbProvince);
+            BindComboBox("1", cmbProvince, 2);
         }
 
         private void cmbProvince_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cmb = sender as ComboBox;
-            NodeData node=(NodeData) cmb.SelectedItem;
-            BindComboBox(node.Code,cmbCity);
+            NodeData node = (NodeData)cmb.SelectedItem;
+            BindComboBox(node.Code, cmbCity, 3);
         }
-        void BindComboBox(string parentCode,ComboBox cmb) 
+        void BindComboBox(string parentCode, ComboBox cmb, int level)
         {
-            List<NodeData> nodes=new List<NodeData>();
+            List<NodeItem> nodes = new List<NodeItem>();
             if (string.IsNullOrEmpty(parentCode))
             {//没有选择省/自治区
-                nodes.Add(noLimitAddress);
+                nodes.Add(noLimitAddress.ConvertMapModel<CategoryData, NodeItem>());
             }
             else
             {
-                nodes = cityList.Where(c => c.ParentCode == parentCode || string.IsNullOrEmpty(c.Code)).OrderBy(t => t.Code).ToList();
+                nodes = cityList.Where(c => (c.ParentCode == parentCode || string.IsNullOrEmpty(c.Code)) && c.NodeLevel == level).
+                    Select(n =>
+                        n.ConvertMapModel<CategoryData, NodeItem>()
+                        ).OrderBy(t => t.Code).ToList();
             }
             cmb.DataSource = nodes;
             cmb.DisplayMember = ComboboxItem.Name.ToString();
             cmb.ValueMember = ComboboxItem.Code.ToString();
         }
-       
-        private void QuartzCallBack(object data) 
+
+        private void QuartzCallBack(object data)
         {
             if (rtbTip.InvokeRequired)
             {//其他进程调度
                 DelegateData.BaseDelegate bd = new DelegateData.BaseDelegate(QuartzCallBack);
-                this.Invoke(bd,data);
+                this.Invoke(bd, data);
                 return;
             }
             PickUpQQDoResponse res = data as PickUpQQDoResponse;
@@ -170,30 +173,30 @@ namespace CaptureWebData
             QuartzJob job = new QuartzJob();
             job.DeleteJob<JobAction<QQDataDA>>();
         }
-        private void QueryTodayPickUp() 
+        private void QueryTodayPickUp()
         {
             PickUpStatic pc = (new QQDataDA()).TodayStatic();
             lsbStatic.Items.Clear();
-            lsbStatic.Items.Add("时间戳"+DateTime.Now.ToString());
+            lsbStatic.Items.Add("时间戳" + DateTime.Now.ToString());
             lsbStatic.Items.Add("库\t" + pc.DBTotal);
-            lsbStatic.Items.Add("库唯一\t"+pc.DBPrimaryTotal);
-            lsbStatic.Items.Add( "日期\t"+pc.StaticDay);
-            lsbStatic.Items.Add("今日总计\t" + pc.Total );
+            lsbStatic.Items.Add("库唯一\t" + pc.DBPrimaryTotal);
+            lsbStatic.Items.Add("日期\t" + pc.StaticDay);
+            lsbStatic.Items.Add("今日总计\t" + pc.Total);
             lsbStatic.Items.Add("今日QQ号\t" + pc.IdTotal);
         }
-        void QuartzGuidForach(object quartzParam) 
+        void QuartzGuidForach(object quartzParam)
         {
-            if (this.InvokeRequired) 
+            if (this.InvokeRequired)
             {//是否通过其他形式调用
                 DelegateData.BaseDelegate bd = new DelegateData.BaseDelegate(QuartzGuidForach);
                 this.Invoke(bd, quartzParam);
                 return;
             }
             LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath + (new QQDataDA().GeneratePathTimeSpan(Cookie)), ELogType.SessionOrCookieLog);
-            QueryQQParam param = GetBaseQueryParam();           
+            QueryQQParam param = GetBaseQueryParam();
             QQDataDA da = new QQDataDA();
             da.QueryParam = param;
-            PickUpQQDoResponse response= da.QueryQQData(Cookie);
+            PickUpQQDoResponse response = da.QueryQQData(Cookie);
             QueryTodayPickUp();
             //为下一次产生随机参数
             Guid gid = Guid.NewGuid();
@@ -209,7 +212,7 @@ namespace CaptureWebData
         /// 提取查询qq数据使用的参数
         /// </summary>
         /// <returns></returns>
-        QueryQQParam GetBaseQueryParam() 
+        QueryQQParam GetBaseQueryParam()
         {
             int interval = 0;
             string inter = txtTimeSpan.Text;
@@ -222,6 +225,8 @@ namespace CaptureWebData
             param.province = pro.Code;
             NodeData city = (NodeData)cmbCity.SelectedItem;
             param.city = city.Code;
+            NodeData dist = (NodeData)cmbDistinct.SelectedItem;
+            param.district = dist.Code;
             int limit = 30;
             if (int.TryParse(txtCurrentLimit.Text, out limit))
             {
@@ -241,7 +246,7 @@ namespace CaptureWebData
                 rbNormal.Checked = true;
                 gbPollingType.Enabled = true;
             }
-            else 
+            else
             {
                 rbNormal.Checked = false;
                 rbGuid.Checked = false;
@@ -249,7 +254,7 @@ namespace CaptureWebData
                 gbPollingType.Enabled = false;
             }
         }
-        void QuartzForeachPage(object data) 
+        void QuartzForeachPage(object data)
         {
             if (this.InvokeRequired)
             {//是否通过其他形式调用
@@ -275,7 +280,7 @@ namespace CaptureWebData
             {
                 txtPageIndex.Text = (resp.result.buddy.page + 1).ToString();
             }
-            else 
+            else
             {
                 txtPageIndex.Text = "1";
             }
@@ -284,7 +289,7 @@ namespace CaptureWebData
         }
         void QueryResponseAction(PickUpQQDoResponse res)
         {
-            if (res != null&&res.responseData!=null)
+            if (res != null && res.responseData != null)
             {
                 FindQQResponse qqres = res.responseData;
                 StringBuilder sb = new StringBuilder();
@@ -292,11 +297,11 @@ namespace CaptureWebData
                 sb.AppendLine("DB Total\t" + qqres.result.buddy.totalnum);
                 sb.AppendLine("now count\t" + qqres.result.buddy.info_list.Count);//info_list 可能出现为null的情况
                 rtbTip.Text = sb.ToString();
-                if (qqres.retcode == QQRetCode.Normal.GetHashCode() && qqres.result.buddy.info_list.Count> 0)
+                if (qqres.retcode == QQRetCode.Normal.GetHashCode() && qqres.result.buddy.info_list.Count > 0)
                 {
                     return;
                 }
-                else if (qqres.retcode ==QQRetCode.Normal.GetHashCode()) 
+                else if (qqres.retcode == QQRetCode.Normal.GetHashCode())
                 {//数据读取正常(但是当前没有查找到数据)
                     //数据读取正常也可能出现腾讯没有提供返回数据（腾讯在进行防作弊检测）
                     ProtectJob();
@@ -309,7 +314,7 @@ namespace CaptureWebData
                     job.DeleteJob<JobAction<QQDataDA>>();
                     return;
                 }
-                if ( qqres.retcode !=QQRetCode.Forbin.GetHashCode())
+                if (qqres.retcode != QQRetCode.Forbin.GetHashCode())
                 {//延迟轮询的间隔
                     //更改轮询条件
                     ProtectJob();
@@ -325,7 +330,7 @@ namespace CaptureWebData
             {
                 //返回消息转换为实体对象
                 FindQQResponse find = res.responseJson.ConvertObject<FindQQResponse>();
-                if (find.retcode != QQRetCode.Forbin.GetHashCode()&&find.retcode!=QQRetCode.CookieTimeOut.GetHashCode())
+                if (find.retcode != QQRetCode.Forbin.GetHashCode() && find.retcode != QQRetCode.CookieTimeOut.GetHashCode())
                 { //错误不是来自于账户不禁用
                     ProtectJob();
                     return;
@@ -341,11 +346,11 @@ namespace CaptureWebData
         {
             Application.Exit();
         }
-        void GatherErrorSendEmail(string responseJson) 
+        void GatherErrorSendEmail(string responseJson)
         {
-            
+
         }
-        void ProtectJob() 
+        void ProtectJob()
         {
             //更换查询条件 防止被检测为攻击
             Guid gid = Guid.NewGuid();
@@ -361,6 +366,25 @@ namespace CaptureWebData
                 cmbCity.SelectedIndex = city;
             }
 
+        }
+
+        private void cmbCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox cmb = sender as ComboBox;
+            NodeItem node = (NodeItem)cmb.SelectedItem;
+            //由于腾讯城市数据县级 的父节点使用
+            CategoryData item = cityList.Where(c => c.Id == node.Id).FirstOrDefault();
+            List<NodeItem> items = new List<NodeItem>();
+            items.Add(noLimitAddress.ConvertMapModel<CategoryData, NodeItem>());
+            if (item.ParentId.HasValue)
+            {
+                object dd = cityList.Where(c => c.ParentId == item.Id).ToList();
+                NodeItem[] cts = cityList.Where(c => c.ParentId == item.Id).Select(s => s.ConvertMapModel<CategoryData, NodeItem>()).ToArray();
+                items.AddRange(cts);
+            }
+            cmbDistinct.DataSource = items;
+            cmbDistinct.DisplayMember = ComboboxItem.Name.ToString();
+            cmbDistinct.ValueMember = ComboboxItem.Code.ToString();
         }
     }
 }

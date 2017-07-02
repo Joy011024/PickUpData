@@ -19,6 +19,13 @@ namespace Domain.CommonData
         public int NodeLevel { get;set;}
     }
     /// <summary>
+    /// 带有 ID的节点
+    /// </summary>
+    public class NodeItem :NodeData
+    {
+        public int Id { get; set; }
+    }
+    /// <summary>
     /// 分类
     /// </summary>
     public class CategoryData : NodeData

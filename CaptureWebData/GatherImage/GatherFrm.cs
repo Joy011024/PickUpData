@@ -19,8 +19,21 @@ namespace GatherImage
         }
         public void GatherImage() 
         {
+            if (lsbProcess.InvokeRequired) 
+            {
+                DelegateData.SampleDelegate sam = new DelegateData.SampleDelegate(GatherImage);
+                this.Invoke(sam);
+                return;
+            }
             GatherUinImage guin = new GatherUinImage();
-            guin.DownLoadImage();
+            bool isZip = true;
+            if (rbOrigin.Checked)
+            {
+                isZip = false;
+            }
+           int gather=  guin.DownLoadImage(isZip).Count;
+           lsbProcess.Items.Add("成功采集数目"+gather);
+          
             //guin.GatherImage("http://q2.qlogo.cn/g?b=qq&k=gPpshyzPCdw5WsH3BUB5xg&s=100&t=1483286794");
         }
         void QuartRun(object obj) 
