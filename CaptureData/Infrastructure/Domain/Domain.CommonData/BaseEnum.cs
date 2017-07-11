@@ -86,5 +86,21 @@ namespace Domain.CommonData
             file.Flush();
             file.Close();
         }
+        public static void WriteLog(string path, string fileName, string text)
+        {
+            DirExists(path);
+            FileStream stream = new FileStream(path + "\\" + fileName, FileMode.Append, FileAccess.Write);
+            byte[] txt = Encoding.UTF8.GetBytes(text);
+            stream.Write(txt, 0, txt.Length);
+            stream.Flush();
+            stream.Close();
+        }
+        static void DirExists(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
     }
 }

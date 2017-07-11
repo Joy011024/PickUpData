@@ -97,7 +97,7 @@ namespace GatherImage
                 if (!string.IsNullOrEmpty(address))
                 {
                     relative = address + "\\" + asd [1]+"\\"+ GetRelativePath;//获取所在的省份作为文件目录
-                    fileName = local + "_" + uin + "_" + time + ".jpg";
+                    fileName = imgType + local + "_" + uin + "_" + time + ".jpg";
                 }
             }
             string file = img.SaveImage(ms, ImageDir + "\\"+relative, fileName);

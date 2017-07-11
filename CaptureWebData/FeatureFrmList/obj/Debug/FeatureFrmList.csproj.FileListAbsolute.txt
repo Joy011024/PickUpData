@@ -10,3 +10,5 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\FeatureFrmList\obj\Debug\Featur
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\FeatureFrmList\obj\Debug\FeatureFrmList.csproj.GenerateResource.Cache
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\FeatureFrmList\obj\Debug\FeatureFrmList.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\FeatureFrmList\obj\Debug\FeatureFrmList.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\FeatureFrmList\obj\Debug\FeatureFrmList.UserContact.resources
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\FeatureFrmList\obj\Debug\FeatureFrmList.SelectHeadImage.resources

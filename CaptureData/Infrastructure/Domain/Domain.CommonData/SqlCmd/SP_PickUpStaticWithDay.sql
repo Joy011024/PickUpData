@@ -17,4 +17,4 @@ declare @DBPrimaryTotal int
 select @DBTotal=count(uin),@DBPrimaryTotal=count(distinct(uin))  from TecentQQData
 
 select @DBTotal as DBTotal,@DBPrimaryTotal as DBPrimaryTotal, @count as Total,@primaryCount as IdTotal,
-convert(varchar(10),@day,112) StaticDay
+convert(varchar(10),@day,120) StaticDay
