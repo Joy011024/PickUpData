@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-
+using TimeIntervalListen;
 namespace Demo
 {
     public partial class Form1 : Form
@@ -122,20 +122,44 @@ namespace Demo
 
         private unsafe void Form1_Load(object sender, EventArgs e)
         {
-            Win32Native.MIB_IF_TABLE2 s_Mit2 = GetMIB2Interface();
-            for (int i = 0; i < s_Mit2.NumEntries; i++)
+            IntervalListen();
+        }
+        private void IntervalListen() 
+        {
+            string group = "ListenNIC";
+            QuartzJob job = new QuartzJob(group);
+            BaseDelegate bd=new BaseDelegate(DoInterval);
+            //job.CreateJobWithParam(,)
+            int interval=30;
+            int repeact=24*60*60/interval;
+            job.CreateJobWithParam<JobDelegateFunction>(new object[] { bd }, DateTime.Now, interval, repeact);
+        }
+        private void DoInterval(object obj) 
+        {
+            if (lstNic.InvokeRequired)
             {
-                listView1.Items.Add(
-                    new ListViewItem(
-                        new string[]
+                BaseDelegate bd = new BaseDelegate(DoInterval);
+                this.Invoke(bd, obj);
+                return;
+            }
+            else 
+            {
+                lstNic.Items.Clear();
+                Win32Native.MIB_IF_TABLE2 s_Mit2 = GetMIB2Interface();
+                for (int i = 0; i < s_Mit2.NumEntries; i++)
+                {
+                    lstNic.Items.Add(
+                        new ListViewItem(
+                            new string[]
                             {
                                 s_Mit2.Table[i].Description,
                                 s_Mit2.Table[i].Alias,
                                 s_Mit2.Table[i].InOctets.ToString(),
                                 s_Mit2.Table[i].OutOctets.ToString()
                             }
-                        )
-                    );
+                            )
+                        );
+                }
             }
         }
     }

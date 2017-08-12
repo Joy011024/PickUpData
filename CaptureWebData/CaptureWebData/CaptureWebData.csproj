@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionTimeOut.cs" />
     <Compile Include="BaseData\ConfigurationItems.cs" />
     <Compile Include="BaseData\CityData.cs" />
     <Compile Include="EleTestFrm.cs">

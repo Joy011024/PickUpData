@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-
+using TimeIntervalListen;
 namespace Demo
 {
     static class Program
@@ -14,7 +14,16 @@ namespace Demo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+           
+            Application.Run(new JobDetailFrm());
+        }
+    }
+    public class QueryJob
+    {
+        public void GetAllActiveJob() 
+        {
+            QuartzJob job = new QuartzJob("Query");
+            job.GetAllActiveJob();
         }
     }
 }

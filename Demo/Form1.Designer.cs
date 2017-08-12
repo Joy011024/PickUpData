@@ -28,39 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.b = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lstNic = new System.Windows.Forms.ListView();
             this.a = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.b = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.c = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.d = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
-            // listView1
+            // lstNic
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lstNic.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.a,
             this.b,
             this.c,
             this.d});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(467, 253);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // b
-            // 
-            this.b.DisplayIndex = 0;
-            this.b.Text = "描述";
-            this.b.Width = 200;
+            this.lstNic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstNic.Location = new System.Drawing.Point(0, 0);
+            this.lstNic.Name = "lstNic";
+            this.lstNic.Size = new System.Drawing.Size(467, 253);
+            this.lstNic.TabIndex = 0;
+            this.lstNic.UseCompatibleStateImageBehavior = false;
+            this.lstNic.View = System.Windows.Forms.View.Details;
             // 
             // a
             // 
             this.a.DisplayIndex = 1;
             this.a.Text = "别名";
             this.a.Width = 200;
+            // 
+            // b
+            // 
+            this.b.DisplayIndex = 0;
+            this.b.Text = "描述";
+            this.b.Width = 200;
             // 
             // c
             // 
@@ -75,7 +75,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(467, 253);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lstNic);
             this.Name = "Form1";
             this.Text = "C# Monitor NIC Traffic.";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -85,7 +85,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lstNic;
         private System.Windows.Forms.ColumnHeader a;
         private System.Windows.Forms.ColumnHeader b;
         private System.Windows.Forms.ColumnHeader c;

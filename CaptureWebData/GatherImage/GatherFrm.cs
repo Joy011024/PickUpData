@@ -45,7 +45,7 @@ namespace GatherImage
         {
             QuartzJob job = new QuartzJob();
             DelegateData.BaseDelegate del = QuartRun;
-            job.CreateJobWithParam<JobDelegateFunction>(new object[] {  del }, DateTime.Now, 30, 0);
+            job.CreateJobWithParam<JobDelegateFunction>(new object[] {  del }, DateTime.Now, 15, 0);
         }
 
         private void BtnClearPRocess_Click(object sender, EventArgs e)
