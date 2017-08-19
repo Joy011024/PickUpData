@@ -30,7 +30,9 @@ namespace Domain.CommonData
         [Description("缓存数据日志")]
         SessionOrCookieLog=5,
         [Description("数据存入数据库日志")]
-        DataInDBLog=6
+        DataInDBLog=6,
+        [Description("Debug调试日志数据")]
+        DebugData=7
     }
     public class LoggerWriter 
     {
@@ -48,7 +50,7 @@ namespace Domain.CommonData
                 Directory.CreateDirectory(path);
             }
             DateTime now = DateTime.Now;
-            string file = path + "/" + log.ToString() + DateTime.Now.ToString(CommonFormat.DateTimeIntFormat) + ".txt";
+            string file = path + "/" + log.ToString() + now.ToString(CommonFormat.DateTimeIntFormat) + ".txt";
             FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
             sw.Write(text);
@@ -101,6 +103,57 @@ namespace Domain.CommonData
             {
                 Directory.CreateDirectory(path);
             }
+        }
+    }
+    public static class Logger 
+    {
+        static string DllDir;
+        static Logger()
+        {
+            if (string.IsNullOrEmpty(DllDir))
+            {
+                AssemblyDataExt ass = new AssemblyDataExt();
+                DllDir = ass.GetAssemblyDir();
+            }
+        }
+        public static void CreateNewAppData(this string document,string fileName,string dir=null) 
+        {
+            if (string.IsNullOrEmpty(dir))
+            {
+                dir = (new AssemblyDataExt()).GetAssemblyDir();
+            }    
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            string fullname = dir + "/" + fileName;
+            FileStream fs = new FileStream(fullname,FileMode.Create,FileAccess.Write,FileShare.ReadWrite);
+            byte[] txt = Encoding.UTF8.GetBytes(document);
+            fs.Write(txt,0,txt.Length);
+            fs.Close();
+        }
+    }
+    public  class AssemblyDataExt 
+    {
+        public  string GetAssemblyDir() 
+        {//获取dll文件被引用后所在的程序集
+            System.Reflection.Assembly ass= this.GetType().Assembly;
+            string path= ass.Location;
+            DirectoryInfo di = new DirectoryInfo(path);
+            return di.Parent.FullName;
+            //D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Domain.CommonData.dll
+        }
+        public string ForeachDir(string originDir, int foreachLevel)
+        {
+            DirectoryInfo di = new DirectoryInfo(originDir);
+            string path = originDir;
+            while (foreachLevel>0)
+            {
+                path = di.Parent.FullName;
+                di = new DirectoryInfo(originDir);
+                foreachLevel--;
+            }
+            return originDir;
         }
     }
 }

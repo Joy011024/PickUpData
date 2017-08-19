@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Domain.CommonData;
 using ApplicationService.IPDataService;
 using DataHelp;
+using System.IO;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : Form
@@ -55,6 +56,13 @@ namespace CaptureWebData
             CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
             IEnumerable<CategoryData> city = cds.QueryCityCategory();
             cityList = city.ToList();
+            string dir = (new AssemblyDataExt()).GetAssemblyDir();
+            string cityFile = "City.text";
+            if (!File.Exists(dir + "/" + cityFile))
+            {
+                string json = cityList.ConvertJson();
+                json.CreateNewAppData(cityFile);
+            }
             cityList.Add(noLimitAddress);
             gbPollingType.Enabled = false;
             BindProvince();
