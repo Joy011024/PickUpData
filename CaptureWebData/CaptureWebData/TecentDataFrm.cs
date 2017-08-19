@@ -10,6 +10,7 @@ using Domain.CommonData;
 using ApplicationService.IPDataService;
 using DataHelp;
 using System.IO;
+using AppService.RedisService;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : Form
@@ -53,16 +54,34 @@ namespace CaptureWebData
             Dictionary<string, object> fields = EGender.Men.GetEnumFieldAttributeDict("DescriptionAttribute", "Description");
             BindComboBoxDict(fields, cmbGender);
             pickUpIEWebCookie.CallBack = CallBack;
-            CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
-            IEnumerable<CategoryData> city = cds.QueryCityCategory();
-            cityList = city.ToList();
-            string dir = (new AssemblyDataExt()).GetAssemblyDir();
+
+            string dir = (new AssemblyDataExt()).GetAssemblyDir() + "/Service";
             string cityFile = "City.text";
             if (!File.Exists(dir + "/" + cityFile))
             {
-                string json = cityList.ConvertJson();
-                json.CreateNewAppData(cityFile);
+                //首先判断redis中是否存在配置数据
+                RedisCacheService redis = new RedisCacheService(SytemConfig.RedisIp, SytemConfig.RedisPort, SytemConfig.RedisPsw);
+                string text = redis.GetRedisItemString(typeof(CategoryData).Name);
+                if (redis.HavaCacheItem)
+                {
+                    cityList = text.ConvertObject<List<CategoryData>>();
+                }
+                else
+                {
+                    CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
+                    IEnumerable<CategoryData> city = cds.QueryCityCategory();
+                    cityList = city.ToList();
+                    string json = cityList.ConvertJson();
+                    json.CreateNewAppData(cityFile);
+                    redis.SetRedisItem(typeof(CityData).Name, "redis");
+                }
             }
+            else 
+            {
+               string json= FileHelper.ReadFile(dir + "/" + cityFile);
+               cityList = json.ConvertObject<List<CategoryData>>();
+            }
+
             cityList.Add(noLimitAddress);
             gbPollingType.Enabled = false;
             BindProvince();

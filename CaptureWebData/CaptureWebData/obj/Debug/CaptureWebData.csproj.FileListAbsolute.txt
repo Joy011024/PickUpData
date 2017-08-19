@@ -59,3 +59,9 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\Captur
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\City.text
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppService.RedisService.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Redis.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Interfaces.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Text.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Common.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppService.RedisService.pdb

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CaptureWebData</RootNamespace>
     <AssemblyName>CaptureWebData</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Data">
@@ -180,6 +183,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="TecentDataFrm.resx">
       <DependentUpon>TecentDataFrm.cs</DependentUpon>
@@ -211,6 +215,10 @@
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj">
       <Project>{ce6b1f9a-1df7-4e35-adcc-b527206f2b98}</Project>
       <Name>Application.IPDataService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\AppService.RedisService\AppService.RedisService.csproj">
+      <Project>{4381d531-c89c-486d-bada-b94d022f665e}</Project>
+      <Name>AppService.RedisService</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
