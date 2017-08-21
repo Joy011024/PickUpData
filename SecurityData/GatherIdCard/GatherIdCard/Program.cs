@@ -18,10 +18,13 @@ namespace GatherIdCard
         }
         static void GatherUserInfo()
         {
+           
+        }
+        void GatherIdCardNews() 
+        {
             int initPageIndex = 1;
             int pages = 300;
             //采集用户身份证【挂失】
-            
             while (initPageIndex < pages)
             {
                 string url = string.Format(AppConfig.GatherPersonInfor, initPageIndex);
@@ -29,6 +32,7 @@ namespace GatherIdCard
                 initPageIndex++;
             }
         }
+
         static void GatherUserIdCard() 
         {
             string[] city = new string[] { 
