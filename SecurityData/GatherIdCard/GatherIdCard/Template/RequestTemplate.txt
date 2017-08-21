@@ -1,0 +1,70 @@
+Request URL:http://idcard.gxsky.com/more_card.asp?city=%CD%E2%CA%A1%B5%D8%C7%F8
+Request Method:GET
+Status Code:200 OK
+Remote Address:211.138.248.109:80
+Referrer Policy:no-referrer-when-downgrade
+Response Headers
+view source
+Cache-control:private
+Connection:keep-alive
+Content-Encoding:gzip
+Content-Type:text/html
+Date:Sun, 20 Aug 2017 12:08:56 GMT
+Server:nginx/1.10.3
+Set-Cookie:Card3=Url=; path=/
+Transfer-Encoding:chunked
+Vary:Accept-Encoding
+X-Powered-By:ASP.NET
+Request Headers
+view source
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding:gzip, deflate
+Accept-Language:zh-CN,zh;q=0.8
+Cache-Control:max-age=0
+Connection:keep-alive
+Cookie:ASPSESSIONIDSQABCDRA=AJCBIMLAFHDDPOKGJDPBGIHB; gxskydzx31_f5ee_saltkey=V8j84g4P; gxskydzx31_f5ee_lastvisit=1503227237; gxskydzx31_f5ee_sid=wL5R7g; gxskydzx31_f5ee_lastact=1503230837%09nav_js.php%09; UM_distinctid=15dff8a57c50-0ad597d1229d24-474a0521-15f900-15dff8a57c61; Card3=Url=; CNZZDATA1259785388=339484251-1503230374-%7C1503230374
+Host:idcard.gxsky.com
+Referer:http://idcard.gxsky.com/
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
+Query String Parameters
+view source
+view URL encoded
+city:(unable to decode value)
+
+
+
+Request URL:http://idcard.gxsky.com/more_card.asp?page=2&city=%CD%E2%CA%A1%B5%D8%C7%F8
+Request Method:GET
+Status Code:200 OK
+Remote Address:211.138.248.109:80
+Referrer Policy:no-referrer-when-downgrade
+Response Headers
+view source
+Cache-control:private
+Connection:keep-alive
+Content-Encoding:gzip
+Content-Type:text/html
+Date:Sun, 20 Aug 2017 12:27:37 GMT
+Server:nginx/1.10.3
+Set-Cookie:Card3=Url=; path=/
+Transfer-Encoding:chunked
+Vary:Accept-Encoding
+X-Powered-By:ASP.NET
+Request Headers
+view source
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding:gzip, deflate
+Accept-Language:zh-CN,zh;q=0.8
+Cache-Control:max-age=0
+Connection:keep-alive
+Cookie:ASPSESSIONIDSQABCDRA=AJCBIMLAFHDDPOKGJDPBGIHB; gxskydzx31_f5ee_saltkey=V8j84g4P; gxskydzx31_f5ee_lastvisit=1503227237; gxskydzx31_f5ee_sid=wL5R7g; gxskydzx31_f5ee_lastact=1503230837%09nav_js.php%09; UM_distinctid=15dff8a57c50-0ad597d1229d24-474a0521-15f900-15dff8a57c61; Card3=Url=; ASPSESSIONIDQQCACCRB=PBHHKPLACDPLIPHOAFPIJOBI; CNZZDATA1259785388=339484251-1503230374-%7C1503230374
+Host:idcard.gxsky.com
+Referer:http://idcard.gxsky.com/more_card.asp?city=%CD%E2%CA%A1%B5%D8%C7%F8
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
+Query String Parameters
+view source
+view URL encoded
+page:2
+city:(unable to decode value)
