@@ -54,8 +54,10 @@ namespace CaptureWebData
             Dictionary<string, object> fields = EGender.Men.GetEnumFieldAttributeDict("DescriptionAttribute", "Description");
             BindComboBoxDict(fields, cmbGender);
             pickUpIEWebCookie.CallBack = CallBack;
-
-            string dir = (new AssemblyDataExt()).GetAssemblyDir() + "/Service";
+            CategoryGroup g = new CategoryGroup();
+            AssemblyDataExt ass = new AssemblyDataExt();
+            string debugDir = ass.GetAssemblyDir();
+            string dir = debugDir + "/Service";
             string cityFile = "City.text";
             if (!File.Exists(dir + "/" + cityFile))
             {
@@ -81,7 +83,16 @@ namespace CaptureWebData
                string json= FileHelper.ReadFile(dir + "/" + cityFile);
                cityList = json.ConvertObject<List<CategoryData>>();
             }
-
+            CategoryGourpHelper helper = new CategoryGourpHelper();
+           CategoryGroup nodes = helper.DataGroup(cityList);
+           CategoryGroup gc= nodes.Childrens.Where(c => c.Root.Name == "中国").FirstOrDefault();
+           string cityDir = ass.ForeachDir(debugDir, 3) + "/" + typeof(CategoryGroup).Name+"/"+gc.Root.Name;
+           foreach (var item in gc.Childrens)
+           {
+               string text = item.ConvertJson();
+               string filename = item.Root.Name+".txt";
+               Logger.CreateNewAppData(text, filename, cityDir);
+           }
             cityList.Add(noLimitAddress);
             gbPollingType.Enabled = false;
             BindProvince();

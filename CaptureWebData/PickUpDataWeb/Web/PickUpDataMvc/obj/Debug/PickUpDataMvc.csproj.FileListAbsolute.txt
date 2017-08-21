@@ -1,3 +1,4 @@
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\zh-Hans\System.Web.WebPages.resources.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\PickUpDataMvc.dll.config
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\PickUpDataMvc.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\PickUpDataMvc.pdb
@@ -32,7 +33,6 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\zh-Hans\System.Web.Helpers.resources.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\zh-Hans\System.Web.Mvc.resources.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\zh-Hans\System.Web.Razor.resources.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\zh-Hans\System.Web.WebPages.resources.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\PickUpDataWeb\Web\PickUpDataMvc\obj\Debug\PickUpDataMvc.dll

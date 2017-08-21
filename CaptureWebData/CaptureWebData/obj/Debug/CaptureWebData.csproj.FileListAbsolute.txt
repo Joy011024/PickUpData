@@ -1,6 +1,9 @@
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.exe
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\City.text
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.exe.config
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.exe
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ApplicationService.IPDataService.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppService.RedisService.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Common.Data.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Common.Logging.Core.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Common.Logging.dll
@@ -21,9 +24,14 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Runtime.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Threading.Tasks.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Infrastructure.EFMsSQL.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Redis.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\WebKitBrowser.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\InfrastructureRepository.IMainContext.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Interfaces.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Text.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Common.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ApplicationService.IPDataService.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppService.RedisService.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Domain.CommonData.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\SelfControlForm.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Common.Logging.pdb
@@ -57,11 +65,3 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\Captur
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.csproj.GenerateResource.Cache
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.exe
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.pdb
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.pdb
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\City.text
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppService.RedisService.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Redis.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Interfaces.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Text.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Common.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppService.RedisService.pdb

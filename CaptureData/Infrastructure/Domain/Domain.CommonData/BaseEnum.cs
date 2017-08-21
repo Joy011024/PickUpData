@@ -147,13 +147,18 @@ namespace Domain.CommonData
         {
             DirectoryInfo di = new DirectoryInfo(originDir);
             string path = originDir;
+            string root = di.Root.FullName;
             while (foreachLevel>0)
             {
                 path = di.Parent.FullName;
-                di = new DirectoryInfo(originDir);
+                if (path == root)
+                {
+                    return root;
+                }
+                di = new DirectoryInfo(path);
                 foreachLevel--;
             }
-            return originDir;
+            return path;
         }
     }
 }

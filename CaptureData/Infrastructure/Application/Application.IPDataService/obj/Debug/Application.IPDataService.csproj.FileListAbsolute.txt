@@ -2,13 +2,13 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Applica
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\ApplicationService.IPDataService.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\Domain.CommonData.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\Infrastructure.EFMsSQL.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\InfrastructureRepository.IMainContext.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\Common.Data.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\EntityFramework.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\Domain.CommonData.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\Infrastructure.EFMsSQL.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\InfrastructureRepository.IMainContext.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\EntityFramework.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\obj\Debug\Application.IPDataService.csprojResolveAssemblyReference.cache
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\obj\Debug\ApplicationService.IPDataService.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\obj\Debug\ApplicationService.IPDataService.pdb
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\InfrastructureRepository.IMainContext.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\InfrastructureRepository.IMainContext.pdb
