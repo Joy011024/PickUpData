@@ -163,6 +163,42 @@
     <Compile Include="WebDataFrm.Designer.cs">
       <DependentUpon>WebDataFrm.cs</DependentUpon>
     </Compile>
+    <Content Include="Service\中国\China.txt" />
+    <Content Include="Service\中国\World.txt" />
+    <Content Include="Service\中国\上海.txt" />
+    <Content Include="Service\中国\云南.txt" />
+    <Content Include="Service\中国\内蒙古.txt" />
+    <Content Include="Service\中国\北京.txt" />
+    <Content Include="Service\中国\台湾.txt" />
+    <Content Include="Service\中国\吉林.txt" />
+    <Content Include="Service\中国\四川.txt" />
+    <Content Include="Service\中国\天津.txt" />
+    <Content Include="Service\中国\宁夏.txt" />
+    <Content Include="Service\中国\安徽.txt" />
+    <Content Include="Service\中国\山东.txt" />
+    <Content Include="Service\中国\山西.txt" />
+    <Content Include="Service\中国\广东.txt" />
+    <Content Include="Service\中国\广西.txt" />
+    <Content Include="Service\中国\新疆.txt" />
+    <Content Include="Service\中国\江苏.txt" />
+    <Content Include="Service\中国\江西.txt" />
+    <Content Include="Service\中国\河北.txt" />
+    <Content Include="Service\中国\河南.txt" />
+    <Content Include="Service\中国\浙江.txt" />
+    <Content Include="Service\中国\海南.txt" />
+    <Content Include="Service\中国\湖北.txt" />
+    <Content Include="Service\中国\湖南.txt" />
+    <Content Include="Service\中国\澳门.txt" />
+    <Content Include="Service\中国\甘肃.txt" />
+    <Content Include="Service\中国\福建.txt" />
+    <Content Include="Service\中国\西藏.txt" />
+    <Content Include="Service\中国\贵州.txt" />
+    <Content Include="Service\中国\辽宁.txt" />
+    <Content Include="Service\中国\重庆.txt" />
+    <Content Include="Service\中国\陕西.txt" />
+    <Content Include="Service\中国\青海.txt" />
+    <Content Include="Service\中国\香港.txt" />
+    <Content Include="Service\中国\黑龙江.txt" />
     <EmbeddedResource Include="EleTestFrm.resx">
       <DependentUpon>EleTestFrm.cs</DependentUpon>
     </EmbeddedResource>

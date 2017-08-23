@@ -83,21 +83,43 @@ namespace CaptureWebData
                string json= FileHelper.ReadFile(dir + "/" + cityFile);
                cityList = json.ConvertObject<List<CategoryData>>();
             }
-            CategoryGourpHelper helper = new CategoryGourpHelper();
-           CategoryGroup nodes = helper.DataGroup(cityList);
-           CategoryGroup gc= nodes.Childrens.Where(c => c.Root.Name == "中国").FirstOrDefault();
-           string cityDir = ass.ForeachDir(debugDir, 3) + "/" + typeof(CategoryGroup).Name+"/"+gc.Root.Name;
-           foreach (var item in gc.Childrens)
-           {
-               string text = item.ConvertJson();
-               string filename = item.Root.Name+".txt";
-               Logger.CreateNewAppData(text, filename, cityDir);
-           }
             cityList.Add(noLimitAddress);
             gbPollingType.Enabled = false;
             BindProvince();
             GetProcessPath();
             QueryTodayPickUp();
+        }
+        void AnalyCity() 
+        {
+            AssemblyDataExt ass = new AssemblyDataExt();
+            string debugDir = ass.GetAssemblyDir();
+            CategoryGourpHelper helper = new CategoryGourpHelper();
+            CategoryGroup nodes = helper.DataGroup(cityList);
+            string cityDir = ass.ForeachDir(debugDir, 3) + "/" + typeof(CategoryGroup).Name;
+            //中国的省会列表
+            foreach (CategoryGroup item in nodes.Childrens)
+            {//省市直辖区
+                item.Childrens = new List<CategoryGroup>();
+            }
+            string chinaPro = nodes.ConvertJson();
+            Logger.CreateNewAppData(chinaPro, "Country.txt", cityDir);
+            //foreach (var item in nodes.Childrens)
+            //{
+            //    string text = item.ConvertJson();
+            //    string filename = item.Root.Name+".txt";
+            //    Logger.CreateNewAppData(text, filename, cityDir);
+            //    if (item.Childrens.Count == 0)
+            //    {
+            //        continue;
+            //    }
+            //    string detailDir = cityDir + "/" + item.Root.Name;
+            //    foreach (var pro in item.Childrens)
+            //    {
+            //        string document = pro.ConvertJson();
+            //        filename = pro.Root.Name + ".txt";
+            //        Logger.CreateNewAppData(document, filename, detailDir);
+            //    }
+            //}
         }
         void GetProcessPath()
         {
