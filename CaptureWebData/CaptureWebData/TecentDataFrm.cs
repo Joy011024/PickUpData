@@ -142,10 +142,9 @@ namespace CaptureWebData
                 Logger.CreateNewAppData(city, item.Root.Name+"="+item.Root.Id+".txt", pro);
                 foreach (CategoryGroup c in item.Childrens)
                 {//省直辖市的子节点
-                    CategoryGroup cityNode = new CategoryGroup() 
-                    {
-                        
-                    };
+                    string nodeJson = c.ConvertJson();
+                    string cityNodeDir = pro + "/" + c.Root.Name + "=" + c.Root.Id;
+                    Logger.CreateNewAppData(nodeJson, c.Root.Name + "=" + c.Root.Id + ".txt", cityNodeDir);
                 }
             }
             //foreach (var item in nodes.Childrens)
