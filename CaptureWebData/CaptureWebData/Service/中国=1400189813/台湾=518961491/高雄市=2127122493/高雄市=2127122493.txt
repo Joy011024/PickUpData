@@ -1,1 +1,0 @@
-{"Childrens":[],"Root":{"Code":"2","Name":"高雄市","NodeLevel":3,"ParentCode":"71","CreateTime":"\/Date(1498976783553+0800)\/","Id":2127122493,"IsDelete":false,"ItemType":"City","ParentId":518961491,"Sort":0}}

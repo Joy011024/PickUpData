@@ -1,1 +1,0 @@
-{"Childrens":[],"Root":{"Code":"NTM","Name":"屯门区","NodeLevel":3,"ParentCode":"81","CreateTime":"\/Date(1498976783553+0800)\/","Id":867860632,"IsDelete":false,"ItemType":"City","ParentId":1913858940,"Sort":0}}

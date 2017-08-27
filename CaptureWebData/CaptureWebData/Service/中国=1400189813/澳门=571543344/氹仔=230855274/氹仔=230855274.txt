@@ -1,1 +1,0 @@
-{"Childrens":[],"Root":{"Code":"TPA","Name":"氹仔","NodeLevel":3,"ParentCode":"82","CreateTime":"\/Date(1498976783553+0800)\/","Id":230855274,"IsDelete":false,"ItemType":"City","ParentId":571543344,"Sort":0}}

@@ -8,17 +8,23 @@ using Domain.CommonData;
 using System.Net;
 using System.IO;
 using System.IO.Compression;
+using System.Text.RegularExpressions;
+using System.Threading;
 namespace GatherIdCard
 {
     class Program
     {
         static void Main(string[] args)
-        {// 南宁市 | 柳州市 | 桂林市 | 梧州市 | 北海市 | 钦州市 | 贵港市 | 玉林市 | 百色市 | 防城港市|贺州市 | 河池市 | 来宾市 | 崇左市 | 外省地区
-            GatherUserInfo();
+        {
+            Thread[] th = new Thread[2];
+            th[0] = new Thread(QueryUserRemarkLossId);
+            th[0].Start();
+            Console.ReadLine();
+            //QueryUserRemarkLossId();
         }
         static void GatherUserInfo()
         {
-           
+            HtmlElementAnalysis.IdgxskyHtmlAnalysic(AppConfig.FileSaveDir);
         }
         void GatherIdCardNews() 
         {
@@ -33,8 +39,8 @@ namespace GatherIdCard
             }
         }
 
-        static void GatherUserIdCard() 
-        {
+        static void GatherUserIdCard()
+        {// 南宁市 | 柳州市 | 桂林市 | 梧州市 | 北海市 | 钦州市 | 贵港市 | 玉林市 | 百色市 | 防城港市|贺州市 | 河池市 | 来宾市 | 崇左市 | 外省地区
             string[] city = new string[] { 
                 "%C4%CF%C4%FE%CA%D0", "%C1%F8%D6%DD%CA%D0", "%B9%F0%C1%D6%CA%D0", "%CE%E0%D6%DD%CA%D0", "%B1%B1%BA%A3%CA%D0","%C7%D5%D6%DD%CA%D0"
                 ,"%B9%F3%B8%DB%CA%D0","%D3%F1%C1%D6%CA%D0","%B0%D9%C9%AB%CA%D0","%B7%C0%B3%C7%B8%DB%CA%D0","%BA%D8%D6%DD%CA%D0","%BA%D3%B3%D8%CA%D0"
@@ -93,7 +99,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
                 str.Dispose();
                 gzip.Close();
                 sr.Close();
-                HttpClientExtend.GetHttpResponseData(url);
+               // HttpClientExtend.GetHttpResponseData(url);
                 AssemblyDataExt ass = new AssemblyDataExt();
                 string dir = ass.ForeachDir(ass.GetAssemblyDir(), 3);
                 LoggerWriter.CreateLogFile(text, dir + "/" + ELogType.DataLog, ELogType.DataLog);
@@ -103,6 +109,81 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
                 return;
             }
             
+        }
+        static void QueryUserRemarkLossId() 
+        {
+            int cur = 1;
+
+            string text = GetRequestData(string.Format(AppConfig.UserRemarkLoseIdCard, cur));
+            
+            string startRegex = "<form method=post";
+            if (!text.Contains(startRegex))
+            {
+                return;
+            }
+            int position = text.IndexOf(startRegex);
+            string page = text.Substring(position + startRegex.Length);
+            string endRegex = "<input";
+            string releate= page.Substring(0, page.IndexOf(endRegex));
+            AssemblyDataExt ass = new AssemblyDataExt();
+            string dir = ass.ForeachDir(ass.GetAssemblyDir(), 3);
+            LoggerWriter.CreateLogFile(text, dir + "/" + ELogType.DataLog, ELogType.DataLog);
+            string sign = "#ff0000'>";
+            releate = releate.Substring(releate.LastIndexOf(sign) + sign.Length);
+            releate = releate.Substring(0, releate.LastIndexOf("</b>"));
+            Regex reg = new Regex("([0-9]+)");
+            MatchCollection list= reg.Matches(releate);
+            //--->"3500</font></b>条记录 <b>35"
+            Match total = list[0];// total
+            Match limit = list[1];
+            int sum = int.Parse(total.ToString());
+            int size = int.Parse(limit.ToString());
+            int pages = (sum / size) + (sum % size > 0 ? 1 : 0);
+            cur++;
+            while (cur <= pages)
+            {
+                text = GetRequestData(string.Format(AppConfig.UserRemarkLoseIdCard, cur));
+                cur++;
+                if (string.IsNullOrEmpty(text))
+                {
+                    continue;
+                }
+                LoggerWriter.CreateLogFile(text, dir + "/" + ELogType.DataLog, ELogType.DataLog);
+            }
+        }
+        static string GetRequestData(string url) 
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Headers.Add("Accept-Encoding", "gzip,deflate");
+            //request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            request.Method = "GET";
+            request.UserAgent = "Mozilla/5.0 (Windows NT 5.1; rv:19.0) Gecko/20100101 Firefox/19.0";
+            request.KeepAlive = false;
+            request.AllowWriteStreamBuffering = true;//对响应数据进行缓冲处理
+            try
+            {
+                HttpWebResponse webResponse = null;
+                Stream str = null;
+                webResponse = (HttpWebResponse)request.GetResponse();//此处有坑【如果http响应超时此处会抛出异常】
+                if (webResponse.StatusCode != HttpStatusCode.OK)
+                {//http请求失败
+
+                }
+                str = webResponse.GetResponseStream();
+                GZipStream gzip = new GZipStream(str, CompressionMode.Decompress);//解压缩
+                Encoding enc = Encoding.GetEncoding("gb2312");
+                StreamReader sr = new StreamReader(gzip, enc);
+                string text = sr.ReadToEnd();
+                str.Dispose();
+                gzip.Close();
+                sr.Close();
+                // HttpClientExtend.GetHttpResponseData(url);
+                return text;
+            }
+            catch (Exception ex)
+            {
+                return string.Empty;
+            }
         }
     }
     public class AppConfig
@@ -130,6 +211,36 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
                     userInfo = ConfigurationManager.AppSettings["GatherPersonInfor"];
                 }
                 return userInfo;
+            }
+        }
+        static string fileSaveDir;
+        public static string FileSaveDir
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(fileSaveDir))
+                {
+                    fileSaveDir = ConfigurationManager.AppSettings["FileSaveDir"];
+                }
+                if (string.IsNullOrEmpty(fileSaveDir))
+                {
+                    AssemblyDataExt ass=new AssemblyDataExt();
+                    fileSaveDir = ass.ForeachDir(ass.GetAssemblyDir(), 3);
+                }
+                return fileSaveDir;
+            }
+        }
+
+        static string userRedmarkLoseId;
+        public static string UserRemarkLoseIdCard 
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(userRedmarkLoseId))
+                {
+                    userRedmarkLoseId = ConfigurationManager.AppSettings["UserRemarkLoseIdCard"];
+                }
+                return userRedmarkLoseId;
             }
         }
     }
