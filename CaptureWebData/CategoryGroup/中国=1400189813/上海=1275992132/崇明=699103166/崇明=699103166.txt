@@ -1,1 +1,0 @@
-{"Childrens":[],"Root":{"Code":"30","Name":"崇明","NodeLevel":3,"ParentCode":"31","CreateTime":"\/Date(1498976783553+0800)\/","Id":699103166,"IsDelete":false,"ItemType":"City","ParentId":1275992132,"Sort":0}}

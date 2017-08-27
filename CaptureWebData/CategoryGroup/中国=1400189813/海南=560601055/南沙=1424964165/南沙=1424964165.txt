@@ -1,1 +1,0 @@
-{"Childrens":[],"Root":{"Code":"A38","Name":"南沙","NodeLevel":3,"ParentCode":"46","CreateTime":"\/Date(1498976783553+0800)\/","Id":1424964165,"IsDelete":false,"ItemType":"City","ParentId":560601055,"Sort":0}}
