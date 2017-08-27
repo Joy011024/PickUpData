@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"COL","Name":"哥伦比亚","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":1397685252,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

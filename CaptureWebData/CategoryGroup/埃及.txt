@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"EGY","Name":"埃及","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":1382595170,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

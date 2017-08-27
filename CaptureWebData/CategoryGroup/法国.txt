@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"FRA","Name":"法国","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":863400633,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

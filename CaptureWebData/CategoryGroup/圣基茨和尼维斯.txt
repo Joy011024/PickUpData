@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"KNA","Name":"圣基茨和尼维斯","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":2003760435,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

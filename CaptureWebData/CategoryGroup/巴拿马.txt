@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"PAN","Name":"巴拿马","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":1390307416,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

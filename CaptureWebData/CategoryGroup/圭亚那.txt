@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"GUY","Name":"圭亚那","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":471905347,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

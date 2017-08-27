@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"6","Name":"新竹市","NodeLevel":3,"ParentCode":"71","CreateTime":"\/Date(1498976783553+0800)\/","Id":172569343,"IsDelete":false,"ItemType":"City","ParentId":518961491,"Sort":0}}

@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"KIR","Name":"基里巴斯","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":929801018,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

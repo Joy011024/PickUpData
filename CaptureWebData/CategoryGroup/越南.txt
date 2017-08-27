@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"VNM","Name":"越南","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":281546286,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"94","Name":"五家渠","NodeLevel":3,"ParentCode":"65","CreateTime":"\/Date(1498976783553+0800)\/","Id":110239843,"IsDelete":false,"ItemType":"City","ParentId":1227474829,"Sort":0}}

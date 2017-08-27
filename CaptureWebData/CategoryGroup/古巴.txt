@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"CUB","Name":"古巴","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":144696870,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

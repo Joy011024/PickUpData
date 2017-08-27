@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"LSO","Name":"莱索托","NodeLevel":1,"ParentCode":null,"CreateTime":"\/Date(1498976783553+0800)\/","Id":2106252121,"IsDelete":false,"ItemType":"City","ParentId":null,"Sort":0}}

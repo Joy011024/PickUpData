@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"82","Name":"合川","NodeLevel":3,"ParentCode":"50","CreateTime":"\/Date(1498976783553+0800)\/","Id":1625535065,"IsDelete":false,"ItemType":"City","ParentId":203629863,"Sort":0}}
