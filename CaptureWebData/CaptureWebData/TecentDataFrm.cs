@@ -58,7 +58,7 @@ namespace CaptureWebData
             AssemblyDataExt ass = new AssemblyDataExt();
             string debugDir = ass.GetAssemblyDir();
             string dir = debugDir + "/Service";
-            string cityFile = "City.text";
+            string cityFile = "City.txt";
             if (!File.Exists(dir + "/" + cityFile))
             {
                 //首先判断redis中是否存在配置数据
@@ -83,6 +83,7 @@ namespace CaptureWebData
                string json= FileHelper.ReadFile(dir + "/" + cityFile);
                cityList = json.ConvertObject<List<CategoryData>>();
             }
+            AnalyCity();
             cityList.Add(noLimitAddress);
             gbPollingType.Enabled = false;
             BindProvince();
@@ -94,15 +95,59 @@ namespace CaptureWebData
             AssemblyDataExt ass = new AssemblyDataExt();
             string debugDir = ass.GetAssemblyDir();
             CategoryGourpHelper helper = new CategoryGourpHelper();
-            CategoryGroup nodes = helper.DataGroup(cityList);
+            CategoryGroup result=helper.DataGroup(cityList);;
+            CategoryGroup nodes = new CategoryGroup();// (CategoryGroup)result;//提取国家列表 
             string cityDir = ass.ForeachDir(debugDir, 3) + "/" + typeof(CategoryGroup).Name;
             //中国的省会列表
-            foreach (CategoryGroup item in nodes.Childrens)
-            {//省市直辖区
-                item.Childrens = new List<CategoryGroup>();
+            foreach (CategoryGroup item in result.Childrens)
+            {//查询到国家，过滤省市直辖区
+                //item.Childrens = new List<CategoryGroup>();
+                CategoryGroup temp = new CategoryGroup() { Root = item.Root };
+                nodes.Childrens.Add(temp);
             }
-            string chinaPro = nodes.ConvertJson();
-            Logger.CreateNewAppData(chinaPro, "Country.txt", cityDir);
+            string country = nodes.ConvertJson();
+            Logger.CreateNewAppData(country, "Country.txt", cityDir);
+            //提取中国的省会列表 
+            #region 要追踪显示的索引则取消此块注释
+            //int index = 0;//
+            //for (int i = 0; i < result.Childrens.Count; i++)
+            //{
+            //    if (result.Childrens[i].Root.Name == "中国") 
+            //    {
+            //        index = i;
+            //        break;
+            //    }
+            //}
+            #endregion
+            CategoryGroup provinceGroup = new CategoryGroup();
+            CategoryGroup china= result.Childrens.Where(s => s.Root.Name == "中国").FirstOrDefault();
+            provinceGroup.Root = china.Root;
+            foreach (CategoryGroup item in china.Childrens)
+            {//查询省会，过滤到市、区
+                provinceGroup.Childrens.Add(new CategoryGroup() { Root = item.Root });
+                //item.Childrens = new List<CategoryGroup>();
+            }
+            string province = provinceGroup.ConvertJson();
+            Logger.CreateNewAppData(province, china.Root.Name +"="+china.Root.Id+ ".txt", cityDir + "/" + china.Root.Name + "=" + china.Root.Id);
+            //各个省会的市区列表
+            foreach (var item in china.Childrens)
+            {
+                CategoryGroup cg = new CategoryGroup() 
+                {
+                    Root=item.Root,
+                    Childrens=item.Childrens
+                };
+                string city = cg.ConvertJson();
+                string pro= cityDir + "/"+china.Root.Name+"=" +china.Root.Id+"/"+item.Root.Name+"="+ item.Root.Id;
+                Logger.CreateNewAppData(city, item.Root.Name+"="+item.Root.Id+".txt", pro);
+                foreach (CategoryGroup c in item.Childrens)
+                {//省直辖市的子节点
+                    CategoryGroup cityNode = new CategoryGroup() 
+                    {
+                        
+                    };
+                }
+            }
             //foreach (var item in nodes.Childrens)
             //{
             //    string text = item.ConvertJson();
