@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"NNO","Name":"北区","NodeLevel":3,"ParentCode":"81","CreateTime":"\/Date(1498976783553+0800)\/","Id":2093794369,"IsDelete":false,"ItemType":"City","ParentId":1913858940,"Sort":0}}

@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"18","Name":"台南县","NodeLevel":3,"ParentCode":"71","CreateTime":"\/Date(1498976783553+0800)\/","Id":540671529,"IsDelete":false,"ItemType":"City","ParentId":518961491,"Sort":0}}

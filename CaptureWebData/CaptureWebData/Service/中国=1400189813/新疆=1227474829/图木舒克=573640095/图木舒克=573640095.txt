@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"93","Name":"图木舒克","NodeLevel":3,"ParentCode":"65","CreateTime":"\/Date(1498976783553+0800)\/","Id":573640095,"IsDelete":false,"ItemType":"City","ParentId":1227474829,"Sort":0}}

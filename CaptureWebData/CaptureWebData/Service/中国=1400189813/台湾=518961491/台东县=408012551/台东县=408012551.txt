@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"22","Name":"台东县","NodeLevel":3,"ParentCode":"71","CreateTime":"\/Date(1498976783553+0800)\/","Id":408012551,"IsDelete":false,"ItemType":"City","ParentId":518961491,"Sort":0}}

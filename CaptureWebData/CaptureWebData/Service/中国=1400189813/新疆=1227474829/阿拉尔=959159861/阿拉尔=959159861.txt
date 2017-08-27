@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"92","Name":"阿拉尔","NodeLevel":3,"ParentCode":"65","CreateTime":"\/Date(1498976783553+0800)\/","Id":959159861,"IsDelete":false,"ItemType":"City","ParentId":1227474829,"Sort":0}}

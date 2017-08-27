@@ -1,0 +1,1 @@
+{"Childrens":[],"Root":{"Code":"26","Name":"滨海新区","NodeLevel":3,"ParentCode":"12","CreateTime":"\/Date(1498976783553+0800)\/","Id":2134543114,"IsDelete":false,"ItemType":"City","ParentId":285670936,"Sort":0}}
