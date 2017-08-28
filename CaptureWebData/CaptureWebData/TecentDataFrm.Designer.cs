@@ -95,7 +95,7 @@
             this.txtTimeSpan.Name = "txtTimeSpan";
             this.txtTimeSpan.Size = new System.Drawing.Size(103, 21);
             this.txtTimeSpan.TabIndex = 4;
-            this.txtTimeSpan.Text = "30";
+            this.txtTimeSpan.Text = "4";
             // 
             // txtRepeact
             // 

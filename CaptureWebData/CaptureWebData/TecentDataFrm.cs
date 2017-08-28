@@ -18,6 +18,7 @@ namespace CaptureWebData
         QuartzJob job = new QuartzJob();
         string NoLimit = "不限";
         CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
+        RedisCacheService redis;
         enum QQRetCode
         {
             Normal = 0,
@@ -35,11 +36,25 @@ namespace CaptureWebData
             Value = 2
         }
         string Cookie { get; set; }
-        List<CategoryData> cityList { get; set; }
+        List<CategoryData> cityList = new List<CategoryData>();
         public TecentDataFrm()
         {
             InitializeComponent();
+            InitRedis();
             Test();
+            Init();
+        }
+        void InitRedis()
+        {
+            redis = new RedisCacheService(SystemConfig.RedisIp, SystemConfig.RedisPort, SystemConfig.RedisPsw);
+            CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
+            CategoryData obj = cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();
+            List<CategoryGroup> citys = redis.GetRedisCacheItem<List<CategoryGroup>>(typeof(CategoryGroup).Name + "." + typeof(CategoryData).Name + "." + obj.Id);
+            cityList.Add(noLimitAddress);
+            List<CategoryData> cts = citys.Select(s => s.Root).OrderBy(t => t.Code).ToList();
+            cityList.AddRange(cts);
+            DelegateData.BaseDelegate del=IntervalDisplay;
+            job.CreateJobWithParam <JobDelegate<Common.Data.EISOSex> >(new object[]{del,null},DateTime.Now.AddSeconds(5),10,0);//
         }
         void Test()
         {
@@ -47,14 +62,25 @@ namespace CaptureWebData
         }
         private void TecentDataFrm_Load(object sender, EventArgs e)
         {
-            Init();
+         
         }
         void Init()
         {
             Dictionary<string, object> fields = EGender.Men.GetEnumFieldAttributeDict("DescriptionAttribute", "Description");
             BindComboBoxDict(fields, cmbGender);
             pickUpIEWebCookie.CallBack = CallBack;
-            CategoryGroup g = new CategoryGroup();
+            InitProvinceData();
+            gbPollingType.Enabled = false;
+            BindProvince();
+            GetProcessPath();
+            QueryTodayPickUp();
+        }
+        void InitProvinceData() 
+        {
+            if (cityList.Count > 0)
+            {
+                return;
+            }
             AssemblyDataExt ass = new AssemblyDataExt();
             string debugDir = ass.GetAssemblyDir();
             string dir = debugDir + "/Service";
@@ -62,7 +88,7 @@ namespace CaptureWebData
             if (!File.Exists(dir + "/" + cityFile))
             {
                 //首先判断redis中是否存在配置数据
-                RedisCacheService redis = new RedisCacheService(SytemConfig.RedisIp, SytemConfig.RedisPort, SytemConfig.RedisPsw);
+
                 string text = redis.GetRedisItemString(typeof(CategoryData).Name);
                 if (redis.HavaCacheItem)
                 {
@@ -78,17 +104,13 @@ namespace CaptureWebData
                     redis.SetRedisItem(typeof(CityData).Name, "redis");
                 }
             }
-            else 
+            else
             {
-               string json= FileHelper.ReadFile(dir + "/" + cityFile);
-               cityList = json.ConvertObject<List<CategoryData>>();
+                string json = FileHelper.ReadFile(dir + "/" + cityFile);
+                cityList = json.ConvertObject<List<CategoryData>>();
             }
-            AnalyCity();
+            // AnalyCity();
             cityList.Add(noLimitAddress);
-            gbPollingType.Enabled = false;
-            BindProvince();
-            GetProcessPath();
-            QueryTodayPickUp();
         }
         void AnalyCity() 
         {
@@ -238,28 +260,36 @@ namespace CaptureWebData
         }
         void BindProvince()
         {
-            BindComboBox("1", cmbProvince, 2);
+            BindComboBox(new CategoryData() { Code="1"}, cmbProvince, 2);
         }
 
         private void cmbProvince_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cmb = sender as ComboBox;
-            NodeData node = (NodeData)cmb.SelectedItem;
-            BindComboBox(node.Code, cmbCity, 3);
+            CategoryData node = (CategoryData)cmb.SelectedItem;
+            BindComboBox(node, cmbCity, 3);
         }
-        void BindComboBox(string parentCode, ComboBox cmb, int level)
+        void BindComboBox(CategoryData parentCode, ComboBox cmb, int level)
         {
-            List<NodeItem> nodes = new List<NodeItem>();
-            if (string.IsNullOrEmpty(parentCode))
+            List<CategoryData> nodes = new List<CategoryData>();
+            if (parentCode.Id==0&&level==2)
             {//没有选择省/自治区
-                nodes.Add(noLimitAddress.ConvertMapModel<CategoryData, NodeItem>());
+                nodes = cityList;
             }
             else
             {
-                nodes = cityList.Where(c => (c.ParentCode == parentCode || string.IsNullOrEmpty(c.Code)) && c.NodeLevel == level).
-                    Select(n =>
-                        n.ConvertMapModel<CategoryData, NodeItem>()
-                        ).OrderBy(t => t.Code).ToList();
+                nodes.Add(noLimitAddress);
+                List < CategoryGroup> objs = redis.GetRedisCacheItem<List<CategoryGroup>>(typeof(CategoryGroup).Name + ".Objcet=" + parentCode.Id);
+                if (objs !=null)
+                {//没数据
+                    List<CategoryData> items = objs.Select(s => s.Root).ToList()
+                   .OrderBy(t => t.Code).ToList();
+                    nodes.AddRange(items.ToArray());
+                }
+                //nodes = cityList.Where(c => (c.ParentCode == parentCode || string.IsNullOrEmpty(c.Code)) && c.NodeLevel == level).
+                //    Select(n =>
+                //        n.ConvertMapModel<CategoryData, NodeItem>()
+                //        ).OrderBy(t => t.Code).ToList();
             }
             cmb.DataSource = nodes;
             cmb.DisplayMember = ComboboxItem.Name.ToString();
@@ -277,7 +307,6 @@ namespace CaptureWebData
             PickUpQQDoResponse res = data as PickUpQQDoResponse;
             if (res == null) { return; }
             //如果此时检测返回集合为空，但是返回状态码不是错误，需要更改检测条件【腾讯防攻击检测】
-
             QueryResponseAction(res);
             QueryTodayPickUp();
         }
@@ -286,6 +315,18 @@ namespace CaptureWebData
         {
             QuartzJob job = new QuartzJob();
             job.DeleteJob<JobAction<QQDataDA>>();
+        }
+        private void IntervalDisplay(object quartzParam)
+        {
+            if (this.InvokeRequired)
+            {
+                DelegateData.BaseDelegate bd = new DelegateData.BaseDelegate(IntervalDisplay);
+                this.Invoke(bd, quartzParam);
+                return;
+            }
+            else {
+                QueryTodayPickUp();
+            }
         }
         private void QueryTodayPickUp()
         {
@@ -335,12 +376,6 @@ namespace CaptureWebData
             string rep = txtRepeact.Text;
             int.TryParse(rep, out repeact);
             QueryQQParam param = new QueryQQParam();
-            NodeData pro = (NodeData)cmbProvince.SelectedItem;
-            param.province = pro.Code;
-            NodeData city = (NodeData)cmbCity.SelectedItem;
-            param.city = city.Code;
-            NodeData dist = (NodeData)cmbDistinct.SelectedItem;
-            param.district = dist.Code;
             int limit = 30;
             if (int.TryParse(txtCurrentLimit.Text, out limit))
             {
@@ -350,6 +385,25 @@ namespace CaptureWebData
             string obj = ((KeyValuePair<string, object>)cmbGender.SelectedItem).Key as string;
             Enum.TryParse(obj, out gender);
             param.sex = gender.GetHashCode();
+
+            NodeData pro = (NodeData)cmbProvince.SelectedItem;
+            if (string.IsNullOrEmpty(pro.Code))
+            {
+                return param;
+            }
+            param.province = pro.Code;
+            NodeData city = (NodeData)cmbCity.SelectedItem;
+            if (string.IsNullOrEmpty(city.Code))
+            {
+                return param;
+            }
+            param.city = city.Code;
+            NodeData dist = (NodeData)cmbDistinct.SelectedItem;
+            if (string.IsNullOrEmpty(dist.Code))
+            {
+                return param;
+            }
+            param.district = dist.Code;
             return param;
         }
         private void ckStartQuartz_CheckedChanged(object sender, EventArgs e)
@@ -485,20 +539,27 @@ namespace CaptureWebData
         private void cmbCity_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cmb = sender as ComboBox;
-            NodeItem node = (NodeItem)cmb.SelectedItem;
+            CategoryData node = (CategoryData)cmb.SelectedItem;
+            BindComboBox(new CategoryData() { Id = node.Id }, cmbDistinct, 4);
+            return;
             //由于腾讯城市数据县级 的父节点使用
             CategoryData item = cityList.Where(c => c.Id == node.Id).FirstOrDefault();
-            List<NodeItem> items = new List<NodeItem>();
-            items.Add(noLimitAddress.ConvertMapModel<CategoryData, NodeItem>());
+            List<CategoryData> items = new List<CategoryData>();
+            items.Add(noLimitAddress);
             if (item.ParentId.HasValue)
             {
-                object dd = cityList.Where(c => c.ParentId == item.Id).ToList();
-                NodeItem[] cts = cityList.Where(c => c.ParentId == item.Id).Select(s => s.ConvertMapModel<CategoryData, NodeItem>()).ToArray();
-                items.AddRange(cts);
+                
+                //object dd = cityList.Where(c => c.ParentId == item.Id).ToList();
+                //CategoryData[] cts = cityList.Where(c => c.ParentId == item.Id).ToArray();
+                //items.AddRange(cts);
             }
-            cmbDistinct.DataSource = items;
-            cmbDistinct.DisplayMember = ComboboxItem.Name.ToString();
-            cmbDistinct.ValueMember = ComboboxItem.Code.ToString();
+            //cmbDistinct.DataSource = items;
+            //cmbDistinct.DisplayMember = ComboboxItem.Name.ToString();
+            //cmbDistinct.ValueMember = ComboboxItem.Code.ToString();
+        }
+        void GetRedisCacheItem() 
+        {
+            
         }
     }
 }

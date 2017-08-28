@@ -70,6 +70,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Quartz.2.5.0\lib\net40\Quartz.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Client">
+      <HintPath>..\bin\Redis\ServiceStack.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\Redis\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=4.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\Redis\ServiceStack.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -134,6 +145,7 @@
     <Compile Include="BaseData\QuartzJob.cs" />
     <Compile Include="ProcessHelp.cs" />
     <Compile Include="QQFriend.cs" />
+    <Compile Include="RedisCache\RedisCacheService.cs" />
     <Compile Include="TecentDataDA\FindQQDataManage.cs" />
     <Compile Include="TecentDataDA\FindQQResponse.cs" />
     <Compile Include="Form1.cs">
@@ -163,6 +175,7 @@
     <Compile Include="WebDataFrm.Designer.cs">
       <DependentUpon>WebDataFrm.cs</DependentUpon>
     </Compile>
+    <Content Include="Exeption\Error.txt" />
     <Content Include="Service\中国=1400189813\China.txt" />
     <Content Include="Service\中国=1400189813\World.txt" />
     <Content Include="Service\中国=1400189813\上海.txt" />

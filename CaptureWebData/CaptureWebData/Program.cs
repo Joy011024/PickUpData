@@ -27,7 +27,7 @@ namespace CaptureWebData
         }
         
     }
-    public class SytemConfig
+    public class SystemConfig
     {
         static string redisIp;
         public static string RedisIp 

@@ -37,6 +37,10 @@ namespace CaptureWebData
         }
         public void CreateJob<T>(int interval, int repeactCount) where T : IJob //调用的实体需要继承IJob
         {
+            if (interval == 0) 
+            {
+                interval = 1;
+            }
             // Console.WriteLine(DateTime.Now.ToString());
             ISchedulerFactory schedf = new StdSchedulerFactory();//pool
             scheduler = schedf.GetScheduler();
@@ -93,6 +97,10 @@ namespace CaptureWebData
         }
         public void CreateJobWithParam<T>(object param, DateTime start, int interval, int repeat, string jobGroup) where T : IJob
         {
+            if (interval == 0)
+            {
+                interval = 1;
+            }
             ISchedulerFactory schedf = new StdSchedulerFactory();//pool
             scheduler = schedf.GetScheduler();
             string jobName = typeof(T).FullName;
@@ -185,5 +193,9 @@ namespace CaptureWebData
             object obj = ps.Length >= 2 ? ps[1] : null;
             bd(obj);
         }
+    }
+    public class JobDelegate<T> : JobDelegateFunction 
+    {
+        
     }
 }
