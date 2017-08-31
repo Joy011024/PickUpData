@@ -176,6 +176,7 @@
       <DependentUpon>WebDataFrm.cs</DependentUpon>
     </Compile>
     <Content Include="Exeption\Error.txt" />
+    <Content Include="Service\TemplateQQGeoup.html" />
     <Content Include="Service\中国=1400189813\China.txt" />
     <Content Include="Service\中国=1400189813\World.txt" />
     <Content Include="Service\中国=1400189813\上海.txt" />

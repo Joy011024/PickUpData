@@ -50,6 +50,23 @@ namespace GatherImage
                 return DateTime.Now.ToString("yyyyMMddHHmm");
             }
         }
+        /// <summary>
+        /// 每个文件夹下最大存储的文件数目
+        /// </summary>
+        public int FolderFilesMaxNumder 
+        {
+            get 
+            {
+                int def = 0;
+                string str = ConfigurationManager.AppSettings["FolderFilesMaxNumder"];
+                int.TryParse(str, out def);
+                if (def <= 1)
+                {
+                    def = 200;
+                }
+                return def;
+            }
+        }
         List<WaitGatherImage> GetWaitGatherImageData()
         {
             DateTime today = DateTime.Now;
@@ -88,7 +105,7 @@ namespace GatherImage
             }
             string time = DateTime.Now.ToString("yyyyMMddHHmmssfff");
             string address = "Null";
-            string relative = address + "\\" + GetRelativePath;
+            string relative = address ;
             string fileName = imgType+address + "_" + uin + "_" + time + ".jpg";
             if (!string.IsNullOrEmpty(local) && local != LocalCityJoinSign)
             {
@@ -96,16 +113,69 @@ namespace GatherImage
                 address = asd[0];
                 if (!string.IsNullOrEmpty(address))
                 {
-                    relative = address + "\\" + asd [1]+"\\"+ GetRelativePath;//获取所在的省份作为文件目录
+                    relative = address + "\\" + asd [1];//获取所在的省份作为文件目录
                     fileName = imgType + local + "_" + uin + "_" + time + ".jpg";
                 }
             }
-            string file = img.SaveImage(ms, ImageDir + "\\"+relative, fileName);
+            //判断当前相对路径下存储的文件数量是否已经到达限定数
+            string imgDir = ImageDir;
+            string folderFullName = imgDir + relative + "\\";
+            object[] folder = GetLastCreateFolder(folderFullName);
+            if (folder == null)
+            {
+                folderFullName += "0";
+            }
+            else 
+            {//判断文件夹中文件数量是否达到限定
+                string dir = folder[0] as string;
+                int fileSize = GetFolderFileSize(dir);
+                if (fileSize >= FolderFilesMaxNumder)
+                {
+                    folderFullName += ((int)folder[1]) + 1;
+                }
+                else {
+                    folderFullName = dir;
+                }
+            }
+            string file = img.SaveImage(ms, folderFullName, fileName);
             if (!string.IsNullOrEmpty(file))
             {
-                return relative + "\\" + fileName;
+                return folderFullName.Replace(imgDir,"") + "\\" + fileName;
             }
             return string.Empty;
+        }
+        /// <summary>
+        /// 获取上次创建的文件夹
+        /// </summary>
+        /// <param name="parentFullName">上级文件夹全路径</param>
+        /// <returns>数组 =最后创建的文件夹名称,总共文件夹数量</returns>
+        object[] GetLastCreateFolder(string parentFullName)
+        {//获取文件夹下子文件夹内最后更新的文件夹路径名称信息
+            if (!Directory.Exists(parentFullName))
+            {
+                return null;
+            }
+            DirectoryInfo dis = new DirectoryInfo(parentFullName);
+            DirectoryInfo[] folders = dis.GetDirectories();
+            if (folders.Length == 0)
+            { //没有文件夹
+                return null;
+            }
+            //此处需要添加一个日志进行耗时分析【以便进行性能改善】
+            DateTime ct = folders.Max(d => d.CreationTime);
+            DirectoryInfo target= folders.Where(f => f.CreationTime == ct).FirstOrDefault();
+            object[] info=new  object[]{target.FullName,folders.Length};
+            return info;
+        }
+        /// <summary>
+        /// 文件夹下文件数目
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <returns></returns>
+        int GetFolderFileSize(string folder)
+        {
+            DirectoryInfo di = new DirectoryInfo(folder);
+            return di.GetFiles().Length;
         }
         /// <summary>
         /// 下载的图片是否为压缩图
@@ -134,5 +204,6 @@ namespace GatherImage
             }
             return paths;
         }
+
     }
 }

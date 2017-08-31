@@ -37,6 +37,7 @@ namespace CaptureWebData
         }
         string Cookie { get; set; }
         List<CategoryData> cityList = new List<CategoryData>();
+        bool GatherFirstUin = true;
         public TecentDataFrm()
         {
             InitializeComponent();
@@ -54,7 +55,7 @@ namespace CaptureWebData
             List<CategoryData> cts = citys.Select(s => s.Root).OrderBy(t => t.Code).ToList();
             cityList.AddRange(cts);
             DelegateData.BaseDelegate del=IntervalDisplay;
-            job.CreateJobWithParam <JobDelegate<Common.Data.EISOSex> >(new object[]{del,null},DateTime.Now.AddSeconds(5),10,0);//
+            job.CreateJobWithParam <JobDelegate<Common.Data.EISOSex> >(new object[]{del,null},DateTime.Now.AddSeconds(5),30,0);//
         }
         void Test()
         {
@@ -249,7 +250,12 @@ namespace CaptureWebData
                 QQDataDA da = new QQDataDA();
                 da.QueryParam = param;
                 PickUpQQDoResponse response = da.QueryQQData(Cookie);
-                QueryTodayPickUp();
+                if (GatherFirstUin) 
+                {//这里要改成在页面初始化时查询当前库数据量，其他情形交给另一线程查询
+                    QueryTodayPickUp();
+                    GatherFirstUin = false;
+                }
+               
                 QuartzCallBack(response);
             }
         }
@@ -352,7 +358,7 @@ namespace CaptureWebData
             QQDataDA da = new QQDataDA();
             da.QueryParam = param;
             PickUpQQDoResponse response = da.QueryQQData(Cookie);
-            QueryTodayPickUp();
+           // QueryTodayPickUp();
             //为下一次产生随机参数
             Guid gid = Guid.NewGuid();
             Random ran = new Random(gid.GetHashCode());
@@ -453,7 +459,7 @@ namespace CaptureWebData
                 txtPageIndex.Text = "1";
             }
             QueryResponseAction(response);
-            QueryTodayPickUp();
+           // QueryTodayPickUp();
         }
         void QueryResponseAction(PickUpQQDoResponse res)
         {
