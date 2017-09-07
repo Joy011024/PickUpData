@@ -60,12 +60,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="SqlCmd\SP_ErrorGatherImageList.sql" />
-    <Content Include="SqlCmd\SP_GetWaitGatherImageList.sql" />
-    <Content Include="SqlCmd\SP_PickUpStaticWithDay.sql" />
-    <Content Include="SqlCmd\SP_StaticCountToday.sql" />
-    <Content Include="SqlCmd\SP_SuccessGatherImageList.sql" />
-    <Content Include="SqlCmd\TecentQQ.sql" />
+    <Content Include="SqlCmd\CreateSql\TecentDataUinDA.sql" />
+    <Content Include="SqlCmd\UpdateSp\SP_ErrorGatherImageList.sql" />
+    <Content Include="SqlCmd\UpdateSp\SP_GetWaitGatherImageList.sql" />
+    <Content Include="SqlCmd\UpdateSp\SP_PickUpStaticWithDay.sql" />
+    <Content Include="SqlCmd\UpdateSp\SP_StaticCountToday.sql" />
+    <Content Include="SqlCmd\UpdateSp\SP_SuccessGatherImageList.sql" />
+    <Content Include="SqlCmd\UpdateSp\TecentQQ.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -116,6 +116,10 @@ namespace GatherImage
                     relative = address + "\\" + asd [1];//获取所在的省份作为文件目录
                     fileName = imgType + local + "_" + uin + "_" + time + ".jpg";
                 }
+                else if (asd.Length == 1)
+                {
+                    address += "\\" + address;
+                }
             }
             //判断当前相对路径下存储的文件数量是否已经到达限定数
             string imgDir = ImageDir;
@@ -123,7 +127,7 @@ namespace GatherImage
             object[] folder = GetLastCreateFolder(folderFullName);
             if (folder == null)
             {
-                folderFullName += "0";
+                folderFullName += "1";
             }
             else 
             {//判断文件夹中文件数量是否达到限定

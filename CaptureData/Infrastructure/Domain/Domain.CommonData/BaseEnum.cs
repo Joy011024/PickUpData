@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Common.Data;
+using System.Globalization;
 namespace Domain.CommonData
 {
     public enum RequestMethod
@@ -32,7 +33,29 @@ namespace Domain.CommonData
         [Description("数据存入数据库日志")]
         DataInDBLog=6,
         [Description("Debug调试日志数据")]
-        DebugData=7
+        DebugData=7,
+        [Description("性能日志")]
+        PerformanceLog=8
+    }
+    /// <summary>
+    /// 程序类型
+    /// </summary>
+    public enum EAppCategoty 
+    {
+        [Description("客户端程序")]
+        CleintApp=1,
+        [Description("服务端程序")]
+        ServiceApp=2
+    }
+    [Description("腾讯头像分类")]
+    public enum EUinImageType 
+    {
+       [Description ("系统照片")]
+        System=1,
+        [Description("头像")]
+        User = 2,
+        [Description("其他类型")]
+        Other=-1,
     }
     public class LoggerWriter 
     {
@@ -51,7 +74,7 @@ namespace Domain.CommonData
             }
             DateTime now = DateTime.Now;
             string file = path + "/" + log.ToString() + now.ToString(CommonFormat.DateTimeIntFormat) + ".txt";
-            FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write,FileShare.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
             sw.Write(text);
             sw.Close();
@@ -131,6 +154,27 @@ namespace Domain.CommonData
             byte[] txt = Encoding.UTF8.GetBytes(document);
             fs.Write(txt,0,txt.Length);
             fs.Close();
+        }
+        /// <summary>
+        /// 获取当前天所属的周
+        /// </summary>
+        /// <returns></returns>
+        public static string GetWeekIndex() 
+        {
+            GregorianCalendar gc = new GregorianCalendar();
+            int week= gc.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);//今天是今年第几周
+            return week.ToString();
+        }
+        /// <summary>
+        /// 获取今天的年以及所属周 如 201736（表示2017年第36周）
+        /// </summary>
+        /// <returns></returns>
+        public static string GetYearWeekIndex()
+        {
+            GregorianCalendar gc = new GregorianCalendar();
+            DateTime now = DateTime.Now;
+            int week = gc.GetWeekOfYear(now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);//今天是今年第几周
+            return now.ToString("yyyy")+ week.ToString();
         }
     }
     public  class AssemblyDataExt 
