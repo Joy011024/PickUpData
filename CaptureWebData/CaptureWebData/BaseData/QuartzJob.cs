@@ -198,4 +198,21 @@ namespace CaptureWebData
     {
         
     }
+
+    public class QuartzJobParam 
+    {
+        /// <summary>
+        /// 执行定时job方案时传递给上下文的参数
+        /// </summary>
+        public object JobExecutionContextJobDataMap { get; set; }
+        public DateTime StartTime { get; set; }
+        /// <summary>
+        /// 每一次轮询执行的间隔
+        /// </summary>
+        public int TrigggerInterval { get; set; }
+        /// <summary>
+        /// 执行次数
+        /// </summary>
+        public int TriggerRepeat { get; set; }
+    }
 }

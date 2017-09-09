@@ -11,6 +11,7 @@ using ApplicationService.IPDataService;
 using DataHelp;
 using System.IO;
 using AppService.RedisService;
+using System.Threading;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : Form
@@ -51,6 +52,10 @@ namespace CaptureWebData
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
             CategoryData obj = cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();
             List<CategoryGroup> citys = redis.GetRedisCacheItem<List<CategoryGroup>>(typeof(CategoryGroup).Name + "." + typeof(CategoryData).Name + "." + obj.Id);
+            if (citys == null)
+            {//没有缓存数据，此时将数据库中的城市地址数据进行读取写入到redis
+                NotRedisCacheCase();
+            }
             cityList.Add(noLimitAddress);
             List<CategoryData> cts = citys.Select(s => s.Root).OrderBy(t => t.Code).ToList();
             cityList.AddRange(cts);
@@ -82,28 +87,33 @@ namespace CaptureWebData
             {
                 return;
             }
+           
+        }
+        /// <summary>
+        /// redis 中没有匹配的数据时基础数据加载形式
+        /// </summary>
+        void NotRedisCacheCase() 
+        {
             AssemblyDataExt ass = new AssemblyDataExt();
             string debugDir = ass.GetAssemblyDir();
             string dir = debugDir + "/Service";
             string cityFile = "City.txt";
             if (!File.Exists(dir + "/" + cityFile))
             {
-                //首先判断redis中是否存在配置数据
-
-                string text = redis.GetRedisItemString(typeof(CategoryData).Name);
-                if (redis.HavaCacheItem)
-                {
-                    cityList = text.ConvertObject<List<CategoryData>>();
-                }
-                else
-                {
-                    CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
-                    IEnumerable<CategoryData> city = cds.QueryCityCategory();
-                    cityList = city.ToList();
-                    string json = cityList.ConvertJson();
-                    json.CreateNewAppData(cityFile);
-                    redis.SetRedisItem(typeof(CityData).Name, "redis");
-                }
+                CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
+                List<CategoryData> city = cds.QueryCityCategory().ToList(); 
+                string json = city.ConvertJson();
+                json.CreateNewAppData(cityFile);
+                redis.SetRedisItem(typeof(CityData).Name, "redis");
+                //省会，城市，区域
+                cityList = city.Where(c => c.ParentCode == "1" && c.NodeLevel == 2).ToList();
+                AnalyCity(city);//创建对应
+                //string text = redis.GetRedisItemString(typeof(CategoryData).Name);
+                //if (!redis.HavaCacheItem)
+                //{
+                   
+                //}
+                //cityList = text.ConvertObject<List<CategoryData>>();
             }
             else
             {
@@ -113,12 +123,12 @@ namespace CaptureWebData
             // AnalyCity();
             cityList.Add(noLimitAddress);
         }
-        void AnalyCity() 
+        void AnalyCity(List<CategoryData> data) 
         {
             AssemblyDataExt ass = new AssemblyDataExt();
             string debugDir = ass.GetAssemblyDir();
             CategoryGourpHelper helper = new CategoryGourpHelper();
-            CategoryGroup result=helper.DataGroup(cityList);;
+            CategoryGroup result = helper.DataGroup(data); ;
             CategoryGroup nodes = new CategoryGroup();// (CategoryGroup)result;//提取国家列表 
             string cityDir = ass.ForeachDir(debugDir, 3) + "/" + typeof(CategoryGroup).Name;
             //中国的省会列表
@@ -230,20 +240,50 @@ namespace CaptureWebData
             LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath + (new QQDataDA().GeneratePathTimeSpan(Cookie)), ELogType.SessionOrCookieLog);
 
             QueryQQParam param = GetBaseQueryParam();
+            ParameterizedThreadStart pth;
             if (ckStartQuartz.Checked && rbGuid.Checked)
             {//开启随机轮询
                 DelegateData.BaseDelegate del = QuartzGuidForach;
-                job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, param }, DateTime.Now.AddSeconds(interval), interval, repeact);
+                QuartzJobParam p=new QuartzJobParam(){
+                JobExecutionContextJobDataMap=new object[] { del, param,null },
+                StartTime=DateTime.Now.AddSeconds(interval),
+                 TriggerRepeat=repeact,
+                 TrigggerInterval=interval
+                };
+                pth = new ParameterizedThreadStart(BackstageRun <JobDelegateFunction>);
+                Thread th = new Thread(pth);
+                th.Start(p);
+               // job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, param,null }, DateTime.Now.AddSeconds(interval), interval, repeact);
             }
             else if (ckStartQuartz.Checked && rbDepth.Checked)
             {//该查询结果页轮询
                 DelegateData.BaseDelegate del = QuartzForeachPage;
-                job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, null }, DateTime.Now.AddSeconds(interval), interval, repeact);
+                QuartzJobParam p = new QuartzJobParam()
+                {
+                    JobExecutionContextJobDataMap = new object[] { del, null, null },
+                    StartTime = DateTime.Now.AddSeconds(interval),
+                    TriggerRepeat = repeact,
+                    TrigggerInterval = interval
+                };
+                pth = new ParameterizedThreadStart(BackstageRun < JobDelegateFunction>);
+                Thread th = new Thread(pth);
+                th.Start(p);
+                //job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, null,null }, DateTime.Now.AddSeconds(interval), interval, repeact);
             }
             else if (ckStartQuartz.Checked)
             {
                 DelegateData.BaseDelegate del = QuartzCallBack;
-                job.CreateJobWithParam<JobAction<QQDataDA>>(new object[] { Cookie, param, del }, DateTime.Now, interval, repeact);
+                QuartzJobParam p = new QuartzJobParam()
+                {
+                    JobExecutionContextJobDataMap = new object[] { Cookie, param, del },
+                    StartTime = DateTime.Now.AddSeconds(interval),
+                    TriggerRepeat = repeact,
+                    TrigggerInterval = interval
+                };
+                pth = new ParameterizedThreadStart(BackstageRun < JobAction<QQDataDA>>);
+                Thread th = new Thread(pth);
+                th.Start(p);
+               // job.CreateJobWithParam<JobAction<QQDataDA>>(new object[] { Cookie, param, del }, DateTime.Now, interval, repeact);
             }
             else
             {
@@ -259,7 +299,11 @@ namespace CaptureWebData
                 QuartzCallBack(response);
             }
         }
-
+        void BackstageRun<T>(object param) where T:Quartz.IJob
+        {
+            QuartzJobParam p = param as QuartzJobParam;
+            job.CreateJobWithParam<T>(p.JobExecutionContextJobDataMap, p.StartTime, p.TrigggerInterval,p.TriggerRepeat);
+        }
         private void webBrowserData_Load(object sender, EventArgs e)
         {
 

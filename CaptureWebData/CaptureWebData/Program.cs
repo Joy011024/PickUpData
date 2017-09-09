@@ -82,5 +82,19 @@ namespace CaptureWebData
                 return useRedis;
             }
         }
+        static string cacheReleativeDir;
+        /// <summary>
+        /// redis缓存项的文件的相对路径
+        /// </summary>
+        public static string RedisCacheFromFileReleative
+        {
+            get 
+            {
+                if(string.IsNullOrEmpty(cacheReleativeDir))
+                    cacheReleativeDir = ConfigurationManager.AppSettings["RedisCacheReleativeFile"];
+                return cacheReleativeDir;
+            }
+        }
+
     }
 }
