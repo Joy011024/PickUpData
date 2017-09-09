@@ -55,8 +55,9 @@
             this.rbNormal = new System.Windows.Forms.RadioButton();
             this.lblPageIndex = new System.Windows.Forms.Label();
             this.txtPageIndex = new System.Windows.Forms.TextBox();
-            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
             this.btnExit = new System.Windows.Forms.Button();
+            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbPollingType.SuspendLayout();
             this.SuspendLayout();
@@ -214,7 +215,7 @@
             // 
             // btnDeleteQuartz
             // 
-            this.btnDeleteQuartz.Location = new System.Drawing.Point(655, 140);
+            this.btnDeleteQuartz.Location = new System.Drawing.Point(635, 140);
             this.btnDeleteQuartz.Name = "btnDeleteQuartz";
             this.btnDeleteQuartz.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteQuartz.TabIndex = 18;
@@ -319,6 +320,16 @@
             this.txtPageIndex.TabIndex = 27;
             this.txtPageIndex.Text = "1";
             // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(716, 140);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(57, 23);
+            this.btnExit.TabIndex = 28;
+            this.btnExit.Text = "退出";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // pickUpIEWebCookie
             // 
             this.pickUpIEWebCookie.CallBack = null;
@@ -327,21 +338,21 @@
             this.pickUpIEWebCookie.Size = new System.Drawing.Size(545, 694);
             this.pickUpIEWebCookie.TabIndex = 19;
             // 
-            // btnExit
+            // btnRefresh
             // 
-            this.btnExit.Location = new System.Drawing.Point(698, 3);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
-            this.btnExit.TabIndex = 28;
-            this.btnExit.Text = "退出";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnRefresh.Location = new System.Drawing.Point(703, 24);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(57, 23);
+            this.btnRefresh.TabIndex = 29;
+            this.btnRefresh.Text = "刷新";
+            this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 708);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtPageIndex);
             this.Controls.Add(this.lblPageIndex);
@@ -405,6 +416,7 @@
         private System.Windows.Forms.Label lblPageIndex;
         private System.Windows.Forms.TextBox txtPageIndex;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnRefresh;
 
 
 

@@ -95,6 +95,21 @@ namespace CaptureWebData
                 return cacheReleativeDir;
             }
         }
-
+        static bool? openAutoQuertyDBTotal;
+        /// <summary>
+        /// 开启自动查询数据库中采集的数据量
+        /// </summary>
+        public static bool OpenAutoQuertyDBTotal
+        {
+            get 
+            {
+                if (openAutoQuertyDBTotal.HasValue)
+                {
+                    string cfg = ConfigurationManager.AppSettings["OpenAutoQuertyDBTotal"];
+                    openAutoQuertyDBTotal = cfg == "true";
+                }
+                return openAutoQuertyDBTotal.HasValue;
+            }
+        }
     }
 }

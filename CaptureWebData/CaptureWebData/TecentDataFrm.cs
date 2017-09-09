@@ -59,8 +59,11 @@ namespace CaptureWebData
             cityList.Add(noLimitAddress);
             List<CategoryData> cts = citys.Select(s => s.Root).OrderBy(t => t.Code).ToList();
             cityList.AddRange(cts);
-            DelegateData.BaseDelegate del=IntervalDisplay;
-            job.CreateJobWithParam <JobDelegate<Common.Data.EISOSex> >(new object[]{del,null},DateTime.Now.AddSeconds(5),30,0);//
+            if (SystemConfig.OpenAutoQuertyDBTotal) 
+            {//是否开启定时自动查询数据库采集的数据量信息
+                DelegateData.BaseDelegate del = IntervalDisplay;
+                job.CreateJobWithParam<JobDelegate<Common.Data.EISOSex>>(new object[] { del, null }, DateTime.Now.AddSeconds(5), 30, 0);//
+            }
         }
         void Test()
         {
@@ -290,7 +293,7 @@ namespace CaptureWebData
                 QQDataDA da = new QQDataDA();
                 da.QueryParam = param;
                 PickUpQQDoResponse response = da.QueryQQData(Cookie);
-                if (GatherFirstUin) 
+                if (GatherFirstUin||!SystemConfig.OpenAutoQuertyDBTotal) 
                 {//这里要改成在页面初始化时查询当前库数据量，其他情形交给另一线程查询
                     QueryTodayPickUp();
                     GatherFirstUin = false;
