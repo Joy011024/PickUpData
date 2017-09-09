@@ -10,15 +10,18 @@ using System.IO;
 using System.IO.Compression;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Text.RegularExpressions;
 namespace GatherIdCard
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Thread[] th = new Thread[2];
-            th[0] = new Thread(QueryUserRemarkLossId);
-            th[0].Start();
+            //Thread[] th = new Thread[2];
+            //th[0] = new Thread(QueryUserRemarkLossId);
+            //th[0].Start();
+            RegexSpilder();
+            //GatherMoMoHoster();
             Console.ReadLine();
             //QueryUserRemarkLossId();
         }
@@ -185,13 +188,55 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
                 return string.Empty;
             }
         }
+
+        static void GatherMoMoHoster() 
+        {
+            //1  获取 cookie 
+            string cookieUrl = "https://web.immomo.com/fonts/fontawesome-webfont.woff2?v=4.4.0";
+            string cookie = GetRequestData(cookieUrl);
+            string requestHead = @"Accept:*/*
+Accept-Encoding:gzip, deflate, br
+Accept-Language:zh-CN,zh;q=0.8
+Connection:keep-alive
+Cookie:MMID=fc1dce98c1610ba745e394d25531d844; MMSSID=a6efe97f91e8449bc71eab3b266bc391; Hm_lvt_96a25bfd79bc4377847ba1e9d5dfbe8a=1504194645; Hm_lpvt_96a25bfd79bc4377847ba1e9d5dfbe8a=1504194645; __v3_c_sesslist_10052=et6xh8sbra_dfl; __v3_c_pv_10052=1; __v3_c_session_10052=1504194642159238; __v3_c_today_10052=1; __v3_c_review_10052=0; __v3_c_last_10052=1504194642159; __v3_c_visitor=1504194642159238; __v3_c_session_at_10052=1504194646409; s_id=5d189f720ca0f72e22f624746c7be202; cId=19464624661178; L_V_T=d91ade7b-edc7-403b-ad79-fb6bcfb2c5cc; L_V_T.sig=ZhuK-3ov4Zua3cE3yFu3-RV0Kho; webmomo.sig=4TdIPyaRNmlicDRBBcVgoWQIgn8; web-imi-bew=s%3A254863613.RZ6mavZhWIGwrD1%2FMftKB6s7URkLQ3hWgdLWAafNrO8; web-imi-bew.sig=uEejlS3DD0RtEWvpYs5MUQzZs8c; io=z7C9eol9rTu_LwcyBZ4P; Hm_lvt_c391e69b0f7798b6e990aecbd611a3d4=1504194650,1504194739,1504195035; Hm_lpvt_c391e69b0f7798b6e990aecbd611a3d4=1504195127
+Host:web.immomo.com
+Referer:https://web.immomo.com/
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
+X-Requested-With:XMLHttpRequest";
+            string text= GetRequestData(AppConfig.MoMoHoster);
+        }
+        static void RegexSpilder()
+        {
+            string path = @"F:\SecurityData\IDCard\DebugIdCard\DataLog";
+            DirectoryInfo di = new DirectoryInfo(path);
+            FileInfo[] fis = di.GetFiles("*.txt");
+            Console.WriteLine("start->" + DateTime.Now.ToString(AppConfig.DateTimeFormat));
+            DateTime create = fis.Min(f => f.CreationTime);
+            FileInfo file = fis.Where(f => f.CreationTime == create).FirstOrDefault();
+            Console.WriteLine("query target file name->"+DateTime.Now.ToString(AppConfig.DateTimeFormat));
+            //提取html
+            string html= FileHelper.ReadFile(file.FullName);
+            Regex reg = new Regex("<tbody.*(?=>)(.|\n)*?</tbody>$");//"<tbody>([^</tbody>]*)"
+            //((?<Nested><\k<HtmlTag>[^>]*>)|</\k<HtmlTag>>(?<-Nested>)|.*?)*</\k<HtmlTag>>
+            // ((?<Nested><\k<HtmlTag>[^>]*>)|</\k<HtmlTag>>(?<-Nested>)|.*?)*</\k<HtmlTag>>
+            MatchCollection mc= reg.Matches(html);
+            Console.WriteLine("Analysic one file end->" + DateTime.Now.ToString(AppConfig.DateTimeFormat));
+            foreach (Match item in mc)
+            {
+                int total = item.Groups.Count;
+                foreach (Group ele in item.Groups)
+                {
+                    Console.WriteLine(ele.Value);
+                }
+            }
+        }
     }
     public class AppConfig
     {
         static string idCardUrl;
         public static string GatherIdCardUrl
         {
-            get 
+            get
             {
                 if (string.IsNullOrEmpty(idCardUrl))
                 {
@@ -216,7 +261,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
         static string fileSaveDir;
         public static string FileSaveDir
         {
-            get 
+            get
             {
                 if (string.IsNullOrEmpty(fileSaveDir))
                 {
@@ -224,7 +269,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
                 }
                 if (string.IsNullOrEmpty(fileSaveDir))
                 {
-                    AssemblyDataExt ass=new AssemblyDataExt();
+                    AssemblyDataExt ass = new AssemblyDataExt();
                     fileSaveDir = ass.ForeachDir(ass.GetAssemblyDir(), 3);
                 }
                 return fileSaveDir;
@@ -232,15 +277,37 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
         }
 
         static string userRedmarkLoseId;
-        public static string UserRemarkLoseIdCard 
+        public static string UserRemarkLoseIdCard
         {
-            get 
+            get
             {
                 if (string.IsNullOrEmpty(userRedmarkLoseId))
                 {
                     userRedmarkLoseId = ConfigurationManager.AppSettings["UserRemarkLoseIdCard"];
                 }
                 return userRedmarkLoseId;
+            }
+        }
+        static string momoHoster;
+        public static string MoMoHoster
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(momoHoster))
+                {
+                    momoHoster = ConfigurationManager.AppSettings["MoMoHoster"];
+                }
+                return momoHoster;
+            }
+        }
+        static string dateTimeformat;
+        public static string DateTimeFormat
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(dateTimeformat))
+                    dateTimeformat = ConfigurationManager.AppSettings["DateTimeFormat"];
+                return dateTimeformat;
             }
         }
     }

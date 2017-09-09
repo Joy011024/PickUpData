@@ -52,6 +52,7 @@
   <ItemGroup>
     <Content Include="Template\51guashi.html" />
     <Content Include="Template\cnguashi.html" />
+    <Content Include="Template\DataLog20170821001448.html" />
     <Content Include="Template\GatherData.html" />
     <Content Include="Template\IdCard.html" />
     <Content Include="Template\RequestTemplate.txt" />

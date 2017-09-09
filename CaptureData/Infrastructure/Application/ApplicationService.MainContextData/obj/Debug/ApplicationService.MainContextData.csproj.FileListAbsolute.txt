@@ -7,6 +7,6 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\Applica
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\ApplicationService.MainContextData\bin\Debug\Domain.MainContextData.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\ApplicationService.MainContextData\bin\Debug\InfrastructureRepository.IMainContext.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\ApplicationService.MainContextData\bin\Debug\EntityFramework.xml
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\ApplicationService.MainContextData\obj\Debug\ApplicationService.MainContextData.csprojResolveAssemblyReference.cache
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\ApplicationService.MainContextData\obj\Debug\ApplicationService.MainContextData.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\ApplicationService.MainContextData\obj\Debug\ApplicationService.MainContextData.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\Application\ApplicationService.MainContextData\obj\Debug\ApplicationService.MainContextData.csprojResolveAssemblyReference.cache
