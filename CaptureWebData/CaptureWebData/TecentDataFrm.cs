@@ -542,7 +542,7 @@ namespace CaptureWebData
                     ProtectJob();
                 }
                 else if (qqres.retcode == QQRetCode.Forbin.GetHashCode())
-                {//已被腾讯封号
+                {//已被腾讯封号【禁用时进行程序关闭，并反馈到邮箱】
                     job.DeleteJob<JobDelegateFunction>();
                     job.DeleteJob<JobAction<QQDataDA>>();
                     rtbTip.Text = "该账户本次检测被禁用";

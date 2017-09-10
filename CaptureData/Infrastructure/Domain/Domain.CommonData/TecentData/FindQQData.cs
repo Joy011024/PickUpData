@@ -24,6 +24,10 @@ namespace Domain.CommonData
         public string Uin { get; set; }
         [System.ComponentModel.DataAnnotations.Schema.Column("HeadImageUrl")]
         public string Url { get; set; }
+        /// <summary>
+        /// 头像类型【默认0 当没有采集到头像数据时设置该值为-1】
+        /// </summary>
+        public int ImgType { get; set; }
     }
     public class QQFriend 
     {

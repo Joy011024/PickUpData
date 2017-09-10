@@ -17,11 +17,15 @@ namespace CaptureWebData
         {
             try 
             {
+                //此处功能修正：使用SQL 
+
                 DateTime now = DateTime.Now;
                 foreach (FindQQDataTable item in data)
                 {
                     item.ID = Guid.NewGuid();
                     item.CreateTime = now;
+                    if (string.IsNullOrEmpty(item.Url))//没有采集到该账户的头像数据
+                        item.ImgType = -1;
                 }
                 MainRespority<FindQQDataTable> mr = new MainRespority<FindQQDataTable>(ConnString);
                 mr.InsertList(data);

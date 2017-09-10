@@ -61,6 +61,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="SqlCmd\CreateSql\TecentDataUinDA.sql" />
+    <Content Include="SqlCmd\LogicData\CategoryData.sql" />
     <Content Include="SqlCmd\UpdateSp\V1.1\SP_ErrorGatherImageList.sql" />
     <Content Include="SqlCmd\UpdateSp\V1.1\SP_GetWaitGatherImageList.sql" />
     <Content Include="SqlCmd\UpdateSp\V1.1\SP_PickUpStaticWithDay.sql" />
