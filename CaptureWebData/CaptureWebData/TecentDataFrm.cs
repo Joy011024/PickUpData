@@ -361,7 +361,8 @@ namespace CaptureWebData
             if (res == null) { return; }
             //如果此时检测返回集合为空，但是返回状态码不是错误，需要更改检测条件【腾讯防攻击检测】
             QueryResponseAction(res);
-            QueryTodayPickUp();
+            if(!SystemConfig.OpenAutoQuertyDBTotal)
+                 QueryTodayPickUp();
         }
 
         private void btnDeleteQuartz_Click(object sender, EventArgs e)
