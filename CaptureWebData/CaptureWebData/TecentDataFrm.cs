@@ -39,6 +39,7 @@ namespace CaptureWebData
         }
         string Cookie { get; set; }
         List<CategoryData> cityList = new List<CategoryData>();
+        CategoryData targetCountry = null;
         bool GatherFirstUin = true;
         public TecentDataFrm()
         {
@@ -52,6 +53,7 @@ namespace CaptureWebData
             redis = new RedisCacheService(SystemConfig.RedisIp, SystemConfig.RedisPort, SystemConfig.RedisPsw);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
             CategoryData obj = cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();
+            targetCountry = obj;//目标国家数据
             List<CategoryGroup> citys = redis.GetRedisCacheItem<List<CategoryGroup>>(typeof(CategoryGroup).Name + "." + typeof(CategoryData).Name + "." + obj.Id);
             if (citys == null)
             {//没有缓存数据，此时将数据库中的城市地址数据进行读取写入到redis
@@ -100,41 +102,37 @@ namespace CaptureWebData
         {
             AssemblyDataExt ass = new AssemblyDataExt();
             string debugDir = ass.GetAssemblyDir();
-            string dir = debugDir + "/Service";
-            string cityFile = "City.txt";
+            string dir = debugDir + "/" + SystemConfig.RedisCacheFromFileReleative + "/" + typeof(CategoryGroup).Name;
+            string cityFile = string.Format("{0}={1}.txt",targetCountry.Name,targetCountry.Id); 
             if (!File.Exists(dir + "/" + cityFile))
-            {
+            {//没有数据文件时先从数据库中进行读取，在写入到文件中，最后写入到redis中
                 CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
-                List<CategoryData> city = cds.QueryCityCategory().ToList(); 
+                List<CategoryData> city = cds.QueryCityCategory().ToList();
                 string json = city.ConvertJson();
                 json.CreateNewAppData(cityFile);
                 redis.SetRedisItem(typeof(CityData).Name, "redis");
                 //省会，城市，区域
-                cityList = city.Where(c => c.ParentCode == "1" && c.NodeLevel == 2).ToList();
-                AnalyCity(city);//创建对应
-                //string text = redis.GetRedisItemString(typeof(CategoryData).Name);
-                //if (!redis.HavaCacheItem)
-                //{
-                   
-                //}
-                //cityList = text.ConvertObject<List<CategoryData>>();
+                AnalyCity(city, targetCountry);//创建相关文件
             }
-            else
-            {
-                string json = FileHelper.ReadFile(dir + "/" + cityFile);
-                cityList = json.ConvertObject<List<CategoryData>>();
-            }
+            //将文件中的数据
+            string text = FileHelper.ReadFile(dir + "/" + cityFile);
+            List<CategoryData>  cs = text.ConvertObject<List<CategoryData>>();
+            cs= cs.Where(s => s.Id == targetCountry.Id).ToList();//指定国家下的省会数据
             // AnalyCity();
+            //将数据写入redis 
+            RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp,  SystemConfig.RedisPsw,SystemConfig.RedisPort);
+            rcm.SetCityCacheFromFile(dir, rcm, true);
             cityList.Add(noLimitAddress);
+            cityList.AddRange(cs.ToArray());
         }
-        void AnalyCity(List<CategoryData> data) 
+        void AnalyCity(List<CategoryData> data,CategoryData root) 
         {
             AssemblyDataExt ass = new AssemblyDataExt();
-            string debugDir = ass.GetAssemblyDir();
+            string debugDir = ass.GetAssemblyDir() + "/" + SystemConfig.RedisCacheFromFileReleative;
             CategoryGourpHelper helper = new CategoryGourpHelper();
             CategoryGroup result = helper.DataGroup(data); ;
             CategoryGroup nodes = new CategoryGroup();// (CategoryGroup)result;//提取国家列表 
-            string cityDir = ass.ForeachDir(debugDir, 3) + "/" + typeof(CategoryGroup).Name;
+            string cityDir = debugDir +"/"+ typeof(CategoryGroup).Name;
             //中国的省会列表
             foreach (CategoryGroup item in result.Childrens)
             {//查询到国家，过滤省市直辖区
@@ -143,7 +141,7 @@ namespace CaptureWebData
                 nodes.Childrens.Add(temp);
             }
             string country = nodes.ConvertJson();
-            Logger.CreateNewAppData(country, "Country.txt", cityDir);
+            Logger.CreateNewAppData(country, "Country.txt", debugDir);
             //提取中国的省会列表 
             #region 要追踪显示的索引则取消此块注释
             //int index = 0;//
@@ -157,7 +155,7 @@ namespace CaptureWebData
             //}
             #endregion
             CategoryGroup provinceGroup = new CategoryGroup();
-            CategoryGroup china= result.Childrens.Where(s => s.Root.Name == "中国").FirstOrDefault();
+            CategoryGroup china= result.Childrens.Where(s => s.Root.Name == root.Name).FirstOrDefault();
             provinceGroup.Root = china.Root;
             foreach (CategoryGroup item in china.Childrens)
             {//查询省会，过滤到市、区
@@ -165,7 +163,7 @@ namespace CaptureWebData
                 //item.Childrens = new List<CategoryGroup>();
             }
             string province = provinceGroup.ConvertJson();
-            Logger.CreateNewAppData(province, china.Root.Name +"="+china.Root.Id+ ".txt", cityDir + "/" + china.Root.Name + "=" + china.Root.Id);
+            Logger.CreateNewAppData(province, china.Root.Name + "=" + china.Root.Id + ".txt", cityDir);
             //各个省会的市区列表
             foreach (var item in china.Childrens)
             {
