@@ -111,5 +111,15 @@ namespace CaptureWebData
                 return openAutoQuertyDBTotal.HasValue;
             }
         }
+        static string iisCode501;
+        public static string IIS501 
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(iisCode501))
+                    iisCode501 = ConfigurationManager.AppSettings["IIS501"];
+                return iisCode501;
+            }
+        }
     }
 }

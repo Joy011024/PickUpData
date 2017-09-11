@@ -20,6 +20,7 @@ namespace CaptureWebData
         string NoLimit = "不限";
         CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
         RedisCacheService redis;
+        int currentIndex = 1;
         enum QQRetCode
         {
             Normal = 0,
@@ -485,9 +486,7 @@ namespace CaptureWebData
                 return;
             }
             QueryQQParam param = GetBaseQueryParam();
-            int page = 1;
-            string pageStr = txtPageIndex.Text;
-            int.TryParse(pageStr, out page);
+            int page = currentIndex+1;
             param.page = page;
             QQDataDA da = new QQDataDA();
             da.QueryParam = param;
@@ -500,11 +499,12 @@ namespace CaptureWebData
             FindQQResponse resp = response.responseData;
             if (resp != null && resp.retcode == 0 && resp.result.buddy.totalnum > param.num)
             {
-                txtPageIndex.Text = (resp.result.buddy.page + 1).ToString();
+                txtPageIndex.Text = (page+1).ToString();
             }
             else
             {
-                txtPageIndex.Text = "1";
+                page = 1;
+                txtPageIndex.Text = page.ToString();
             }
             QueryResponseAction(response);
            // QueryTodayPickUp();
@@ -552,13 +552,21 @@ namespace CaptureWebData
             {
                 //返回消息转换为实体对象
                 FindQQResponse find = res.responseJson.ConvertObject<FindQQResponse>();
-                if (find.retcode != QQRetCode.Forbin.GetHashCode() && find.retcode != QQRetCode.CookieTimeOut.GetHashCode())
+                if (find == null && res.responseJson.Contains(SystemConfig.IIS501))
+                {
+                    rtbTip.Text = SystemConfig.IIS501;
+                   // Application.ExitThread();
+                }
+                else if (find.retcode != QQRetCode.Forbin.GetHashCode() && find.retcode != QQRetCode.CookieTimeOut.GetHashCode())
                 { //错误不是来自于账户不禁用
                     ProtectJob();
                     return;
                 }
-                //判断返回数据的情况
-                rtbTip.Text = "Error\r\n" + res.responseJson;
+                else
+                {
+                    //判断返回数据的情况
+                    rtbTip.Text = "Error\r\n" + res.responseJson;
+                }
                 //一旦出现数据异常（防止被腾讯检测导致封号），停止轮询
                 job.DeleteJob<JobDelegateFunction>();
                 job.DeleteJob<JobAction<QQDataDA>>();
@@ -566,7 +574,13 @@ namespace CaptureWebData
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
+            StopRunApp();
+        }
+        void StopRunApp() 
+        {
+            Application.ExitThread();
             Application.Exit();
+            Environment.Exit(0);//次步骤会将新启动的进程一起进行关闭【符合关闭程序的要求限定】
         }
         void GatherErrorSendEmail(string responseJson)
         {

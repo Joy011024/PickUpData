@@ -35,7 +35,9 @@ namespace Domain.CommonData
         [Description("Debug调试日志数据")]
         DebugData=7,
         [Description("性能日志")]
-        PerformanceLog=8
+        PerformanceLog=8,
+        [Description("爬虫数据日志")]
+        SpliderDataLog=9
     }
     /// <summary>
     /// 程序类型
@@ -203,6 +205,28 @@ namespace Domain.CommonData
                 foreachLevel--;
             }
             return path;
+        }
+    }
+    /// <summary>
+    /// 获取APP所在文件
+    /// </summary>
+    public class AppDir 
+    {
+        public static string GetParentDir(int level)
+        {
+            AssemblyDataExt ass = new AssemblyDataExt();
+            string app = ass.GetAssemblyDir();
+            while (level > 0)
+            {
+                DirectoryInfo di = new DirectoryInfo(app);
+                if (di.Root.FullName == app)
+                {
+                    return app;
+                }
+                app = di.Parent.FullName;
+                level--;
+            }
+            return app;
         }
     }
 }
