@@ -75,7 +75,11 @@ namespace Domain.CommonData
                 Directory.CreateDirectory(path);
             }
             DateTime now = DateTime.Now;
-            string file = path + "/" + log.ToString() + now.ToString(CommonFormat.DateTimeIntFormat) + ".txt";
+            //当前周次
+            GregorianCalendar gc = new GregorianCalendar(GregorianCalendarTypes.TransliteratedEnglish);
+            int week= gc.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Friday);
+
+            string file = path + "/" + week + log.ToString() + now.ToString(CommonFormat.DateTimeIntFormat) + ".txt";
             FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write,FileShare.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
             sw.Write(text);
