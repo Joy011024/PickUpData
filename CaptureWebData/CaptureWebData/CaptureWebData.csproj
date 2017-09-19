@@ -179,6 +179,7 @@
     <Compile Include="WebDataFrm.Designer.cs">
       <DependentUpon>WebDataFrm.cs</DependentUpon>
     </Compile>
+    <Content Include="DeveloperDocument\SystemDoc.txt" />
     <Content Include="Exeption\Error.txt" />
     <Content Include="Service\SpilderUrl.txt" />
     <Content Include="Service\TemplateQQGeoup.html" />

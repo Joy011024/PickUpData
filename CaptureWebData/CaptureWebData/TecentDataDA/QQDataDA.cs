@@ -9,6 +9,7 @@ using System.Threading;
 using Domain.CommonData;
 using System.ComponentModel;
 using Common.Data;
+using System.Globalization;
 namespace CaptureWebData
 {
     public enum EGender
@@ -182,6 +183,10 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
         {
             string logPath = "\\" + DateTime.Now.ToString(CommonFormat.DateIntFormat);
             string tag = GetUinFromCookie(cookie);
+            //当前周次
+            GregorianCalendar gc = new GregorianCalendar(GregorianCalendarTypes.TransliteratedEnglish);
+            int week = gc.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Friday);
+            tag +="\\"+ week;
             if (!string.IsNullOrEmpty(tag))
             {//这是当前登录人的qq号
                 logPath = "\\" + tag + logPath;

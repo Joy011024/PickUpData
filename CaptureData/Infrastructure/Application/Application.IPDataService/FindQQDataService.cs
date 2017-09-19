@@ -50,11 +50,21 @@ namespace CaptureWebData
         }
         public PickUpStatic TodayStaticData() 
         {
-            DateTime today = DateTime.Now;
-            string sp = string.Format("exec SP_PickUpStaticWithDay '{0}'", today);
-            MainRespority<FindQQDataTable> main = new MainRespority<FindQQDataTable>(ConnString);
-            List<PickUpStatic> staticData=main.ExecuteSPSelect<PickUpStatic>(sp,null).ToList();
-            return staticData.FirstOrDefault();
+            try
+            {
+                DateTime today = DateTime.Now;
+                string sp = string.Format("exec SP_PickUpStaticWithDay '{0}'", today);
+                MainRespority<FindQQDataTable> main = new MainRespority<FindQQDataTable>(ConnString);
+                //其他信息: Timeout 时间已到。在操作完成之前超时时间已过或服务器未响应。
+                List<PickUpStatic> staticData = main.ExecuteSPSelect<PickUpStatic>(sp, null).ToList();
+                return staticData.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                string logPath = (new AssemblyDataExt()).GetAssemblyDir()+"\\"+ELogType.ErrorLog; // new ConfigurationItems().LogPath + GeneratePathTimeSpan(cookie);
+                LoggerWriter.CreateLogFile(ex.Message, logPath, ELogType.ErrorLog);
+                return new PickUpStatic();
+            }
         }
         
     }

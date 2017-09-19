@@ -10,7 +10,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Text.RegularExpressions;
 namespace GatherIdCard
 {
     class Program
@@ -20,7 +19,8 @@ namespace GatherIdCard
             //Thread[] th = new Thread[2];
             //th[0] = new Thread(QueryUserRemarkLossId);
             //th[0].Start();
-            RegexSpilder();
+            GetEduList();
+           // RegexSpilder();
             //GatherMoMoHoster();
             Console.ReadLine();
             //QueryUserRemarkLossId();
@@ -188,7 +188,13 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
                 return string.Empty;
             }
         }
-
+        static void GetEduList() 
+        {
+            AppConfig app = new AppConfig();
+            HttpHelper http = new HttpHelper();
+            string response = http.GetHttpResponse(AppConfig.EduListUrl + app.FormatEduComUrlParam("普通本科", 1, 30), string.Empty);
+            LoggerWriter.CreateLogFile(response, AppDir.GetParentDir(3)+ "/" + ELogType.SpliderDataLog, ELogType.DataLog);
+        } 
         static void GatherMoMoHoster() 
         {
             //1  获取 cookie 
@@ -230,7 +236,7 @@ X-Requested-With:XMLHttpRequest";
                 }
             }
         }
-    }
+    } 
     public class AppConfig
     {
         static string idCardUrl;
@@ -309,6 +315,57 @@ X-Requested-With:XMLHttpRequest";
                     dateTimeformat = ConfigurationManager.AppSettings["DateTimeFormat"];
                 return dateTimeformat;
             }
+        }
+        static string eduComList;
+        /// <summary>
+        /// 大学数据URL
+        /// </summary>
+        public static string EduListUrl 
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(eduComList))
+                    eduComList = ConfigurationManager.AppSettings["EduListUrl"];
+                return eduComList;
+            }
+        }
+        /// <summary>
+        /// 学校数据采集URL参数格式化
+        /// </summary>
+        string EduComListParam 
+        {
+            get
+            {
+                string param = @"province:
+schooltype:{0}
+page:{1}
+size:{2}
+callback:jQuery18301668075825546702_1505119180990
+keyWord1:
+schoolprop:
+schoolflag:
+schoolsort:
+schoolid:";//{type}普通本科
+                string[] ps = param.Split(new string[] { "\r\n" },StringSplitOptions.None);
+                return string.Join("\r\n", ps);
+            }
+        }
+        /// <summary>
+        /// 组装学校数据采集URL参数
+        /// </summary>
+        /// <param name="schoolType">学校类型</param>
+        /// <param name="page"></param>
+        /// <param name="limit"></param>
+        /// <returns></returns>
+        public string FormatEduComUrlParam(string schoolType,int page,int limit) 
+        {
+            if (string.IsNullOrEmpty(schoolType))
+                schoolType = "普通本科";
+            if (page < 1)
+                page = 1;
+            if (limit < 1)
+                limit = 30;
+           return string.Format(EduComListParam, schoolType, page, limit);
         }
     }
 }
