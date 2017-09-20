@@ -600,3 +600,6 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Servic
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\中国=1400189813\黑龙江=900359482\黑龙江=900359482.txt
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\中国=1400189813\黑龙江=900359482\齐齐哈尔=1801252877\齐齐哈尔=1801252877.txt
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\City.text
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\EmailHelper.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\EmailHelper.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.LanguageItem.resources

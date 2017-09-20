@@ -69,6 +69,7 @@
     <Content Include="SqlCmd\UpdateSp\V1.1\SP_SuccessGatherImageList.sql" />
     <Content Include="SqlCmd\UpdateSp\V1.1\TecentQQ.sql" />
     <Content Include="SqlCmd\UpdateSp\V1.2\TecentQQData_imageType.sql" />
+    <Content Include="SqlCmd\UpdateSp\V1.3\EveryDayStatics.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

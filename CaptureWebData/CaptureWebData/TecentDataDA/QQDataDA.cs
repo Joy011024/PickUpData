@@ -165,7 +165,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
         }
         public string GetUinFromCookie(string cookie) 
         {
-            string tag = "uin=o";
+            string tag = "p_uin=o";
             if (!string.IsNullOrEmpty(cookie)&&cookie.Contains(tag))
             {//这是当前登录人的qq号
                 string uin = cookie.Substring(cookie.IndexOf(tag) + tag.Length);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Configuration;
+using EmailHelper;
 namespace CaptureWebData
 {
     static class Program
@@ -120,6 +121,66 @@ namespace CaptureWebData
                     iisCode501 = ConfigurationManager.AppSettings["IIS501"];
                 return iisCode501;
             }
+        }
+
+        #region smtp邮件服务
+        public static string EmailId { get { return ConfigurationManager.AppSettings["EmailId"]; } }
+        public static string EmailKey { get { return ConfigurationManager.AppSettings["EmailKey"]; } }
+        public static string EmailClient { get { return ConfigurationManager.AppSettings["SMTPClient"]; } }
+        public static bool EmailEnableSsl { get { return ConfigurationManager.AppSettings["enableSsl"]=="true"; } }
+        public static int? EmailClientPort 
+        {
+            get 
+            {
+                int? port=null;
+                string ps = ConfigurationManager.AppSettings["emailClientPort"];
+                if (!string.IsNullOrEmpty(ps))
+                { 
+                    int p=0;
+                    int.TryParse(ps, out p);
+                    if (p > 0) port = p;
+                }
+                return port;
+            }
+        }
+        public static string DefaultEmailTo 
+        {
+            get 
+            {
+                string to = ConfigurationManager.AppSettings["EmailToUser"];
+                return to;
+            }
+        }
+        #endregion
+        /// <summary>
+        /// 日期格式 精确到毫秒
+        /// </summary>
+        public static string DateTimeFormat 
+        {
+            get 
+            {
+                return ConfigurationManager.AppSettings["DateTimeFormat"];
+            }
+        }
+    }
+    public class DataLink
+    {
+        /// <summary>
+        /// 将数据发送给其他的平台
+        /// </summary>
+        /// <param name="title">数据标题</param>
+        /// <param name="document">数据</param>
+        public void SendDataToOtherPlatform(string title,string document) 
+        {
+            SendEmail(title, document);
+        }  
+        void SendEmail(string subject, string body)
+        {
+            string from=SystemConfig.EmailId;
+            EmailService email = new EmailService(SystemConfig.EmailClient,from, SystemConfig.EmailKey, 
+                SystemConfig.EmailClientPort, SystemConfig.EmailEnableSsl);
+            //此处需要验证 发信人和发件人的区别
+            email.SendEmail(subject, body, from, from, SystemConfig.DefaultEmailTo, null, false, System.Net.Mail.MailPriority.High, null);
         }
     }
 }

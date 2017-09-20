@@ -21,6 +21,7 @@ namespace CaptureWebData
         CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
         RedisCacheService redis;
         int currentIndex = 1;
+        string Uin;//当前进行爬虫时使用到的账户信息
         enum QQRetCode
         {
             Normal = 0,
@@ -232,6 +233,11 @@ namespace CaptureWebData
         }
         private void btnQuery_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(Cookie))
+            {
+                rtbTip.Text = "please  login,and get cookie,and continue";
+                return;
+            }
             // 
             int interval = 0;
             string inter = txtTimeSpan.Text;
@@ -239,8 +245,10 @@ namespace CaptureWebData
             int repeact = 0;
             string rep = txtRepeact.Text;
             int.TryParse(rep, out repeact);
-            LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath + (new QQDataDA().GeneratePathTimeSpan(Cookie)), ELogType.SessionOrCookieLog);
-
+            QQDataDA das=new QQDataDA();
+            LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath + das.GeneratePathTimeSpan(Cookie), ELogType.SessionOrCookieLog);
+            Uin = das.GetUinFromCookie(Cookie);//当前登录的账户
+            //useralias  这是提取账户名称的元素
             QueryQQParam param = GetBaseQueryParam();
             ParameterizedThreadStart pth;
             if (ckStartQuartz.Checked && rbGuid.Checked)
@@ -505,6 +513,8 @@ namespace CaptureWebData
                 txtPageIndex.Text = page.ToString();
             }
             QueryResponseAction(response);
+            if (!SystemConfig.OpenAutoQuertyDBTotal)
+                QueryTodayPickUp();
            // QueryTodayPickUp();
         }
         void QueryResponseAction(PickUpQQDoResponse res)
@@ -544,6 +554,11 @@ namespace CaptureWebData
                     job.DeleteJob<JobDelegateFunction>();
                     job.DeleteJob<JobAction<QQDataDA>>();
                     rtbTip.Text = "该账户本次检测被禁用";
+                    DataLink dl = new DataLink();
+                    StringBuilder tip = new StringBuilder();
+                    tip.AppendLine("time:\t"+DateTime.Now.ToString(SystemConfig.DateTimeFormat));
+                    tip.AppendLine("account:\t"+Uin);
+                    dl.SendDataToOtherPlatform(LanguageItem.Tip_PickUpErrorlockAccount, tip.ToString());//需要知道当前在进行采集的账户
                 }
             }
             else

@@ -134,6 +134,11 @@
     <Compile Include="EleTestFrm.Designer.cs">
       <DependentUpon>EleTestFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LanguageItem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LanguageItem.resx</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1826,6 +1831,10 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LanguageItem.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LanguageItem.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -1880,6 +1889,10 @@
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\EmailHelper\EmailHelper.csproj">
+      <Project>{0ba494a2-4acc-4277-8a68-b519d76a02b0}</Project>
+      <Name>EmailHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelfControlForm\SelfControlForm.csproj">
       <Project>{F56BF2A6-3935-4975-AB7A-7B242F36EE83}</Project>
