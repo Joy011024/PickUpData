@@ -37,7 +37,9 @@ namespace Domain.CommonData
         [Description("性能日志")]
         PerformanceLog=8,
         [Description("爬虫数据日志")]
-        SpliderDataLog=9
+        SpliderDataLog=9,
+        [Description("爬取的组数据")]
+        SpliderGroupDataLog=10
     }
     /// <summary>
     /// 程序类型

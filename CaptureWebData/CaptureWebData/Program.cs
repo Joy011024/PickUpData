@@ -24,7 +24,7 @@ namespace CaptureWebData
             //CityDataManage cm = new CityDataManage();
             //cm.ImportDB(@"D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\Wait\国家城市区域名称.txt");
            // PrepareParam.PrepareHeader();
-            
+           
         }
         
     }

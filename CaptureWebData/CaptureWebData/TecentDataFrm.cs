@@ -305,7 +305,6 @@ namespace CaptureWebData
                     QueryTodayPickUp();
                     GatherFirstUin = false;
                 }
-               
                 QuartzCallBack(response);
             }
         }
@@ -516,9 +515,37 @@ namespace CaptureWebData
             if (!SystemConfig.OpenAutoQuertyDBTotal)
                 QueryTodayPickUp();
            // QueryTodayPickUp();
+
+        }
+        void GetContainerKeyOfCookie(string  cookie)
+        {
+            //此处调用cookie
+            QQDataDA common = new QQDataDA();
+            //ldw,bkn 是js生成的参数，在该函数调用中将根据cookie进行生成
+            UinGroupDataRequestParam puin = new UinGroupDataRequestParam()
+            {
+                k = "交友",
+                n = 8,
+                st = 1,
+                iso = 1,
+                src = 1,
+                v = 4903,
+                bkn = "1053723692",
+                isRecommend = false,
+                city_id = 10059,
+                from = 1,
+                newSearch = true,
+                keyword = "白羊座",
+                sort = 0,
+                wantnum = 24,
+                page = 0,
+                ldw = "1053723692"
+            };
+            common.QQGroupGather(Cookie, puin);
         }
         void QueryResponseAction(PickUpQQDoResponse res)
         {
+          //  GetContainerKeyOfCookie(res.cookie);//查询qq群组数据[qq群数据提取参数待确定]
             if (res != null && res.responseData != null)
             {
                 FindQQResponse qqres = res.responseData;

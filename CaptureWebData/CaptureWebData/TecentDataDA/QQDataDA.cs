@@ -154,6 +154,8 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
             JsonData jsondata = new JsonData();
             PickUpQQDoResponse pickup = new PickUpQQDoResponse();
             pickup.responseData= manage.SaveFindQQ(response);
+            //此处开启一个线程查询qq群组
+
             pickup.cookie = cookie;
             pickup.request = json;
             pickup.responseJson = response;
@@ -162,6 +164,15 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
                
             }
             return pickup;
+        }
+        /// <summary>
+        /// 根据提供的qqcookie获取默认的日志存储路径
+        /// </summary>
+        /// <param name="cookie"></param>
+        /// <returns></returns>
+        public string GetDefaultLogDir(string cookie) 
+        {
+            return new ConfigurationItems().LogPath + GeneratePathTimeSpan(cookie);
         }
         public string GetUinFromCookie(string cookie) 
         {
@@ -203,36 +214,63 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
             FindQQDataManage manage = new FindQQDataManage(new ConfigurationItems().TecentDA);
             return manage.TodayStatic();
         }
-        public void QQGroupGather() 
-        {
-            string url = "http://qun.qq.com/cgi-bin/qunapp/recommend2";
+        public string QQGroupGather(string  cookie,UinGroupDataRequestParam param)
+        {//共同的cookie项： pgv_pvi, pgv_pvid,pgv_si ,RK,uin,o_cookie,ptui_loginuin,ptisp,pt2gguin,uin,skey,itkn
+            //缺少项：    
+            // 可去除项： 
+            string recommandurl = "http://qun.qq.com/cgi-bin/qunapp/recommend2";//这是推荐的qq群
+            string url="http://qun.qq.com/cgi-bin/group_search/pc_group_search";
             string requestHeader = @"Accept:application/json, text/javascript, */*; q=0.01
 Accept-Encoding:gzip, deflate
 Accept-Language:zh-CN,zh;q=0.8
 Connection:keep-alive
 Content-Length:74
 Content-Type:application/x-www-form-urlencoded; charset=UTF-8
-Cookie:tvfe_boss_uuid=1e6199e1d2117b2e; pgv_pvi=2689650688; RK=jY8eVEcaan; luin=o0158055983; lskey=0001000072112c965a16959759ae4ea12f3723377b617431ab54af275b17458151ca356e5e7c02ddf05d2898; o_cookie=158055983; pgv_pvid=280615424; pgv_si=s1233967104; ptui_loginuin=1281756329; ptisp=cnc; ptcz=a13b68ec1bc3d52e50539dce656d1c5dddd67990597a5f892944921a0910ae37; pt2gguin=o1281756329; uin=o1281756329; skey=@JcISofHYC
+Cookie:{Cookie}
 Host:qun.qq.com
 Origin:http://find.qq.com
 Referer:http://find.qq.com/index.html?version=1&im_version=5521&width=910&height=610&search_target=0
 User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36";
-            string generat = @"Request URL:http://qun.qq.com/cgi-bin/qunapp/recommend2
+            Dictionary<string, string> head = new Dictionary<string, string>();
+            string ck="{Cookie}";
+            Dictionary<string,string> hs= new RequestHeaderHelper().PickUpRequestHeader(requestHeader);
+            foreach (KeyValuePair<string,string> item in head)
+            {
+                if (item.Value == ck)
+                {
+                    head[item.Key] = cookie;
+                    break;
+                }
+            }
+
+            string generate = @"Request URL:http://qun.qq.com/cgi-bin/qunapp/recommend2
 Request Method:POST
 Status Code:200 OK
 Remote Address:182.254.104.46:80
 Referrer Policy:no-referrer-when-downgrade";
-            string form = @"n:6
+            string form = @"k:交友
+n:8
 st:1
-guagua:1
-guaguan:1
-pos:0
-v:4903
+iso:1
 src:1
-gdt:1
-gdtn:1
-ldw:2127130791";
-            string response = @"";
+v:4903
+bkn:1053723692
+isRecommend:false
+city_id:10059
+from:1
+newSearch:true
+keyword:白羊座
+sort:0
+wantnum:24
+page:0
+ldw:1053723692";
+            //cookie:tvfe_boss_uuid=1e6199e1d2117b2e; pgv_pvi=2689650688; RK=jY8eVEcaan; luin=o0158055983; lskey=0001000072112c965a16959759ae4ea12f3723377b617431ab54af275b17458151ca356e5e7c02ddf05d2898; o_cookie=158055983; pgv_pvid=280615424; pgv_si=s1233967104; ptui_loginuin=1281756329; ptisp=cnc; ptcz=a13b68ec1bc3d52e50539dce656d1c5dddd67990597a5f892944921a0910ae37; pt2gguin=o1281756329; uin=o1281756329; skey=@JcISofHYC
+            requestHeader = requestHeader.Replace(ck, cookie);
+            param.CalculateUinJsParam(cookie);
+            string ps = param.ConvertJson();
+            string result = HttpClientExtend.HttpWebRequestPost(url, ps, cookie);
+            LoggerWriter.CreateLogFile(result, GetDefaultLogDir(cookie), ELogType.SpliderGroupDataLog);
+            return result;
         }
     }
     /// <summary>

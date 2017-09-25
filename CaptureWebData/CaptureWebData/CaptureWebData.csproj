@@ -186,6 +186,7 @@
     </Compile>
     <Content Include="DeveloperDocument\SystemDoc.txt" />
     <Content Include="Exeption\Error.txt" />
+    <Content Include="Note\UinGroupDeveloper\Cookie.txt" />
     <Content Include="Service\SpilderUrl.txt" />
     <Content Include="Service\TemplateQQGeoup.html" />
     <Content Include="Service\CategoryGroup\中国=1400189813\China.txt" />
