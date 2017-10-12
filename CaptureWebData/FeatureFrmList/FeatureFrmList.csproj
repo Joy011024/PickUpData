@@ -50,6 +50,12 @@
     <Compile Include="ComboBoxDataSource.cs" />
     <Compile Include="FeatureService.cs" />
     <Compile Include="ListViewDataSourceHelper.cs" />
+    <Compile Include="MicrosoftBrowser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MicrosoftBrowser.Designer.cs">
+      <DependentUpon>MicrosoftBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="PageDataHelp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectFile.cs">
@@ -78,6 +84,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MicrosoftBrowser.resx">
+      <DependentUpon>MicrosoftBrowser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SelectFile.resx">
       <DependentUpon>SelectFile.cs</DependentUpon>
     </EmbeddedResource>

@@ -1,2 +1,71 @@
-﻿tvfe_boss_uuid=1e6199e1d2117b2e; pgv_pvi=2689650688; RK=jY8eVEcaan; eas_sid=D175U044s0B9N5T0M4i788g0p9; o_cookie=158055983; pgv_pvid=6691931733; pgv_si=s2390202368; ptui_loginuin=1281756329; ptisp=cnc; ptcz=5574052159393dcaff18034b6297860bf1d967208ee4ad2d010049712f34c236; pt2gguin=o1281756329; uin=o1281756329; skey=@9nhhngzvp
+﻿qq群：
+tvfe_boss_uuid=1e6199e1d2117b2e; pgv_pvi=2689650688; RK=jY8eVEcaan; eas_sid=D175U044s0B9N5T0M4i788g0p9; o_cookie=158055983; pgv_pvid=6691931733; pgv_si=s9942151168; ptui_loginuin=1281756329; ptisp=cnc; ptcz=5574052159393dcaff18034b6297860bf1d967208ee4ad2d010049712f34c236; pt2gguin=o1281756329; uin=o1281756329; skey=@fd1tHqN25
+qq账户：
+tvfe_boss_uuid=1e6199e1d2117b2e; pgv_pvi=2689650688; RK=jY8eVEcaan; eas_sid=D175U044s0B9N5T0M4i788g0p9; o_cookie=158055983; pgv_pvid=6691931733; pgv_si=s9942151168; itkn=1928872379; ptui_loginuin=1281756329; ptisp=cnc; ptcz=5574052159393dcaff18034b6297860bf1d967208ee4ad2d010049712f34c236; pt2gguin=o1281756329; uin=o1281756329; skey=@fd1tHqN25
 
+查询我的信息：
+http://cgi.find.qq.com/qqfind/myinfo?ldw=997231938
+tvfe_boss_uuid=1e6199e1d2117b2e; pgv_pvi=2689650688; RK=jY8eVEcaan; eas_sid=D175U044s0B9N5T0M4i788g0p9; o_cookie=158055983; pgv_pvid=6691931733; pgv_si=s9942151168; itkn=1928872379; ptui_loginuin=1281756329; ptisp=cnc; ptcz=5574052159393dcaff18034b6297860bf1d967208ee4ad2d010049712f34c236; pt2gguin=o1281756329; uin=o1281756329; skey=@fd1tHqN25
+response:
+{
+	result:
+	{
+		allow:1
+		birthday:
+		{
+			day:24
+			month:8
+			year:1992
+		}
+		blood:0
+		cft_flag:0
+		city:"上饶"
+		city_id:"11"
+		college:"agricultur"
+		constel:8
+		country:"中国"
+		country_id:"1"
+		email:""
+		extflag:512
+		face:522
+		flag:8389120
+		gender:"male"
+		gender_id:1
+		gps_flag:0
+		h_city:""
+		h_country:""
+		h_province:""
+		h_zone:""
+		homepage:""
+		latitude:40.102523
+		lbs_addr_detail:
+		{
+			city:"北京市"
+			code:"110114"
+			district:"昌平区"
+			mergedaddr:"北京市昌平区发展路8号院"
+			mergedname:"中天创业园"
+			name:"中国,北京市,北京市,昌平区"
+			nation:"中国"
+			province:"北京市"
+			street:"朱辛庄北路"
+			street_no:""
+			town:"Unknown"
+			village:"Unknown"
+		}
+		longitude:116.28989
+		mobile:"-"
+		nick:"枯竹"
+		occupation:""
+		p2c:"11_0"
+		personal:""
+		phone:""
+		province:"江西"
+		province_id:"36"
+		reg_type:0
+		s_flag:0
+		shengxiao:9
+		zone_id:""
+	}
+	retcode:0
+}

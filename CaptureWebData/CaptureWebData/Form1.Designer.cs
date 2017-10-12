@@ -1,6 +1,6 @@
 ﻿namespace CaptureWebData
 {
-    partial class Form1
+    partial class HttpFrm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -191,7 +191,7 @@
             this.rtbCookie.Tag = "Cookie";
             this.rtbCookie.Text = "";
             // 
-            // Form1
+            // HttpFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -212,7 +212,7 @@
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.cmbRequestMethod);
             this.Controls.Add(this.btnSave);
-            this.Name = "Form1";
+            this.Name = "HttpFrm";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -13,14 +13,14 @@ using CommonHelperEntity;
 using Domain.CommonData;
 namespace CaptureWebData
 {
-    public partial class Form1 : Form
+    public partial class HttpFrm : Form
     {
         enum ButtonActionTag
         {
             PickUpData = 1,
             ClearData = 2
         }
-        public Form1()
+        public HttpFrm()
         {
             InitializeComponent();
             InitPageData();

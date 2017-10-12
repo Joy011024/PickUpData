@@ -139,6 +139,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LanguageItem.resx</DependentUpon>
     </Compile>
+    <Compile Include="MaimaiFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaimaiFrm.Designer.cs">
+      <DependentUpon>MaimaiFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1836,6 +1842,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LanguageItem.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="MaimaiFrm.resx">
+      <DependentUpon>MaimaiFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -1877,6 +1886,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Manage\" />
+    <Folder Include="NetWorkData\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj">
