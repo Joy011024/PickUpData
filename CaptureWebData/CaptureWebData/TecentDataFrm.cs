@@ -364,7 +364,7 @@ namespace CaptureWebData
                 return;
             }
             PickUpQQDoResponse res = data as PickUpQQDoResponse;
-            if (res == null) { return; }
+            if (res == null) { return; }// 1 no cookie 
             //如果此时检测返回集合为空，但是返回状态码不是错误，需要更改检测条件【腾讯防攻击检测】
             QueryResponseAction(res);
             if(!SystemConfig.OpenAutoQuertyDBTotal)

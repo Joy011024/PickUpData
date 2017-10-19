@@ -163,6 +163,19 @@ namespace CaptureWebData
                 return ConfigurationManager.AppSettings["DateTimeFormat"];
             }
         }
+        static string captureWebDataWinAssembly;
+        /// <summary>
+        /// 采集网络数据窗体的程序集
+        /// </summary>
+        public static string CaptureWebDataWinAssembly
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(captureWebDataWinAssembly))
+                    captureWebDataWinAssembly = ConfigurationManager.AppSettings["CaptureWebDataWinAssembly"];
+                return captureWebDataWinAssembly;
+            }
+        }
     }
     public class DataLink
     {

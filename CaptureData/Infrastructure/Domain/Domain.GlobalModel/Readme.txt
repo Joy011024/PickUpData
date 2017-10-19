@@ -1,0 +1,1 @@
+﻿the  assembly for define some public of class.

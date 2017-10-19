@@ -33,13 +33,15 @@
             this.tspHeadBtnSplider = new System.Windows.Forms.ToolStripSplitButton();
             this.tspMiUin = new System.Windows.Forms.ToolStripMenuItem();
             this.tspMiMaimai = new System.Windows.Forms.ToolStripMenuItem();
+            this.tspSBNews = new System.Windows.Forms.ToolStripSplitButton();
             this.tspHeadTool.SuspendLayout();
             this.SuspendLayout();
             // 
             // tspHeadTool
             // 
             this.tspHeadTool.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tspHeadBtnSplider});
+            this.tspHeadBtnSplider,
+            this.tspSBNews});
             this.tspHeadTool.Location = new System.Drawing.Point(0, 0);
             this.tspHeadTool.Name = "tspHeadTool";
             this.tspHeadTool.Size = new System.Drawing.Size(998, 25);
@@ -72,6 +74,15 @@
             this.tspMiMaimai.Tag = "CaptureWebData.MaimaiFrm";
             this.tspMiMaimai.Text = "Maimai";
             // 
+            // tspSBNews
+            // 
+            this.tspSBNews.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tspSBNews.Image = ((System.Drawing.Image)(resources.GetObject("tspSBNews.Image")));
+            this.tspSBNews.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tspSBNews.Name = "tspSBNews";
+            this.tspSBNews.Size = new System.Drawing.Size(56, 22);
+            this.tspSBNews.Text = "News";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -93,5 +104,6 @@
         private System.Windows.Forms.ToolStripSplitButton tspHeadBtnSplider;
         private System.Windows.Forms.ToolStripMenuItem tspMiUin;
         private System.Windows.Forms.ToolStripMenuItem tspMiMaimai;
+        private System.Windows.Forms.ToolStripSplitButton tspSBNews;
     }
 }

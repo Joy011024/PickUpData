@@ -30,6 +30,8 @@ namespace FeatureFrmList
             }
             containerHeight = originHeight;
             containerWidth = originWidth;
+            btnGo.Click += new EventHandler(BtnGo_Click);
+            btnGetCookies.Click += new EventHandler(BtnGetCookie_Click);
         }
         /// <summary>
         /// 设置页面大小
@@ -58,6 +60,7 @@ namespace FeatureFrmList
             HtmlDocument doc = MicrosoftWebBrowser.Document;
             if (doc == null) { return; }
             Cookie = doc.Cookie;
+            rtbCookie.Text = Cookie;
         }
     }
 }

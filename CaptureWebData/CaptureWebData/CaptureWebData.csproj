@@ -151,6 +151,7 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="NetWorkData\Toutiao.cs" />
     <Compile Include="NoParamHttpGetFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1886,7 +1887,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Manage\" />
-    <Folder Include="NetWorkData\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj">
@@ -1901,9 +1901,21 @@
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.GlobalModel\Domain.GlobalModel.csproj">
+      <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
+      <Name>Domain.GlobalModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\EmailHelper\EmailHelper.csproj">
       <Project>{0ba494a2-4acc-4277-8a68-b519d76a02b0}</Project>
       <Name>EmailHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
+      <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
+      <Name>Infrastructure.ExtService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CaptureManage.AppWin\CaptureManage.AppWin.csproj">
+      <Project>{11861a4e-e136-4395-9abd-31637e3dae9a}</Project>
+      <Name>CaptureManage.AppWin</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelfControlForm\SelfControlForm.csproj">
       <Project>{F56BF2A6-3935-4975-AB7A-7B242F36EE83}</Project>
