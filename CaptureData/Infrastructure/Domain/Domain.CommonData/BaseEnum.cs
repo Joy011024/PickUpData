@@ -69,7 +69,7 @@ namespace Domain.CommonData
         /// <param name="text"></param>
         /// <param name="path"></param>
         /// <param name="log"></param>
-        public static void  CreateLogFile(string text,string path,ELogType log) 
+        public static void  CreateLogFile(string text,string path,ELogType log,string fileName=null) 
         {
             if (string.IsNullOrEmpty(text)) { return; }
             if (!string.IsNullOrEmpty(path)&&!Directory.Exists(path)) 
@@ -77,7 +77,14 @@ namespace Domain.CommonData
                 Directory.CreateDirectory(path);
             }
             DateTime now = DateTime.Now;
-            string file = path + "/" + log.ToString() + now.ToString(CommonFormat.DateTimeIntFormat) + ".txt";
+            string file = path + "/" + log.ToString();
+            if (!Directory.Exists(file))
+                Directory.CreateDirectory(file);
+            string filetype = ".txt";
+            if (string.IsNullOrEmpty(fileName))
+                file += now.ToString(CommonFormat.DateTimeIntFormat) + filetype;
+            else
+                file += "/"+ fileName + filetype;
             FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write,FileShare.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
             sw.Write(text);
