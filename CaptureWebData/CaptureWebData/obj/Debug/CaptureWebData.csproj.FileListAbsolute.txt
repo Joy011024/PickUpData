@@ -1,7 +1,3 @@
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.exe.config
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.csproj.App.config
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\Interop.SHDocVw.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.csproj.ResolveComReference.cache
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Config\LogicCfg.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\中国=1400189813\上海=1275992132\上海=1275992132.txt
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\中国=1400189813\上海=1275992132\卢湾=1327785764\卢湾=1327785764.txt
@@ -537,6 +533,7 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Servic
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\中国=1400189813\黑龙江=900359482\黑龙江=900359482.txt
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\中国=1400189813\黑龙江=900359482\齐齐哈尔=1801252877\齐齐哈尔=1801252877.txt
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\City.text
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.exe.config
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.exe
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\CaptureWebData.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ApplicationService.IPDataService.dll
@@ -570,6 +567,7 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Threading.Tasks.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Infrastructure.EFMsSQL.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\FeatureFrmList.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppLanguage.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\WebKitBrowser.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Text.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\ServiceStack.Common.dll
@@ -599,8 +597,12 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Threading.Tasks.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Infrastructure.EFMsSQL.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\FeatureFrmList.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppLanguage.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\InfrastructureRepository.IMainContext.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.csproj.App.config
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.csprojResolveAssemblyReference.cache
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\Interop.SHDocVw.dll
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.csproj.ResolveComReference.cache
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.EleTestFrm.resources
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.HttpFrm.resources
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\obj\Debug\CaptureWebData.LanguageItem.resources

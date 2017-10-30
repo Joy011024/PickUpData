@@ -44,6 +44,21 @@ namespace Infrastructure.ExtService
             if (p == null) { return null; }
             return p.GetValue(help,null);
         }
+        public static string[] GetEntityProperties<T>(this T help) where T:class 
+        {
+            return typeof(T).GetProperties().Select(p => p.Name).ToArray();
+        }
+        public static string GetPropertyValue<T>(this T helper,string property) where T:class 
+        {
+            Type type = typeof(T);
+            PropertyInfo pi= type.GetProperty(property);
+            object obj= pi.GetValue(helper, null);
+            if (obj == null)
+            {
+                return string.Empty;
+            }
+            return obj.ToString();
+        }
     }
     public static class DataConvert
     {
