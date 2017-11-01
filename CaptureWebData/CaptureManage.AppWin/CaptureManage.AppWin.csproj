@@ -108,6 +108,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Doc\DevDoc\车票json数据含义解析.txt" />
+    <Content Include="Exception\反射创建实体.txt" />
     <Content Include="SqlCmd\Ticket12306.sql" />
   </ItemGroup>
   <ItemGroup>

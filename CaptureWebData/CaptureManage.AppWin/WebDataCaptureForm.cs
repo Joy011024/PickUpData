@@ -212,10 +212,15 @@ namespace CaptureManage.AppWin
                 GetCarTicket(item, response);
             }
             //存储列车座位信息
-            ISyncTicketDataManage sync = IocHelper.CreateObject<ISyncTicketDataManage>(typeof(SyncTicketDataManage).Name,
+            //反射时构造函数没有提供参数可以进行创建
+            ISyncTicketDataManage sync = IocHelper.CreateObjectCtorWithParam<ISyncTicketDataManage>(
+                new object[]{AppCategory.WinApp,"Conn" },
+                typeof(SyncTicketDataManage).Name,
                 "TicketData.Manage",
                 "CaptureManage.AppWin",//此为程序集，而不是命名空间
                 NowAppDirHelper.GetNowAppDir(AppCategory.WinApp));
+             
+            //由于实现类中对于构造函数存在参数限定，此处需要特殊参数的传递
             sync.SaveCarWithSeatData(response);
             //读取列车过站信息
             //存储列车过站信息，绘制运动轨迹图

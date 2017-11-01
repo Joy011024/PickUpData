@@ -13,5 +13,11 @@ namespace FactoryService
             GeneratorClass gc = new GeneratorClass();
             return gc.BaseAutoCreateType<T>(className, nameSpace, assembly, assemblyDir, ".dll");
         }
+        public static Dictionary<string, object> ClassIoc = new Dictionary<string, object>();
+        public static T CreateObjectCtorWithParam<T>(object[] paramList, string className, string nameSpace, string assembly, string assemblyDir) where T : class //此处提供的T为接口
+        {
+            GeneratorClass gc = new GeneratorClass();
+            return gc.BaseAutoCreateTypeWithCtorParam<T>(paramList,className, nameSpace, assembly, assemblyDir, ".dll");
+        }
     }
 }
