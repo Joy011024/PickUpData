@@ -1,0 +1,11 @@
+﻿1.Type definitions should start with a '{', expecting serialized type 'CategoryGroup', got string starting with: [{"Root":{"Id":59641816,"ParentId":1400189813,"Ite
+问题出现原因：redis数据库存储的是节点结构中的子节点列表项，但是接收时直接使用了实体在序列化时出现错误。
+2.查询接口时返回结果不是json数据
+
+<html>
+<head><title>501 Not Implemented</title></head>
+<body bgcolor="white">
+<center><h1>501 Not Implemented</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>

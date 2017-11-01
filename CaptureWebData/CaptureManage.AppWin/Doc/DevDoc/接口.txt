@@ -1,0 +1,4 @@
+1.查询12306账户下的乘客列表
+https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs
+该请求含有tocket
+REPEAT_SUBMIT_TOKEN

@@ -1,0 +1,46 @@
+https://mail.qq.com/cgi-bin/laddr_lastlist?sid=eFdapxlCqMOMcnsi&encode_type=js&t=addr_datanew&s=AutoComplete&category=hot&resp_charset=UTF8&ef=js&r=0.6020991376261546
+
+Request Method:GET
+Header:
+
+:authority:mail.qq.com
+:method:GET
+:path:/cgi-bin/laddr_lastlist?sid=eFdapxlCqMOMcnsi&encode_type=js&t=addr_datanew&s=AutoComplete&category=hot&resp_charset=UTF8&ef=js&r=0.6020991376261546
+:scheme:https
+accept:*/*
+accept-encoding:gzip, deflate, sdch, br
+accept-language:zh-CN,zh;q=0.8
+cookie:pgv_pvi=2166054912; RK=5Q8eAGcqdH; tvfe_boss_uuid=4326f9f3a442deb4; o_cookie=158055983; pac_uid=1_158055983; pgv_pvid=3887722460; pgv_si=s6359198720; ptisp=; ptui_loginuin=158055983; ptcz=50381d247d471856795f71bee19f08d2d437f1a1e9ecc4a4d47d90b0744a7ddf; pt2gguin=o0158055983; uin=o0158055983; skey=@1nPjzuiwV; p_uin=o0158055983; p_skey=kTWhcsqmG7KkzjFgyTDc1yZlwAHfQJCzQQpCbcJu0LE_; pt4_token=6XS7kVOMTUszVxbyGpfdjG44YzKdwdnQAFq*LMPfU-c_; wimrefreshrun=0&; qm_antisky=158055983&80dbb4d659204186ce41890411ffba0886f869abe61d68f4c9ef88d9f6eec103; qm_flag=0; qqmail_alias=158055983@qq.com; sid=158055983&6c2ac2e2e9421186966c28e02248ffb3,qa1RXaGNzcW1HN0trempGZ3lURGMxeVpsd0FIZlFKQ3pRUXBDYmNKdTBMRV8.; qm_username=158055983; qm_domain=https://mail.qq.com; qm_ptsk=158055983&@1nPjzuiwV; foxacc=158055983&0; ssl_edition=sail.qq.com; edition=mail.qq.com; qm_loginfrom=158055983&wpt; username=158055983&158055983; CCSHOW=000001; new_mail_num=158055983&142; webp=1
+referer:https://mail.qq.com/zh_CN/htmledition/ajax_proxy.html?mail.qq.com&v=140521
+user-agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36
+
+Param:
+
+
+sid:eFdapxlCqMOMcnsi
+encode_type:js
+t:addr_datanew
+s:AutoComplete
+category:hot
+resp_charset:UTF8
+ef:js
+r:0.6020991376261546
+
+Response:
+ 
+domaingroups:[]
+ggroup:[]
+groups:[]
+qqgroups:[
+	[--0 分组序号 ，1 分组的qq好友列表，2分组名，3？
+		"1000015",[],"老师",""
+	]
+]
+sortbyupdatetime:[
+-- 0 主键？，1 昵称简称， 2 qq邮箱号，3 昵称，4 hashcode号，5 ？，6 ？，7 ？，8备注
+	["127":"JUNEJS":"june.js@hotmail.com":"june.js":"":"":"":"1484409063":""]
+],
+timeuse:["134"]
+tool:[
+	["wysczs","urlcreator@qq.com","网页生成助手","ico_urlcreator"]
+]

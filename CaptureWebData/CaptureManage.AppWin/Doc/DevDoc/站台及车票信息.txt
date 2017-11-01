@@ -1,0 +1,16 @@
+|预订|2400000G330Y|G33|VNP|NXG|VNP|NXG|09:40|19:00|09:20|N|e4%2F4GuQ3YzIe778f7wl0qUERHCuY0NFo7HI48QgQapE93NCa|20171031|3|P3|01|19|1|0|||||||||||无|无|无||O0M090|OM9
+备注|车辆信息|车次|start_station_telecode始发站代码|end_station_telecode重点站代码|from_station_telecode 出发站代码|to_station_telecode 目的地站代码
+start_time 出发时间|arrive_time到达时间|lishi历时（耗时）|canWebBuy是否可以购票|yp_info 【随机数】|start_train_date 列车出发日期|
+train_seat_feature|location_code 位置代码
+
+
+同一车同一日期  各站时间显示
+霸州->南昌 【北京西->深圳】
+
+|23:00-06:00系统维护时间|240000K1051L|K105|BXP|SZQ|RMP|NCG|00:26|15:56|15:30|IS_TIME_NOT_BUY|KeAsUoHXD8xXp%2FTD37TJ51uyOs8oooTEzfjpPE%2Faw3e0CTvLeMeQILJ5KXs%3D|20171118|3|PB|02|13|0|0||||无|||无||无|有|||||10401030|1413"
+
+北京->南昌 【北京西->深圳】
+
+|23:00-06:00系统维护时间|240000K1051L|K105|BXP|SZQ|BXP|NCG|23:16|15:56|16:40|IS_TIME_NOT_BUY|IqC2lsYM3UihXfRxgBtNPzhPP2a6QRRl0tpMDEyhCw6mhlAUgP2Ui5XY5XA%3D|20171119|3|PB|01|13|0|0||||12|||有||有|有|||||10401030|1413"
+北京->深圳 【北京西->深圳】
+|23:00-06:00系统维护时间|240000K1051L|K105|BXP|SZQ|BXP|SZQ|23:16|04:20|29:04|IS_TIME_NOT_BUY|z3efwNKV4ROD18RXj5jcmTTJO5cpkgdseKvuFUWibTEjf604N8bQKCJTjXw%3D|20171119|3|PB|01|24|0|0||||16|||有||有|有|||||10401030|1413"

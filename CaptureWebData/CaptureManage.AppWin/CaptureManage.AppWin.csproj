@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{11861A4E-E136-4395-9ABD-31637E3DAE9A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CaptureManage.AppWin</RootNamespace>
+    <AssemblyName>CaptureManage.AppWin</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Data">
+      <HintPath>..\bin\SelfDefine\Common.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="DataHelp">
+      <HintPath>..\bin\SelfDefine\DataHelp.dll</HintPath>
+    </Reference>
+    <Reference Include="HttpClientHelper">
+      <HintPath>..\bin\SelfDefine\HttpClientHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Infrastructure.ExtService">
+      <HintPath>..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\bin\Debug\Infrastructure.ExtService.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FactoryService\IocHelper.cs" />
+    <Compile Include="TicketData.IManage\ISyncTicketDataManage.cs" />
+    <Compile Include="TicketData.Model\CarInfo.cs" />
+    <Compile Include="TicketData.Model\TicketCfg.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TicketAppConfig.cs" />
+    <Compile Include="TicketData.Model\TickModel.cs" />
+    <Compile Include="TicketData.IService\ISyncTicketDataService.cs" />
+    <Compile Include="TicketData.Manage\SyncTicketDataManage.cs" />
+    <Compile Include="TicketData.Service\SyncTicketDataService.cs" />
+    <Compile Include="WebDataCaptureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WebDataCaptureForm.Designer.cs">
+      <DependentUpon>WebDataCaptureForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinArray.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WebDataCaptureForm.resx">
+      <DependentUpon>WebDataCaptureForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppLanguage\AppLanguage.csproj">
+      <Project>{3da2bb21-14a7-49ca-9bb4-7eb8f26c415a}</Project>
+      <Name>AppLanguage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
+      <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
+      <Name>Domain.CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.GlobalModel\Domain.GlobalModel.csproj">
+      <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
+      <Name>Domain.GlobalModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FeatureFrmList\FeatureFrmList.csproj">
+      <Project>{9843B4C8-9CC6-444D-8C34-371F828B3717}</Project>
+      <Name>FeatureFrmList</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\LogicCfg.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Config\TicketConfigEntity.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Doc\DevDoc\车票json数据含义解析.txt" />
+    <Content Include="SqlCmd\Ticket12306.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TicketHelper\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

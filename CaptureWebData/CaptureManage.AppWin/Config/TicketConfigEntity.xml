@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ticket>
+    <TimeSpan>3</TimeSpan> <!--刷票触发的时间间隔-->
+    <OpenDb>true</OpenDb> <!--是否开启数据库存储-->
+    <!--<SeatCategory>商务座特等座=1|一等座=2|二等座=3高级|软卧=4|软卧=5|动卧=6|硬卧=7|软座=8|硬座=9|无座=10|其他=11</SeatCategory>-->
+    <FirstSeatCategory>7</FirstSeatCategory><!--优先购买的车票类型-->
+    <!--<CarCategory>GC=GC-高铁/城际|D=D-动车|Z=Z-直达|T=T-特快|K=K-快速|O=其他</CarCategory>-->
+    <FirstCarCategory>Z</FirstCarCategory><!--优先考虑购买的车次类型-->
+    <CarDate>2017-10-31</CarDate> <!--车票日期-->
+    <StartTriggerTime></StartTriggerTime> <!--首次刷票时间-->
+    <SuccessTime></SuccessTime><!--成功刷票时间-->
+    <TryTime>0</TryTime><!--刷票次数-->
+    <ErrorMsg>null</ErrorMsg><!--刷票失败原因-->
+    <ErrorCode></ErrorCode> <!--刷票错误代码-->
+  </ticket>
