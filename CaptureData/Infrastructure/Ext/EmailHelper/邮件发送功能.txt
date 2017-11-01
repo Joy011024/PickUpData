@@ -1,0 +1,14 @@
+使用outlook.com开通smtp服务
+
+Smtp配置
+服务器名称: smtp-mail.outlook.com
+端口: 587
+加密方法: STARTTLS
+Pop配置
+服务器名称: pop-mail.outlook.com
+端口: 995
+加密方法: TLS
+Imap配置
+服务器名称: imap-mail.outlook.com
+端口: 993
+加密方法: TLS
