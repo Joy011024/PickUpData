@@ -1,0 +1,6 @@
+实体类不带无参构造函数：
+System.Activator.CreateInstance
+
+System.MissingMethodException”类型的未经处理的异常在 mscorlib.dll 中发生 
+
+其他信息: 没有为该对象定义无参数的构造函数。

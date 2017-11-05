@@ -7,5 +7,6 @@ namespace Infrastructure.ExtService
 {
     class LoggerHelper
     {
+
     }
 }

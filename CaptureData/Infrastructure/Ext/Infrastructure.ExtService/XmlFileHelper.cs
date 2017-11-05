@@ -83,5 +83,49 @@ namespace Infrastructure.ExtService
             }
             return entity;
         }
+        static XmlNode GetXmlNode(string xmlFile, string node) 
+        {
+            if (string.IsNullOrEmpty(xmlFile))
+            {
+                return null;
+            }
+            if (!File.Exists(xmlFile))
+            {
+                return null;
+            }
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlFile);
+            XmlNode xn = doc.SelectSingleNode(node);
+            return xn;
+        }
+        /// <summary>
+        /// 形如Config文件键值形式读取
+        /// </summary>
+        /// <param name="xmlFile"></param>
+        /// <param name="nodeName"></param>
+        /// <param name="itemKeyName"></param>
+        /// <param name="itemValueName"></param>
+        /// <returns></returns>
+        public static Dictionary<string, string> ReadAppsettingSimulateConfig(string xmlFile,string nodeName,string itemKeyName,string itemValueName) 
+        {
+            XmlNode node = GetXmlNode(xmlFile, nodeName);
+            if (node == null) 
+            {
+                return null;
+            }
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            foreach (XmlNode item in node.ChildNodes)
+            {
+                if (item.NodeType == XmlNodeType.Comment)
+                {
+                    continue;
+                }
+                XmlAttribute attKey= item.Attributes[itemKeyName];
+                XmlAttribute attrValue = item.Attributes[itemValueName];
+                //如果xml文件节点key重复的处理办法？？
+                dict.Add(attKey.Value, attrValue.Value);
+            }
+            return dict;
+        }
     }
 }

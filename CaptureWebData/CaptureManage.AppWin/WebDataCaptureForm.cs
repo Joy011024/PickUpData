@@ -20,6 +20,8 @@ using TicketData.Model;
 using TicketData.IManage;
 using FactoryService;
 using TicketData.Manage;
+using System.Net;
+using QuartzJobService;
 namespace CaptureManage.AppWin
 {
     public partial class WebDataCaptureForm : Form
@@ -44,6 +46,7 @@ namespace CaptureManage.AppWin
         bool SyncToDB = false;//采集的数据是否同步到数据库
         leftTicketDTO ticketParam = new leftTicketDTO();
         string langTipFix = "Tip_12306_";//语言提示的前缀项
+        Dictionary<string, string> configDict = new Dictionary<string, string>(); 
         public void SetLogDir(string dir) 
         {
             logDir = dir;
@@ -53,7 +56,8 @@ namespace CaptureManage.AppWin
             LogicData=1,
             BtnUpdateStation=2, //更新车站数据
             QueryTicket=3 ,//查询车票信息
-            ListenTricket=4 //实时抢票
+            ListenTricket=4, //实时抢票
+            RefreshVerifyCode=5
         }
         public WebDataCaptureForm()
         {
@@ -64,6 +68,7 @@ namespace CaptureManage.AppWin
         void InitCfg() 
         {
             ReadAppCfg();
+            GetVerifyCodeImage();
         }
         void InitEle() 
         {
@@ -78,6 +83,10 @@ namespace CaptureManage.AppWin
             cmbBeginStation.DroppedDown = true;
             btnTicketQuery.Tag = BtnCategory.QueryTicket.ToString();
             btnTicketQuery.Click += new EventHandler(Button_Click);
+            btnRefreshVerifyCode.Tag = BtnCategory.RefreshVerifyCode.ToString();
+            btnRefreshVerifyCode.Click += new EventHandler(Button_Click);
+            btnJob.Tag = BtnCategory.ListenTricket.ToString();
+            btnJob.Click += new EventHandler(Button_Click);
         }
         void LoadStation() 
         {
@@ -140,6 +149,13 @@ namespace CaptureManage.AppWin
                     QueryTicket();//根据参数查询数据
                     break;
                 case BtnCategory.ListenTricket:
+                    string value = configDict["DefaultQuaryTimeSpan"];
+                    QuartzJobService.QuartzJob job=new QuartzJob();
+                    job.CreateJobWithParam<QuartzJobService.JobDelegate<WebDataCaptureForm>>(new object[] { new BaseDelegate(DoJob), null }, DateTime.Now, 2, 0);
+                  
+                    break;
+                case BtnCategory.RefreshVerifyCode:
+                    GetVerifyCodeImage();
                     break;
             }
         }
@@ -334,8 +350,26 @@ namespace CaptureManage.AppWin
         {
             string cfgDir = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
             string file = TicketAppConfig.Ticket12306CfgReletive;//相对路径名称
-            List<Dictionary<string, string>> dict = XmlFileHelper.ReadXmlNodeItemInAttribute(cfgDir + "/" + file, "configuration/appSettings");
+            configDict = XmlFileHelper.ReadAppsettingSimulateConfig(cfgDir + "/" + file, "configuration/appSettings", "key", "value");
             Dictionary<string, string> brushCfg = XmlFileHelper.ReadXmlNodeItemInText(cfgDir + "/" + TicketAppConfig.BrushTicketCfg, "ticket");
+        }
+        void DoJob(object obj) 
+        {
+            if (rtbTip.InvokeRequired)
+            {//是否是线程调度
+                DoJob(obj);
+                return;
+            }
+            GetVerifyCodeImage();
+        }
+        void GetVerifyCodeImage() 
+        {
+            string url = configDict["GetVerifyCodeUrl"].Replace("{rand}", TicketDataPrepareManager.GenerateVerifyCodeGuid());
+            //读取响应的流
+            //将流转换为响应的图片显示到界面
+           // WebResponse stream= HttpClientExtend.HttpWebRequestGet(url);
+            HttpClientExtend.DownloadSmallFile(url, LogDir + "/" + Logger.GetNowDayIndex() + "/" + configDict["ImageRelativeDirName"], Logger.GenerateTimeOfFileName()+".jpg");
+           // string response= HttpClientExtend.HttpClientGet(url);//实际上此处应该读取文件流转换为图片
         }
     }
     

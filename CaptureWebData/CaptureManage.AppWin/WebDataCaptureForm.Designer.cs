@@ -37,9 +37,11 @@
             this.dtpGoTime = new System.Windows.Forms.DateTimePicker();
             this.lblGoTime = new System.Windows.Forms.Label();
             this.panelWhere = new System.Windows.Forms.Panel();
-            this.microsoftBrowser1 = new FeatureFrmList.MicrosoftBrowser();
             this.btnTicketQuery = new System.Windows.Forms.Button();
             this.rtbTip = new System.Windows.Forms.RichTextBox();
+            this.btnRefreshVerifyCode = new System.Windows.Forms.Button();
+            this.microsoftBrowser1 = new FeatureFrmList.MicrosoftBrowser();
+            this.btnJob = new System.Windows.Forms.Button();
             this.panelWhere.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -131,16 +133,9 @@
             this.panelWhere.Size = new System.Drawing.Size(226, 115);
             this.panelWhere.TabIndex = 10;
             // 
-            // microsoftBrowser1
-            // 
-            this.microsoftBrowser1.Location = new System.Drawing.Point(12, 12);
-            this.microsoftBrowser1.Name = "microsoftBrowser1";
-            this.microsoftBrowser1.Size = new System.Drawing.Size(476, 388);
-            this.microsoftBrowser1.TabIndex = 0;
-            // 
             // btnTicketQuery
             // 
-            this.btnTicketQuery.Location = new System.Drawing.Point(512, 180);
+            this.btnTicketQuery.Location = new System.Drawing.Point(584, 162);
             this.btnTicketQuery.Name = "btnTicketQuery";
             this.btnTicketQuery.Size = new System.Drawing.Size(75, 23);
             this.btnTicketQuery.TabIndex = 11;
@@ -155,11 +150,39 @@
             this.rtbTip.TabIndex = 12;
             this.rtbTip.Text = "";
             // 
+            // btnRefreshVerifyCode
+            // 
+            this.btnRefreshVerifyCode.Location = new System.Drawing.Point(503, 194);
+            this.btnRefreshVerifyCode.Name = "btnRefreshVerifyCode";
+            this.btnRefreshVerifyCode.Size = new System.Drawing.Size(75, 23);
+            this.btnRefreshVerifyCode.TabIndex = 13;
+            this.btnRefreshVerifyCode.Tag = "RefreshVerifyCode";
+            this.btnRefreshVerifyCode.Text = "刷新验证码";
+            this.btnRefreshVerifyCode.UseVisualStyleBackColor = true;
+            // 
+            // microsoftBrowser1
+            // 
+            this.microsoftBrowser1.Location = new System.Drawing.Point(12, 12);
+            this.microsoftBrowser1.Name = "microsoftBrowser1";
+            this.microsoftBrowser1.Size = new System.Drawing.Size(476, 388);
+            this.microsoftBrowser1.TabIndex = 0;
+            // 
+            // btnJob
+            // 
+            this.btnJob.Location = new System.Drawing.Point(503, 162);
+            this.btnJob.Name = "btnJob";
+            this.btnJob.Size = new System.Drawing.Size(75, 23);
+            this.btnJob.TabIndex = 14;
+            this.btnJob.Text = "作业";
+            this.btnJob.UseVisualStyleBackColor = true;
+            // 
             // WebDataCaptureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 421);
+            this.Controls.Add(this.btnJob);
+            this.Controls.Add(this.btnRefreshVerifyCode);
             this.Controls.Add(this.rtbTip);
             this.Controls.Add(this.btnTicketQuery);
             this.Controls.Add(this.panelWhere);
@@ -188,5 +211,7 @@
         private System.Windows.Forms.Panel panelWhere;
         private System.Windows.Forms.Button btnTicketQuery;
         private System.Windows.Forms.RichTextBox rtbTip;
+        private System.Windows.Forms.Button btnRefreshVerifyCode;
+        private System.Windows.Forms.Button btnJob;
     }
 }

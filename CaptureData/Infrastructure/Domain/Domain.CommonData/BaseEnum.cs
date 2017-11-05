@@ -176,6 +176,10 @@ namespace Domain.CommonData
             int week= gc.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);//今天是今年第几周
             return week.ToString();
         }
+        public static string GetNowDayIndex() 
+        {
+            return DateTime.Now.ToString("yyyyMMdd");
+        }
         /// <summary>
         /// 获取今天的年以及所属周 如 201736（表示2017年第36周）
         /// </summary>
@@ -186,6 +190,10 @@ namespace Domain.CommonData
             DateTime now = DateTime.Now;
             int week = gc.GetWeekOfYear(now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);//今天是今年第几周
             return now.ToString("yyyy")+ week.ToString();
+        }
+        public static string GenerateTimeOfFileName() 
+        {
+          return  DateTime.Now.ToString(CommonFormat.DateTimeIntFormat);
         }
     }
     public  class AssemblyDataExt 
