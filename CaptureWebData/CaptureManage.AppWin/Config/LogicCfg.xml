@@ -11,8 +11,11 @@
       <add key="SeatCategory" value="商务座特等座=1|一等座=2|二等座=3高级|软卧=4|软卧=5|动卧=6|硬卧=7|软座=8|硬座=9|无座=10|其他=11"/> <!--车票类型分类-->
       <add key="CarCategory" value="GC=GC-高铁/城际|D=D-动车|Z=Z-直达|T=T-特快|K=K-快速|O=其他"/>
       <add key="OpenBrushTicket" value=" true"/> <!--是否开启刷票-->
-    <!--获取验证码的URL-->
-     <add key="GetVerifyCodeUrl" value="https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&amp;module=login&amp;rand=sjrand&amp;{rand}"/> <!--eg: rand=0.28811422643745876-->
-     <add key="ImageRelativeDirName" value="ImageLog"/> <!--图片文件存储相对目录-->
+      <!--获取验证码的URL-->
+      <add key="GetVerifyCodeUrl" value="https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&amp;module=login&amp;rand=sjrand&amp;{rand}"/> <!--eg: rand=0.28811422643745876-->
+      <add key="CheckVerifyCode" value="https://kyfw.12306.cn/passport/captcha/captcha-check"/> 
+      <add key="ImageRelativeDirName" value="ImageLog"/> <!--图片文件存储相对目录-->
+      <add key="VerifyCodeTemplate" value="2*4"/> <!--验证码规格 2排3列图片-->
+      <add key="ClickImgReleativePath" value="Content\SystemImg\ClickSign.png"/> <!--点击位置图片路径-->
   </appSettings>
 </configuration>

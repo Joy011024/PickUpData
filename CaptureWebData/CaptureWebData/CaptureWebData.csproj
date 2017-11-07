@@ -191,6 +191,9 @@
     <Compile Include="WebDataFrm.Designer.cs">
       <DependentUpon>WebDataFrm.cs</DependentUpon>
     </Compile>
+    <Content Include="Content\SystemImg\ClickSign.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="DeveloperDocument\SystemDoc.txt" />
     <Content Include="Exeption\Error.txt" />
     <Content Include="Note\UinGroupDeveloper\Cookie.txt" />

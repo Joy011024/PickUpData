@@ -46,7 +46,8 @@ namespace CaptureManage.AppWin
         bool SyncToDB = false;//采集的数据是否同步到数据库
         leftTicketDTO ticketParam = new leftTicketDTO();
         string langTipFix = "Tip_12306_";//语言提示的前缀项
-        Dictionary<string, string> configDict = new Dictionary<string, string>(); 
+        Dictionary<string, string> configDict = new Dictionary<string, string>();
+        int avgX=0, avgY=0;
         public void SetLogDir(string dir) 
         {
             logDir = dir;
@@ -87,6 +88,7 @@ namespace CaptureManage.AppWin
             btnRefreshVerifyCode.Click += new EventHandler(Button_Click);
             btnJob.Tag = BtnCategory.ListenTricket.ToString();
             btnJob.Click += new EventHandler(Button_Click);
+            pbVerifyCodeImg.Click += new EventHandler(PictureBox_Click);
         }
         void LoadStation() 
         {
@@ -362,15 +364,73 @@ namespace CaptureManage.AppWin
             }
             GetVerifyCodeImage();
         }
-        void GetVerifyCodeImage() 
+        void GetVerifyCodeImage()
         {
             string url = configDict["GetVerifyCodeUrl"].Replace("{rand}", TicketDataPrepareManager.GenerateVerifyCodeGuid());
             //读取响应的流
             //将流转换为响应的图片显示到界面
-           // WebResponse stream= HttpClientExtend.HttpWebRequestGet(url);
-            HttpClientExtend.DownloadSmallFile(url, LogDir + "/" + Logger.GetNowDayIndex() + "/" + configDict["ImageRelativeDirName"], Logger.GenerateTimeOfFileName()+".jpg");
-           // string response= HttpClientExtend.HttpClientGet(url);//实际上此处应该读取文件流转换为图片
+            // WebResponse stream= HttpClientExtend.HttpWebRequestGet(url);
+            string dir = LogDir + "/" + Logger.GetNowDayIndex() + "/" + configDict["ImageRelativeDirName"];
+            string full = Logger.GenerateTimeOfFileName() + ".jpg";
+            HttpClientExtend.DownloadSmallFile(url, dir, full);
+            // string response= HttpClientExtend.HttpClientGet(url);//实际上此处应该读取文件流转换为图片
+            Image img = new Bitmap(dir + "/" + full);
+            int w = img.Width;
+            int h = img.Height;
+            microBrowser.Visible = false;//首次进入此处时出现不显示的情况 自定义控件是没有显示，但是页面渲染完成之后显示
+            if (microBrowser.Visible)
+            {
+                microBrowser.Visible = false;
+            }
+            string[] px = configDict["VerifyCodeTemplate"].Split('*');
+            int x = int.Parse(px[1]);
+            int y = int.Parse(px[0]);
+            if (pbVerifyCodeImg.Width < w || pbVerifyCodeImg.Height < h)
+            {
+                pbVerifyCodeImg.Width = w;
+                pbVerifyCodeImg.Height = h;
+                logicPanel.Height = w + 80;
+            }
+            pbVerifyCodeImg.BackgroundImage = img;
+           
+            //进行位置的切割分析
+            avgX = w / x;//每个图片平均宽度
+            avgY = h / y;//每个图片平均高度
+            //验证码行列分析
+            string relative = configDict["ClickImgReleativePath"];
+            string appDir = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
+            pbTest.Image = Image.FromFile(appDir + "/" + relative);
+            for (int i = 0; i < y; i++)
+            {
+                for (int j = 0; j < x; j++)
+                {
+                    Point p = pbVerifyCodeImg.Location;
+                    PictureBox pb = new PictureBox();
+                    logicPanel.Controls.Add(pb);
+                    pb.Left = p.X + j * avgX + avgX/2;
+                    pb.Top = p.Y + i * avgY + avgY/2;
+                    pb.SizeMode = PictureBoxSizeMode.Zoom;
+                    pb.BorderStyle = BorderStyle.FixedSingle;
+                    pb.Image = Image.FromFile(appDir + "/" + relative);
+                    // pb.Visible = false;
+                    pb.Name = "Icon" + ((i + 1) * (j + 1)).ToString();
+                    pb.Size = new System.Drawing.Size(32, 32);
+                    pb.Visible = true;
+                    pb.BackColor = Color.Red;
+                   
+                }
+            }
         }
+
+        private void PictureBox_Click(object sender, EventArgs e)
+        {
+            MouseEventArgs mouse = e as MouseEventArgs;//鼠标点击
+            rtbTip.AppendText("X="+ mouse.X + " Y=" + mouse.Y+"\r\n");
+            int x = mouse.X / avgX+1;
+            int y = mouse.Y / avgY+1;
+            Control img= this.Controls.Find("Icon" + (x * y), false).FirstOrDefault();
+        }
+
     }
     
 }

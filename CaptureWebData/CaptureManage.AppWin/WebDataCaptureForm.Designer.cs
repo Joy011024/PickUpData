@@ -40,9 +40,15 @@
             this.btnTicketQuery = new System.Windows.Forms.Button();
             this.rtbTip = new System.Windows.Forms.RichTextBox();
             this.btnRefreshVerifyCode = new System.Windows.Forms.Button();
-            this.microsoftBrowser1 = new FeatureFrmList.MicrosoftBrowser();
             this.btnJob = new System.Windows.Forms.Button();
+            this.logicPanel = new System.Windows.Forms.Panel();
+            this.pbVerifyCodeImg = new System.Windows.Forms.PictureBox();
+            this.microBrowser = new FeatureFrmList.MicrosoftBrowser();
+            this.pbTest = new System.Windows.Forms.PictureBox();
             this.panelWhere.SuspendLayout();
+            this.logicPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTest)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLoadBaseData
@@ -144,9 +150,9 @@
             // 
             // rtbTip
             // 
-            this.rtbTip.Location = new System.Drawing.Point(503, 223);
+            this.rtbTip.Location = new System.Drawing.Point(9, 222);
             this.rtbTip.Name = "rtbTip";
-            this.rtbTip.Size = new System.Drawing.Size(226, 177);
+            this.rtbTip.Size = new System.Drawing.Size(285, 52);
             this.rtbTip.TabIndex = 12;
             this.rtbTip.Text = "";
             // 
@@ -160,13 +166,6 @@
             this.btnRefreshVerifyCode.Text = "刷新验证码";
             this.btnRefreshVerifyCode.UseVisualStyleBackColor = true;
             // 
-            // microsoftBrowser1
-            // 
-            this.microsoftBrowser1.Location = new System.Drawing.Point(12, 12);
-            this.microsoftBrowser1.Name = "microsoftBrowser1";
-            this.microsoftBrowser1.Size = new System.Drawing.Size(476, 388);
-            this.microsoftBrowser1.TabIndex = 0;
-            // 
             // btnJob
             // 
             this.btnJob.Location = new System.Drawing.Point(503, 162);
@@ -176,30 +175,66 @@
             this.btnJob.Text = "作业";
             this.btnJob.UseVisualStyleBackColor = true;
             // 
+            // logicPanel
+            // 
+            this.logicPanel.Controls.Add(this.pbTest);
+            this.logicPanel.Controls.Add(this.pbVerifyCodeImg);
+            this.logicPanel.Controls.Add(this.rtbTip);
+            this.logicPanel.Location = new System.Drawing.Point(12, 12);
+            this.logicPanel.Name = "logicPanel";
+            this.logicPanel.Size = new System.Drawing.Size(300, 283);
+            this.logicPanel.TabIndex = 15;
+            // 
+            // pbVerifyCodeImg
+            // 
+            this.pbVerifyCodeImg.Location = new System.Drawing.Point(9, 9);
+            this.pbVerifyCodeImg.Name = "pbVerifyCodeImg";
+            this.pbVerifyCodeImg.Size = new System.Drawing.Size(285, 207);
+            this.pbVerifyCodeImg.TabIndex = 0;
+            this.pbVerifyCodeImg.TabStop = false;
+            // 
+            // microBrowser
+            // 
+            this.microBrowser.Location = new System.Drawing.Point(12, 12);
+            this.microBrowser.Name = "microBrowser";
+            this.microBrowser.Size = new System.Drawing.Size(476, 388);
+            this.microBrowser.TabIndex = 0;
+            // 
+            // pbTest
+            // 
+            this.pbTest.Location = new System.Drawing.Point(122, 93);
+            this.pbTest.Name = "pbTest";
+            this.pbTest.Size = new System.Drawing.Size(25, 22);
+            this.pbTest.TabIndex = 13;
+            this.pbTest.TabStop = false;
+            // 
             // WebDataCaptureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(730, 421);
+            this.ClientSize = new System.Drawing.Size(751, 412);
+            this.Controls.Add(this.logicPanel);
             this.Controls.Add(this.btnJob);
             this.Controls.Add(this.btnRefreshVerifyCode);
-            this.Controls.Add(this.rtbTip);
             this.Controls.Add(this.btnTicketQuery);
             this.Controls.Add(this.panelWhere);
             this.Controls.Add(this.btnUseRuleStation);
             this.Controls.Add(this.btnLoadBaseData);
-            this.Controls.Add(this.microsoftBrowser1);
+            this.Controls.Add(this.microBrowser);
             this.Name = "WebDataCaptureForm";
             this.Text = "WebDataCaptureForm";
             this.panelWhere.ResumeLayout(false);
             this.panelWhere.PerformLayout();
+            this.logicPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTest)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private FeatureFrmList.MicrosoftBrowser microsoftBrowser1;
+        private FeatureFrmList.MicrosoftBrowser microBrowser;
         private System.Windows.Forms.Button btnLoadBaseData;
         private System.Windows.Forms.ComboBox cmbBeginStation;
         private System.Windows.Forms.Label lblBeginStation;
@@ -213,5 +248,8 @@
         private System.Windows.Forms.RichTextBox rtbTip;
         private System.Windows.Forms.Button btnRefreshVerifyCode;
         private System.Windows.Forms.Button btnJob;
+        private System.Windows.Forms.Panel logicPanel;
+        private System.Windows.Forms.PictureBox pbVerifyCodeImg;
+        private System.Windows.Forms.PictureBox pbTest;
     }
 }
