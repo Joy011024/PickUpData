@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 namespace Infrastructure.ExtService
 {
     public static class EntityReflection
@@ -58,6 +59,70 @@ namespace Infrastructure.ExtService
                 return string.Empty;
             }
             return obj.ToString();
+        }
+        public static void SetPropertyValue<T>(this T helper,string propertyName,object value) where T:class
+        {
+            Type st = helper.GetType();
+            PropertyInfo pi = st.GetProperty(propertyName);
+            if (pi == null)
+            {//没有该属性
+                return;
+            }
+            if (value == null) { return; }
+            //如果是字符串，需要对空串进行过滤
+            if (pi.PropertyType.Name == typeof(string).Name && (string.IsNullOrEmpty(value as string)))
+            {
+                return;
+            }
+            //如果类型不一致需要强制类型转换【如果类型不一致且可空】
+            if (pi.PropertyType.Name == typeof(Nullable<>).Name)
+            {
+                NullableConverter nullableConverter = new NullableConverter(pi.PropertyType);//如何获取可空类型属性非空时的数据类型
+                Type nt = nullableConverter.UnderlyingType;
+                pi.SetValue(helper, Convert.ChangeType(value, nt), null);
+                return;
+            }
+            pi.SetValue(helper, Convert.ChangeType(value, pi.PropertyType), null);
+        }
+        /// <summary>
+        /// 使用正则表达式提取xml格式字符串中的内容到实体内【实体类中的属性名称需要保持待提取文本中key形式】
+        /// </summary>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="obj">待填充数据的实体</param>
+        /// <param name="text">待提取的文本</param>
+        public static void FromXmlStringGetEntity<T>(this T obj, string text) where T : class
+        {
+            Type t = obj.GetType();
+            foreach (PropertyInfo item in t.GetProperties())
+            {
+                string pn = item.Name;
+                Regex reg = new Regex(string.Format(@"<{0}>(.*)<\/{0}>", pn));//<{skey}>(.*)<\/{skey}> //提取出格式内的文本
+                MatchCollection mc = reg.Matches(text);
+                if (mc.Count == 0)
+                {
+                    continue;
+                }
+                Match m = mc[0];
+                GroupCollection gc = m.Groups;
+                if (gc.Count < 2)
+                {
+                    continue;
+                }
+                string propertyValue = gc[1].Value;
+                obj.SetPropertyValue(pn, propertyValue);
+            }
+        }
+        public static string FillStringFromObject<T>(this T helper, string waitFillString) where T : class
+        {
+            Type t = helper.GetType();
+            foreach (PropertyInfo item in t.GetProperties())
+            {
+                string name = item.Name;
+                object value = item.GetValue(helper, null);
+                string vString = value == null ? string.Empty : value.ToString();
+                waitFillString = waitFillString.Replace(string.Format("{0}", name), vString);
+            }
+            return waitFillString;
         }
     }
     public static class DataConvert

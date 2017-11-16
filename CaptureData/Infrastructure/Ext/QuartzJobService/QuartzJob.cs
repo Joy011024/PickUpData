@@ -141,7 +141,7 @@ namespace QuartzJobService
             //IMatcher<JobKey> match = KeyMatcher<JobKey>.KeyEquals(job.Key); // Quartz.Impl.Matchers.KeyMatcher<TKey>
             //scheduler.ListenerManager.AddJobListener(jobListence, match);
             DateTimeOffset startSet=DateTime.SpecifyKind(start,DateTimeKind.Utc);
-            if (repeat == 0)
+            if (repeat <= 0)
             {
                 repeat = int.MaxValue;
             }

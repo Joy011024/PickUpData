@@ -116,7 +116,7 @@ namespace CaptureWebData
             Form frm = (new GeneratorClass()).AutoCreateType<Form>(asseblyDir, (string)li.Tag, li.Name, ".dll");
             //无法将顶级控件添加到控件。
             frm.TopLevel = false;
-            frm.Parent = this;
+            frm.Parent = bodyPanel;
             frm.Show();
         }
     }

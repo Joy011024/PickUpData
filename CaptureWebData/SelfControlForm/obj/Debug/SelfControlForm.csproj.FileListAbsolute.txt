@@ -1,10 +1,10 @@
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\bin\Debug\SelfControlForm.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\bin\Debug\SelfControlForm.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\bin\Debug\WebKitBrowser.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\obj\Debug\SelfControlForm.csprojResolveAssemblyReference.cache
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\obj\Debug\SelfControlForm.PickUpIEWebCookieData.resources
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\obj\Debug\SelfControlForm.WebBrowserData.resources
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\obj\Debug\SelfControlForm.WebKitBrowserData.resources
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\obj\Debug\SelfControlForm.csproj.GenerateResource.Cache
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\obj\Debug\SelfControlForm.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\obj\Debug\SelfControlForm.pdb
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\SelfControlForm\obj\Debug\SelfControlForm.csprojResolveAssemblyReference.cache
