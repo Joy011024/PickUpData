@@ -42,13 +42,27 @@
             this.btnRefreshVerifyCode = new System.Windows.Forms.Button();
             this.btnJob = new System.Windows.Forms.Button();
             this.logicPanel = new System.Windows.Forms.Panel();
+            this.pbIcon7 = new System.Windows.Forms.PictureBox();
+            this.pbIcon3 = new System.Windows.Forms.PictureBox();
+            this.pbIcon8 = new System.Windows.Forms.PictureBox();
+            this.pbIcon5 = new System.Windows.Forms.PictureBox();
+            this.pbIcon6 = new System.Windows.Forms.PictureBox();
+            this.pbIcon4 = new System.Windows.Forms.PictureBox();
+            this.pbIcon1 = new System.Windows.Forms.PictureBox();
+            this.pbIcon2 = new System.Windows.Forms.PictureBox();
             this.pbVerifyCodeImg = new System.Windows.Forms.PictureBox();
             this.microBrowser = new FeatureFrmList.MicrosoftBrowser();
-            this.pbTest = new System.Windows.Forms.PictureBox();
             this.panelWhere.SuspendLayout();
             this.logicPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTest)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLoadBaseData
@@ -177,13 +191,92 @@
             // 
             // logicPanel
             // 
-            this.logicPanel.Controls.Add(this.pbTest);
+            this.logicPanel.Controls.Add(this.pbIcon7);
+            this.logicPanel.Controls.Add(this.pbIcon3);
+            this.logicPanel.Controls.Add(this.pbIcon8);
+            this.logicPanel.Controls.Add(this.pbIcon5);
+            this.logicPanel.Controls.Add(this.pbIcon6);
+            this.logicPanel.Controls.Add(this.pbIcon4);
+            this.logicPanel.Controls.Add(this.pbIcon1);
+            this.logicPanel.Controls.Add(this.pbIcon2);
             this.logicPanel.Controls.Add(this.pbVerifyCodeImg);
             this.logicPanel.Controls.Add(this.rtbTip);
             this.logicPanel.Location = new System.Drawing.Point(12, 12);
             this.logicPanel.Name = "logicPanel";
             this.logicPanel.Size = new System.Drawing.Size(300, 283);
             this.logicPanel.TabIndex = 15;
+            // 
+            // pbIcon7
+            // 
+            this.pbIcon7.Location = new System.Drawing.Point(167, 150);
+            this.pbIcon7.Name = "pbIcon7";
+            this.pbIcon7.Size = new System.Drawing.Size(25, 22);
+            this.pbIcon7.TabIndex = 20;
+            this.pbIcon7.TabStop = false;
+            this.pbIcon7.Tag = "Icon";
+            // 
+            // pbIcon3
+            // 
+            this.pbIcon3.Location = new System.Drawing.Point(167, 79);
+            this.pbIcon3.Name = "pbIcon3";
+            this.pbIcon3.Size = new System.Drawing.Size(25, 22);
+            this.pbIcon3.TabIndex = 19;
+            this.pbIcon3.TabStop = false;
+            this.pbIcon3.Tag = "Icon";
+            // 
+            // pbIcon8
+            // 
+            this.pbIcon8.Location = new System.Drawing.Point(233, 151);
+            this.pbIcon8.Name = "pbIcon8";
+            this.pbIcon8.Size = new System.Drawing.Size(25, 22);
+            this.pbIcon8.TabIndex = 18;
+            this.pbIcon8.TabStop = false;
+            this.pbIcon8.Tag = "Icon";
+            // 
+            // pbIcon5
+            // 
+            this.pbIcon5.Location = new System.Drawing.Point(31, 151);
+            this.pbIcon5.Name = "pbIcon5";
+            this.pbIcon5.Size = new System.Drawing.Size(25, 22);
+            this.pbIcon5.TabIndex = 17;
+            this.pbIcon5.TabStop = false;
+            this.pbIcon5.Tag = "Icon";
+            // 
+            // pbIcon6
+            // 
+            this.pbIcon6.Location = new System.Drawing.Point(100, 151);
+            this.pbIcon6.Name = "pbIcon6";
+            this.pbIcon6.Size = new System.Drawing.Size(25, 22);
+            this.pbIcon6.TabIndex = 16;
+            this.pbIcon6.TabStop = false;
+            this.pbIcon6.Tag = "Icon";
+            // 
+            // pbIcon4
+            // 
+            this.pbIcon4.Location = new System.Drawing.Point(233, 79);
+            this.pbIcon4.Name = "pbIcon4";
+            this.pbIcon4.Size = new System.Drawing.Size(25, 22);
+            this.pbIcon4.TabIndex = 15;
+            this.pbIcon4.TabStop = false;
+            this.pbIcon4.Tag = "Icon";
+            // 
+            // pbIcon1
+            // 
+            this.pbIcon1.Location = new System.Drawing.Point(31, 79);
+            this.pbIcon1.Name = "pbIcon1";
+            this.pbIcon1.Size = new System.Drawing.Size(25, 22);
+            this.pbIcon1.TabIndex = 14;
+            this.pbIcon1.TabStop = false;
+            this.pbIcon1.Tag = "Icon";
+            // 
+            // pbIcon2
+            // 
+            this.pbIcon2.Location = new System.Drawing.Point(100, 79);
+            this.pbIcon2.Name = "pbIcon2";
+            this.pbIcon2.Size = new System.Drawing.Size(25, 22);
+            this.pbIcon2.TabIndex = 13;
+            this.pbIcon2.TabStop = false;
+            this.pbIcon2.Tag = "Icon";
             // 
             // pbVerifyCodeImg
             // 
@@ -199,14 +292,6 @@
             this.microBrowser.Name = "microBrowser";
             this.microBrowser.Size = new System.Drawing.Size(476, 388);
             this.microBrowser.TabIndex = 0;
-            // 
-            // pbTest
-            // 
-            this.pbTest.Location = new System.Drawing.Point(122, 93);
-            this.pbTest.Name = "pbTest";
-            this.pbTest.Size = new System.Drawing.Size(25, 22);
-            this.pbTest.TabIndex = 13;
-            this.pbTest.TabStop = false;
             // 
             // WebDataCaptureForm
             // 
@@ -226,8 +311,15 @@
             this.panelWhere.ResumeLayout(false);
             this.panelWhere.PerformLayout();
             this.logicPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTest)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -250,6 +342,13 @@
         private System.Windows.Forms.Button btnJob;
         private System.Windows.Forms.Panel logicPanel;
         private System.Windows.Forms.PictureBox pbVerifyCodeImg;
-        private System.Windows.Forms.PictureBox pbTest;
+        private System.Windows.Forms.PictureBox pbIcon2;
+        private System.Windows.Forms.PictureBox pbIcon8;
+        private System.Windows.Forms.PictureBox pbIcon5;
+        private System.Windows.Forms.PictureBox pbIcon6;
+        private System.Windows.Forms.PictureBox pbIcon4;
+        private System.Windows.Forms.PictureBox pbIcon1;
+        private System.Windows.Forms.PictureBox pbIcon7;
+        private System.Windows.Forms.PictureBox pbIcon3;
     }
 }

@@ -26,6 +26,10 @@ namespace CaptureManage.AppWin
 {
     public partial class WebDataCaptureForm : Form
     {
+        enum EleTag
+        {
+            Icon=1
+        }
         string logDir;
         public string LogDir
         {
@@ -47,6 +51,20 @@ namespace CaptureManage.AppWin
         leftTicketDTO ticketParam = new leftTicketDTO();
         string langTipFix = "Tip_12306_";//语言提示的前缀项
         Dictionary<string, string> configDict = new Dictionary<string, string>();
+        /// <summary>
+        /// 12306 验证码图片中文本内容的高度
+        /// </summary>
+        int VerifyCodeTextHeight 
+        {
+            get 
+            {
+                string cfg = configDict["VerifyCodeTextHeight"];
+                int h = 30;
+                if (!string.IsNullOrEmpty(cfg) && int.TryParse(cfg, out h))
+                { }
+                return h;
+            }
+        }
         int avgX=0, avgY=0;
         public void SetLogDir(string dir) 
         {
@@ -374,6 +392,7 @@ namespace CaptureManage.AppWin
             string full = Logger.GenerateTimeOfFileName() + ".jpg";
             HttpClientExtend.DownloadSmallFile(url, dir, full);
             // string response= HttpClientExtend.HttpClientGet(url);//实际上此处应该读取文件流转换为图片
+            InitIconImag();
             Image img = new Bitmap(dir + "/" + full);
             int w = img.Width;
             int h = img.Height;
@@ -392,40 +411,68 @@ namespace CaptureManage.AppWin
                 logicPanel.Height = w + 80;
             }
             pbVerifyCodeImg.BackgroundImage = img;
+            string relative = configDict["ClickImgReleativePath"];
+            string appDir = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
            
             //进行位置的切割分析
             avgX = w / x;//每个图片平均宽度
             avgY = h / y;//每个图片平均高度
             //验证码行列分析
-            string relative = configDict["ClickImgReleativePath"];
-            string appDir = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
-            pbTest.Image = Image.FromFile(appDir + "/" + relative);
+            return;
             for (int i = 0; i < y; i++)
             {
                 for (int j = 0; j < x; j++)
                 {
                     Point p = pbVerifyCodeImg.Location;
                     PictureBox pb = new PictureBox();
-                    logicPanel.Controls.Add(pb);
+                    ((System.ComponentModel.ISupportInitialize)(pb)).BeginInit();
+                    //logicPanel.Controls.Add(pb);
                     pb.Left = p.X + j * avgX + avgX/2;
                     pb.Top = p.Y + i * avgY + avgY/2;
                     pb.SizeMode = PictureBoxSizeMode.Zoom;
                     pb.BorderStyle = BorderStyle.FixedSingle;
                     pb.Image = Image.FromFile(appDir + "/" + relative);
                     // pb.Visible = false;
+                    pb.Tag = EleTag.Icon.ToString();
                     pb.Name = "Icon" + ((i + 1) * (j + 1)).ToString();
                     pb.Size = new System.Drawing.Size(32, 32);
                     pb.Visible = true;
                     pb.BackColor = Color.Red;
-                   
+                    pb.TabStop = false;
+                    ((System.ComponentModel.ISupportInitialize)(pb)).EndInit();
+                    logicPanel.Controls.Add(pb);
                 }
             }
+            logicPanel.ResumeLayout(false);
         }
+        void InitIconImag()
+        {
+            string relative = configDict["ClickImgReleativePath"];
+            string appDir = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
+            foreach (Control item in logicPanel.Controls)
+            {
+                string tag = item.Tag as string;
+                if (tag == EleTag.Icon.ToString())
+                {
+                    PictureBox pb = item as PictureBox;
+                    pb.Image = Image.FromFile(appDir + "/" + relative);
+                }
+            }
 
+            //PictureBox justTest = new PictureBox();
+            //justTest.Image = Image.FromFile(appDir + "/" + relative);
+            //justTest.Location = new System.Drawing.Point(100, 21);
+            //justTest.Size = new System.Drawing.Size(25, 22);
+            //logicPanel.Controls.Add(justTest);
+        }
         private void PictureBox_Click(object sender, EventArgs e)
         {
             MouseEventArgs mouse = e as MouseEventArgs;//鼠标点击
             rtbTip.AppendText("X="+ mouse.X + " Y=" + mouse.Y+"\r\n");
+            if (mouse.Y < VerifyCodeTextHeight)
+            {
+                return;
+            }
             int x = mouse.X / avgX+1;
             int y = mouse.Y / avgY+1;
             Control img= this.Controls.Find("Icon" + (x * y), false).FirstOrDefault();

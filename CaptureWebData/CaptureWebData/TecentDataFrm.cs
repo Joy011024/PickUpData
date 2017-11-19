@@ -254,16 +254,17 @@ namespace CaptureWebData
             if (ckStartQuartz.Checked && rbGuid.Checked)
             {//开启随机轮询
                 DelegateData.BaseDelegate del = QuartzGuidForach;
-                QuartzJobParam p=new QuartzJobParam(){
-                JobExecutionContextJobDataMap=new object[] { del, param,null },
-                StartTime=DateTime.Now.AddSeconds(interval),
-                 TriggerRepeat=repeact,
-                 TrigggerInterval=interval
+                QuartzJobParam p = new QuartzJobParam()
+                {
+                    JobExecutionContextJobDataMap = new object[] { del, param, null },
+                    StartTime = DateTime.Now.AddSeconds(interval),
+                    TriggerRepeat = repeact,
+                    TrigggerInterval = interval
                 };
-                pth = new ParameterizedThreadStart(BackstageRun <JobDelegateFunction>);
+                pth = new ParameterizedThreadStart(BackstageRun<JobDelegateFunction>);
                 Thread th = new Thread(pth);
                 th.Start(p);
-               // job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, param,null }, DateTime.Now.AddSeconds(interval), interval, repeact);
+                // job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, param,null }, DateTime.Now.AddSeconds(interval), interval, repeact);
             }
             else if (ckStartQuartz.Checked && rbDepth.Checked)
             {//该查询结果页轮询
@@ -275,7 +276,7 @@ namespace CaptureWebData
                     TriggerRepeat = repeact,
                     TrigggerInterval = interval
                 };
-                pth = new ParameterizedThreadStart(BackstageRun < JobDelegateFunction>);
+                pth = new ParameterizedThreadStart(BackstageRun<JobDelegateFunction>);
                 Thread th = new Thread(pth);
                 th.Start(p);
                 //job.CreateJobWithParam<JobDelegateFunction>(new object[] { del, null,null }, DateTime.Now.AddSeconds(interval), interval, repeact);
@@ -290,17 +291,17 @@ namespace CaptureWebData
                     TriggerRepeat = repeact,
                     TrigggerInterval = interval
                 };
-                pth = new ParameterizedThreadStart(BackstageRun < JobAction<QQDataDA>>);
+                pth = new ParameterizedThreadStart(BackstageRun<JobAction<QQDataDA>>);
                 Thread th = new Thread(pth);
                 th.Start(p);
-               // job.CreateJobWithParam<JobAction<QQDataDA>>(new object[] { Cookie, param, del }, DateTime.Now, interval, repeact);
+                // job.CreateJobWithParam<JobAction<QQDataDA>>(new object[] { Cookie, param, del }, DateTime.Now, interval, repeact);
             }
             else
             {
                 QQDataDA da = new QQDataDA();
                 da.QueryParam = param;
                 PickUpQQDoResponse response = da.QueryQQData(Cookie);
-                if (GatherFirstUin||!SystemConfig.OpenAutoQuertyDBTotal) 
+                if (GatherFirstUin || !SystemConfig.OpenAutoQuertyDBTotal)
                 {//这里要改成在页面初始化时查询当前库数据量，其他情形交给另一线程查询
                     QueryTodayPickUp();
                     GatherFirstUin = false;

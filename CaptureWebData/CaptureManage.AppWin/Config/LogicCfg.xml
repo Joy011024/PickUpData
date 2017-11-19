@@ -17,5 +17,6 @@
       <add key="ImageRelativeDirName" value="ImageLog"/> <!--图片文件存储相对目录-->
       <add key="VerifyCodeTemplate" value="2*4"/> <!--验证码规格 2排3列图片-->
       <add key="ClickImgReleativePath" value="Content\SystemImg\ClickSign.png"/> <!--点击位置图片路径-->
+      <add key="VerifyCodeTextHeight" value="30"/> <!--返回的验证码中文本内容的高度-->
   </appSettings>
 </configuration>
