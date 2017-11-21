@@ -65,7 +65,23 @@ namespace CaptureManage.AppWin
                 return h;
             }
         }
+        /// <summary>
+        /// 点中的图片大小
+        /// </summary>
+        int[] ClickIconSizeIn12306
+        {
+            get 
+            {
+                string cfg = configDict["ClickIconSizeIn12306"];
+                string[] size = cfg.Split('x');
+                return new int[] { int.Parse(size[0]), int.Parse(size[1]) };
+            }
+        }
         int avgX=0, avgY=0;
+        /// <summary>
+        /// 选中的图标
+        /// </summary>
+        Dictionary<int, Point> selectIcon = new Dictionary<int, Point>();
         public void SetLogDir(string dir) 
         {
             logDir = dir;
