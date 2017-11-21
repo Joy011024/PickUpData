@@ -82,6 +82,18 @@ namespace CaptureManage.AppWin
         /// 选中的图标
         /// </summary>
         Dictionary<int, Point> selectIcon = new Dictionary<int, Point>();
+        /// <summary>
+        /// 12306图片验证码模式
+        /// </summary>
+        int[] smallImgNormalIn12306
+        {
+            get 
+            {
+                string cfg = configDict["VerifyCodeTemplate"];
+                string[] items = cfg.Split('*');
+                return new int[] { int.Parse(items[0]), int.Parse(items[1]) };
+            }
+        }
         public void SetLogDir(string dir) 
         {
             logDir = dir;
@@ -417,9 +429,8 @@ namespace CaptureManage.AppWin
             {
                 microBrowser.Visible = false;
             }
-            string[] px = configDict["VerifyCodeTemplate"].Split('*');
-            int x = int.Parse(px[1]);
-            int y = int.Parse(px[0]);
+            int x = smallImgNormalIn12306[0];
+            int y = smallImgNormalIn12306[1];
             if (pbVerifyCodeImg.Width < w || pbVerifyCodeImg.Height < h)
             {
                 pbVerifyCodeImg.Width = w;
@@ -492,6 +503,8 @@ namespace CaptureManage.AppWin
             int x = mouse.X / avgX+1;
             int y = mouse.Y / avgY+1;
             Control img= this.Controls.Find("Icon" + (x * y), false).FirstOrDefault();
+
+            //
         }
 
     }
