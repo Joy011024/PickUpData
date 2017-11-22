@@ -5,7 +5,7 @@
       <add key="StartDayInt" value="0"/> <!--开始日期距离今天的天数-->
       <add key="EndDayInt" value="30" /> <!--结束日期距离今天的天数差-->
       <add key="TicketTypeName" value="1:成人票|2:孩票|3:学生票|4:伤残军人票"/> <!--车票类型-->
-      <add key="DefaultQuaryTimeSpan" value="2"/> <!--默认查询的时间间隔-->
+      <add key="DefaultQueryTimeSpan" value="2"/> <!--默认查询的时间间隔-->
       <add key="StationListUrl" value="https://kyfw.12306.cn/otn/resources/js/framework/station_name.js?station_version=1.9028"/> <!--读取车站信息的URL-->
       <add key="TicketTypeUI12306" value="0X00=学生|ADULT=普通"/>
       <add key="SeatCategory" value="商务座特等座=1|一等座=2|二等座=3高级|软卧=4|软卧=5|动卧=6|硬卧=7|软座=8|硬座=9|无座=10|其他=11"/> <!--车票类型分类-->

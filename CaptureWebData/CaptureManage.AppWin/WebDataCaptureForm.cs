@@ -145,7 +145,21 @@ namespace CaptureManage.AppWin
                 return AppDir + "/" + VerifyCodeReleativeDir;
             }
         }
-        
+        int DefualtRefreshCalTicketTimeSpan
+        {
+            get 
+            {
+                string cfg = configDict["DefaultQueryTimeSpan"];
+                int span = 2;
+                if (int.TryParse(cfg, out span))
+                { }
+                if (span <= 1)
+                {
+                    span = 1;
+                }
+                return span;
+            }
+        }
         public void SetLogDir(string dir) 
         {
             logDir = dir;
@@ -156,7 +170,8 @@ namespace CaptureManage.AppWin
             BtnUpdateStation=2, //更新车站数据
             QueryTicket=3 ,//查询车票信息
             ListenTricket=4, //实时抢票
-            RefreshVerifyCode=5
+            RefreshVerifyCode=5,
+            ClearTip=6
         }
         public WebDataCaptureForm()
         {
@@ -187,6 +202,8 @@ namespace CaptureManage.AppWin
             btnJob.Click += new EventHandler(Button_Click);
             pbVerifyCodeImg.Click += new EventHandler(PictureBox_Click);
             btnUseRuleStation.Tag = BtnCategory.BtnUpdateStation.ToString();
+            btnClearTip.Tag = BtnCategory.ClearTip.ToString();
+            btnClearTip.Click += new EventHandler(Button_Click);
             LoadStation();//init station of information
         }
         void LoadStation() 
@@ -254,15 +271,28 @@ namespace CaptureManage.AppWin
                     QueryTicket();//根据参数查询数据
                     break;
                 case BtnCategory.ListenTricket:
-                    string value = configDict["DefaultQuaryTimeSpan"];
-                    QuartzJobService.QuartzJob job=new QuartzJob();
-                    job.CreateJobWithParam<QuartzJobService.JobDelegate<WebDataCaptureForm>>(new object[] { new BaseDelegate(DoJob), null }, DateTime.Now, 2, 0);
-                  
+                    AsyncListen();
                     break;
                 case BtnCategory.RefreshVerifyCode:
                     GetVerifyCodeImage();
                     break;
+                case BtnCategory.ClearTip://清空提示内容的处理
+                    ClearTip();
+                    break;
+                
             }
+        }
+        void ClearTip() 
+        {
+            lsbTip.Items.Clear();
+            rtbTip.Clear();
+        }
+        void AsyncListen() 
+        {//异步进程进行监听
+            int timeSpan = DefualtRefreshCalTicketTimeSpan;//默认轮询间隔
+            QuartzJobService.QuartzJob job = new QuartzJob();
+            job.CreateJobWithParam<QuartzJobService.JobDelegate<WebDataCaptureForm>>(new object[] { new BaseDelegate(DoJob), null }, DateTime.Now, 2, 0);
+                  
         }
         void GetPapeParam() 
         {
@@ -483,11 +513,7 @@ namespace CaptureManage.AppWin
             img.Save(VerifyCodeImgFullDir);
             int w = img.Width;
             int h = img.Height;
-            microBrowser.Visible = false;//首次进入此处时出现不显示的情况 自定义控件是没有显示，但是页面渲染完成之后显示
-            if (microBrowser.Visible)
-            {
-                microBrowser.Visible = false;
-            }
+           
             int x = smallImgNormalIn12306[0];
             int y = smallImgNormalIn12306[1];
             if (pbVerifyCodeImg.Width < w || pbVerifyCodeImg.Height < h)

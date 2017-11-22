@@ -568,7 +568,6 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Runtime.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Threading.Tasks.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Infrastructure.EFMsSQL.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\FeatureFrmList.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\QuartzJobService.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppLanguage.dll
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\WebKitBrowser.dll
@@ -599,7 +598,6 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Runtime.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Threading.Tasks.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Infrastructure.EFMsSQL.pdb
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\FeatureFrmList.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\QuartzJobService.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\AppLanguage.pdb
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\InfrastructureRepository.IMainContext.pdb

@@ -43,8 +43,8 @@
             this.btnJob = new System.Windows.Forms.Button();
             this.logicPanel = new System.Windows.Forms.Panel();
             this.pbVerifyCodeImg = new System.Windows.Forms.PictureBox();
-            this.microBrowser = new FeatureFrmList.MicrosoftBrowser();
             this.lsbTip = new System.Windows.Forms.ListBox();
+            this.btnClearTip = new System.Windows.Forms.Button();
             this.panelWhere.SuspendLayout();
             this.logicPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).BeginInit();
@@ -149,9 +149,9 @@
             // 
             // rtbTip
             // 
-            this.rtbTip.Location = new System.Drawing.Point(9, 222);
+            this.rtbTip.Location = new System.Drawing.Point(503, 365);
             this.rtbTip.Name = "rtbTip";
-            this.rtbTip.Size = new System.Drawing.Size(285, 52);
+            this.rtbTip.Size = new System.Drawing.Size(236, 52);
             this.rtbTip.TabIndex = 12;
             this.rtbTip.Text = "";
             // 
@@ -177,10 +177,9 @@
             // logicPanel
             // 
             this.logicPanel.Controls.Add(this.pbVerifyCodeImg);
-            this.logicPanel.Controls.Add(this.rtbTip);
             this.logicPanel.Location = new System.Drawing.Point(12, 12);
             this.logicPanel.Name = "logicPanel";
-            this.logicPanel.Size = new System.Drawing.Size(300, 283);
+            this.logicPanel.Size = new System.Drawing.Size(471, 406);
             this.logicPanel.TabIndex = 15;
             // 
             // pbVerifyCodeImg
@@ -191,27 +190,31 @@
             this.pbVerifyCodeImg.TabIndex = 0;
             this.pbVerifyCodeImg.TabStop = false;
             // 
-            // microBrowser
-            // 
-            this.microBrowser.Location = new System.Drawing.Point(12, 12);
-            this.microBrowser.Name = "microBrowser";
-            this.microBrowser.Size = new System.Drawing.Size(476, 388);
-            this.microBrowser.TabIndex = 0;
-            // 
             // lsbTip
             // 
             this.lsbTip.FormattingEnabled = true;
             this.lsbTip.ItemHeight = 12;
-            this.lsbTip.Location = new System.Drawing.Point(503, 244);
+            this.lsbTip.Location = new System.Drawing.Point(503, 223);
             this.lsbTip.Name = "lsbTip";
-            this.lsbTip.Size = new System.Drawing.Size(226, 136);
+            this.lsbTip.Size = new System.Drawing.Size(236, 136);
             this.lsbTip.TabIndex = 16;
+            // 
+            // btnClearTip
+            // 
+            this.btnClearTip.Location = new System.Drawing.Point(585, 194);
+            this.btnClearTip.Name = "btnClearTip";
+            this.btnClearTip.Size = new System.Drawing.Size(75, 23);
+            this.btnClearTip.TabIndex = 17;
+            this.btnClearTip.Text = "清空提示";
+            this.btnClearTip.UseVisualStyleBackColor = true;
             // 
             // WebDataCaptureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(751, 412);
+            this.ClientSize = new System.Drawing.Size(749, 430);
+            this.Controls.Add(this.btnClearTip);
+            this.Controls.Add(this.rtbTip);
             this.Controls.Add(this.lsbTip);
             this.Controls.Add(this.logicPanel);
             this.Controls.Add(this.btnJob);
@@ -220,7 +223,6 @@
             this.Controls.Add(this.panelWhere);
             this.Controls.Add(this.btnUseRuleStation);
             this.Controls.Add(this.btnLoadBaseData);
-            this.Controls.Add(this.microBrowser);
             this.Name = "WebDataCaptureForm";
             this.Text = "WebDataCaptureForm";
             this.panelWhere.ResumeLayout(false);
@@ -233,7 +235,6 @@
 
         #endregion
 
-        private FeatureFrmList.MicrosoftBrowser microBrowser;
         private System.Windows.Forms.Button btnLoadBaseData;
         private System.Windows.Forms.ComboBox cmbBeginStation;
         private System.Windows.Forms.Label lblBeginStation;
@@ -250,5 +251,6 @@
         private System.Windows.Forms.Panel logicPanel;
         private System.Windows.Forms.PictureBox pbVerifyCodeImg;
         private System.Windows.Forms.ListBox lsbTip;
+        private System.Windows.Forms.Button btnClearTip;
     }
 }
