@@ -15,6 +15,7 @@
       <add key="GetVerifyCodeUrl" value="https://kyfw.12306.cn/passport/captcha/captcha-image?login_site=E&amp;module=login&amp;rand=sjrand&amp;{rand}"/> <!--eg: rand=0.28811422643745876-->
       <add key="CheckVerifyCode" value="https://kyfw.12306.cn/passport/captcha/captcha-check"/> 
       <add key="ImageRelativeDirName" value="ImageLog"/> <!--图片文件存储相对目录-->
+      <add key="VerifyCodeImgName" value="VerifyCodeJpb.jpg"/> <!--验证码图片-->
       <add key="VerifyCodeTemplate" value="4*2"/> <!--验证码规格 2排4列图片-->
       <add key="ClickImgReleativePath" value="Content\SystemImg\ClickSign.png"/> <!--点击位置图片路径-->
       <add key="VerifyCodeTextHeight" value="30"/> <!--返回的验证码中文本内容的高度-->

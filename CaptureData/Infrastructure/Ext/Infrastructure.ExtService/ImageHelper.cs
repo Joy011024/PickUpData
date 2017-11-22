@@ -209,7 +209,7 @@ namespace Infrastructure.ExtService
                 return string.Empty;
             }
         }
-        public void GraphiscImg(Graphics g,string waterIconDir,Size iconSize,Point iconPX) 
+        public static void GraphiscImg(Graphics g,string waterIconDir,Size iconSize,Point iconPX) 
         {
             Image icon = Bitmap.FromFile(waterIconDir);
             Bitmap targetImg = new System.Drawing.Bitmap(iconSize.Width, icon.Height);

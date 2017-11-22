@@ -30,6 +30,16 @@ namespace CaptureManage.AppWin
         {
             Icon=1
         }
+       
+        string AppDir
+        {
+            get 
+            {
+                string path = this.GetType().Assembly.Location;
+                DirectoryInfo di = new DirectoryInfo(path);
+                return di.Parent.FullName;
+            }
+        }
         string logDir;
         public string LogDir
         {
@@ -37,14 +47,19 @@ namespace CaptureManage.AppWin
             {
                 if (string.IsNullOrEmpty(logDir))
                 {
-                    string path = this.GetType().Assembly.Location;
-                    DirectoryInfo di = new DirectoryInfo(path);
-                    logDir = di.Parent.Parent.FullName;
+                    DirectoryInfo di = new DirectoryInfo(AppDir);
+                    logDir = di.Parent.FullName;
                 }
                 return logDir;
             }
         }
-        
+        public string ImgDir
+        {
+            get 
+            {
+                return NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
+            }
+        }
         List<StationName> datas = new List<StationName>();
         QueryTicket ticketWhere = new QueryTicket();
         bool SyncToDB = false;//采集的数据是否同步到数据库
@@ -94,6 +109,43 @@ namespace CaptureManage.AppWin
                 return new int[] { int.Parse(items[0]), int.Parse(items[1]) };
             }
         }
+        string VerifyCodeReleativeDir
+        {
+            get
+            {
+                return configDict["ClickImgReleativePath"];
+
+            }
+        }
+        public string VerifyCodeDir
+        {
+            get 
+            {
+                return AppDir + "/" + configDict["ImageRelativeDirName"];
+            }
+        }
+        public string VerifyCodeName 
+        {
+            get 
+            {
+                return configDict["VerifyCodeImgName"];
+            }
+        }
+        public string VerifyCodeImgFullDir
+        {
+            get 
+            {
+                return VerifyCodeDir + "/" + VerifyCodeName;
+            }
+        }
+        string IconImgFullDir
+        {
+            get 
+            {
+                return AppDir + "/" + VerifyCodeReleativeDir;
+            }
+        }
+        
         public void SetLogDir(string dir) 
         {
             logDir = dir;
@@ -121,7 +173,6 @@ namespace CaptureManage.AppWin
         {
             btnLoadBaseData.Tag = BtnCategory.LogicData.ToString();
             btnLoadBaseData.Click += new EventHandler(Button_Click);
-            LoadStation();//init station of information
             //如何实现 Combobox元素在不点击下拉箭头前能输入文本
             cmbBeginStation.AutoCompleteMode = AutoCompleteMode.Append;
             dtpGoTime.Value = DateTime.Now;
@@ -135,10 +186,16 @@ namespace CaptureManage.AppWin
             btnJob.Tag = BtnCategory.ListenTricket.ToString();
             btnJob.Click += new EventHandler(Button_Click);
             pbVerifyCodeImg.Click += new EventHandler(PictureBox_Click);
+            btnUseRuleStation.Tag = BtnCategory.BtnUpdateStation.ToString();
+            LoadStation();//init station of information
         }
         void LoadStation() 
         {
             string stationDir=LogDir+"/"+ELogType.LogicLog+"/"+typeof(WebDataCaptureForm).Name+".txt";
+            if (!File.Exists(stationDir))
+            { //文件不存在,查询实时车站
+                Button_Click(btnUseRuleStation, null);
+            }
             string station= FileHelper.ReadFile(stationDir);
             GetStationModelFromString(station);
         }
@@ -416,12 +473,14 @@ namespace CaptureManage.AppWin
             //读取响应的流
             //将流转换为响应的图片显示到界面
             // WebResponse stream= HttpClientExtend.HttpWebRequestGet(url);
-            string dir = LogDir + "/" + Logger.GetNowDayIndex() + "/" + configDict["ImageRelativeDirName"];
+           
             string full = Logger.GenerateTimeOfFileName() + ".jpg";
+            string dir = VerifyCodeDir + "/" + Logger.GetNowDayIndex(); 
             HttpClientExtend.DownloadSmallFile(url, dir, full);
             // string response= HttpClientExtend.HttpClientGet(url);//实际上此处应该读取文件流转换为图片
-            InitIconImag();
+            
             Image img = new Bitmap(dir + "/" + full);
+            img.Save(VerifyCodeImgFullDir);
             int w = img.Width;
             int h = img.Height;
             microBrowser.Visible = false;//首次进入此处时出现不显示的情况 自定义控件是没有显示，但是页面渲染完成之后显示
@@ -439,7 +498,7 @@ namespace CaptureManage.AppWin
             }
             pbVerifyCodeImg.BackgroundImage = img;
             string relative = configDict["ClickImgReleativePath"];
-            string appDir = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
+            string appDir = AppDir;
            
             //进行位置的切割分析
             avgX = w / x;//每个图片平均宽度
@@ -472,26 +531,6 @@ namespace CaptureManage.AppWin
             }
             logicPanel.ResumeLayout(false);
         }
-        void InitIconImag()
-        {
-            string relative = configDict["ClickImgReleativePath"];
-            string appDir = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
-            foreach (Control item in logicPanel.Controls)
-            {
-                string tag = item.Tag as string;
-                if (tag == EleTag.Icon.ToString())
-                {
-                    PictureBox pb = item as PictureBox;
-                    pb.Image = Image.FromFile(appDir + "/" + relative);
-                }
-            }
-
-            //PictureBox justTest = new PictureBox();
-            //justTest.Image = Image.FromFile(appDir + "/" + relative);
-            //justTest.Location = new System.Drawing.Point(100, 21);
-            //justTest.Size = new System.Drawing.Size(25, 22);
-            //logicPanel.Controls.Add(justTest);
-        }
         private void PictureBox_Click(object sender, EventArgs e)
         {
             MouseEventArgs mouse = e as MouseEventArgs;//鼠标点击
@@ -500,13 +539,36 @@ namespace CaptureManage.AppWin
             {
                 return;
             }
-            int x = mouse.X / avgX+1;
-            int y = mouse.Y / avgY+1;
-            Control img= this.Controls.Find("Icon" + (x * y), false).FirstOrDefault();
-
+            int x = mouse.X / avgX;
+            int y = mouse.Y / avgY;
+            int column = smallImgNormalIn12306[0];//每行显示多少列图片
+            int index = x + column * y;
+            if (selectIcon.ContainsKey(index))
+            {
+                selectIcon.Remove(index);
+            }
+            else 
+            {
+                Point px = new Point(x * avgX + avgX * 3 / 7, y * avgY + avgY * 3 / 7);
+                selectIcon.Add(index, px);
+            }
+           // lsbTip.Items.Add(index);
+            //Control img= this.Controls.Find("Icon" + (x * y), false).FirstOrDefault();
+            ControlIconDisplay(selectIcon);
             //
         }
-
+        void ControlIconDisplay(Dictionary<int,Point> icons) 
+        {//控制那些图标被选中
+            Image img=Bitmap.FromFile(VerifyCodeImgFullDir);
+            Graphics g = Graphics.FromImage(img);
+            Size iconSize = new Size(ClickIconSizeIn12306[0], ClickIconSizeIn12306[1]);
+            foreach (KeyValuePair<int,Point> item in icons)
+            {
+                Infrastructure.ExtService.ImageHelper.GraphiscImg(g,IconImgFullDir, iconSize, item.Value);
+            }
+            pbVerifyCodeImg.Image = img;
+            g.Dispose();
+        }
     }
     
 }

@@ -44,6 +44,7 @@
             this.logicPanel = new System.Windows.Forms.Panel();
             this.pbVerifyCodeImg = new System.Windows.Forms.PictureBox();
             this.microBrowser = new FeatureFrmList.MicrosoftBrowser();
+            this.lsbTip = new System.Windows.Forms.ListBox();
             this.panelWhere.SuspendLayout();
             this.logicPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).BeginInit();
@@ -197,11 +198,21 @@
             this.microBrowser.Size = new System.Drawing.Size(476, 388);
             this.microBrowser.TabIndex = 0;
             // 
+            // lsbTip
+            // 
+            this.lsbTip.FormattingEnabled = true;
+            this.lsbTip.ItemHeight = 12;
+            this.lsbTip.Location = new System.Drawing.Point(503, 244);
+            this.lsbTip.Name = "lsbTip";
+            this.lsbTip.Size = new System.Drawing.Size(226, 136);
+            this.lsbTip.TabIndex = 16;
+            // 
             // WebDataCaptureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(751, 412);
+            this.Controls.Add(this.lsbTip);
             this.Controls.Add(this.logicPanel);
             this.Controls.Add(this.btnJob);
             this.Controls.Add(this.btnRefreshVerifyCode);
@@ -238,5 +249,6 @@
         private System.Windows.Forms.Button btnJob;
         private System.Windows.Forms.Panel logicPanel;
         private System.Windows.Forms.PictureBox pbVerifyCodeImg;
+        private System.Windows.Forms.ListBox lsbTip;
     }
 }
