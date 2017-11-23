@@ -160,6 +160,14 @@ namespace CaptureManage.AppWin
                 return span;
             }
         }
+        public string CheckVerifyCodeUrl
+        {
+            get 
+            {
+                return configDict["CheckVerifyCodeUrl"];
+            }
+        }
+
         public void SetLogDir(string dir) 
         {
             logDir = dir;

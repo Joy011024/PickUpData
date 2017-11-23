@@ -71,6 +71,7 @@
     <Compile Include="TicketData.IManage\ISyncTicketDataManage.cs" />
     <Compile Include="TicketData.Manage\TicketDataPrepareManager.cs" />
     <Compile Include="TicketData.Model\CarInfo.cs" />
+    <Compile Include="TicketData.Model\Request\LoginParam12306.cs" />
     <Compile Include="TicketData.Model\TicketCfg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicketAppConfig.cs" />
@@ -126,6 +127,7 @@
     <Content Include="SqlCmd\Ticket12306.sql" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="TicketData.Model\Response\" />
     <Folder Include="TicketHelper\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

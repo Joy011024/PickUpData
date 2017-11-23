@@ -45,9 +45,17 @@
             this.pbVerifyCodeImg = new System.Windows.Forms.PictureBox();
             this.lsbTip = new System.Windows.Forms.ListBox();
             this.btnClearTip = new System.Windows.Forms.Button();
+            this.loginPanel = new System.Windows.Forms.Panel();
+            this.lblUserName12306 = new System.Windows.Forms.Label();
+            this.txtUserName12306 = new System.Windows.Forms.TextBox();
+            this.txtPsw12306 = new System.Windows.Forms.TextBox();
+            this.lblPsw12306 = new System.Windows.Forms.Label();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.lblPanelTypeDesc = new System.Windows.Forms.Label();
             this.panelWhere.SuspendLayout();
             this.logicPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).BeginInit();
+            this.loginPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLoadBaseData
@@ -176,10 +184,11 @@
             // 
             // logicPanel
             // 
+            this.logicPanel.Controls.Add(this.loginPanel);
             this.logicPanel.Controls.Add(this.pbVerifyCodeImg);
             this.logicPanel.Location = new System.Drawing.Point(12, 12);
             this.logicPanel.Name = "logicPanel";
-            this.logicPanel.Size = new System.Drawing.Size(471, 406);
+            this.logicPanel.Size = new System.Drawing.Size(485, 406);
             this.logicPanel.TabIndex = 15;
             // 
             // pbVerifyCodeImg
@@ -208,6 +217,69 @@
             this.btnClearTip.Text = "清空提示";
             this.btnClearTip.UseVisualStyleBackColor = true;
             // 
+            // loginPanel
+            // 
+            this.loginPanel.Controls.Add(this.lblPanelTypeDesc);
+            this.loginPanel.Controls.Add(this.btnLogin);
+            this.loginPanel.Controls.Add(this.txtPsw12306);
+            this.loginPanel.Controls.Add(this.lblPsw12306);
+            this.loginPanel.Controls.Add(this.txtUserName12306);
+            this.loginPanel.Controls.Add(this.lblUserName12306);
+            this.loginPanel.Location = new System.Drawing.Point(301, 9);
+            this.loginPanel.Name = "loginPanel";
+            this.loginPanel.Size = new System.Drawing.Size(181, 207);
+            this.loginPanel.TabIndex = 1;
+            // 
+            // lblUserName12306
+            // 
+            this.lblUserName12306.AutoSize = true;
+            this.lblUserName12306.Location = new System.Drawing.Point(3, 32);
+            this.lblUserName12306.Name = "lblUserName12306";
+            this.lblUserName12306.Size = new System.Drawing.Size(41, 12);
+            this.lblUserName12306.TabIndex = 0;
+            this.lblUserName12306.Text = "用户名";
+            // 
+            // txtUserName12306
+            // 
+            this.txtUserName12306.Location = new System.Drawing.Point(5, 55);
+            this.txtUserName12306.Name = "txtUserName12306";
+            this.txtUserName12306.Size = new System.Drawing.Size(172, 21);
+            this.txtUserName12306.TabIndex = 1;
+            // 
+            // txtPsw12306
+            // 
+            this.txtPsw12306.Location = new System.Drawing.Point(5, 118);
+            this.txtPsw12306.Name = "txtPsw12306";
+            this.txtPsw12306.Size = new System.Drawing.Size(172, 21);
+            this.txtPsw12306.TabIndex = 3;
+            // 
+            // lblPsw12306
+            // 
+            this.lblPsw12306.AutoSize = true;
+            this.lblPsw12306.Location = new System.Drawing.Point(3, 95);
+            this.lblPsw12306.Name = "lblPsw12306";
+            this.lblPsw12306.Size = new System.Drawing.Size(29, 12);
+            this.lblPsw12306.TabIndex = 2;
+            this.lblPsw12306.Text = "密码";
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(5, 155);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.TabIndex = 4;
+            this.btnLogin.Text = "登录";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            // 
+            // lblPanelTypeDesc
+            // 
+            this.lblPanelTypeDesc.AutoSize = true;
+            this.lblPanelTypeDesc.Location = new System.Drawing.Point(3, 2);
+            this.lblPanelTypeDesc.Name = "lblPanelTypeDesc";
+            this.lblPanelTypeDesc.Size = new System.Drawing.Size(59, 12);
+            this.lblPanelTypeDesc.TabIndex = 5;
+            this.lblPanelTypeDesc.Text = "12306账户";
+            // 
             // WebDataCaptureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -229,6 +301,8 @@
             this.panelWhere.PerformLayout();
             this.logicPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).EndInit();
+            this.loginPanel.ResumeLayout(false);
+            this.loginPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -252,5 +326,12 @@
         private System.Windows.Forms.PictureBox pbVerifyCodeImg;
         private System.Windows.Forms.ListBox lsbTip;
         private System.Windows.Forms.Button btnClearTip;
+        private System.Windows.Forms.Panel loginPanel;
+        private System.Windows.Forms.Label lblPanelTypeDesc;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.TextBox txtPsw12306;
+        private System.Windows.Forms.Label lblPsw12306;
+        private System.Windows.Forms.TextBox txtUserName12306;
+        private System.Windows.Forms.Label lblUserName12306;
     }
 }

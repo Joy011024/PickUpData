@@ -12,4 +12,24 @@
     <TryTime>0</TryTime><!--刷票次数-->
     <ErrorMsg>null</ErrorMsg><!--刷票失败原因-->
     <ErrorCode></ErrorCode> <!--刷票错误代码-->
+    <RequestParam>
+        <!--验证码的请求参数-->
+        <VerifyCodeParam>
+              <answer>{answer}</answer> <!--如果属性值不为{属性名}则表示系统赋值-->
+              <login_site>E</login_site>
+              <rand>sjrand</rand>
+        </VerifyCodeParam>
+        <!--登录12306账户的参数-->
+        <LoginParam>
+            <username>{username}</username>
+            <password>{password}</password>
+            <appid>{otn}</appid>
+        </LoginParam>
+    </RequestParam>
+    <ResponseParam>
+        <CommonResponse> <!--公共响应-->
+            <result_code>{result_code}</result_code>
+            <result_message>{result_message}</result_message>
+        </CommonResponse>
+    </ResponseParam>
   </ticket>
