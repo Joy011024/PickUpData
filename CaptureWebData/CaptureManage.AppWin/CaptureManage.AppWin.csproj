@@ -45,9 +45,6 @@
     <Reference Include="HttpClientHelper">
       <HintPath>..\bin\SelfDefine\HttpClientHelper.dll</HintPath>
     </Reference>
-    <Reference Include="Infrastructure.ExtService">
-      <HintPath>..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\bin\Debug\Infrastructure.ExtService.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Newtonsoft.Json.dll</HintPath>
@@ -74,11 +71,12 @@
     <Compile Include="TicketData.Model\Request\LoginParam12306.cs" />
     <Compile Include="TicketData.Model\TicketCfg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TicketAppConfig.cs" />
+    <Compile Include="TicketHelper\TicketAppConfig.cs" />
     <Compile Include="TicketData.Model\TickModel.cs" />
     <Compile Include="TicketData.IService\ISyncTicketDataService.cs" />
     <Compile Include="TicketData.Manage\SyncTicketDataManage.cs" />
     <Compile Include="TicketData.Service\SyncTicketDataService.cs" />
+    <Compile Include="TicketHelper\HttpProtocolConfig.cs" />
     <Compile Include="WebDataCaptureForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +103,10 @@
       <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
       <Name>Domain.GlobalModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
+      <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
+      <Name>Infrastructure.ExtService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\QuartzJobService\QuartzJobService.csproj">
       <Project>{32dbc3b8-3b1a-4450-8293-a43f643db83c}</Project>
       <Name>QuartzJobService</Name>
@@ -128,7 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TicketData.Model\Response\" />
-    <Folder Include="TicketHelper\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

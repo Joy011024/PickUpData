@@ -20,6 +20,7 @@
       <add key="ClickImgReleativePath" value="Content\SystemImg\ClickSign.png"/> <!--点击位置图片路径-->
       <add key="VerifyCodeTextHeight" value="30"/> <!--返回的验证码中文本内容的高度-->
       <add key="ClickIconSizeIn12306" value="26x26"/> <!--图片点中提示像素-->
-      
+      <add key="TickekLogicConfigFile" value="Config/TicketConfigEntity.xml"/> <!--票务系统配置的xml-->
+      <add key="VerifyCodeHttp12306" value="ticket/RequestParam/VerifyCodeParam"/> <!--12306登录验证请求的配置项-->
   </appSettings>
 </configuration>

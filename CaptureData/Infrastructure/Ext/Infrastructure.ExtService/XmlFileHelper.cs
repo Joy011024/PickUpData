@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-
+using System.Reflection;
 namespace Infrastructure.ExtService
 {
-    public class XmlFileHelper
+    public static class XmlFileHelper
     {
         /// <summary>
         /// 读取节点下各项属性内容 如：  <add key="key" value="value"/>
@@ -123,9 +123,41 @@ namespace Infrastructure.ExtService
                 XmlAttribute attKey= item.Attributes[itemKeyName];
                 XmlAttribute attrValue = item.Attributes[itemValueName];
                 //如果xml文件节点key重复的处理办法？？
-                dict.Add(attKey.Value, attrValue.Value);
+                dict.Add(attKey.Value.Trim(), attrValue.Value.Trim());
             }
             return dict;
+        }
+        /// <summary>
+        /// 从xml中读取实体相关信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xmlFile"></param>
+        /// <param name="entityNodeName"></param>
+        /// <returns></returns>
+        public static T GetEntityConfig<T>(this T obj, string xmlFile,string entityNodeName) where T:class
+        {
+            XmlNode doc = GetXmlNode(xmlFile, entityNodeName);
+            //获取实体属性列表
+            if (doc == null)
+            {
+                return default(T);
+            }
+            T entity = System.Activator.CreateInstance<T>();
+            Type t=typeof(T);
+            foreach (XmlNode item in doc.ChildNodes)
+            {
+                if (item.NodeType == XmlNodeType.Comment)
+                {
+                    continue;
+                }
+                PropertyInfo pi = t.GetProperty(item.Name);
+                if (pi == null)
+                {
+                    continue;
+                }
+                entity.SetPropertyValue(pi.Name, item.InnerText.Trim());
+            }
+            return entity;
         }
     }
 }

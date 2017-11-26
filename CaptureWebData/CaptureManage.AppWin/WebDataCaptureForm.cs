@@ -167,7 +167,23 @@ namespace CaptureManage.AppWin
                 return configDict["CheckVerifyCodeUrl"];
             }
         }
-
+        /// <summary>
+        /// 票务系统（12306）逻辑配置问路径
+        /// </summary>
+        string TickekLogicConfigFullFile
+        {
+            get 
+            {
+                return  AppDir+"/"+ configDict["TickekLogicConfigFile"];
+            }
+        }
+        string VerifyCodeImgConfig
+        {
+            get 
+            {
+                return configDict["VerifyCodeHttp12306"];
+            }
+        }
         public void SetLogDir(string dir) 
         {
             logDir = dir;
@@ -213,6 +229,12 @@ namespace CaptureManage.AppWin
             btnClearTip.Tag = BtnCategory.ClearTip.ToString();
             btnClearTip.Click += new EventHandler(Button_Click);
             LoadStation();//init station of information
+            InitRequestParam();
+        }
+        void InitRequestParam() 
+        {
+            HttpProtocolConfig config = new  HttpProtocolConfig();
+            config.GetVerifyCodeParamStatic(TickekLogicConfigFullFile, VerifyCodeImgConfig);
         }
         void LoadStation() 
         {
