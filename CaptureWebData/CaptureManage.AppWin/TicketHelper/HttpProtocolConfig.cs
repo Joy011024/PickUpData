@@ -11,9 +11,9 @@ namespace CaptureManage.AppWin
     /// </summary>
     public class HttpProtocolConfig
     {
-        public void GetVerifyCodeParamStatic(string filePath,string nodeName) 
+        public VerifyCode GetVerifyCodeParamStatic(string filePath, string nodeName) 
         {
-            new VerifyCode().GetEntityConfig(filePath, nodeName);
+           return new VerifyCode().GetEntityConfig(filePath, nodeName,true);
         }
     }
 }

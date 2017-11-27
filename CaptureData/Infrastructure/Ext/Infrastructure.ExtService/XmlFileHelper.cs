@@ -131,10 +131,12 @@ namespace Infrastructure.ExtService
         /// 从xml中读取实体相关信息
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
         /// <param name="xmlFile"></param>
         /// <param name="entityNodeName"></param>
+        /// <param name="filterPropertyFormat">是否过滤占位的属性串</param>
         /// <returns></returns>
-        public static T GetEntityConfig<T>(this T obj, string xmlFile,string entityNodeName) where T:class
+        public static T GetEntityConfig<T>(this T obj, string xmlFile,string entityNodeName,bool filterPropertyFormat=false) where T:class
         {
             XmlNode doc = GetXmlNode(xmlFile, entityNodeName);
             //获取实体属性列表
@@ -147,6 +149,15 @@ namespace Infrastructure.ExtService
             foreach (XmlNode item in doc.ChildNodes)
             {
                 if (item.NodeType == XmlNodeType.Comment)
+                {
+                    continue;
+                }
+                string value = item.InnerText.Trim();
+                if (string.IsNullOrEmpty(value))
+                {
+                    continue;
+                }
+                if (filterPropertyFormat&&value=="{"+item.Name+"}")
                 {
                     continue;
                 }

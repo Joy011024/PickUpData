@@ -22,6 +22,7 @@ using FactoryService;
 using TicketData.Manage;
 using System.Net;
 using QuartzJobService;
+using CaptureManage.AppWin.TicketData.Model.Request;
 namespace CaptureManage.AppWin
 {
     public partial class WebDataCaptureForm : Form
@@ -93,6 +94,7 @@ namespace CaptureManage.AppWin
             }
         }
         int avgX=0, avgY=0;
+        VerifyCode verifyCodeParam;//进行验证码验证的参数配置
         /// <summary>
         /// 选中的图标
         /// </summary>
@@ -188,6 +190,7 @@ namespace CaptureManage.AppWin
         {
             logDir = dir;
         }
+        
         enum BtnCategory 
         {
             LogicData=1,
@@ -195,7 +198,8 @@ namespace CaptureManage.AppWin
             QueryTicket=3 ,//查询车票信息
             ListenTricket=4, //实时抢票
             RefreshVerifyCode=5,
-            ClearTip=6
+            ClearTip=6,
+            Login12306Account=7 //登录12306账户
         }
         public WebDataCaptureForm()
         {
@@ -228,13 +232,15 @@ namespace CaptureManage.AppWin
             btnUseRuleStation.Tag = BtnCategory.BtnUpdateStation.ToString();
             btnClearTip.Tag = BtnCategory.ClearTip.ToString();
             btnClearTip.Click += new EventHandler(Button_Click);
+            btnLogin.Tag = BtnCategory.Login12306Account.ToString();
+            btnLogin.Click += new EventHandler(Button_Click);
             LoadStation();//init station of information
             InitRequestParam();
         }
-        void InitRequestParam() 
+        void InitRequestParam()
         {
-            HttpProtocolConfig config = new  HttpProtocolConfig();
-            config.GetVerifyCodeParamStatic(TickekLogicConfigFullFile, VerifyCodeImgConfig);
+            HttpProtocolConfig config = new HttpProtocolConfig();
+            verifyCodeParam = config.GetVerifyCodeParamStatic(TickekLogicConfigFullFile, VerifyCodeImgConfig);
         }
         void LoadStation() 
         {
@@ -308,6 +314,9 @@ namespace CaptureManage.AppWin
                     break;
                 case BtnCategory.ClearTip://清空提示内容的处理
                     ClearTip();
+                    break;
+                case BtnCategory.Login12306Account:
+                    LoginAccountWithVerifyCode(selectIcon, verifyCodeParam, CheckVerifyCodeUrl);
                     break;
                 
             }
@@ -468,7 +477,6 @@ namespace CaptureManage.AppWin
             }
             //查找出符合输入关键字对应的车站
         }
-
         private void CombobBox_TextUpdate(object sender, EventArgs e)
         {
             ComboBox cmb = sender as ComboBox;
@@ -534,16 +542,16 @@ namespace CaptureManage.AppWin
             //将流转换为响应的图片显示到界面
             // WebResponse stream= HttpClientExtend.HttpWebRequestGet(url);
            
-            string full = Logger.GenerateTimeOfFileName() + ".jpg";
+            string full = Logger.GenerateTimeOfFileName() + ".jpg";//如果操作的图片间隔在1秒之内会占用相同的文件名称导致异常
             string dir = VerifyCodeDir + "/" + Logger.GetNowDayIndex(); 
             HttpClientExtend.DownloadSmallFile(url, dir, full);
             // string response= HttpClientExtend.HttpClientGet(url);//实际上此处应该读取文件流转换为图片
             
             Image img = new Bitmap(dir + "/" + full);
+            //存在bug   GDI+发生一般性错误详解
             img.Save(VerifyCodeImgFullDir);
             int w = img.Width;
             int h = img.Height;
-           
             int x = smallImgNormalIn12306[0];
             int y = smallImgNormalIn12306[1];
             if (pbVerifyCodeImg.Width < w || pbVerifyCodeImg.Height < h)
@@ -552,7 +560,10 @@ namespace CaptureManage.AppWin
                 pbVerifyCodeImg.Height = h;
                 logicPanel.Height = w + 80;
             }
+            //生成图片副本
+           // Graphics g = Graphics.FromImage(img); 
             pbVerifyCodeImg.BackgroundImage = img;
+            //g.Dispose();
             string relative = configDict["ClickImgReleativePath"];
             string appDir = AppDir;
            
@@ -561,6 +572,8 @@ namespace CaptureManage.AppWin
             avgY = h / y;//每个图片平均高度
             //验证码行列分析
             return;
+            #region  --代码控制图标
+            
             for (int i = 0; i < y; i++)
             {
                 for (int j = 0; j < x; j++)
@@ -586,6 +599,7 @@ namespace CaptureManage.AppWin
                 }
             }
             logicPanel.ResumeLayout(false);
+            #endregion
         }
         private void PictureBox_Click(object sender, EventArgs e)
         {
@@ -624,6 +638,32 @@ namespace CaptureManage.AppWin
             }
             pbVerifyCodeImg.Image = img;
             g.Dispose();
+        }
+        void LoginAccountWithVerifyCode(Dictionary<int,Point> selectIcon,VerifyCode param,string url) 
+        {//提取选择的验证码图片坐标
+            List<string> px = new List<string>();
+            foreach (KeyValuePair<int,Point> item in selectIcon)
+            {
+                px.Add(item.Value.X + "," + item.Value.Y);
+            }
+            string select = string.Join(",", px);
+            param.answer = select;
+
+            string json = param.ConvertJson();
+            string head = @"Accept:application/json, text/javascript, */*; q=0.01
+Accept-Encoding:gzip, deflate, br
+Accept-Language:zh-CN,zh;q=0.8
+Connection:keep-alive
+Content-Length:51
+Content-Type:application/x-www-form-urlencoded; charset=UTF-8
+Cookie:_passport_session=47d63662000d48f5ad967765bfb47b8b9382; _passport_ct=bf013d1f23774a43bc968ae3e2675904t0269; _jc_save_fromStation=%u5317%u4EAC%u897F%2CBXP; _jc_save_toStation=%u6DF1%u5733%2CSZQ; _jc_save_fromDate=2017-11-19; _jc_save_toDate=2017-11-19; _jc_save_wfdc_flag=dc; route=c5c62a339e7744272a54643b3be5bf64; BIGipServerotn=217055754.50210.0000; RAIL_EXPIRATION=1512095461498; RAIL_DEVICEID=EzgegZVdgB_T7ZG4zCPom_T9XgfrU2pfqAAuoaXpl8fEVAnnnWmws9yX2apr16Niw-HvJ1a5I7ze8gAfo83_dscQ7wiBfop10YDYOfHbbJH6D6tDj61aHmB1JSCPzFnvpH3TLjHPiVzciX714Ck_MQpNw0QBO3q4; BIGipServerpool_passport=300745226.50215.0000
+Host:kyfw.12306.cn
+Origin:https://kyfw.12306.cn
+Referer:https://kyfw.12306.cn/otn/login/init
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
+X-Requested-With:XMLHttpRequest";
+            string answer= HttpClientExtend.RunPosterContainerHeaderHavaParam(url, head,json,null);
+            LoggerWriter.CreateLogFile(answer, LogDir, ELogType.HttpResponse, typeof(WebDataCaptureForm).Name);
         }
     }
     

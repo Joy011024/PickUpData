@@ -39,7 +39,9 @@ namespace Domain.CommonData
         [Description("爬虫数据日志")]
         SpliderDataLog=9,
         [Description("爬取的组数据")]
-        SpliderGroupDataLog=10
+        SpliderGroupDataLog=10,
+        [Description("Http请求响应")]
+        HttpResponse=11
     }
     /// <summary>
     /// 程序类型

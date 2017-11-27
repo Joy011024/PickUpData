@@ -20,7 +20,7 @@ namespace TicketData.Manage
         }
         public void SaveCarWithSeatData(leftTicketDTOResponse record)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
