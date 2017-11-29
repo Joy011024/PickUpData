@@ -222,6 +222,8 @@ namespace CaptureManage.AppWin
             cmbBeginStation.Focus();
             Cursor = Cursors.Default;
             cmbBeginStation.DroppedDown = true;
+            cmbBeginStation.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndex);
+            cmbToStation.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndex);
             btnTicketQuery.Tag = BtnCategory.QueryTicket.ToString();
             btnTicketQuery.Click += new EventHandler(Button_Click);
             btnRefreshVerifyCode.Tag = BtnCategory.RefreshVerifyCode.ToString();
@@ -236,6 +238,15 @@ namespace CaptureManage.AppWin
             btnLogin.Click += new EventHandler(Button_Click);
             LoadStation();//init station of information
             InitRequestParam();
+            //绑定数据源
+            foreach (StationName item in datas)
+            {
+                // items.Add(item.Name, item);
+                cmbBeginStation.Items.Add(new KeyValuePair<string, StationName>(item.Name, item));
+                cmbToStation.Items.Add(new KeyValuePair<string, StationName>(item.Name, item));
+            }
+            SetComboBoxDisplay(cmbBeginStation);
+            SetComboBoxDisplay(cmbToStation);
         }
         void InitRequestParam()
         {
@@ -469,37 +480,66 @@ namespace CaptureManage.AppWin
         }
         private void ComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char c = e.KeyChar;
-            // 8 '\b' 删除键  32 ' ' 空格
-            if (c == 8 || c == 32)
+            try
             {
-                return;
+                char c = e.KeyChar;
+                // 8 '\b' 删除键  32 ' ' 空格
+                if (c == 8 || c == 32)
+                {
+                    return;
+                }
+                //查找出符合输入关键字对应的车站
             }
-            //查找出符合输入关键字对应的车站
+            catch (Exception ex)
+            { 
+            
+            }
         }
         private void CombobBox_TextUpdate(object sender, EventArgs e)
         {
-            ComboBox cmb = sender as ComboBox;
-            cmb.Items.Clear();
-            string text = cmb.Text;
-            Dictionary<string, StationName> items = new Dictionary<string, StationName>();
-            foreach (StationName item in datas)
+            try
             {
-                if (item.Key.Contains(text))
+                ComboBox cmb = sender as ComboBox;
+                cmb.Items.Clear();
+                string text = cmb.Text;
+                Dictionary<string, StationName> items = new Dictionary<string, StationName>();
+                foreach (StationName item in datas)
                 {
-                    // items.Add(item.Name, item);
-                    cmb.Items.Add(new KeyValuePair<string, StationName>(item.Name, item));
+                    if (item.Key.Contains(text))
+                    {
+                        // items.Add(item.Name, item);
+                        cmb.Items.Add(new KeyValuePair<string, StationName>(item.Name, item));
+                    }
                 }
+                if (cmb.Items.Count == 0)
+                {
+                    return;
+                }
+                SetComboBoxDisplay(cmb);
+                cmb.SelectionStart = text.Length;//设置继续输入的文本位置（没有改语句将出现倒叙文本）
+                Cursor = Cursors.Default;
+                cmb.DroppedDown = true;
             }
-            if (cmb.Items.Count == 0)
-            {
-                return;
+            catch (Exception ex)
+            { 
+            
             }
+        }
+        void SetComboBoxDisplay(ComboBox cmb) 
+        {
             cmb.DisplayMember = "Key";
             cmb.ValueMember = "Value";
-            cmb.SelectionStart = text.Length;//设置继续输入的文本位置（没有改语句将出现倒叙文本）
-            Cursor = Cursors.Default;
-            cmb.DroppedDown = true;
+        }
+        private void ComboBox_SelectedIndex(object sender, EventArgs e)
+        {
+            try
+            {
+                ComboBox cmb = sender as ComboBox;
+            }
+            catch (Exception ex)
+            { 
+            
+            }
         }
         /// <summary>
         /// 设置参数

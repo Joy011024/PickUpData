@@ -22,5 +22,6 @@
       <add key="ClickIconSizeIn12306" value="26x26"/> <!--图片点中提示像素-->
       <add key="TickekLogicConfigFile" value="Config/TicketConfigEntity.xml"/> <!--票务系统配置的xml-->
       <add key="VerifyCodeHttp12306" value="ticket/RequestParam/VerifyCodeParam"/> <!--12306登录验证请求的配置项-->
+      <add key="Get12306Cookie_1" value="http://www.12306.cn/mormhweb/"/>
   </appSettings>
 </configuration>
