@@ -86,6 +86,8 @@ namespace CaptureWebData
         {
             //new System.Windows.Forms.ToolStripSplitButton()
             WinArray wins = new WinArray();
+           
+            //提取程序集下全部的窗体类
             foreach (KeyValuePair<string,List<ClassInfo>> item in wins.winGroup)
             {
                 ToolStripSplitButton tsbSB = new ToolStripSplitButton()

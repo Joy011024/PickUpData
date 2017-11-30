@@ -64,6 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CitySubwayFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CitySubwayFrm.Designer.cs">
+      <DependentUpon>CitySubwayFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FactoryService\IocHelper.cs" />
     <Compile Include="TicketData.IManage\ISyncTicketDataManage.cs" />
     <Compile Include="TicketData.Manage\TicketDataPrepareManager.cs" />
@@ -86,6 +92,9 @@
     <Compile Include="WinArray.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CitySubwayFrm.resx">
+      <DependentUpon>CitySubwayFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WebDataCaptureForm.resx">
       <DependentUpon>WebDataCaptureForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,6 +126,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\CitySubwayCfg.xml" />
     <Content Include="Config\LogicCfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>

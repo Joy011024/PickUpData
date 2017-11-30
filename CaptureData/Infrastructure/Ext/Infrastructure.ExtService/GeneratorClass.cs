@@ -90,4 +90,53 @@ namespace Infrastructure.ExtService
             return (obj as T);
         }
     }
+    public class AssemblyHelp
+    {
+        /// <summary>
+        /// 提取程序集下全部的类对象
+        /// </summary>
+        /// <param name="dllPath"></param>
+        public static Type[] GetAllClass(string dllPath, string baseTypeName = null)
+        {
+            Type[] ts = GetAllType(dllPath);
+            if (string.IsNullOrEmpty(baseTypeName))
+            {
+                return ts;
+            }
+            List<Type> target = new List<Type>();
+            foreach (Type item in ts)
+            {
+                if (item.BaseType!=null&&item.BaseType.Name.ToLower() == baseTypeName.ToLower())
+                {
+                    target.Add(item);
+                }
+            }
+            return target.ToArray();
+        }
+        static Type[] GetAllType(string dllPath) 
+        {
+            Assembly ass = Assembly.LoadFrom(dllPath);
+            Type[] ts = ass.GetTypes();
+            return ts;
+        }
+        public static T[] GetAllType<T>(string dllType) where T:class
+        {
+            Type[] ts = GetAllType(dllType);
+            List<T> es=new List<T>();
+            Type et = typeof(T);
+            foreach (Type item in ts)
+            {
+                if (item.BaseType != null && item.BaseType == et)
+                {
+                    object obj = System.Activator.CreateInstance(item);
+                    T t = (obj as T);
+                    if (t != null)
+                    {
+                        es.Add(t);
+                    }
+                }
+            }
+            return es.ToArray();
+        }
+    }
 }
