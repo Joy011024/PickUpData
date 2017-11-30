@@ -217,11 +217,11 @@ namespace CaptureManage.AppWin
             btnLoadBaseData.Tag = BtnCategory.LogicData.ToString();
             btnLoadBaseData.Click += new EventHandler(Button_Click);
             //如何实现 Combobox元素在不点击下拉箭头前能输入文本
-            cmbBeginStation.AutoCompleteMode = AutoCompleteMode.Append;
+           // cmbBeginStation.AutoCompleteMode = AutoCompleteMode.Append;
             dtpGoTime.Value = DateTime.Now;
-            cmbBeginStation.Focus();
-            Cursor = Cursors.Default;
-            cmbBeginStation.DroppedDown = true;
+           // cmbBeginStation.Focus();
+            //Cursor = Cursors.Default;
+            //cmbBeginStation.DroppedDown = true;
             cmbBeginStation.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndex);
             cmbToStation.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndex);
             btnTicketQuery.Tag = BtnCategory.QueryTicket.ToString();

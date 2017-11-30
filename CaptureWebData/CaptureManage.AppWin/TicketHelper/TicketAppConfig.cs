@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using System.IO;
 namespace CaptureManage.AppWin
 {
     public class TicketAppConfig
@@ -50,6 +51,45 @@ namespace CaptureManage.AppWin
                     brushTicketCfg = ConfigurationManager.AppSettings["Ticket12306PluginCfgDir"];
                 }
                 return brushTicketCfg;
+            }
+        }
+        static string subwayCfg;
+
+        public static string BeijingSubwayCfgReletive
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ticket12306Cfg))
+                {
+                    subwayCfg = ConfigurationManager.AppSettings["CitySubwayCfg"];
+                }
+                return subwayCfg;
+            }
+        }
+        
+    }
+    public class AssemblyLoggerDir
+    {
+        public  string AppDir
+        {
+            get
+            {
+                string path = this.GetType().Assembly.Location;
+                DirectoryInfo di = new DirectoryInfo(path);
+                return di.FullName;
+            }
+        }
+        static string logDir;
+        public string LogDir
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(logDir))
+                {
+                    DirectoryInfo di = new DirectoryInfo(AppDir);
+                    logDir = di.Parent.FullName;
+                }
+                return logDir;
             }
         }
     }

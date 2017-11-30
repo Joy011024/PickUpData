@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<appSetting>
-  <!--北京地铁各站次一级首发信息-->
-  <add key="BeijingSubwaySiteTimeFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/subwaymap/stations.xml"/>
-  <!--北京各个线路站点信息-->
-  <add key="BeijingSubwayLineSiteFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/subwaymap/beijing.xml"/>
-  <!--北京地铁线路更新URL-->
-  <add key="BeijingSubwayLineUpdateFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/api/getrealdatas"/>
-  <add key="BeijingSubwaySiteFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/subwaymap/interchange.xml"/>
-</appSetting>
+<configuration>
+  <appSettings>
+    <!--北京地铁各站次一级首发信息-->
+    <add key="BeijingSubwaySiteTimeFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/subwaymap/stations.xml"/>
+    <!--北京各个线路站点信息-->
+    <add key="BeijingSubwayLineSiteFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/subwaymap/beijing.xml"/>
+    <!--北京地铁线路更新URL-->
+    <add key="BeijingSubwayLineUpdateFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/api/getrealdatas"/>
+    <add key="BeijingSubwaySiteFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/subwaymap/interchange.xml"/>
+  </appSettings>
+</configuration>
