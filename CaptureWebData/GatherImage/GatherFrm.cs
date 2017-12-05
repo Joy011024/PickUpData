@@ -41,6 +41,7 @@ namespace GatherImage
             if (gather > 0)
             {//如果本次操作有图片进行下载，则删除轮询调度作业，直接使用while去查找，避免出现锁死的现象
                 (new QuartzJob()).DeleteJob<JobDelegateFunction>();
+                DownLoadImageSize();
             }
             return gather;
         }
