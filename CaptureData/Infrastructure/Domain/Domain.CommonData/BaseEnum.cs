@@ -84,7 +84,7 @@ namespace Domain.CommonData
                 Directory.CreateDirectory(file);
             string filetype = ".txt";
             if (string.IsNullOrEmpty(fileName))
-                file += now.ToString(CommonFormat.DateTimeIntFormat) + filetype;
+                file += "/"+log+now.ToString(CommonFormat.DateTimeIntFormat) + filetype;
             else
                 file += "/"+ fileName + filetype;
             FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write,FileShare.Write);

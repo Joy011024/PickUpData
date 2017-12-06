@@ -90,18 +90,29 @@ namespace GatherImage
         string GatherImage(string url, string uin, string local, bool isZipImage)
         {
             WebResponse response = HttpClientExtend.HttpWebRequestGet(url);
+            //如何判断响应是否正常
+            string type= response.ContentType;
+            //响应内容是否为预期
             Stream st = response.GetResponseStream();
             ImageHelper img = new ImageHelper();
             MemoryStream ms;
             string imgType = "Zip_";
-            if (isZipImage)
+            try
             {
-                ms = img.ImageZip(st, 100);
+                if (isZipImage)
+                {
+                    ms = img.ImageZip(st, 100);
+                }
+                else
+                {
+                    ms = img.OriginImage(st);
+                    imgType = "Ori_";
+                }
             }
-            else 
-            {
-                ms = img.OriginImage(st);
-                imgType = "Ori_";
+            catch (Exception ex)
+            { //此处存在的bug http://q3.qlogo.cn/g?b=qq&k=jOSrVyJKynwRulkkbBRZfw&s=100&t=1496888983 
+                //虽然该URL在浏览器上可以打开，但是打开的图片不可用，不能转换为图片进行存储
+                return string.Empty;
             }
             string time = DateTime.Now.ToString("yyyyMMddHHmmssfff");
             string address = "Null";
@@ -192,6 +203,10 @@ namespace GatherImage
             List<string> paths = new List<string>();
             foreach  (WaitGatherImage item in waits)
             {
+                if (string.IsNullOrEmpty(item.HeadImageUrl))
+                {
+                    continue;
+                }
                 string path= GatherImage(item.HeadImageUrl,item.Uin, item.LocalCity,isZipImage);
                 string sp = string.Empty;
                 if (!string.IsNullOrEmpty(path))

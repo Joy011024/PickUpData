@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using Infrastructure.ExtService;
 namespace GatherImage
 {
     public partial class GatherFrm : Form
@@ -37,7 +37,11 @@ namespace GatherImage
             {
                 isZip = false;
             }
-            int gather = guin.DownLoadImage(isZip).Count;
+            List<string> dirs=guin.DownLoadImage(isZip);
+            if(dirs.Count>0)
+            LoggerWriter.CreateLogFile(string.Join("\r\n", dirs), 
+                NowAppDirHelper.GetNowAppDir(AppCategory.WinApp) + "/" + AppCategory.WinApp.ToString(), ELogType.DebugData);
+            int gather = dirs.Count;
             if (gather > 0)
             {//如果本次操作有图片进行下载，则删除轮询调度作业，直接使用while去查找，避免出现锁死的现象
                 (new QuartzJob()).DeleteJob<JobDelegateFunction>();
