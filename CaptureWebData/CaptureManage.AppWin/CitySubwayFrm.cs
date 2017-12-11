@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DataHelp;
 using HttpClientHelper;
 using Domain.CommonData;
+using TicketData.Model;
 namespace CaptureManage.AppWin
 {
     public partial class CitySubwayFrm : Form
@@ -32,10 +33,19 @@ namespace CaptureManage.AppWin
         }
         void ReadAppCfg()
         {
+            
+
             string cfgDir = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
             string file = TicketAppConfig.BeijingSubwayCfgReletive;//相对路径名称
             configDict = XmlFileHelper.ReadAppsettingSimulateConfig(cfgDir + "/" + file, "configuration/appSettings", "key", "value");
             Dictionary<string, string> brushCfg = XmlFileHelper.ReadXmlNodeItemInText(cfgDir + "/" + TicketAppConfig.BrushTicketCfg, "ticket");
+        }
+        void ReadSql(Type table) 
+        {
+            string xml = AppSettingItem.AppDataSqlXml;//xml 文件
+            //读取进行操作的SQL语句
+            string nodeName = BaseCfgItem.AppCfgXmlNodeFormat + "/" + table.Name;
+            //读取节点项
         }
     }
 }

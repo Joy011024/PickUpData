@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettingCfg.cs" />
     <Compile Include="BaseEnum.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="DelegateData.cs" />
+    <Compile Include="ModelFieldContainTime.cs" />
     <Compile Include="PickUpStatic.cs" />
     <Compile Include="TecentData\FindQQData.cs" />
     <Compile Include="IpModel\IpDataMapTable.cs" />
@@ -71,6 +73,7 @@
     <Content Include="SqlCmd\UpdateSp\V1.2\TecentQQData_imageType.sql" />
     <Content Include="SqlCmd\UpdateSp\V1.3\EveryDayStatics.sql" />
     <Content Include="SqlCmd\UpdateSp\V1.4\IgnoreNoImageData.sql" />
+    <Content Include="TicketDBSqlCmd\CreateSql\AppSettingCfg.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

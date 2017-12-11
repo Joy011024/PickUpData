@@ -68,6 +68,21 @@ namespace CaptureManage.AppWin
         }
         
     }
+    public class AppSettingItem
+    {
+        static string appDataSqlXml;
+        public static string AppDataSqlXml
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(appDataSqlXml))
+                {
+                    appDataSqlXml = new AssemblyLoggerDir().LogDir+"/" + ConfigurationManager.AppSettings["AppDataSqlXml"];
+                }
+                return appDataSqlXml;
+            }
+        }
+    }
     public class AssemblyLoggerDir
     {
         public  string AppDir
@@ -90,6 +105,25 @@ namespace CaptureManage.AppWin
                     logDir = di.Parent.FullName;
                 }
                 return logDir;
+            }
+        }
+       
+    }
+    public class BaseCfgItem
+    {
+        static string baseNodeItemFormat;
+        /// <summary>
+        /// 公用的xml节点项
+        /// </summary>
+        public static string AppCfgXmlNodeFormat
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(baseNodeItemFormat))
+                {
+                    baseNodeItemFormat = ConfigurationManager.AppSettings["AppCfgXmlNodeFormat"];
+                }
+                return baseNodeItemFormat;
             }
         }
     }

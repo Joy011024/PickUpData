@@ -8,5 +8,6 @@
     <!--北京地铁线路更新URL-->
     <add key="BeijingSubwayLineUpdateFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/api/getrealdatas"/>
     <add key="BeijingSubwaySiteFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/subwaymap/interchange.xml"/>
+    <add key="BeijingSubwayLine" value="1号线=0|2号线=1|4号线大兴线=2|5号线=3|6号线=4|8号线=5|9号线=6|10号线=7|13号线=8|14号线=9|15号线=10|八通线=11|昌平线=12|亦庄线=13|房山线=14|机场线=15|7号线=16|14号线(东)=17"/>
   </appSettings>
 </configuration>

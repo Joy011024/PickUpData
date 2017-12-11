@@ -39,7 +39,7 @@ namespace GatherImage
             }
             List<string> dirs=guin.DownLoadImage(isZip);
             if(dirs.Count>0)
-            LoggerWriter.CreateLogFile(string.Join("\r\n", dirs), 
+            LoggerWriter.CreateLogFile("Rows:"+dirs.Count+"\r\n"+ string.Join("\r\n", dirs), 
                 NowAppDirHelper.GetNowAppDir(AppCategory.WinApp) + "/" + AppCategory.WinApp.ToString(), ELogType.DebugData);
             int gather = dirs.Count;
             if (gather > 0)

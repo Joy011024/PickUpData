@@ -75,6 +75,7 @@
     <Compile Include="TicketData.Manage\TicketDataPrepareManager.cs" />
     <Compile Include="TicketData.Model\CarInfo.cs" />
     <Compile Include="TicketData.Model\Request\LoginParam12306.cs" />
+    <Compile Include="TicketData.Model\Response\SubwaySiteData.cs" />
     <Compile Include="TicketData.Model\TicketCfg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicketHelper\TicketAppConfig.cs" />
@@ -138,11 +139,12 @@
     </Content>
     <Content Include="Doc\DevDoc\车票json数据含义解析.txt" />
     <Content Include="Exception\反射创建实体.txt" />
+    <Content Include="SqlCmdConfig\AppDataCfgSql.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SqlCmd\Ticket12306.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TicketData.Model\Response\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

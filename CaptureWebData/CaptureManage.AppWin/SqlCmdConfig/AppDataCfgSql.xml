@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <SubwaySiteData>
+      <add key="Insert" value="insert into  SubwaySiteData
+(Id,InDBDayInt,CreateTime,BelongLine,TurnLine,SubwaySiteName,SubwaySiteTimeLong)
+values
+(
+	'{Id}',{InDBDayInt},'{CreateTime}',{BelongLine},{TurnLine},'{SubwaySiteName}',{SubwaySiteTimeLong}
+)" />
+    </SubwaySiteData>
+  </appSettings>
+</configuration>

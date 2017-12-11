@@ -1,6 +1,8 @@
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Quartz.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Config\CitySubwayCfg.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Config\LogicCfg.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Config\TicketConfigEntity.xml
+D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\SqlCmdConfig\AppDataCfgSql.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Content\SystemImg\ClickSign.png
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\中国=1400189813\上海=1275992132\上海=1275992132.txt
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Service\CategoryGroup\中国=1400189813\上海=1275992132\卢湾=1327785764\卢湾=1327785764.txt
@@ -590,7 +592,6 @@ D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Common
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\EntityFramework.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\EntityFramework.SqlServer.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Quartz.pdb
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\Quartz.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.IO.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Net.Http.xml
 D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\bin\Debug\System.Net.Http.Extensions.xml
