@@ -30,11 +30,10 @@ namespace CaptureManage.AppWin
                 string response= HttpClientExtend.HttpClientGet(item.Value);
                 LoggerWriter.CreateLogFile(response, new AssemblyLoggerDir().LogDir + "/" + typeof(CitySubwayFrm).Name, ELogType.HttpResponse, item.Key);
             }
+            ReadSql(typeof(SubwaySiteData));
         }
         void ReadAppCfg()
         {
-            
-
             string cfgDir = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp);
             string file = TicketAppConfig.BeijingSubwayCfgReletive;//相对路径名称
             configDict = XmlFileHelper.ReadAppsettingSimulateConfig(cfgDir + "/" + file, "configuration/appSettings", "key", "value");
@@ -46,6 +45,7 @@ namespace CaptureManage.AppWin
             //读取进行操作的SQL语句
             string nodeName = BaseCfgItem.AppCfgXmlNodeFormat + "/" + table.Name;
             //读取节点项
+            string addSqlCmd= XmlFileHelper.ReadXmlItemValue(xml, nodeName, "key", "value", "Insert");
         }
     }
 }

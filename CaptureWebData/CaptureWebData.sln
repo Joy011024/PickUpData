@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLanguage", "..\AppLangua
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzJobService", "..\CaptureData\Infrastructure\Ext\QuartzJobService\QuartzJobService.csproj", "{32DBC3B8-3B1A-4450-8293-A43F643DB83C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.MsSqlService.XmlConfigService", "..\CaptureData\Infrastructure\Infrastructure.MsSqlService.XmlConfigService\Infrastructure.MsSqlService.XmlConfigService.csproj", "{6708F053-5FAE-4F98-9E8C-A985815295DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +173,10 @@ Global
 		{32DBC3B8-3B1A-4450-8293-A43F643DB83C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32DBC3B8-3B1A-4450-8293-A43F643DB83C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32DBC3B8-3B1A-4450-8293-A43F643DB83C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6708F053-5FAE-4F98-9E8C-A985815295DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6708F053-5FAE-4F98-9E8C-A985815295DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6708F053-5FAE-4F98-9E8C-A985815295DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6708F053-5FAE-4F98-9E8C-A985815295DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,5 +196,6 @@ Global
 		{FF8BBA0A-ADD4-4750-916E-A635A27CA67E} = {A6454CE8-AC13-4840-B473-8D3234D62EBB}
 		{11861A4E-E136-4395-9ABD-31637E3DAE9A} = {04AFFF02-BD80-463B-ABE2-34E30679817C}
 		{BA4BE399-D5A0-49EB-8C57-8458D74E9803} = {46EA8F30-5239-4673-B56F-463CB395B141}
+		{6708F053-5FAE-4F98-9E8C-A985815295DE} = {4CC1115A-0CC8-4BEB-B2CC-0ED8D706E75F}
 	EndGlobalSection
 EndGlobal

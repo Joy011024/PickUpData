@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-  <appSettings>
+  <appSettings>  <!--此处项URL-->
     <!--北京地铁各站次一级首发信息-->
     <add key="BeijingSubwaySiteTimeFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/subwaymap/stations.xml"/>
     <!--北京各个线路站点信息-->
@@ -8,6 +8,8 @@
     <!--北京地铁线路更新URL-->
     <add key="BeijingSubwayLineUpdateFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/api/getrealdatas"/>
     <add key="BeijingSubwaySiteFrom" value="http://map.bjsubway.com:8080/subwaymap2/public/subwaymap/interchange.xml"/>
-    <add key="BeijingSubwayLine" value="1号线=0|2号线=1|4号线大兴线=2|5号线=3|6号线=4|8号线=5|9号线=6|10号线=7|13号线=8|14号线=9|15号线=10|八通线=11|昌平线=12|亦庄线=13|房山线=14|机场线=15|7号线=16|14号线(东)=17"/>
   </appSettings>
+  <dict><!--此处项为基础数据-->
+    <add key="BeijingSubwayLine" value="1号线=0|2号线=1|4号线大兴线=2|5号线=3|6号线=4|8号线=5|9号线=6|10号线=7|13号线=8|14号线=9|15号线=10|八通线=11|昌平线=12|亦庄线=13|房山线=14|机场线=15|7号线=16|14号线(东)=17"/>
+  </dict>
 </configuration>

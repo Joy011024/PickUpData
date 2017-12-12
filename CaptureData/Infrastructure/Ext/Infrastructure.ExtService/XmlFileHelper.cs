@@ -127,6 +127,29 @@ namespace Infrastructure.ExtService
             }
             return dict;
         }
+        public static string ReadXmlItemValue(string xmlDir,string nodeName,string keyItemName,string valueItemName,string key) 
+        {
+            XmlNode node = GetXmlNode(xmlDir, nodeName);
+            if (node == null)
+            {
+                return null;
+            }
+            foreach (XmlNode item in node.ChildNodes)
+            {
+                if (item.NodeType == XmlNodeType.Comment)
+                {
+                    continue;
+                }
+                XmlAttribute attKey = item.Attributes[keyItemName];
+                if (attKey.Value != key)
+                {
+                    continue;
+                }
+                XmlAttribute attValue = item.Attributes[valueItemName];
+                return attValue.Value;
+            }
+            return null;
+        }
         /// <summary>
         /// 从xml中读取实体相关信息
         /// </summary>

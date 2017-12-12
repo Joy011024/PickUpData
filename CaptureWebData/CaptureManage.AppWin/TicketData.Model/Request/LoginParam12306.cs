@@ -15,4 +15,9 @@ namespace CaptureManage.AppWin.TicketData.Model.Request
         public string login_site { get; set; }
         public string rand { get; set; }
     }
+    public enum ECfgItem
+    {
+        appSettings=1,
+        dict=2
+    }
 }
