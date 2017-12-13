@@ -124,6 +124,11 @@ namespace Infrastructure.ExtService
             }
             return waitFillString;
         }
+        public static Type GetPropertyType<T>(this T helper,string property) where T:class
+        {
+            PropertyInfo pi = helper.GetType().GetProperty(property);
+            return pi.GetType();
+        }
     }
     public static class DataConvert
     {

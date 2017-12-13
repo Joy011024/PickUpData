@@ -1,4 +1,0 @@
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\InfrastructureRepository\InfrastructureRepository.IMainContext\bin\Debug\InfrastructureRepository.IMainContext.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\InfrastructureRepository\InfrastructureRepository.IMainContext\bin\Debug\InfrastructureRepository.IMainContext.pdb
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\InfrastructureRepository\InfrastructureRepository.IMainContext\obj\Debug\InfrastructureRepository.IMainContext.dll
-D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureData\Infrastructure\InfrastructureRepository\InfrastructureRepository.IMainContext\obj\Debug\InfrastructureRepository.IMainContext.pdb

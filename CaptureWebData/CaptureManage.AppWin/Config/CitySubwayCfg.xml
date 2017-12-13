@@ -12,4 +12,10 @@
   <dict><!--此处项为基础数据-->
     <add key="BeijingSubwayLine" value="1号线=0|2号线=1|4号线大兴线=2|5号线=3|6号线=4|8号线=5|9号线=6|10号线=7|13号线=8|14号线=9|15号线=10|八通线=11|昌平线=12|亦庄线=13|房山线=14|机场线=15|7号线=16|14号线(东)=17"/>
   </dict>
+  <appMapModel> <!--配置和实体间的匹配关系-->
+    <add appSettings="BeijingSubwaySiteTimeFrom" model="stations"/>
+    <add appSettings="BeijingSubwayLineSiteFrom" model="sw"/>
+    <add appSettings="BeijingSubwayLineUpdateFrom" model=""/>
+    <add appSettings="BeijingSubwaySiteFrom" model="exs"/>
+  </appMapModel>
 </configuration>

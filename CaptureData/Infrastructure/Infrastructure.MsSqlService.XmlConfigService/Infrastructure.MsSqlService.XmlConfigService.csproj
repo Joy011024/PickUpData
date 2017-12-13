@@ -39,8 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseHelper\ReadXmlConfigHelper.cs" />
     <Compile Include="XmlConfigItemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
+      <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
+      <Name>Infrastructure.ExtService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.MsSqlService.SqlHelper\Infrastructure.MsSqlService.SqlHelper.csproj">
+      <Project>{43847d96-253a-4525-97ed-aca52340013b}</Project>
+      <Name>Infrastructure.MsSqlService.SqlHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
