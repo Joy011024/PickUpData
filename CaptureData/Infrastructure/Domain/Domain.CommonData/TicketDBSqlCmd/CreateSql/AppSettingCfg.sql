@@ -21,4 +21,12 @@ create table SubwaySiteData
 	TurnLine int not null,
 	SubwaySiteName  nvarchar(32) not null,
 	SubwaySiteTimeLong  smallint not null
-)
+);
+go
+create table SubwayCollection
+(
+	Id uniqueidentifier primary key,
+	Name nvarchar(32) not null,--地铁所属城市名
+	Code smallint ,
+	City nvarchar(32) --城市
+);

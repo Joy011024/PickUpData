@@ -9,5 +9,9 @@ values
 	'{Id}',{InDBDayInt},'{CreateTime}',{BelongLine},{TurnLine},'{SubwaySiteName}',{SubwaySiteTimeLong}
 )" />
     </SubwaySiteData>
+  <CitySubway>
+      <add  key="Insert" value="insert into SubwayCollection
+(Id,Name,Code,City) values('{Id}','{Name}',{Code},'{City}')"/>
+  </CitySubway>
   </appSettings>
 </configuration>

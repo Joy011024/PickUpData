@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Domain.CommonData
 {
-    public abstract class BaseField
+    public abstract class BaseField:GuidPrimaryKey
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
     }
     public class ModelFieldContainTimeWithGuid : ModelFieldContainTime
@@ -24,5 +23,12 @@ namespace Domain.CommonData
     public class FieldContainTime:BaseField
     { 
         
+    }
+    /// <summary>
+    /// 主键字段
+    /// </summary>
+    public class GuidPrimaryKey
+    {
+        public Guid Id { get; set; }
     }
 }

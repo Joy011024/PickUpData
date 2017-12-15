@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9CEF7F17-E35B-4AF0-BFAF-DA0F7B3D9EF4}</ProjectGuid>
+    <ProjectGuid>{43847D96-253A-4525-97ED-ACA52340013B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Domain.CommonData</RootNamespace>
-    <AssemblyName>Domain.CommonData</AssemblyName>
+    <RootNamespace>Infrastructure.MsSqlService.SqlHelper</RootNamespace>
+    <AssemblyName>Infrastructure.MsSqlService.SqlHelper</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,17 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Data">
-      <HintPath>..\..\..\..\CaptureWebData\bin\SelfDefine\Common.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\CaptureWebData\bin\EF\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,32 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSettingCfg.cs" />
-    <Compile Include="BaseEnum.cs" />
-    <Compile Include="CategoryData.cs" />
-    <Compile Include="DelegateData.cs" />
-    <Compile Include="BaeModel\ModelFieldContainTime.cs" />
-    <Compile Include="PickUpStatic.cs" />
-    <Compile Include="TecentData\FindQQData.cs" />
-    <Compile Include="IpModel\IpDataMapTable.cs" />
-    <Compile Include="IpModel\IPData.cs" />
-    <Compile Include="IpModel\IpAddressData.cs" />
+    <Compile Include="SqlCmdHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="SqlCmd\CreateSql\TecentDataUinDA.sql" />
-    <Content Include="SqlCmd\LogicData\CategoryData.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_ErrorGatherImageList.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_GetWaitGatherImageList.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_PickUpStaticWithDay.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_StaticCountToday.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_SuccessGatherImageList.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\TecentQQ.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.2\TecentQQData_imageType.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.3\EveryDayStatics.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.4\IgnoreNoImageData.sql" />
-    <Content Include="TicketDBSqlCmd\CreateSql\AppSettingCfg.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

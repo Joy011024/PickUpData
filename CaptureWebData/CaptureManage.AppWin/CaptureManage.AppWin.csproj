@@ -55,6 +55,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -74,6 +75,7 @@
     <Compile Include="TicketData.IManage\ISyncTicketDataManage.cs" />
     <Compile Include="TicketData.Manage\TicketDataPrepareManager.cs" />
     <Compile Include="TicketData.Model\CarInfo.cs" />
+    <Compile Include="TicketData.Model\CitySubway.cs" />
     <Compile Include="TicketData.Model\Request\LoginParam12306.cs" />
     <Compile Include="TicketData.Model\Response\SubwaySiteData.cs" />
     <Compile Include="TicketData.Model\TicketCfg.cs" />
@@ -130,6 +132,9 @@
     <Content Include="Config\CitySubwayCfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\ConfigTemplate\beijing.xml" />
+    <Content Include="Config\ConfigTemplate\interchange.xml" />
+    <Content Include="Config\ConfigTemplate\stations.xml" />
     <Content Include="Config\LogicCfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
