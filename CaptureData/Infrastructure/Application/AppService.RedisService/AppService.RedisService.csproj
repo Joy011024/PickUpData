@@ -39,25 +39,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ServiceStack.Client">
-      <HintPath>bin\RedisBin\ServiceStack.Client.dll</HintPath>
+      <HintPath>..\..\..\..\CaptureWebData\bin\Redis\ServiceStack.Client.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common">
-      <HintPath>bin\RedisBin\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\..\..\..\CaptureWebData\bin\Redis\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
-      <HintPath>bin\RedisBin\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\..\..\..\CaptureWebData\bin\Redis\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Redis">
-      <HintPath>bin\RedisBin\ServiceStack.Redis.dll</HintPath>
+      <HintPath>..\..\..\..\CaptureWebData\bin\Redis\ServiceStack.Redis.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>bin\RedisBin\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\..\..\..\CaptureWebData\bin\Redis\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
