@@ -32,7 +32,23 @@ namespace TicketData.Model
         public string LineName { get; set; }
         [Column(Name="i")]
         public short Code { get; set; }
+        [Column(Name = "slb")] 
         public string LineDesc { get; set; } //如机场线，昌平线
-
+        [Column(Name = "n")] //序号
+        public int Number { get; set; }
+        [Column(Name = "loop")]//该条地铁线是否环线【进行字符串之间的转换处理】
+        public bool IsLoop { get; set; }
+        [Column(Name = "lbx")]//最后一站的x坐标（最右边一站）
+        public int StepX { get; set; }
+        [Column(Name = "lby")]//最右侧一站的坐标
+        public int StepY { get; set; }
+        [Column(Name = "lbr")]//这个字段目前值都为 0.0
+        public string lbr { get; set; }
+        /// <summary>
+        /// 地体线的颜色
+        /// </summary>
+        public string LineColor { get; set; }
+        [Column(Name = "lnub")]
+        public int LineId { get; set; }
     }
 }
