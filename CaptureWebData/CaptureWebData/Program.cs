@@ -76,11 +76,14 @@ namespace CaptureWebData
             }
         }
         static bool useRedis;
-        public static bool UseRedis
+        /// <summary>
+        /// 启用Redis缓存存储功能
+        /// </summary>
+        public static bool OpenRedis
         {
             get 
             {
-                useRedis = ConfigurationManager.AppSettings["UseRedis"] == "true";
+                useRedis = ConfigurationManager.AppSettings["UsingRedis"] == "true";
                 return useRedis;
             }
         }
