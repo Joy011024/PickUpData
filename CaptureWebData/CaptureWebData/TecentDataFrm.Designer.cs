@@ -209,7 +209,7 @@
             // 
             this.rtbTip.Location = new System.Drawing.Point(559, 541);
             this.rtbTip.Name = "rtbTip";
-            this.rtbTip.Size = new System.Drawing.Size(205, 155);
+            this.rtbTip.Size = new System.Drawing.Size(205, 91);
             this.rtbTip.TabIndex = 17;
             this.rtbTip.Text = "";
             // 
@@ -335,7 +335,7 @@
             this.pickUpIEWebCookie.CallBack = null;
             this.pickUpIEWebCookie.Location = new System.Drawing.Point(12, 12);
             this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
-            this.pickUpIEWebCookie.Size = new System.Drawing.Size(545, 694);
+            this.pickUpIEWebCookie.Size = new System.Drawing.Size(541, 620);
             this.pickUpIEWebCookie.TabIndex = 19;
             // 
             // btnRefresh
@@ -351,7 +351,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(781, 708);
+            this.ClientSize = new System.Drawing.Size(772, 635);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtPageIndex);

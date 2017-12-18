@@ -54,9 +54,16 @@ namespace CaptureWebData
         }
         private void TecentDataFrm_Load(object sender, EventArgs e)
         {
-            InitBaseConfig();
-            Test();
-            Init();
+            try
+            {
+                InitBaseConfig();
+                Test();
+                Init();
+            }
+            catch (Exception ex)
+            { 
+                LoggerWriter.CreateLogFile(ex.ToString(),SystemConfig.ExeDir+ELogType.ErrorLog.ToString(),ELogType.ErrorLog);
+            }
         }
         void ReadCountryCity() 
         {
@@ -81,7 +88,8 @@ namespace CaptureWebData
 
             }
             cityList.Add(noLimitAddress);
-            List<CategoryData> cts = citys.Select(s => s.Root).OrderBy(t => t.Code).ToList();
+            List<CategoryData> cts =citys==null?new List<CategoryData>():
+                citys.Select(s => s.Root).OrderBy(t => t.Code).ToList();
             cityList.AddRange(cts);
             if (SystemConfig.OpenAutoQuertyDBTotal) 
             {//是否开启定时自动查询数据库采集的数据量信息
@@ -129,7 +137,7 @@ namespace CaptureWebData
         void NotRedisCacheCase() 
         {
             string dir = GetRedisRelyFileDir();
-            string fileOrItem = redisItemOrFileNameFormat + targetCountry.Name;
+            string fileOrItem =GetCagetoryDAtaFileName(targetCountry, redisItemOrFileNameFormat );
             string cityFile = fileOrItem + ".txt";
             if (!File.Exists(dir + "/" + fileOrItem + "/" + cityFile))
             {//没有数据文件时先从数据库中进行读取，在写入到文件中，最后写入到redis中
@@ -138,7 +146,7 @@ namespace CaptureWebData
                 string json = city.ConvertJson();
                 json.CreateNewAppData(cityFile, dir + "/" + fileOrItem);
                 if (SystemConfig.OpenRedis)
-                    redis.SetRedisItem(fileOrItem, "redis");
+                    redis.SetRedisItem(fileOrItem, json);
                 //省会，城市，区域
                 AnalyCity(city, targetCountry);//创建相关文件
             }
@@ -173,7 +181,7 @@ namespace CaptureWebData
                 nodes.Childrens.Add(temp);
             }
             string country = nodes.ConvertJson();
-            Logger.CreateNewAppData(country, "Country.txt", debugDir);
+            Logger.CreateNewAppData(country, "Country.txt", cityDir);
             //提取中国的省会列表 
             
             CategoryGroup provinceGroup = new CategoryGroup();
@@ -185,7 +193,8 @@ namespace CaptureWebData
                 //item.Childrens = new List<CategoryGroup>();
             }
             string province = provinceGroup.ConvertJson();
-            Logger.CreateNewAppData(province,GetNodeItemFileName(china, redisItemOrFileNameFormat), cityDir + GetNodeItemName(china, redisItemOrFileNameFormat ));
+            Logger.CreateNewAppData(province,GetNodeItemFileName(china, redisItemOrFileNameFormat), 
+                cityDir + GetNodeItemName(china, redisItemOrFileNameFormat ));
             //各个省会的市区列表
             foreach (var item in china.Childrens)
             {
@@ -203,7 +212,7 @@ namespace CaptureWebData
                 string city = cg.ConvertJson();
                 string pro = cityDir +GetNodeItemName(china, redisItemOrFileNameFormat ) + GetNodeItemName(item, redisItemOrFileNameFormat );
                 if(!string.IsNullOrEmpty(city))
-                Logger.CreateNewAppData(city, redisItemOrFileNameFormat + item.Root.Name + ".txt", pro);
+                Logger.CreateNewAppData(city, GetNodeItemFileName(item,redisItemOrFileNameFormat), pro);
                 foreach (CategoryGroup c in item.Childrens)
                 {//省直辖市的子节点
                     CategoryGroup cn = cn = new CategoryGroup()
@@ -223,11 +232,15 @@ namespace CaptureWebData
         }
         string GetNodeItemName(CategoryGroup item,string nameFormat) 
         {
-            return "/"+nameFormat + item.Root.Id ;
+            return "/"+nameFormat + item.Root.Name ;
+        }
+        string GetCagetoryDAtaFileName(CategoryData cate,string nameFormat) 
+        {
+            return nameFormat + cate.Name;
         }
         string GetNodeItemFileName(CategoryGroup item, string nameFormat) 
         {
-            return nameFormat + item.Root.Id + ".txt";
+            return nameFormat + item.Root.Name + ".txt";
         }
         void GetProcessPath()
         {

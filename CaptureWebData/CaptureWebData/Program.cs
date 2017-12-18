@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Configuration;
 using EmailHelper;
+using Domain.CommonData;
 namespace CaptureWebData
 {
     static class Program
@@ -177,6 +178,53 @@ namespace CaptureWebData
                 if (string.IsNullOrEmpty(captureWebDataWinAssembly))
                     captureWebDataWinAssembly = ConfigurationManager.AppSettings["CaptureWebDataWinAssembly"];
                 return captureWebDataWinAssembly;
+            }
+        }
+        
+        static string usingWebConfigDir;
+        /// <summary>
+        /// 日志路径采用配置文件中路径
+        /// </summary>
+        public static bool LogDirIsFromWebConfig
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(usingWebConfigDir))
+                {
+                    usingWebConfigDir = ConfigurationManager.AppSettings["LogDirIsFromWebConfig"];
+                }
+                usingWebConfigDir = string.IsNullOrEmpty(usingWebConfigDir) ? "true" : usingWebConfigDir;
+                return usingWebConfigDir == "true";
+            }
+        }
+        /// <summary>
+        /// 配置文件中设置的日志路径
+        /// </summary>
+        static string LogDir
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["LogDir"];
+            }
+        }
+        static string exeDir;
+        /// <summary>
+        /// 当前程序的路径
+        /// </summary>
+        public static string ExeDir
+        {
+            get
+            {
+                if (LogDirIsFromWebConfig)
+                {
+                    exeDir = LogDir;
+                }
+                if (string.IsNullOrEmpty(exeDir))
+                {
+                    AssemblyDataExt ass = new AssemblyDataExt();
+                    exeDir = ass.GetAssemblyDir();
+                }
+                return exeDir;
             }
         }
     }
