@@ -81,13 +81,15 @@ namespace CaptureWebData
                 redis = new RedisCacheService(SystemConfig.RedisIp, SystemConfig.RedisPort, SystemConfig.RedisPsw);
                 citys = redis.GetRedisCacheItem<List<CategoryGroup>>(defaultCountryNode);
             }
+            cityList = new List<CategoryData>();
+            cityList.Add(noLimitAddress);
             if (citys == null)
             {//没有缓存数据，此时将数据库中的城市地址数据进行读取写入到redis
                 NotRedisCacheCase();
                 //读取节点项
-
+                //数据项是否已经缓存
             }
-            cityList.Add(noLimitAddress);
+           
             List<CategoryData> cts =citys==null?new List<CategoryData>():
                 citys.Select(s => s.Root).OrderBy(t => t.Code).ToList();
             cityList.AddRange(cts);
@@ -206,21 +208,33 @@ namespace CaptureWebData
             //各个省会的市区列表
             foreach (var item in china.Childrens)
             {
-                string provinceJson=item.ConvertJson();
-                if (!string.IsNullOrEmpty(provinceJson))
+                //提取省会列表到市
+                CategoryGroup level = new CategoryGroup()
                 {
-                    Logger.CreateNewAppData(provinceJson, GetNodeItemFileName(item, redisItemOrFileNameFormat),
+                    Childrens = item.Childrens.Select(s => new CategoryGroup() { Root=s.Root }).ToList()
+                };
+                string jsonNode = level.ConvertJson();
+                //string provinceJson=item.ConvertJson();
+                if (!string.IsNullOrEmpty(jsonNode))
+                {
+                    Logger.CreateNewAppData(jsonNode, GetNodeItemFileName(item, redisItemOrFileNameFormat),
                         cityDir + GetNodeItemName(china, redisItemOrFileNameFormat) + GetNodeItemName(item, redisItemOrFileNameFormat));
+                    if (SystemConfig.OpenRedis)
+                    {
+                        redis.SetRedisItem(GetCagetoryDataFileNameOrRedisItem(item.Root, redisItemOrFileNameFormat), jsonNode);
+                    }
                 }
                 CategoryGroup cg = new CategoryGroup() 
                 {
                     Root=item.Root,
                     Childrens=item.Childrens
                 };
-                string city = cg.ConvertJson();
                 string pro = cityDir +GetNodeItemName(china, redisItemOrFileNameFormat ) + GetNodeItemName(item, redisItemOrFileNameFormat );
-                if(!string.IsNullOrEmpty(city))
-                Logger.CreateNewAppData(city, GetNodeItemFileName(item,redisItemOrFileNameFormat), pro);
+                //string city = cg.ConvertJson();
+                //if (!string.IsNullOrEmpty(city))
+                //{
+                //    Logger.CreateNewAppData(city, GetNodeItemFileName(item, redisItemOrFileNameFormat), pro);
+                //}
                 foreach (CategoryGroup c in item.Childrens)
                 {//省直辖市的子节点
                     CategoryGroup cn = cn = new CategoryGroup()
