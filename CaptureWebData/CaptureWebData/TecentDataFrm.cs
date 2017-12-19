@@ -152,19 +152,28 @@ namespace CaptureWebData
             }
             //将文件中的数据
             string text = FileHelper.ReadFile(dir + "/" + fileOrItem + "/" + cityFile);
-            List<CategoryData>  cs = text.ConvertObject<List<CategoryData>>();
-            cs= cs.Where(s => s.Id == targetCountry.Id).ToList();//指定国家下的省会数据
-            // AnalyCity();
             //将数据写入redis 
+            #region --这里需要增加一个判断是否将数据缓存到Redis缓存库
+           
             if (SystemConfig.OpenRedis)
-            {//启用Redis功能
+            {//启用Redis功能(数据写入到Redis缓存中)
                 RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp, SystemConfig.RedisPsw, SystemConfig.RedisPort);
                 rcm.SetCityCacheFromFile(dir, rcm, true);
             }
-            cityList.Add(noLimitAddress);
+            #endregion
+            List<CategoryData> cs = new List<CategoryData>();
+            //cs= text.ConvertObject<List<CategoryData>>();
+            // cs= cs.Where(s => s.Id == targetCountry.Id).ToList();//指定国家下的省会数据
+            CategoryGroup group = text.ConvertObject<CategoryGroup>();
+            cs.AddRange(group.Childrens.Select(s => s.Root).ToArray());
             cityList.AddRange(cs.ToArray());
             //citys
         }
+        /// <summary>
+        /// 对于从数据库中读取的城市数据进行处理写入到文本文件中作为基础数据使用
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="root"></param>
         void AnalyCity(List<CategoryData> data,CategoryData root) 
         {
             AssemblyDataExt ass = new AssemblyDataExt();
