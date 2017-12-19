@@ -137,7 +137,7 @@ namespace CaptureWebData
         void NotRedisCacheCase() 
         {
             string dir = GetRedisRelyFileDir();
-            string fileOrItem =GetCagetoryDAtaFileName(targetCountry, redisItemOrFileNameFormat );
+            string fileOrItem = GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat);
             string cityFile = fileOrItem + ".txt";
             if (!File.Exists(dir + "/" + fileOrItem + "/" + cityFile))
             {//没有数据文件时先从数据库中进行读取，在写入到文件中，最后写入到redis中
@@ -154,7 +154,7 @@ namespace CaptureWebData
             string text = FileHelper.ReadFile(dir + "/" + fileOrItem + "/" + cityFile);
             //将数据写入redis 
             #region --这里需要增加一个判断是否将数据缓存到Redis缓存库
-           
+            //在Redis数据库中增加一个版本号来记录当前存储的城市数据版本
             if (SystemConfig.OpenRedis)
             {//启用Redis功能(数据写入到Redis缓存中)
                 RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp, SystemConfig.RedisPsw, SystemConfig.RedisPort);
@@ -167,7 +167,6 @@ namespace CaptureWebData
             CategoryGroup group = text.ConvertObject<CategoryGroup>();
             cs.AddRange(group.Childrens.Select(s => s.Root).ToArray());
             cityList.AddRange(cs.ToArray());
-            //citys
         }
         /// <summary>
         /// 对于从数据库中读取的城市数据进行处理写入到文本文件中作为基础数据使用
@@ -243,7 +242,13 @@ namespace CaptureWebData
         {
             return "/"+nameFormat + item.Root.Name ;
         }
-        string GetCagetoryDAtaFileName(CategoryData cate,string nameFormat) 
+        /// <summary>
+        /// 组装文件或者Redis缓存项的名名
+        /// </summary>
+        /// <param name="cate"></param>
+        /// <param name="nameFormat"></param>
+        /// <returns></returns>
+        string GetCagetoryDataFileNameOrRedisItem(CategoryData cate,string nameFormat) 
         {
             return nameFormat + cate.Name;
         }
@@ -380,15 +385,20 @@ namespace CaptureWebData
             {
                 nodes.Add(noLimitAddress);
                 //如果没有启用Redis功能，则该数据从文本文件中读取
-
                 List < CategoryGroup> objs=null;
-                string itemName = typeof(CategoryGroup).Name + ".Objcet=" + parentCode.Id;
+                //如果是文本文件 需要读取上层节点项，如果是Redis缓存项，则只需读取当前节点对id组装缓存项名称
+                string itemName = string.Empty;
                 if (SystemConfig.OpenRedis)
+                {
                     objs = redis.GetRedisCacheItem<List<CategoryGroup>>(itemName);
-                else 
+                    itemName = GetCagetoryDataFileNameOrRedisItem(parentCode, redisItemOrFileNameFormat);
+                    // typeof(CategoryGroup).Name + ".Objcet=" + parentCode.Id;
+                }
+                else
                 {
                     string dir = GetRedisRelyFileDir();
                     string file = dir + "/" + itemName;//  string cityFile = string.Format("{0}={1}.txt",targetCountry.Name,targetCountry.Id); 
+
                 }
                 if (objs !=null)
                 {//没数据
