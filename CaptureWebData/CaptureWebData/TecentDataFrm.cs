@@ -393,16 +393,16 @@ namespace CaptureWebData
             {//该控件来自于省会自治区
                 nodes = cityList;
             }
-            else
+            else if (parentCode.Id > 0)
             {
                 nodes.Add(noLimitAddress);
                 //如果没有启用Redis功能，则该数据从文本文件中读取
-                List < CategoryGroup> objs=null;
+                CategoryGroup objs = null;
                 //如果是文本文件 需要读取上层节点项，如果是Redis缓存项，则只需读取当前节点对id组装缓存项名称
                 string itemName = string.Empty;
                 if (SystemConfig.OpenRedis)
                 {
-                    objs = redis.GetRedisCacheItem<List<CategoryGroup>>(itemName);
+                    objs = redis.GetRedisCacheItem<CategoryGroup>(itemName);
                     itemName = GetCagetoryDataFileNameOrRedisItem(parentCode, redisItemOrFileNameFormat);
                     // typeof(CategoryGroup).Name + ".Objcet=" + parentCode.Id;
                 }
@@ -413,12 +413,12 @@ namespace CaptureWebData
                         redisItemOrFileNameFormat));
                     if (fileJson != null)
                     {
-                        CategoryGroup dataSource = fileJson.ConvertObject<CategoryGroup>();
+                        objs = fileJson.ConvertObject<CategoryGroup>();
                     }
                 }
-                if (objs !=null)
+                if (objs != null)
                 {//没数据
-                    List<CategoryData> items = objs.Select(s => s.Root).ToList()
+                    List<CategoryData> items = objs.Childrens.Select(s => s.Root)
                    .OrderBy(t => t.Code).ToList();
                     nodes.AddRange(items.ToArray());
                 }
@@ -426,6 +426,10 @@ namespace CaptureWebData
                 //    Select(n =>
                 //        n.ConvertMapModel<CategoryData, NodeItem>()
                 //        ).OrderBy(t => t.Code).ToList();
+            }
+            else 
+            {
+                nodes.Add(noLimitAddress);
             }
             cmb.DataSource = nodes;
             cmb.DisplayMember = ComboboxItem.Name.ToString();
@@ -725,8 +729,7 @@ namespace CaptureWebData
         {
             ComboBox cmb = sender as ComboBox;
             CategoryData node = (CategoryData)cmb.SelectedItem;
-            if (node.Id > 0)
-                BindComboBox(new CategoryData() { Id = node.Id }, cmbDistinct, 4);
+            BindComboBox(new CategoryData() { Id = node.Id }, cmbDistinct, 4);
             return;
             //由于腾讯城市数据县级 的父节点使用
             CategoryData item = cityList.Where(c => c.Id == node.Id).FirstOrDefault();
