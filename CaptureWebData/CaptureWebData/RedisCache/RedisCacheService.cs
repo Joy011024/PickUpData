@@ -47,11 +47,11 @@ namespace CaptureWebData
                 Client.Set(cache.CacheKey, cache.CacheValue, DateTime.Now.AddDays(-1));
             }
         }
-        public void GetCacheByKey(string key) 
+        public string GetCacheByKey(string key) 
         {
             byte[] bs = Client.Get(key);
             //将存储的数据转换为字符内容
-           
+            return string.Empty;
         }
         public void TestSetOrStore(int cacheSize) 
         {

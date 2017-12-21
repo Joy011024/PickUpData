@@ -22,7 +22,14 @@ namespace CaptureWebData
             规定： 存储城市数据的json串日志文件或者Redis存储项命名规则 Name= "CategoryGroup.CategoryData."+Id
          
          */
-        string redisItemOrFileNameFormat = typeof(CategoryGroup).Name + ".Json=";
+        string redisItemOrFileNameFormat(bool isJsonString=false) 
+        {
+            if (isJsonString)
+            {
+                return typeof(CategoryGroup).Name + ".Json=";
+            }
+            return typeof(CategoryGroup).Name + ".Objcet=";
+        }
         QuartzJob job = new QuartzJob();
         CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
         RedisCacheService redis;
@@ -72,25 +79,28 @@ namespace CaptureWebData
         }
         void InitBaseConfig()
         {
-            List<CategoryGroup> citys = null;
+            cityList = new List<CategoryData>();
+            cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
             CategoryData obj = cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();
             targetCountry = obj;//目标国家数据
-            string defaultCountryNode = redisItemOrFileNameFormat + obj.Id;
+            string defaultCountryNode = GetCagetoryDataFileNameOrRedisItem(obj, redisItemOrFileNameFormat());
             if (SystemConfig.OpenRedis) 
             {
                 redis = new RedisCacheService(SystemConfig.RedisIp, SystemConfig.RedisPort, SystemConfig.RedisPsw);
-                citys = redis.GetRedisCacheItem<List<CategoryGroup>>(defaultCountryNode);
+               // citys = redis.GetRedisCacheItem<CategoryGroup>(defaultCountryNode);
+                //GetRedisCacheItem
+               // CategoryGroup r = redis.GetRedisCacheItem<CategoryGroup>(defaultCountryNode);
+                string redisItem = redis.GetRedisItemString(defaultCountryNode);//读取出来含有json串格式形式[ \"key\":\"value\" ]
+               List<CategoryGroup> objectItems = redisItem.ConvertObject < List<CategoryGroup>>();
+               cityList.AddRange(objectItems.Select(s => s.Root).OrderBy(s=>s.Name));
             }
-            cityList = new List<CategoryData>();
-            cityList.Add(noLimitAddress);
-            if (citys == null)
+            if (cityList.Count==1)
             {//没有缓存数据，此时将数据库中的城市地址数据进行读取写入到redis
                 NotRedisCacheCase();
                 //读取节点项
                 //数据项是否已经缓存
             }
-           
             //List<CategoryData> cts =citys==null?new List<CategoryData>():
             //    citys.Select(s => s.Root).OrderBy(t => t.Code).ToList();
             //cityList.AddRange(cts);
@@ -136,7 +146,7 @@ namespace CaptureWebData
         {
             AssemblyDataExt ass = new AssemblyDataExt();
             string debugDir = ass.GetAssemblyDir();
-            return debugDir + "/" + SystemConfig.RedisCacheFromFileReleative + "/" + typeof(CategoryGroup).Name + "/" + GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat);
+            return debugDir + "/" + SystemConfig.RedisCacheFromFileReleative + "/" + typeof(CategoryGroup).Name + "/" + GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat());
         }
         /// <summary>
         /// redis 中没有匹配的数据时基础数据加载形式
@@ -144,15 +154,15 @@ namespace CaptureWebData
         void NotRedisCacheCase() 
         {
             string dir = GetRedisRelyFileDir();
-            string cityFile = GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat) + ".txt";
+            string cityFile = GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat()) + ".txt";
             if (!File.Exists(dir + "/" + cityFile))
             {//没有数据文件时先从数据库中进行读取，在写入到文件中，最后写入到redis中
                 CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
                 List<CategoryData> city = cds.QueryCityCategory().ToList();
-                string json = city.ConvertJson();
-                json.CreateNewAppData(cityFile, dir);
-                if (SystemConfig.OpenRedis)
-                    redis.SetRedisItem(GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat), json);
+                //string json = city.ConvertJson();
+                //json.CreateNewAppData(cityFile, dir);
+                //if (SystemConfig.OpenRedis)
+                //    redis.SetRedisItem(GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat), json);
                 //省会，城市，区域
                 AnalyCity(city, targetCountry);//创建相关文件
             }
@@ -164,7 +174,7 @@ namespace CaptureWebData
             if (SystemConfig.OpenRedis)
             {//启用Redis功能(数据写入到Redis缓存中)
                 RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp, SystemConfig.RedisPsw, SystemConfig.RedisPort);
-                rcm.SetCityCacheFromFile(dir, rcm, true);
+                rcm.SetCityCacheFromFile(dir, rcm, false);
             }
             #endregion
             //cs= text.ConvertObject<List<CategoryData>>();
@@ -194,8 +204,7 @@ namespace CaptureWebData
             }
             string country = nodes.ConvertJson();
             Logger.CreateNewAppData(country, "Country.txt", cityDir);
-            //提取中国的省会列表 
-            
+            //提取中国的省会列表
             CategoryGroup provinceGroup = new CategoryGroup();
             CategoryGroup china= result.Childrens.Where(s => s.Root.Name == root.Name).FirstOrDefault();
             provinceGroup.Root = china.Root;
@@ -205,8 +214,9 @@ namespace CaptureWebData
                 //item.Childrens = new List<CategoryGroup>();
             }
             string province = provinceGroup.ConvertJson();
-            Logger.CreateNewAppData(province,GetNodeItemFileName(china, redisItemOrFileNameFormat),
+            Logger.CreateNewAppData(province,GetNodeItemFileName(china, redisItemOrFileNameFormat()),
                 GetRedisRelyFileDir());
+            CategoryGroup cgJson = province.ConvertObject<CategoryGroup>();
             //各个省会的市区列表
             foreach (var item in china.Childrens)
             {
@@ -219,11 +229,11 @@ namespace CaptureWebData
                 //string provinceJson=item.ConvertJson();
                 if (!string.IsNullOrEmpty(jsonNode))
                 {
-                    Logger.CreateNewAppData(jsonNode, GetNodeItemFileName(item, redisItemOrFileNameFormat),
+                    Logger.CreateNewAppData(jsonNode, GetNodeItemFileName(item, redisItemOrFileNameFormat()),
                         GetRedisRelyFileDir());
                     if (SystemConfig.OpenRedis)
                     {
-                        redis.SetRedisItem(GetCagetoryDataFileNameOrRedisItem(item.Root, redisItemOrFileNameFormat), jsonNode);
+                        redis.SetRedisItem(GetCagetoryDataFileNameOrRedisItem(item.Root, redisItemOrFileNameFormat()), jsonNode);
                     }
                 }
                 CategoryGroup cg = new CategoryGroup() 
@@ -248,7 +258,7 @@ namespace CaptureWebData
                     {
                         nodeJson = cn.ConvertJson();
                     }
-                    Logger.CreateNewAppData(nodeJson, GetNodeItemFileName(c, redisItemOrFileNameFormat), GetRedisRelyFileDir());
+                    Logger.CreateNewAppData(nodeJson, GetNodeItemFileName(c, redisItemOrFileNameFormat()), GetRedisRelyFileDir());
                 }
             }
         }
@@ -409,14 +419,17 @@ namespace CaptureWebData
                 if (SystemConfig.OpenRedis)
                 {
                     objs = redis.GetRedisCacheItem<CategoryGroup>(itemName);
-                    itemName = GetCagetoryDataFileNameOrRedisItem(parentCode, redisItemOrFileNameFormat);
+                    itemName = GetCagetoryDataFileNameOrRedisItem(parentCode, redisItemOrFileNameFormat());
                     // typeof(CategoryGroup).Name + ".Objcet=" + parentCode.Id;
+                    List<CategoryGroup> items = redis.GetRedisCacheItem<List<CategoryGroup>>(itemName);
+                    if (items != null)
+                        objs = new CategoryGroup() { Childrens = items };
                 }
                 else
                 {
                     string dir = GetRedisRelyFileDir();
                     string fileJson = FileHelper.ReadFile(dir + "/" + GetNodeItemFileName(new CategoryGroup() { Root = parentCode },
-                        redisItemOrFileNameFormat));
+                        redisItemOrFileNameFormat()));
                     if (fileJson != null)
                     {
                         objs = fileJson.ConvertObject<CategoryGroup>();
@@ -425,7 +438,7 @@ namespace CaptureWebData
                 if (objs != null)
                 {//没数据
                     List<CategoryData> items = objs.Childrens.Select(s => s.Root)
-                   .OrderBy(t => t.Code).ToList();
+                   .OrderBy(t => t.Name).ToList();
                     nodes.AddRange(items.ToArray());
                 }
                 //nodes = cityList.Where(c => (c.ParentCode == parentCode || string.IsNullOrEmpty(c.Code)) && c.NodeLevel == level).

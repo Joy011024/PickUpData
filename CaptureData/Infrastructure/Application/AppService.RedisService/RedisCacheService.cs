@@ -48,6 +48,12 @@ namespace AppService.RedisService
             HavaCacheItem = true;
             return Encoding.UTF8.GetString(bts);
         }
+        public string GetCacheByKey(string key)
+        {
+            byte[] bs = Client.Get(key);
+            //将存储的数据转换为字符内容
+            return string.Empty;
+        }
         public T GetRedisCacheItem<T>(string key)
         {
             return  Client.Get<T>(key);
