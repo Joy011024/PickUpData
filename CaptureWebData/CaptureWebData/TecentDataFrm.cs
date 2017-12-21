@@ -12,6 +12,8 @@ using DataHelp;
 using System.IO;
 using AppService.RedisService;
 using System.Threading;
+using SelfControlForm;
+using DataHelpWinform;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : Form
@@ -113,6 +115,10 @@ namespace CaptureWebData
             BindProvince();//绑定省会的数据源
             GetProcessPath();
             QueryTodayPickUp();
+            rbtWorkPanel.Click += new EventHandler(RadioButton_Click);
+            rbtWorkPanel.Tag = workPanel.Name;
+            rbtWebPanel.Click += new EventHandler(RadioButton_Click);
+            rbtWebPanel.Tag = pickUpIEWebCookie.Name;
         }
         void InitProvinceData() 
         {
@@ -749,6 +755,33 @@ namespace CaptureWebData
         void GetRedisCacheItem() 
         {
             
+        }
+        private void RadioButton_Click(object sender, EventArgs e)
+        {
+            RadioButton rbt = sender as RadioButton;
+            string panel = rbt.Tag as string;
+            if (string.IsNullOrEmpty(panel))
+            {
+                return;
+            }
+            //首先查找全部radio控制项【联动控制隐藏】
+            List<Control> bindPanels =new PageDataHelp().ForeachPanel(switchPanel,typeof(RadioButton).Name);// switchPanel.Controls;
+            foreach (Control item in bindPanels)
+            {
+                string hide = item.Tag as string;
+                Control[] targets = this.Controls.Find(hide, false);
+                foreach (Control ch in targets)
+                {
+                    if (panel == hide)
+                    {
+                        ch.Visible = true;
+                    }
+                    else 
+                    {
+                        ch.Visible = false;
+                    }
+                }
+            }
         }
     }
 }

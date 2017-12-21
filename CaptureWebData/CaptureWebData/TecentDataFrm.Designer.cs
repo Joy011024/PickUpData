@@ -56,15 +56,23 @@
             this.lblPageIndex = new System.Windows.Forms.Label();
             this.txtPageIndex = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
-            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.workPanel = new System.Windows.Forms.Panel();
+            this.rbtWebPanel = new System.Windows.Forms.RadioButton();
+            this.rbtWorkPanel = new System.Windows.Forms.RadioButton();
+            this.switchPanel = new System.Windows.Forms.Panel();
+            this.lblSwitchShow = new System.Windows.Forms.Label();
+            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
+            this.btnTodayPickupResult = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbPollingType.SuspendLayout();
+            this.workPanel.SuspendLayout();
+            this.switchPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(567, 242);
+            this.btnQuery.Location = new System.Drawing.Point(599, 242);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 1;
@@ -75,7 +83,7 @@
             // lblTimeSpan
             // 
             this.lblTimeSpan.AutoSize = true;
-            this.lblTimeSpan.Location = new System.Drawing.Point(563, 350);
+            this.lblTimeSpan.Location = new System.Drawing.Point(595, 350);
             this.lblTimeSpan.Name = "lblTimeSpan";
             this.lblTimeSpan.Size = new System.Drawing.Size(77, 12);
             this.lblTimeSpan.TabIndex = 2;
@@ -84,7 +92,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(563, 385);
+            this.label1.Location = new System.Drawing.Point(595, 385);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 3;
@@ -92,7 +100,7 @@
             // 
             // txtTimeSpan
             // 
-            this.txtTimeSpan.Location = new System.Drawing.Point(655, 341);
+            this.txtTimeSpan.Location = new System.Drawing.Point(687, 341);
             this.txtTimeSpan.Name = "txtTimeSpan";
             this.txtTimeSpan.Size = new System.Drawing.Size(103, 21);
             this.txtTimeSpan.TabIndex = 4;
@@ -100,7 +108,7 @@
             // 
             // txtRepeact
             // 
-            this.txtRepeact.Location = new System.Drawing.Point(655, 376);
+            this.txtRepeact.Location = new System.Drawing.Point(687, 376);
             this.txtRepeact.Name = "txtRepeact";
             this.txtRepeact.Size = new System.Drawing.Size(103, 21);
             this.txtRepeact.TabIndex = 5;
@@ -145,7 +153,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(563, 311);
+            this.label3.Location = new System.Drawing.Point(595, 311);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 10;
@@ -153,7 +161,7 @@
             // 
             // txtCurrentLimit
             // 
-            this.txtCurrentLimit.Location = new System.Drawing.Point(655, 308);
+            this.txtCurrentLimit.Location = new System.Drawing.Point(687, 308);
             this.txtCurrentLimit.Name = "txtCurrentLimit";
             this.txtCurrentLimit.Size = new System.Drawing.Size(103, 21);
             this.txtCurrentLimit.TabIndex = 11;
@@ -179,7 +187,7 @@
             // lblGender
             // 
             this.lblGender.AutoSize = true;
-            this.lblGender.Location = new System.Drawing.Point(570, 279);
+            this.lblGender.Location = new System.Drawing.Point(602, 279);
             this.lblGender.Name = "lblGender";
             this.lblGender.Size = new System.Drawing.Size(29, 12);
             this.lblGender.TabIndex = 14;
@@ -189,7 +197,7 @@
             // 
             this.cmbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGender.FormattingEnabled = true;
-            this.cmbGender.Location = new System.Drawing.Point(657, 276);
+            this.cmbGender.Location = new System.Drawing.Point(689, 276);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(103, 20);
             this.cmbGender.TabIndex = 15;
@@ -197,7 +205,7 @@
             // ckStartQuartz
             // 
             this.ckStartQuartz.AutoSize = true;
-            this.ckStartQuartz.Location = new System.Drawing.Point(565, 144);
+            this.ckStartQuartz.Location = new System.Drawing.Point(597, 144);
             this.ckStartQuartz.Name = "ckStartQuartz";
             this.ckStartQuartz.Size = new System.Drawing.Size(72, 16);
             this.ckStartQuartz.TabIndex = 16;
@@ -207,7 +215,7 @@
             // 
             // rtbTip
             // 
-            this.rtbTip.Location = new System.Drawing.Point(559, 541);
+            this.rtbTip.Location = new System.Drawing.Point(591, 541);
             this.rtbTip.Name = "rtbTip";
             this.rtbTip.Size = new System.Drawing.Size(205, 91);
             this.rtbTip.TabIndex = 17;
@@ -215,7 +223,7 @@
             // 
             // btnDeleteQuartz
             // 
-            this.btnDeleteQuartz.Location = new System.Drawing.Point(635, 140);
+            this.btnDeleteQuartz.Location = new System.Drawing.Point(667, 140);
             this.btnDeleteQuartz.Name = "btnDeleteQuartz";
             this.btnDeleteQuartz.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteQuartz.TabIndex = 18;
@@ -231,7 +239,7 @@
             this.groupBox1.Controls.Add(this.lblCity);
             this.groupBox1.Controls.Add(this.lblDistinct);
             this.groupBox1.Controls.Add(this.cmbCity);
-            this.groupBox1.Location = new System.Drawing.Point(559, 410);
+            this.groupBox1.Location = new System.Drawing.Point(591, 410);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(214, 125);
             this.groupBox1.TabIndex = 21;
@@ -241,7 +249,7 @@
             // lblTodayPickUp
             // 
             this.lblTodayPickUp.AutoSize = true;
-            this.lblTodayPickUp.Location = new System.Drawing.Point(565, 24);
+            this.lblTodayPickUp.Location = new System.Drawing.Point(597, 24);
             this.lblTodayPickUp.Name = "lblTodayPickUp";
             this.lblTodayPickUp.Size = new System.Drawing.Size(89, 12);
             this.lblTodayPickUp.TabIndex = 22;
@@ -251,7 +259,7 @@
             // 
             this.lsbStatic.FormattingEnabled = true;
             this.lsbStatic.ItemHeight = 12;
-            this.lsbStatic.Location = new System.Drawing.Point(567, 50);
+            this.lsbStatic.Location = new System.Drawing.Point(599, 50);
             this.lsbStatic.Name = "lsbStatic";
             this.lsbStatic.Size = new System.Drawing.Size(206, 88);
             this.lsbStatic.TabIndex = 24;
@@ -261,7 +269,7 @@
             this.gbPollingType.Controls.Add(this.rbDepth);
             this.gbPollingType.Controls.Add(this.rbGuid);
             this.gbPollingType.Controls.Add(this.rbNormal);
-            this.gbPollingType.Location = new System.Drawing.Point(567, 166);
+            this.gbPollingType.Location = new System.Drawing.Point(599, 166);
             this.gbPollingType.Name = "gbPollingType";
             this.gbPollingType.Size = new System.Drawing.Size(202, 41);
             this.gbPollingType.TabIndex = 25;
@@ -305,7 +313,7 @@
             // 
             this.lblPageIndex.AccessibleRole = System.Windows.Forms.AccessibleRole.SplitButton;
             this.lblPageIndex.AutoSize = true;
-            this.lblPageIndex.Location = new System.Drawing.Point(567, 209);
+            this.lblPageIndex.Location = new System.Drawing.Point(599, 209);
             this.lblPageIndex.Name = "lblPageIndex";
             this.lblPageIndex.Size = new System.Drawing.Size(29, 12);
             this.lblPageIndex.TabIndex = 26;
@@ -314,7 +322,7 @@
             // 
             // txtPageIndex
             // 
-            this.txtPageIndex.Location = new System.Drawing.Point(655, 209);
+            this.txtPageIndex.Location = new System.Drawing.Point(687, 209);
             this.txtPageIndex.Name = "txtPageIndex";
             this.txtPageIndex.Size = new System.Drawing.Size(100, 21);
             this.txtPageIndex.TabIndex = 27;
@@ -322,7 +330,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(716, 140);
+            this.btnExit.Location = new System.Drawing.Point(748, 140);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(57, 23);
             this.btnExit.TabIndex = 28;
@@ -330,28 +338,89 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // pickUpIEWebCookie
-            // 
-            this.pickUpIEWebCookie.CallBack = null;
-            this.pickUpIEWebCookie.Location = new System.Drawing.Point(12, 12);
-            this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
-            this.pickUpIEWebCookie.Size = new System.Drawing.Size(541, 620);
-            this.pickUpIEWebCookie.TabIndex = 19;
-            // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(703, 24);
+            this.btnRefresh.Location = new System.Drawing.Point(735, 24);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(57, 23);
             this.btnRefresh.TabIndex = 29;
             this.btnRefresh.Text = "刷新";
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
+            // workPanel
+            // 
+            this.workPanel.Controls.Add(this.btnTodayPickupResult);
+            this.workPanel.Location = new System.Drawing.Point(8, 38);
+            this.workPanel.Name = "workPanel";
+            this.workPanel.Size = new System.Drawing.Size(480, 579);
+            this.workPanel.TabIndex = 30;
+            this.workPanel.Visible = false;
+            // 
+            // rbtWebPanel
+            // 
+            this.rbtWebPanel.AutoSize = true;
+            this.rbtWebPanel.Checked = true;
+            this.rbtWebPanel.Location = new System.Drawing.Point(147, 7);
+            this.rbtWebPanel.Name = "rbtWebPanel";
+            this.rbtWebPanel.Size = new System.Drawing.Size(53, 16);
+            this.rbtWebPanel.TabIndex = 31;
+            this.rbtWebPanel.TabStop = true;
+            this.rbtWebPanel.Text = "Web页";
+            this.rbtWebPanel.UseVisualStyleBackColor = true;
+            // 
+            // rbtWorkPanel
+            // 
+            this.rbtWorkPanel.AutoSize = true;
+            this.rbtWorkPanel.Location = new System.Drawing.Point(70, 7);
+            this.rbtWorkPanel.Name = "rbtWorkPanel";
+            this.rbtWorkPanel.Size = new System.Drawing.Size(59, 16);
+            this.rbtWorkPanel.TabIndex = 32;
+            this.rbtWorkPanel.Text = "工作页";
+            this.rbtWorkPanel.UseVisualStyleBackColor = true;
+            // 
+            // switchPanel
+            // 
+            this.switchPanel.Controls.Add(this.lblSwitchShow);
+            this.switchPanel.Controls.Add(this.rbtWorkPanel);
+            this.switchPanel.Controls.Add(this.rbtWebPanel);
+            this.switchPanel.Location = new System.Drawing.Point(15, 8);
+            this.switchPanel.Name = "switchPanel";
+            this.switchPanel.Size = new System.Drawing.Size(212, 28);
+            this.switchPanel.TabIndex = 0;
+            // 
+            // lblSwitchShow
+            // 
+            this.lblSwitchShow.AutoSize = true;
+            this.lblSwitchShow.Location = new System.Drawing.Point(3, 7);
+            this.lblSwitchShow.Name = "lblSwitchShow";
+            this.lblSwitchShow.Size = new System.Drawing.Size(53, 12);
+            this.lblSwitchShow.TabIndex = 31;
+            this.lblSwitchShow.Text = "切换显示";
+            // 
+            // pickUpIEWebCookie
+            // 
+            this.pickUpIEWebCookie.CallBack = null;
+            this.pickUpIEWebCookie.Location = new System.Drawing.Point(18, 45);
+            this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
+            this.pickUpIEWebCookie.Size = new System.Drawing.Size(549, 594);
+            this.pickUpIEWebCookie.TabIndex = 19;
+            // 
+            // btnTodayPickupResult
+            // 
+            this.btnTodayPickupResult.Location = new System.Drawing.Point(10, 12);
+            this.btnTodayPickupResult.Name = "btnTodayPickupResult";
+            this.btnTodayPickupResult.Size = new System.Drawing.Size(126, 23);
+            this.btnTodayPickupResult.TabIndex = 0;
+            this.btnTodayPickupResult.Text = "今日采集详情";
+            this.btnTodayPickupResult.UseVisualStyleBackColor = true;
+            // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(772, 635);
+            this.ClientSize = new System.Drawing.Size(824, 635);
+            this.Controls.Add(this.switchPanel);
+            this.Controls.Add(this.workPanel);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtPageIndex);
@@ -380,6 +449,9 @@
             this.groupBox1.PerformLayout();
             this.gbPollingType.ResumeLayout(false);
             this.gbPollingType.PerformLayout();
+            this.workPanel.ResumeLayout(false);
+            this.switchPanel.ResumeLayout(false);
+            this.switchPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -417,6 +489,12 @@
         private System.Windows.Forms.TextBox txtPageIndex;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Panel workPanel;
+        private System.Windows.Forms.RadioButton rbtWebPanel;
+        private System.Windows.Forms.RadioButton rbtWorkPanel;
+        private System.Windows.Forms.Panel switchPanel;
+        private System.Windows.Forms.Label lblSwitchShow;
+        private System.Windows.Forms.Button btnTodayPickupResult;
 
 
 
