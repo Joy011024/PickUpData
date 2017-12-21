@@ -227,6 +227,18 @@ namespace CaptureWebData
                 return exeDir;
             }
         }
+        static string redisValueIsJsonFormat;
+        public static bool RedisValueIsJsonFormat
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(redisValueIsJsonFormat))
+                {
+                    redisValueIsJsonFormat = ConfigurationManager.AppSettings["RedisValueIsJsonFormat"];
+                }
+                return redisValueIsJsonFormat == "true";
+            }
+        }
     }
     public class DataLink
     {
