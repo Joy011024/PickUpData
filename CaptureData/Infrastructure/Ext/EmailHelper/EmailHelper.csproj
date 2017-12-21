@@ -35,9 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\CaptureWebData\bin\SelfDefine\Common.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Domain.CommonData">
-      <HintPath>..\..\..\..\..\SampleHelper\RedisServiceHelper\bin\Domain.CommonData.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +47,12 @@
     <Compile Include="EmailData.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Domain.CommonData\Domain.CommonData.csproj">
+      <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
+      <Name>Domain.CommonData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
