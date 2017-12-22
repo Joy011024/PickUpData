@@ -1,0 +1,3 @@
+(error) NOAUTH Authentication required.
+
+[11116] 22 Dec 10:45:22.182 # Redis service failed to start.
