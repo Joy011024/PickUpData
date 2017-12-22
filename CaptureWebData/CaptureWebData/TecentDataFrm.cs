@@ -31,6 +31,7 @@ namespace CaptureWebData
             return typeof(CategoryGroup).Name + ".Objcet=";
         }
         QuartzJob job = new QuartzJob();
+        RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp, SystemConfig.RedisPsw, SystemConfig.RedisPort);
         CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
         RedisCacheService redis;
         int currentIndex = 1;
@@ -101,7 +102,7 @@ namespace CaptureWebData
                 }
                 else 
                 {
-                    
+                    CategoryGroup group = rcm.GetCacheItem<CategoryGroup>(defaultCountryNode);
                 }
             }
             if (cityList.Count==1)
@@ -183,8 +184,8 @@ namespace CaptureWebData
             //在Redis数据库中增加一个版本号来记录当前存储的城市数据版本
             if (SystemConfig.OpenRedis)
             {//启用Redis功能(数据写入到Redis缓存中)
-                RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp, SystemConfig.RedisPsw, SystemConfig.RedisPort);
-                rcm.SetCityCacheFromFile(dir, rcm, false);
+                
+                rcm.SetCityCacheFromFile(dir, rcm, SystemConfig.RedisValueIsJsonFormat);
             }
             #endregion
             //cs= text.ConvertObject<List<CategoryData>>();
@@ -419,55 +420,63 @@ namespace CaptureWebData
         void BindComboBox(CategoryData parentCode, ComboBox cmb, int level)
         {
             List<CategoryData> nodes = new List<CategoryData>();
-            if (parentCode.Id==0&&level==2)
-            {//该控件来自于省会自治区
-                nodes = cityList;
-            }
-            else if (parentCode.Id > 0)
+            try
             {
-                nodes.Add(noLimitAddress);
-                //如果没有启用Redis功能，则该数据从文本文件中读取
-                CategoryGroup objs = null;
-                //如果是文本文件 需要读取上层节点项，如果是Redis缓存项，则只需读取当前节点对id组装缓存项名称
-                if (SystemConfig.OpenRedis)
+                if (parentCode.Id == 0 && level == 2)
+                {//该控件来自于省会自治区
+                    nodes = cityList;
+                }
+                else if (parentCode.Id > 0)
                 {
-                    string itemName = GetCagetoryDataFileNameOrRedisItem(parentCode,
-                        redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat));
-                    // typeof(CategoryGroup).Name + ".Objcet=" + parentCode.Id;
-                    if (!SystemConfig.RedisValueIsJsonFormat)
-                    {//json  or object
-                        List<CategoryGroup> items = redis.GetRedisCacheItem<List<CategoryGroup>>(itemName);
-                        if (items != null)
-                            objs = new CategoryGroup() { Childrens = items };
-                    }
-                    else 
+                    nodes.Add(noLimitAddress);
+                    //如果没有启用Redis功能，则该数据从文本文件中读取
+                    CategoryGroup objs = null;
+                    //如果是文本文件 需要读取上层节点项，如果是Redis缓存项，则只需读取当前节点对id组装缓存项名称
+                    if (SystemConfig.OpenRedis)
                     {
-                        objs = redis.GetRedisCacheItem<CategoryGroup>(itemName);
+                        string itemName = GetCagetoryDataFileNameOrRedisItem(parentCode,
+                            redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat));
+                        // typeof(CategoryGroup).Name + ".Objcet=" + parentCode.Id;
+                        if (!SystemConfig.RedisValueIsJsonFormat)
+                        {//json  or object
+                            List<CategoryGroup> items = redis.GetRedisCacheItem<List<CategoryGroup>>(itemName);
+                            if (items != null)
+                                objs = new CategoryGroup() { Childrens = items };
+                        }
+                        else
+                        {
+                            objs = redis.GetRedisCacheItem<CategoryGroup>(itemName);
+                        }
                     }
+                    else
+                    {
+                        string dir = GetRedisRelyFileDir();
+                        string fileJson = FileHelper.ReadFile(dir + "/" + GetNodeItemFileName(new CategoryGroup() { Root = parentCode },
+                            redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat)));
+                        if (fileJson != null)
+                        {
+                            objs = fileJson.ConvertObject<CategoryGroup>();
+                        }
+                    }
+                    if (objs != null)
+                    {//没数据
+                        List<CategoryData> items = objs.Childrens.Select(s => s.Root)
+                       .OrderBy(t => t.Code).ToList();
+                        nodes.AddRange(items.ToArray());
+                    }
+                    //nodes = cityList.Where(c => (c.ParentCode == parentCode || string.IsNullOrEmpty(c.Code)) && c.NodeLevel == level).
+                    //    Select(n =>
+                    //        n.ConvertMapModel<CategoryData, NodeItem>()
+                    //        ).OrderBy(t => t.Code).ToList();
                 }
                 else
                 {
-                    string dir = GetRedisRelyFileDir();
-                    string fileJson = FileHelper.ReadFile(dir + "/" + GetNodeItemFileName(new CategoryGroup() { Root = parentCode },
-                        redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat)));
-                    if (fileJson != null)
-                    {
-                        objs = fileJson.ConvertObject<CategoryGroup>();
-                    }
+                    nodes.Add(noLimitAddress);
                 }
-                if (objs != null)
-                {//没数据
-                    List<CategoryData> items = objs.Childrens.Select(s => s.Root)
-                   .OrderBy(t => t.Code).ToList();
-                    nodes.AddRange(items.ToArray());
-                }
-                //nodes = cityList.Where(c => (c.ParentCode == parentCode || string.IsNullOrEmpty(c.Code)) && c.NodeLevel == level).
-                //    Select(n =>
-                //        n.ConvertMapModel<CategoryData, NodeItem>()
-                //        ).OrderBy(t => t.Code).ToList();
             }
-            else 
+            catch (Exception ex)
             {
+                nodes = new List<CategoryData>();
                 nodes.Add(noLimitAddress);
             }
             cmb.DataSource = nodes;

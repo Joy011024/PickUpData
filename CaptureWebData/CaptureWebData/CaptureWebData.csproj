@@ -161,7 +161,7 @@
     <Compile Include="BaseData\QuartzJob.cs" />
     <Compile Include="ProcessHelp.cs" />
     <Compile Include="QQFriend.cs" />
-    <Compile Include="RedisCache\RedisCacheService.cs" />
+    <Compile Include="RedisCache\RedisCacheManage.cs" />
     <Compile Include="TecentDataDA\FindQQDataManage.cs" />
     <Compile Include="TecentDataDA\FindQQResponse.cs" />
     <Compile Include="Form1.cs">
