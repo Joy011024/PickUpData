@@ -95,12 +95,13 @@ namespace CaptureWebData
                 //数据存储形式：json字符串或者实体对象字节流
                 if (!SystemConfig.RedisValueIsJsonFormat)
                 {
-                    List<CategoryGroup> objectItems= redis.GetRedisCacheItem<List<CategoryGroup>>(defaultCountryNode);
+                    List<CategoryGroup> objectItems = redis.GetRedisCacheItem<List<CategoryGroup>>(defaultCountryNode);
                     //string redisItem = redis.GetRedisItemString(defaultCountryNode);//读取出来含有json串格式形式[ \"key\":\"value\" ]
                     //List<CategoryGroup> objectItems = redisItem.ConvertObject<List<CategoryGroup>>();
-                    cityList.AddRange(objectItems.Select(s => s.Root).OrderBy(s => s.Code));
+                    if (objectItems != null)
+                        cityList.AddRange(objectItems.Select(s => s.Root).OrderBy(s => s.Code));
                 }
-                else 
+                else
                 {
                     CategoryGroup group = rcm.GetCacheItem<CategoryGroup>(defaultCountryNode);
                 }
