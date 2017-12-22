@@ -91,11 +91,12 @@ namespace CaptureWebData
                // citys = redis.GetRedisCacheItem<CategoryGroup>(defaultCountryNode);
                 //GetRedisCacheItem
                // CategoryGroup r = redis.GetRedisCacheItem<CategoryGroup>(defaultCountryNode);
-                string redisItem = redis.GetRedisItemString(defaultCountryNode);//读取出来含有json串格式形式[ \"key\":\"value\" ]
                 //数据存储形式：json字符串或者实体对象字节流
                 if (!SystemConfig.RedisValueIsJsonFormat)
                 {
-                    List<CategoryGroup> objectItems = redisItem.ConvertObject<List<CategoryGroup>>();
+                    List<CategoryGroup> objectItems= redis.GetRedisCacheItem<List<CategoryGroup>>(defaultCountryNode);
+                    //string redisItem = redis.GetRedisItemString(defaultCountryNode);//读取出来含有json串格式形式[ \"key\":\"value\" ]
+                    //List<CategoryGroup> objectItems = redisItem.ConvertObject<List<CategoryGroup>>();
                     cityList.AddRange(objectItems.Select(s => s.Root).OrderBy(s => s.Code));
                 }
                 else 
@@ -428,11 +429,9 @@ namespace CaptureWebData
                 //如果没有启用Redis功能，则该数据从文本文件中读取
                 CategoryGroup objs = null;
                 //如果是文本文件 需要读取上层节点项，如果是Redis缓存项，则只需读取当前节点对id组装缓存项名称
-                string itemName = string.Empty;
                 if (SystemConfig.OpenRedis)
                 {
-                    objs = redis.GetRedisCacheItem<CategoryGroup>(itemName);
-                    itemName = GetCagetoryDataFileNameOrRedisItem(parentCode,
+                    string itemName = GetCagetoryDataFileNameOrRedisItem(parentCode,
                         redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat));
                     // typeof(CategoryGroup).Name + ".Objcet=" + parentCode.Id;
                     if (!SystemConfig.RedisValueIsJsonFormat)
@@ -443,7 +442,7 @@ namespace CaptureWebData
                     }
                     else 
                     {
-                    
+                        objs = redis.GetRedisCacheItem<CategoryGroup>(itemName);
                     }
                 }
                 else
