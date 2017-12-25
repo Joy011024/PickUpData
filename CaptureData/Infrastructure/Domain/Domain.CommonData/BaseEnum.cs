@@ -75,7 +75,7 @@ namespace Domain.CommonData
         /// <param name="log"></param>
         /// <param name="fileName"></param>
         /// <param name="existsWrite">存在相同名称的文件进行替换还是追加</param>
-        public static void  CreateLogFile(string text,string path,ELogType log,string fileName=null,bool existsWrite=false) 
+        public static void  CreateLogFile(string text,string path,ELogType log,string fileName=null,bool existsWrite=false,Encoding encode=null) 
         {
             if (string.IsNullOrEmpty(text)) { return; }
             if (!string.IsNullOrEmpty(path)&&!Directory.Exists(path)) 
@@ -107,7 +107,11 @@ namespace Domain.CommonData
                     fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.Write);
                 }
             }
-            StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
+            if (encode == null)
+            {
+                encode = Encoding.UTF8;
+            }
+            StreamWriter sw = new StreamWriter(fs, encode);
             sw.Write(text);
             sw.Close();
             fs.Close();

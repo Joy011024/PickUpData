@@ -1,3 +1,6 @@
 (error) NOAUTH Authentication required.
 
 [11116] 22 Dec 10:45:22.182 # Redis service failed to start.
+
+使用 Newtonsoft.Json.JsonConvert.DeserializeObject序列化为对象存储到Redis中能直接进行读写，然而使用DataContractJsonSerializer 进行序列化的
+在进行存储之后反序列化不成功

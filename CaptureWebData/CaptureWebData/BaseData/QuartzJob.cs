@@ -52,7 +52,8 @@ namespace CaptureWebData
                     WithRepeatCount(repeactCount)).Build();
             //如果存在该作业，进行替换
             JobKey jy = new JobKey(jobName, group);
-            if (scheduler.GetJobDetail(jy) == null)
+            IJobDetail detail=scheduler.GetJobDetail(jy);
+            if ( detail== null)
             {
                 scheduler.ScheduleJob(job, trigger);//in pool
                 scheduler.Start();
@@ -68,7 +69,8 @@ namespace CaptureWebData
         public void DeleteJob<T>() where T : IJob
         {//删除上次运行程序没有关闭的作业
             Type t = typeof(T);
-            string group = "PickUpDataResD";// new ConfigurationItems().AppNameEng;
+            string group = new ConfigurationItems().AppNameEng;
+            //string group = "PickUpDataResD";// new ConfigurationItems().AppNameEng;
             DeleteJob(t.Name, group);
             DeleteJob(t.FullName, group);
 
@@ -85,6 +87,8 @@ namespace CaptureWebData
                 scheduler = GetScheduler();
             }
             IJobDetail job = scheduler.GetJobDetail(key);
+            bool del= scheduler.DeleteJob(key);
+            //找不到作业？？ 已经创建轮询作业
             if (job != null)
             {
                 scheduler.PauseJob(key);//停止作业调度

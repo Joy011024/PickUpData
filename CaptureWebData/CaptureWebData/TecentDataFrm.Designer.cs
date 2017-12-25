@@ -58,12 +58,12 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.workPanel = new System.Windows.Forms.Panel();
+            this.btnTodayPickupResult = new System.Windows.Forms.Button();
             this.rbtWebPanel = new System.Windows.Forms.RadioButton();
             this.rbtWorkPanel = new System.Windows.Forms.RadioButton();
             this.switchPanel = new System.Windows.Forms.Panel();
             this.lblSwitchShow = new System.Windows.Forms.Label();
             this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
-            this.btnTodayPickupResult = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbPollingType.SuspendLayout();
             this.workPanel.SuspendLayout();
@@ -104,7 +104,7 @@
             this.txtTimeSpan.Name = "txtTimeSpan";
             this.txtTimeSpan.Size = new System.Drawing.Size(103, 21);
             this.txtTimeSpan.TabIndex = 4;
-            this.txtTimeSpan.Text = "4";
+            this.txtTimeSpan.Text = "3";
             // 
             // txtRepeact
             // 
@@ -356,6 +356,15 @@
             this.workPanel.TabIndex = 30;
             this.workPanel.Visible = false;
             // 
+            // btnTodayPickupResult
+            // 
+            this.btnTodayPickupResult.Location = new System.Drawing.Point(10, 12);
+            this.btnTodayPickupResult.Name = "btnTodayPickupResult";
+            this.btnTodayPickupResult.Size = new System.Drawing.Size(126, 23);
+            this.btnTodayPickupResult.TabIndex = 0;
+            this.btnTodayPickupResult.Text = "今日采集详情";
+            this.btnTodayPickupResult.UseVisualStyleBackColor = true;
+            // 
             // rbtWebPanel
             // 
             this.rbtWebPanel.AutoSize = true;
@@ -404,15 +413,6 @@
             this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
             this.pickUpIEWebCookie.Size = new System.Drawing.Size(549, 594);
             this.pickUpIEWebCookie.TabIndex = 19;
-            // 
-            // btnTodayPickupResult
-            // 
-            this.btnTodayPickupResult.Location = new System.Drawing.Point(10, 12);
-            this.btnTodayPickupResult.Name = "btnTodayPickupResult";
-            this.btnTodayPickupResult.Size = new System.Drawing.Size(126, 23);
-            this.btnTodayPickupResult.TabIndex = 0;
-            this.btnTodayPickupResult.Text = "今日采集详情";
-            this.btnTodayPickupResult.UseVisualStyleBackColor = true;
             // 
             // TecentDataFrm
             // 

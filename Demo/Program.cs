@@ -27,9 +27,10 @@ namespace Demo
             string dir=new AppDirHelper().GetAppDir(AppCategory.WinApp);
             string zipDir= new DirectoryInfo(dir).Parent.Parent.FullName+"/ZipTemplate";
             ZipFileHelper zip = new ZipFileHelper();
-            zip.GenerateZip(zipDir, dir +"/"+ELogType.ZipLog.ToString(), 
+            zip.Test();
+            //zip.GenerateZip(zipDir, dir +"/"+ELogType.ZipLog.ToString(), 
                 //DateTime.Now.ToString(CommonFormat.DateTimeIntFormat)+
-                "000886197005184001_100.zip");
+                //"000886197005184001_100.zip");
         }
     }
    
@@ -116,6 +117,19 @@ namespace Demo
 
             return result;
         }
-
+        public  void Test()
+        {
+            string[] maxims = new string[]{
+                "事常与人违，事总在人为",
+                "骏马是跑出来的，强兵是打出来的",
+                "驾驭命运的舵是奋斗。不抱有一丝幻想，不放弃一点机会，不停止一日努力。 ",
+                "如果惧怕前面跌宕的山岩，生命就永远只能是死水一潭", 
+                "懦弱的人只会裹足不前，莽撞的人只能引为烧身，只有真正勇敢的人才能所向披靡"
+            };
+            foreach (string item in maxims)
+            {
+               string pinying= item.TextConvertChar(true);
+            }
+        }
     }
 }

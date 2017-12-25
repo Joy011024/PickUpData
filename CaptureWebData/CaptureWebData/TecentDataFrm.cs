@@ -140,6 +140,7 @@ namespace CaptureWebData
             rbtWorkPanel.Tag = workPanel.Name;
             rbtWebPanel.Click += new EventHandler(RadioButton_Click);
             rbtWebPanel.Tag = pickUpIEWebCookie.Name;
+            this.FormClosing += new FormClosingEventHandler(Form_FormBeforeClosed);
         }
         void InitProvinceData() 
         {
@@ -825,6 +826,16 @@ namespace CaptureWebData
                     }
                 }
             }
+        }
+        public void Form_FormBeforeClosed(object sender,FormClosingEventArgs e)
+        {
+            Form fm = sender as Form;
+            //窗体关闭前，关闭异步线程
+            StopOtherThread();
+        }
+        void StopOtherThread() 
+        {
+            job.DeleteJob<JobDelegate<Common.Data.EISOSex>>();
         }
     }
 }
