@@ -14,6 +14,7 @@ using AppService.RedisService;
 using System.Threading;
 using SelfControlForm;
 using DataHelpWinform;
+using Infrastructure.ExtService;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : Form
@@ -168,7 +169,7 @@ namespace CaptureWebData
         {
             string dir = GetRedisRelyFileDir();
             string cityFile = GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat)) + ".txt";
-            if (!File.Exists(dir + "/" + cityFile))
+            if (SystemConfig.CfgFileExistsIsDoReplace|| !File.Exists(dir + "/" + cityFile))
             {//没有数据文件时先从数据库中进行读取，在写入到文件中，最后写入到redis中
                 CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
                 List<CategoryData> city = cds.QueryCityCategory().ToList();
@@ -291,11 +292,11 @@ namespace CaptureWebData
         /// <returns></returns>
         string GetCagetoryDataFileNameOrRedisItem(CategoryData cate,string nameFormat) 
         {
-            return nameFormat + cate.Id;
+            return nameFormat +cate.Name.TextConvertChar(true)+ cate.Id;
         }
         string GetNodeItemFileName(CategoryGroup item, string nameFormat) 
         {
-            return nameFormat + item.Root.Id + ".txt";
+            return nameFormat +item.Root.Name.TextConvertChar(true)+ item.Root.Id + ".txt";
         }
         void GetProcessPath()
         {

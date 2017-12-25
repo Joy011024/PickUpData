@@ -239,6 +239,18 @@ namespace CaptureWebData
                 return redisValueIsJsonFormat == "true";
             }
         }
+        static string cfgFileExistsIsDoReplace;
+        public static bool CfgFileExistsIsDoReplace 
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(cfgFileExistsIsDoReplace))
+                {
+                    cfgFileExistsIsDoReplace = ConfigurationManager.AppSettings["CfgFileExistsIsDoReplace"];
+                }
+                return cfgFileExistsIsDoReplace=="true";
+            }
+        }
     }
     public class DataLink
     {
