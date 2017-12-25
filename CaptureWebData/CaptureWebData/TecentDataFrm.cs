@@ -187,7 +187,7 @@ namespace CaptureWebData
             //在Redis数据库中增加一个版本号来记录当前存储的城市数据版本
             if (SystemConfig.OpenRedis)
             {//启用Redis功能(数据写入到Redis缓存中)
-                
+                rcm.SetPropertyValue("A_"+SystemConfig.DateTimeIntFormat, DateTime.Now.ToString(SystemConfig.DateTimeIntFormat));
                 rcm.SetCityCacheFromFile(dir, rcm, SystemConfig.RedisValueIsJsonFormat);
             }
             #endregion
@@ -235,6 +235,8 @@ namespace CaptureWebData
             //各个省会的市区列表
             foreach (var item in china.Childrens)
             {
+                LoggerWriter.CreateLogFile(item.Root.Name, SystemConfig.ExeDir + ELogType.DebugData.ToString(),
+                 ELogType.DebugData, DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat) + ".log", true);
                 //提取省会列表到市
                 CategoryGroup level = new CategoryGroup()
                 {
@@ -258,6 +260,8 @@ namespace CaptureWebData
                     Root=item.Root,
                     Childrens=item.Childrens
                 };
+                LoggerWriter.CreateLogFile(cg.Root.Name, SystemConfig.ExeDir + ELogType.DebugData.ToString(),
+                 ELogType.DebugData, DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat) + ".log", true);
                 //string city = cg.ConvertJson();
                 //if (!string.IsNullOrEmpty(city))
                 //{
@@ -265,7 +269,7 @@ namespace CaptureWebData
                 //}
                 foreach (CategoryGroup c in item.Childrens)
                 {//省直辖市的子节点
-                    CategoryGroup cn = cn = new CategoryGroup()
+                    CategoryGroup  cn = new CategoryGroup()
                     {
                         Root = c.Root,
                         Childrens = c.Childrens
@@ -275,6 +279,8 @@ namespace CaptureWebData
                     {
                         nodeJson = cn.ConvertJson();
                     }
+                    LoggerWriter.CreateLogFile(cn.Root.Name, SystemConfig.ExeDir + ELogType.DebugData.ToString(),
+                  ELogType.DebugData, DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat) + ".log",true);
                     Logger.CreateNewAppData(nodeJson, GetNodeItemFileName(c, 
                         redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat)), GetRedisRelyFileDir());
                 }

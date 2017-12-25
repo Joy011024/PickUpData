@@ -221,8 +221,8 @@ namespace CaptureWebData
                 }
                 if (string.IsNullOrEmpty(exeDir))
                 {
-                    AssemblyDataExt ass = new AssemblyDataExt();
-                    exeDir = ass.GetAssemblyDir();
+
+                    exeDir = new Infrastructure.ExtService.AppDirHelper().GetAppDir(Infrastructure.ExtService.AppCategory.WinApp);
                 }
                 return exeDir;
             }
@@ -249,6 +249,21 @@ namespace CaptureWebData
                     cfgFileExistsIsDoReplace = ConfigurationManager.AppSettings["CfgFileExistsIsDoReplace"];
                 }
                 return cfgFileExistsIsDoReplace=="true";
+            }
+        }
+        static string dateTimeIntFormat;
+        /// <summary>
+        /// 日期戳形式
+        /// </summary>
+        public static string DateTimeIntFormat
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(dateTimeIntFormat))
+                {
+                    dateTimeIntFormat = ConfigurationManager.AppSettings["DateTimeIntFormat"];
+                }
+                return dateTimeIntFormat;
             }
         }
     }
