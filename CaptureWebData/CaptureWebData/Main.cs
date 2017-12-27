@@ -78,6 +78,9 @@ namespace CaptureWebData
             {//不是目标类 
             
             }
+            //无法将顶级控件添加到控件。
+            frm.TopLevel = false;
+            frm.Parent = bodyPanel;
             frm.Show();
             //Form frm = (Form)Convert.ChangeType(targetForm, typeof(Form));//其他信息: 对象必须实现 IConvertible。
             // Form frm = (Form)targetForm.Assembly.CreateInstance(frmName);//不能加载当前程序集内的窗体

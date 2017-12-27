@@ -41,7 +41,9 @@ namespace Domain.CommonData
         [Description("爬取的组数据")]
         SpliderGroupDataLog=10,
         [Description("Http请求响应")]
-        HttpResponse=11
+        HttpResponse=11,
+        [Description("压缩日志")]
+        ZipLog=12
     }
     /// <summary>
     /// 程序类型
@@ -71,7 +73,9 @@ namespace Domain.CommonData
         /// <param name="text"></param>
         /// <param name="path"></param>
         /// <param name="log"></param>
-        public static void  CreateLogFile(string text,string path,ELogType log,string fileName=null) 
+        /// <param name="fileName"></param>
+        /// <param name="existsWrite">存在相同名称的文件进行替换还是追加</param>
+        public static void  CreateLogFile(string text,string path,ELogType log,string fileName=null,bool existsWrite=false,Encoding encode=null) 
         {
             if (string.IsNullOrEmpty(text)) { return; }
             if (!string.IsNullOrEmpty(path)&&!Directory.Exists(path)) 
@@ -87,8 +91,27 @@ namespace Domain.CommonData
                 file += "/"+log+now.ToString(CommonFormat.DateTimeIntFormat) + filetype;
             else
                 file += "/"+ fileName + filetype;
-            FileStream fs = new FileStream(file, FileMode.Create, FileAccess.Write,FileShare.Write);
-            StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
+            FileStream fs ;
+            if (!existsWrite)
+            {
+                fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.Write);
+            }
+            else 
+            {
+                if (File.Exists(file))
+                {
+                    fs = new FileStream(file, FileMode.Append, FileAccess.Write, FileShare.Write);
+                }
+                else 
+                {
+                    fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.Write);
+                }
+            }
+            if (encode == null)
+            {
+                encode = Encoding.UTF8;
+            }
+            StreamWriter sw = new StreamWriter(fs, encode);
             sw.Write(text);
             sw.Close();
             fs.Close();
@@ -96,8 +119,17 @@ namespace Domain.CommonData
     }
     public class FileHelper
     {
+        /// <summary>
+        /// 读取文件 ，如果文件不存在则返回null
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static string ReadFile(string path)
         {
+            if (!File.Exists(path))
+            {
+                return null;
+            }
             FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read);
             StreamReader rs = new StreamReader(file);
             // byte[] bytes = new byte[1024];

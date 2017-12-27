@@ -1,3 +1,5 @@
+--create database TicketDB;
+go
 create  table AppSettingCfg
 (
 	Id	uniqueidentifier  primary key,

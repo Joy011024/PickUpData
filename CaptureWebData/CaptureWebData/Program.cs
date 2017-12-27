@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Configuration;
 using EmailHelper;
+using Domain.CommonData;
 namespace CaptureWebData
 {
     static class Program
@@ -76,11 +77,14 @@ namespace CaptureWebData
             }
         }
         static bool useRedis;
-        public static bool UseRedis
+        /// <summary>
+        /// 启用Redis缓存存储功能
+        /// </summary>
+        public static bool OpenRedis
         {
             get 
             {
-                useRedis = ConfigurationManager.AppSettings["UseRedis"] == "true";
+                useRedis = ConfigurationManager.AppSettings["UsingRedis"] == "true";
                 return useRedis;
             }
         }
@@ -174,6 +178,92 @@ namespace CaptureWebData
                 if (string.IsNullOrEmpty(captureWebDataWinAssembly))
                     captureWebDataWinAssembly = ConfigurationManager.AppSettings["CaptureWebDataWinAssembly"];
                 return captureWebDataWinAssembly;
+            }
+        }
+        
+        static string usingWebConfigDir;
+        /// <summary>
+        /// 日志路径采用配置文件中路径
+        /// </summary>
+        public static bool LogDirIsFromWebConfig
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(usingWebConfigDir))
+                {
+                    usingWebConfigDir = ConfigurationManager.AppSettings["LogDirIsFromWebConfig"];
+                }
+                usingWebConfigDir = string.IsNullOrEmpty(usingWebConfigDir) ? "true" : usingWebConfigDir;
+                return usingWebConfigDir == "true";
+            }
+        }
+        /// <summary>
+        /// 配置文件中设置的日志路径
+        /// </summary>
+        static string LogDir
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["LogDir"];
+            }
+        }
+        static string exeDir;
+        /// <summary>
+        /// 当前程序的路径
+        /// </summary>
+        public static string ExeDir
+        {
+            get
+            {
+                if (LogDirIsFromWebConfig)
+                {
+                    exeDir = LogDir;
+                }
+                if (string.IsNullOrEmpty(exeDir))
+                {
+
+                    exeDir = new Infrastructure.ExtService.AppDirHelper().GetAppDir(Infrastructure.ExtService.AppCategory.WinApp);
+                }
+                return exeDir;
+            }
+        }
+        static string redisValueIsJsonFormat;
+        public static bool RedisValueIsJsonFormat
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(redisValueIsJsonFormat))
+                {
+                    redisValueIsJsonFormat = ConfigurationManager.AppSettings["RedisValueIsJsonFormat"];
+                }
+                return redisValueIsJsonFormat == "true";
+            }
+        }
+        static string cfgFileExistsIsDoReplace;
+        public static bool CfgFileExistsIsDoReplace 
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(cfgFileExistsIsDoReplace))
+                {
+                    cfgFileExistsIsDoReplace = ConfigurationManager.AppSettings["CfgFileExistsIsDoReplace"];
+                }
+                return cfgFileExistsIsDoReplace=="true";
+            }
+        }
+        static string dateTimeIntFormat;
+        /// <summary>
+        /// 日期戳形式
+        /// </summary>
+        public static string DateTimeIntFormat
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(dateTimeIntFormat))
+                {
+                    dateTimeIntFormat = ConfigurationManager.AppSettings["DateTimeIntFormat"];
+                }
+                return dateTimeIntFormat;
             }
         }
     }
