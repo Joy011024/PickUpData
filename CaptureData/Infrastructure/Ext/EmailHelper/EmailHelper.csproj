@@ -36,7 +36,7 @@
       <HintPath>..\..\..\..\CaptureWebData\bin\SelfDefine\Common.Data.dll</HintPath>
     </Reference>
     <Reference Include="Domain.CommonData">
-      <HintPath>..\..\..\..\..\SampleHelper\RedisServiceHelper\bin\Domain.CommonData.dll</HintPath>
+      <HintPath>..\..\Domain\Domain.CommonData\bin\Debug\Domain.CommonData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
