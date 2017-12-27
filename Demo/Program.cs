@@ -7,6 +7,7 @@ using Infrastructure.ExtService;
 using System.IO;
 using Common.Data;
 using System.IO.Packaging;
+using System.Text;
 namespace Demo
 {
     static class Program
@@ -126,10 +127,13 @@ namespace Demo
                 "如果惧怕前面跌宕的山岩，生命就永远只能是死水一潭", 
                 "懦弱的人只会裹足不前，莽撞的人只能引为烧身，只有真正勇敢的人才能所向披靡"
             };
+            StringBuilder sb = new StringBuilder();
             foreach (string item in maxims)
             {
                string pinying= item.TextConvertChar(true);
+               sb.AppendLine(item + "\t" + pinying);
             }
+            LoggerWriter.CreateLogFile(sb.ToString(), new AppDirHelper().GetAppDir(AppCategory.WinApp), ELogType.DebugData);
         }
     }
 }
