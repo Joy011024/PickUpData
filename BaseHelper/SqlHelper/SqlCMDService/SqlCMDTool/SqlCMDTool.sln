@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlDBSyncTool", "SqlDBSyncTool\SqlDBSyncTool.csproj", "{793AFE8F-690D-47A7-A71B-74371D0472FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsSqlHelper", "..\..\MsSqlHelper\MsSqlHelper.csproj", "{D8DA05C4-0583-4357-AE64-0550DA6BA48F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlCmd.Model", "..\..\SqlCmd.Model\SqlCmd.Model.csproj", "{FF558206-5198-484B-A7E5-EBD8E9454F31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{793AFE8F-690D-47A7-A71B-74371D0472FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793AFE8F-690D-47A7-A71B-74371D0472FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793AFE8F-690D-47A7-A71B-74371D0472FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793AFE8F-690D-47A7-A71B-74371D0472FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8DA05C4-0583-4357-AE64-0550DA6BA48F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8DA05C4-0583-4357-AE64-0550DA6BA48F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8DA05C4-0583-4357-AE64-0550DA6BA48F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8DA05C4-0583-4357-AE64-0550DA6BA48F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF558206-5198-484B-A7E5-EBD8E9454F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF558206-5198-484B-A7E5-EBD8E9454F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF558206-5198-484B-A7E5-EBD8E9454F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF558206-5198-484B-A7E5-EBD8E9454F31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

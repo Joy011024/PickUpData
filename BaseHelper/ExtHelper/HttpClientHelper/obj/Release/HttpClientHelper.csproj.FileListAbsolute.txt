@@ -1,0 +1,4 @@
+D:\Dream\ExcuteHttpCmd\ExcuteHttp\BaseHelper\bin\Release\HttpClientHelper.dll
+D:\Dream\ExcuteHttpCmd\ExcuteHttp\BaseHelper\bin\Release\HttpClientHelper.pdb
+D:\Dream\ExcuteHttpCmd\ExcuteHttp\BaseHelper\ExtHelper\HttpClientHelper\obj\Release\HttpClientHelper.dll
+D:\Dream\ExcuteHttpCmd\ExcuteHttp\BaseHelper\ExtHelper\HttpClientHelper\obj\Release\HttpClientHelper.pdb

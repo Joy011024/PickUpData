@@ -1,0 +1,861 @@
+USE [gamelogdb]
+GO
+/****** Object:  Table [dbo].[T_Version]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[T_Version](
+	[F_id] [smallint] NOT NULL,
+	[F_DB_Version] [nchar](20) NULL,
+	[F_Uptime] [smalldatetime] NOT NULL,
+	[F_UpNote] [nvarchar](500) NULL,
+ CONSTRAINT [PK_T_Version] PRIMARY KEY NONCLUSTERED 
+(
+	[F_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[T_UserStatis]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[T_UserStatis](
+	[F_UserID] [int] NOT NULL,
+	[F_UserName] [nvarchar](50) NULL,
+	[F_LoginTimes] [int] NULL,
+	[F_LoginCount] [int] NULL,
+	[F_CTNLoginCount] [int] NULL,
+	[F_MaxCTNLoginCount] [int] NULL,
+	[F_MaxLoginInterval] [int] NULL,
+	[F_LastLoginInterval] [int] NULL,
+	[F_FirstLoginTime] [datetime] NULL,
+	[F_ActiveTime] [datetime] NULL,
+ CONSTRAINT [PK_T_UserStatis] PRIMARY KEY CLUSTERED 
+(
+	[F_UserID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (1, N'111                                               ', 6, 1, 1, 1, 1, 1, CAST(0x0000A76A00B13D3C AS DateTime), CAST(0x0000A76A01032535 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (6, N'666                                               ', 17, 1, 1, 1, 1, 1, CAST(0x0000A76A00B9542D AS DateTime), CAST(0x0000A76A01259F73 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (7, N'777                                               ', 2, 1, 1, 1, 1, 1, CAST(0x0000A76A00F5ECC3 AS DateTime), CAST(0x0000A76A00F82E50 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (14, N'100014                                            ', 2, 1, 1, 1, 1, 1, CAST(0x0000A76A00E6C424 AS DateTime), CAST(0x0000A76A00E73A44 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (21, N'100021                                            ', 20, 1, 1, 1, 1, 1, CAST(0x0000A76A00F1B702 AS DateTime), CAST(0x0000A76A0129F370 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (23, N'100023                                            ', 11, 1, 1, 1, 1, 1, CAST(0x0000A76A00AEF74F AS DateTime), CAST(0x0000A76A0125308C AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (24, N'100024                                            ', 44, 1, 1, 1, 1, 1, CAST(0x0000A76A00B1896C AS DateTime), CAST(0x0000A76A01141599 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (25, N'100025                                            ', 23, 1, 1, 1, 1, 1, CAST(0x0000A76A00AD7462 AS DateTime), CAST(0x0000A76A01259767 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (26, N'100026                                            ', 11, 1, 1, 1, 1, 1, CAST(0x0000A76A00B3D071 AS DateTime), CAST(0x0000A76A01296080 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (27, N'100027                                            ', 22, 1, 1, 1, 1, 1, CAST(0x0000A76A00AFE9D7 AS DateTime), CAST(0x0000A76A01255FD5 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (28, N'100028                                            ', 2, 1, 1, 1, 1, 1, CAST(0x0000A76A00F160F6 AS DateTime), CAST(0x0000A76A00FDB8F9 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (29, N'100029                                            ', 21, 1, 1, 1, 1, 1, CAST(0x0000A76A00C0DDF0 AS DateTime), CAST(0x0000A76A0124B63B AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (42, N'100042                                            ', 12, 1, 1, 1, 1, 1, CAST(0x0000A76A00BD79FF AS DateTime), CAST(0x0000A76A0120D90B AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (45, N'100045                                            ', 8, 1, 1, 1, 1, 1, CAST(0x0000A76A00B10C50 AS DateTime), CAST(0x0000A76A0111DD03 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (46, N'100046                                            ', 26, 1, 1, 1, 1, 1, CAST(0x0000A76A00AEA6CB AS DateTime), CAST(0x0000A76A011D7AA5 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (57, N'100057                                            ', 72, 1, 1, 1, 1, 1, CAST(0x0000A76A00B40C12 AS DateTime), CAST(0x0000A76A01297183 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (58, N'100058                                            ', 8, 1, 1, 1, 1, 1, CAST(0x0000A76A00D44960 AS DateTime), CAST(0x0000A76A01250779 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (59, N'100059                                            ', 22, 1, 1, 1, 1, 1, CAST(0x0000A76A00AF5021 AS DateTime), CAST(0x0000A76A0122D6D7 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (60, N'100060                                            ', 26, 1, 1, 1, 1, 1, CAST(0x0000A76A00B6254A AS DateTime), CAST(0x0000A76A01237400 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (81, N'100081                                            ', 6, 1, 1, 1, 1, 1, CAST(0x0000A76A00C62B3F AS DateTime), CAST(0x0000A76A010D6C7B AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (89, N'100089                                            ', 12, 1, 1, 1, 1, 1, CAST(0x0000A76A00B169CF AS DateTime), CAST(0x0000A76A00EA859E AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (91, N'100091                                            ', 28, 1, 1, 1, 1, 1, CAST(0x0000A76A00AEBA3D AS DateTime), CAST(0x0000A76A01259F77 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (113, N'100113                                            ', 5, 1, 1, 1, 1, 1, CAST(0x0000A76A00BFB2A1 AS DateTime), CAST(0x0000A76A01254AFE AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (114, N'100114                                            ', 8, 1, 1, 1, 1, 1, CAST(0x0000A76A00BEE0CD AS DateTime), CAST(0x0000A76A012A5F68 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (115, N'100115                                            ', 2, 1, 1, 1, 1, 1, CAST(0x0000A76A01256DD3 AS DateTime), CAST(0x0000A76A01259F7C AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (117, N'100117                                            ', 4, 1, 1, 1, 1, 1, CAST(0x0000A76A00FEFDEB AS DateTime), CAST(0x0000A76A010C8818 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (119, N'100119                                            ', 10, 1, 1, 1, 1, 1, CAST(0x0000A76A01025B6D AS DateTime), CAST(0x0000A76A01245356 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (120, N'100120                                            ', 10, 1, 1, 1, 1, 1, CAST(0x0000A76A00BABE5A AS DateTime), CAST(0x0000A76A0129D460 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (149, N'100149                                            ', 2, 1, 1, 1, 1, 1, CAST(0x0000A76A01122624 AS DateTime), CAST(0x0000A76A0112BC39 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (161, N'100161                                            ', 4, 1, 1, 1, 1, 1, CAST(0x0000A76A010CCD5F AS DateTime), CAST(0x0000A76A011D7317 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (162, N'100162                                            ', 6, 1, 1, 1, 1, 1, CAST(0x0000A76A00AD712F AS DateTime), CAST(0x0000A76A00D4E3C4 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (219, N'100219                                            ', 3, 1, 1, 1, 1, 1, CAST(0x0000A76A01256E89 AS DateTime), CAST(0x0000A76A01285AC8 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (257, N'100003                                            ', 6, 1, 1, 1, 1, 1, CAST(0x0000A76A00BB94DC AS DateTime), CAST(0x0000A76A012593C7 AS DateTime))
+INSERT [dbo].[T_UserStatis] ([F_UserID], [F_UserName], [F_LoginTimes], [F_LoginCount], [F_CTNLoginCount], [F_MaxCTNLoginCount], [F_MaxLoginInterval], [F_LastLoginInterval], [F_FirstLoginTime], [F_ActiveTime]) VALUES (1041, N'100319                                            ', 2, 1, 1, 1, 1, 1, CAST(0x0000A76A01056805 AS DateTime), CAST(0x0000A76A0111DFBA AS DateTime))
+/****** Object:  Table [dbo].[T_UserGMUsedLog]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_UserGMUsedLog](
+	[F_LogId] [int] IDENTITY(1,1) NOT NULL,
+	[F_ID] [int] NOT NULL,
+	[F_UserID] [int] NOT NULL,
+	[F_PassWord] [char](34) NOT NULL,
+	[F_GMName] [nchar](20) NULL,
+	[F_UpdateTime] [smalldatetime] NOT NULL,
+	[F_BackTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_T_UserGMUsedLog] PRIMARY KEY CLUSTERED 
+(
+	[F_LogId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'归还时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_UserGMUsedLog', @level2type=N'COLUMN',@level2name=N'F_BackTime'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'GM借用帐号日志' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_UserGMUsedLog'
+GO
+/****** Object:  Table [dbo].[T_UserEnterExitLog20170505]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[T_UserEnterExitLog20170505](
+	[F_LogID] [bigint] IDENTITY(1,1) NOT NULL,
+	[F_UserLogedID] [bigint] NULL,
+	[F_UserID] [int] NULL,
+	[F_UserName] [nchar](50) NULL,
+	[F_LoginNGSID] [smallint] NULL,
+	[F_ZoneID] [smallint] NULL,
+	[F_LoginIP] [nchar](32) NULL,
+	[F_LoginType] [tinyint] NULL,
+	[F_TimeCount] [int] NULL,
+	[F_LoginTime] [smalldatetime] NULL,
+	[F_ExitTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_T_UserEnterExitLog20170505] PRIMARY KEY CLUSTERED 
+(
+	[F_LogID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_T_UserEnterExitLog20170505_UserLogedID] ON [dbo].[T_UserEnterExitLog20170505] 
+(
+	[F_UserLogedID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[T_UserEnterExitLog20170505] ON
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (1, 14221, 162, N'100162                                            ', 2, 2, N'192.168.1.121                   ', 0, 68, CAST(0xA76A0277 AS SmallDateTime), CAST(0xA76A02BB AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (2, 14212, 25, N'100025                                            ', 2, 2, N'192.168.1.25                    ', 0, 632, CAST(0xA76A0000 AS SmallDateTime), CAST(0xA76A0278 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (3, 14222, 25, N'100025                                            ', 2, 2, N'192.168.1.25                    ', 0, 46, CAST(0xA76A0279 AS SmallDateTime), CAST(0xA76A02A7 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (4, 14223, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 10, CAST(0xA76A027C AS SmallDateTime), CAST(0xA76A0286 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (5, 14224, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 1, CAST(0xA76A027C AS SmallDateTime), CAST(0xA76A027D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (6, 14214, 23, N'100023                                            ', 2, 2, N'192.168.1.23                    ', 0, 637, CAST(0xA76A0000 AS SmallDateTime), CAST(0xA76A027D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (7, 14225, 59, N'100059                                            ', 2, 2, N'192.168.1.59                    ', 0, 0, CAST(0xA76A027E AS SmallDateTime), CAST(0xA76A027E AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (8, 14226, 59, N'100059                                            ', 18, 18, N'192.168.1.59                    ', 0, 5, CAST(0xA76A027E AS SmallDateTime), CAST(0xA76A0283 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (9, 14227, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 2, CAST(0xA76A027F AS SmallDateTime), CAST(0xA76A0281 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (10, 14217, 27, N'100027                                            ', 16, 16, N'192.168.1.27                    ', 0, 640, CAST(0xA76A0000 AS SmallDateTime), CAST(0xA76A0280 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (11, 14228, 27, N'100027                                            ', 16, 16, N'192.168.1.27                    ', 0, 4, CAST(0xA76A0281 AS SmallDateTime), CAST(0xA76A0285 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (12, 14229, 45, N'100045                                            ', 8, 8, N'192.168.1.45                    ', 0, 45, CAST(0xA76A0285 AS SmallDateTime), CAST(0xA76A02B2 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (13, 14230, 1, N'111                                               ', 2, 2, N'192.168.1.196                   ', 0, 2, CAST(0xA76A0285 AS SmallDateTime), CAST(0xA76A0287 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (14, 14231, 89, N'100089                                            ', 2, 2, N'192.168.1.89                    ', 0, 1, CAST(0xA76A0286 AS SmallDateTime), CAST(0xA76A0287 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (15, 14216, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 646, CAST(0xA76A0000 AS SmallDateTime), CAST(0xA76A0286 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (16, 14232, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 9, CAST(0xA76A0286 AS SmallDateTime), CAST(0xA76A028F AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (17, 14233, 89, N'100089                                            ', 2, 2, N'192.168.1.89                    ', 0, 51, CAST(0xA76A0287 AS SmallDateTime), CAST(0xA76A02BA AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (18, 14234, 1, N'111                                               ', 2, 2, N'192.168.1.196                   ', 0, 18, CAST(0xA76A028A AS SmallDateTime), CAST(0xA76A029C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (19, 14203, 26, N'100026                                            ', 2, 2, N'192.168.1.26                    ', 0, 655, CAST(0xA76A0000 AS SmallDateTime), CAST(0xA76A028F AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (20, 14235, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 2, CAST(0xA76A0290 AS SmallDateTime), CAST(0xA76A0292 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (21, 14236, 26, N'100026                                            ', 2, 2, N'192.168.1.26                    ', 0, 0, CAST(0xA76A0290 AS SmallDateTime), CAST(0xA76A0290 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (22, 14237, 26, N'100026                                            ', 2, 2, N'192.168.1.26                    ', 0, 0, CAST(0xA76A0290 AS SmallDateTime), CAST(0xA76A0290 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (23, 14238, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 39, CAST(0xA76A0292 AS SmallDateTime), CAST(0xA76A02B9 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (24, 14239, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A0293 AS SmallDateTime), CAST(0xA76A0294 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (25, 14240, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 2, CAST(0xA76A0297 AS SmallDateTime), CAST(0xA76A0299 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (26, 14241, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 15, CAST(0xA76A029D AS SmallDateTime), CAST(0xA76A02AC AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (27, 14209, 6, N'666                                               ', 2, 2, N'192.168.1.171                   ', 0, 675, CAST(0xA76A0000 AS SmallDateTime), CAST(0xA76A02A3 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (28, 14242, 6, N'666                                               ', 2, 2, N'192.168.1.171                   ', 0, 25, CAST(0xA76A02A4 AS SmallDateTime), CAST(0xA76A02BD AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (29, 14220, 120, N'100120                                            ', 2, 2, N'192.168.1.137                   ', 0, 680, CAST(0xA76A0000 AS SmallDateTime), CAST(0xA76A02A8 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (30, 14243, 27, N'100027                                            ', 16, 16, N'192.168.1.27                    ', 0, 5, CAST(0xA76A02A9 AS SmallDateTime), CAST(0xA76A02AE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (31, 14244, 257, N'100003                                            ', 2, 2, N'192.168.1.201                   ', 0, 16, CAST(0xA76A02AB AS SmallDateTime), CAST(0xA76A02BB AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (32, 14245, 25, N'100025                                            ', 2, 2, N'192.168.1.25                    ', 0, 16, CAST(0xA76A02AB AS SmallDateTime), CAST(0xA76A02BB AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (33, 14246, 120, N'100120                                            ', 2, 2, N'192.168.1.137                   ', 0, 33, CAST(0xA76A02B0 AS SmallDateTime), CAST(0xA76A02D1 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (34, 14247, 42, N'100042                                            ', 2, 2, N'192.168.1.42                    ', 0, 10, CAST(0xA76A02B2 AS SmallDateTime), CAST(0xA76A02BC AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (35, 14248, 45, N'100045                                            ', 8, 8, N'192.168.1.45                    ', 0, 94, CAST(0xA76A02B5 AS SmallDateTime), CAST(0xA76A0313 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (36, 14249, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 5, CAST(0xA76A02B5 AS SmallDateTime), CAST(0xA76A02BA AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (37, 14250, 27, N'100027                                            ', 16, 16, N'192.168.1.27                    ', 0, 12, CAST(0xA76A02B5 AS SmallDateTime), CAST(0xA76A02C1 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (38, 14251, 114, N'100114                                            ', 14, 14, N'192.168.1.114                   ', 0, 5, CAST(0xA76A02B7 AS SmallDateTime), CAST(0xA76A02BC AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (39, 14252, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 2, CAST(0xA76A02B8 AS SmallDateTime), CAST(0xA76A02BA AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (40, 14253, 24, N'100024                                            ', 2, 2, N'192.168.1.24                    ', 0, 0, CAST(0xA76A02BA AS SmallDateTime), CAST(0xA76A02BA AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (41, 14219, 113, N'100113                                            ', 2, 2, N'192.168.1.113                   ', 0, 698, CAST(0xA76A0000 AS SmallDateTime), CAST(0xA76A02BA AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (42, 14254, 162, N'100162                                            ', 2, 2, N'192.168.1.121                   ', 0, 0, CAST(0xA76A02BB AS SmallDateTime), CAST(0xA76A02BB AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (43, 14255, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 4, CAST(0xA76A02BC AS SmallDateTime), CAST(0xA76A02C0 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (44, 14256, 114, N'100114                                            ', 2, 2, N'192.168.1.114                   ', 0, 81, CAST(0xA76A02BC AS SmallDateTime), CAST(0xA76A030D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (45, 14257, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 1, CAST(0xA76A02BD AS SmallDateTime), CAST(0xA76A02BE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (46, 14258, 23, N'100023                                            ', 6, 6, N'192.168.1.23                    ', 0, 1, CAST(0xA76A02BD AS SmallDateTime), CAST(0xA76A02BE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (47, 14259, 162, N'100162                                            ', 2, 2, N'192.168.1.121                   ', 0, 73, CAST(0xA76A02BE AS SmallDateTime), CAST(0xA76A0307 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (48, 14260, 24, N'100024                                            ', 2, 2, N'192.168.1.24                    ', 0, 3, CAST(0xA76A02BE AS SmallDateTime), CAST(0xA76A02C1 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (49, 14213, 29, N'100029                                            ', 2, 2, N'192.168.1.29                    ', 0, 702, CAST(0xA76A0000 AS SmallDateTime), CAST(0xA76A02BE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (50, 14261, 25, N'100025                                            ', 10, 10, N'192.168.1.25                    ', 0, 87, CAST(0xA76A02BF AS SmallDateTime), CAST(0xA76A0316 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (51, 14262, 42, N'100042                                            ', 2, 2, N'192.168.1.42                    ', 0, 15, CAST(0xA76A02BF AS SmallDateTime), CAST(0xA76A02CE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (52, 14263, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 2, CAST(0xA76A02C1 AS SmallDateTime), CAST(0xA76A02C3 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (53, 14264, 46, N'100046                                            ', 2, 2, N'192.168.1.46                    ', 0, 85, CAST(0xA76A02C1 AS SmallDateTime), CAST(0xA76A0316 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (54, 14265, 27, N'100027                                            ', 16, 16, N'192.168.1.27                    ', 0, 129, CAST(0xA76A02C2 AS SmallDateTime), CAST(0xA76A0343 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (55, 14266, 24, N'100024                                            ', 2, 2, N'192.168.1.24                    ', 0, 2, CAST(0xA76A02C5 AS SmallDateTime), CAST(0xA76A02C7 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (56, 14267, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 93, CAST(0xA76A02C7 AS SmallDateTime), CAST(0xA76A0324 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (57, 14268, 257, N'100003                                            ', 2, 2, N'192.168.1.201                   ', 0, 10, CAST(0xA76A02CB AS SmallDateTime), CAST(0xA76A02D5 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (58, 14269, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 0, CAST(0xA76A02CE AS SmallDateTime), CAST(0xA76A02CE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (59, 14270, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 0, CAST(0xA76A02CE AS SmallDateTime), CAST(0xA76A02CE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (60, 14271, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 0, CAST(0xA76A02CE AS SmallDateTime), CAST(0xA76A02CE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (61, 14272, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 0, CAST(0xA76A02CE AS SmallDateTime), CAST(0xA76A02CE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (62, 14273, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 0, CAST(0xA76A02CE AS SmallDateTime), CAST(0xA76A02CE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (63, 14274, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 0, CAST(0xA76A02CE AS SmallDateTime), CAST(0xA76A02CE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (64, 14275, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 3, CAST(0xA76A02D0 AS SmallDateTime), CAST(0xA76A02D3 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (65, 14276, 81, N'100081                                            ', 2, 2, N'192.168.1.81                    ', 0, 2, CAST(0xA76A02D2 AS SmallDateTime), CAST(0xA76A02D4 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (66, 14277, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A02D4 AS SmallDateTime), CAST(0xA76A02D5 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (67, 14278, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A02D6 AS SmallDateTime), CAST(0xA76A02D7 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (68, 14279, 58, N'100058                                            ', 2, 2, N'192.168.1.58                    ', 0, 10, CAST(0xA76A0305 AS SmallDateTime), CAST(0xA76A030F AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (69, 14280, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 2, CAST(0xA76A030C AS SmallDateTime), CAST(0xA76A030E AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (70, 14281, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 5, CAST(0xA76A030F AS SmallDateTime), CAST(0xA76A0314 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (71, 14282, 58, N'100058                                            ', 2, 2, N'192.168.1.58                    ', 0, 193, CAST(0xA76A0312 AS SmallDateTime), CAST(0xA76A03D3 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (72, 14283, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A0316 AS SmallDateTime), CAST(0xA76A0317 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (73, 14284, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 7, CAST(0xA76A0316 AS SmallDateTime), CAST(0xA76A031D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (74, 14285, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 2, CAST(0xA76A031C AS SmallDateTime), CAST(0xA76A031E AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (75, 14286, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 8, CAST(0xA76A031E AS SmallDateTime), CAST(0xA76A0326 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (76, 14287, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A0320 AS SmallDateTime), CAST(0xA76A0321 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (77, 14288, 59, N'100059                                            ', 18, 18, N'192.168.1.59                    ', 0, 0, CAST(0xA76A0320 AS SmallDateTime), CAST(0xA76A0320 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (78, 14289, 59, N'100059                                            ', 2, 2, N'192.168.1.59                    ', 0, 1, CAST(0xA76A0321 AS SmallDateTime), CAST(0xA76A0322 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (79, 14290, 113, N'100113                                            ', 2, 2, N'192.168.1.113                   ', 0, 163, CAST(0xA76A0321 AS SmallDateTime), CAST(0xA76A03C4 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (80, 14291, 29, N'100029                                            ', 23, 23, N'192.168.1.29                    ', 0, 13, CAST(0xA76A0321 AS SmallDateTime), CAST(0xA76A032E AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (81, 14292, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 84, CAST(0xA76A0322 AS SmallDateTime), CAST(0xA76A0376 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (82, 14293, 24, N'100024                                            ', 2, 2, N'192.168.1.24                    ', 0, 0, CAST(0xA76A0324 AS SmallDateTime), CAST(0xA76A0324 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (83, 14294, 24, N'100024                                            ', 2, 2, N'192.168.1.24                    ', 0, 9, CAST(0xA76A0325 AS SmallDateTime), CAST(0xA76A032E AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (84, 14295, 89, N'100089                                            ', 2, 2, N'192.168.1.89                    ', 0, 0, CAST(0xA76A0325 AS SmallDateTime), CAST(0xA76A0325 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (85, 14296, 59, N'100059                                            ', 2, 2, N'192.168.1.59                    ', 0, 87, CAST(0xA76A0326 AS SmallDateTime), CAST(0xA76A037D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (86, 14297, 257, N'100003                                            ', 2, 2, N'192.168.1.201                   ', 0, 261, CAST(0xA76A0328 AS SmallDateTime), CAST(0xA76A042D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (87, 14298, 89, N'100089                                            ', 2, 2, N'192.168.1.89                    ', 0, 24, CAST(0xA76A0329 AS SmallDateTime), CAST(0xA76A0341 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (88, 14299, 45, N'100045                                            ', 8, 8, N'192.168.1.45                    ', 0, 41, CAST(0xA76A032D AS SmallDateTime), CAST(0xA76A0356 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (89, 14300, 6, N'666                                               ', 2, 2, N'192.168.1.171                   ', 0, 36, CAST(0xA76A032D AS SmallDateTime), CAST(0xA76A0351 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (90, 14301, 24, N'100024                                            ', 2, 2, N'192.168.1.24                    ', 0, 10, CAST(0xA76A032E AS SmallDateTime), CAST(0xA76A0338 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (91, 14302, 25, N'100025                                            ', 2, 2, N'192.168.1.25                    ', 0, 80, CAST(0xA76A032F AS SmallDateTime), CAST(0xA76A037F AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (92, 14303, 23, N'100023                                            ', 6, 6, N'192.168.1.23                    ', 0, 1, CAST(0xA76A032F AS SmallDateTime), CAST(0xA76A0330 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (93, 14304, 42, N'100042                                            ', 2, 2, N'192.168.1.42                    ', 0, 20, CAST(0xA76A0330 AS SmallDateTime), CAST(0xA76A0344 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (94, 14305, 29, N'100029                                            ', 2, 2, N'192.168.1.29                    ', 0, 32, CAST(0xA76A0333 AS SmallDateTime), CAST(0xA76A0353 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (95, 14306, 23, N'100023                                            ', 6, 6, N'192.168.1.23                    ', 0, 22, CAST(0xA76A0339 AS SmallDateTime), CAST(0xA76A034F AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (96, 14307, 27, N'100027                                            ', 16, 16, N'192.168.1.27                    ', 0, 1, CAST(0xA76A0344 AS SmallDateTime), CAST(0xA76A0345 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (97, 14308, 42, N'100042                                            ', 2, 2, N'192.168.1.42                    ', 0, 48, CAST(0xA76A0345 AS SmallDateTime), CAST(0xA76A0375 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (98, 14309, 27, N'100027                                            ', 16, 16, N'192.168.1.27                    ', 0, 8, CAST(0xA76A0346 AS SmallDateTime), CAST(0xA76A034E AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (99, 14310, 14, N'100014                                            ', 2, 2, N'192.168.1.121                   ', 0, 2, CAST(0xA76A0348 AS SmallDateTime), CAST(0xA76A034A AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (100, 14311, 89, N'100089                                            ', 2, 2, N'192.168.1.89                    ', 0, 8, CAST(0xA76A0349 AS SmallDateTime), CAST(0xA76A0351 AS SmallDateTime))
+GO
+print 'Processed 100 total records'
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (101, 14312, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 15, CAST(0xA76A034C AS SmallDateTime), CAST(0xA76A035B AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (102, 14313, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 0, CAST(0xA76A034E AS SmallDateTime), CAST(0xA76A034E AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (103, 14314, 27, N'100027                                            ', 2, 2, N'192.168.1.27                    ', 0, 53, CAST(0xA76A034F AS SmallDateTime), CAST(0xA76A0384 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (104, 14315, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 1, CAST(0xA76A034F AS SmallDateTime), CAST(0xA76A0350 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (105, 14316, 23, N'100023                                            ', 2, 2, N'192.168.1.23                    ', 0, 22, CAST(0xA76A0350 AS SmallDateTime), CAST(0xA76A0366 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (106, 14317, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 0, CAST(0xA76A0352 AS SmallDateTime), CAST(0xA76A0352 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (107, 14318, 89, N'100089                                            ', 2, 2, N'192.168.1.89                    ', 0, 4, CAST(0xA76A0352 AS SmallDateTime), CAST(0xA76A0356 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (108, 14319, 29, N'100029                                            ', 23, 23, N'192.168.1.29                    ', 0, 1, CAST(0xA76A0354 AS SmallDateTime), CAST(0xA76A0355 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (109, 14320, 6, N'666                                               ', 2, 2, N'192.168.1.171                   ', 0, 29, CAST(0xA76A035D AS SmallDateTime), CAST(0xA76A037A AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (110, 14321, 29, N'100029                                            ', 2, 2, N'192.168.1.29                    ', 0, 45, CAST(0xA76A0368 AS SmallDateTime), CAST(0xA76A0395 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (111, 14322, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 6, CAST(0xA76A0369 AS SmallDateTime), CAST(0xA76A036F AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (112, 14323, 28, N'100028                                            ', 2, 2, N'192.168.1.28                    ', 0, 45, CAST(0xA76A036F AS SmallDateTime), CAST(0xA76A039C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (113, 14324, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 2, CAST(0xA76A0370 AS SmallDateTime), CAST(0xA76A0372 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (114, 14325, 21, N'100021                                            ', 2, 2, N'192.168.1.21                    ', 0, 22, CAST(0xA76A0370 AS SmallDateTime), CAST(0xA76A0386 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (115, 14326, 23, N'100023                                            ', 2, 2, N'192.168.1.23                    ', 0, 184, CAST(0xA76A0373 AS SmallDateTime), CAST(0xA76A042B AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (116, 14327, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 6, CAST(0xA76A0374 AS SmallDateTime), CAST(0xA76A037A AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (117, 14328, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 17, CAST(0xA76A037C AS SmallDateTime), CAST(0xA76A038D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (118, 14329, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 0, CAST(0xA76A037D AS SmallDateTime), CAST(0xA76A037D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (119, 14330, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 2, CAST(0xA76A037E AS SmallDateTime), CAST(0xA76A0380 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (120, 14331, 59, N'100059                                            ', 2, 2, N'192.168.1.59                    ', 0, 1, CAST(0xA76A037E AS SmallDateTime), CAST(0xA76A037F AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (121, 14332, 7, N'777                                               ', 2, 2, N'192.168.1.121                   ', 0, 9, CAST(0xA76A037F AS SmallDateTime), CAST(0xA76A0388 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (122, 14333, 24, N'100024                                            ', 2, 2, N'192.168.1.24                    ', 0, 9, CAST(0xA76A0381 AS SmallDateTime), CAST(0xA76A038A AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (123, 14334, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 15, CAST(0xA76A0381 AS SmallDateTime), CAST(0xA76A0390 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (124, 14335, 81, N'100081                                            ', 2, 2, N'192.168.1.81                    ', 0, 77, CAST(0xA76A0382 AS SmallDateTime), CAST(0xA76A03CF AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (125, 14336, 6, N'666                                               ', 2, 2, N'192.168.1.171                   ', 0, 4, CAST(0xA76A0384 AS SmallDateTime), CAST(0xA76A0388 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (126, 14337, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 2, CAST(0xA76A0384 AS SmallDateTime), CAST(0xA76A0386 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (127, 14338, 42, N'100042                                            ', 2, 2, N'192.168.1.42                    ', 0, 5, CAST(0xA76A0385 AS SmallDateTime), CAST(0xA76A038A AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (128, 14339, 6, N'666                                               ', 2, 2, N'192.168.1.121                   ', 0, 1, CAST(0xA76A0388 AS SmallDateTime), CAST(0xA76A0389 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (129, 14340, 6, N'666                                               ', 2, 2, N'192.168.1.171                   ', 0, 14, CAST(0xA76A0389 AS SmallDateTime), CAST(0xA76A0397 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (130, 14341, 24, N'100024                                            ', 2, 2, N'192.168.1.24                    ', 0, 0, CAST(0xA76A038A AS SmallDateTime), CAST(0xA76A038A AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (131, 14342, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 0, CAST(0xA76A038C AS SmallDateTime), CAST(0xA76A038C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (132, 14343, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 6, CAST(0xA76A0392 AS SmallDateTime), CAST(0xA76A0398 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (133, 14344, 25, N'100025                                            ', 2, 2, N'192.168.1.25                    ', 0, 86, CAST(0xA76A0393 AS SmallDateTime), CAST(0xA76A03E9 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (134, 14345, 21, N'100021                                            ', 2, 2, N'192.168.1.21                    ', 0, 28, CAST(0xA76A0393 AS SmallDateTime), CAST(0xA76A03AF AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (135, 14346, 120, N'100120                                            ', 2, 2, N'192.168.1.121                   ', 0, 22, CAST(0xA76A0395 AS SmallDateTime), CAST(0xA76A03AB AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (136, 14347, 27, N'100027                                            ', 2, 2, N'192.168.1.27                    ', 0, 125, CAST(0xA76A0397 AS SmallDateTime), CAST(0xA76A0414 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (137, 14348, 29, N'100029                                            ', 2, 2, N'192.168.1.29                    ', 0, 35, CAST(0xA76A0398 AS SmallDateTime), CAST(0xA76A03BB AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (138, 14349, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 8, CAST(0xA76A0399 AS SmallDateTime), CAST(0xA76A03A1 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (139, 14350, 24, N'100024                                            ', 2, 2, N'192.168.1.24                    ', 0, 2, CAST(0xA76A039A AS SmallDateTime), CAST(0xA76A039C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (140, 14351, 6, N'666                                               ', 2, 2, N'192.168.1.171                   ', 0, 27, CAST(0xA76A039B AS SmallDateTime), CAST(0xA76A03B6 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (141, 14352, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 0, CAST(0xA76A039C AS SmallDateTime), CAST(0xA76A039C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (142, 14353, 24, N'100024                                            ', 7, 7, N'192.168.1.24                    ', 0, 42, CAST(0xA76A039C AS SmallDateTime), CAST(0xA76A03C6 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (143, 14354, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 0, CAST(0xA76A039D AS SmallDateTime), CAST(0xA76A039D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (144, 14355, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 0, CAST(0xA76A039D AS SmallDateTime), CAST(0xA76A039D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (145, 14356, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 0, CAST(0xA76A039D AS SmallDateTime), CAST(0xA76A039D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (146, 14357, 24, N'100024                                            ', 2, 2, N'192.168.1.56                    ', 0, 10, CAST(0xA76A039D AS SmallDateTime), CAST(0xA76A03A7 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (147, 14358, 117, N'100117                                            ', 2, 2, N'192.168.1.137                   ', 0, 49, CAST(0xA76A03A0 AS SmallDateTime), CAST(0xA76A03D1 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (148, 14359, 1, N'111                                               ', 2, 2, N'192.168.1.196                   ', 0, 12, CAST(0xA76A03A4 AS SmallDateTime), CAST(0xA76A03B0 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (149, 14360, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 4, CAST(0xA76A03A6 AS SmallDateTime), CAST(0xA76A03AA AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (150, 14361, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 24, CAST(0xA76A03AB AS SmallDateTime), CAST(0xA76A03C3 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (151, 14362, 119, N'100119                                            ', 2, 2, N'192.168.1.121                   ', 0, 0, CAST(0xA76A03AD AS SmallDateTime), CAST(0xA76A03AD AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (152, 14363, 119, N'100119                                            ', 2, 2, N'192.168.1.121                   ', 0, 1, CAST(0xA76A03AD AS SmallDateTime), CAST(0xA76A03AE AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (153, 14364, 119, N'100119                                            ', 2, 2, N'192.168.1.121                   ', 0, 8, CAST(0xA76A03AE AS SmallDateTime), CAST(0xA76A03B6 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (154, 14365, 21, N'100021                                            ', 2, 2, N'192.168.1.21                    ', 0, 45, CAST(0xA76A03AF AS SmallDateTime), CAST(0xA76A03DC AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (155, 14366, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A03B3 AS SmallDateTime), CAST(0xA76A03B4 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (156, 14367, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A03B5 AS SmallDateTime), CAST(0xA76A03B6 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (157, 14368, 119, N'100119                                            ', 2, 2, N'192.168.1.121                   ', 0, 1, CAST(0xA76A03B6 AS SmallDateTime), CAST(0xA76A03B7 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (158, 14369, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 2, CAST(0xA76A03B7 AS SmallDateTime), CAST(0xA76A03B9 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (159, 14370, 1041, N'100319                                            ', 2, 2, N'192.168.1.121                   ', 0, 45, CAST(0xA76A03B8 AS SmallDateTime), CAST(0xA76A03E5 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (160, 14371, 6, N'666                                               ', 2, 2, N'192.168.1.171                   ', 0, 117, CAST(0xA76A03B8 AS SmallDateTime), CAST(0xA76A042D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (161, 14372, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A03BE AS SmallDateTime), CAST(0xA76A03BF AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (162, 14373, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A03C0 AS SmallDateTime), CAST(0xA76A03C1 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (163, 14374, 59, N'100059                                            ', 2, 2, N'192.168.1.59                    ', 0, 0, CAST(0xA76A03C2 AS SmallDateTime), CAST(0xA76A03C2 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (164, 14375, 59, N'100059                                            ', 18, 18, N'192.168.1.59                    ', 0, 2, CAST(0xA76A03C2 AS SmallDateTime), CAST(0xA76A03C4 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (165, 14376, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 7, CAST(0xA76A03C3 AS SmallDateTime), CAST(0xA76A03CA AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (166, 14377, 59, N'100059                                            ', 18, 18, N'192.168.1.59                    ', 0, 10, CAST(0xA76A03C5 AS SmallDateTime), CAST(0xA76A03CF AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (167, 14378, 24, N'100024                                            ', 8, 8, N'192.168.1.24                    ', 0, 6, CAST(0xA76A03C6 AS SmallDateTime), CAST(0xA76A03CC AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (168, 14379, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 60, CAST(0xA76A03CB AS SmallDateTime), CAST(0xA76A0407 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (169, 14380, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 0, CAST(0xA76A03CC AS SmallDateTime), CAST(0xA76A03CC AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (170, 14381, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 0, CAST(0xA76A03CD AS SmallDateTime), CAST(0xA76A03CD AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (171, 14382, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 0, CAST(0xA76A03CF AS SmallDateTime), CAST(0xA76A03CF AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (172, 14383, 81, N'100081                                            ', 2, 2, N'192.168.1.142                   ', 0, 6, CAST(0xA76A03CF AS SmallDateTime), CAST(0xA76A03D5 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (173, 14384, 59, N'100059                                            ', 18, 18, N'192.168.1.59                    ', 0, 21, CAST(0xA76A03CF AS SmallDateTime), CAST(0xA76A03E4 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (174, 14385, 117, N'100117                                            ', 2, 2, N'192.168.1.137                   ', 0, 1, CAST(0xA76A03D1 AS SmallDateTime), CAST(0xA76A03D2 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (175, 14386, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 0, CAST(0xA76A03D2 AS SmallDateTime), CAST(0xA76A03D2 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (176, 14387, 161, N'100161                                            ', 2, 2, N'192.168.1.137                   ', 0, 25, CAST(0xA76A03D3 AS SmallDateTime), CAST(0xA76A03EC AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (177, 14388, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A03D3 AS SmallDateTime), CAST(0xA76A03D4 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (178, 14389, 29, N'100029                                            ', 2, 2, N'192.168.1.29                    ', 0, 3, CAST(0xA76A03D6 AS SmallDateTime), CAST(0xA76A03D9 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (179, 14390, 26, N'100026                                            ', 2, 2, N'192.168.1.26                    ', 0, 26, CAST(0xA76A03D9 AS SmallDateTime), CAST(0xA76A03F3 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (180, 14391, 45, N'100045                                            ', 8, 8, N'192.168.1.45                    ', 0, 9, CAST(0xA76A03DC AS SmallDateTime), CAST(0xA76A03E5 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (181, 14392, 29, N'100029                                            ', 23, 23, N'192.168.1.29                    ', 0, 7, CAST(0xA76A03DF AS SmallDateTime), CAST(0xA76A03E6 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (182, 14393, 21, N'100021                                            ', 9, 9, N'192.168.1.21                    ', 0, 13, CAST(0xA76A03E5 AS SmallDateTime), CAST(0xA76A03F2 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (183, 14394, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 0, CAST(0xA76A03E5 AS SmallDateTime), CAST(0xA76A03E5 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (184, 14395, 149, N'100149                                            ', 2, 2, N'192.168.1.121                   ', 0, 2, CAST(0xA76A03E6 AS SmallDateTime), CAST(0xA76A03E8 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (185, 14396, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A03E6 AS SmallDateTime), CAST(0xA76A03E7 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (186, 14397, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 2, CAST(0xA76A03E8 AS SmallDateTime), CAST(0xA76A03EA AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (187, 14398, 29, N'100029                                            ', 23, 23, N'192.168.1.29                    ', 0, 5, CAST(0xA76A03E8 AS SmallDateTime), CAST(0xA76A03ED AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (188, 14399, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A03EA AS SmallDateTime), CAST(0xA76A03EB AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (189, 14400, 25, N'100025                                            ', 2, 2, N'192.168.1.25                    ', 0, 0, CAST(0xA76A03EB AS SmallDateTime), CAST(0xA76A03EB AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (190, 14401, 25, N'100025                                            ', 10, 10, N'192.168.1.25                    ', 0, 7, CAST(0xA76A03EB AS SmallDateTime), CAST(0xA76A03F2 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (191, 14402, 161, N'100161                                            ', 2, 2, N'192.168.1.137                   ', 0, 35, CAST(0xA76A03EC AS SmallDateTime), CAST(0xA76A040F AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (192, 14403, 24, N'100024                                            ', 7, 7, N'192.168.1.24                    ', 0, 0, CAST(0xA76A03ED AS SmallDateTime), NULL)
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (193, 14404, 29, N'100029                                            ', 23, 23, N'192.168.1.29                    ', 0, 25, CAST(0xA76A03F2 AS SmallDateTime), CAST(0xA76A040B AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (194, 14405, 25, N'100025                                            ', 10, 10, N'192.168.1.25                    ', 0, 4, CAST(0xA76A03F2 AS SmallDateTime), CAST(0xA76A03F6 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (195, 14406, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A03F2 AS SmallDateTime), CAST(0xA76A03F3 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (196, 14407, 58, N'100058                                            ', 2, 2, N'192.168.1.58                    ', 0, 45, CAST(0xA76A03F3 AS SmallDateTime), CAST(0xA76A0420 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (197, 14408, 21, N'100021                                            ', 9, 9, N'192.168.1.21                    ', 0, 21, CAST(0xA76A03F3 AS SmallDateTime), CAST(0xA76A0408 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (198, 14409, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 2, CAST(0xA76A03F4 AS SmallDateTime), CAST(0xA76A03F6 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (199, 14410, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 4, CAST(0xA76A03F9 AS SmallDateTime), CAST(0xA76A03FD AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (200, 14411, 25, N'100025                                            ', 10, 10, N'192.168.1.25                    ', 0, 9, CAST(0xA76A03FC AS SmallDateTime), CAST(0xA76A0405 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (201, 14412, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A03FD AS SmallDateTime), CAST(0xA76A03FE AS SmallDateTime))
+GO
+print 'Processed 200 total records'
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (202, 14413, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 2, CAST(0xA76A0401 AS SmallDateTime), CAST(0xA76A0403 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (203, 14414, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 3, CAST(0xA76A0404 AS SmallDateTime), CAST(0xA76A0407 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (204, 14415, 25, N'100025                                            ', 10, 10, N'192.168.1.25                    ', 0, 6, CAST(0xA76A0405 AS SmallDateTime), CAST(0xA76A040B AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (205, 14416, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 1, CAST(0xA76A0408 AS SmallDateTime), CAST(0xA76A0409 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (206, 14417, 21, N'100021                                            ', 9, 9, N'192.168.1.21                    ', 0, 4, CAST(0xA76A0409 AS SmallDateTime), CAST(0xA76A040D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (207, 14418, 29, N'100029                                            ', 2, 2, N'192.168.1.29                    ', 0, 31, CAST(0xA76A040B AS SmallDateTime), CAST(0xA76A042A AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (208, 14419, 46, N'100046                                            ', 18, 18, N'192.168.1.46                    ', 0, 3, CAST(0xA76A040C AS SmallDateTime), CAST(0xA76A040F AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (209, 14420, 119, N'100119                                            ', 2, 2, N'192.168.1.121                   ', 0, 26, CAST(0xA76A040E AS SmallDateTime), CAST(0xA76A0428 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (210, 14421, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 2, CAST(0xA76A040E AS SmallDateTime), CAST(0xA76A0410 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (211, 14422, 21, N'100021                                            ', 9, 9, N'192.168.1.21                    ', 0, 20, CAST(0xA76A040E AS SmallDateTime), CAST(0xA76A0422 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (212, 14423, 25, N'100025                                            ', 10, 10, N'192.168.1.25                    ', 0, 30, CAST(0xA76A040F AS SmallDateTime), CAST(0xA76A042D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (213, 14424, 113, N'100113                                            ', 2, 2, N'192.168.1.113                   ', 0, 25, CAST(0xA76A0413 AS SmallDateTime), CAST(0xA76A042C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (214, 14425, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 0, CAST(0xA76A0414 AS SmallDateTime), CAST(0xA76A0414 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (215, 14426, 27, N'100027                                            ', 2, 2, N'192.168.1.27                    ', 0, 22, CAST(0xA76A0415 AS SmallDateTime), CAST(0xA76A042B AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (216, 14427, 42, N'100042                                            ', 2, 2, N'192.168.1.42                    ', 0, 4, CAST(0xA76A0418 AS SmallDateTime), CAST(0xA76A041C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (217, 14428, 59, N'100059                                            ', 18, 18, N'192.168.1.59                    ', 0, 10, CAST(0xA76A0419 AS SmallDateTime), CAST(0xA76A0423 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (218, 14429, 114, N'100114                                            ', 14, 14, N'192.168.1.114                   ', 0, 7, CAST(0xA76A041A AS SmallDateTime), CAST(0xA76A0421 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (219, 14430, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 1, CAST(0xA76A041B AS SmallDateTime), CAST(0xA76A041C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (220, 14431, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 14, CAST(0xA76A041E AS SmallDateTime), CAST(0xA76A042C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (221, 14432, 58, N'100058                                            ', 2, 2, N'192.168.1.58                    ', 0, 10, CAST(0xA76A0421 AS SmallDateTime), CAST(0xA76A042B AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (222, 14433, 60, N'100060                                            ', 2, 2, N'192.168.1.60                    ', 0, 4, CAST(0xA76A0421 AS SmallDateTime), CAST(0xA76A0425 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (223, 14434, 21, N'100021                                            ', 2, 2, N'192.168.1.21                    ', 0, 2, CAST(0xA76A0425 AS SmallDateTime), CAST(0xA76A0427 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (224, 14435, 120, N'100120                                            ', 2, 2, N'192.168.1.137                   ', 0, 0, CAST(0xA76A042A AS SmallDateTime), CAST(0xA76A042A AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (225, 14436, 21, N'100021                                            ', 2, 2, N'192.168.1.21                    ', 0, 0, CAST(0xA76A042A AS SmallDateTime), CAST(0xA76A042A AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (226, 14437, 27, N'100027                                            ', 2, 2, N'192.168.1.27                    ', 0, 1, CAST(0xA76A042B AS SmallDateTime), CAST(0xA76A042C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (227, 14438, 120, N'100120                                            ', 10, 10, N'192.168.1.137                   ', 0, 0, CAST(0xA76A042C AS SmallDateTime), NULL)
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (228, 14439, 27, N'100027                                            ', 16, 16, N'192.168.1.27                    ', 0, 0, CAST(0xA76A042C AS SmallDateTime), NULL)
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (229, 14440, 91, N'100091                                            ', 2, 2, N'192.168.1.91                    ', 0, 1, CAST(0xA76A042C AS SmallDateTime), CAST(0xA76A042D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (230, 14441, 115, N'100115                                            ', 2, 2, N'192.168.1.115                   ', 0, 1, CAST(0xA76A042C AS SmallDateTime), CAST(0xA76A042D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (231, 14442, 219, N'100219                                            ', 2, 2, N'192.168.1.121                   ', 0, 1, CAST(0xA76A042C AS SmallDateTime), CAST(0xA76A042D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (232, 14443, 120, N'100120                                            ', 2, 2, N'192.168.1.137                   ', 0, 13, CAST(0xA76A042F AS SmallDateTime), CAST(0xA76A043C AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (233, 14444, 114, N'100114                                            ', 2, 2, N'192.168.1.114                   ', 0, 15, CAST(0xA76A042F AS SmallDateTime), CAST(0xA76A043E AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (234, 14445, 21, N'100021                                            ', 2, 2, N'192.168.1.21                    ', 0, 11, CAST(0xA76A0432 AS SmallDateTime), CAST(0xA76A043D AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (235, 14446, 219, N'100219                                            ', 2, 2, N'192.168.1.121                   ', 0, 0, CAST(0xA76A0437 AS SmallDateTime), NULL)
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (236, 14447, 26, N'100026                                            ', 2, 2, N'192.168.1.26                    ', 0, 0, CAST(0xA76A0438 AS SmallDateTime), CAST(0xA76A0438 AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (237, 14448, 26, N'100026                                            ', 2, 2, N'192.168.1.26                    ', 0, 3, CAST(0xA76A0438 AS SmallDateTime), CAST(0xA76A043B AS SmallDateTime))
+INSERT [dbo].[T_UserEnterExitLog20170505] ([F_LogID], [F_UserLogedID], [F_UserID], [F_UserName], [F_LoginNGSID], [F_ZoneID], [F_LoginIP], [F_LoginType], [F_TimeCount], [F_LoginTime], [F_ExitTime]) VALUES (238, 14449, 57, N'100057                                            ', 2, 2, N'192.168.1.57                    ', 0, 2, CAST(0xA76A0439 AS SmallDateTime), CAST(0xA76A043B AS SmallDateTime))
+SET IDENTITY_INSERT [dbo].[T_UserEnterExitLog20170505] OFF
+/****** Object:  Table [dbo].[T_UserEnterExitLog]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[T_UserEnterExitLog](
+	[F_LogID] [bigint] IDENTITY(1,1) NOT NULL,
+	[F_UserLogedID] [bigint] NULL,
+	[F_UserID] [int] NULL,
+	[F_UserName] [nchar](50) NULL,
+	[F_LoginNGSID] [smallint] NULL,
+	[F_ZoneID] [smallint] NULL,
+	[F_LoginIP] [nchar](32) NULL,
+	[F_LoginType] [tinyint] NULL,
+	[F_TimeCount] [int] NULL,
+	[F_LoginTime] [datetime] NULL,
+	[F_ExitTime] [datetime] NULL,
+ CONSTRAINT [PK_T_UserEnterExitLog] PRIMARY KEY CLUSTERED 
+(
+	[F_LogID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [IX_T_UserEnterExitLog_UserLogedID] ON [dbo].[T_UserEnterExitLog] 
+(
+	[F_UserLogedID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[T_TradeMoneyLog]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[T_TradeMoneyLog](
+	[F_LogID] [bigint] IDENTITY(1,1) NOT NULL,
+	[F_TradID] [int] NOT NULL,
+	[F_UserID] [int] NOT NULL,
+	[F_PreMoney] [int] NOT NULL,
+	[F_TradeMoney] [int] NOT NULL,
+	[F_AfterMoney] [int] NOT NULL,
+	[F_MoneyType] [tinyint] NOT NULL,
+	[F_TradeTime] [smalldatetime] NOT NULL,
+ CONSTRAINT [PK_T_TradeMoneyLog] PRIMARY KEY CLUSTERED 
+(
+	[F_LogID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'日志编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_TradeMoneyLog', @level2type=N'COLUMN',@level2name=N'F_LogID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'交易记录编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_TradeMoneyLog', @level2type=N'COLUMN',@level2name=N'F_TradID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'用户编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_TradeMoneyLog', @level2type=N'COLUMN',@level2name=N'F_UserID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'交易前的钱' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_TradeMoneyLog', @level2type=N'COLUMN',@level2name=N'F_PreMoney'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'交易的钱' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_TradeMoneyLog', @level2type=N'COLUMN',@level2name=N'F_TradeMoney'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'交易后的钱' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_TradeMoneyLog', @level2type=N'COLUMN',@level2name=N'F_AfterMoney'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'钱的类型（0，1，2）' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_TradeMoneyLog', @level2type=N'COLUMN',@level2name=N'F_MoneyType'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'交易时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_TradeMoneyLog', @level2type=N'COLUMN',@level2name=N'F_TradeTime'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'玩家金钱信息日志表' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_TradeMoneyLog'
+GO
+/****** Object:  Table [dbo].[T_LockUserLog]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_LockUserLog](
+	[F_LogID] [int] IDENTITY(1,1) NOT NULL,
+	[F_UserID] [int] NOT NULL,
+	[F_UserName] [nchar](20) NOT NULL,
+	[F_LockType] [tinyint] NOT NULL,
+	[F_LockStartTime] [smalldatetime] NOT NULL,
+	[F_LockEndTime] [smalldatetime] NOT NULL,
+	[F_LockIPBegin] [char](32) NULL,
+	[F_LockIPEnd] [char](32) NULL,
+	[F_LockDeleteTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_T_LockUserLog_1] PRIMARY KEY CLUSTERED 
+(
+	[F_LogID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'日志编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockUserLog', @level2type=N'COLUMN',@level2name=N'F_LogID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'用户编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockUserLog', @level2type=N'COLUMN',@level2name=N'F_UserID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'用户名' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockUserLog', @level2type=N'COLUMN',@level2name=N'F_UserName'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'锁定类型' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockUserLog', @level2type=N'COLUMN',@level2name=N'F_LockType'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'锁定开始时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockUserLog', @level2type=N'COLUMN',@level2name=N'F_LockStartTime'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'锁定结束时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockUserLog', @level2type=N'COLUMN',@level2name=N'F_LockEndTime'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'锁定时候的IP' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockUserLog', @level2type=N'COLUMN',@level2name=N'F_LockIPBegin'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'锁定解除时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockUserLog', @level2type=N'COLUMN',@level2name=N'F_LockDeleteTime'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'用户封停日志表' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockUserLog'
+GO
+/****** Object:  Table [dbo].[T_LockRoleLog]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_LockRoleLog](
+	[F_LogID] [int] IDENTITY(1,1) NOT NULL,
+	[F_RoleID] [int] NOT NULL,
+	[F_RoleName] [nchar](20) NOT NULL,
+	[F_LockType] [smallint] NOT NULL,
+	[F_LockStartTime] [smalldatetime] NOT NULL,
+	[F_LockEndTime] [smalldatetime] NOT NULL,
+	[F_LockIp] [char](32) NULL,
+	[F_LockDeleteTime] [smalldatetime] NULL,
+ CONSTRAINT [PK_T_LockRoleLog] PRIMARY KEY CLUSTERED 
+(
+	[F_LogID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'日志编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockRoleLog', @level2type=N'COLUMN',@level2name=N'F_LogID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'角色编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockRoleLog', @level2type=N'COLUMN',@level2name=N'F_RoleID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'角色名' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockRoleLog', @level2type=N'COLUMN',@level2name=N'F_RoleName'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'封停原因' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockRoleLog', @level2type=N'COLUMN',@level2name=N'F_LockType'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'开始时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockRoleLog', @level2type=N'COLUMN',@level2name=N'F_LockStartTime'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'结束时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockRoleLog', @level2type=N'COLUMN',@level2name=N'F_LockEndTime'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'封停IP' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockRoleLog', @level2type=N'COLUMN',@level2name=N'F_LockIp'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'锁定解除时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockRoleLog', @level2type=N'COLUMN',@level2name=N'F_LockDeleteTime'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'封停角色日志表' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'T_LockRoleLog'
+GO
+/****** Object:  Table [dbo].[T_Error]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[T_Error](
+	[F_ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[F_Note] [nvarchar](200) NULL,
+	[F_Time] [datetime] NULL,
+ CONSTRAINT [PK_T_Error] PRIMARY KEY CLUSTERED 
+(
+	[F_ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[T_BaseIPAddress]    Script Date: 05/05/2017 18:06:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[T_BaseIPAddress](
+	[F_ID] [int] NOT NULL,
+	[F_IPBegin] [varchar](50) NULL,
+	[F_IPEnd] [varchar](50) NULL,
+	[F_Note] [varchar](200) NULL,
+	[F_IPBeginN] [bigint] NULL,
+	[F_IPEndN] [bigint] NULL,
+	[F_Address] [varchar](50) NULL,
+	[F_AreaName] [varchar](30) NULL,
+	[F_AreaPN] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  UserDefinedFunction [dbo].[f_IP2Int]    Script Date: 05/05/2017 18:06:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+--说明:IP地址转换成格式化数字IP
+--时间:2011-12-25 15:30 HCH
+-- =============================================
+
+CREATE FUNCTION [dbo].[f_IP2Int]
+(
+    @ip CHAR(15)
+)
+RETURNS BIGINT
+AS
+BEGIN
+    DECLARE @re BIGINT   
+    SET @re = 0   
+    SELECT @re = @re+LEFT(@ip, CHARINDEX('.', @ip+'.')-1)*ID, @ip = STUFF(@ip, 1, CHARINDEX('.', @ip+'.'), '') 
+    FROM (
+             SELECT ID = CAST(16777216 AS BIGINT) 
+             UNION ALL   SELECT 65536 
+             UNION ALL   SELECT 256 
+             UNION ALL   SELECT 1
+         )A 
+    RETURN(@re)
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[f_Int2IP]    Script Date: 05/05/2017 18:06:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+--说明:数字IP转换成格式化  IP地址
+--时间:2011-12-25 15:30 HCH
+-- =============================================
+CREATE FUNCTION [dbo].[f_Int2IP]
+(
+    @IP BIGINT
+)
+RETURNS VARCHAR(15)
+AS
+BEGIN
+    DECLARE @re VARCHAR(16)   
+    SET @re = ''   
+    SELECT @re = @re+'.'+CAST(@IP/ID AS VARCHAR), @IP = @IP%ID 
+    FROM (
+             SELECT ID = CAST(16777216 AS BIGINT) 
+             UNION ALL   SELECT 65536 
+             UNION ALL   SELECT 256 
+             UNION ALL   SELECT 1
+         )a 
+    RETURN(STUFF(@re, 1, 1, ''))
+END
+GO
+/****** Object:  StoredProcedure [dbo].[_JOB_DeleteOverdueLog]    Script Date: 05/05/2017 18:06:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- Procedure
+-- =============================================	
+-- 时间: 2011.11.23 HCH
+-- 用途: SQL SERVER工作计划使用,用来清除超过30天的日志
+-- =============================================
+CREATE PROCEDURE [dbo].[_JOB_DeleteOverdueLog]
+ AS
+BEGIN
+	SET NOCOUNT ON;
+--日志记录数量(达到一定数量才启动过期删除)
+	DECLARE @Count BIGINT;
+--过期时间
+	DECLARE  @OverTime DATETIME;
+	SELECT @OverTime=DATEADD(DAY,-30,GETDATE())
+--删除过期角色封停日志
+	SELECT @Count=COUNT(1) FROM T_LockRoleLog WITH(NOLOCK)
+	IF @Count>10000000
+	DELETE FROM T_LockRoleLog WHERE F_LockDeleteTime<@OverTime
+--删除过期用户封停日志
+	SELECT @Count=COUNT(1) FROM T_LockUserLog WITH(NOLOCK)
+	IF @Count>10000000
+	DELETE FROM T_LockUserLog WHERE F_LockDeleteTime<@OverTime
+--删除过期角色登录退出游戏日志
+	SELECT @Count=COUNT(1) FROM T_RoleEnterExitLog WITH(NOLOCK)
+	IF @Count>100000000
+	DELETE FROM T_RoleEnterExitLog WHERE F_ExitTime<@OverTime
+--删除过期交易金钱日志
+--	SELECT @Count=COUNT(1) FROM T_TradeMoneyLog WITH(NOLOCK)
+--	IF @Count>100000000
+--	DELETE FROM T_TradeMoneyLog WHERE F_TradeTime<@OverTime
+--删除过期GM借用帐号日志
+--	SELECT @Count=COUNT(1) FROM T_UserGMUsedLog WITH(NOLOCK)
+--	IF @Count>10000000
+--	DELETE FROM T_UserGMUsedLog WHERE F_BackTime<@OverTime
+--删除过期用户登录退出日志表
+	DECLARE @i INT;--遍历索引
+	DECLARE @tablename VARCHAR(30);--表名
+	--查询是否存在日志临时表
+	IF(EXISTS (SELECT 1 FROM tempdb..sysobjects WHERE id=object_id('tempdb..#TempLog')))        
+	DROP TABLE #TempLog
+	--得到用户登录退出日志表
+	SELECT (ROW_NUMBER() OVER(order by id asc))AS rownum,name INTO #TempLog FROM sysobjects WITH(NOLOCK)  WHERE name LIKE 'T_UserEnterExitLog%' and name<>'T_UserEnterExitLog' AND OBJECTPROPERTY(id, 'IsUserTable') = 1
+	--遍历得到的日志表
+	SELECT @i=MAX(rownum) FROM #TempLog
+	WHILE @i>0
+	BEGIN
+	SELECT @tablename=name FROM  #TempLog WHERE rownum=@i
+	--超期日志表将删除
+	IF (LEN(@tablename)>20 AND CAST(RIGHT(@tablename,8) AS smalldatetime) <@OverTime)
+	begin EXEC('DROP TABLE '+@tablename+'') end
+	else  begin SELECT @i=0 end
+	SELECT @i=@i-1
+	END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[_LOG_UserStatis]    Script Date: 05/05/2017 18:06:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- PROCEDURE
+------------------------------------
+--项目名称：数据库日志
+--说明：用户登录退出日志
+--时间：2011-12-2 10:35:59 HCH
+------------------------------------
+CREATE PROCEDURE [dbo].[_LOG_UserStatis]
+@UserID INT,
+@UserName NVARCHAR(50)
+ AS 
+BEGIN
+declare @LoginCount int,@CTNLoginCount int,@MaxCTNLoginCount int,@MaxLoginInterval int,@LastLoginInterval int,@ActiveTime datetime
+	BEGIN TRY
+--检测是否存在
+	SELECT @LoginCount=F_LoginCount,@CTNLoginCount=F_CTNLoginCount,@MaxCTNLoginCount=F_MaxCTNLoginCount,@MaxLoginInterval=F_MaxLoginInterval,@LastLoginInterval=F_LastLoginInterval,@ActiveTime=F_ActiveTime FROM T_UserStatis with(nolock) WHERE F_UserID=@UserID
+	IF @CTNLoginCount is null
+	BEGIN
+		INSERT INTO T_UserStatis
+			(F_UserID, F_UserName,F_LoginTimes,F_LoginCount, F_CTNLoginCount, F_MaxCTNLoginCount,F_MaxLoginInterval, F_LastLoginInterval, F_FirstLoginTime, F_ActiveTime)
+		VALUES	(@UserID,@UserName ,1,1, 1, 1,1, 1, GETDATE(), GETDATE())
+	END
+	ELSE
+	BEGIN
+		select @LastLoginInterval=DATEDIFF(D,@ActiveTime,GETDATE())--距离上次登录天数
+		if @LastLoginInterval=1 --连续登录天数
+			select @CTNLoginCount=@CTNLoginCount+1
+		if @CTNLoginCount>@MaxCTNLoginCount --最大连续登录天数
+			select @MaxCTNLoginCount=@CTNLoginCount
+		if @LastLoginInterval>0 --登录天数
+			select @LoginCount=@LoginCount+1
+		if @LastLoginInterval<=0--距离登录天数 最小为1天.为了保持回归状态一天
+		select @LastLoginInterval=1
+		if @LastLoginInterval>@MaxLoginInterval --最大距离登录天数
+			select @MaxLoginInterval=@LastLoginInterval
+		--更新数据
+		UPDATE    T_UserStatis
+		SET F_LoginTimes=F_LoginTimes+1,F_LoginCount = @LoginCount, F_CTNLoginCount = @CTNLoginCount, F_MaxCTNLoginCount = @MaxCTNLoginCount, F_MaxLoginInterval=@MaxLoginInterval,F_LastLoginInterval = @LastLoginInterval, F_ActiveTime = getdate()
+		WHERE (F_UserID = @UserID)
+	END
+
+
+	END TRY
+	BEGIN CATCH
+	INSERT INTO T_Error(F_Note) VALUES ('_LOG_UserStatis '+ERROR_MESSAGE())
+	RETURN (1)
+	END CATCH
+END
+GO
+/****** Object:  StoredProcedure [dbo].[_LOG_UserEnterExitLog]    Script Date: 05/05/2017 18:06:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- PROCEDURE
+------------------------------------
+--项目名称：数据库日志
+--说明：用户登录退出日志
+--时间：2011-12-2 10:35:59 HCH
+------------------------------------
+CREATE PROCEDURE [dbo].[_LOG_UserEnterExitLog]
+@UserLogedID BIGINT,
+@UserID INT,
+@UserName NCHAR(50),
+@LoginNGSID SMALLINT,
+@ZoneID SMALLINT,
+@LoginIP CHAR(32),
+@LoginType TINYINT,
+@LoginTime DATETIME,
+@ExitTime DATETIME
+ AS 
+BEGIN
+	BEGIN TRY
+	DECLARE @TABLENAME VARCHAR(30),@TableTime DATETIME
+--判断表日期
+	IF @ExitTime is NOT NULL
+	BEGIN
+		SELECT @TableTime=@ExitTime
+		if Datediff(n,@LoginTime,@ExitTime)<0 SELECT @ExitTime=@LoginTime
+	END
+	ELSE
+	SELECT @TableTime=@LoginTime
+--检测是否存在当前日期的日志表
+	SELECT @TABLENAME='T_UserEnterExitLog'+ convert(VARCHAR(8), @TableTime,112)
+	IF NOT EXISTS (SELECT 1 FROM sysobjects WITH(NOLOCK)  WHERE id = OBJECT_ID(@TABLENAME) AND OBJECTPROPERTY(id, 'IsUserTable') = 1) 
+	BEGIN
+		EXEC('CREATE TABLE [dbo].['+@TABLENAME+'](
+		[F_LogID] [BIGINT] IDENTITY(1,1) NOT NULL,
+		[F_UserLogedID] [BIGINT] NULL,
+		[F_UserID] [INT] NULL,
+		[F_UserName] [NCHAR](50) NULL,
+		[F_LoginNGSID] [SMALLINT] NULL,
+		[F_ZoneID] [SMALLINT] NULL,
+		[F_LoginIP] [NCHAR](32) NULL,
+		[F_LoginType] [TINYINT] NULL,
+		[F_TimeCount] [INT] NULL CONSTRAINT [DF_'+@TABLENAME+'_F_TimeCount]  DEFAULT ((0)),
+		[F_LoginTime] [SMALLDATETIME] NULL,
+		[F_ExitTime] [SMALLDATETIME] NULL,
+	 CONSTRAINT [PK_'+@TABLENAME+'] PRIMARY KEY CLUSTERED 
+	([F_LogID] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+')
+		EXEC('CREATE NONCLUSTERED INDEX [IX_'+@TABLENAME+'_UserLogedID] ON [dbo].['+@TABLENAME+'] 
+			(
+				[F_UserLogedID] ASC
+			)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]')
+	END
+--根据退出时间是否为空判断登录退出
+	IF(@ExitTime is  NULL )
+	BEGIN
+	--新增日志数据
+		EXEC('INSERT INTO ['+@TABLENAME+'](
+		F_UserLogedID,F_UserID,F_UserName,F_LoginNGSID,F_ZoneID,F_LoginIP,F_LoginType,F_TimeCount,F_LoginTime,F_ExitTime
+		)VALUES(
+		'+@UserLogedID+','+@UserID+','''+@UserName+''','+@LoginNGSID+','+@ZoneID+','''+@LoginIP+''','+@LoginType+',0,'''+@LoginTime+''',NULL)')
+	END
+	ELSE
+	BEGIN
+		EXEC('SELECT top 1 * FROM ['+@TABLENAME+'] WHERE F_UserLogedID='+@UserLogedID+'' )
+		IF(@@Rowcount=0)
+		--新增日志数据
+			EXEC('INSERT INTO ['+@TABLENAME+'](
+			F_UserLogedID,F_UserID,F_UserName,F_LoginNGSID,F_ZoneID,F_LoginIP,F_LoginType,F_TimeCount,F_LoginTime,F_ExitTime
+			)VALUES(
+			'+@UserLogedID+','+@UserID+','''+@UserName+''','+@LoginNGSID+','+@ZoneID+','''+@LoginIP+''','+@LoginType+',Datediff(n,convert(VARCHAR(10), '''+@ExitTime+''',120),'''+@ExitTime+'''),convert(VARCHAR(10), '''+@ExitTime+''',120),'''+@ExitTime+''')')
+		ELSE
+		 --更新日志数据
+			EXEC('UPDATE ['+@TABLENAME+'] SET F_TimeCount=Datediff(n,F_LoginTime,'''+@ExitTime+'''),F_ExitTime='''+@ExitTime+''' WHERE F_UserLogedID='+@UserLogedID+' ')
+	END
+	EXEC _LOG_UserStatis @UserID,@UserName
+	END TRY
+	BEGIN CATCH
+	INSERT INTO T_Error(F_Note) VALUES ('_LOG_UserEnterExitLog '+ERROR_MESSAGE())
+	RETURN (1)
+	END CATCH
+END
+GO
+/****** Object:  Default [DF__T_Version__F_Upt__1DE57479]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_Version] ADD  DEFAULT (getdate()) FOR [F_Uptime]
+GO
+/****** Object:  Default [DF_T_UserStatis_F_LoginTimes]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserStatis] ADD  CONSTRAINT [DF_T_UserStatis_F_LoginTimes]  DEFAULT ((0)) FOR [F_LoginTimes]
+GO
+/****** Object:  Default [DF_T_UserStatis_F_LoginCount]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserStatis] ADD  CONSTRAINT [DF_T_UserStatis_F_LoginCount]  DEFAULT ((0)) FOR [F_LoginCount]
+GO
+/****** Object:  Default [DF_T_UserStatis_F_CTNLoginCount]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserStatis] ADD  CONSTRAINT [DF_T_UserStatis_F_CTNLoginCount]  DEFAULT ((0)) FOR [F_CTNLoginCount]
+GO
+/****** Object:  Default [DF_T_UserStatis_F_MaxCTNLoginCount]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserStatis] ADD  CONSTRAINT [DF_T_UserStatis_F_MaxCTNLoginCount]  DEFAULT ((0)) FOR [F_MaxCTNLoginCount]
+GO
+/****** Object:  Default [DF_T_UserStatis_F_MaxLoginInterval]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserStatis] ADD  CONSTRAINT [DF_T_UserStatis_F_MaxLoginInterval]  DEFAULT ((0)) FOR [F_MaxLoginInterval]
+GO
+/****** Object:  Default [DF_T_UserStatis_F_LastLoginInterval]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserStatis] ADD  CONSTRAINT [DF_T_UserStatis_F_LastLoginInterval]  DEFAULT ((0)) FOR [F_LastLoginInterval]
+GO
+/****** Object:  Default [DF_T_UserStatis_F_FirstLoginTime]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserStatis] ADD  CONSTRAINT [DF_T_UserStatis_F_FirstLoginTime]  DEFAULT (getdate()) FOR [F_FirstLoginTime]
+GO
+/****** Object:  Default [DF_T_UserStatis_F_ActiveTime]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserStatis] ADD  CONSTRAINT [DF_T_UserStatis_F_ActiveTime]  DEFAULT (getdate()) FOR [F_ActiveTime]
+GO
+/****** Object:  Default [DF_T_UserGMUsed_F_UpdateTime]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserGMUsedLog] ADD  CONSTRAINT [DF_T_UserGMUsed_F_UpdateTime]  DEFAULT (getdate()) FOR [F_UpdateTime]
+GO
+/****** Object:  Default [DF_T_UserEnterExitLog20170505_F_TimeCount]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserEnterExitLog20170505] ADD  CONSTRAINT [DF_T_UserEnterExitLog20170505_F_TimeCount]  DEFAULT ((0)) FOR [F_TimeCount]
+GO
+/****** Object:  Default [DF_T_UserEnterExitLog_F_TimeCount]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_UserEnterExitLog] ADD  CONSTRAINT [DF_T_UserEnterExitLog_F_TimeCount]  DEFAULT ((0)) FOR [F_TimeCount]
+GO
+/****** Object:  Default [DF_T_LockUserLog_F_LockType]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_LockUserLog] ADD  CONSTRAINT [DF_T_LockUserLog_F_LockType]  DEFAULT ((0)) FOR [F_LockType]
+GO
+/****** Object:  Default [DF_T_Error_F_Time]    Script Date: 05/05/2017 18:06:53 ******/
+ALTER TABLE [dbo].[T_Error] ADD  CONSTRAINT [DF_T_Error_F_Time]  DEFAULT (getdate()) FOR [F_Time]
+GO

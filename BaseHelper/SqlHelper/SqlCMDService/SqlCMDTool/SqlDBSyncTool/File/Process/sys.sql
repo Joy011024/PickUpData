@@ -1,0 +1,19 @@
+--首先指定数据库查询出该数据库下全部的表信息
+select * from sysobjects where xtype='u'  or xtype='p'
+--u 表 p存储过程
+--C = CHECK 约束 
+--D = 默认值或 DEFAULT 约束 
+--F = FOREIGN KEY 约束 
+--L = 日志 
+--FN = 标量函数 
+--IF = 内嵌表函数 
+--P = 存储过程 
+--PK = PRIMARY KEY 约束（类型是 K） 
+--RF = 复制筛选存储过程 
+--S = 系统表 
+--TF = 表函数 
+--TR = 触发器 
+--U = 用户表 
+--UQ = UNIQUE 约束（类型是 K） 
+--V = 视图 
+--X = 扩展存储过程

@@ -1,0 +1,7 @@
+D:\Dream\ExcuteHttpCmd\ExcuteHttp\Common\Common.Data
+D:\Dream\ExcuteHttpCmd\SampleHelper\CommonHelperEntity
+D:\Dream\ExcuteHttpCmd\ExcuteHttp\HelpLibrary\DataHelp
+D:\Dream\ExcuteHttpCmd\SampleHelper\EmailHelper
+
+Êý¾Ý¿â
+D:\Dream\ExcuteHttpCmd\ExcuteHttp\SqlHelper\MsSqlHelper
