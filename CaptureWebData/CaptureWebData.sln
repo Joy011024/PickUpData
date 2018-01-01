@@ -81,6 +81,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsSqlHelper", "..\BaseHelpe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlCmd.Model", "..\BaseHelper\SqlHelper\SqlCmd.Model\SqlCmd.Model.csproj", "{FF558206-5198-484B-A7E5-EBD8E9454F31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRApp.Model", "..\HRApp\HRApp.Model\HRApp.Model.csproj", "{5A4B1F0F-1B3C-4313-9A15-3C55316AA3D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRApp.Web", "..\HRApp\HRApp.Web\HRApp.Web.csproj", "{9B9FC6F6-C20F-4CAF-9470-584BEC272A09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -215,6 +219,14 @@ Global
 		{FF558206-5198-484B-A7E5-EBD8E9454F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF558206-5198-484B-A7E5-EBD8E9454F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF558206-5198-484B-A7E5-EBD8E9454F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A4B1F0F-1B3C-4313-9A15-3C55316AA3D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A4B1F0F-1B3C-4313-9A15-3C55316AA3D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A4B1F0F-1B3C-4313-9A15-3C55316AA3D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A4B1F0F-1B3C-4313-9A15-3C55316AA3D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B9FC6F6-C20F-4CAF-9470-584BEC272A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B9FC6F6-C20F-4CAF-9470-584BEC272A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B9FC6F6-C20F-4CAF-9470-584BEC272A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B9FC6F6-C20F-4CAF-9470-584BEC272A09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
