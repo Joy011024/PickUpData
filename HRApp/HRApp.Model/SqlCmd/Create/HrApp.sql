@@ -1,5 +1,5 @@
-CREATE TABLE [dbo].[CategoryItems](
-	[ID] [int] NOT NULL primary key,
+ CREATE TABLE [dbo].[CategoryItems](
+	[ID] [int] NOT NULL primary key identity(1,1),--主键自增长
 	[Name] [nvarchar](32) NULL,
 	[ParentID] [int] NULL,
 	[ParentCode] [nvarchar](64) ,
