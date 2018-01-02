@@ -32,6 +32,8 @@ E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\zh-Hans\System.Web.WebPages.resources.dll
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.csprojResolveAssemblyReference.cache
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.dll
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.pdb
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\Common.Data.dll
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\Common.Data.pdb
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.csprojResolveAssemblyReference.cache

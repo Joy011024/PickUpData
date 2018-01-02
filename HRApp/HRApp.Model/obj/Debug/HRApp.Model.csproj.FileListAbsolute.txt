@@ -5,6 +5,6 @@ E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Mode
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\EntityFramework.dll
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.CommonData.pdb
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\EntityFramework.xml
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.csprojResolveAssemblyReference.cache
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.dll
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.pdb
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.csprojResolveAssemblyReference.cache
