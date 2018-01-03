@@ -15,3 +15,15 @@ input {
     line-height: 1.42857;
     padding: 4px;
 }
+.alongLine { /*独占一行*/
+    display: block;
+    margin-bottom: 10px;
+}
+.alongLine span {
+    display: block;
+    margin-bottom: 10px;
+}
+textarea {
+    width: 200px;
+    height: 140px;
+}

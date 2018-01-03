@@ -61,6 +61,24 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 助记码 的本地化字符串。
+        /// </summary>
+        public static string LblCode {
+            get {
+                return ResourceManager.GetString("LblCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 说明 的本地化字符串。
+        /// </summary>
+        public static string LblDescription {
+            get {
+                return ResourceManager.GetString("LblDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 姓名 的本地化字符串。
         /// </summary>
         public static string LblFullName {

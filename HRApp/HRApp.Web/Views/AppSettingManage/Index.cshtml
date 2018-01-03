@@ -1,4 +1,5 @@
 ﻿@using AppLanguage;
+@using HRApp.Web;
 @{
     Layout = null;
 }
@@ -9,12 +10,31 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>系统配置</title>
-    <link href="~/Content/AppLayout.css" rel="stylesheet" />
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <style type="text/css">
+       
+    </style>
 </head>
 <body>
     <div>
-        <label>@Lang.LblName</label>
-        <input  type="text" id="txtName" autocomplete="off"/> @* autocomplete关闭自动记忆功能*@
+        <div class="alongLine">
+            <span style="width:100px;">@Lang.LblName :</span>
+            <span>
+                <input type="text" id="txtName" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@
+            </span>
+        </div>
+        <div class="alongLine">
+            <span style="width:100px;">@Lang.LblCode :</span>
+            <span>
+                <input type="text" id="txtMemnorideCode" autocomplete="off" />
+            </span>
+        </div>
+        <div class="alongLine">
+            <span style="width:100px;">@Lang.LblDescription</span>
+            <span>
+                <textarea id="txtDescription"></textarea>
+            </span>
+        </div>
     </div>
 </body>
 </html>
