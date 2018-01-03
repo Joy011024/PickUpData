@@ -61,6 +61,51 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 取消 的本地化字符串。
+        /// </summary>
+        public static string BtnCancel {
+            get {
+                return ResourceManager.GetString("BtnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 删除 的本地化字符串。
+        /// </summary>
+        public static string BtnDelete {
+            get {
+                return ResourceManager.GetString("BtnDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 编辑 的本地化字符串。
+        /// </summary>
+        public static string BtnEdit {
+            get {
+                return ResourceManager.GetString("BtnEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 保存 的本地化字符串。
+        /// </summary>
+        public static string BtnSave {
+            get {
+                return ResourceManager.GetString("BtnSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 更新 的本地化字符串。
+        /// </summary>
+        public static string BtnUpdate {
+            get {
+                return ResourceManager.GetString("BtnUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 助记码 的本地化字符串。
         /// </summary>
         public static string LblCode {

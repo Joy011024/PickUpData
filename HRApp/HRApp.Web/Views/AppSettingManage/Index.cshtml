@@ -11,30 +11,54 @@
     <meta name="viewport" content="width=device-width" />
     <title>系统配置</title>
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
     <style type="text/css">
        
     </style>
+    <script type="text/javascript">
+        $(function () {
+            $('#btnSave').on('click', function () {
+
+            });
+        });
+        function GetXPathObject(rootEle, apiKeyAttr) {
+            var obj = {};
+            if (!rootEle) {
+                return obj;
+            }
+            if (!apiKeyAttr) {
+                apiKeyAttr = "apiKey";
+            }
+            $(rootEle).find('input,textarea,select').each(function (i,ele) {
+
+            });
+        }
+        
+    </script>
 </head>
 <body>
     <div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblName :</span>
             <span>
-                <input type="text" id="txtName" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@
+                <input type="text" id="txtName" apiKey="Name" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
             </span>
         </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblCode :</span>
             <span>
-                <input type="text" id="txtMemnorideCode" autocomplete="off" />
+                <input type="text" id="txtMemnorideCode" apikey="Code" autocomplete="off" />
             </span>
         </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblDescription</span>
             <span>
-                <textarea id="txtDescription"></textarea>
+                <textarea id="txtDescription" apikey="Desc"></textarea>
             </span>
         </div>
+    </div>
+    <div>
+        <button id="btnSave" >@Lang.BtnSave</button>
     </div>
 </body>
 </html>
