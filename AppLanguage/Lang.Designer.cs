@@ -61,6 +61,33 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 姓名 的本地化字符串。
+        /// </summary>
+        public static string LblFullName {
+            get {
+                return ResourceManager.GetString("LblFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 名称 的本地化字符串。
+        /// </summary>
+        public static string LblName {
+            get {
+                return ResourceManager.GetString("LblName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 用户名 的本地化字符串。
+        /// </summary>
+        public static string LblUserName {
+            get {
+                return ResourceManager.GetString("LblUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 出发地 的本地化字符串。
         /// </summary>
         public static string Tip_12306_GoStation {
