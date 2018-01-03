@@ -67,3 +67,5 @@ F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.pdb
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\AppLanguage.dll
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\AppLanguage.pdb
