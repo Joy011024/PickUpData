@@ -11,8 +11,9 @@
     <meta name="viewport" content="width=device-width" />
     <title>系统配置</title>
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>
-    @*<script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>*@
+    @*<script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>*@
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <style type="text/css">
        
     </style>
@@ -21,6 +22,9 @@
             $('#btnSave').on('click', function () {
                 var api = GetXPathObject($(".ApiParam"), "apiKey");
                 console.log(api);
+                bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
+
+                });
             });
         });
         function GetXPathObject(rootEle, apiKeyAttr) {
@@ -32,22 +36,29 @@
                 apiKeyAttr = "apiKey";
             }
             var data = [];
-            $.each($(rootEle).find('input,textarea,select'),function (i, ele) {
+            $.each($(rootEle).find('input,textarea,select'), function (i, ele) {
                 var objEle = $(ele);
                 //这里不能访问到具局部变量data
             });
-            var paramEles=$(rootEle).find('input,textarea,select');
+            var paramEles = $(rootEle).find('input,textarea,select');
             for (var i = 0; i < paramEles.length; i++) {
                 var objEle = $(paramEles[i]);
-                obj[objEle.attr(apiKeyAttr)] = objEle.val();
+                var att = objEle.attr(apiKeyAttr);
+                if (att != undefined) //不含有指定特性的元素进行过滤
+                    obj[att] = objEle.val();
             }
             return obj;
         }
-        
     </script>
 </head>
 <body>
     <div class="ApiParam">
+        <div class="alongLine">
+            
+            <span>
+                <input type="hidden" id="txtId"  value="@Guid.NewGuid()"  autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
+            </span>
+        </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblName :</span>
             <span>

@@ -1,13 +1,3 @@
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.dll
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.pdb
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.CommonData.dll
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\Common.Data.dll
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\EntityFramework.dll
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.CommonData.pdb
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\EntityFramework.xml
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.dll
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.pdb
-E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.pdb
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.CommonData.dll
@@ -18,3 +8,13 @@ F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\bi
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.pdb
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.dll
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.pdb
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.CommonData.dll
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\Common.Data.dll
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\EntityFramework.dll
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.CommonData.pdb
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\bin\Debug\EntityFramework.xml
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.csprojResolveAssemblyReference.cache
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.dll
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.pdb

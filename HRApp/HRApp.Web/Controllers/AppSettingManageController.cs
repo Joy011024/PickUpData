@@ -15,9 +15,10 @@ namespace HRApp.Web.Controllers
         {
             return View();
         }
-        public JsonResult SaveAppSetting()
+        public JsonResult SaveAppSetting(NodeRequestParam param)
         {
             JsonData json = new JsonData();
+
             return Json(json);
         }
     }

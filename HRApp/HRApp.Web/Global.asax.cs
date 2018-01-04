@@ -15,7 +15,7 @@ namespace HRApp.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            InitAppSetting.Version = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat);
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
