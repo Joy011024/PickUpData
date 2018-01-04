@@ -12,7 +12,7 @@ namespace IHRApp.Infrastructure
     /// <typeparam name="T"></typeparam>
     public interface IBaseRepository<T> where T:class
     {
-        string SqlConnString {  set; }
+        string SqlConnString { set; get; }
         /// <summary>
         /// 新增
         /// </summary>

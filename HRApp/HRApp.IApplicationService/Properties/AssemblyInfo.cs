@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("IHRApp.ApplicationService")]
+[assembly: AssemblyTitle("HRApp.IApplicationService")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("IHRApp.ApplicationService")]
+[assembly: AssemblyProduct("HRApp.IApplicationService")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("1e8ac7c3-be20-4fb2-b298-817c54d1b2e6")]
+[assembly: Guid("537efc0e-027c-4f80-8790-b48fd59a9c83")]
 
 // 程序集的版本信息由下面四个值组成: 
 //

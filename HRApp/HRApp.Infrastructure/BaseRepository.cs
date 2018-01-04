@@ -18,7 +18,7 @@ namespace HRApp.Infrastructure
 
         public string SqlConnString
         {
-            private get;
+            get;
             set;
         }
 

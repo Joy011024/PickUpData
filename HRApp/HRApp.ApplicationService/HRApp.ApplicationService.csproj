@@ -43,9 +43,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IHRApp.ApplicationService\IHRApp.ApplicationService.csproj">
-      <Project>{b4d9f280-0a1f-4478-a026-ec4aa964d3c9}</Project>
-      <Name>IHRApp.ApplicationService</Name>
+    <ProjectReference Include="..\HRApp.IApplicationService\HRApp.IApplicationService.csproj">
+      <Project>{64cadac1-0042-48d0-a25f-9bc78df1df00}</Project>
+      <Name>HRApp.IApplicationService</Name>
     </ProjectReference>
     <ProjectReference Include="..\IHRApp.Infrastructure\IHRApp.Infrastructure.csproj">
       <Project>{138002ec-0a16-4c91-bc84-9f76a71dd6fc}</Project>
