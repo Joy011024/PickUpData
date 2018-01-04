@@ -113,12 +113,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\RequestParams\BaseRequestParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\AppLayout.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -133,7 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\RequestParams\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -149,6 +150,30 @@
     <ProjectReference Include="..\..\BaseHelper\Common.Data\Common.Data.csproj">
       <Project>{22b5a7b7-9809-4927-8538-6f7680701c5b}</Project>
       <Name>Common.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
+      <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
+      <Name>Domain.CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HRApp.ApplicationService\HRApp.ApplicationService.csproj">
+      <Project>{0f4f36cc-572b-44f1-a1b7-f2ca95afd9d6}</Project>
+      <Name>HRApp.ApplicationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HRApp.IApplicationService\HRApp.IApplicationService.csproj">
+      <Project>{64cadac1-0042-48d0-a25f-9bc78df1df00}</Project>
+      <Name>HRApp.IApplicationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HRApp.Infrastructure\HRApp.Infrastructure.csproj">
+      <Project>{7e136e38-7db8-4e4e-9da8-f3f0faecdfa2}</Project>
+      <Name>HRApp.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HRApp.Model\HRApp.Model.csproj">
+      <Project>{5a4b1f0f-1b3c-4313-9a15-3c55316aa3d5}</Project>
+      <Name>HRApp.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IHRApp.Infrastructure\IHRApp.Infrastructure.csproj">
+      <Project>{138002ec-0a16-4c91-bc84-9f76a71dd6fc}</Project>
+      <Name>IHRApp.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

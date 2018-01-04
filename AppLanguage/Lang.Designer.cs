@@ -97,6 +97,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 配置 的本地化字符串。
+        /// </summary>
+        public static string LblAppSetValue {
+            get {
+                return ResourceManager.GetString("LblAppSetValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 助记码 的本地化字符串。
         /// </summary>
         public static string LblCode {

@@ -13,5 +13,7 @@ namespace HRApp.Model
         public int ItemUsingSize { get; set; }
         [Description("内容项的描述")]
         public string ItemDesc { get; set; }
+        [Description("配置的值")]
+        public string ItemValue { get; set; }
     }
 }

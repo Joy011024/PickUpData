@@ -11,8 +11,9 @@
     <meta name="viewport" content="width=device-width" />
     <title>系统配置</title>
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>
-    @*<script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>*@
+    @*<script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>*@
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <style type="text/css">
        
     </style>
@@ -20,7 +21,9 @@
         $(function () {
             $('#btnSave').on('click', function () {
                 var api = GetXPathObject($(".ApiParam"), "apiKey");
-                console.log(api);
+                bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
+
+                });
             });
         });
         function GetXPathObject(rootEle, apiKeyAttr) {
@@ -61,7 +64,13 @@
             </span>
         </div>
         <div class="alongLine">
-            <span style="width:100px;">@Lang.LblDescription</span>
+            <span style="width:100px;">@Lang.LblAppSetValue :</span>
+            <span>
+                <input type="text" id="txtDescription" apikey="Value"/>
+            </span>
+        </div>
+        <div class="alongLine">
+            <span style="width:100px;">@Lang.LblDescription :</span>
             <span>
                 <textarea id="txtDescription" apikey="Desc"></textarea>
             </span>

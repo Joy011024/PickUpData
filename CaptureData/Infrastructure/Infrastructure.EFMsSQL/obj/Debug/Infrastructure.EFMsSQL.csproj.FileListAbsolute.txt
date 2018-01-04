@@ -25,3 +25,12 @@ F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\CaptureData\Infrastr
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.pdb
+F:\SecurityData\GitCodeVerify\UinDataPickUpDemo\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\Infrastructure.EFMsSQL.dll
+F:\SecurityData\GitCodeVerify\UinDataPickUpDemo\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\Infrastructure.EFMsSQL.pdb
+F:\SecurityData\GitCodeVerify\UinDataPickUpDemo\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\EntityFramework.dll
+F:\SecurityData\GitCodeVerify\UinDataPickUpDemo\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\InfrastructureRepository.IMainContext.dll
+F:\SecurityData\GitCodeVerify\UinDataPickUpDemo\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\InfrastructureRepository.IMainContext.pdb
+F:\SecurityData\GitCodeVerify\UinDataPickUpDemo\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\EntityFramework.xml
+F:\SecurityData\GitCodeVerify\UinDataPickUpDemo\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.csprojResolveAssemblyReference.cache
+F:\SecurityData\GitCodeVerify\UinDataPickUpDemo\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.dll
+F:\SecurityData\GitCodeVerify\UinDataPickUpDemo\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.pdb

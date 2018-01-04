@@ -129,6 +129,9 @@
   <data name="BtnUpdate" xml:space="preserve">
     <value>更新</value>
   </data>
+  <data name="LblAppSetValue" xml:space="preserve">
+    <value>配置</value>
+  </data>
   <data name="LblCode" xml:space="preserve">
     <value>助记码</value>
   </data>
