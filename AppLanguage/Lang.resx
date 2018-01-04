@@ -117,6 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BtnDelete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="BtnEdit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="BtnSave" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="BtnUpdate" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="LblCode" xml:space="preserve">
+    <value>助记码</value>
+  </data>
+  <data name="LblDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="LblFullName" xml:space="preserve">
+    <value>姓名</value>
+  </data>
+  <data name="LblName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="LblUserName" xml:space="preserve">
+    <value>用户名</value>
+  </data>
   <data name="Tip_12306_GoStation" xml:space="preserve">
     <value>出发地</value>
   </data>
