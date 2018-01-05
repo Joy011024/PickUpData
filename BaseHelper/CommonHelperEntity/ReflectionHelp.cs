@@ -47,11 +47,10 @@ namespace CommonHelperEntity
         {
             Dictionary<string, object> kv = new Dictionary<string, object>();
             Type type = typeof(T);
-            FieldInfo[] fis= type.GetFields();
-            
-            foreach (FieldInfo item in fis)
+            PropertyInfo[] fis= type.GetProperties();
+            foreach (PropertyInfo item in fis)
             {
-                kv.Add(item.Name, item.GetValue(entity));
+                kv.Add(item.Name, item.GetValue(entity,null));
             }
             return kv;
 

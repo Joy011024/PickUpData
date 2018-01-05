@@ -17,6 +17,7 @@ namespace Common.Data
         [Description("额外附加数据")]
         public object AttachData { get; set; }
         public int Total { get; set; }
+        public bool Success { get; set; }
         public void Init() 
         {
             Result = false;

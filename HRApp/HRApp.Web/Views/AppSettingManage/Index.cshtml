@@ -21,7 +21,6 @@
         $(function () {
             $('#btnSave').on('click', function () {
                 var api = GetXPathObject($(".ApiParam"), "apiKey");
-                console.log(api);
                 bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
 
                 });
@@ -36,29 +35,22 @@
                 apiKeyAttr = "apiKey";
             }
             var data = [];
-            $.each($(rootEle).find('input,textarea,select'), function (i, ele) {
+            $.each($(rootEle).find('input,textarea,select'),function (i, ele) {
                 var objEle = $(ele);
                 //这里不能访问到具局部变量data
             });
-            var paramEles = $(rootEle).find('input,textarea,select');
+            var paramEles=$(rootEle).find('input,textarea,select');
             for (var i = 0; i < paramEles.length; i++) {
                 var objEle = $(paramEles[i]);
-                var att = objEle.attr(apiKeyAttr);
-                if (att != undefined) //不含有指定特性的元素进行过滤
-                    obj[att] = objEle.val();
+                obj[objEle.attr(apiKeyAttr)] = objEle.val();
             }
             return obj;
         }
+        
     </script>
 </head>
 <body>
     <div class="ApiParam">
-        <div class="alongLine">
-            
-            <span>
-                <input type="hidden" id="txtId"  value="@Guid.NewGuid()"  autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
-            </span>
-        </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblName :</span>
             <span>
@@ -72,7 +64,13 @@
             </span>
         </div>
         <div class="alongLine">
-            <span style="width:100px;">@Lang.LblDescription</span>
+            <span style="width:100px;">@Lang.LblAppSetValue :</span>
+            <span>
+                <input type="text" id="txtDescription" apikey="Value"/>
+            </span>
+        </div>
+        <div class="alongLine">
+            <span style="width:100px;">@Lang.LblDescription :</span>
             <span>
                 <textarea id="txtDescription" apikey="Desc"></textarea>
             </span>

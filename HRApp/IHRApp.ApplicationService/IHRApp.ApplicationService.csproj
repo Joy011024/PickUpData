@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{64CADAC1-0042-48D0-A25F-9BC78DF1DF00}</ProjectGuid>
+    <ProjectGuid>{B4D9F280-0A1F-4478-A026-EC4AA964D3C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HRApp.IApplicationService</RootNamespace>
-    <AssemblyName>HRApp.IApplicationService</AssemblyName>
+    <RootNamespace>IHRApp.ApplicationService</RootNamespace>
+    <AssemblyName>IHRApp.ApplicationService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,28 +41,6 @@
   <ItemGroup>
     <Compile Include="IAppSettingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\BaseHelper\Common.Data\Common.Data.csproj">
-      <Project>{22b5a7b7-9809-4927-8538-6f7680701c5b}</Project>
-      <Name>Common.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
-      <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
-      <Name>Domain.CommonData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HRApp.Infrastructure\HRApp.Infrastructure.csproj">
-      <Project>{7e136e38-7db8-4e4e-9da8-f3f0faecdfa2}</Project>
-      <Name>HRApp.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HRApp.Model\HRApp.Model.csproj">
-      <Project>{5a4b1f0f-1b3c-4313-9a15-3c55316aa3d5}</Project>
-      <Name>HRApp.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IHRApp.Infrastructure\IHRApp.Infrastructure.csproj">
-      <Project>{138002ec-0a16-4c91-bc84-9f76a71dd6fc}</Project>
-      <Name>IHRApp.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

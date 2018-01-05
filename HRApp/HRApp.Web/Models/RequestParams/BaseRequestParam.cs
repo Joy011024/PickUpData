@@ -10,10 +10,12 @@ namespace HRApp.Web
         public string Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public string Desc { get; set; }
     }
     public class NodeRequestParam : BaseRequestParam
     {
         public string ParentCode { get; set; }
+        public string Value { get; set; }
     }
     public class QueryRequestParam:BaseRequestParam
     {

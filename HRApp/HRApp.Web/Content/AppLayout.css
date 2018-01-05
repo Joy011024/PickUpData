@@ -5,7 +5,7 @@
 input {
     box-sizing: border-box;
     border: solid 1px #ddd;
-    width: 200px;
+    width: 250px;
     -webkit-transition: all 0.2s linear 0s;
     -moz-transition: all 0.2s linear 0s;
     -o-transition: all 0.2s linear 0s;
@@ -24,6 +24,6 @@ input {
     margin-bottom: 10px;
 }
 textarea {
-    width: 200px;
+    width: 250px;
     height: 140px;
 }
