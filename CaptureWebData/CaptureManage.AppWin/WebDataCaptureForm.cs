@@ -682,6 +682,7 @@ namespace CaptureManage.AppWin
         void LoginAccountWithVerifyCode(Dictionary<int,Point> selectIcon,VerifyCode param,string url) 
         {//提取选择的验证码图片坐标
             List<string> px = new List<string>();
+            // image  x=290 y:190
             foreach (KeyValuePair<int,Point> item in selectIcon)
             {
                 px.Add(item.Value.X + "," + item.Value.Y);
