@@ -145,3 +145,8 @@ E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.csprojResolveAssemblyReference.cache
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.dll
 E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.pdb
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\DataHelp.dll
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\Infrastructure.ExtService.dll
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\NPinyin.dll
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\DataHelp.pdb
+E:\Code\DayDayStudy\CaptureWebDemo\UinDataPickUpDemo\PickUpData\HRApp\HRApp.Web\bin\Infrastructure.ExtService.pdb

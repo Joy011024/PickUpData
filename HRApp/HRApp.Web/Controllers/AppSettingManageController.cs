@@ -11,7 +11,8 @@ using IHRApp.Infrastructure;
 using HRApp.Model;
 namespace HRApp.Web.Controllers
 {
-    public class AppSettingManageController : Controller
+    [MvcActionResultHelper]
+    public class AppSettingManageController : BaseController
     {
         //
         // GET: /AppSettingManage/

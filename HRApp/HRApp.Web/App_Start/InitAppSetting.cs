@@ -23,5 +23,20 @@ namespace HRApp.Web
                 return hrDbConnString;
             }
         }
+        static string openDebug;
+        /// <summary>
+        /// 是否开启debug模式
+        /// </summary>
+        public static bool OpenDebugType 
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(openDebug))
+                {
+                    openDebug = ConfigurationManager.AppSettings["OpenDebugType"];
+                }
+                return openDebug == "true";
+            }
+        }
     }
 }
