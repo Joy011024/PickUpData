@@ -171,3 +171,8 @@ F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\CommonHelperEntity.pdb
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\Infrastructure.MsSqlService.SqlHelper.pdb
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\NPOI.xml
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\DataHelp.dll
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\Infrastructure.ExtService.dll
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\NPinyin.dll
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\DataHelp.pdb
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Web\bin\Infrastructure.ExtService.pdb

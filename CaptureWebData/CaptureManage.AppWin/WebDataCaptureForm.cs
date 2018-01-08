@@ -705,6 +705,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
 X-Requested-With:XMLHttpRequest";
             string answer= HttpClientExtend.RunPosterContainerHeaderHavaParam(url, head,json,null);
             LoggerWriter.CreateLogFile(answer, LogDir, ELogType.HttpResponse, typeof(WebDataCaptureForm).Name);
+            lsbTip.Items.Add(answer);
         }
     }
     

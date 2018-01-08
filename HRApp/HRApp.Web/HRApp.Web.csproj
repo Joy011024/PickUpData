@@ -126,6 +126,28 @@
     <Content Include="Global.asax" />
     <Content Include="Note\App Desc.txt" />
     <Content Include="Note\Exception.txt" />
+    <Content Include="Scripts\bootstrap-modal\2.2.4\bootstrap-modal.js" />
+    <Content Include="Scripts\bootstrap-modal\2.2.4\bootstrap-modalmanager.js" />
+    <Content Include="Scripts\bootstrap-select\bootstrap-select.css" />
+    <Content Include="Scripts\bootstrap-select\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap-select\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap-select\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap-Switch\bootstrapSwitch.css" />
+    <Content Include="Scripts\bootstrap-Switch\bootstrapSwitch.js" />
+    <Content Include="Scripts\Common\Common.js" />
+    <Content Include="Scripts\Common\DataGrid.js" />
+    <Content Include="Scripts\Common\Lang.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\layer3.0\layer.js" />
+    <Content Include="Scripts\layer3.0\mobile\layer.js" />
+    <Content Include="Scripts\layer3.0\mobile\need\layer.css" />
+    <Content Include="Scripts\layer3.0\skin\default\icon-ext.png" />
+    <Content Include="Scripts\layer3.0\skin\default\icon.png" />
+    <Content Include="Scripts\layer3.0\skin\default\layer.css" />
+    <Content Include="Scripts\layer3.0\skin\default\loading-0.gif" />
+    <Content Include="Scripts\layer3.0\skin\default\loading-1.gif" />
+    <Content Include="Scripts\layer3.0\skin\default\loading-2.gif" />
+    <Content Include="Scripts\vue.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

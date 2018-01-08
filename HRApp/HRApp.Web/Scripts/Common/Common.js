@@ -70,3 +70,33 @@ function GenerateGuid16String(succFun) {
             succFun(response, statue);
     });
 }
+function ClearCookie() {
+
+}
+$.fn.exttend({
+    ClearAllCookie: function () {
+        var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+        if (keys == null || keys.length == 0) {
+            return false;
+        }
+        $.each(keys, function (i, ele) {
+            var exp = new Date();
+            exp.setTime(exp.getTime() - 1);
+            var cval = $.fn.GetCookie(ele);
+            if (cval != null)
+                document.cookie = ele + "=" + cval + ";expires=" + exp.toGMTString();
+        });
+        return true;
+    },
+    GetCookie: function (key) {
+        var reg = new RegExp("(^| )" + key + "=([^;]*)(;|$)");
+        var arr = document.cookie.match(reg);
+        return arr!=null? unescape(arr[2]):undefined;
+    },
+    SetCookie: function (key, value) {
+        var Days = 30;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = key + "=" + escape(value) + ";expires=" + exp.toGMTString();
+    }
+});
