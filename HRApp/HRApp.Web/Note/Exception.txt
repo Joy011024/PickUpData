@@ -1,0 +1,2 @@
+﻿（1.）站点调用Newtown.json序列化使用 Newtonsoft.Json.JsonConvert.SerializeObject(hcb);出现异常
+此操作要求使用 IIS 集成管线模式。

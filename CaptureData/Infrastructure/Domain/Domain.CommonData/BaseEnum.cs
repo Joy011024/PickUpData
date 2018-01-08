@@ -65,6 +65,15 @@ namespace Domain.CommonData
         [Description("其他类型")]
         Other=-1,
     }
+    public enum EBrowserMachineType
+    {
+        [Description("Linux操作系统")]
+        Linux=1,
+        [Description("Win7操作系统")]
+        WinNT=2,
+        [Description("未知的操作系统")]
+        Unknown=-1
+    }
     public class LoggerWriter 
     {
         /// <summary>
