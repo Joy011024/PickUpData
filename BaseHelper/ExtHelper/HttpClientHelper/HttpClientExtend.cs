@@ -66,7 +66,7 @@ namespace HttpClientHelper
             response.Dispose();
             return result;
         }
-        public static string HttpClientGet(string url)
+        public static string HttpClientGet(string url,bool pickUpCookie=false)
         {
             HttpClient client = new HttpClient();
             client.Timeout = new TimeSpan(0, 1, 0);
@@ -74,6 +74,10 @@ namespace HttpClientHelper
             if (response.StatusCode != HttpStatusCode.OK)
             {//http请求出现异常 写日志
                 return string.Empty;
+            }
+            if (pickUpCookie)
+            {
+                string[] cookies = response.Headers.GetValues("Set-Cookie").ToArray();
             }
             return response.Content.ReadAsStringAsync().Result;
         }

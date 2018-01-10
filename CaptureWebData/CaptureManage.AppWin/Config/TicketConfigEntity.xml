@@ -25,6 +25,9 @@
             <password>{password}</password>
             <appid>{otn}</appid>
         </LoginParam>
+      <CookieTemplate>
+        JSESSIONID=C4B6AF25BCF7A088997B4CD8A537850B; _jc_save_fromStation=%u5317%u4EAC%2CBJP; _jc_save_toStation=%u5357%u660C%2CNCG; _jc_save_fromDate=2017-12-18; _jc_save_toDate=2017-12-18; _jc_save_wfdc_flag=dc; route=c5c62a339e7744272a54643b3be5bf64; BIGipServerotn=31719946.24610.0000; BIGipServerpool_passport=183304714.50215.0000; RAIL_EXPIRATION=1515831411792; RAIL_DEVICEID=FmEPSkRVcNLsXW1EXsBUOUuFX3HOtXySeF8Iu1bWSALUjGE56wXfPhiS_o0IwZ2FiWp-No1GhHVBj-UzsC8xG4NpYI8E6PKJu1yEIlyDo0UiQOPD--tqhB1q_-oFQaMqwwriSrPZSb1GJXWZ9qRlk5H7SNjVv_bP
+      </CookieTemplate>
     </RequestParam>
     <ResponseParam>
         <CommonResponse> <!--公共响应-->

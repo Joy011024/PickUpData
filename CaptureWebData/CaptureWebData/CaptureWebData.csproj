@@ -60,9 +60,6 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\bin\EF\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="HttpClientHelper">
-      <HintPath>..\bin\SelfDefine\HttpClientHelper.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -1892,6 +1889,10 @@
     <Folder Include="Manage\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BaseHelper\ExtHelper\HttpClientHelper\HttpClientHelper.csproj">
+      <Project>{d182918a-32dc-4b35-a998-dac7cadc2369}</Project>
+      <Name>HttpClientHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj">
       <Project>{ce6b1f9a-1df7-4e35-adcc-b527206f2b98}</Project>
       <Name>Application.IPDataService</Name>

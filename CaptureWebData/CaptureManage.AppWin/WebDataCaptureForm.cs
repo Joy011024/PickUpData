@@ -681,6 +681,9 @@ namespace CaptureManage.AppWin
         }
         void LoginAccountWithVerifyCode(Dictionary<int,Point> selectIcon,VerifyCode param,string url) 
         {//提取选择的验证码图片坐标
+            string cookieURl = "https://kyfw.12306.cn/otn/login/init";
+            HttpClientExtend.HttpClientGet(cookieURl);
+
             List<string> px = new List<string>();
             // image  x=290 y:190
             foreach (KeyValuePair<int,Point> item in selectIcon)

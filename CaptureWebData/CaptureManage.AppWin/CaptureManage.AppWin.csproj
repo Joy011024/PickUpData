@@ -42,9 +42,6 @@
     <Reference Include="DataHelp">
       <HintPath>..\bin\SelfDefine\DataHelp.dll</HintPath>
     </Reference>
-    <Reference Include="HttpClientHelper">
-      <HintPath>..\bin\SelfDefine\HttpClientHelper.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Newtonsoft.Json.dll</HintPath>
@@ -107,6 +104,10 @@
       <Project>{3da2bb21-14a7-49ca-9bb4-7eb8f26c415a}</Project>
       <Name>AppLanguage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BaseHelper\ExtHelper\HttpClientHelper\HttpClientHelper.csproj">
+      <Project>{d182918a-32dc-4b35-a998-dac7cadc2369}</Project>
+      <Name>HttpClientHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
@@ -149,7 +150,9 @@
     </Content>
     <Content Include="SqlCmd\Ticket12306.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Config\AppConfig.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
