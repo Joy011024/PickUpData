@@ -12,8 +12,8 @@ namespace HttpClientHelper
 {
     public class HttpClientExtend
     {
-        public static CookieContainer HttpResponseAfterCookie{get; private  set;}
-        public CookieContainer HttpResponseCookie
+        static CookieContainer HttpResponseAfterCookie = new CookieContainer();
+        public static CookieContainer HttpResponseCookie
         {
             get { return HttpResponseAfterCookie; }
         }
@@ -66,7 +66,7 @@ namespace HttpClientHelper
             response.Dispose();
             return result;
         }
-        public static string HttpClientGet(string url,bool pickUpCookie=false)
+        public static string HttpClientGet(string url, bool pickUpCookie = false)
         {
             HttpClient client = new HttpClient();
             client.Timeout = new TimeSpan(0, 1, 0);
@@ -78,6 +78,21 @@ namespace HttpClientHelper
             if (pickUpCookie)
             {
                 string[] cookies = response.Headers.GetValues("Set-Cookie").ToArray();
+                
+                ClearCookie();
+                foreach (string item in cookies)
+                {//route=c5c62a339e7744272a54643b3be5bf64; Path=/
+                    string[] cis = item.Split(';');
+                    string[] cookieKeyValue = cis[0].Split('=');
+                    Cookie ck = new Cookie();
+                    //这里由于缺少Domain导致异常
+                    if (cis.Length > 1 && cis[1].Split('=')[1]!="/")
+                        HttpResponseAfterCookie.Add(new Cookie(cookieKeyValue[0], cookieKeyValue[1], cis[1].Split('=')[1]));
+                    else
+                    {
+                        HttpResponseAfterCookie.Add(new Cookie(cookieKeyValue[0], cookieKeyValue[1]));
+                    }
+                }
             }
             return response.Content.ReadAsStringAsync().Result;
         }

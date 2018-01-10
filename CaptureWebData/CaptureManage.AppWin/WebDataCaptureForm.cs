@@ -682,7 +682,7 @@ namespace CaptureManage.AppWin
         void LoginAccountWithVerifyCode(Dictionary<int,Point> selectIcon,VerifyCode param,string url) 
         {//提取选择的验证码图片坐标
             string cookieURl = "https://kyfw.12306.cn/otn/login/init";
-            HttpClientExtend.HttpClientGet(cookieURl);
+            HttpClientExtend.HttpClientGet(cookieURl,true);
 
             List<string> px = new List<string>();
             // image  x=290 y:190
@@ -706,7 +706,7 @@ Origin:https://kyfw.12306.cn
 Referer:https://kyfw.12306.cn/otn/login/init
 User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
 X-Requested-With:XMLHttpRequest";
-            string answer= HttpClientExtend.RunPosterContainerHeaderHavaParam(url, head,json,null);
+            string answer = HttpClientExtend.RunPosterContainerHeaderHavaParam(url, head, json, HttpClientExtend.HttpResponseCookie);
             LoggerWriter.CreateLogFile(answer, LogDir, ELogType.HttpResponse, typeof(WebDataCaptureForm).Name);
             lsbTip.Items.Add(answer);
         }
