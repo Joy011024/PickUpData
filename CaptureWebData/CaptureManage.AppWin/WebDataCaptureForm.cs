@@ -682,8 +682,8 @@ namespace CaptureManage.AppWin
         void LoginAccountWithVerifyCode(Dictionary<int,Point> selectIcon,VerifyCode param,string url) 
         {//提取选择的验证码图片坐标
             string cookieURl = "https://kyfw.12306.cn/otn/login/init";
-            HttpClientExtend.HttpClientGet(cookieURl,true);
-
+           // HttpClientExtend.HttpClientGet(cookieURl,true);//提取的cookie不完整
+            HttpClientExtend.DoWebGetRequest(cookieURl,true);
             List<string> px = new List<string>();
             // image  x=290 y:190
             foreach (KeyValuePair<int,Point> item in selectIcon)
@@ -700,12 +700,14 @@ Accept-Language:zh-CN,zh;q=0.8
 Connection:keep-alive
 Content-Length:51
 Content-Type:application/x-www-form-urlencoded; charset=UTF-8
-Cookie:_passport_session=47d63662000d48f5ad967765bfb47b8b9382; _passport_ct=bf013d1f23774a43bc968ae3e2675904t0269; _jc_save_fromStation=%u5317%u4EAC%u897F%2CBXP; _jc_save_toStation=%u6DF1%u5733%2CSZQ; _jc_save_fromDate=2017-11-19; _jc_save_toDate=2017-11-19; _jc_save_wfdc_flag=dc; route=c5c62a339e7744272a54643b3be5bf64; BIGipServerotn=217055754.50210.0000; RAIL_EXPIRATION=1512095461498; RAIL_DEVICEID=EzgegZVdgB_T7ZG4zCPom_T9XgfrU2pfqAAuoaXpl8fEVAnnnWmws9yX2apr16Niw-HvJ1a5I7ze8gAfo83_dscQ7wiBfop10YDYOfHbbJH6D6tDj61aHmB1JSCPzFnvpH3TLjHPiVzciX714Ck_MQpNw0QBO3q4; BIGipServerpool_passport=300745226.50215.0000
 Host:kyfw.12306.cn
 Origin:https://kyfw.12306.cn
 Referer:https://kyfw.12306.cn/otn/login/init
 User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
 X-Requested-With:XMLHttpRequest";
+            string cookie = HttpClientExtend.CookieStr;//这是系统随机返回的cookie，需要补充cookie
+
+            LoggerWriter.CreateLogFile(cookie, LogDir, ELogType.HttpResponse);
             string answer = HttpClientExtend.RunPosterContainerHeaderHavaParam(url, head, json, HttpClientExtend.HttpResponseCookie);
             LoggerWriter.CreateLogFile(answer, LogDir, ELogType.HttpResponse, typeof(WebDataCaptureForm).Name);
             lsbTip.Items.Add(answer);

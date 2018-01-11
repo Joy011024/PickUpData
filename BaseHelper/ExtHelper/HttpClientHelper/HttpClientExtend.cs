@@ -17,9 +17,14 @@ namespace HttpClientHelper
         {
             get { return HttpResponseAfterCookie; }
         }
+        /// <summary>
+        /// http请求的cookie串
+        /// </summary>
+        public static string CookieStr { get; set; }
         static void ClearCookie() 
         {
             HttpResponseAfterCookie = new CookieContainer();
+            CookieStr = string.Empty;
         }
         public class ResponseData
         {
@@ -78,16 +83,20 @@ namespace HttpClientHelper
             if (pickUpCookie)
             {
                 string[] cookies = response.Headers.GetValues("Set-Cookie").ToArray();
-                
+                // var d= response.Headers.GetValues("X-Via").ToArray();
                 ClearCookie();
+                CookieStr = string.Join(";", cookies);
+                string domain = response.RequestMessage.RequestUri.DnsSafeHost;
                 foreach (string item in cookies)
                 {//route=c5c62a339e7744272a54643b3be5bf64; Path=/
                     string[] cis = item.Split(';');
                     string[] cookieKeyValue = cis[0].Split('=');
                     Cookie ck = new Cookie();
                     //这里由于缺少Domain导致异常
-                    if (cis.Length > 1 && cis[1].Split('=')[1]!="/")
-                        HttpResponseAfterCookie.Add(new Cookie(cookieKeyValue[0], cookieKeyValue[1], cis[1].Split('=')[1]));
+                    if (cis.Length > 1)
+                    {
+                        HttpResponseAfterCookie.Add(new Cookie(cookieKeyValue[0], cookieKeyValue[1], cis[1].Split('=')[1], domain));
+                    }
                     else
                     {
                         HttpResponseAfterCookie.Add(new Cookie(cookieKeyValue[0], cookieKeyValue[1]));
@@ -207,6 +216,25 @@ namespace HttpClientHelper
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             request.Method = "GET";
             return request.GetResponse();
+        }
+        public static string DoWebGetRequest(string url,bool pickUpCookie)
+        {
+            string unicode = url;//这里需要进行URL处理
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            request.Method = "GET";
+            if (pickUpCookie)
+            {//提取cookie
+                request.CookieContainer = HttpResponseAfterCookie;//本应该是设置cookie，但是在操作中发现这样使用能在获取请求之后将数据返回到cookie【应该是引用类型风表现】
+               // CookieCollection cks = response.Cookies;
+            }
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream responseStream = response.GetResponseStream();
+            
+            StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+            string content = reader.ReadToEnd();
+            reader.Close();
+            responseStream.Close();
+            return content;
         }
         public static Dictionary<string, string> GetResponseCookies(WebResponse response)
         {
