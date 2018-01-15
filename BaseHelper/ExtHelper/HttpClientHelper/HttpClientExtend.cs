@@ -498,7 +498,7 @@ namespace HttpClientHelper
                 }
             }
         }
-        public static string RunPosterContainerHeaderHavaParam(string url, string head, string json, CookieContainer cookie = null)
+        public static string RunPosterContainerHeaderHavaParam(string url, string head, string json, CookieContainer cookie = null,string cookieString=null)
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             request.Method = "POST";

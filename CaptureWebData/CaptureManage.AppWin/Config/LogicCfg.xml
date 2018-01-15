@@ -23,5 +23,6 @@
       <add key="TickekLogicConfigFile" value="Config/TicketConfigEntity.xml"/> <!--票务系统配置的xml-->
       <add key="VerifyCodeHttp12306" value="ticket/RequestParam/VerifyCodeParam"/> <!--12306登录验证请求的配置项-->
       <add key="Get12306Cookie_1" value="http://www.12306.cn/mormhweb/"/>
+      <add key="Init12306" value="https://kyfw.12306.cn/otn/leftTicket/init"/> <!--12306页面初始化-->
   </appSettings>
 </configuration>

@@ -23,6 +23,7 @@ using TicketData.Manage;
 using System.Net;
 using QuartzJobService;
 using CaptureManage.AppWin.TicketData.Model.Request;
+using FeatureFrmList;
 namespace CaptureManage.AppWin
 {
     public partial class WebDataCaptureForm : Form
@@ -190,7 +191,20 @@ namespace CaptureManage.AppWin
         {
             logDir = dir;
         }
-        
+        /// <summary>
+        /// 初始化12306并用于获取cookie的URL
+        /// </summary>
+        string Init12306Url
+        {
+            get 
+            {
+                return configDict["Init12306"];
+            }
+        }
+        /// <summary>
+        /// 通过12036页面进行初始化获得的cookie
+        /// </summary>
+        string Init12306Cookie;
         enum BtnCategory 
         {
             LogicData=1,
@@ -211,6 +225,15 @@ namespace CaptureManage.AppWin
         {
             ReadAppCfg();
             GetVerifyCodeImage();
+        }
+        /// <summary>
+        /// 初始化渲染
+        /// </summary>
+        void InitDraw() 
+        {
+            MicrosoftBrowser mb = new MicrosoftBrowser();
+            mb.PickUpCookieCallBack = LoadUrlComplateEvent;
+            mb.RefreshUrl(Init12306Url);
         }
         void InitEle() 
         {
@@ -247,11 +270,23 @@ namespace CaptureManage.AppWin
             }
             SetComboBoxDisplay(cmbBeginStation);
             SetComboBoxDisplay(cmbToStation);
+            InitDraw();
         }
         void InitRequestParam()
         {
             HttpProtocolConfig config = new HttpProtocolConfig();
             verifyCodeParam = config.GetVerifyCodeParamStatic(TickekLogicConfigFullFile, VerifyCodeImgConfig);
+
+        }
+        void LoadUrlComplateEvent(object data) 
+        {
+            HtmlItem item = data as HtmlItem;
+            if (item != null)
+            {
+                Init12306Cookie = item.Cookie;
+                string json = item.ConvertJson();
+                LoggerWriter.CreateLogFile(json,NowAppDirHelper.GetNowAppDir(AppCategory.WinApp),ELogType.HttpResponse,string.Empty,false,Encoding.UTF8);
+            }
         }
         void LoadStation() 
         {
@@ -341,7 +376,7 @@ namespace CaptureManage.AppWin
         {//异步进程进行监听
             int timeSpan = DefualtRefreshCalTicketTimeSpan;//默认轮询间隔
             QuartzJobService.QuartzJob job = new QuartzJob();
-            job.CreateJobWithParam<QuartzJobService.JobDelegate<WebDataCaptureForm>>(new object[] { new BaseDelegate(DoJob), null }, DateTime.Now, 2, 0);
+            job.CreateJobWithParam<QuartzJobService.JobDelegate<WebDataCaptureForm>>(new object[] { new QuartzJobService.BaseDelegate(DoJob), null }, DateTime.Now, 2, 0);
                   
         }
         void GetPapeParam() 
@@ -681,9 +716,6 @@ namespace CaptureManage.AppWin
         }
         void LoginAccountWithVerifyCode(Dictionary<int,Point> selectIcon,VerifyCode param,string url) 
         {//提取选择的验证码图片坐标
-            string cookieURl = "https://kyfw.12306.cn/otn/login/init";
-           // HttpClientExtend.HttpClientGet(cookieURl,true);//提取的cookie不完整
-            HttpClientExtend.DoWebGetRequest(cookieURl,true);
             List<string> px = new List<string>();
             // image  x=290 y:190
             foreach (KeyValuePair<int,Point> item in selectIcon)
@@ -692,7 +724,6 @@ namespace CaptureManage.AppWin
             }
             string select = string.Join(",", px);
             param.answer = select;
-
             string json = param.ConvertJson();
             string head = @"Accept:application/json, text/javascript, */*; q=0.01
 Accept-Encoding:gzip, deflate, br
@@ -705,9 +736,17 @@ Origin:https://kyfw.12306.cn
 Referer:https://kyfw.12306.cn/otn/login/init
 User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
 X-Requested-With:XMLHttpRequest";
-            string cookie = HttpClientExtend.CookieStr;//这是系统随机返回的cookie，需要补充cookie
-
-            LoggerWriter.CreateLogFile(cookie, LogDir, ELogType.HttpResponse);
+            string cookie = Init12306Cookie;
+            if (string.IsNullOrEmpty(cookie))
+            {
+                cookie = HttpClientExtend.CookieStr;//这是系统随机返回的cookie，需要补充cookie
+                string cookieURl = configDict[Init12306Url];
+                // HttpClientExtend.HttpClientGet(cookieURl,true);//提取的cookie不完整
+                HttpClientExtend.DoWebGetRequest(cookieURl, true);
+                LoggerWriter.CreateLogFile(cookie, LogDir, ELogType.HttpResponse);
+            }
+            StringBuilder sb = new StringBuilder(head);
+            sb.AppendLine("Cookie:" + cookie);
             string answer = HttpClientExtend.RunPosterContainerHeaderHavaParam(url, head, json, HttpClientExtend.HttpResponseCookie);
             LoggerWriter.CreateLogFile(answer, LogDir, ELogType.HttpResponse, typeof(WebDataCaptureForm).Name);
             lsbTip.Items.Add(answer);

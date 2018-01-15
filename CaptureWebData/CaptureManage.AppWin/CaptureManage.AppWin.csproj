@@ -60,6 +60,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebKitBrowser">
+      <HintPath>..\bin\WebKitNET0.5_bin_cairo\bin\WebKitBrowser.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CitySubwayFrm.cs">
@@ -127,6 +130,10 @@
     <ProjectReference Include="..\FeatureFrmList\FeatureFrmList.csproj">
       <Project>{9843B4C8-9CC6-444D-8C34-371F828B3717}</Project>
       <Name>FeatureFrmList</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SelfControlForm\SelfControlForm.csproj">
+      <Project>{F56BF2A6-3935-4975-AB7A-7B242F36EE83}</Project>
+      <Name>SelfControlForm</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
