@@ -502,7 +502,7 @@ namespace HttpClientHelper
         {
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             request.Method = "POST";
-            if (cookie != null)
+            if (cookie != null&&cookie.Count>0)
                 request.CookieContainer = cookie;
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
             byte[] jsonStream = Encoding.UTF8.GetBytes(json);

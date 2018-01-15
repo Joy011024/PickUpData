@@ -18,6 +18,10 @@ namespace FeatureFrmList
     {
         public string Cookie { get; set; }
         public string Html { get; set; }
+        /// <summary>
+        /// cookie的作用域
+        /// </summary>
+        public string Domain { get; set; }
     }
     public partial class MicrosoftBrowser : UserControl
     {

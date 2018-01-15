@@ -746,8 +746,8 @@ X-Requested-With:XMLHttpRequest";
                 LoggerWriter.CreateLogFile(cookie, LogDir, ELogType.HttpResponse);
             }
             StringBuilder sb = new StringBuilder(head);
-            sb.AppendLine("Cookie:" + cookie);
-            string answer = HttpClientExtend.RunPosterContainerHeaderHavaParam(url, head, json, HttpClientExtend.HttpResponseCookie);
+            sb.AppendLine("\r\nCookie:" + cookie);
+            string answer = HttpClientExtend.RunPosterContainerHeaderHavaParam(url, sb.ToString(), json);
             LoggerWriter.CreateLogFile(answer, LogDir, ELogType.HttpResponse, typeof(WebDataCaptureForm).Name);
             lsbTip.Items.Add(answer);
         }
