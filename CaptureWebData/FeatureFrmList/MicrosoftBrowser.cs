@@ -14,15 +14,7 @@ namespace FeatureFrmList
     /// </summary>
     /// <param name="data"></param>
     public delegate void ButtonClickAfetr(object data);
-    public class HtmlItem
-    {
-        public string Cookie { get; set; }
-        public string Html { get; set; }
-        /// <summary>
-        /// cookie的作用域
-        /// </summary>
-        public string Domain { get; set; }
-    }
+    
     public partial class MicrosoftBrowser : UserControl
     {
         /// <summary>
@@ -88,10 +80,13 @@ namespace FeatureFrmList
         /// <param name="height"></param>
         public void SetPage(int width,int height) 
         {
-            if (width < containerWidth || height < containerHeight)
+            if (width > containerWidth && height > containerHeight)
             {//容器最小像素 
-            
+                this.Size = new Size(width, height);
+                MicrosoftWebBrowser.Height = this.Size.Height - 70;
+                MicrosoftWebBrowser.Width = this.Size.Width - 10;
             }
+
         }
         void BtnGo_Click(object sender, EventArgs e)
         {
@@ -129,11 +124,21 @@ namespace FeatureFrmList
             {
                 data.Cookie = doc.Cookie;
                 data.Html = doc.Body.OuterHtml;
+                data.Domain = doc.Domain;
             }
             if (PickUpCookieCallBack != null)
             {
                 PickUpCookieCallBack(data);
             }
         }
+    }
+    public class HtmlItem
+    {
+        public string Cookie { get; set; }
+        public string Html { get; set; }
+        /// <summary>
+        /// cookie的作用域
+        /// </summary>
+        public string Domain { get; set; }
     }
 }

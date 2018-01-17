@@ -202,9 +202,19 @@ namespace CaptureManage.AppWin
             }
         }
         /// <summary>
+        ///初始化我的联系人列表
+        /// </summary>
+        string InitMyContactList
+        {
+            get 
+            {
+                return configDict["InitMyContactList"];
+            }
+        }
+        /// <summary>
         /// 通过12036页面进行初始化获得的cookie
         /// </summary>
-        string Init12306Cookie;
+        HtmlItem Init12306Cookie;
         enum BtnCategory 
         {
             LogicData=1,
@@ -232,6 +242,10 @@ namespace CaptureManage.AppWin
         void InitDraw() 
         {
             MicrosoftBrowser mb = new MicrosoftBrowser();
+            verifyCodePanel.Visible = false;
+            mb.Parent = logicFunPanel;
+            mb.Visible = true;
+            mb.SetPage(mb.Parent.Size.Width - 20, mb.Parent.Size.Height - 20);
             mb.PickUpCookieCallBack = LoadUrlComplateEvent;
             mb.RefreshUrl(Init12306Url);
         }
@@ -283,9 +297,13 @@ namespace CaptureManage.AppWin
             HtmlItem item = data as HtmlItem;
             if (item != null)
             {
-                Init12306Cookie = item.Cookie;
+                Init12306Cookie = item;
                 string json = item.ConvertJson();
-                LoggerWriter.CreateLogFile(json,NowAppDirHelper.GetNowAppDir(AppCategory.WinApp),ELogType.HttpResponse,string.Empty,false,Encoding.UTF8);
+                LoggerWriter.CreateLogFile(json, NowAppDirHelper.GetNowAppDir(AppCategory.WinApp), ELogType.HttpResponse, string.Empty, false, Encoding.UTF8);
+            }
+            else
+            {
+                Init12306Cookie = new HtmlItem();
             }
         }
         void LoadStation() 
@@ -300,7 +318,15 @@ namespace CaptureManage.AppWin
         }
         public void LoadBaseData() 
         {
-           
+            if (Init12306Cookie != null)
+            {//提取到cookie之后 
+                //查询身份证列表
+                /*
+                 * cookie 补充缺少项
+                  _jc_save_fromStation _jc_save_toStation _jc_save_fromDate _jc_save_toDate _jc_save_wfdc_flag=dc
+                 */
+                string url = HttpClientExtend.RunPosterContainerHeaderHavaParam(InitMyContactList, configDict["InitMyContactListHttpHead"], string.Empty, null, Init12306Cookie.Cookie);
+            }
         }
         void LoadStaionData() 
         {
@@ -308,6 +334,7 @@ namespace CaptureManage.AppWin
             string response = HttpClientExtend.HttpClientGet(url);//@bjb|北京北|VAP|beijingbei|bjb|0 前6项为一组（并且第六项索引可以舍弃）
             LoggerWriter.CreateLogFile(response, LogDir, ELogType.LogicLog, typeof(WebDataCaptureForm).Name);
             GetStationModelFromString(response);
+            
         }
         void GetStationModelFromString(string response)
         {
@@ -633,7 +660,7 @@ namespace CaptureManage.AppWin
             {
                 pbVerifyCodeImg.Width = w;
                 pbVerifyCodeImg.Height = h;
-                logicPanel.Height = w + 80;
+                verifyCodePanel.Height = w + 80;
             }
             //生成图片副本
            // Graphics g = Graphics.FromImage(img); 
@@ -670,10 +697,10 @@ namespace CaptureManage.AppWin
                     pb.BackColor = Color.Red;
                     pb.TabStop = false;
                     ((System.ComponentModel.ISupportInitialize)(pb)).EndInit();
-                    logicPanel.Controls.Add(pb);
+                    verifyCodePanel.Controls.Add(pb);
                 }
             }
-            logicPanel.ResumeLayout(false);
+            verifyCodePanel.ResumeLayout(false);
             #endregion
         }
         private void PictureBox_Click(object sender, EventArgs e)
@@ -736,15 +763,19 @@ Origin:https://kyfw.12306.cn
 Referer:https://kyfw.12306.cn/otn/login/init
 User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
 X-Requested-With:XMLHttpRequest";
-            string cookie = Init12306Cookie;
+            string cookie = string.Empty;
+            if (!string.IsNullOrEmpty(Init12306Cookie.Cookie))
+            {
+                cookie = Init12306Cookie.Cookie;
+            }
             if (string.IsNullOrEmpty(cookie))
             {
-                cookie = HttpClientExtend.CookieStr;//这是系统随机返回的cookie，需要补充cookie
-                string cookieURl = configDict[Init12306Url];
                 // HttpClientExtend.HttpClientGet(cookieURl,true);//提取的cookie不完整
-                HttpClientExtend.DoWebGetRequest(cookieURl, true);
+                HttpClientExtend.DoWebGetRequest(Init12306Url, true);
+                cookie = HttpClientExtend.CookieStr;//这是系统随机返回的cookie，需要补充cookie
                 LoggerWriter.CreateLogFile(cookie, LogDir, ELogType.HttpResponse);
             }
+            
             StringBuilder sb = new StringBuilder(head);
             sb.AppendLine("\r\nCookie:" + cookie);
             string answer = HttpClientExtend.RunPosterContainerHeaderHavaParam(url, sb.ToString(), json);

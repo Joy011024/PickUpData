@@ -217,11 +217,15 @@ namespace HttpClientHelper
             request.Method = "GET";
             return request.GetResponse();
         }
-        public static string DoWebGetRequest(string url,bool pickUpCookie)
+        public static string DoWebGetRequest(string url,bool pickUpCookie,string cookies=null)
         {
             string unicode = url;//这里需要进行URL处理
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
             request.Method = "GET";
+            if (!string.IsNullOrEmpty(cookies))
+            {
+                request.Headers.Add("Cookie", cookies);
+            }
             if (pickUpCookie)
             {//提取cookie
                 request.CookieContainer = HttpResponseAfterCookie;//本应该是设置cookie，但是在操作中发现这样使用能在获取请求之后将数据返回到cookie【应该是引用类型风表现】
@@ -504,6 +508,10 @@ namespace HttpClientHelper
             request.Method = "POST";
             if (cookie != null&&cookie.Count>0)
                 request.CookieContainer = cookie;
+            if (!string.IsNullOrEmpty(cookieString))
+            {
+                request.Headers.Add("Cookie", cookieString);
+            }
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
             byte[] jsonStream = Encoding.UTF8.GetBytes(json);
             request.ContentLength = jsonStream.Length;

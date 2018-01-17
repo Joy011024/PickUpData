@@ -24,5 +24,18 @@
       <add key="VerifyCodeHttp12306" value="ticket/RequestParam/VerifyCodeParam"/> <!--12306登录验证请求的配置项-->
       <add key="Get12306Cookie_1" value="http://www.12306.cn/mormhweb/"/>
       <add key="Init12306" value="https://kyfw.12306.cn/otn/leftTicket/init"/> <!--12306页面初始化-->
+      <add key="InitMyContactList" value="https://kyfw.12306.cn/otn/passengers/init"/> <!--初始化我的联系人列表-->
+    <add key="InitMyContactListHttpHead" value="Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding:gzip, deflate, br
+Accept-Language:zh-CN,zh;q=0.8
+Cache-Control:max-age=0
+Connection:keep-alive
+Content-Length:10
+Content-Type:application/x-www-form-urlencoded
+Host:kyfw.12306.cn
+Origin:https://kyfw.12306.cn
+Referer:https://kyfw.12306.cn/otn/index/initMy12306
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"/>
   </appSettings>
 </configuration>

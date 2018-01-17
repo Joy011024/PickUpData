@@ -72,6 +72,12 @@
       <DependentUpon>CitySubwayFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="FactoryService\IocHelper.cs" />
+    <Compile Include="PicpUpWebHtmlFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PicpUpWebHtmlFrm.Designer.cs">
+      <DependentUpon>PicpUpWebHtmlFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TicketData.IManage\ISyncTicketDataManage.cs" />
     <Compile Include="TicketData.Manage\TicketDataPrepareManager.cs" />
     <Compile Include="TicketData.Model\CarInfo.cs" />
@@ -97,6 +103,9 @@
   <ItemGroup>
     <EmbeddedResource Include="CitySubwayFrm.resx">
       <DependentUpon>CitySubwayFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PicpUpWebHtmlFrm.resx">
+      <DependentUpon>PicpUpWebHtmlFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WebDataCaptureForm.resx">
       <DependentUpon>WebDataCaptureForm.cs</DependentUpon>

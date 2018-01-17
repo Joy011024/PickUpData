@@ -41,8 +41,8 @@
             this.rtbTip = new System.Windows.Forms.RichTextBox();
             this.btnRefreshVerifyCode = new System.Windows.Forms.Button();
             this.btnJob = new System.Windows.Forms.Button();
-            this.logicPanel = new System.Windows.Forms.Panel();
-            this.loginPanel = new System.Windows.Forms.Panel();
+            this.verifyCodePanel = new System.Windows.Forms.Panel();
+            this.loginAccountPanel = new System.Windows.Forms.Panel();
             this.lblPanelTypeDesc = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtPsw12306 = new System.Windows.Forms.TextBox();
@@ -52,15 +52,17 @@
             this.pbVerifyCodeImg = new System.Windows.Forms.PictureBox();
             this.lsbTip = new System.Windows.Forms.ListBox();
             this.btnClearTip = new System.Windows.Forms.Button();
+            this.logicFunPanel = new System.Windows.Forms.Panel();
             this.panelWhere.SuspendLayout();
-            this.logicPanel.SuspendLayout();
-            this.loginPanel.SuspendLayout();
+            this.verifyCodePanel.SuspendLayout();
+            this.loginAccountPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).BeginInit();
+            this.logicFunPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLoadBaseData
             // 
-            this.btnLoadBaseData.Location = new System.Drawing.Point(512, 12);
+            this.btnLoadBaseData.Location = new System.Drawing.Point(676, 194);
             this.btnLoadBaseData.Name = "btnLoadBaseData";
             this.btnLoadBaseData.Size = new System.Drawing.Size(75, 23);
             this.btnLoadBaseData.TabIndex = 1;
@@ -108,7 +110,7 @@
             // 
             // btnUseRuleStation
             // 
-            this.btnUseRuleStation.Location = new System.Drawing.Point(600, 12);
+            this.btnUseRuleStation.Location = new System.Drawing.Point(773, 12);
             this.btnUseRuleStation.Name = "btnUseRuleStation";
             this.btnUseRuleStation.Size = new System.Drawing.Size(97, 23);
             this.btnUseRuleStation.TabIndex = 7;
@@ -141,14 +143,14 @@
             this.panelWhere.Controls.Add(this.dtpGoTime);
             this.panelWhere.Controls.Add(this.lblBeginStation);
             this.panelWhere.Controls.Add(this.cmbToStation);
-            this.panelWhere.Location = new System.Drawing.Point(503, 41);
+            this.panelWhere.Location = new System.Drawing.Point(676, 41);
             this.panelWhere.Name = "panelWhere";
             this.panelWhere.Size = new System.Drawing.Size(226, 115);
             this.panelWhere.TabIndex = 10;
             // 
             // btnTicketQuery
             // 
-            this.btnTicketQuery.Location = new System.Drawing.Point(584, 162);
+            this.btnTicketQuery.Location = new System.Drawing.Point(757, 162);
             this.btnTicketQuery.Name = "btnTicketQuery";
             this.btnTicketQuery.Size = new System.Drawing.Size(75, 23);
             this.btnTicketQuery.TabIndex = 11;
@@ -157,15 +159,15 @@
             // 
             // rtbTip
             // 
-            this.rtbTip.Location = new System.Drawing.Point(503, 365);
+            this.rtbTip.Location = new System.Drawing.Point(676, 365);
             this.rtbTip.Name = "rtbTip";
-            this.rtbTip.Size = new System.Drawing.Size(236, 52);
+            this.rtbTip.Size = new System.Drawing.Size(236, 107);
             this.rtbTip.TabIndex = 12;
             this.rtbTip.Text = "";
             // 
             // btnRefreshVerifyCode
             // 
-            this.btnRefreshVerifyCode.Location = new System.Drawing.Point(503, 194);
+            this.btnRefreshVerifyCode.Location = new System.Drawing.Point(795, 478);
             this.btnRefreshVerifyCode.Name = "btnRefreshVerifyCode";
             this.btnRefreshVerifyCode.Size = new System.Drawing.Size(75, 23);
             this.btnRefreshVerifyCode.TabIndex = 13;
@@ -175,34 +177,34 @@
             // 
             // btnJob
             // 
-            this.btnJob.Location = new System.Drawing.Point(503, 162);
+            this.btnJob.Location = new System.Drawing.Point(676, 162);
             this.btnJob.Name = "btnJob";
             this.btnJob.Size = new System.Drawing.Size(75, 23);
             this.btnJob.TabIndex = 14;
             this.btnJob.Text = "作业";
             this.btnJob.UseVisualStyleBackColor = true;
             // 
-            // logicPanel
+            // verifyCodePanel
             // 
-            this.logicPanel.Controls.Add(this.loginPanel);
-            this.logicPanel.Controls.Add(this.pbVerifyCodeImg);
-            this.logicPanel.Location = new System.Drawing.Point(12, 12);
-            this.logicPanel.Name = "logicPanel";
-            this.logicPanel.Size = new System.Drawing.Size(485, 406);
-            this.logicPanel.TabIndex = 15;
+            this.verifyCodePanel.Controls.Add(this.loginAccountPanel);
+            this.verifyCodePanel.Controls.Add(this.pbVerifyCodeImg);
+            this.verifyCodePanel.Location = new System.Drawing.Point(7, 3);
+            this.verifyCodePanel.Name = "verifyCodePanel";
+            this.verifyCodePanel.Size = new System.Drawing.Size(485, 225);
+            this.verifyCodePanel.TabIndex = 15;
             // 
-            // loginPanel
+            // loginAccountPanel
             // 
-            this.loginPanel.Controls.Add(this.lblPanelTypeDesc);
-            this.loginPanel.Controls.Add(this.btnLogin);
-            this.loginPanel.Controls.Add(this.txtPsw12306);
-            this.loginPanel.Controls.Add(this.lblPsw12306);
-            this.loginPanel.Controls.Add(this.txtUserName12306);
-            this.loginPanel.Controls.Add(this.lblUserName12306);
-            this.loginPanel.Location = new System.Drawing.Point(301, 9);
-            this.loginPanel.Name = "loginPanel";
-            this.loginPanel.Size = new System.Drawing.Size(181, 207);
-            this.loginPanel.TabIndex = 1;
+            this.loginAccountPanel.Controls.Add(this.lblPanelTypeDesc);
+            this.loginAccountPanel.Controls.Add(this.btnLogin);
+            this.loginAccountPanel.Controls.Add(this.txtPsw12306);
+            this.loginAccountPanel.Controls.Add(this.lblPsw12306);
+            this.loginAccountPanel.Controls.Add(this.txtUserName12306);
+            this.loginAccountPanel.Controls.Add(this.lblUserName12306);
+            this.loginAccountPanel.Location = new System.Drawing.Point(301, 9);
+            this.loginAccountPanel.Name = "loginAccountPanel";
+            this.loginAccountPanel.Size = new System.Drawing.Size(181, 207);
+            this.loginAccountPanel.TabIndex = 1;
             // 
             // lblPanelTypeDesc
             // 
@@ -266,29 +268,37 @@
             // 
             this.lsbTip.FormattingEnabled = true;
             this.lsbTip.ItemHeight = 12;
-            this.lsbTip.Location = new System.Drawing.Point(503, 223);
+            this.lsbTip.Location = new System.Drawing.Point(676, 223);
             this.lsbTip.Name = "lsbTip";
             this.lsbTip.Size = new System.Drawing.Size(236, 136);
             this.lsbTip.TabIndex = 16;
             // 
             // btnClearTip
             // 
-            this.btnClearTip.Location = new System.Drawing.Point(585, 194);
+            this.btnClearTip.Location = new System.Drawing.Point(676, 478);
             this.btnClearTip.Name = "btnClearTip";
             this.btnClearTip.Size = new System.Drawing.Size(75, 23);
             this.btnClearTip.TabIndex = 17;
             this.btnClearTip.Text = "清空提示";
             this.btnClearTip.UseVisualStyleBackColor = true;
             // 
+            // logicFunPanel
+            // 
+            this.logicFunPanel.Controls.Add(this.verifyCodePanel);
+            this.logicFunPanel.Location = new System.Drawing.Point(3, 21);
+            this.logicFunPanel.Name = "logicFunPanel";
+            this.logicFunPanel.Size = new System.Drawing.Size(658, 568);
+            this.logicFunPanel.TabIndex = 18;
+            // 
             // WebDataCaptureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 430);
+            this.ClientSize = new System.Drawing.Size(924, 601);
+            this.Controls.Add(this.logicFunPanel);
             this.Controls.Add(this.btnClearTip);
             this.Controls.Add(this.rtbTip);
             this.Controls.Add(this.lsbTip);
-            this.Controls.Add(this.logicPanel);
             this.Controls.Add(this.btnJob);
             this.Controls.Add(this.btnRefreshVerifyCode);
             this.Controls.Add(this.btnTicketQuery);
@@ -299,10 +309,11 @@
             this.Text = "12306数据采集";
             this.panelWhere.ResumeLayout(false);
             this.panelWhere.PerformLayout();
-            this.logicPanel.ResumeLayout(false);
-            this.loginPanel.ResumeLayout(false);
-            this.loginPanel.PerformLayout();
+            this.verifyCodePanel.ResumeLayout(false);
+            this.loginAccountPanel.ResumeLayout(false);
+            this.loginAccountPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbVerifyCodeImg)).EndInit();
+            this.logicFunPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -322,16 +333,17 @@
         private System.Windows.Forms.RichTextBox rtbTip;
         private System.Windows.Forms.Button btnRefreshVerifyCode;
         private System.Windows.Forms.Button btnJob;
-        private System.Windows.Forms.Panel logicPanel;
+        private System.Windows.Forms.Panel verifyCodePanel;
         private System.Windows.Forms.PictureBox pbVerifyCodeImg;
         private System.Windows.Forms.ListBox lsbTip;
         private System.Windows.Forms.Button btnClearTip;
-        private System.Windows.Forms.Panel loginPanel;
+        private System.Windows.Forms.Panel loginAccountPanel;
         private System.Windows.Forms.Label lblPanelTypeDesc;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.TextBox txtPsw12306;
         private System.Windows.Forms.Label lblPsw12306;
         private System.Windows.Forms.TextBox txtUserName12306;
         private System.Windows.Forms.Label lblUserName12306;
+        private System.Windows.Forms.Panel logicFunPanel;
     }
 }
