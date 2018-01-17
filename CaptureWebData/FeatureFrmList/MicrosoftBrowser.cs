@@ -46,6 +46,7 @@ namespace FeatureFrmList
             Url = url;
             rtbUrl.Text = url;
             btnGo.PerformClick();
+            //btnGetCookies.PerformClick();
         }
         public MicrosoftBrowser()
         {
@@ -140,5 +141,19 @@ namespace FeatureFrmList
         /// cookie的作用域
         /// </summary>
         public string Domain { get; set; }
+    }
+    public class DrawWebBrowserInFromEle
+    { 
+        //将自定义的控件绘制到元素上
+        public DrawWebBrowserInFromEle(Control parent, ButtonClickAfetr LoadUrlComplateEvent,string url)
+        { //渲染的父容器
+            MicrosoftBrowser mb = new MicrosoftBrowser();
+
+            mb.Parent = parent;
+            mb.Visible = true;
+            mb.SetPage(mb.Parent.Size.Width - 20, mb.Parent.Size.Height - 20);
+            mb.PickUpCookieCallBack = LoadUrlComplateEvent;
+            mb.RefreshUrl(url);
+        }
     }
 }
