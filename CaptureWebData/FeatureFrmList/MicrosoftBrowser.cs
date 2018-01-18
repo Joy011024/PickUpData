@@ -145,14 +145,29 @@ namespace FeatureFrmList
     public class DrawWebBrowserInFromEle
     { 
         //将自定义的控件绘制到元素上
-        public DrawWebBrowserInFromEle(Control parent, ButtonClickAfetr LoadUrlComplateEvent,string url)
+        MicrosoftBrowser mb;
+        /// <summary>
+        /// 将元素渲染到父容器中并进行加载调度
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="LoadUrlComplateEvent"></param>
+        /// <param name="url"></param>
+        public DrawWebBrowserInFromEle(Control parent, ButtonClickAfetr LoadUrlComplateEvent, string url)
         { //渲染的父容器
-            MicrosoftBrowser mb = new MicrosoftBrowser();
-
+            mb = new MicrosoftBrowser();
             mb.Parent = parent;
             mb.Visible = true;
             mb.SetPage(mb.Parent.Size.Width - 20, mb.Parent.Size.Height - 20);
             mb.PickUpCookieCallBack = LoadUrlComplateEvent;
+            if (!string.IsNullOrEmpty(url))
+                mb.RefreshUrl(url);
+        }
+        /// <summary>
+        /// 页面重新加载
+        /// </summary>
+        /// <param name="url"></param>
+        public void RefreshUrl(string url) 
+        {
             mb.RefreshUrl(url);
         }
     }

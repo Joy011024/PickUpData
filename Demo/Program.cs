@@ -8,6 +8,7 @@ using System.IO;
 using Common.Data;
 using System.IO.Packaging;
 using System.Text;
+using System.Text.RegularExpressions;
 namespace Demo
 {
     static class Program
@@ -25,6 +26,25 @@ namespace Demo
         }
         static void Test() 
         {
+
+            //使用xpath <B class=ui-page-s-len>2/100</B>
+            Regex reg = new Regex("<B[^>]*>(.+)</B>");//提取符合要求的一段文本
+            GroupCollection gc= reg.Match("<B class=ui-page-s-len>2/100</B>").Groups;
+            if (gc.Count > 1)
+            {//第一项为匹配的完整串，第二项为标签内的文本  [2/100]
+                Group g = gc[1];
+                string value = g.Value;
+            }
+            //提取标签内的文本 2/100
+            string pu = "<B[^>]*>(.*?)</B>";
+            Regex inner = new Regex(pu);
+            GroupCollection pugc = inner.Match("<B class=ui-page-s-len>2/100</B>").Groups;
+            if (pugc.Count > 0)
+            {
+                Group g = pugc[0];
+                string value = g.Value;
+            }
+            return;
             string dir=new AppDirHelper().GetAppDir(AppCategory.WinApp);
             string zipDir= new DirectoryInfo(dir).Parent.Parent.FullName+"/ZipTemplate";
             ZipFileHelper zip = new ZipFileHelper();
