@@ -12,6 +12,12 @@
   第二页：'list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.102a9ba0jWcdDd&s=60&q=%D3%F0%C8%DE%B7%FE%C4%D0&sort=s&style=g&smAreaId=110106&type=pc#J_Filter'
   第一页：'list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.46af0a4kV7p43&q=%D3%F0%C8%DE%B7%FE%C4%D0&sort=s&style=g&smAreaId=110106&type=pc#J_Filter'
   -->
-      <add key="tianmao" value="https://list.tmall.com/search_product.htm?spm={spm}&amp;q={q}&amp;prop={prop}&amp;sort=s&amp;style=g&amp;from=sn_1_prop-qp&amp;suggest=0_1&amp;smAreaId=110106#J_crumbs"/>
+      <add key="tianmaoYurongfu" value="https://list.tmall.com/search_product.htm?spm={spm}&amp;q={q}&amp;prop={prop}&amp;sort=s&amp;style=g&amp;from=sn_1_prop-qp&amp;suggest=0_1&amp;smAreaId=110106#J_crumbs"/>
+    <!--毛衣：
+    第1页：list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.4f506713HbGUt4&s=1&q=%C3%AB%D2%C2&sort=s&style=g&from=mallfp..pc_1_searchbutton&active=2&smAreaId=110106&type=pc#J_Filter
+    第2页：list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.5e1585bfdo3of1&s=60&q=%C3%AB%D2%C2&sort=s&style=g&from=mallfp..pc_1_searchbutton&active=2&smAreaId=110106&type=pc#J_Filter
+    -->
+    
+      <add key="tianmaoMaoyi" value="https://list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.5e1585bfdo3of1&amp;s={page}&amp;q=%C3%AB%D2%C2&amp;sort=s&amp;style=g&amp;from=mallfp..pc_1_searchbutton&amp;active=2&amp;smAreaId=110106&amp;type=pc#J_Filter"/>
   </appSettings>
 </configuration>

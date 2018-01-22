@@ -23,7 +23,8 @@ namespace CaptureManage.AppWin
         DrawWebBrowserInFromEle web;
         private void PicpUpWebHtmlFrm_Load(object sender, EventArgs e)
         {
-            string url = "https://list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.7f5f72ac0cvkWI&s=60&q=%D3%F0%C8%DE%B7%FE%C4%D0&sort=s&style=g&smAreaId=110106&type=pc";
+            string url = "https://list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.4f506713HbGUt4&s=1&q=%C3%AB%D2%C2&sort=s&style=g&from=mallfp..pc_1_searchbutton&active=2&smAreaId=110106&type=pc#J_Filter";
+               //羽绒服 "https://list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.7f5f72ac0cvkWI&s=60&q=%D3%F0%C8%DE%B7%FE%C4%D0&sort=s&style=g&smAreaId=110106&type=pc";
             web = new DrawWebBrowserInFromEle(htmlPanel, QueryHtmlData, url);
         }
         
@@ -62,7 +63,8 @@ namespace CaptureManage.AppWin
                 return;
             }
             numerator++;
-            string  url = "https://list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.7f5f72ac0cvkWI&s={page}&q=%D3%F0%C8%DE%B7%FE%C4%D0&sort=s&style=g&smAreaId=110106&type=pc";
+            string url = "https://list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.4f506713HbGUt4&s={page}&q=%C3%AB%D2%C2&sort=s&style=g&from=mallfp..pc_1_searchbutton&active=2&smAreaId=110106&type=pc#J_Filter";
+                // 羽绒服 "https://list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.7f5f72ac0cvkWI&s={page}&q=%D3%F0%C8%DE%B7%FE%C4%D0&sort=s&style=g&smAreaId=110106&type=pc";
             int start = numerator * 60;
             url = url.Replace("{page}", start.ToString());
             web.RefreshUrl(url);
