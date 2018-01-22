@@ -48,11 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaeModel\AppClass.cs" />
     <Compile Include="AppSettingCfg.cs" />
     <Compile Include="BaseEnum.cs" />
     <Compile Include="CategoryData.cs" />
     <Compile Include="DelegateData.cs" />
     <Compile Include="BaeModel\ModelFieldContainTime.cs" />
+    <Compile Include="BaeModel\DescriptionSortAttribute.cs" />
     <Compile Include="PickUpStatic.cs" />
     <Compile Include="TecentData\FindQQData.cs" />
     <Compile Include="IpModel\IpDataMapTable.cs" />
@@ -60,7 +62,9 @@
     <Compile Include="IpModel\IpAddressData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ExtAttribute\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="SqlCmd\CreateSql\TecentDataUinDA.sql" />
     <Content Include="SqlCmd\LogicData\CategoryData.sql" />
