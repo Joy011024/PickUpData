@@ -7,6 +7,6 @@ D:\Dream\ExcuteHttpCmd\ExcuteHttp\BaseHelper\ExtHelper\HttpClientHelper\obj\Debu
 D:\Dream\ExcuteHttpCmd\ExcuteHttp\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\bin\Debug\HttpClientHelper.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\bin\Debug\HttpClientHelper.pdb
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.pdb
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.csprojResolveAssemblyReference.cache
