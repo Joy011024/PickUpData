@@ -15,4 +15,12 @@ namespace Domain.CommonData
             DescriptionValue = description;
         }
     }
+    public class SqlDBMappedAttribute : Attribute
+    {
+        public string Name { get; set; }
+        public SqlDBMappedAttribute(string name) 
+        {
+            Name = name;
+        }
+    }
 }

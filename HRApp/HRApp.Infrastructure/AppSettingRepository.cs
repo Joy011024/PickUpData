@@ -45,7 +45,6 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
                     ps.Add(p);
                 }
             }
-
             SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = SqlConnString };
             return helper.ExcuteNoQuery(cmd, ps.ToArray()) > 0;
         }
