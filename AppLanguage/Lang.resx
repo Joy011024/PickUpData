@@ -147,6 +147,9 @@
   <data name="LblName" xml:space="preserve">
     <value>名称</value>
   </data>
+  <data name="LblSpecialSpellNameManage" xml:space="preserve">
+    <value>生僻字拼音维护</value>
+  </data>
   <data name="LblUserName" xml:space="preserve">
     <value>用户名</value>
   </data>

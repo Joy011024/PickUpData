@@ -151,6 +151,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 生僻字拼音维护 的本地化字符串。
+        /// </summary>
+        public static string LblSpecialSpellNameManage {
+            get {
+                return ResourceManager.GetString("LblSpecialSpellNameManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 用户名 的本地化字符串。
         /// </summary>
         public static string LblUserName {

@@ -3,33 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IHRApp.Infrastructure;
 using HRApp.Model;
+using IHRApp.Infrastructure;
 namespace HRApp.Infrastructure
 {
-    public class AppRepository:IAppRepository
+    public class SpecialSpellNameRepository:ISpecialSpellNameRepository
     {
-
-        public IList<AppModel> QueryList(string cmd, Dictionary<string, object> param)
-        {
-            throw new NotImplementedException();
-        }
-
         public string SqlConnString
         {
             get;
             set;
         }
 
-        public bool Add(AppModel entity)
+        public bool Add(SpecialSpellName entity)
         {
-            entity.IsDelete = 0;
-            string sqlCmd = @"INSERT INTO [dbo].[App]  ([AppName],[AppCode],[IsDelete])
-                    VALUES  ({AppName},{AppCode},{IsDelete}) ";
-            return CommonRepository.ExtInsert<AppModel>(sqlCmd, SqlConnString, entity);
+            string cmd = @"INSERT INTO [HrApp].[dbo].[SpecialSpellName] ([Name],[Code],[IsDeleted],[IsErrorSpell])
+     VALUES ({Name},{Code},{IsDeleted},{IsErrorSpell}) ";
+            return CommonRepository.ExtInsert<SpecialSpellName>(cmd, SqlConnString, entity);
         }
 
-        public bool Edit(AppModel entity)
+        public bool Edit(SpecialSpellName entity)
         {
             throw new NotImplementedException();
         }
@@ -44,14 +37,13 @@ namespace HRApp.Infrastructure
             throw new NotImplementedException();
         }
 
-        public AppModel Get(object key)
+        public SpecialSpellName Get(object key)
         {
             throw new NotImplementedException();
         }
 
-        public IList<AppModel> Query(string cmd)
+        public IList<SpecialSpellName> Query(string cmd)
         {
-
             throw new NotImplementedException();
         }
     }

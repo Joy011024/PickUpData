@@ -42,6 +42,7 @@
     <Compile Include="Entity\AppModel.cs" />
     <Compile Include="Entity\CategoryItems.cs" />
     <Compile Include="Entity\Users.cs" />
+    <Compile Include="Entity\SpecialSpellName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
