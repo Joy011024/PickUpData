@@ -7,6 +7,7 @@ using HRApp.Model;
 using HRApp.IApplicationService;
 using IHRApp.Infrastructure;
 using Common.Data;
+using Infrastructure.ExtService;
 namespace HRApp.ApplicationService
 {
     public class AppSettingService:IAppSettingService
@@ -36,6 +37,10 @@ namespace HRApp.ApplicationService
             if (!item.ParentId.HasValue)
             {//表示这是跟节点
                 item.ParentId = -1;
+            }
+            if (string.IsNullOrEmpty(item.Code))
+            {
+                item.Code = item.Name.TextConvertChar(true);
             }
             if (string.IsNullOrEmpty(item.ParentCode))
             {

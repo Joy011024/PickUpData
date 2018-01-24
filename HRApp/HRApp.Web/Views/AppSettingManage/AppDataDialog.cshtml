@@ -1,0 +1,83 @@
+﻿@using AppLanguage;
+@using HRApp.Web;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Lang.LblAppManage</title>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    @*<script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>*@
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $('#btnSave').on('click', function () {
+                var api = GetXPathObject($(".ApiParam"), "apiKey");
+                bindPostAjax('/AppSettingManage/InsertAppData', api, function (response, statue) {
+
+                });
+            });
+        });
+        function GetXPathObject(rootEle, apiKeyAttr) {
+            var obj = {};
+            if (!rootEle) {
+                return obj;
+            }
+            if (!apiKeyAttr) {
+                apiKeyAttr = "apiKey";
+            }
+            var data = [];
+            $.each($(rootEle).find('input,textarea,select'),function (i, ele) {
+                var objEle = $(ele);
+                //这里不能访问到具局部变量data
+            });
+            var paramEles=$(rootEle).find('input,textarea,select');
+            for (var i = 0; i < paramEles.length; i++) {
+                var objEle = $(paramEles[i]);
+                obj[objEle.attr(apiKeyAttr)] = objEle.val();
+            }
+            return obj;
+        }
+
+    </script>
+</head>
+<body>
+    <div class="ApiParam">
+        <div class="alongLine">
+            <span style="width:100px;">@Lang.LblName :</span>
+            <span>
+                <input type="text" id="txtName" apikey="Name" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
+            </span>
+        </div>
+        <div class="alongLine">
+            <span style="width:100px;">@Lang.LblCode :</span>
+            <span>
+                <input type="text" id="txtMemnorideCode" apikey="Code" autocomplete="off" />
+            </span>
+        </div>
+        <div class="alongLine" style="display:none;">
+            <span style="width:100px;">@Lang.LblAppSetValue :</span>
+            <span>
+                <input type="text" id="txtDescription" apikey="Value" />
+            </span>
+        </div>
+        <div class="alongLine" style="display:none;">
+            <span style="width:100px;">@Lang.LblDescription :</span>
+            <span>
+                <textarea id="txtDescription" apikey="Desc"></textarea>
+            </span>
+        </div>
+    </div>
+    <div>
+        <button id="btnSave">@Lang.BtnSave</button>
+    </div>
+</body>
+</html>

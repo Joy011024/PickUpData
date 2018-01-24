@@ -9,6 +9,7 @@ using HRApp.Infrastructure;
 using HRApp.IApplicationService;
 using IHRApp.Infrastructure;
 using HRApp.Model;
+using System.EnterpriseServices;
 namespace HRApp.Web.Controllers
 {
     [MvcActionResultHelper]
@@ -32,6 +33,24 @@ namespace HRApp.Web.Controllers
                 ParentCode=param.ParentCode,
                 Name=param.Name,
                 ItemValue=param.Value
+            });
+            return Json(json);
+        }
+        public ActionResult AppDataDialog() 
+        {
+            return View();
+        }
+        [HttpPost]
+        [Description("新增系统应用")]
+        public JsonResult InsertAppData(NodeRequestParam param) 
+        {
+            JsonData json = new JsonData();
+            IAppRepository appSetRepository = new AppRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
+            IAppDataService appSetService = new AppDataService(appSetRepository);
+            json= appSetService.Add(new AppModel()
+            {
+                AppName=param.Name,
+                AppCode=param.Code
             });
             return Json(json);
         }

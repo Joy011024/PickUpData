@@ -23,7 +23,8 @@ namespace HRApp.Infrastructure
 
         public bool Add(AppModel entity)
         {
-            string sqlCmd = @"INSERT INTO [TicketDB].[dbo].[App]  ([AppName],[AppCode],[IsDelete])
+            entity.IsDelete = 0;
+            string sqlCmd = @"INSERT INTO [dbo].[App]  ([AppName],[AppCode],[IsDelete])
                     VALUES  ({AppName},{AppCode},{IsDelete}) ";
             return CommonRepository.ExtInsert<AppModel>(sqlCmd, SqlConnString, entity);
         }
