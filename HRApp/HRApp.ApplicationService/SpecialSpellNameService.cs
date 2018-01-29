@@ -37,5 +37,9 @@ namespace HRApp.ApplicationService
             }
             return json;
         }
+        public void AddMaybeSpecialChinese() 
+        {//存储疑似生僻字
+        
+        }
     }
 }
