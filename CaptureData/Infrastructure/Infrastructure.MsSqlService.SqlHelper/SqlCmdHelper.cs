@@ -30,6 +30,17 @@ namespace Infrastructure.MsSqlService.SqlHelper
             }
             return comm.ExecuteNonQuery();
         }
-         
+        public int RunProcedureNoQuery(string proceudreCmd,params SqlParameter[] pms) 
+        {
+            SqlConnection conn = new SqlConnection(SqlConnString);
+            conn.Open();
+            SqlCommand comm = new SqlCommand(proceudreCmd,conn);
+            if (pms != null && pms.Length > 0)
+            {
+                comm.Parameters.AddRange(pms);
+            }
+            comm.CommandType = CommandType.StoredProcedure;
+            return comm.ExecuteNonQuery();
+        }
     }
 }

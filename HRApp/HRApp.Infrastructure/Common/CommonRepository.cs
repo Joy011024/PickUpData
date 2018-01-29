@@ -1,6 +1,7 @@
 ﻿using Infrastructure.MsSqlService.SqlHelper;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,40 @@ namespace HRApp.Infrastructure
             }
             SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = connString };
             return helper.ExcuteNoQuery(cmd, ps.ToArray()) > 0;
+        }
+         class SqlExcuteParam
+        {
+            public string Cmd { get; set; }
+            public List<SqlParameter> Param { get; set; }
+        }
+        static SqlExcuteParam BuilderSqlParamter<T>(string cmd, T entity) where T : class
+        {
+            Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
+            List<SqlParameter> ps = new List<SqlParameter>();
+            foreach (KeyValuePair<string, object> item in properties)
+            {
+                string paramName = "@" + item.Key;
+                string field = "{" + item.Key + "}";
+                if (cmd.Contains(field))
+                {
+                    cmd = cmd.Replace(field, paramName);
+                    //获取参数的数据类型
+                    SqlParameter p = new SqlParameter(paramName, item.Value == null ? DBNull.Value : item.Value);
+                    ps.Add(p);
+                }
+            }
+            SqlExcuteParam pp = new SqlExcuteParam() { Cmd = cmd, Param = ps };
+            return pp;
+        }
+        public static int RunProcedureNoQuery<T>(string procdureCmd, string connString, T entity, 
+            string outPutName, SqlDbType outPutType,out object procedureOut) where T : class
+        {
+            SqlExcuteParam pms = BuilderSqlParamter(procdureCmd, entity);
+            pms.Param.Add(new SqlParameter() { ParameterName = outPutName, SqlDbType = outPutType, Direction = ParameterDirection.Output });
+            SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = connString };
+            int result= helper.RunProcedureNoQuery(pms.Cmd, pms.Param.ToArray());
+            procedureOut = pms.Param[pms.Param.Count - 1].Value;
+            return result;
         }
     }
 }
