@@ -37,5 +37,26 @@ namespace Infrastructure.ExtService
             }
             return sb.ToString();
         }
+        /// <summary>
+        /// 单个汉字转换为拼音
+        /// </summary>
+        /// <param name="word"></param>
+        /// <param name="firstIsUpper">汉字首字母转换为大写</param>
+        /// <returns></returns>
+        public static string CharConvertSpellName(this char word, bool firstIsUpper)
+        {
+            Encoding enc = Encoding.UTF8;
+            string pinying = Pinyin.GetPinyin(word.ToString());//这是获取到元素的拼音
+            StringBuilder sb = new StringBuilder();
+            if (string.IsNullOrEmpty(pinying))
+            {
+                return string.Empty;
+            }
+            //首字母进行处理
+            sb.Append(pinying.Substring(0, 1).ToUpper());
+            if (pinying.Length > 1)
+                sb.Append(pinying.Substring(1));
+            return sb.ToString();
+        }
     }
 }

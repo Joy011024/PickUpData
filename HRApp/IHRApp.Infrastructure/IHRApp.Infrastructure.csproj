@@ -42,6 +42,7 @@
     <Compile Include="IAppRepository.cs" />
     <Compile Include="IAppSettingRepository.cs" />
     <Compile Include="IBaseRepository.cs" />
+    <Compile Include="IMaybeSpecialRepository.cs" />
     <Compile Include="ISpecialSpellNameRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

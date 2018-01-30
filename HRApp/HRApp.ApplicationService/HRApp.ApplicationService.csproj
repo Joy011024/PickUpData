@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="AppDataService.cs" />
     <Compile Include="AppSettingService.cs" />
+    <Compile Include="CommonCallService.cs" />
+    <Compile Include="MaybeSpecialService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecialSpellNameService.cs" />
   </ItemGroup>
