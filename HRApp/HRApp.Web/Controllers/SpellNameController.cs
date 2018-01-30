@@ -22,7 +22,7 @@ namespace HRApp.Web.Controllers
         public ActionResult SpecialSpellNameDialog()
         {
             string test = "正则@表达式&*只能输入中,；:=+文和字母zhongguo1949垚";
-            CommonCallService.TextConvertSpellName(test);
+            //CommonCallService.TextConvertSpellName(test);
             return View();
         }
         [Description("保存生僻字")]
