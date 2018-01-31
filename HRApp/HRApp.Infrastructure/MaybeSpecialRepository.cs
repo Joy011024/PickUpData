@@ -25,10 +25,15 @@ namespace HRApp.Infrastructure
 		@result = @result OUTPUT";
             MaybeSpellName maybe = new MaybeSpellName() 
             {
-                 Name=word,
+                 Name=word.ToString(),
                  Code=spellName
             };
             return CommonRepository.RunProcedureNoQuery(cmd, SqlConnString, maybe, "@result", SqlDbType.Int, out responseCode) > 0;
+        }
+
+        public void BulkSave( List<MaybeSpellName> rows)
+        {
+             CommonRepository.BulkSave<MaybeSpellName>(typeof(MaybeSpellName).Name, SqlConnString, rows);
         }
     }
 }

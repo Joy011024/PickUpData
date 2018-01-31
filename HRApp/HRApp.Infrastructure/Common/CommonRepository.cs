@@ -72,5 +72,29 @@ namespace HRApp.Infrastructure
             procedureOut = pms.Param[pms.Param.Count - 1].Value;
             return result;
         }
+        public static void BulkSave<T>(string table,string connString,List<T> rows) where T:class
+        {
+            T def = System.Activator.CreateInstance<T>();
+            string[] pnames = def.GetAllProperties();
+            DataTable dt = new DataTable();
+            foreach (var item in pnames)
+            {
+                //获取属性的数据类型
+                dt.Columns.Add(new DataColumn(item, def.GetPropertyType(item)));
+            }
+            foreach (T item in rows)
+            {
+                DataRow row = dt.NewRow();
+                foreach (var column in pnames)
+                {
+                    bool hasProperty = false;
+                    object value = item.GetPropertyValue(column, out hasProperty);
+                    row[column] = value;
+                }
+                dt.Rows.Add(row);
+            }
+            SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = connString };
+            helper.BulkSave(dt, table);
+        }
     }
 }

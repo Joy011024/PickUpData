@@ -15,13 +15,26 @@ namespace CommonHelperEntity
         public static string[] GetAllProperties<T>(this T entity) where T : class
         {
             List<string> names = new List<string>();
-            Type type = typeof(T);
+            Type type = entity.GetType();
             PropertyInfo[] pis = type.GetProperties();
             foreach (var item in pis)
             {
                 names.Add(item.Name);
             }
             return names.ToArray();
+        }
+        /// <summary>
+        /// 获取指定属性的属性类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public static Type GetPropertyType<T>(this T entity, string propertyName) where T : class
+        {
+           Type t= entity.GetType();
+           PropertyInfo pi= t.GetProperty(propertyName);
+           return pi.PropertyType;
         }
         /// <summary>
         /// 获取属性值

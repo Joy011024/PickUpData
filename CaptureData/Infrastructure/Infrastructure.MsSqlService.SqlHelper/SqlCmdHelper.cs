@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 namespace Infrastructure.MsSqlService.SqlHelper
 {
     public class SqlCmdHelper
@@ -28,7 +29,9 @@ namespace Infrastructure.MsSqlService.SqlHelper
             {
                 comm.Parameters.AddRange(pms);
             }
-            return comm.ExecuteNonQuery();
+            int result= comm.ExecuteNonQuery();
+            conn.Close();
+            return result;
         }
         public int RunProcedureNoQuery(string proceudreCmd,params SqlParameter[] pms) 
         {
@@ -40,7 +43,27 @@ namespace Infrastructure.MsSqlService.SqlHelper
                 comm.Parameters.AddRange(pms);
             }
             comm.CommandType = CommandType.StoredProcedure;
-            return comm.ExecuteNonQuery();
+            int result= comm.ExecuteNonQuery();
+            conn.Close();
+            return result;
+        }
+        /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <param name="table">待批量添加的数据</param>
+        /// <param name="destinationTableName">数据库中要批量添加数据的表名</param>
+        public void BulkSave(DataTable table, string destinationTableName)
+        {
+            SqlConnection conn = new SqlConnection(SqlConnString);
+            Stopwatch sw = new Stopwatch();
+            SqlBulkCopy bulk = new SqlBulkCopy(conn);//批量添加
+            bulk.DestinationTableName = destinationTableName;
+            bulk.BatchSize = table.Rows.Count;
+            conn.Open();
+            sw.Start();
+            bulk.WriteToServer(table);
+            sw.Stop();
+            conn.Close();
         }
     }
 }

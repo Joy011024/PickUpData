@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HRApp.Model;
 namespace IHRApp.Infrastructure
 {
     public interface IMaybeSpecialRepository
@@ -16,6 +16,11 @@ namespace IHRApp.Infrastructure
         /// <param name="spellName">疑似字使用转换的拼音【该拼音不一定是正确的拼音】</param>
         /// <param name="responseCode">调用存储过程回调参数值【检测之前是否已经录入该疑似词】</param>
         /// <returns></returns>
-        bool SaveMaybeSpecialWord(char word,string spellName,out object responseCode);
+        bool SaveMaybeSpecialWord(char word, string spellName, out object responseCode);
+        /// <summary>
+        /// 批量新增
+        /// </summary>
+        /// <param name="rows">批量数据</param>
+        void BulkSave( List<MaybeSpellName> rows);
     }
 }

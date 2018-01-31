@@ -11,6 +11,7 @@ using IHRApp.Infrastructure;
 using HRApp.Infrastructure;
 using HRApp.IApplicationService;
 using HRApp.ApplicationService;
+using CommonHelperEntity;
 namespace HRApp.Web.Controllers
 {
     [Description("拼音维护")]
@@ -21,8 +22,9 @@ namespace HRApp.Web.Controllers
         [Description("生僻字维护")]
         public ActionResult SpecialSpellNameDialog()
         {
+            new MaybeSpellName().GetAllProperties();
             string test = "正则@表达式&*只能输入中,；:=+文和字母zhongguo1949垚";
-            //CommonCallService.TextConvertSpellName(test);
+            CommonCallService.TextConvertSpellName(test, InitAppSetting.LogicDBConnString);
             return View();
         }
         [Description("保存生僻字")]
@@ -37,7 +39,7 @@ namespace HRApp.Web.Controllers
             ISpecialSpellNameService appSetService = new SpecialSpellNameService(spellRepository);
             json = appSetService.Add(new SpecialSpellName()
             {
-                Name = param.Name[0],//只读取第一个字符
+                Name = param.Name[0].ToString(),//只读取第一个字符
                 Code = param.Code
             });
             return Json(json);
