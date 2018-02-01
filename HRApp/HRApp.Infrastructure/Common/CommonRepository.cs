@@ -77,10 +77,12 @@ namespace HRApp.Infrastructure
             T def = System.Activator.CreateInstance<T>();
             string[] pnames = def.GetAllProperties();
             DataTable dt = new DataTable();
+            string specialType=typeof(bool).Name;
             foreach (var item in pnames)
             {
                 //获取属性的数据类型
-                dt.Columns.Add(new DataColumn(item, def.GetPropertyType(item)));
+                Type pt= def.GetPropertyType(item);
+                dt.Columns.Add(new DataColumn(item, pt.Name == specialType?typeof(int):pt));
             }
             foreach (T item in rows)
             {
@@ -88,8 +90,16 @@ namespace HRApp.Infrastructure
                 foreach (var column in pnames)
                 {
                     bool hasProperty = false;
+                    Type pt= item.GetPropertyType(column);
                     object value = item.GetPropertyValue(column, out hasProperty);
-                    row[column] = value;
+                    if (pt.Name == specialType)
+                    {
+                        row[column] = ((bool)value ? 1 : 0);
+                    }
+                    else
+                    {
+                        row[column] = value;
+                    }
                 }
                 dt.Rows.Add(row);
             }

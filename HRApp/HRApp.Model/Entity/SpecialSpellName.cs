@@ -24,8 +24,8 @@ namespace HRApp.Model
         [Description("是否生僻字")]
         public bool IsSpecialChinese { get; set; }
         //
-        string cmd = @"INSERT INTO  [dbo].[MaybeSpellName]   ([Id],[Name],[Code],[CreateTime],[CreateDayInt])
-     VALUES  ({Id},{Name},{Code},{CreateTime},{CreateDayInt})";
+        string cmd = @"INSERT INTO  [dbo].[MaybeSpellName]   ([Id],[Name],[Code],[CreateTime],[CreateDayInt],IsSpecialChinese)
+     VALUES  ({Id},{Name},{Code},{CreateTime},{CreateDayInt},{IsSpecialChinese})";
         public void SaveMaybeSpecialChinese(string name,string code) 
         {
             string cmd = @"EXEC	@return_value = [dbo].[SP_VerifyAndAddMaybeSpellName]

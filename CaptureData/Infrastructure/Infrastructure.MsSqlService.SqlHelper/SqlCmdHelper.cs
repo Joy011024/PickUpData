@@ -58,6 +58,10 @@ namespace Infrastructure.MsSqlService.SqlHelper
             Stopwatch sw = new Stopwatch();
             SqlBulkCopy bulk = new SqlBulkCopy(conn);//批量添加
             bulk.DestinationTableName = destinationTableName;
+            foreach (DataColumn item in table.Columns)
+            {
+                bulk.ColumnMappings.Add(item.ColumnName, item.ColumnName);
+            }
             bulk.BatchSize = table.Rows.Count;
             conn.Open();
             sw.Start();

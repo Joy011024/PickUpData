@@ -22,7 +22,6 @@ namespace HRApp.Web.Controllers
         [Description("生僻字维护")]
         public ActionResult SpecialSpellNameDialog()
         {
-            new MaybeSpellName().GetAllProperties();
             string test = "正则@表达式&*只能输入中,；:=+文和字母zhongguo1949垚";
             CommonCallService.TextConvertSpellName(test, InitAppSetting.LogicDBConnString);
             return View();
