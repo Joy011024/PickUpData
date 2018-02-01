@@ -65,7 +65,7 @@ namespace HRApp.ApplicationService
                     sb.Append(spell);
                 }
             }
-            if (openDBFun)
+            if (openDBFun && maybes.Count>0)
             {//使用数据库进行疑似生僻字存储 [这里应该修改未异步多线程进行，避免出现死锁以及延时的情形]
                 SaveMaybeSpell(maybes, sqlConnString);
                 
@@ -77,6 +77,7 @@ namespace HRApp.ApplicationService
             JsonData json = new JsonData() { Result=true};
             try
             {
+                //需要过滤掉已经存储的
                 IMaybeSpecialRepository maybeRepository = new MaybeSpecialRepository() { SqlConnString = sqlConnString };
                 maybeRepository.BulkSave(maybes);
                 json.Success = true;
