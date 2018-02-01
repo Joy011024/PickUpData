@@ -10,3 +10,8 @@ F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\bin\Debug
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.pdb
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.csprojResolveAssemblyReference.cache
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\BaseHelper\bin\Debug\HttpClientHelper.dll
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\BaseHelper\bin\Debug\HttpClientHelper.pdb
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.csprojResolveAssemblyReference.cache
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.dll
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.pdb
