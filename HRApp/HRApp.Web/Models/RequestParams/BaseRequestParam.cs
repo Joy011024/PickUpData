@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Web;
 
@@ -21,5 +22,13 @@ namespace HRApp.Web
     {
         public int BeginRow { get; set; }
         public int EndRow { get; set; }
+        //[Description("第一排序字段")]
+        public string OrderField { get; set; }
+        //[Description("并联排序自断后，第一排序字段非空才有效")]
+        public List<string> ThenOrderFields { get; set; }
+        //[Description("排序方向")]
+        public bool OrderAsc { get; set; }//升序
+        public string LimitCode { get; set; }
+        public List<string> LimitIds { get; set; }
     }
 }

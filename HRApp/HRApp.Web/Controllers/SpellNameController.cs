@@ -55,5 +55,12 @@ namespace HRApp.Web.Controllers
             });
             return Json(json);
         }
+        [HttpPost]
+        [Description("查询生僻字列表")]
+        public JsonResult QuerySpecialSpellNames(QueryRequestParam param) 
+        {
+            JsonData json = new JsonData();
+            return Json(json);
+        }
     }
 }
