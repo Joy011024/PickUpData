@@ -83,6 +83,7 @@
     <Compile Include="TicketData.Model\CarInfo.cs" />
     <Compile Include="TicketData.Model\CitySubway.cs" />
     <Compile Include="TicketData.Model\Request\LoginParam12306.cs" />
+    <Compile Include="TicketData.Model\Request\TianmaoGood.cs" />
     <Compile Include="TicketData.Model\Response\SubwaySiteData.cs" />
     <Compile Include="TicketData.Model\TicketCfg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,6 +11,8 @@ using FeatureFrmList;
 using Domain.CommonData;
 using Infrastructure.ExtService;
 using System.Text.RegularExpressions;
+using System.IO;
+using TicketData.Model;
 namespace CaptureManage.AppWin
 {
     public partial class PicpUpWebHtmlFrm : Form
@@ -27,7 +29,6 @@ namespace CaptureManage.AppWin
                //羽绒服 "https://list.tmall.com/search_product.htm?spm=a220m.1000858.1000724.10.7f5f72ac0cvkWI&s=60&q=%D3%F0%C8%DE%B7%FE%C4%D0&sort=s&style=g&smAreaId=110106&type=pc";
             web = new DrawWebBrowserInFromEle(htmlPanel, QueryHtmlData, url);
         }
-        
         private void QueryHtmlData(object response)
         {
             HtmlItem html = response as HtmlItem;
@@ -75,6 +76,56 @@ namespace CaptureManage.AppWin
         void HtmlAnalisy() 
         {//html解析
         
+        }
+    }
+    public class PickUpTianMaoHtml
+    {
+        public void DoHtmlFileAnalysis(string file)
+        {
+            DirectoryInfo di = new DirectoryInfo(file);
+            string fileName = di.Name;//这是文件名称
+            string dir = di.Parent.FullName;//该文件的目录
+            string newDir = dir + ".Read/";
+            if (!Directory.Exists(newDir))
+            {
+                Directory.CreateDirectory(newDir);
+            }
+            //读取文件
+            string html= FileHelper.ReadFile(file);
+            //进行文件HTML分析
+            List<TianmaoGood> goods = new List<TianmaoGood>();
+            GetGoodList(html, goods);
+            //文件移动到已读库
+            //File.Move(file, newDir + fileName);
+        }
+        public void GetGoodList(string html, List<TianmaoGood> outResult) 
+        {
+            html = html.Replace("><", ">\r\n<").Replace("> <", ">\r\n<");
+            Regex reg = new Regex("<DIV class=product-iWrap>(.+)</DIV>"); //new Regex("<P class=productTitle>(.+)</P>");
+            MatchCollection mc= reg.Matches(html);//获取商品列表
+            foreach (Match item in mc)
+            {
+                if (item.Groups.Count <= 1)
+                {
+                    continue;
+                }
+                Group g = item.Groups[1];
+                string goods = g.Value;
+                //提取商品图片已经价格数据信息
+                Regex regGood = new Regex("<DIV class=productImg-wrap>(.+)</DIV>");//这是图片
+                MatchCollection mcGood= regGood.Matches(goods);
+                foreach (Match itemGood in mcGood)
+                {
+                    if (itemGood.Groups.Count <= 1) 
+                    {
+                        continue;
+                    }
+                    string img = itemGood.Groups[1].Value;
+                    string imgLine = img.Replace("><", ">\r\n<").Replace("> <", ">\r\n<");
+                }
+            }
+            //如果该数据串中还含有商品列表分析格式在使用递归分析
+
         }
     }
 }

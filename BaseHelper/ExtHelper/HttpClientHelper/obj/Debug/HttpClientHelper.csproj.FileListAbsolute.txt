@@ -15,3 +15,8 @@ F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\BaseHelper\
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.pdb
+E:\Code\DayDayStudy\PickUpData\BaseHelper\bin\Debug\HttpClientHelper.dll
+E:\Code\DayDayStudy\PickUpData\BaseHelper\bin\Debug\HttpClientHelper.pdb
+E:\Code\DayDayStudy\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.csprojResolveAssemblyReference.cache
+E:\Code\DayDayStudy\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.dll
+E:\Code\DayDayStudy\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.pdb

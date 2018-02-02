@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Configuration;
 using EmailHelper;
 using Domain.CommonData;
+using CaptureManage.AppWin;
 namespace CaptureWebData
 {
     static class Program
@@ -23,10 +24,8 @@ namespace CaptureWebData
         }
         static void Test() 
         {
-            //CityDataManage cm = new CityDataManage();
-            //cm.ImportDB(@"D:\Dream\ExcuteHttpCmd\CaptureWeb\CaptureWebData\CaptureWebData\Wait\国家城市区域名称.txt");
-           // PrepareParam.PrepareHeader();
-           
+            PickUpTianMaoHtml tm = new PickUpTianMaoHtml();
+            tm.DoHtmlFileAnalysis(@"E:\Code\DayDayStudy\PickUpData\CaptureWebData\CaptureWebData\bin\Debug\HttpResponse\list.tmall.com\HttpResponse\HttpResponse20180202102021.txt");
         }
         
     }
