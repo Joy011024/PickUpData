@@ -16,8 +16,20 @@ namespace TicketData.Model
         public string productPrice { get; set; }
         [Description("单价")]
         public float GoodPrice { get; set; }
+        char priceUnit;
         [Description("币种")]
-        public char PriceUnit { get; set; }
+        public char PriceUnit
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(priceUnit.ToString()))
+                {
+                    priceUnit = '$';
+                }
+                return priceUnit;
+            }
+            set { priceUnit = value; }
+        }
         public string productTitle { get; set; }
         public string productShop { get; set; }
         public string productStatus { get; set; }

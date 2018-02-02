@@ -6,6 +6,7 @@ using System.Configuration;
 using EmailHelper;
 using Domain.CommonData;
 using CaptureManage.AppWin;
+using Infrastructure.ExtService;
 namespace CaptureWebData
 {
     static class Program
@@ -25,7 +26,8 @@ namespace CaptureWebData
         static void Test() 
         {
             PickUpTianMaoHtml tm = new PickUpTianMaoHtml();
-            tm.DoHtmlFileAnalysis(@"E:\Code\DayDayStudy\PickUpData\CaptureWebData\CaptureWebData\bin\Debug\HttpResponse\list.tmall.com\HttpResponse\HttpResponse20180202102021.txt");
+            string dir= new AppDirHelper().GetAppDir(AppCategory.WinApp);
+            tm.DoHtmlFileAnalysis(dir + @"\HttpResponse\list.tmall.com\HttpResponse\HttpResponse20180202231424.txt");
         }
         
     }

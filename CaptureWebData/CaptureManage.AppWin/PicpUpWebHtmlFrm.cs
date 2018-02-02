@@ -92,6 +92,10 @@ namespace CaptureManage.AppWin
             }
             //读取文件
             string html= FileHelper.ReadFile(file);
+            if (string.IsNullOrEmpty(html))
+            {
+                return;
+            }
             //进行文件HTML分析
             List<TianmaoGood> goods = new List<TianmaoGood>();
             GetGoodList(html, goods);
@@ -113,10 +117,32 @@ namespace CaptureManage.AppWin
                 {
                     continue;
                 }
+                TianmaoGood good = new TianmaoGood();
                 Group g = item.Groups[1];
                 string goods = g.Value;
                 //提取商品图片已经价格数据信息
-                string href= GetHtmlEleValue(goods, "<A class=productImg(.*?)</A>");//提取商品图片
+                string hrefStr= GetHtmlEleValue(goods, "<A class=productImg(.*?)</A>");//提取商品图片
+                string regHref = "href=\"(.*?)\" target";
+                //货物链接
+                good .GoodHref= GetHtmlEleValue(hrefStr, regHref);
+                //货物照片
+                good.productImg = GetHtmlEleValue(goods, "<IMG src=\"(.*?)\">");
+               string price = GetHtmlEleValue(goods, "<EM title=(.*?)>");
+               if (!string.IsNullOrEmpty(price))
+               {
+                   good.GoodPrice = float.Parse(price);
+               }
+               string unit = GetHtmlEleValue(goods, "<B>(.*?)</B>");
+               if (!string.IsNullOrEmpty(unit)) 
+               {
+                   good.PriceUnit = unit[0];
+               }
+               string title = GetHtmlEleValue(goods, "<P class=productTitle><A title=(.*?)</P>");
+                /*
+                 ONLY2017冬季新品宽松V领套头毛衣针织衫女|117324537 
+                 * href="//detail.tmall.com/item.htm?id=557951889087&amp;skuId=3464513665788&amp;user_id=356060330&amp;cat_id=2&amp;is_b=1&amp;rn=c316941c37ea277eb8b7f2cc36209dd1" 
+                 * target=_blank data-p="1-11">ONLY2017冬季新品宽松V领套头<SPAN class=H>毛衣</SPAN>针织衫女|117324537 </A>
+                 */
             }
             //如果该数据串中还含有商品列表分析格式在使用递归分析
 
