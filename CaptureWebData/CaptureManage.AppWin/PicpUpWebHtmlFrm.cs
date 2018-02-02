@@ -116,36 +116,25 @@ namespace CaptureManage.AppWin
                 Group g = item.Groups[1];
                 string goods = g.Value;
                 //提取商品图片已经价格数据信息
-                Regex regGood = new Regex("<DIV class=productImg-wrap>(.*?)</DIV>");//这是图片
-                MatchCollection mcGood= regGood.Matches(goods);
-                foreach (Match itemGood in mcGood)
-                {
-                    if (itemGood.Groups.Count <= 1)
-                    {
-                        continue;
-                    }
-                    string img = itemGood.Groups[1].Value;
-                    // string imgLine = img.Replace("><", ">\r\n<").Replace("> <", ">\r\n<");
-                    /*
-                    由于以前的函数求值超时，函数求值被禁用。必须继续执行才能重新启用函数求值。
-                    */
-                    string sign = "</DIV><DIV class=\"product";
-                    if (!img.Contains(sign))
-                    {
-                        continue;
-                    }
-                    string one = img.Substring(0, img.IndexOf(sign));
-                   
-                    Regex info = new Regex("<A class=productImg(.*?)</A></DIV><P");
-                    MatchCollection oneMC = info.Matches(one);
-                    if (oneMC.Count > 0) 
-                    {//这是商品的图片信息
-                      string href=   oneMC[0].Groups[1].Value;
-                    }
-                }
+                string href= GetHtmlEleValue(goods, "<A class=productImg(.*?)</A>");//提取商品图片
             }
             //如果该数据串中还含有商品列表分析格式在使用递归分析
 
+        }
+        string  GetHtmlEleValue(string rowHtml, string ruleRegex)
+        {
+            Regex regGood = new Regex(ruleRegex);//这是图片
+            MatchCollection mc = regGood.Matches(rowHtml);
+            foreach (Match item in mc)
+            { //这是一条完整的记录
+                if (item.Groups.Count <= 1)
+                {
+                    continue;
+                }
+                Group g = item.Groups[1];
+                return g.Value.Trim();
+            }
+            return string.Empty;
         }
     }
 }
