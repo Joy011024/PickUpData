@@ -20,6 +20,24 @@ namespace CommonHelperEntity
         Xls=1,
         Xlsx=2
     }
+    [Description("Excel列头信息设置")]
+    public class ExcelHeadAttribute:Attribute
+    {
+        [Description("列在表格中的位置号，未使用")]
+        public int ColumnIndex { get; set; }
+        [Description("列名")]
+        public string ColumnName { get; set; }
+        [Description("该列开始的索引")]
+        public int BeingCellIndex { get; set; }
+        [Description("占用列数")]
+        public int OccuopationCell { get; set; }
+        [Description("占用行数")]
+        public int OccupationRow { get; set; }
+        [Description("列所在的行索引")]
+        public int RowPosition { get; set; }
+        [Description("列宽（设置100以上才能查看到显示的效果）")]
+        public int ColumnWidth { get; set; }
+    }
     public delegate void SheetRowToDo(NPOI.SS.UserModel.IRow data);
     public delegate void SheetDataToDo(NPOI.SS.UserModel.ISheet sheet);
     public static class ExcelHelper 
@@ -157,6 +175,32 @@ namespace CommonHelperEntity
             fileStream.Close();
             book.Close();
         }
+        static void FillSheetHead(ISheet sheet)
+        {
+            Dictionary<int, IRow> newRow = new Dictionary<int, IRow>();
+            foreach (int item in sheetHead.Select(s=>s.RowPosition).Distinct())
+            {
+                newRow.Add(item, sheet.CreateRow(item));
+            }
+            //sheetHead = sheetHead.OrderBy(s => s.ColumnIndex).ToList();//进行一次排序
+            foreach (ExcelHeadAttribute column in sheetHead)
+            {
+                ICell cell = newRow[column.RowPosition].CreateCell(column.BeingCellIndex);
+                cell.SetCellValue(column.ColumnName);
+            }
+            //合并单元格 
+            foreach (ExcelHeadAttribute item in sheetHead)
+            {
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(item.RowPosition, item.RowPosition + item.OccupationRow-1, item.BeingCellIndex,item.BeingCellIndex+item.OccuopationCell-1));                
+            }
+
+        }
+        static List<ExcelHeadAttribute> sheetHead;
+        public static void DataFillSheet(string fileFullName, EExcelType excel, string targetSheetName, List<ExcelHeadAttribute> head, SheetRowToDo fillRowsDataEvent) 
+        {
+            sheetHead = head;
+            DataFillSheet(fileFullName, excel, targetSheetName, FillSheetHead, fillRowsDataEvent);
+        }
         /// <summary>
         /// 对Excel进行数据写入【操作结束之后会自动进行存储】
         /// </summary>
@@ -209,7 +253,7 @@ namespace CommonHelperEntity
             fillRowEvent(sheet);
             //行数据
             if (fillRowsDataEvent != null)
-                SheetFillRow(sheet, 120, fillRowsDataEvent);
+                SheetFillRow(sheet, 600, fillRowsDataEvent);
             //数据存储
             SaveSheet(excelBook, fs);
         }

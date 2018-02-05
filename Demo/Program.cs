@@ -23,7 +23,7 @@ namespace Demo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            TestExcel();
+            TestMultipleHead();
             Application.Run(new JobDetailFrm());
         }
         static void Test() 
@@ -54,6 +54,74 @@ namespace Demo
             //zip.GenerateZip(zipDir, dir +"/"+ELogType.ZipLog.ToString(), 
                 //DateTime.Now.ToString(CommonFormat.DateTimeIntFormat)+
                 //"000886197005184001_100.zip");
+        }
+        static void TestMultipleHead()
+        {
+            List<ExcelHeadAttribute> heads = new List<ExcelHeadAttribute>();
+            heads.Add(new ExcelHeadAttribute()
+            {
+                ColumnName = "姓名",
+                ColumnIndex = 0,
+                ColumnWidth = 200,
+                BeingCellIndex = 0,
+                OccuopationCell = 1,
+                OccupationRow = 2,
+                RowPosition = 0
+            });
+            heads.Add(new ExcelHeadAttribute()
+            {
+                ColumnName = "复训带教",
+                ColumnIndex = 1,
+                ColumnWidth = 200,
+                BeingCellIndex = 1,
+                OccuopationCell = 2,
+                OccupationRow = 1,
+                RowPosition = 0
+            });
+            heads.Add(new ExcelHeadAttribute()
+            {
+                ColumnName = "复训检查",
+                ColumnIndex = 2,
+                ColumnWidth = 200,
+                BeingCellIndex = 3,
+                OccuopationCell = 2,
+                OccupationRow = 1,
+                RowPosition = 0
+            });
+            heads.Add(new ExcelHeadAttribute()
+            {
+                ColumnName = "复训翻译",
+                ColumnIndex = 3,
+                ColumnWidth = 200,
+                BeingCellIndex = 5,
+                OccuopationCell = 2,
+                OccupationRow = 1,
+                RowPosition = 0
+            });
+            //子行
+            heads.Add(new ExcelHeadAttribute()
+            {
+                ColumnName = "小时",
+                ColumnWidth = 200,
+                BeingCellIndex = 1,
+                OccuopationCell = 1,
+                OccupationRow = 1,
+                RowPosition = 1
+            });
+            heads.Add(new ExcelHeadAttribute()
+            {
+                ColumnName = "日期",
+                ColumnWidth = 200,
+                BeingCellIndex = 2,
+                OccuopationCell = 1,
+                OccupationRow = 1,
+                RowPosition = 1
+            });
+            DateTime now = DateTime.Now;
+            string time = now.ToString(Common.Data.CommonFormat.DateTimeIntFormat) + "." + CommonHelperEntity.EExcelType.Xlsx;
+            string dir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
+            string fullName = dir + "/" + time;
+            ExcelHelper.DataFillSheet(fullName, EExcelType.Xlsx, "1", heads, null);
         }
         static void TestExcel() 
         {
