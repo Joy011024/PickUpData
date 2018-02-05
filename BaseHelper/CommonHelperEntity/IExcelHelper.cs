@@ -8,12 +8,20 @@ using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System.Data;
 using System.Data.OleDb;
+using System.ComponentModel;
 namespace CommonHelperEntity
 {
     public class ExcelDataHelper : IExcelHelper { }
     public interface IExcelHelper
     {
     }
+    public enum EExcelType
+    { 
+        Xls=1,
+        Xlsx=2
+    }
+    public delegate void SheetRowToDo(NPOI.SS.UserModel.IRow data);
+    public delegate void SheetDataToDo(NPOI.SS.UserModel.ISheet sheet);
     public static class ExcelHelper 
     {
         public static DataTable ReadExcelSingleSheet<T>(this T helper, FileStream stream) where T : IExcelHelper 
@@ -125,6 +133,85 @@ namespace CommonHelperEntity
                 table.Rows.Add(row);
             }
             return table;
+        }
+        [Description("向Excel中进行数据填充")]
+        static void SheetFillRow(ISheet sheet, short rowHeihgt, SheetRowToDo fillRow) 
+        {//填充数据
+            IRow row= sheet.CreateRow(1);
+            row.Height = rowHeihgt;//行高
+            //for (int i = 1; i < cellNum + 1; i++)
+            //{
+            //    ICell cell = row.CreateCell(i);
+
+            //}
+            fillRow(row);
+        }
+        /// <summary>
+        /// 数据保存
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="fileStream"></param>
+        static void SaveSheet(IWorkbook book,FileStream fileStream) 
+        {
+            book.Write(fileStream);
+            fileStream.Close();
+            book.Close();
+        }
+        /// <summary>
+        /// 对Excel进行数据写入【操作结束之后会自动进行存储】
+        /// </summary>
+        /// <param name="fileFullName">excel全路径，如果文件不存在则进行创建</param>
+        /// <param name="excel">Excel版本</param>
+        /// <param name="targetSheetName">操作的目标Excel工作页</param>
+        /// <param name="fillRowEvent">自定义数据填充</param>
+        /// <param name="fillRowsDataEvent">可选择的数据填充</param>
+        [Description("对Excel进行数据写入")]
+        public static void DataFillSheet(string fileFullName, EExcelType excel, string targetSheetName, SheetDataToDo fillRowEvent, SheetRowToDo fillRowsDataEvent)
+        {
+            //单元格数据填充处理
+            FileStream fs = null;
+            if (File.Exists(fileFullName))
+            {
+                fs = new FileStream(fileFullName, FileMode.Open, FileAccess.Write);
+            }
+            else
+            {
+                fs = new FileStream(fileFullName, FileMode.Create, FileAccess.Write);
+            }
+            #region 选定目标sheet页
+            IWorkbook excelBook = null;
+            switch (excel)
+            {
+                case EExcelType.Xls:
+                    excelBook = new HSSFWorkbook();
+                    break;
+                case EExcelType.Xlsx:
+                    excelBook = new NPOI.XSSF.UserModel.XSSFWorkbook();
+                    break;
+            }
+            if (excelBook == null)
+            { //文件限定不正常
+
+            }
+            //判断工作页是否存在
+            int index = excelBook.GetSheetIndex(targetSheetName);
+            ISheet sheet = null;
+            if (index < 0)
+            {//不存在则创建 
+                sheet = excelBook.CreateSheet(targetSheetName);
+            }
+            else
+            {
+                sheet = excelBook.GetSheetAt(index);
+            }
+            #endregion
+            //列头
+            fillRowEvent(sheet);
+            //行数据
+            if (fillRowsDataEvent != null)
+                SheetFillRow(sheet, 120, fillRowsDataEvent);
+            //数据存储
+            SaveSheet(excelBook, fs);
         }
     }
 }

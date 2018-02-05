@@ -98,6 +98,11 @@ namespace CaptureManage.AppWin
             }
             DirectoryInfo di = new DirectoryInfo(diskDir);//
             string fileFormat="*.txt";
+            int fileCount= di.EnumerateFiles(fileFormat).Count();
+            if (fileCount < 1)
+            {//没有文件
+                return;
+            }
             DateTime first= di.EnumerateFiles(fileFormat).Min(s => s.CreationTime);//最先创建的文件
             string file = di.EnumerateFiles(fileFormat).Where(s => s.CreationTime == first).Select(s => s.FullName).FirstOrDefault();
             //根据提供的路径查找最先创建的文本
@@ -172,10 +177,16 @@ namespace CaptureManage.AppWin
                 string titleStr = GetHtmlEleValue(goods, "<P class=productTitle><A title=(.*?)href=");
                 string title = GetHtmlEleValue(goods, "<P class=productTitle><A title=(.*?)</A></P>");
                 string goodName = GetHtmlEleValue(goods, "data-p=\"1-11\">(.*?)<SPAN class=H>");
+                //string groups=GetHtmlEleValue(goods,"target=_blank data-p=\"1-11\">(.*?)<SPAN class=H>(.*?)</SPAN>(.*?)|(.*?)</A>");
                 /*
                  ONLY2017冬季新品宽松V领套头毛衣针织衫女|117324537 
                  * href="//detail.tmall.com/item.htm?id=557951889087&amp;skuId=3464513665788&amp;user_id=356060330&amp;cat_id=2&amp;is_b=1&amp;rn=c316941c37ea277eb8b7f2cc36209dd1" 
                  * target=_blank data-p="1-11">ONLY2017冬季新品宽松V领套头<SPAN class=H>毛衣</SPAN>针织衫女|117324537 </A>
+                 */
+                /*
+                 
+                 <DIV class=productImg-wrap><A class=productImg href="//detail.tmall.com/item.htm?id=559884497567&amp;skuId=3659469818510&amp;areaId=110100&amp;user_id=528811819&amp;cat_id=2&amp;is_b=1&amp;rn=7879cf8d2912d25bce4e22d6793715bf" target=_blank data-p="1-10"><IMG src="//img.alicdn.com/bao/uploaded/i3/528811819/TB1biHaaZnI8KJjSsziXXb8QpXa_!!0-item_pic.jpg_b.jpg"> </A></DIV><P class=productPrice><EM title=128.00><B>¥</B>128.00</EM> </P><P class=productTitle><A title=南极人爸爸冬装中年男士假两件男装毛衣中老年加绒加厚保暖针织衫 href="//detail.tmall.com/item.htm?id=559884497567&amp;skuId=3659469818510&amp;areaId=110100&amp;user_id=528811819&amp;cat_id=2&amp;is_b=1&amp;rn=7879cf8d2912d25bce4e22d6793715bf" target=_blank data-p="1-11">南极人中年男士中老年加绒加厚毛衣 </A></P><DIV class=productShop data-atp="b!1-3,{user_id},,,,,,"><A class=productShop-name href="//store.taobao.com/search.htm?user_number_id=528811819&amp;rn=7879cf8d2912d25bce4e22d6793715bf&amp;keyword=毛衣" target=_blank>兰子服饰专营店 </A></DIV><P class=productStatus><SPAN>月成交 <EM>6526笔</EM></SPAN> <SPAN>评价 <A href="//detail.tmall.com/item.htm?id=559884497567&amp;skuId=3659469818510&amp;areaId=110100&amp;user_id=528811819&amp;cat_id=2&amp;is_b=1&amp;rn=7879cf8d2912d25bce4e22d6793715bf&amp;on_comment=1#J_TabBar" target=_blank data-p="1-1">5806</A></SPAN> <SPAN class="ww-light ww-small m_wangwang J_WangWang" data-atp="a!1-2,,,,,,,528811819" data-display="inline" data-tnick="兰子服饰专营店" data-nick="兰子服饰专营店" data-item="559884497567" data-icon="small"></SPAN></P></DIV></DIV>
+                 * 
                  */
             }
             //如果该数据串中还含有商品列表分析格式在使用递归分析

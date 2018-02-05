@@ -9,6 +9,8 @@ using Common.Data;
 using System.IO.Packaging;
 using System.Text;
 using System.Text.RegularExpressions;
+using CommonHelperEntity;
+using NPOI.XSSF.UserModel;
 namespace Demo
 {
     static class Program
@@ -21,7 +23,7 @@ namespace Demo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Test();
+            TestExcel();
             Application.Run(new JobDetailFrm());
         }
         static void Test() 
@@ -52,6 +54,40 @@ namespace Demo
             //zip.GenerateZip(zipDir, dir +"/"+ELogType.ZipLog.ToString(), 
                 //DateTime.Now.ToString(CommonFormat.DateTimeIntFormat)+
                 //"000886197005184001_100.zip");
+        }
+        static void TestExcel() 
+        {
+            DateTime now=DateTime.Now;
+            string time = now.ToString(Common.Data.CommonFormat.DateTimeIntFormat)+"."+CommonHelperEntity.EExcelType.Xlsx;
+            string dir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
+            string fullName = dir + "/" + time;
+            //合并单元格
+            ExcelHelper.DataFillSheet(fullName, CommonHelperEntity.EExcelType.Xlsx, now.ToString(Common.Data.CommonFormat.DateIntFormat), DoMergeExcelSheet, null);
+        }
+        static void DoMergeExcelSheet(NPOI.SS.UserModel.ISheet sheet)
+        {
+            string[] heads = new string[] { "姓名", "复训带教", "复训检查", "复训翻译" };
+            //增加列头
+            //设置列头直接进行单元格合并
+            NPOI.SS.UserModel.IRow row = sheet.CreateRow(0);
+            row.Height = 1024;
+            for (int i = 0; i < heads.Length; i++)
+            {
+                int cellIndex = i > 0 ? 2 * i - 1 : i;
+                NPOI.SS.UserModel.ICell cell = row.CreateCell(cellIndex);
+                cell.SetCellValue(heads[i]);
+            }
+            for (int i = 0; i < heads.Length; i++)
+            {
+                if (i == 0)
+                {
+                    sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 1, 0, 0));
+                }
+                else
+                {
+                    sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 2 * i - 1, 2 * i));
+                }
+            }
         }
     }
    

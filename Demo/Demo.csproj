@@ -45,6 +45,15 @@
     <Reference Include="Common.Logging.Core">
       <HintPath>..\CaptureWebData\bin\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\BaseHelper\bin\NPOI\Net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\BaseHelper\bin\NPOI\Net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\BaseHelper\bin\NPOI\Net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
     <Reference Include="Quartz">
       <HintPath>..\CaptureWebData\bin\Quartz.2.5.0\lib\net40\Quartz.dll</HintPath>
     </Reference>
@@ -100,6 +109,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BaseHelper\CommonHelperEntity\CommonHelperEntity.csproj">
+      <Project>{32c60c3a-c56e-457d-b553-be076218fd5a}</Project>
+      <Name>CommonHelperEntity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>

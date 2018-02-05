@@ -301,3 +301,6 @@ E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\zh-Hans\System.Web.WebPages.R
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.csprojResolveAssemblyReference.cache
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.dll
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.pdb
+E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\NPOI.OOXML.dll
+E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\NPOI.OpenXmlFormats.dll
+E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\NPOI.OpenXml4Net.dll
