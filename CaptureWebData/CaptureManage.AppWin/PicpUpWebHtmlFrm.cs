@@ -78,6 +78,13 @@ namespace CaptureManage.AppWin
         
         }
     }
+    public enum EFileStatue
+    { 
+        WaitRead=1,
+        Readed=2,
+        Reading=3,
+        Error=4
+    }
     public class PickUpTianMaoHtml
     {
         [Description("根据提供的目录查找文件进行天猫商品分析")]
@@ -97,22 +104,30 @@ namespace CaptureManage.AppWin
             di = new DirectoryInfo(file);//提取该文件的目录及文件信息
             string fileName = di.Name;//这是文件名称
             string dir = di.Parent.FullName;//该文件的目录
-            string newDir = dir + ".Read/";
-            if (!Directory.Exists(newDir))
+            try
             {
-                Directory.CreateDirectory(newDir);
+                string newDir = dir + "." + EFileStatue.Readed.ToString() + "/";
+                if (!Directory.Exists(newDir))
+                {
+                    Directory.CreateDirectory(newDir);
+                }
+                //读取文件
+                string html = FileHelper.ReadFile(file);
+                if (string.IsNullOrEmpty(html))
+                {
+                    return;
+                }
+                //进行文件HTML分析
+                List<TianmaoGood> goods = new List<TianmaoGood>();
+                GetGoodList(html, goods);
+                //文件移动到已读库
+                //File.Move(file, newDir + fileName);
             }
-            //读取文件
-            string html= FileHelper.ReadFile(file);
-            if (string.IsNullOrEmpty(html))
+            catch (Exception ex)
             {
-                return;
+                string newDir = dir + "." + EFileStatue.Error.ToString() + "/";
+                File.Move(file, newDir + fileName);
             }
-            //进行文件HTML分析
-            List<TianmaoGood> goods = new List<TianmaoGood>();
-            GetGoodList(html, goods);
-            //文件移动到已读库
-            //File.Move(file, newDir + fileName);
         }
         public void GetGoodList(string html, List<TianmaoGood> outResult)
         {

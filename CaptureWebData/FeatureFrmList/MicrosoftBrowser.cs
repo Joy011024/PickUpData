@@ -97,7 +97,10 @@ namespace FeatureFrmList
                 return;
             }
             MicrosoftWebBrowser.Url = new Uri(url);
-            
+            /*
+             可能出现异常：
+             * 请求的资源在使用中。 (异常来自 HRESULT:0x800700AA)
+             */
         }
         void BtnGetCookie_Click(object sender, EventArgs e)
         {
