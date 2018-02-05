@@ -38,7 +38,6 @@ namespace CommonHelperEntity
         [Description("列宽（设置100以上才能查看到显示的效果）")]
         public int ColumnWidth { get; set; }
     }
-    public delegate void SheetRowToDo(NPOI.SS.UserModel.IRow data);
     public delegate void SheetDataToDo(NPOI.SS.UserModel.ISheet sheet);
     public static class ExcelHelper 
     {
@@ -152,18 +151,6 @@ namespace CommonHelperEntity
             }
             return table;
         }
-        [Description("向Excel中进行数据填充")]
-        static void SheetFillRow(ISheet sheet, short rowHeihgt, SheetRowToDo fillRow) 
-        {//填充数据
-            IRow row= sheet.CreateRow(1);
-            row.Height = rowHeihgt;//行高
-            //for (int i = 1; i < cellNum + 1; i++)
-            //{
-            //    ICell cell = row.CreateCell(i);
-
-            //}
-            fillRow(row);
-        }
         /// <summary>
         /// 数据保存
         /// </summary>
@@ -193,10 +180,10 @@ namespace CommonHelperEntity
             {
                 sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(item.RowPosition, item.RowPosition + item.OccupationRow-1, item.BeingCellIndex,item.BeingCellIndex+item.OccuopationCell-1));                
             }
-
+            
         }
         static List<ExcelHeadAttribute> sheetHead;
-        public static void DataFillSheet(string fileFullName, EExcelType excel, string targetSheetName, List<ExcelHeadAttribute> head, SheetRowToDo fillRowsDataEvent) 
+        public static void DataFillSheet(string fileFullName, EExcelType excel, string targetSheetName, List<ExcelHeadAttribute> head, SheetDataToDo fillRowsDataEvent) 
         {
             sheetHead = head;
             DataFillSheet(fileFullName, excel, targetSheetName, FillSheetHead, fillRowsDataEvent);
@@ -210,7 +197,7 @@ namespace CommonHelperEntity
         /// <param name="fillRowEvent">自定义数据填充</param>
         /// <param name="fillRowsDataEvent">可选择的数据填充</param>
         [Description("对Excel进行数据写入")]
-        public static void DataFillSheet(string fileFullName, EExcelType excel, string targetSheetName, SheetDataToDo fillRowEvent, SheetRowToDo fillRowsDataEvent)
+        public static void DataFillSheet(string fileFullName, EExcelType excel, string targetSheetName, SheetDataToDo fillRowEvent, SheetDataToDo fillRowsDataEvent)
         {
             //单元格数据填充处理
             FileStream fs = null;
@@ -253,7 +240,7 @@ namespace CommonHelperEntity
             fillRowEvent(sheet);
             //行数据
             if (fillRowsDataEvent != null)
-                SheetFillRow(sheet, 600, fillRowsDataEvent);
+                fillRowsDataEvent(sheet);
             //数据存储
             SaveSheet(excelBook, fs);
         }

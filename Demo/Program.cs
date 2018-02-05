@@ -121,7 +121,7 @@ namespace Demo
             string time = now.ToString(Common.Data.CommonFormat.DateTimeIntFormat) + "." + CommonHelperEntity.EExcelType.Xlsx;
             string dir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
             string fullName = dir + "/" + time;
-            ExcelHelper.DataFillSheet(fullName, EExcelType.Xlsx, "1", heads, null);
+            ExcelHelper.DataFillSheet(fullName, EExcelType.Xlsx, "1", heads, DoFillRowToExcelSheet);
         }
         static void TestExcel() 
         {
@@ -156,6 +156,14 @@ namespace Demo
                     sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(0, 0, 2 * i - 1, 2 * i));
                 }
             }
+        }
+        static void DoFillRowToExcelSheet(NPOI.SS.UserModel.ISheet sheet)
+        { 
+        //当前存在多少行数据
+            int ri= sheet.LastRowNum;
+            //文件未写入完成时如何统计当前已写入了多少行数据
+            int rowNumber = sheet.PhysicalNumberOfRows;//当前写入了多少行数据
+           
         }
     }
    
