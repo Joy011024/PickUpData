@@ -169,6 +169,7 @@ namespace CaptureManage.AppWin
                 {
                     good.PriceUnit = unit[0];
                 }
+                
                 /*
                  "<DIV class=productImg-wrap><A class=productImg href=\"//detail.tmall.com/item.htm?id=557951889087&amp;skuId=3464513665788&amp;user_id=356060330&amp;cat_id=2&amp;is_b=1&amp;rn=c316941c37ea277eb8b7f2cc36209dd1\" target=_blank data-p=\"1-10\"><IMG src=\"//img.alicdn.com/bao/uploaded/i3/356060330/TB1SYhna.tWMKJjy0FaXXcCDpXa_!!0-item_pic.jpg_b.jpg\"> </A></DIV><P class=productPrice><EM title=199.50><B>¥</B>199.50</EM> </P><P class=productTitle><A title=ONLY2017冬季新品宽松V领套头毛衣针织衫女|117324537 href=\"//detail.tmall.com/item.htm?id=557951889087&amp;skuId=3464513665788&amp;user_id=356060330&amp;cat_id=2&amp;is_b=1&amp;rn=c316941c37ea277eb8b7f2cc36209dd1\" target=_blank data-p=\"1-11\">ONLY2017冬季新品宽松V领套头<SPAN class=H>毛衣</SPAN>针织衫女|117324537 </A></P><DIV class=productShop data-atp=\"b!1-3,{user_id},,,,,,\"><A class=productShop-name href=\"//store.taobao.com/search.htm?user_number_id=356060330&amp;rn=c316941c37ea277eb8b7f2cc36209dd1&amp;keyword=毛衣\" target=_blank>ONLY官方旗舰店 </A></DIV><P class=productStatus><SPAN>月成交 <EM>967笔</
     EM></SPAN> <SPAN>评价 <A href=\"//detail.tmall.com/item.htm?id=557951889087&amp;skuId=3464513665788&amp;user_id=356060330&amp;cat_id=2&amp;is_b=1&amp;rn=c316941c37ea277eb8b7f2cc36209dd1&amp;on_comment=1#J_TabBar\" target=_blank data-p=\"1-1\">573</A></SPAN> <SPAN class=\"ww-light ww-small m_wangwang J_WangWang\" data-atp=\"a!1-2,,,,,,,356060330\" data-display=\"inline\" data-tnick=\"only官方旗舰店\" data-nick=\"only官方旗舰店\" data-item=\"557951889087\" data-icon=\"small\"></SPAN></P></DIV></DIV>"
@@ -177,6 +178,20 @@ namespace CaptureManage.AppWin
                 string titleStr = GetHtmlEleValue(goods, "<P class=productTitle><A title=(.*?)href=");
                 string title = GetHtmlEleValue(goods, "<P class=productTitle><A title=(.*?)</A></P>");
                 string goodName = GetHtmlEleValue(goods, "data-p=\"1-11\">(.*?)<SPAN class=H>");
+                string curstom = GetHtmlEleValue(goods, "<P class=productTitle>(.*?)</P>");
+                string goodShopData = GetHtmlEleValue(goods, "<DIV class=productShop(.*?)</DIV><P class=productStatus>");
+                //提取店铺名称
+                string goodShopName = GetHtmlEleValue(goodShopData, "target=_blank>(.*?)</A>");
+                good.productShop = goodShopName;
+                string goodShopLink = GetHtmlEleValue(goods, "<A class=productShop-name href=\"(.*?)target=_blank");
+                string ignoreSign = "\"";
+                if (!string.IsNullOrEmpty(goodShopLink) && goodShopLink.LastIndexOf(ignoreSign)==goodShopLink.Length-ignoreSign.Length)
+                {
+                    goodShopLink = goodShopLink.Substring(0, goodShopLink.Length - ignoreSign.Length);
+                }
+                good.ShopLink = goodShopLink;
+                good.SetNormalHttpUrl();//对于不规范的http进行规范化
+                //<A class=productShop-name href=\"(.*?)\" target=_blank>
                 //string groups=GetHtmlEleValue(goods,"target=_blank data-p=\"1-11\">(.*?)<SPAN class=H>(.*?)</SPAN>(.*?)|(.*?)</A>");
                 /*
                  ONLY2017冬季新品宽松V领套头毛衣针织衫女|117324537 

@@ -33,6 +33,20 @@ namespace TicketData.Model
         public string productTitle { get; set; }
         public string productShop { get; set; }
         public string productStatus { get; set; }
-
+        public string ShopLink { get; set; }
+        [Description("数据采集日期")]
+        public DateTime PickUpTime { get; set; }
+        [Description("数据采集时间整型到天")]
+        public int PickUpTimeInt { get; set; }
+        [Description("数据入库时间")]
+        public DateTime InDBTime { get; set; }
+        public void SetNormalHttpUrl() 
+        {
+            string sign="http:";
+            //对于不规范的http的URL增加http
+            GoodHref = string.IsNullOrEmpty(GoodHref) ? GoodHref : (GoodHref.Contains(sign) ? GoodHref : sign + GoodHref);
+            ShopLink = string.IsNullOrEmpty(ShopLink) ? ShopLink : (ShopLink.Contains(sign) ? ShopLink : sign + ShopLink);
+            productImg = string.IsNullOrEmpty(productImg) ? productImg : (productImg.Contains(sign) ? productImg : sign + productImg);
+        }
     }
 }
