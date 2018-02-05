@@ -27,7 +27,7 @@ namespace CaptureWebData
         {
             PickUpTianMaoHtml tm = new PickUpTianMaoHtml();
             string dir= new AppDirHelper().GetAppDir(AppCategory.WinApp);
-            tm.DoHtmlFileAnalysis(dir + @"\HttpResponse\list.tmall.com\HttpResponse\HttpResponse20180202231424.txt");
+            tm.DoHtmlFileAnalysis(dir + @"\HttpResponse\list.tmall.com\HttpResponse");
         }
         
     }

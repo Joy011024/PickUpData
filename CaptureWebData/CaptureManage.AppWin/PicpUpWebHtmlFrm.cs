@@ -80,9 +80,21 @@ namespace CaptureManage.AppWin
     }
     public class PickUpTianMaoHtml
     {
-        public void DoHtmlFileAnalysis(string file)
+        [Description("根据提供的目录查找文件进行天猫商品分析")]
+        public void DoHtmlFileAnalysis(string diskDir)
         {
-            DirectoryInfo di = new DirectoryInfo(file);
+            //获取目录下的文件列表
+            if (!Directory.Exists(diskDir))
+            {
+                Directory.CreateDirectory(diskDir);
+                return;
+            }
+            DirectoryInfo di = new DirectoryInfo(diskDir);//
+            string fileFormat="*.txt";
+            DateTime first= di.EnumerateFiles(fileFormat).Min(s => s.CreationTime);//最先创建的文件
+            string file = di.EnumerateFiles(fileFormat).Where(s => s.CreationTime == first).Select(s => s.FullName).FirstOrDefault();
+            //根据提供的路径查找最先创建的文本
+            di = new DirectoryInfo(file);//提取该文件的目录及文件信息
             string fileName = di.Name;//这是文件名称
             string dir = di.Parent.FullName;//该文件的目录
             string newDir = dir + ".Read/";
