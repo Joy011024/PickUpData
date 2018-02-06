@@ -121,7 +121,7 @@ namespace Demo
             string time = now.ToString(Common.Data.CommonFormat.DateTimeIntFormat) + "." + CommonHelperEntity.EExcelType.Xlsx;
             string dir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
             string fullName = dir + "/" + time;
-            ExcelHelper.DataFillSheet(fullName, EExcelType.Xlsx, "1", heads, DoFillRowToExcelSheet);
+            ExcelHelper.DataFillSheet(fullName, EExcelType.Xlsx, "1", heads, DoFillRowToExcelSheet, new List<ExcelHeadAttribute>());
         }
         static void TestExcel() 
         {
@@ -130,7 +130,7 @@ namespace Demo
             string dir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
             string fullName = dir + "/" + time;
             //合并单元格
-            ExcelHelper.DataFillSheet(fullName, CommonHelperEntity.EExcelType.Xlsx, now.ToString(Common.Data.CommonFormat.DateIntFormat), DoMergeExcelSheet, null);
+            ExcelHelper.DataFillSheet<ExcelHeadAttribute, ExcelHeadAttribute>(fullName, EExcelType.Xlsx, now.ToString(Common.Data.CommonFormat.DateIntFormat), DoMergeExcelSheet, DoFillRowToExcelSheet, new List<ExcelHeadAttribute>());
         }
         static void DoMergeExcelSheet(NPOI.SS.UserModel.ISheet sheet)
         {
@@ -157,7 +157,7 @@ namespace Demo
                 }
             }
         }
-        static void DoFillRowToExcelSheet(NPOI.SS.UserModel.ISheet sheet)
+        static void DoFillRowToExcelSheet(NPOI.SS.UserModel.ISheet sheet, List<ExcelHeadAttribute> rows)
         { 
         //当前存在多少行数据
             int ri= sheet.LastRowNum;
