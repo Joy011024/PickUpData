@@ -36,6 +36,7 @@ namespace CaptureManage.AppWin
             {
                 return;
             }
+            lstData.Items.Add(html.Url);
             LoggerWriter.CreateLogFile(html.Html, NowAppDirHelper.GetNowAppDir(AppCategory.WinApp) +"/"+ ELogType.HttpResponse.ToString()+"/"+html.Domain, ELogType.HttpResponse);
             //提取索引页码
             //使用xpath <B class=ui-page-s-len>2/100</B>
@@ -76,6 +77,22 @@ namespace CaptureManage.AppWin
         void HtmlAnalisy() 
         {//html解析
         
+        }
+
+        private void btnClearText_Click(object sender, EventArgs e)
+        {
+            lstData.Items.Clear();
+            rtbHtml.Text = string.Empty;
+        }
+
+        private void lstData_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBox lst = sender as ListBox;
+            object obj = lst.SelectedValue;
+            if (obj != null)
+            {
+                txtSelectUrl.Text = obj.ToString();
+            }
         }
     }
     public enum EFileStatue
@@ -190,6 +207,7 @@ namespace CaptureManage.AppWin
                     goodShopLink = goodShopLink.Substring(0, goodShopLink.Length - ignoreSign.Length);
                 }
                 good.ShopLink = goodShopLink;
+
                 good.SetNormalHttpUrl();//对于不规范的http进行规范化
                 //<A class=productShop-name href=\"(.*?)\" target=_blank>
                 //string groups=GetHtmlEleValue(goods,"target=_blank data-p=\"1-11\">(.*?)<SPAN class=H>(.*?)</SPAN>(.*?)|(.*?)</A>");

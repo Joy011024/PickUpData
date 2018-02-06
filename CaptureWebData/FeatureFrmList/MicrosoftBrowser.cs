@@ -129,6 +129,7 @@ namespace FeatureFrmList
                 data.Cookie = doc.Cookie;
                 data.Html = doc.Body.OuterHtml;
                 data.Domain = doc.Domain;
+                data.Url = doc.Url.ToString();
             }
             if (PickUpCookieCallBack != null)
             {
@@ -144,6 +145,10 @@ namespace FeatureFrmList
         /// cookie的作用域
         /// </summary>
         public string Domain { get; set; }
+        /// <summary>
+        /// 请求的URL
+        /// </summary>
+        public string Url { get; set; }
     }
     public class DrawWebBrowserInFromEle
     { 
