@@ -130,7 +130,7 @@ namespace Demo
             string dir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
             string fullName = dir + "/" + time;
             //合并单元格
-            ExcelHelper.DataFillSheet<ExcelHeadAttribute, ExcelHeadAttribute>(fullName, EExcelType.Xlsx, now.ToString(Common.Data.CommonFormat.DateIntFormat), DoMergeExcelSheet, DoFillRowToExcelSheet, new List<ExcelHeadAttribute>());
+            ExcelHelper.DataFillRowsInSheet<ExcelHeadAttribute, ExcelHeadAttribute>(fullName, EExcelType.Xlsx, now.ToString(Common.Data.CommonFormat.DateIntFormat), DoMergeExcelSheet, DoFillRowToExcelSheet, new List<ExcelHeadAttribute>());
         }
         static void DoMergeExcelSheet(NPOI.SS.UserModel.ISheet sheet)
         {

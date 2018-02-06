@@ -187,7 +187,7 @@ namespace CommonHelperEntity
         public static void DataFillSheet<R>(string fileFullName, EExcelType excel, string targetSheetName, List<ExcelHeadAttribute> head, SheetRowDataToDo<R> fillRowsDataEvent, List<R> rows) where R : class
         {
             sheetHead = head;
-            DataFillSheet<ExcelHeadAttribute, R>(fileFullName, excel, targetSheetName, FillSheetHead, fillRowsDataEvent,rows);
+            DataFillRowsInSheet<ExcelHeadAttribute, R>(fileFullName, excel, targetSheetName, FillSheetHead, fillRowsDataEvent, rows);
         }
         /// <summary>
         /// 对Excel进行数据写入【操作结束之后会自动进行存储】
@@ -198,7 +198,7 @@ namespace CommonHelperEntity
         /// <param name="fillRowEvent">自定义数据填充</param>
         /// <param name="fillRowsDataEvent">可选择的数据填充</param>
         [Description("对Excel进行数据写入")]
-        public static void DataFillSheet<T, R>(string fileFullName, EExcelType excel, string targetSheetName, SheetHeadDataToDo fillRowEvent, SheetRowDataToDo<R> fillRowsDataEvent, List<R> rows)
+        public static void DataFillRowsInSheet<T, R>(string fileFullName, EExcelType excel, string targetSheetName, SheetHeadDataToDo fillRowEvent, SheetRowDataToDo<R> fillRowsDataEvent, List<R> rows)
             where T : class
             where R : class
         {
