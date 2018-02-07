@@ -88,7 +88,7 @@ namespace CaptureManage.AppWin
         private void lstData_SelectedIndexChanged(object sender, EventArgs e)
         {
             ListBox lst = sender as ListBox;
-            object obj = lst.SelectedValue;
+            object obj = lst.SelectedItem;
             if (obj != null)
             {
                 txtSelectUrl.Text = obj.ToString();
