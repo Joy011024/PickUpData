@@ -194,8 +194,10 @@ namespace CaptureManage.AppWin
                  */
                 string titleStr = GetHtmlEleValue(goods, "<P class=productTitle><A title=(.*?)href=");
                 string title = GetHtmlEleValue(goods, "<P class=productTitle><A title=(.*?)</A></P>");
-                string goodName = GetHtmlEleValue(goods, "data-p=\"1-11\">(.*?)<SPAN class=H>");
-                string curstom = GetHtmlEleValue(goods, "<P class=productTitle>(.*?)</P>");
+                good.productTitle = GetHtmlEleValue(title, "(.*?)href=");
+                good.GoodName= GetHtmlEleValue(goods, "data-p=\"1-11\">(.*?)<SPAN class=H>");
+                string custorm = GetHtmlEleValue(goods, "<P class=productTitle>(.*?)</P>");
+                good.ShopTheGoodOfLink= GetHtmlEleValue(custorm, " href=\"(.*?)\"");
                 string goodShopData = GetHtmlEleValue(goods, "<DIV class=productShop(.*?)</DIV><P class=productStatus>");
                 //提取店铺名称
                 string goodShopName = GetHtmlEleValue(goodShopData, "target=_blank>(.*?)</A>");
@@ -208,6 +210,8 @@ namespace CaptureManage.AppWin
                 }
                 good.ShopLink = goodShopLink;
                 string transaction = GetHtmlEleValue(goods, "<P class=productStatus>(.*?)</EM></SPAN>");//交易数量及交易类别：  月交易 数目 <SPAN>月成交 <EM>1345笔
+                string erp = GetHtmlEleValue(transaction, "<EM>(.*?)笔");
+                good.NumOfTransactionInMonth = string.IsNullOrEmpty(erp) ? -1 : int.Parse(erp);
                 good.SetNormalHttpUrl();//对于不规范的http进行规范化
                 //<A class=productShop-name href=\"(.*?)\" target=_blank>
                 //string groups=GetHtmlEleValue(goods,"target=_blank data-p=\"1-11\">(.*?)<SPAN class=H>(.*?)</SPAN>(.*?)|(.*?)</A>");
@@ -227,6 +231,10 @@ namespace CaptureManage.AppWin
         }
         string  GetHtmlEleValue(string rowHtml, string ruleRegex)
         {
+            if (string.IsNullOrEmpty(rowHtml))
+            {
+                return string.Empty;
+            }
             Regex regGood = new Regex(ruleRegex);//这是图片
             MatchCollection mc = regGood.Matches(rowHtml);
             foreach (Match item in mc)

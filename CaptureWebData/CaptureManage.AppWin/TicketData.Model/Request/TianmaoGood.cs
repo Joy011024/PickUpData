@@ -30,9 +30,15 @@ namespace TicketData.Model
             }
             set { priceUnit = value; }
         }
+        [Description("商品名称标题")]
         public string productTitle { get; set; }
+        [Description("商品名")]
+        public string GoodName { get; set; }
         public string productShop { get; set; }
         public string productStatus { get; set; }
+        [Description("某一个商品的在店铺的连接")]
+        public string ShopTheGoodOfLink { get; set; }
+        [Description("店铺下该类商品连接")]
         public string ShopLink { get; set; }
         [Description("数据采集日期")]
         public DateTime PickUpTime { get; set; }
