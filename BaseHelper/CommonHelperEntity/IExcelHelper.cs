@@ -203,26 +203,8 @@ namespace CommonHelperEntity
             where R : class
         {
             //单元格数据填充处理
-            FileStream fs = null;
-            if (File.Exists(fileFullName))
-            {
-                fs = new FileStream(fileFullName, FileMode.Open, FileAccess.Write);
-            }
-            else
-            {
-                fs = new FileStream(fileFullName, FileMode.Create, FileAccess.Write);
-            }
             #region 选定目标sheet页
-            IWorkbook excelBook = null;
-            switch (excel)
-            {
-                case EExcelType.Xls:
-                    excelBook = new HSSFWorkbook();
-                    break;
-                case EExcelType.Xlsx:
-                    excelBook = new NPOI.XSSF.UserModel.XSSFWorkbook();
-                    break;
-            }
+            IWorkbook excelBook = GetExcelWorkBook(fileFullName,excel);
             if (excelBook == null)
             { //文件限定不正常
 
@@ -245,7 +227,47 @@ namespace CommonHelperEntity
             if (fillRowsDataEvent != null)
                 fillRowsDataEvent(sheet,rows);
             //数据存储
+            FileStream fs = new FileStream(fileFullName, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
+            fs.Flush();
             SaveSheet(excelBook, fs);
+        }
+        static IWorkbook GetExcelWorkBook(string fileFullName, EExcelType excel)
+        {
+            if (File.Exists(fileFullName))
+            {
+                return ReadFielStreamFormExcel(fileFullName, excel);//文件已存在进行追加时调用
+            }
+            //文件不存在直接新建
+            FileStream fs = new FileStream(fileFullName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+            IWorkbook excelBook = null;
+            //当文件是新建的时候没法读取文件流
+            switch (excel)
+            {
+                case EExcelType.Xls:
+                    excelBook = new HSSFWorkbook();
+                    break;
+                case EExcelType.Xlsx:
+                    excelBook = new NPOI.XSSF.UserModel.XSSFWorkbook();
+                    break;
+            }
+
+            return excelBook;
+        }
+        static IWorkbook ReadFielStreamFormExcel(string fileFullName, EExcelType excel)
+        {
+            FileStream fs = new FileStream(fileFullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            IWorkbook excelBook = null;
+            //当文件是新建的时候没法读取文件流
+            switch (excel)
+            {
+                case EExcelType.Xls:
+                    excelBook = new HSSFWorkbook(fs);
+                    break;
+                case EExcelType.Xlsx:
+                    excelBook = new NPOI.XSSF.UserModel.XSSFWorkbook(fs);
+                    break;
+            }
+            return excelBook;
         }
     }
 }
