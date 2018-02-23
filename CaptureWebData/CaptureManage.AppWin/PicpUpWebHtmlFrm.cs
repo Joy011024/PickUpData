@@ -148,6 +148,10 @@ namespace CaptureManage.AppWin
             catch (Exception ex)
             {
                 string newDir = dir + "." + EFileStatue.Error.ToString() + "/";
+                if (!Directory.Exists(newDir))
+                {
+                    Directory.CreateDirectory(newDir);
+                }
                 File.Move(file, newDir + fileName);
             }
         }
