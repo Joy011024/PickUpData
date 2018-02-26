@@ -160,6 +160,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 父节点 的本地化字符串。
+        /// </summary>
+        public static string LblParentCode {
+            get {
+                return ResourceManager.GetString("LblParentCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 生僻字拼音维护 的本地化字符串。
         /// </summary>
         public static string LblSpecialSpellNameManage {
@@ -219,6 +228,15 @@ namespace AppLanguage {
         public static string Tip_MenuUrlIsRequired {
             get {
                 return ResourceManager.GetString("Tip_MenuUrlIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请选择。 的本地化字符串。
+        /// </summary>
+        public static string Tip_PleaseSelect {
+            get {
+                return ResourceManager.GetString("Tip_PleaseSelect", resourceCulture);
             }
         }
     }

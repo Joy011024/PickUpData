@@ -150,6 +150,9 @@
   <data name="LblNewMenu" xml:space="preserve">
     <value>新增菜单</value>
   </data>
+  <data name="LblParentCode" xml:space="preserve">
+    <value>父节点</value>
+  </data>
   <data name="LblSpecialSpellNameManage" xml:space="preserve">
     <value>生僻字拼音维护</value>
   </data>
@@ -170,5 +173,8 @@
   </data>
   <data name="Tip_MenuUrlIsRequired" xml:space="preserve">
     <value>菜单路径不能为空。</value>
+  </data>
+  <data name="Tip_PleaseSelect" xml:space="preserve">
+    <value>请选择。</value>
   </data>
 </root>
