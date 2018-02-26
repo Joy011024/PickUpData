@@ -112,6 +112,7 @@
     <Compile Include="App_Start\InitAppSetting.cs" />
     <Compile Include="Controllers\AppSettingManageController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\SpellNameController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -220,6 +221,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SpellName\SpecialSpellNameDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Menu\NewNemu.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

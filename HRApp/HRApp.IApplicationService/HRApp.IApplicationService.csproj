@@ -43,6 +43,7 @@
     <Compile Include="IAppSettingService.cs" />
     <Compile Include="IBaseService.cs" />
     <Compile Include="IMaybeSpecialService.cs" />
+    <Compile Include="IMenuService.cs" />
     <Compile Include="ISpecialSpellNameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
