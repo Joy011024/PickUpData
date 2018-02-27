@@ -151,11 +151,38 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 新增菜单 的本地化字符串。
+        /// </summary>
+        public static string LblNewMenu {
+            get {
+                return ResourceManager.GetString("LblNewMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 父节点 的本地化字符串。
+        /// </summary>
+        public static string LblParentCode {
+            get {
+                return ResourceManager.GetString("LblParentCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 生僻字拼音维护 的本地化字符串。
         /// </summary>
         public static string LblSpecialSpellNameManage {
             get {
                 return ResourceManager.GetString("LblSpecialSpellNameManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 网址 的本地化字符串。
+        /// </summary>
+        public static string LblUrl {
+            get {
+                return ResourceManager.GetString("LblUrl", resourceCulture);
             }
         }
         
@@ -192,6 +219,24 @@ namespace AppLanguage {
         public static string Tip_12306_ToStation {
             get {
                 return ResourceManager.GetString("Tip_12306_ToStation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 菜单路径不能为空。 的本地化字符串。
+        /// </summary>
+        public static string Tip_MenuUrlIsRequired {
+            get {
+                return ResourceManager.GetString("Tip_MenuUrlIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请选择。 的本地化字符串。
+        /// </summary>
+        public static string Tip_PleaseSelect {
+            get {
+                return ResourceManager.GetString("Tip_PleaseSelect", resourceCulture);
             }
         }
     }

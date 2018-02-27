@@ -40,6 +40,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Menu", "Menu", "{04AFFF02-BD80-463B-ABE2-34E30679817C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeInitMenuWin", "AutoMenu\CodeInitMenuWin\CodeInitMenuWin.csproj", "{ECFCCDAB-A2BA-49AF-93B7-64CAC4461237}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F56BF2A6-3935-4975-AB7A-7B242F36EE83} = {F56BF2A6-3935-4975-AB7A-7B242F36EE83}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "..\Demo\Demo.csproj", "{111A8E3A-B0F2-47E6-9796-940F61A7AB80}"
 EndProject

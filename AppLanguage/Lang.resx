@@ -147,8 +147,17 @@
   <data name="LblName" xml:space="preserve">
     <value>名称</value>
   </data>
+  <data name="LblNewMenu" xml:space="preserve">
+    <value>新增菜单</value>
+  </data>
+  <data name="LblParentCode" xml:space="preserve">
+    <value>父节点</value>
+  </data>
   <data name="LblSpecialSpellNameManage" xml:space="preserve">
     <value>生僻字拼音维护</value>
+  </data>
+  <data name="LblUrl" xml:space="preserve">
+    <value>网址</value>
   </data>
   <data name="LblUserName" xml:space="preserve">
     <value>用户名</value>
@@ -161,5 +170,11 @@
   </data>
   <data name="Tip_12306_ToStation" xml:space="preserve">
     <value>目的地</value>
+  </data>
+  <data name="Tip_MenuUrlIsRequired" xml:space="preserve">
+    <value>菜单路径不能为空。</value>
+  </data>
+  <data name="Tip_PleaseSelect" xml:space="preserve">
+    <value>请选择。</value>
   </data>
 </root>

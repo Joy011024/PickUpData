@@ -45,6 +45,7 @@
     <Compile Include="CommonCallRepository.cs" />
     <Compile Include="Common\CommonRepository.cs" />
     <Compile Include="MaybeSpecialRepository.cs" />
+    <Compile Include="MenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecialSpellNameRepository.cs" />
   </ItemGroup>

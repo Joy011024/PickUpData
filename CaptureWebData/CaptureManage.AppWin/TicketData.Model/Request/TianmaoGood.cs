@@ -47,7 +47,7 @@ namespace TicketData.Model
         [Description("数据入库时间")]
         public DateTime InDBTime { get; set; }
         [Description("月交易数量")]
-        public int NumOfTransactionInMonth { get; set; }
+        public string NumOfTransactionInMonth { get; set; }
         public void SetNormalHttpUrl() 
         {
             string sign="http:";

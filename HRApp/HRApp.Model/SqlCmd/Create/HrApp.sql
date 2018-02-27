@@ -11,4 +11,32 @@
 	[CreateTime] [datetime] not  NULL,
 	[NodeLevel] [int] default(0),
 	ItemDesc nvarchar(1024)
-)  
+);
+go
+Create table Menu
+(
+	Id int primary key identity(1,1),
+	Name nvarchar(32) not null,
+	Code varchar(64) not null,
+	Url varchar(256) not null,
+	Remark nvarchar(1024),
+	CreateTime datetime not null
+)
+go
+Create table RelyTable
+(--外键关联的表，此表数据只能管理员进行操作
+	Id int primary key identity(1,1),
+	TableName varchar(32) not null,
+	KeyColumnName varchar(32) not null,
+	CreateTime Datetime not null 
+)
+go
+Create table OptionEvent
+(--操作历史 ：每一次操作都把之前这对应表中的这一行数据进行清除【设置IsDelete=true】
+	Id uniqueidentifier primary key,
+	 RelyTableId int not null,
+	 EventId smallint not null,
+	 CreateTime datetime not null,
+	 RelyTableRowValue varchar(32) not null,
+	 IsDelete bit not null
+)

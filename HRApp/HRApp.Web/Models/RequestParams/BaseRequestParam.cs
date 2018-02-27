@@ -13,10 +13,10 @@ namespace HRApp.Web
         public string Name { get; set; }
         public string Desc { get; set; }
     }
-    public class NodeRequestParam : BaseRequestParam
+    public class NodeRequestParam : SampleRequestParam
     {
         public string ParentCode { get; set; }
-        public string Value { get; set; }
+       
     }
     public class QueryRequestParam:BaseRequestParam
     {
@@ -30,5 +30,9 @@ namespace HRApp.Web
         public bool OrderAsc { get; set; }//升序
         public string LimitCode { get; set; }
         public List<string> LimitIds { get; set; }
+    }
+    public class SampleRequestParam : BaseRequestParam
+    {
+        public string Value { get; set; }
     }
 }

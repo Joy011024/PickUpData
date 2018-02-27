@@ -215,7 +215,7 @@ namespace CaptureManage.AppWin
                 good.ShopLink = goodShopLink;
                 string transaction = GetHtmlEleValue(goods, "<P class=productStatus>(.*?)</EM></SPAN>");//交易数量及交易类别：  月交易 数目 <SPAN>月成交 <EM>1345笔
                 string erp = GetHtmlEleValue(transaction, "<EM>(.*?)笔");
-                good.NumOfTransactionInMonth = string.IsNullOrEmpty(erp) ? -1 : int.Parse(erp);
+                good.NumOfTransactionInMonth = string.IsNullOrEmpty(erp) ? "-1" : erp;
                 good.SetNormalHttpUrl();//对于不规范的http进行规范化
                 //<A class=productShop-name href=\"(.*?)\" target=_blank>
                 //string groups=GetHtmlEleValue(goods,"target=_blank data-p=\"1-11\">(.*?)<SPAN class=H>(.*?)</SPAN>(.*?)|(.*?)</A>");

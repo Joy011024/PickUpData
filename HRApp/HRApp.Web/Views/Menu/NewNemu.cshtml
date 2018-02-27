@@ -9,42 +9,20 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>系统配置</title>
+    <title>@Lang.LblNewMenu</title>
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     @*<script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>*@
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <style type="text/css">
-       
     </style>
     <script type="text/javascript">
         $(function () {
             $('#btnSave').on('click', function () {
                 var api = GetXPathObject($(".ApiParam"), "apiKey");
-                bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
+                bindPostAjax('/Menu/SaveMenu', api, function (response, statue) {
                     console.log(response);
                 });
-            });
-            $('.bindSelect>input').focus(function (e, ele) {
-                var slt = $(this).siblings();
-                if (slt.first('select').length < 1) {
-                    slt = slt.find('select');
-                }
-                else {
-                    slt = slt.first('select');
-                }
-                $(slt).show();
-                console.log('click');
-            }).blur(function (e, ele) {
-                var slt = $(this).siblings();
-                if (slt.first('select').length < 1) {
-                    slt = slt.find('select');
-                }
-                else {
-                    slt = slt.first('select');
-                }
-                $(slt).hide();
-                console.log('leave');
             });
         });
         function GetXPathObject(rootEle, apiKeyAttr) {
@@ -67,24 +45,15 @@
             }
             return obj;
         }
-        
+
     </script>
 </head>
 <body>
     <div class="ApiParam">
         <div class="alongLine">
-            <span style="width:100px;">@Lang.LblName :</span>
+            <span style="width:100px;"><span style="color:red;">@Lang.LblName *:</span></span>
             <span>
-                <input type="text" id="txtName" apiKey="Name" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
-            </span>
-        </div>
-        <div class="alongLine">
-            <span style="width:100px;">@Lang.LblParentCode :</span>
-            <span style="display: grid;" class="bindSelect">
-                <input type="text" id="txtName" apikey="ParentCode" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
-                <select class="select" apikey="ParentCode" style="display:none;">
-                    <option value="-1">@AppLanguage.Lang.Tip_PleaseSelect</option>
-                </select>
+                <input type="text" id="txtName" apikey="Name" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
             </span>
         </div>
         <div class="alongLine">
@@ -94,9 +63,9 @@
             </span>
         </div>
         <div class="alongLine">
-            <span style="width:100px;">@Lang.LblAppSetValue :</span>
+            <span style="width:100px;">@Lang.LblUrl :</span>
             <span>
-                <input type="text" id="txtDescription" apikey="Value"/>
+                <input type="text" id="txtMemnorideCode" apikey="Value" autocomplete="off" />
             </span>
         </div>
         <div class="alongLine">
@@ -107,7 +76,7 @@
         </div>
     </div>
     <div>
-        <button id="btnSave" >@Lang.BtnSave</button>
+        <button id="btnSave">@Lang.BtnSave</button>
     </div>
 </body>
 </html>
