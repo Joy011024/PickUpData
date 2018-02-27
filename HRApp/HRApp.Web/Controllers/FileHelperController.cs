@@ -26,6 +26,8 @@ namespace HRApp.Web.Controllers
                 json.Success = false;
                 return Json(json);
             }
+            //进行文件存储
+
             return Json(json);
         }
     }

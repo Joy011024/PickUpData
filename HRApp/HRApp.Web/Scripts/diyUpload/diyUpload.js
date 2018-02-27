@@ -273,7 +273,7 @@
         $parentFileBox.children('.fileBoxUl').append(li);
 
         //父容器宽度;
-        var $width = $('.fileBoxUl>li').length * 180;
+        var $width = 720;//$('.fileBoxUl>li').length * 180;
         var $maxWidth = $fileInput.parent().width();
         $width = $maxWidth > $width ? $width : $maxWidth;
         $parentFileBox.width($width);

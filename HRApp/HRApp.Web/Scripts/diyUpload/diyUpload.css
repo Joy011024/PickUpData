@@ -17,8 +17,8 @@
 	float:left;
 	border:1px solid #09F;
 	border-radius:5px;
-	width:170px;
-	height:150px;
+	width:680px;
+	height:600px;
 	margin-top:5px;
 	margin-left:5px;
 	overflow:hidden;
@@ -29,8 +29,8 @@
 	position:absolute;
 	top:0;
 	left:0;
-	width:170px;
-	height:150px;
+	width:680px;
+	height:600px;
 	overflow:hidden;
 }
 .parentFileBox>.fileBoxUl>li>.viewThumb>img {
@@ -107,7 +107,7 @@
 	padding:5px 10px 5px 10px;
 	background-color:#09C;
 	color:#FFF;
-	font-size:12px;
+	font-size:22px;
 	text-decoration:none;
 	border-radius:3px;
 }
