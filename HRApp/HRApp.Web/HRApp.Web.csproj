@@ -141,6 +141,10 @@
     <Content Include="Scripts\Common\Common.js" />
     <Content Include="Scripts\Common\DataGrid.js" />
     <Content Include="Scripts\Common\Lang.js" />
+    <Content Include="Scripts\diyUpload\diyUpload.css" />
+    <Content Include="Scripts\diyUpload\diyUpload.js" />
+    <Content Include="Scripts\diyUpload\webuploader.css" />
+    <Content Include="Scripts\diyUpload\webuploader.html5only.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\layer3.0\layer.js" />
     <Content Include="Scripts\layer3.0\mobile\layer.js" />
