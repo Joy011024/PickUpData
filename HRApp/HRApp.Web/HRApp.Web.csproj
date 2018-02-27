@@ -112,6 +112,8 @@
     <Compile Include="App_Start\InitAppSetting.cs" />
     <Compile Include="Controllers\AppSettingManageController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\FileHelperController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\SpellNameController.cs" />
     <Compile Include="Global.asax.cs">
@@ -224,6 +226,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Menu\NewNemu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FileHelper\FileUpload.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

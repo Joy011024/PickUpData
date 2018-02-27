@@ -239,5 +239,14 @@ namespace AppLanguage {
                 return ResourceManager.GetString("Tip_PleaseSelect", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 请选择文件。 的本地化字符串。
+        /// </summary>
+        public static string Tip_PleaseSelectFile {
+            get {
+                return ResourceManager.GetString("Tip_PleaseSelectFile", resourceCulture);
+            }
+        }
     }
 }
