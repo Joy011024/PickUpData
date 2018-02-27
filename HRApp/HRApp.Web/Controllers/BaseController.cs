@@ -47,9 +47,21 @@ namespace HRApp.Web.Controllers
                 if (cookies.Count > 0)
                 {
                     sb.AppendLine("Cookies=");
-                    foreach (HttpCookie item in cookies)
+                    /*
+                     “System.InvalidCastException”类型的异常在 HRApp.Web.dll 中发生，但未在用户代码中进行处理
+
+其他信息: 无法将类型为“System.String”的对象强制转换为类型“System.Web.HttpCookie”
+                     不能直接使用foreach
+                     foreach (HttpCookie item in cookies)
                     {
                         sb.AppendLine(item.ConvertJson()+"\r\n");
+                    }
+                     * https://www.cnblogs.com/answercard/archive/2009/02/02/1382404.html
+                     */
+                    for (int i = 0; i < cookies.Count; i++)
+                    {
+                        HttpCookie hc = cookies[i];
+                        sb.AppendLine(hc.ConvertJson() + "\r\n");
                     }
                 }
                 string mimeType = req.ContentType;//文件传输类型
