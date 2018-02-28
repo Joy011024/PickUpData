@@ -42,6 +42,7 @@
     <Compile Include="AppDataService.cs" />
     <Compile Include="AppSettingService.cs" />
     <Compile Include="CommonCallService.cs" />
+    <Compile Include="FileService.cs" />
     <Compile Include="MaybeSpecialService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

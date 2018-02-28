@@ -24,6 +24,10 @@
             min-height: 800px;
             background: #CF9;
         }
+        .tip {
+            color:red;
+            display: inline-block;
+        }
     </style>
     <script type="text/javascript">
 
@@ -38,6 +42,13 @@
             $('#as').diyUpload({
                 url: '/FileHelper/GetUploadFile',
                 success: function (data) {
+                    var tip = $('.webuploader-pick').nextAll('.tip');
+                    if (tip.length < 1)
+                    {
+                        $('.webuploader-pick').parent().append('<span class="tip"></span>');
+                        tip = $('.webuploader-pick').nextAll('.tip');
+                    }
+                    tip.html(data.Message);
                     console.info(data);
                 },
                 error: function (err) {
