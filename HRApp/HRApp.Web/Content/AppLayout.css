@@ -2,7 +2,7 @@
     margin: 20px;
     background-color: #ccc;
 }
-input {
+input,textarea {
     box-sizing: border-box;
     border: solid 1px #ddd;
     width: 250px;
@@ -13,7 +13,7 @@ input {
     font-size: 14px;
     height: 31px;
     line-height: 1.42857;
-    padding: 4px;
+    padding: 12px;
 }
 .alongLine { /*独占一行*/
     display: block;
@@ -30,4 +30,10 @@ textarea {
 .select {
     width: 250px;
     height: 32px;
+}
+.button {
+    height: 50px;
+    width: 75px;
+    background-color: #bfe8ef;
+    border-radius: 15px;
 }

@@ -180,4 +180,7 @@
   <data name="Tip_PleaseSelectFile" xml:space="preserve">
     <value>请选择文件。</value>
   </data>
+  <data name="Tip_PleaseSelectParentNode" xml:space="preserve">
+    <value>请选择父节点</value>
+  </data>
 </root>

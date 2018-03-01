@@ -32,5 +32,11 @@ namespace HRApp.ApplicationService
             json.Success = menuRepository.Add(model);
             return json;
         }
+
+
+        public List<Menu> QueryWhere(Menu model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

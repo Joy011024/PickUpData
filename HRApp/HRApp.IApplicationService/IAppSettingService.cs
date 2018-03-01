@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace HRApp.IApplicationService
 {
-    public interface IAppSettingService
+    public interface IAppSettingService:IBaseServiceWithSqlConnstring<CategoryItems>
     {
-        string SqlConnString { get; set; }
-        JsonData Add(CategoryItems item);
+       new  string SqlConnString { get; set; }
+       new  JsonData Add(CategoryItems item);
+       Common.Data.JsonData SelectNodesByParent(string parentNodeCode);
     }
 }

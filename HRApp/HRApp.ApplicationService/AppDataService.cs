@@ -45,5 +45,11 @@ namespace HRApp.ApplicationService
             }
             return json;
         }
+
+
+        public List<AppModel> QueryWhere(AppModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

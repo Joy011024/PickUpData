@@ -8,5 +8,6 @@ namespace IHRApp.Infrastructure
 {
     public interface IAppSettingRepository:IBaseListRepository<CategoryItems>
     {
+        List<CategoryItems> GetNodeListByParent(string parentNodeCode);
     }
 }

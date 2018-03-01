@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ClassInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.txt" />

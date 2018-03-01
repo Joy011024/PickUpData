@@ -11,5 +11,6 @@ namespace HRApp.IApplicationService
     {
         string SqlConnString { get; set; }
         JsonData Add(T model);
+        List<T> QueryWhere(T model);
     }
 }

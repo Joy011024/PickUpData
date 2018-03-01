@@ -73,5 +73,10 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
         {
             throw new NotImplementedException();
         }
+
+        public List<CategoryItems> GetNodeListByParent(string parentNodeCode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

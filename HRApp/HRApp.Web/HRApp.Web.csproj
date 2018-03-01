@@ -146,6 +146,8 @@
     <Content Include="Scripts\diyUpload\webuploader.css" />
     <Content Include="Scripts\diyUpload\webuploader.html5only.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery.combo.select.js\combo.select.css" />
+    <Content Include="Scripts\jquery.combo.select.js\jquery.combo.select.js" />
     <Content Include="Scripts\layer3.0\layer.js" />
     <Content Include="Scripts\layer3.0\mobile\layer.js" />
     <Content Include="Scripts\layer3.0\mobile\need\layer.css" />

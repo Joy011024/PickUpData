@@ -41,5 +41,11 @@ namespace HRApp.ApplicationService
         {
             
         }
+
+
+        public List<SpecialSpellName> QueryWhere(SpecialSpellName model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

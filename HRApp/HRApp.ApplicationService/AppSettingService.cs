@@ -56,5 +56,29 @@ namespace HRApp.ApplicationService
             }
             return json;
         }
+
+
+        public List<CategoryItems> QueryWhere(CategoryItems model)
+        {
+
+            throw new NotImplementedException();
+        }
+
+
+        public Common.Data.JsonData SelectNodesByParent(string parentNode)
+        {
+            Common.Data.JsonData json = new JsonData() { Result=true};
+            try
+            {
+                List<CategoryItems> data = appSettingRepository.GetNodeListByParent(parentNode);
+                json.Success = true;
+                json.Data = data;
+            }
+            catch (Exception ex)
+            {
+                json.Message = ex.Message;
+            }
+            return json;
+        }
     }
 }

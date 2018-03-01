@@ -248,5 +248,14 @@ namespace AppLanguage {
                 return ResourceManager.GetString("Tip_PleaseSelectFile", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 请选择父节点 的本地化字符串。
+        /// </summary>
+        public static string Tip_PleaseSelectParentNode {
+            get {
+                return ResourceManager.GetString("Tip_PleaseSelectParentNode", resourceCulture);
+            }
+        }
     }
 }
