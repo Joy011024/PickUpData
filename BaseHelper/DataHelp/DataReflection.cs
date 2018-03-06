@@ -140,13 +140,16 @@ namespace DataHelp
                 //是否对于不存在的列进行数据移除
                 columns.Add(column);
             }
+            List<PropertyInfo> targetProperty = new List<PropertyInfo>();
             foreach (PropertyInfo p in pis)
             {
-                if (!columns.Contains(p.Name.ToLower()) || p.GetSetMethod() == null)
+                if (columns.Contains(p.Name.ToLower()) && p.GetSetMethod()!= null)
                 {//移除定义的只读属性 //不能在进行遍历是移除属性 集合已修改；可能无法执行枚举操作。
-                    pis.Remove(p);
+                    targetProperty.Add(p);
                 }
             }//end 过滤之后字段全部存在于集合中
+            pis.Clear();
+            pis = targetProperty;
             if (pis == null || pis.Count == 0)
             {//数据异常:过滤之后没有映射的字段
                 return null;

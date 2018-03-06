@@ -96,6 +96,13 @@
             <span class="jq22" style="display: inline-table;">
                 <select apikey="ParentCode">
                     <option value="">@AppLanguage.Lang.Tip_PleaseSelectParentNode</option>
+                    @{
+                        foreach (HRApp.Model.CategoryItems item in ViewData["ParentNode"] as List<HRApp.Model.CategoryItems>)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                        
+                    }
                 </select>
             </span>
         </div>
