@@ -54,6 +54,10 @@
       <Project>{32c60c3a-c56e-457d-b553-be076218fd5a}</Project>
       <Name>CommonHelperEntity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BaseHelper\DataHelp\DataHelp.csproj">
+      <Project>{f2af7a2a-3c36-4979-b10e-997d20a42dbc}</Project>
+      <Name>DataHelp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>

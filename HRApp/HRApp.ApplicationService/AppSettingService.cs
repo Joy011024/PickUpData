@@ -80,5 +80,11 @@ namespace HRApp.ApplicationService
             }
             return json;
         }
+
+
+        public List<CategoryItems> SelectNodeItemByParentCode(string parentCode)
+        {
+            return appSettingRepository.GetNodeListByParent(parentCode);
+        }
     }
 }

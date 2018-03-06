@@ -16,7 +16,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
         /// <param name="sqlCmd"></param>
         /// <param name="pms"></param>
         /// <returns></returns>
-        public int ExcuteNoQuery(string sqlCmd,params SqlParameter[] pms) 
+        public int ExcuteNoQuery(string sqlCmd, params SqlParameter[] pms)
         {
             if (string.IsNullOrEmpty(SqlConnString))
             {
@@ -29,21 +29,21 @@ namespace Infrastructure.MsSqlService.SqlHelper
             {
                 comm.Parameters.AddRange(pms);
             }
-            int result= comm.ExecuteNonQuery();
+            int result = comm.ExecuteNonQuery();
             conn.Close();
             return result;
         }
-        public int RunProcedureNoQuery(string proceudreCmd,params SqlParameter[] pms) 
+        public int RunProcedureNoQuery(string proceudreCmd, params SqlParameter[] pms)
         {
             SqlConnection conn = new SqlConnection(SqlConnString);
             conn.Open();
-            SqlCommand comm = new SqlCommand(proceudreCmd,conn);
+            SqlCommand comm = new SqlCommand(proceudreCmd, conn);
             if (pms != null && pms.Length > 0)
             {
                 comm.Parameters.AddRange(pms);
             }
             comm.CommandType = CommandType.StoredProcedure;
-            int result= comm.ExecuteNonQuery();
+            int result = comm.ExecuteNonQuery();
             conn.Close();
             return result;
         }
@@ -68,6 +68,27 @@ namespace Infrastructure.MsSqlService.SqlHelper
             bulk.WriteToServer(table);
             sw.Stop();
             conn.Close();
+        }
+        public DataSet QueryDataSet(string sql,string sqlconnString,SqlParameter[] param,int? beginRow,int? endRow,string dataSetName)
+        {
+            SqlConnection conn = new SqlConnection(sqlconnString);
+            conn.Open();
+            SqlCommand comm = new SqlCommand(sql, conn);
+            if (param != null && param.Length > 0)
+            {
+                comm.Parameters.AddRange(param);
+            }
+            SqlDataAdapter dap = new SqlDataAdapter(comm);
+            DataSet ds = new DataSet();
+            if (!beginRow.HasValue)
+            {
+                dap.Fill(ds);
+            }
+            else 
+            {
+                dap.Fill(ds, beginRow.Value, endRow.HasValue ? endRow.Value : int.MaxValue, dataSetName);
+            }
+            return ds;
         }
     }
 }

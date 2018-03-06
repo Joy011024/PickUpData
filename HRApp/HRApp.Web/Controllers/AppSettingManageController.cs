@@ -20,6 +20,10 @@ namespace HRApp.Web.Controllers
 
         public ActionResult Index()
         {
+            //查询节点列表
+            IAppSettingRepository appSetRepository = new AppSettingRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
+            IAppSettingService appSetService = new AppSettingService(appSetRepository);
+            ViewData["ParentNode"] = appSetService.SelectNodeItemByParentCode("-1");
             return View();
         }
         public JsonResult SaveAppSetting(NodeRequestParam param)
@@ -52,6 +56,16 @@ namespace HRApp.Web.Controllers
                 AppName=param.Name,
                 AppCode=param.Code
             });
+            return Json(json);
+        }
+        [Description("根据根节点查询节点列表")]
+        [HttpPost]
+        public JsonResult QueryNodes(string parenCode)
+        {
+            Common.Data.JsonData json = new JsonData();
+            IAppSettingRepository appSetRepository = new AppSettingRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
+            IAppSettingService appSetService = new AppSettingService(appSetRepository);
+            json = appSetService.SelectNodesByParent(parenCode);
             return Json(json);
         }
     }

@@ -106,5 +106,10 @@ namespace HRApp.Infrastructure
             SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = connString };
             helper.BulkSave(dt, table);
         }
+        public static List<T> QueryModelList<T>(string sql, SqlParameter[] param, string sqlConnString,int beginRow,int endRow) where T:class
+        {
+            DataSet ds = new SqlCmdHelper().QueryDataSet(sql, sqlConnString, param, beginRow, endRow, typeof(T).Name);
+            return DataHelp.DataReflection.DataSetConvert<T>(ds);
+        }
     }
 }

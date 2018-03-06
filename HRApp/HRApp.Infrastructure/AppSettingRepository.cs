@@ -73,10 +73,18 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
         {
             throw new NotImplementedException();
         }
-
+        [DescriptionSort("根据元素的根节点查询数据")]
         public List<CategoryItems> GetNodeListByParent(string parentNodeCode)
         {
-            throw new NotImplementedException();
+            List<CategoryItems> datas = new List<CategoryItems>();
+            CategoryItems model = new CategoryItems();
+            string sql = model.BuilderSqlParam();
+            SqlParameter[] param = new SqlParameter[]
+            { 
+                new SqlParameter(){ ParameterName="@code",Value=parentNodeCode} 
+            };
+            return CommonRepository.QueryModelList<CategoryItems>(sql, param, SqlConnString, 0, int.MaxValue);
         }
+
     }
 }

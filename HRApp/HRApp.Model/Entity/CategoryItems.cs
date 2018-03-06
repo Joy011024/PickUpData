@@ -7,7 +7,7 @@ using Domain.CommonData;
 using System.ComponentModel;
 namespace HRApp.Model
 {
-    public class CategoryItems:CategoryData
+    public class CategoryItems : CategoryData
     {
         [Description("配置项被引用次数")]
         public int ItemUsingSize { get; set; }
@@ -15,5 +15,16 @@ namespace HRApp.Model
         public string ItemDesc { get; set; }
         [Description("配置的值")]
         public string ItemValue { get; set; }
+        public string GetQueryModelSampleSql()
+        {
+            return @"SELECT [ID],[Name],[ParentID],[ParentCode],[Code],[Sort],[IsDelete],[ItemValue],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc]
+  FROM [dbo].[CategoryItems] ";
+        }
+        public string BuilderSqlParam()
+        {
+            string sql = GetQueryModelSampleSql() + " where ParentCode=@code";
+
+            return sql;
+        }
     }
 }

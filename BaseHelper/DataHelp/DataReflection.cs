@@ -143,7 +143,7 @@ namespace DataHelp
             foreach (PropertyInfo p in pis)
             {
                 if (!columns.Contains(p.Name.ToLower()) || p.GetSetMethod() == null)
-                {//移除定义的只读属性
+                {//移除定义的只读属性 //不能在进行遍历是移除属性 集合已修改；可能无法执行枚举操作。
                     pis.Remove(p);
                 }
             }//end 过滤之后字段全部存在于集合中
