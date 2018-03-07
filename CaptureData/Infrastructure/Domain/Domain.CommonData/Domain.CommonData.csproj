@@ -78,6 +78,7 @@
     <Content Include="SqlCmd\UpdateSp\V1.2\TecentQQData_imageType.sql" />
     <Content Include="SqlCmd\UpdateSp\V1.3\EveryDayStatics.sql" />
     <Content Include="SqlCmd\UpdateSp\V1.4\IgnoreNoImageData.sql" />
+    <Content Include="SqlCmd\UpdateSp\V1.5\InitGatherImageProperty.sql" />
     <Content Include="TicketDBSqlCmd\CreateSql\AppSettingCfg.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

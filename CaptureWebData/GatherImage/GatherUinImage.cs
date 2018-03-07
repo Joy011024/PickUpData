@@ -27,11 +27,22 @@ namespace GatherImage
                 return sec.ConnectionString;
             }
         }
+        string dirPath;
         public string ImageDir 
         {
             get 
             {
-                return ConfigurationManager.AppSettings["ImageDir"];
+                if (string.IsNullOrEmpty(dirPath))
+                {
+                    string cfg = ConfigurationManager.AppSettings["ImageDir"];
+                    DirectoryInfo di = new DirectoryInfo(cfg);
+                    if (!Directory.Exists(di.Root.FullName))
+                    {// 盘符是否存在
+                        cfg = NowAppDirHelper.GetNowAppDir(AppCategory.WinApp)+"/"+ELogType.HttpResponse.ToString()+"/";
+                    }
+                    dirPath = cfg;
+                }
+                return dirPath;
             }
         }
 
