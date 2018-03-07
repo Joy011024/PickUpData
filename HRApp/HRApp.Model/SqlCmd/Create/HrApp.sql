@@ -39,4 +39,15 @@ Create table OptionEvent
 	 CreateTime datetime not null,
 	 RelyTableRowValue varchar(32) not null,
 	 IsDelete bit not null
-)
+);
+create table ContactData
+(--联系人信息列表
+	Id uniqueidentifier primary key,
+	ContactTypeId int not null,
+	Value varchar(16) not null,
+	ContactName nvarchar(16) not null,
+	Belonger nvarchar(16) not null,
+	CreateTime DateTime not null
+);
+alter table ContactData add constraint FK_ContactId foreign key (ContactTypeId) 
+references CategoryItems(Id)
