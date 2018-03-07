@@ -389,7 +389,14 @@
 
 			this._fixScroll()
 		},
-
+		getSelected: function () {//扩展的函数：获取选择项数据【后期select标签不使用这个控件】
+		    var items = $(this.currentTarget);
+		    if (!items) {
+		        items = $(this);
+		    }
+		    var index = items.data('index');
+		    var option = this.$items[index];
+		},
 		_select: function(event){
 
 			var item = event.currentTarget? $(event.currentTarget) : $(event);

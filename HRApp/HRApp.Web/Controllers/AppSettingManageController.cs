@@ -23,7 +23,7 @@ namespace HRApp.Web.Controllers
             //查询节点列表
             IAppSettingRepository appSetRepository = new AppSettingRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
             IAppSettingService appSetService = new AppSettingService(appSetRepository);
-            ViewData["ParentNode"] = appSetService.SelectNodeItemByParentCode("-1");
+            ViewData["ParentNode"] = appSetService.SelectNodeItemByParentCode("LianXiRenLeiXingGuanLi");
             return View();
         }
         public JsonResult SaveAppSetting(NodeRequestParam param)
