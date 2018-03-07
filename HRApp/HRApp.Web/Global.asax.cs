@@ -16,6 +16,7 @@ namespace HRApp.Web
         {
             AreaRegistration.RegisterAllAreas();
             InitAppSetting.Version = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat);
+            InitAppSetting.CodeVersion = InitAppSetting.CodeVersionFromCfg();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

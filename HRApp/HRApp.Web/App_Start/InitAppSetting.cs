@@ -8,6 +8,10 @@ namespace HRApp.Web
     public class InitAppSetting
     {
         public static string Version { get; set; }
+        [Domain.CommonData.DescriptionSort("代码版本号")]
+        public static string CodeVersion { get; set; }
+        [Domain.CommonData.DescriptionSort("数据库版本号")]
+        public static string DBVersion { get; set; }
         static string hrDbConnString;
         /// <summary>
         /// 数据库连接字符串
@@ -37,6 +41,10 @@ namespace HRApp.Web
                 }
                 return openDebug == "true";
             }
+        }
+        public static string CodeVersionFromCfg()
+        {
+            return ConfigurationManager.AppSettings["CodeVersion"];
         }
     }
 }
