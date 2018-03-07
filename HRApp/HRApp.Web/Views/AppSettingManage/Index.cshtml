@@ -99,7 +99,7 @@
                     @{
                         foreach (HRApp.Model.CategoryItems item in ViewData["ParentNode"] as List<HRApp.Model.CategoryItems>)
                         {
-                            <option value="@item.Id">@item.Name</option>
+                            <option value="@item.Code">@item.Name</option>
                         }
                         
                     }
