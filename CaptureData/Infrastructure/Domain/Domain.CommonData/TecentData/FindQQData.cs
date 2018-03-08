@@ -28,6 +28,10 @@ namespace Domain.CommonData
         /// 头像类型【默认0 当没有采集到头像数据时设置该值为-1】
         /// </summary>
         public int ImgType { get; set; }
+        #region 增加这字段是为了兼容数据库表创建的形式不符合采集数据
+        public int GatherImageErrorNum { get; set; }
+        public int IsGatherImage { get; set; }
+        #endregion
     }
     public class QQFriend 
     {
