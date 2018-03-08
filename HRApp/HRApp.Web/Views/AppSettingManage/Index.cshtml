@@ -23,7 +23,6 @@
         $(function () {
             $('#btnSave').on('click', function () {
                 var api = GetXPathObject($(".ApiParam"), "apiKey");
-                return
                 bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
                     console.log(response);
                 });

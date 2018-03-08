@@ -47,7 +47,8 @@ create table ContactData
 	Value varchar(16) not null,
 	ContactName nvarchar(16) not null,
 	Belonger nvarchar(16) not null,
-	CreateTime DateTime not null
+	CreateTime DateTime not null,
+	[Desc] nvarchar(128)
 );
 alter table ContactData add constraint FK_ContactId foreign key (ContactTypeId) 
 references CategoryItems(Id)

@@ -9,10 +9,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@Lang.LblNewMenu</title>
+    <title>联系人</title>
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     @*<script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>*@
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/jquery.combo.select.js/combo.select.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/jquery.combo.select.js/jquery.combo.select.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <style type="text/css">
     </style>
@@ -20,10 +22,11 @@
         $(function () {
             $('#btnSave').on('click', function () {
                 var api = GetXPathObject($(".ApiParam"), "apiKey");
-                bindPostAjax('/Menu/SaveMenu', api, function (response, statue) {
+                bindPostAjax('/ContactManage/SaveContacter', api, function (response, statue) {
                     console.log(response);
                 });
             });
+            $('select').comboSelect({ maxHeight: 100, width: 100 });
         });
         function GetXPathObject(rootEle, apiKeyAttr) {
             var obj = {};
@@ -57,13 +60,21 @@
             </span>
         </div>
         <div class="alongLine">
-            <span style="width:100px;">@Lang.LblCode :</span>
-            <span>
-                <input type="text" id="txtMemnorideCode" apikey="Code" autocomplete="off" />
+            <span style="width:100px;">类型 :</span>
+            <span class="jq22" style="display: inline-table;">
+                <select apikey="Code">
+                    <option value="">@AppLanguage.Lang.Tip_PleaseSelectParentNode</option>
+                    @{
+                        foreach (HRApp.Model.CategoryItems item in ViewData["ParentNode"] as List<HRApp.Model.CategoryItems>)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
             </span>
         </div>
         <div class="alongLine">
-            <span style="width:100px;">@Lang.LblUrl :</span>
+            <span style="width:100px;">联系方式 :</span>
             <span>
                 <input type="text" id="txtMemnorideCode" apikey="Value" autocomplete="off" />
             </span>
@@ -71,7 +82,7 @@
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblDescription :</span>
             <span>
-                <textarea id="txtDescription" apikey="Desc"></textarea>
+                <textarea id="txtDescription" apikey="Desc" maxlength="128"></textarea>
             </span>
         </div>
     </div>

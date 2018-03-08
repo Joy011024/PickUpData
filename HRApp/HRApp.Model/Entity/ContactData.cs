@@ -21,13 +21,16 @@ namespace HRApp.Model
         public DateTime CreateTime { get; set; }
         public void InitData() 
         {
+            Id = Guid.NewGuid();
             Belonger = "-1";
             CreateTime = DateTime.Now;
         }
+        [Domain.CommonData.DescriptionSort("描述：最大长度128")]
+        public string Desc { get; set; }
         public string InsertSql() 
         {
-            return @"INSERT INTO [HrApp].[dbo].[ContactData] ([Id],[ContactTypeId],[Value],[ContactName],[Belonger],[Createtime])
-     VALUES ({Id},{ContactTypeId},{Value},{ContactName},{Belonger},{Createtime})";
+            return @"INSERT INTO [HrApp].[dbo].[ContactData] ([Id],[ContactTypeId],[Value],[ContactName],[Belonger],[Createtime],[Desc])
+     VALUES ({Id},{ContactTypeId},{Value},{ContactName},{Belonger},{Createtime},{Desc})";
         }
     }
 }
