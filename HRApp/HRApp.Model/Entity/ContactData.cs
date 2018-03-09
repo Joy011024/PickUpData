@@ -30,7 +30,7 @@ namespace HRApp.Model
         public string InsertSql() 
         {
             return @"INSERT INTO [HrApp].[dbo].[ContactData] ([Id],[ContactTypeId],[Value],[ContactName],[Belonger],[Createtime],[Desc])
-     VALUES ({Id},{ContactTypeId},{Value},{ContactName},{Belonger},{Createtime},{Desc})";
+     VALUES ({Id},{ContactTypeId},{Value},{ContactName},{Belonger},{CreateTime},{Desc})";
         }
     }
 }

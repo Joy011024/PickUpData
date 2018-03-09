@@ -54,9 +54,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SqlCmd\Create\HrApp.sql" />
-    <Content Include="SqlCmd\LogicData\LogicData.sql" />
+    <Content Include="SqlCmd\1_Create\HrApp.sql" />
+    <Content Include="SqlCmd\2_InitData\2-InitLogicData.sql" />
+    <Content Include="SqlCmd\3_LogicCmd\3_LogicSqlCmd.sql" />
+    <Content Include="SqlCmd\4_LogicData\4_0_LogicData.sql" />
+    <Content Include="SqlCmd\4_LogicData\4_1_LogicData.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
