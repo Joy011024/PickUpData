@@ -37,3 +37,11 @@ textarea {
     background-color: #bfe8ef;
     border-radius: 15px;
 }
+.block {
+    display:inline-block;
+    border:1px solid ;
+    background-color:#32ead1;
+    padding:10px;
+    margin:0  20px 10px 0;
+    cursor:pointer;
+}

@@ -173,7 +173,7 @@ namespace DataHelp
                 {
                     PropertyInfo pi = pis.Where(p => p.Name == f).First();
                     object value = item[f];
-                    if(value!=null)
+                    if (value.GetType().Name!= typeof(DBNull).Name&&value != null) //如果此字段数据为空是的处理
                         pi.SetValue(entity, value, null);
                 }
                 items.Add(entity);

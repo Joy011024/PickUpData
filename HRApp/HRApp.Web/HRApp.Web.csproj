@@ -144,6 +144,7 @@
     <Content Include="Scripts\Common\DataGrid.js" />
     <Content Include="Scripts\Common\HtmlEleExt.js" />
     <Content Include="Scripts\Common\Lang.js" />
+    <Content Include="Scripts\Common\string.js" />
     <Content Include="Scripts\diyUpload\diyUpload.css" />
     <Content Include="Scripts\diyUpload\diyUpload.js" />
     <Content Include="Scripts\diyUpload\webuploader.css" />

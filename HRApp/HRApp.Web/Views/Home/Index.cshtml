@@ -10,23 +10,66 @@
     <title>Index</title>
     <script src="~/Scripts/jquery-1.9.1.js"></script>
     <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/Common/string.js"></script>
+    <link href="~/Content/AppLayout.css" rel="stylesheet" />
+    <style type="text/css">
+        #toolTab {
+            margin-bottom:10px;
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             //$('#menus')
-            bindPostAjax('/Menu/QueryAllMenus', function (response, statue) {
-
+            bindPostAjax('/Menu/QueryAllMenus',null, function (response, statue) {
+                if (!response.Success)
+                {
+                    $('.warming').html(response.Message);
+                    return;
+                }
+                $(response.Data).each(function (i,ele) {//跟节点
+                    var tmpl = '<div class="block" url="{1}" id="{2}" title="{3}">{0}</div>';
+                   var html=  tmpl.format(ele.Name, ele.Url, ele.Id, ele.Remark);
+                   $('#menus').append(html);
+                   $('#menus').find('.block:last').click(function () {
+                       btnMenuClick(this);
+                   })
+                });
+                
             });
         });
+        function btnMenuClick(objEle) {
+            var id = $(objEle).attr('id');
+
+        }
     </script>
 </head>
-<body>
+<body style="height:95%;width:98%;">
     <div style="display:none;">
-        <div  style="color:red;">代码版本= @HRApp.Web.InitAppSetting.CodeVersion</div>
+        <div style="color:red;">代码版本= @HRApp.Web.InitAppSetting.CodeVersion</div>
         <div style="color:red;">数据库版本= @HRApp.Web.InitAppSetting.DBVersion</div>
         <div style="color:red;">文件版本= @HRApp.Web.InitAppSetting.Version</div>
     </div>
-    <div id="menus">
+    <div id="toolTab">
+        <div class="warming"></div>
+        <div id="menus">
 
+        </div>
     </div>
+    <div id="layout">
+        <div class="tabs">
+            <span>1<span>x</span></span>
+            <span>2<span>x</span></span>
+        </div>
+        <div class="panel">
+          
+            <div class="layout" style="height:90%;width:95%;border:1px solid white;">
+                <iframe src="/AppSettingManage/AppDataDialog" width="95%" height="500"></iframe>
+            </div> 
+            <div class="layout" style="height:90%;width:95%;border:1px solid white;display:none;">
+                <iframe src="/SpellName/SpecialSpellNameDialog" width="95%" height="500"></iframe>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
