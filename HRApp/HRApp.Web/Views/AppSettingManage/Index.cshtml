@@ -31,6 +31,7 @@
                 }
                 var api = GetXPathObject(root, "apiKey");
                 bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
+                    AjaxWarming($('#btnSave'), response);
                     console.log(response);
                 });
             });

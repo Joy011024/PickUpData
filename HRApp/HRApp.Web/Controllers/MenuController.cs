@@ -34,5 +34,10 @@ namespace HRApp.Web.Controllers
             json = ms.Add(new Model.Menu() { Name = param.Name, Code = param.Code, Remark = param.Desc,Url=param.Value });
             return Json(json);
         }
+        [DescriptionSort("显示菜单列表")]
+        public ActionResult MenuList() 
+        {
+            return View();
+        }
     }
 }

@@ -46,6 +46,7 @@ function ValidEleIsRequired(rootEle, isReuqiredTag,notAddWarmingEle) {
     $(rootEle).find(isReuqiredTag).each(function (i, ele) {
         //判断必填项是否存在非空项
         if ($.trim($(ele).val()) != '') {//过滤首尾空格项
+            valid = valid && true;
             return true;
         }
         valid =valid&& false;
@@ -62,4 +63,7 @@ function ValidEleIsRequired(rootEle, isReuqiredTag,notAddWarmingEle) {
         return true;
     });
     return valid;
+}
+function AjaxWarming(warmEle, json) {
+
 }

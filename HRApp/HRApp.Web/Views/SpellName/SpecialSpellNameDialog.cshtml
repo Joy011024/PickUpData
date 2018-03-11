@@ -38,19 +38,19 @@
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblName :</span>
             <span>
-                <input type="text" id="txtName" maxlength="1" apikey="Name" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
+                <input type="text" id="txtName" maxlength="1" apikey="Name" class="required" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
             </span>
         </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblCode :</span>
             <span>
-                <input type="text" id="txtMemnorideCode" apikey="Code" autocomplete="off" />
+                <input type="text" id="txtMemnorideCode" apikey="Code" class="required" autocomplete="off" />
             </span>
         </div>
         <div class="alongLine" style="display:none;">
             <span style="width:100px;">@Lang.LblAppSetValue :</span>
             <span>
-                <input type="text" id="txtDescription" apikey="Value" />
+                <input type="text" id="txtDescription" apikey="Value" class="required" />
             </span>
         </div>
         <div class="alongLine" style="display:none;">
