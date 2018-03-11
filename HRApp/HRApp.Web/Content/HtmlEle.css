@@ -1,0 +1,24 @@
+﻿.clearTag {
+            cursor: pointer;
+            display: inline-block;
+            color: white;
+            background-color: #ccc;
+            left: -24px;
+            position: relative;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 10px;
+            padding-left: 2px;
+        }
+input[type=text] {
+    height: 42px;
+}
+.validWarming {
+    position: absolute;
+    color: white;
+    border-radius: 8px;
+    border: 1px solid red;
+    width: 16px;
+    height: 16px;
+    background-color: red;
+}

@@ -128,6 +128,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\AppLayout.css" />
+    <Content Include="Content\HtmlEle.css" />
     <Content Include="Global.asax" />
     <Content Include="Note\App Desc.txt" />
     <Content Include="Note\Exception.txt" />
@@ -141,6 +142,7 @@
     <Content Include="Scripts\bootstrap-Switch\bootstrapSwitch.js" />
     <Content Include="Scripts\Common\Common.js" />
     <Content Include="Scripts\Common\DataGrid.js" />
+    <Content Include="Scripts\Common\HtmlEleExt.js" />
     <Content Include="Scripts\Common\Lang.js" />
     <Content Include="Scripts\diyUpload\diyUpload.css" />
     <Content Include="Scripts\diyUpload\diyUpload.js" />
