@@ -13,38 +13,24 @@
     @*<script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>*@
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
     <style type="text/css">
     </style>
     <script type="text/javascript">
         $(function () {
             $('#btnSave').on('click', function () {
-                var api = GetXPathObject($(".ApiParam"), "apiKey");
+                var root = $(".ApiParam");
+                var valid = ValidEleIsRequired(root, '.required')
+                if (!valid) {
+                    return;
+                }
+                var api = GetXPathObject(root, "apiKey");
                 bindPostAjax('/SpellName/SaveSpecialSpellName', api, function (response, statue) {
 
                 });
             });
         });
-        function GetXPathObject(rootEle, apiKeyAttr) {
-            var obj = {};
-            if (!rootEle) {
-                return obj;
-            }
-            if (!apiKeyAttr) {
-                apiKeyAttr = "apiKey";
-            }
-            var data = [];
-            $.each($(rootEle).find('input,textarea,select'),function (i, ele) {
-                var objEle = $(ele);
-                //这里不能访问到具局部变量data
-            });
-            var paramEles=$(rootEle).find('input,textarea,select');
-            for (var i = 0; i < paramEles.length; i++) {
-                var objEle = $(paramEles[i]);
-                obj[objEle.attr(apiKeyAttr)] = objEle.val();
-            }
-            return obj;
-        }
-
     </script>
 </head>
 <body>
