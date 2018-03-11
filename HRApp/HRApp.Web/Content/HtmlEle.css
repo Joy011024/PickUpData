@@ -22,3 +22,11 @@ input[type=text] {
     height: 16px;
     background-color: red;
 }
+.smalllClear {
+    color: red;
+    position: relative;
+    top: -15px;
+    right: -5px;
+    width: 20px;
+    cursor: pointer;
+}
