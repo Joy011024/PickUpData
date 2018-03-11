@@ -39,5 +39,13 @@ namespace HRApp.Web.Controllers
         {
             return View();
         }
+        public JsonResult QueryAllMenus() 
+        {
+            Common.Data.JsonData json = new Common.Data.JsonData();
+            IMenuRepository mr = new MenuRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
+            IMenuService ms = new MenuService(mr);
+            json = ms.QueryAllMenu();
+            return Json(json);
+        }
     }
 }

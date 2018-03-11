@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IHRApp.Infrastructure;
 using HRApp.Model;
+using IHRApp.Infrastructure;
 namespace HRApp.Infrastructure
 {
-    public class MenuRepository:IMenuRepository
+    public class ContactDataRepository:IContactDataRepository
     {
         public string SqlConnString
         {
@@ -15,14 +15,14 @@ namespace HRApp.Infrastructure
             set;
         }
 
-        public bool Add(Model.Menu entity)
+        public bool Add(ContactData entity)
         {
-            Menu m = new Menu();
-            string insert = m.InserSql();
-            return CommonRepository.ExtInsert<Menu>(insert, SqlConnString, entity);
+            entity.InitData();
+            string sql = entity.InsertSql();
+            return CommonRepository.ExtInsert<ContactData>(sql, SqlConnString, entity);
         }
 
-        public bool Edit(Model.Menu entity)
+        public bool Edit(ContactData entity)
         {
             throw new NotImplementedException();
         }
@@ -37,21 +37,14 @@ namespace HRApp.Infrastructure
             throw new NotImplementedException();
         }
 
-        public Model.Menu Get(object key)
+        public ContactData Get(object key)
         {
             throw new NotImplementedException();
         }
 
-        public IList<Model.Menu> Query(string cmd)
+        public IList<ContactData> Query(string cmd)
         {
             throw new NotImplementedException();
-        }
-
-        public List<Menu> QueryMenus()
-        {
-            Menu menu = new Menu();
-            string cmd = menu.QueryMenus();
-            return CommonRepository.QueryModelList<Menu>(cmd, null, SqlConnString, 0, int.MaxValue);
         }
     }
 }

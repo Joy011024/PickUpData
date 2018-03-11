@@ -8,5 +8,6 @@ namespace HRApp.IApplicationService
 {
     public interface IMenuService : IBaseServiceWithSqlConnstring<Menu>
     {
+        Common.Data.JsonData QueryAllMenu();
     }
 }

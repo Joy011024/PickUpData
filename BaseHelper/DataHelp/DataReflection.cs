@@ -172,7 +172,9 @@ namespace DataHelp
                 foreach (string f in fields)
                 {
                     PropertyInfo pi = pis.Where(p => p.Name == f).First();
-                    pi.SetValue(entity, item[f], null);
+                    object value = item[f];
+                    if(value!=null)
+                        pi.SetValue(entity, value, null);
                 }
                 items.Add(entity);
             }

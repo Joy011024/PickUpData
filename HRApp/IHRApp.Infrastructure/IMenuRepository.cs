@@ -11,5 +11,6 @@ namespace IHRApp.Infrastructure
     /// </summary>
     public interface IMenuRepository:IBaseRepository<Menu>
     {
+        List<Menu> QueryMenus();
     }
 }

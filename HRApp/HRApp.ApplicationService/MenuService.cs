@@ -38,5 +38,20 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+        public Common.Data.JsonData QueryAllMenu()
+        {
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
+            try
+            {
+                json.Data = menuRepository.QueryMenus();
+                json.Success = true;
+            }
+            catch (Exception ex)
+            {
+                json.Message = ex.Message;
+            }
+            return json;
+        }
     }
 }

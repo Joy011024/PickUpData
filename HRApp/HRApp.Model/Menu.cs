@@ -19,8 +19,12 @@ namespace HRApp.Model
         public DateTime CreateTime { get; set; }
         public string InserSql()
         {
-            return @"INSERT INTO [HrApp].[dbo].[Menu] ([Name],[Code],[Url],[Remark],[CreateTime])
+            return @"INSERT INTO [dbo].[Menu] ([Name],[Code],[Url],[Remark],[CreateTime])
      VALUES  ({Name},{Code},{Url},{Remark},{CreateTime}) ";
+        }
+        public string QueryMenus()
+        {
+            return " select  [Name],[Code],[Url],[Remark],[CreateTime]  from [dbo].[Menu] ";
         }
     }
 }
