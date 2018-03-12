@@ -9,6 +9,11 @@ using Domain.CommonData;
 using Infrastructure.ExtService;
 using Newtonsoft.Json;
 using System.Text;
+using HRApp.Model;
+using HRApp.Infrastructure;
+using IHRApp.Infrastructure;
+using HRApp.IApplicationService;
+using HRApp.ApplicationService;
 namespace HRApp.Web.Controllers
 {
     [MvcActionResultHelper]
@@ -16,7 +21,15 @@ namespace HRApp.Web.Controllers
     {
         //
         // GET: /Base/
-
+        [DescriptionSort("根据父节点id查询节点列表")]
+       public List<CategoryItems> QueryAppSettingList(string parentCode)
+        {
+            //查询节点列表
+            IAppSettingRepository appSetRepository = new AppSettingRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
+            IAppSettingService appSetService = new AppSettingService(appSetRepository);
+            List<CategoryItems> items = appSetService.SelectNodeItemByParentCode(parentCode);
+            return items;
+        }
        
 
     }

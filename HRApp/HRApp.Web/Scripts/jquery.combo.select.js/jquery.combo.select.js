@@ -22,783 +22,796 @@
 	}
 }(function ( $, undefined ) {
 
-	var pluginName = "comboSelect",
+    var pluginName = "comboSelect",
 		dataKey = 'comboselect';
-	var defaults = {			
-		comboClass         : 'combo-select',
-		comboArrowClass    : 'combo-arrow',
-		comboDropDownClass : 'combo-dropdown',
-		inputClass         : 'combo-input text-input',
-		disabledClass      : 'option-disabled',
-		hoverClass         : 'option-hover',
-		selectedClass      : 'option-selected',
-		markerClass        : 'combo-marker',
-		themeClass         : '',
-		maxHeight          : 200,
-		extendStyle        : true,
-		focusInput         : true
-	};
+    var defaults = {			
+        comboClass         : 'combo-select',
+        comboArrowClass    : 'combo-arrow',
+        comboDropDownClass : 'combo-dropdown',
+        inputClass         : 'combo-input text-input',
+        disabledClass      : 'option-disabled',
+        hoverClass         : 'option-hover',
+        selectedClass      : 'option-selected',
+        markerClass        : 'combo-marker',
+        themeClass         : '',
+        maxHeight          : 200,
+        extendStyle        : true,
+        focusInput         : true
+    };
 
-	/**
+    /**
 	 * Utility functions
 	 */
 
-	var keys = {
-		ESC: 27,
-		TAB: 9,
-		RETURN: 13,
-		LEFT: 37,
-		UP: 38,
-		RIGHT: 39,
-		DOWN: 40,
-		ENTER: 13,
-		SHIFT: 16
-	},	
+    var keys = {
+        ESC: 27,
+        TAB: 9,
+        RETURN: 13,
+        LEFT: 37,
+        UP: 38,
+        RIGHT: 39,
+        DOWN: 40,
+        ENTER: 13,
+        SHIFT: 16
+    },	
 	isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
-	/**
+    /**
 	 * Constructor
 	 * @param {[Node]} element [Select element]
 	 * @param {[Object]} options [Option object]
 	 */
-	function Plugin ( element, options ) {
+    function Plugin ( element, options ) {
 			
-		/* Name of the plugin */
+        /* Name of the plugin */
 
-		this._name = pluginName;
+        this._name = pluginName;
 
-		/* Reverse lookup */
+        /* Reverse lookup */
 
-		this.el = element
+        this.el = element
 
-		/* Element */
+        /* Element */
 
-		this.$el = $(element)
+        this.$el = $(element)
 
-		/* If multiple select: stop */
+        /* If multiple select: stop */
 		
-		if(this.$el.prop('multiple')) return;
+        if(this.$el.prop('multiple')) return;
 
-		/* Settings */
+        /* Settings */
 
-		this.settings = $.extend( {}, defaults, options, this.$el.data() );
+        this.settings = $.extend( {}, defaults, options, this.$el.data() );
 
-		/* Defaults */
+        /* Defaults */
 
-		this._defaults = defaults;
+        this._defaults = defaults;
 
-		/* Options */
+        /* Options */
 
-		this.$options = this.$el.find('option, optgroup')
+        this.$options = this.$el.find('option, optgroup')
 
-		/* Initialize */
+        /* Initialize */
 
-		this.init();
+        this.init();
 
-		/* Instances */
+        /* Instances */
 
-		$.fn[ pluginName ].instances.push(this);
+        $.fn[ pluginName ].instances.push(this);
 
-	}
+    }
 
-	$.extend(Plugin.prototype, {
-		init: function () {
+    $.extend(Plugin.prototype, {
+        init: function () {
 
-			/* Construct the comboselect */
+            /* Construct the comboselect */
 
-			this._construct();
-
-
-			/* Add event bindings */          
-
-			this._events();
+            this._construct();
 
 
-		},
-		_construct: function(){
+            /* Add event bindings */          
 
-			var self = this
+            this._events();
 
-			/**
+
+        },
+        _construct: function(){
+
+            var self = this
+
+            /**
 			 * Add negative TabIndex to `select`
 			 * Preserves previous tabindex
 			 */
 			
-			this.$el.data('plugin_'+ dataKey + '_tabindex', this.$el.prop('tabindex'))
+            this.$el.data('plugin_'+ dataKey + '_tabindex', this.$el.prop('tabindex'))
 
-			/* Add a tab index for desktop browsers */
+            /* Add a tab index for desktop browsers */
 
-			!isMobile && this.$el.prop("tabIndex", -1)
+            !isMobile && this.$el.prop("tabIndex", -1)
 
-			/**
+            /**
 			 * Wrap the Select
 			 */
 
-			this.$container = this.$el.wrapAll('<div class="' + this.settings.comboClass + ' '+ this.settings.themeClass + '" />').parent();
+            this.$container = this.$el.wrapAll('<div class="' + this.settings.comboClass + ' '+ this.settings.themeClass + '" />').parent();
 			
-			/**
+            /**
 			 * Check if select has a width attribute
 			 */
-			if(this.settings.extendStyle && this.$el.attr('style')){
+            if(this.settings.extendStyle && this.$el.attr('style')){
 
-				this.$container.attr('style', this.$el.attr("style"))
+                this.$container.attr('style', this.$el.attr("style"))
 				
-			}
+            }
 			
 
-			/**
+            /**
 			 * Append dropdown arrow
 			 */
 
-			this.$arrow = $('<div class="'+ this.settings.comboArrowClass+ '" />').appendTo(this.$container)
+            this.$arrow = $('<div class="'+ this.settings.comboArrowClass+ '" />').appendTo(this.$container)
 
 
-			/**
+            /**
 			 * Append dropdown
 			 */
 
-			this.$dropdown = $('<ul class="'+this.settings.comboDropDownClass+'" />').appendTo(this.$container)
+            this.$dropdown = $('<ul class="'+this.settings.comboDropDownClass+'" />').appendTo(this.$container)
 
 
-			/**
+            /**
 			 * Create dropdown options
 			 */
 
-			var o = '', k = 0, p = '';
+            var o = '', k = 0, p = '';
 
-			this.selectedIndex = this.$el.prop('selectedIndex')
+            this.selectedIndex = this.$el.prop('selectedIndex')
 
-			this.$options.each(function(i, e){
+            this.$options.each(function(i, e){
 
-				if(e.nodeName.toLowerCase() == 'optgroup'){
+                if(e.nodeName.toLowerCase() == 'optgroup'){
 
-					return o+='<li class="option-group">'+this.label+'</li>'
-				}
+                    return o+='<li class="option-group">'+this.label+'</li>'
+                }
 
-				if(!e.value) p = e.innerHTML
+                if (!e.value) p = e.innerHTML;
+                o += '<li class="' + (this.disabled ? self.settings.disabledClass : "option-item") + ' ' + (k == self.selectedIndex ? self.settings.selectedClass : '') + '" data-index="' + (k) + '" data-value="' + this.value + '"';
+                $(e.attributes).each(function (i, ele) {//ext :2018-03-12 add ui user of attributes
+                    $.each(e.attributes, function () {
+                        if (this.specified) {
+                            o += ' ' + this.name + '="' + this.value + '"';
+                        }
+                    });
+                });
+                o+='>' + (this.innerHTML) + '</li>'
+                k++;
+            })
 
-				o+='<li class="'+(this.disabled? self.settings.disabledClass : "option-item") + ' ' +(k == self.selectedIndex? self.settings.selectedClass : '')+ '" data-index="'+(k)+'" data-value="'+this.value+'">'+ (this.innerHTML) + '</li>'
+            this.$dropdown.html(o)
 
-				k++;
-			})
-
-			this.$dropdown.html(o)
-
-			/**
+            /**
 			 * Items
 			 */
 
-			this.$items = this.$dropdown.children();
+            this.$items = this.$dropdown.children();
 
 
-			/**
+            /**
 			 * Append Input
 			 */
 
-			this.$input = $('<input type="text"' + (isMobile? 'tabindex="-1"': '') + ' placeholder="'+p+'" class="'+ this.settings.inputClass + '">').appendTo(this.$container)
+            this.$input = $('<input type="text"' + (isMobile? 'tabindex="-1"': '') + ' placeholder="'+p+'" class="'+ this.settings.inputClass + '">').appendTo(this.$container)
 
-			/* Update input text */
+            /* Update input text */
 
-			this._updateInput()
+            this._updateInput()
 
-		},
+        },
 
-		_events: function(){
+        _events: function(){
 
-			/* Input: focus */
+            /* Input: focus */
 
-			this.$container.on('focus.input', 'input', $.proxy(this._focus, this))
+            this.$container.on('focus.input', 'input', $.proxy(this._focus, this))
 
-			/**
+            /**
 			 * Input: mouseup
 			 * For input select() event to function correctly
 			 */
-			this.$container.on('mouseup.input', 'input', function(e){
-				e.preventDefault()
-			})
+            this.$container.on('mouseup.input', 'input', function(e){
+                e.preventDefault()
+            })
 
-			/* Input: blur */
+            /* Input: blur */
 
-			this.$container.on('blur.input', 'input', $.proxy(this._blur, this))
+            this.$container.on('blur.input', 'input', $.proxy(this._blur, this))
 
-			/* Select: change */
+            /* Select: change */
 
-			this.$el.on('change.select', $.proxy(this._change, this))
+            this.$el.on('change.select', $.proxy(this._change, this))
 
-			/* Select: focus */
+            /* Select: focus */
 
-			this.$el.on('focus.select', $.proxy(this._focus, this))
+            this.$el.on('focus.select', $.proxy(this._focus, this))
 
-			/* Select: blur */
+            /* Select: blur */
 
-			this.$el.on('blur.select', $.proxy(this._blurSelect, this))
+            this.$el.on('blur.select', $.proxy(this._blurSelect, this))
 
-			/* Dropdown Arrow: click */
+            /* Dropdown Arrow: click */
 
-			this.$container.on('click.arrow', '.'+this.settings.comboArrowClass , $.proxy(this._toggle, this))
+            this.$container.on('click.arrow', '.'+this.settings.comboArrowClass , $.proxy(this._toggle, this))
 
-			/* Dropdown: close */
+            /* Dropdown: close */
 
-			this.$container.on('comboselect:close', $.proxy(this._close, this))
+            this.$container.on('comboselect:close', $.proxy(this._close, this))
 
-			/* Dropdown: open */
+            /* Dropdown: open */
 
-			this.$container.on('comboselect:open', $.proxy(this._open, this))
+            this.$container.on('comboselect:open', $.proxy(this._open, this))
 
 
-			/* HTML Click */
+            /* HTML Click */
 
-			$('html').off('click.comboselect').on('click.comboselect', function(){
+            $('html').off('click.comboselect').on('click.comboselect', function(){
 				
-				$.each($.fn[ pluginName ].instances, function(i, plugin){
+                $.each($.fn[ pluginName ].instances, function(i, plugin){
 
-					plugin.$container.trigger('comboselect:close')
+                    plugin.$container.trigger('comboselect:close')
 
-				})
-			});
+                })
+            });
 
-			/* Stop `event:click` bubbling */
+            /* Stop `event:click` bubbling */
 
-			this.$container.on('click.comboselect', function(e){
-				e.stopPropagation();
-			})
+            this.$container.on('click.comboselect', function(e){
+                e.stopPropagation();
+            })
 
 
-			/* Input: keydown */
+            /* Input: keydown */
 
-			this.$container.on('keydown', 'input', $.proxy(this._keydown, this))
+            this.$container.on('keydown', 'input', $.proxy(this._keydown, this))
 
-			/* Input: keyup */
+            /* Input: keyup */
 			
-			this.$container.on('keyup', 'input', $.proxy(this._keyup, this))
+            this.$container.on('keyup', 'input', $.proxy(this._keyup, this))
 
-			/* Dropdown item: click */
+            /* Dropdown item: click */
 
-			this.$container.on('click.item', '.option-item', $.proxy(this._select, this))
+            this.$container.on('click.item', '.option-item', $.proxy(this._select, this))
 
-		},
+        },
 
-		_keydown: function(event){
+        _keydown: function(event){
 
 			
 
-			switch(event.which){
+            switch(event.which){
 
-				case keys.UP:
-					this._move('up', event)
-					break;
+                case keys.UP:
+                    this._move('up', event)
+                    break;
 
-				case keys.DOWN:
-					this._move('down', event)
-					break;
+                case keys.DOWN:
+                    this._move('down', event)
+                    break;
 				
-				case keys.TAB:
-					this._enter(event)
-					break;
+                case keys.TAB:
+                    this._enter(event)
+                    break;
 
-				case keys.RIGHT:
-					this._autofill(event);
-					break;
+                case keys.RIGHT:
+                    this._autofill(event);
+                    break;
 
-				case keys.ENTER:
-					this._enter(event);
-					break;
+                case keys.ENTER:
+                    this._enter(event);
+                    break;
 
-				default:							
-					break;
+                default:							
+                    break;
 
 
-			}
+            }
 
-		},
+        },
 		
 
-		_keyup: function(event){
+        _keyup: function(event){
 			
-			switch(event.which){
-				case keys.ESC:													
-					this.$container.trigger('comboselect:close')
-					break;
+            switch(event.which){
+                case keys.ESC:													
+                    this.$container.trigger('comboselect:close')
+                    break;
 
-				case keys.ENTER:
-				case keys.UP:
-				case keys.DOWN:
-				case keys.LEFT:
-				case keys.RIGHT:
-				case keys.TAB:
-				case keys.SHIFT:							
-					break;
+                case keys.ENTER:
+                case keys.UP:
+                case keys.DOWN:
+                case keys.LEFT:
+                case keys.RIGHT:
+                case keys.TAB:
+                case keys.SHIFT:							
+                    break;
 				
-				default:							
-					this._filter(event.target.value)
-					break;
-			}
-		},
+                default:							
+                    this._filter(event.target.value)
+                    break;
+            }
+        },
 		
-		_enter: function(event){
+        _enter: function(event){
 
-			var item = this._getHovered()
+            var item = this._getHovered()
 
-			item.length && this._select(item);
+            item.length && this._select(item);
 
-			/* Check if it enter key */
-			if(event && event.which == keys.ENTER){
+            /* Check if it enter key */
+            if(event && event.which == keys.ENTER){
 
-				if(!item.length) {
+                if(!item.length) {
 					
-					/* Check if its illegal value */
+                    /* Check if its illegal value */
 
-					this._blur();
+                    this._blur();
 
-					return true;
-				}
+                    return true;
+                }
 
-				event.preventDefault();
-			}
+                event.preventDefault();
+            }
 			
 
-		},
-		_move: function(dir){
+        },
+        _move: function(dir){
 
-			var items = this._getVisible(),
+            var items = this._getVisible(),
 				current = this._getHovered(),
 				index = current.prevAll('.option-item').filter(':visible').length,
 				total = items.length
 
 			
-			switch(dir){
-				case 'up':
-					index--;
-					(index < 0) && (index = (total - 1));
-					break;
+            switch(dir){
+                case 'up':
+                    index--;
+                    (index < 0) && (index = (total - 1));
+                    break;
 
-				case 'down':							
-					index++;
-					(index >= total) && (index = 0);							
-					break;
-			}
+                case 'down':							
+                    index++;
+                    (index >= total) && (index = 0);							
+                    break;
+            }
 
 			
-			items
+            items
 				.removeClass(this.settings.hoverClass)
 				.eq(index)
 				.addClass(this.settings.hoverClass)
 
 
-			if(!this.opened) this.$container.trigger('comboselect:open');
+            if(!this.opened) this.$container.trigger('comboselect:open');
 
-			this._fixScroll()
-		},
-		getSelected: function () {//扩展的函数：获取选择项数据【后期select标签不使用这个控件】
-		    var items = $(this.currentTarget);
-		    if (!items) {
-		        items = $(this);
-		    }
-		    var index = items.data('index');
-		    var option = this.$items[index];
-		},
-		_select: function(event){
+            this._fixScroll()
+        },
+		
+        _select: function(event){
 
-			var item = event.currentTarget? $(event.currentTarget) : $(event);
+            var item = event.currentTarget? $(event.currentTarget) : $(event);
 
-			if(!item.length) return;
+            if(!item.length) return;
 
-			/**
+            /**
 			 * 1. get Index
 			 */
 			
-			var index = item.data('index');
+            var index = item.data('index');
 
-			this._selectByIndex(index);
+            this._selectByIndex(index);
 
-			this.$container.trigger('comboselect:close')					
+            this.$container.trigger('comboselect:close')					
 
-		},
+        },
 
-		_selectByIndex: function(index){
+        _selectByIndex: function(index){
 
-			/**
+            /**
 			 * Set selected index and trigger change
 			 * @type {[type]}
 			 */
-			if(typeof index == 'undefined'){
+            if(typeof index == 'undefined'){
 				
-				index = 0
+                index = 0
 
-			}
+            }
 			
-			if(this.$el.prop('selectedIndex') != index){
+            if(this.$el.prop('selectedIndex') != index){
 
-				this.$el.prop('selectedIndex', index).trigger('change');
-			}
+                this.$el.prop('selectedIndex', index).trigger('change');
+            }
 
-		},
+        },
 
-		_autofill: function(){
+        _autofill: function(){
 
-			var item = this._getHovered();
+            var item = this._getHovered();
 
-			if(item.length){
+            if(item.length){
 
-				var index = item.data('index')
+                var index = item.data('index')
 
-				this._selectByIndex(index)
+                this._selectByIndex(index)
 
-			}
+            }
 
-		},
+        },
 		
 
-		_filter: function(search){
+        _filter: function(search){
 
-			var self = this,
+            var self = this,
 				items = this._getAll();
-				needle = $.trim(search).toLowerCase(),
-				reEscape = new RegExp('(\\' + ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'].join('|\\') + ')', 'g'),
-				pattern = '(' + search.replace(reEscape, '\\$1') + ')';
+            needle = $.trim(search).toLowerCase(),
+            reEscape = new RegExp('(\\' + ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'].join('|\\') + ')', 'g'),
+            pattern = '(' + search.replace(reEscape, '\\$1') + ')';
 
 
-			/**
+            /**
 			 * Unwrap all markers
 			 */
 			
-			$('.'+self.settings.markerClass, items).contents().unwrap();
+            $('.'+self.settings.markerClass, items).contents().unwrap();
 
-			/* Search */
+            /* Search */
 			
-			if(needle){
+            if(needle){
 
-				/* Hide Disabled and optgroups */
+                /* Hide Disabled and optgroups */
 
-				this.$items.filter('.option-group, .option-disabled').hide();
+                this.$items.filter('.option-group, .option-disabled').hide();
 			
 				
-				items							
+                items							
 					.hide()
 					.filter(function(){
 
-						var $this = $(this),
+					    var $this = $(this),
 							text = $.trim($this.text()).toLowerCase();
 						
-						/* Found */
-						if(text.toString().indexOf(needle) != -1){
+					    /* Found */
+					    if(text.toString().indexOf(needle) != -1){
 																
-							/**
+					        /**
 							 * Wrap the selection
 							 */									
 							
-							$this
+					        $this
 								.html(function(index, oldhtml){
-								return oldhtml.replace(new RegExp(pattern, 'gi'), '<span class="'+self.settings.markerClass+'">$1</span>')
-							})									
+								    return oldhtml.replace(new RegExp(pattern, 'gi'), '<span class="'+self.settings.markerClass+'">$1</span>')
+								})									
 
-							return true
-						}
+					        return true
+					    }
 
 					})
 					.show()
-			}else{
+            }else{
 
 								
-				this.$items.show();
-			}
+                this.$items.show();
+            }
 
-			/* Open the comboselect */
+            /* Open the comboselect */
 
-			this.$container.trigger('comboselect:open')
+            this.$container.trigger('comboselect:open')
 			
 
-		},
+        },
 
-		_highlight: function(){
+        _highlight: function(){
 
-			/* 
+            /* 
 			1. Check if there is a selected item 
 			2. Add hover class to it
 			3. If not add hover class to first item
 			*/
 		
-			var visible = this._getVisible().removeClass(this.settings.hoverClass),
+            var visible = this._getVisible().removeClass(this.settings.hoverClass),
 				$selected = visible.filter('.'+this.settings.selectedClass)
 
-			if($selected.length){
+            if($selected.length){
 				
-				$selected.addClass(this.settings.hoverClass);
+                $selected.addClass(this.settings.hoverClass);
 
-			}else{
+            }else{
 
-				visible
+                visible
 					.removeClass(this.settings.hoverClass)
 					.first()
 					.addClass(this.settings.hoverClass)
-			}
+            }
 
-		},
+        },
 
-		_updateInput: function(){
+        _updateInput: function(){
 
-			var selected = this.$el.prop('selectedIndex')
+            var selected = this.$el.prop('selectedIndex')
 			
-			if(this.$el.val()){
+            if(this.$el.val()){
 				
-				text = this.$el.find('option').eq(selected).text()
+                text = this.$el.find('option').eq(selected).text()
 
-				this.$input.val(text)
+                this.$input.val(text)
 
-			}else{
+            }else{
 				
-				this.$input.val('')
+                this.$input.val('')
 
-			}
+            }
 
-			return this._getAll()
+            return this._getAll()
 				.removeClass(this.settings.selectedClass)
 				.filter(function(){
 
-					return $(this).data('index') == selected
+				    return $(this).data('index') == selected
 				})
 				.addClass(this.settings.selectedClass)
 		
-		},
-		_blurSelect: function(){
+        },
+        _blurSelect: function(){
 
-			this.$container.removeClass('combo-focus');
+            this.$container.removeClass('combo-focus');
 
-		},
-		_focus: function(event){
+        },
+        _focus: function(event){
 			
-			/* Toggle focus class */
+            /* Toggle focus class */
 
-			this.$container.toggleClass('combo-focus', !this.opened);
+            this.$container.toggleClass('combo-focus', !this.opened);
 
-			/* If mobile: stop */
+            /* If mobile: stop */
 			
-			if(isMobile) return;
+            if(isMobile) return;
 
-			/* Open combo */
+            /* Open combo */
 
-			if(!this.opened) this.$container.trigger('comboselect:open');
+            if(!this.opened) this.$container.trigger('comboselect:open');
 			
-			/* Select the input */
+            /* Select the input */
 			
-			this.settings.focusInput && event && event.currentTarget && event.currentTarget.nodeName == 'INPUT' && event.currentTarget.select()
-		},
+            this.settings.focusInput && event && event.currentTarget && event.currentTarget.nodeName == 'INPUT' && event.currentTarget.select()
+        },
 
-		_blur: function(){
+        _blur: function(){
 
-			/**
+            /**
 			 * 1. Get hovered item
 			 * 2. If not check if input value == select option
 			 * 3. If none
 			 */
 			
-			var val = $.trim(this.$input.val().toLowerCase()),
+            var val = $.trim(this.$input.val().toLowerCase()),
 				isNumber = !isNaN(val);
 			
-			var index = this.$options.filter(function(){
+            var index = this.$options.filter(function(){
 				
-				if(isNumber){
-					return parseInt($.trim(this.innerHTML).toLowerCase()) == val
-				}
+                if(isNumber){
+                    return parseInt($.trim(this.innerHTML).toLowerCase()) == val
+                }
 
-				return $.trim(this.innerHTML).toLowerCase() == val
+                return $.trim(this.innerHTML).toLowerCase() == val
 
-			}).prop('index')
+            }).prop('index')
 		
-			/* Select by Index */
+            /* Select by Index */
 						
-			this._selectByIndex(index)
+            this._selectByIndex(index)
 			
-		},
+        },
 
-		_change: function(){
+        _change: function(){
 
 
-			this._updateInput();
+            this._updateInput();
 
-		},
+        },
 
-		_getAll: function(){
+        _getAll: function(){
 
-			return this.$items.filter('.option-item')
+            return this.$items.filter('.option-item')
 
-		},
-		_getVisible: function(){
+        },
+        _getVisible: function(){
 
-			return this.$items.filter('.option-item').filter(':visible')
+            return this.$items.filter('.option-item').filter(':visible')
 
-		},
+        },
 
-		_getHovered: function(){
+        _getHovered: function(){
 
-			return this._getVisible().filter('.' + this.settings.hoverClass);
+            return this._getVisible().filter('.' + this.settings.hoverClass);
 
-		},
+        },
 
-		_open: function(){
+        _open: function(){
 
-			var self = this
+            var self = this
 
-			this.$container.addClass('combo-open')			
+            this.$container.addClass('combo-open')			
 
-			this.opened = true
+            this.opened = true
 			
-			/* Focus input field */			
+            /* Focus input field */			
 
-			this.settings.focusInput && setTimeout(function(){ !self.$input.is(':focus') && self.$input.focus(); });
+            this.settings.focusInput && setTimeout(function(){ !self.$input.is(':focus') && self.$input.focus(); });
 
-			/* Highligh the items */
+            /* Highligh the items */
 
-			this._highlight()
+            this._highlight()
 
-			/* Fix scroll */
+            /* Fix scroll */
 
-			this._fixScroll()
+            this._fixScroll()
 
-			/* Close all others */
+            /* Close all others */
 
 
-			$.each($.fn[ pluginName ].instances, function(i, plugin){
+            $.each($.fn[ pluginName ].instances, function(i, plugin){
 
-				if(plugin != self && plugin.opened) plugin.$container.trigger('comboselect:close')
-			})
+                if(plugin != self && plugin.opened) plugin.$container.trigger('comboselect:close')
+            })
 
-		},
+        },
 
-		_toggle: function(){
+        _toggle: function(){
 
-			this.opened? this._close.call(this) : this._open.call(this)
-		},
+            this.opened? this._close.call(this) : this._open.call(this)
+        },
 
-		_close: function(){				
+        _close: function(){				
 
-			this.$container.removeClass('combo-open combo-focus')
+            this.$container.removeClass('combo-open combo-focus')
 
-			this.$container.trigger('comboselect:closed')
+            this.$container.trigger('comboselect:closed')
 
-			this.opened = false
+            this.opened = false
 
-			/* Show all items */
+            /* Show all items */
 
-			this.$items.show();
+            this.$items.show();
 
-		},
-		_fixScroll: function(){
+        },
+        _fixScroll: function(){
 	
-			/**
+            /**
 			 * If dropdown is hidden
 			 */
-			if(this.$dropdown.is(':hidden')) return;
+            if(this.$dropdown.is(':hidden')) return;
 
 			
-			/**
+            /**
 			 * Else					 
 			 */
-			var item = this._getHovered();
+            var item = this._getHovered();
 
-			if(!item.length) return;					
+            if(!item.length) return;					
 
-			/**
+            /**
 			 * Scroll
 			 */
 			
-			var offsetTop,
+            var offsetTop,
 				upperBound,
 				lowerBound,
 				heightDelta = item.outerHeight()
 
-			offsetTop = item[0].offsetTop;
+            offsetTop = item[0].offsetTop;
 			
-			upperBound = this.$dropdown.scrollTop();
+            upperBound = this.$dropdown.scrollTop();
 
-			lowerBound = upperBound + this.settings.maxHeight - heightDelta;
+            lowerBound = upperBound + this.settings.maxHeight - heightDelta;
 			
-			if (offsetTop < upperBound) {
+            if (offsetTop < upperBound) {
 					
-				this.$dropdown.scrollTop(offsetTop);
+                this.$dropdown.scrollTop(offsetTop);
 
-			} else if (offsetTop > lowerBound) {
+            } else if (offsetTop > lowerBound) {
 					
-				this.$dropdown.scrollTop(offsetTop - this.settings.maxHeight + heightDelta);
-			}
+                this.$dropdown.scrollTop(offsetTop - this.settings.maxHeight + heightDelta);
+            }
 
-		},
-		/**
+        },
+        /**
 		 * Destroy API
 		 */
 		
-		dispose: function(){
+        dispose: function(){
 
-			/* Remove combo arrow, input, dropdown */
+            /* Remove combo arrow, input, dropdown */
 
-			this.$arrow.remove()
+            this.$arrow.remove()
 
-			this.$input.remove()
+            this.$input.remove()
 
-			this.$dropdown.remove()
+            this.$dropdown.remove()
 
-			/* Remove tabindex property */
-			this.$el
+            /* Remove tabindex property */
+            this.$el
 				.removeAttr("tabindex")
 
-			/* Check if there is a tabindex set before */
+            /* Check if there is a tabindex set before */
 
-			if(!!this.$el.data('plugin_'+ dataKey + '_tabindex')){
-				this.$el.prop('tabindex', this.$el.data('plugin_'+ dataKey + '_tabindex'))
-			}
+            if(!!this.$el.data('plugin_'+ dataKey + '_tabindex')){
+                this.$el.prop('tabindex', this.$el.data('plugin_'+ dataKey + '_tabindex'))
+            }
 
-			/* Unwrap */
+            /* Unwrap */
 
-			this.$el.unwrap()
+            this.$el.unwrap()
 
-			/* Remove data */
+            /* Remove data */
 
-			this.$el.removeData('plugin_'+dataKey)
+            this.$el.removeData('plugin_'+dataKey)
 
-			/* Remove tabindex data */
+            /* Remove tabindex data */
 
-			this.$el.removeData('plugin_'+dataKey + '_tabindex')
+            this.$el.removeData('plugin_'+dataKey + '_tabindex')
 
-			/* Remove change event on select */
+            /* Remove change event on select */
 
-			this.$el.off('change.select focus.select blur.select');
+            this.$el.off('change.select focus.select blur.select');
 
-		}	
-	});
+        }	
+    });
 
 
 
-	// A really lightweight plugin wrapper around the constructor,
-	// preventing against multiple instantiations
-	$.fn[ pluginName ] = function ( options, args ) {
+    // A really lightweight plugin wrapper around the constructor,
+    // preventing against multiple instantiations
+    $.fn[ pluginName ] = function ( options, args ) {
 
-		this.each(function() {
+        this.each(function() {
 
-			var $e = $(this),
+            var $e = $(this),
 				instance = $e.data('plugin_'+dataKey)
 
-			if (typeof options === 'string') {
+            if (typeof options === 'string') {
 				
-				if (instance && typeof instance[options] === 'function') {
-						instance[options](args);
-				}
+                if (instance && typeof instance[options] === 'function') {
+                    instance[options](args);
+                }
 
-			}else{
+            }else{
 
-				if (instance && instance.dispose) {
-						instance.dispose();
-				}
+                if (instance && instance.dispose) {
+                    instance.dispose();
+                }
 
-				$.data( this, "plugin_" + dataKey, new Plugin( this, options ) );
+                $.data( this, "plugin_" + dataKey, new Plugin( this, options ) );
 
-			}
+            }
 
-		});
+        });
 
-		// chain jQuery functions
-		return this;
-	};
-
+        // chain jQuery functions
+        return this;
+    };
+    $.extend($.fn, {
+        getSelected: function () {//扩展的函数：获取选择项数据【后期select标签不使用这个控件】
+            var items = $(this.currentTarget);
+            if (!items.hasOwnProperty()) {
+                items = $(this);
+            }
+            var index = items.data('index');
+            if (!index) {
+                index = items[0].selectedIndex;
+            }
+            var option = items[0][index];
+            return option;//获取选中的数据项
+        }
+    });
+   
 	$.fn[ pluginName ].instances = [];
 
 }));

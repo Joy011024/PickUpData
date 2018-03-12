@@ -17,13 +17,16 @@ namespace HRApp.Web.Controllers
     {
         //
         // GET: /AppSettingManage/
-
+        public JsonResult QueryRootAppSetting()
+        {
+            Common.Data.JsonData json = new JsonData() { Result=true};
+            json.Data = QueryAppSettingList("-1");
+            json.Success = true;
+            return Json(json);
+        }
         public ActionResult Index()
         {
-            //查询节点列表
-            IAppSettingRepository appSetRepository = new AppSettingRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            IAppSettingService appSetService = new AppSettingService(appSetRepository);
-            ViewData["ParentNode"] = appSetService.SelectNodeItemByParentCode("-1");
+            ViewData["ParentNode"] = QueryAppSettingList("-1");
             return View();
         }
         public JsonResult SaveAppSetting(NodeRequestParam param)
