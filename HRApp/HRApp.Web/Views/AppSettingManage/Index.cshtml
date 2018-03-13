@@ -47,7 +47,9 @@
                 }
                 var data= $('[apiKey=ParentCode]').getSelected();
                 var api = GetXPathObject(root, "apiKey");
-                return;
+                if (data) {
+                    api["ParentId"] = $(data).attr('ParentId');
+                }
                 bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
                     AjaxWarming($('#btnSave'), response);
                     console.log(response);
@@ -98,7 +100,7 @@
                     @{
                         foreach (HRApp.Model.CategoryItems item in ViewData["ParentNode"] as List<HRApp.Model.CategoryItems>)
                         {
-                            <option value="@item.ItemValue" codeid="@item.Id" code="@item.Code">@item.Name</option>
+                            <option appvalue="@item.ItemValue" value="@item.Code" parentid="@item.Id" nodeParentId="@item.ParentId">@item.Name</option>
                         }
 
                     }

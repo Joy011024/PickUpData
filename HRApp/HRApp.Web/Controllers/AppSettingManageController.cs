@@ -39,6 +39,7 @@ namespace HRApp.Web.Controllers
                 Code=param.Code,
                 ParentCode=param.ParentCode,
                 Name=param.Name,
+                ParentId=param.ParentId,
                 ItemValue=param.Value
             });
             return Json(json);

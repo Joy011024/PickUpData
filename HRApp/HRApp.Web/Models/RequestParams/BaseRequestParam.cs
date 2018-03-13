@@ -16,6 +16,7 @@ namespace HRApp.Web
     public class NodeRequestParam : SampleRequestParam
     {
         public string ParentCode { get; set; }
+        public int ParentId { get; set; }
        
     }
     public class QueryRequestParam:BaseRequestParam

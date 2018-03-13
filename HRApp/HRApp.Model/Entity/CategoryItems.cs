@@ -26,6 +26,9 @@ namespace HRApp.Model
 
             return sql;
         }
-
+        public static string BuilderValideSql() 
+        {
+            return @"select count(id) from CategoryItems where code=@code";
+        }
     }
 }

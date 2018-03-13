@@ -88,7 +88,27 @@ namespace Infrastructure.MsSqlService.SqlHelper
             {
                 dap.Fill(ds, beginRow.Value, endRow.HasValue ? endRow.Value : int.MaxValue, dataSetName);
             }
+            conn.Close();
             return ds;
+        }
+        /// <summary>
+        /// 执行查询
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="sqlconnString"></param>
+        /// <param name="param"></param>
+        /// <returns>查询结果</returns>
+        public SqlDataReader ExcuteQuery(string sql, string sqlconnString, SqlParameter[] param)
+        {
+            SqlConnection conn = new SqlConnection(sqlconnString);
+            conn.Open();
+            SqlCommand comm = new SqlCommand(sql, conn);
+            if (param != null && param.Length > 0)
+            {
+                comm.Parameters.AddRange(param);
+            }
+            SqlDataReader reader= comm.ExecuteReader();
+            return reader;
         }
     }
 }

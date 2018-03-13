@@ -85,6 +85,14 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
             };
             return CommonRepository.QueryModelList<CategoryItems>(sql, param, SqlConnString, 0, int.MaxValue);
         }
-
+        public int ValideExists(string key)
+        {
+            string sql = CategoryItems.BuilderValideSql();
+            SqlParameter[] param = new SqlParameter[] 
+            {
+                new SqlParameter(){ParameterName="@code",Value=key}
+            };
+            return CommonRepository.ExecuteCount(sql, param, SqlConnString);
+        }
     }
 }

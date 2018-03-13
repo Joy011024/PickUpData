@@ -171,6 +171,9 @@
   <data name="Tip_12306_ToStation" xml:space="preserve">
     <value>目的地</value>
   </data>
+  <data name="Tip_CodeHasUsed" xml:space="preserve">
+    <value>编码【{0}】已被使用</value>
+  </data>
   <data name="Tip_MenuUrlIsRequired" xml:space="preserve">
     <value>菜单路径不能为空。</value>
   </data>

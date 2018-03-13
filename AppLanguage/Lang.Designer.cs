@@ -223,6 +223,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 编码【{0}】已被使用 的本地化字符串。
+        /// </summary>
+        public static string Tip_CodeHasUsed {
+            get {
+                return ResourceManager.GetString("Tip_CodeHasUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 菜单路径不能为空。 的本地化字符串。
         /// </summary>
         public static string Tip_MenuUrlIsRequired {

@@ -111,5 +111,22 @@ namespace HRApp.Infrastructure
             DataSet ds = new SqlCmdHelper().QueryDataSet(sql, sqlConnString, param, beginRow, endRow, typeof(T).Name);
             return DataHelp.DataReflection.DataSetConvert<T>(ds);
         }
+        public static int ExecuteCount(string sql,SqlParameter[] param,string sqlConnString)
+        {
+            SqlDataReader read = new SqlCmdHelper().ExcuteQuery(sql, sqlConnString, param);
+            if (read.HasRows)
+            {
+                read.Read();
+                object obj = read[0];
+                int count = -1;
+                if (obj != null && int.TryParse(obj.ToString(), out count))
+                {
+                    return count;
+                }
+                return -1;
+            }
+            read.Close();
+            return -1;
+        }
     }
 }

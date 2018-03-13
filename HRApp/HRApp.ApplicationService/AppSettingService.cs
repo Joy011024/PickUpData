@@ -48,7 +48,17 @@ namespace HRApp.ApplicationService
             }
             try
             {
-                json.Success = appSettingRepository.Add(item);
+                //首先检测编码是否已经使用
+                string code = item.Code;
+                if (appSettingRepository.ValideExists(code) == 0)
+                {
+                    json.Success = appSettingRepository.Add(item);
+                }
+                else 
+                {
+                    json.Success = false;
+                    json.Message = string.Format(AppLanguage.Lang.Tip_CodeHasUsed, code);
+                }
             }
             catch (Exception ex)
             {
