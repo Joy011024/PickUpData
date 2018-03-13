@@ -24,7 +24,7 @@ namespace HRApp.Model
         }
         public string QueryMenus()
         {
-            return " select  [Name],[Code],[Url],[Remark],[CreateTime]  from [dbo].[Menu] ";
+            return " select [Id], [Name],[Code],[Url],[Remark],[CreateTime]  from [dbo].[Menu] ";
         }
     }
 }

@@ -31,20 +31,35 @@
                     $('.warming').html(response.Message);
                     return;
                 }
-                $(response.Data).each(function (i,ele) {//跟节点
+                $(response.Data).each(function (i, ele) {//跟节点
+                    var active = '';
+                    if (i == 0) {
+                        active = ' class="active" ';
+                    }
+                    var tmplLi = ' <li  ' + active + '><a href="#menu{Code}" data-toggle="tab" url="{url}"> {title} </a> </li>';
+                    tmplLi = tmplLi.replace(/{Code}/g, ele.Code).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
+                    $('#myTab').append(tmplLi);
                     var tmpl = '<div class="block" url="{1}" id="{2}" title="{3}">{0}</div>';
                    var html=  tmpl.format(ele.Name, ele.Url, ele.Id, ele.Remark);
-                   $('#menus').append(html);
-                   $('#menus').find('.block:last').click(function () {
+                  // $('#menus').append(html);
+                   $('#myTab').find('[data-toggle=tab]:last').click(function () {
                        btnMenuClick(this);
                    })
                 });
-                
+                //初始化触发第一项
+                $('#myTab .active>[data-toggle=tab]').trigger('click');
             });
         });
         function btnMenuClick(objEle) {
-            var id = $(objEle).attr('id');
-           // ○
+            var layoutId = $(objEle).attr('href').replace('#','');
+            var url = $(objEle).attr('url');
+            if ($('#myTabContent #'+layoutId).length > 0)
+            {
+                return;
+            }
+            var layoutHtml = ' <div class="tab-pane fade in active" id="{layoutId}"> <iframe src="{url}" width="99%" height="500"></iframe> </div>';
+            layoutHtml = layoutHtml.replace(/{layoutId}/g, layoutId).replace(/{url}/g, url);
+            $('#myTabContent').append(layoutHtml);
         }
     </script>
 </head>
@@ -55,26 +70,23 @@
         <div style="color:red;">文件版本= @HRApp.Web.InitAppSetting.Version</div>
     </div>
     <div id="toolTab">
-        <div class="warming"></div>
-        <div id="menus">
-
+        <ul id="myTab" class="nav nav-tabs">
+            
+            <li class="dropdown" style="display:none;">
+                <a href="#" id="myTabDrop1" class="dropdown-toggle"
+                   data-toggle="dropdown">
+                    应用
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" style="display:none;">
+                    <li><a href="#jmeter" tabindex="-1" data-toggle="tab">jmeter</a></li>
+                    <li><a href="#ejb" tabindex="-1" data-toggle="tab">ejb</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+           
         </div>
     </div>
-    <div id="layout">
-        <div class="tabs" >
-            <span style="border:1px solid white;padding:10px;"><span>1</span><span class="smalllClear">x</span></span>
-            <span>2</span>
-        </div>
-        <div class="panel">
-          
-            <div class="layout" style="height:90%;width:99%;border:1px solid white;">
-                <iframe src="/AppSettingManage/AppDataDialog" width="99%" height="500"></iframe>
-            </div> 
-            <div class="layout" style="height:90%;width:98%;border:1px solid white;display:none;">
-                <iframe src="/SpellName/SpecialSpellNameDialog" width="99%" height="500"></iframe>
-            </div>
-        </div>
-    </div>
-    
 </body>
 </html>
