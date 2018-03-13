@@ -15,6 +15,9 @@ namespace HRApp.Web.Controllers
         {
             return View();
         }
-
+        public ActionResult UILayout() 
+        {
+            return View();
+        }
     }
 }

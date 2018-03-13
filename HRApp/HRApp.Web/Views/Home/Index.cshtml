@@ -1,4 +1,5 @@
-﻿@{
+﻿@using HRApp.Web;
+@{
     Layout = null;
 }
 
@@ -8,11 +9,14 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <script src="~/Scripts/jquery-1.9.1.js"></script>
-    <script src="~/Scripts/Common/Common.js"></script>
-    <script src="~/Scripts/Common/string.js"></script>
-    <link href="~/Content/AppLayout.css" rel="stylesheet" />
-    <link href="~/Content/HtmlEle.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <style type="text/css">
         #toolTab {
             margin-bottom:10px;
@@ -40,7 +44,7 @@
         });
         function btnMenuClick(objEle) {
             var id = $(objEle).attr('id');
-
+           // ○
         }
     </script>
 </head>
@@ -63,11 +67,11 @@
         </div>
         <div class="panel">
           
-            <div class="layout" style="height:90%;width:98%;border:1px solid white;">
-                <iframe src="/AppSettingManage/AppDataDialog" width="95%" height="500"></iframe>
+            <div class="layout" style="height:90%;width:99%;border:1px solid white;">
+                <iframe src="/AppSettingManage/AppDataDialog" width="99%" height="500"></iframe>
             </div> 
             <div class="layout" style="height:90%;width:98%;border:1px solid white;display:none;">
-                <iframe src="/SpellName/SpecialSpellNameDialog" width="95%" height="500"></iframe>
+                <iframe src="/SpellName/SpecialSpellNameDialog" width="99%" height="500"></iframe>
             </div>
         </div>
     </div>
