@@ -21,6 +21,15 @@
         #toolTab {
             margin-bottom:10px;
         }
+        .tabItem {
+            border: 1px solid white;
+            padding: 8px;
+            border-radius: 50px;
+            margin-right:5px;
+        }
+        #myTab .active {
+            background-color: #1f1d1d;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
@@ -38,28 +47,75 @@
                     }
                     var tmplLi = ' <li  ' + active + '><a href="#menu{Code}" data-toggle="tab" url="{url}"> {title} </a> </li>';
                     tmplLi = tmplLi.replace(/{Code}/g, ele.Code).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
-                    $('#myTab').append(tmplLi);
+                    $('#myMenu').append(tmplLi);
                     var tmpl = '<div class="block" url="{1}" id="{2}" title="{3}">{0}</div>';
                    var html=  tmpl.format(ele.Name, ele.Url, ele.Id, ele.Remark);
                   // $('#menus').append(html);
-                   $('#myTab').find('[data-toggle=tab]:last').click(function () {
-                       btnMenuClick(this);
+                   $('#myMenu').find('[data-toggle=tab]:last').click(function () {
+                       toolItemSlt(this);
+                      // btnMenuClick(this);
                    })
                 });
                 //初始化触发第一项
                 $('#myTab .active>[data-toggle=tab]').trigger('click');
             });
         });
+        function toolItemSlt(objEle) {
+            var tabId = $(objEle).attr('href').replace('#', '');
+            var item = 'tab_' + tabId;
+            //判断该项是否之前已经增加到面板中
+            var tab = $('#myTab #' + item);
+            if ($('#myTab li').length>0)
+                $('#myTab li').removeClass('active');
+            if (tab.length < 1) {
+                //不存在则进行追加到面板栏
+
+                var url = $(objEle).attr('url');
+                var text = $(objEle).text();
+                var tmplLi = ' <li  class="active tabItem"><span><a id="{item}" href="#menu{item}" data-toggle="tab" url="{url}"> {text} </a></span><span class="topIcon" onclick="btnClosePanel(this)">x</span> </li>';
+                tmplLi = tmplLi.replace(/{item}/g, item).replace(/{url}/g, url).replace(/{text}/g, text);
+                $('#myTab').append(tmplLi);
+                tab = $('#myTab #' + item);
+                $(tab).click(function () {
+                    btnMenuClick(this);
+                });
+            } else {
+                $('#' + item).parents('li').addClass('active');
+            }
+            btnMenuClick(tab);
+        }
         function btnMenuClick(objEle) {
+            if (objEle.length == 0) {
+
+            }
+            $('#myTabContent .tab-pane').hide();
             var layoutId = $(objEle).attr('href').replace('#','');
             var url = $(objEle).attr('url');
-            if ($('#myTabContent #'+layoutId).length > 0)
+            var panel = $('#myTabContent #' + layoutId);
+            if (panel.length > 0)
             {
+                panel.show();
                 return;
             }
-            var layoutHtml = ' <div class="tab-pane fade in active" id="{layoutId}"> <iframe src="{url}" width="99%" height="500"></iframe> </div>';
+            var layoutHtml = ' <div class="tab-pane fade in active" id="{layoutId}"> <iframe src="{url}" width="99%" height="540"></iframe> </div>';
             layoutHtml = layoutHtml.replace(/{layoutId}/g, layoutId).replace(/{url}/g, url);
             $('#myTabContent').append(layoutHtml);
+
+        }
+        function btnClosePanel(obj) {
+            var panelF = $(obj).parents('li');
+            var id= panelF.find('a').attr('href');
+            var next = panelF.next();
+            if (next.length > 0) {
+                btnMenuClick(next.find('a'));
+            } else {
+                var prev = panelF.prev();
+                if (prev.length > 0) {
+                    btnMenuClick(prev.find('a'));
+                }
+            }
+            $(id).remove();
+            panelF.remove();
         }
     </script>
 </head>
@@ -69,9 +125,12 @@
         <div style="color:red;">数据库版本= @HRApp.Web.InitAppSetting.DBVersion</div>
         <div style="color:red;">文件版本= @HRApp.Web.InitAppSetting.Version</div>
     </div>
-    <div id="toolTab">
+    <div id="toolMenu">
+        <ul id="myMenu" class="nav nav-tabs">
+        </ul>
+    </div>
+    <div id="toolTab" style="margin-top: 5px;">
         <ul id="myTab" class="nav nav-tabs">
-            
             <li class="dropdown" style="display:none;">
                 <a href="#" id="myTabDrop1" class="dropdown-toggle"
                    data-toggle="dropdown">
@@ -85,7 +144,7 @@
             </li>
         </ul>
         <div id="myTabContent" class="tab-content">
-           
+
         </div>
     </div>
 </body>
