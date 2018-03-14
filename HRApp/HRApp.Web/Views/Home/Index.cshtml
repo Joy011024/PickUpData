@@ -88,6 +88,8 @@
             if (objEle.length == 0) {
 
             }
+            var li = $(objEle).parents('li');
+            li.addClass('active');
             $('#myTabContent .tab-pane').hide();
             var layoutId = $(objEle).attr('href').replace('#','');
             var url = $(objEle).attr('url');
@@ -130,7 +132,7 @@
         </ul>
     </div>
     <div id="toolTab" style="margin-top: 5px;">
-        <ul id="myTab" class="nav nav-tabs">
+        <ul id="myTab" class="nav nav-tabs" style="margin-bottom: 5px;">
             <li class="dropdown" style="display:none;">
                 <a href="#" id="myTabDrop1" class="dropdown-toggle"
                    data-toggle="dropdown">
