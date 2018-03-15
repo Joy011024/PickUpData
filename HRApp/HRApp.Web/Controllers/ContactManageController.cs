@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HRApp.Model;
+using Domain.CommonData;
 namespace HRApp.Web.Controllers
 {
     public class ContactManageController : Controller
@@ -36,6 +37,11 @@ namespace HRApp.Web.Controllers
             IContactDataService contactService = new ContactDataService(contactRep);
             json = contactService.Add(contacter);
             return Json(json);
+        }
+        [DescriptionSort("qq图片分类处理")]
+        public ActionResult UinImageGroup() 
+        {
+            return View();
         }
     }
 }

@@ -52,3 +52,16 @@ create table ContactData
 );
 alter table ContactData add constraint FK_ContactId foreign key (ContactTypeId) 
 references CategoryItems(Id)
+go
+create table Account
+(
+	Id uniqueidentifier primary key,
+	Name nvarchar(16) not null,
+	HeadImgUrl varchar(1024),
+	HasHeadImage bit not null,
+	UserName varchar(16) not null,
+	IsThirdAccount bit not null,
+	Statue smallint not null,
+	CreateTime datetime not null,
+	CreateDayInt int not null
+);

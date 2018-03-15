@@ -43,6 +43,7 @@
     <Compile Include="IAppSettingService.cs" />
     <Compile Include="IBaseService.cs" />
     <Compile Include="IContactDataService.cs" />
+    <Compile Include="IDataFromOtherService.cs" />
     <Compile Include="IFileService.cs" />
     <Compile Include="IMaybeSpecialService.cs" />
     <Compile Include="IMenuService.cs" />

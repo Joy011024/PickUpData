@@ -120,6 +120,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IocFactory.cs" />
     <Compile Include="Models\RequestParams\BaseRequestParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -251,6 +252,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\UILayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ContactManage\UinImageGroup.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
