@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ECommn.cs" />
     <Compile Include="Entity\ContactData.cs" />
     <Compile Include="Entity\AppModel.cs" />
     <Compile Include="Entity\CategoryItems.cs" />
@@ -60,7 +61,9 @@
     <Content Include="SqlCmd\4_LogicData\4_0_LogicData.sql" />
     <Content Include="SqlCmd\4_LogicData\4_1_LogicData.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Setting\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

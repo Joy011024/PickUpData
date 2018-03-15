@@ -26,6 +26,7 @@ namespace CaptureWebData
                     item.CreateTime = now;
                     if (string.IsNullOrEmpty(item.Url))//没有采集到该账户的头像数据
                         item.ImgType = -1;
+                    item.DayInt = int.Parse(now.ToString("yyyyMMdd"));
                 }
                 MainRespority<FindQQDataTable> mr = new MainRespority<FindQQDataTable>(ConnString);
                 mr.InsertList(data);

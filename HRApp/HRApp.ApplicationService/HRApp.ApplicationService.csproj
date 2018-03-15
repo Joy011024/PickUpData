@@ -43,6 +43,7 @@
     <Compile Include="AppSettingService.cs" />
     <Compile Include="CommonCallService.cs" />
     <Compile Include="ContactDataService.cs" />
+    <Compile Include="DataFromOtherService.cs" />
     <Compile Include="FileService.cs" />
     <Compile Include="MaybeSpecialService.cs" />
     <Compile Include="MenuService.cs" />

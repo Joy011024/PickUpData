@@ -31,6 +31,8 @@ namespace Domain.CommonData
         #region 增加这字段是为了兼容数据库表创建的形式不符合采集数据
         public int GatherImageErrorNum { get; set; }
         public int IsGatherImage { get; set; }
+        [DescriptionSort("数据采集日期数值（精确到天），这个字段在数据量大的时候很有用")]
+        public int DayInt { get; set; }
         #endregion
     }
     public class QQFriend 
