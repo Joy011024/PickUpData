@@ -49,6 +49,8 @@
                 var api = GetXPathObject(root, "apiKey");
                 if (data) {
                     api["ParentId"] = $(data).attr('ParentId');
+                } else {
+                    api["ParentId"] = -1;
                 }
                 bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
                     AjaxWarming($('#btnSave'), response);
