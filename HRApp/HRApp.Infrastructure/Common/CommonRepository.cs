@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommonHelperEntity;
+using System.ComponentModel;
 namespace HRApp.Infrastructure
 {
     public class CommonRepository
@@ -127,6 +128,12 @@ namespace HRApp.Infrastructure
             }
             read.Close();
             return -1;
+        }
+        [Description("执行查询的存储过程，并转化为响应实体对象")]
+        public static List<T> QuerySPModelList<T>(string sql, SqlParameter[] param, string sqlConnString, int beginRow, int endRow) where T : class
+        {
+            DataSet ds = new SqlCmdHelper().ExcuteQuerySP(sql, sqlConnString, beginRow, endRow, typeof(T).Name, param);
+            return DataHelp.DataReflection.DataSetConvert<T>(ds);
         }
     }
 }

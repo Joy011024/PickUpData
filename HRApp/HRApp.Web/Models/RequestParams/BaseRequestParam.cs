@@ -31,6 +31,8 @@ namespace HRApp.Web
         public bool OrderAsc { get; set; }//升序
         public string LimitCode { get; set; }
         public List<string> LimitIds { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
     }
     public class SampleRequestParam : BaseRequestParam
     {

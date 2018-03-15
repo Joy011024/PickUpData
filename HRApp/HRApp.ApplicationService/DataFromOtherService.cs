@@ -33,6 +33,8 @@ SELECT	'Return Value' = @return_value
             Common.Data.JsonData json = new Common.Data.JsonData();
             try
             {
+                //查询配置判断是否需要切换数据库
+
                 json.Data = dataFromRepository.QueryUinList(beginTime, endTime, beginRow, endRow, out count);
                 json.Total = count;
             }

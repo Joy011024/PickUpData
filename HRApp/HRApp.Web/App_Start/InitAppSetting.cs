@@ -27,6 +27,12 @@ namespace HRApp.Web
                 return hrDbConnString;
             }
         }
+        public static string QueryUinDB
+        {
+            get {
+                return ConfigurationManager.ConnectionStrings["UinDBConnString"].ConnectionString;
+            }
+        }
         static string openDebug;
         /// <summary>
         /// 是否开启debug模式

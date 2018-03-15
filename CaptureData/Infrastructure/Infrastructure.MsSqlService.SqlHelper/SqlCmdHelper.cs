@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.ComponentModel;
 namespace Infrastructure.MsSqlService.SqlHelper
 {
     public class SqlCmdHelper
@@ -109,6 +110,28 @@ namespace Infrastructure.MsSqlService.SqlHelper
             }
             SqlDataReader reader= comm.ExecuteReader();
             return reader;
+        }
+        [Description("执行查询的存储过程")]
+        public DataSet ExcuteQuerySP(string sp,string connString,int? beginRow,int? endRow,string tableName,params SqlParameter[] ps) 
+        {
+            SqlConnection conn = new SqlConnection(connString);
+            conn.Open();
+            SqlCommand comm = new SqlCommand(sp, conn);
+            comm.CommandType = CommandType.StoredProcedure;//存储过程
+            if (ps != null && ps.Length > 0)
+            {
+                comm.Parameters.AddRange(ps);
+            }
+            SqlDataAdapter dap = new SqlDataAdapter(comm);
+            DataSet ds = new DataSet();
+            if (beginRow.HasValue)
+            {
+                dap.Fill(ds, beginRow.Value, (endRow.HasValue ? endRow.Value : int.MaxValue), tableName);
+            }
+            else {
+                dap.Fill(ds);
+            }
+            return ds;
         }
     }
 }
