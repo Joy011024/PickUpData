@@ -115,9 +115,11 @@ namespace Infrastructure.MsSqlService.SqlHelper
         public DataSet ExcuteQuerySP(string sp,string connString,int? beginRow,int? endRow,string tableName,params SqlParameter[] ps) 
         {
             SqlConnection conn = new SqlConnection(connString);
-            conn.Open();
-            SqlCommand comm = new SqlCommand(sp, conn);
+            SqlCommand comm = new SqlCommand();// new SqlCommand(sp, conn);
             comm.CommandType = CommandType.StoredProcedure;//存储过程
+            comm.Connection = conn;
+            comm.CommandText = sp;
+            conn.Open();
             if (ps != null && ps.Length > 0)
             {
                 comm.Parameters.AddRange(ps);

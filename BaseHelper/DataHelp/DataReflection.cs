@@ -173,8 +173,19 @@ namespace DataHelp
                 {
                     PropertyInfo pi = pis.Where(p => p.Name == f).First();
                     object value = item[f];
-                    if (value.GetType().Name!= typeof(DBNull).Name&&value != null) //如果此字段数据为空是的处理
+                    if (value == null)
+                    {
+                        continue;
+                    }
+                    if (value.GetType().Name != typeof(DBNull).Name&&value.GetType().Name != pi.PropertyType.Name)
+                    {
+                       object  pv= Convert.ChangeType(value, pi.PropertyType);
+                       pi.SetValue(entity, pv, null);
+                    }
+                    else if (value.GetType().Name != typeof(DBNull).Name) //如果此字段数据为空是的处理
+                    {
                         pi.SetValue(entity, value, null);
+                    }
                 }
                 items.Add(entity);
             }
