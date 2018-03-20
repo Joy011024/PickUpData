@@ -1,3 +1,47 @@
+Create table  SpecialSpellName
+(--chinese convert english
+	Id int identity(1,1) primary key,
+	Name nvarchar(2) not null,
+	Code varchar(16) not null,
+	IsDeleted int default(0),
+	IsErrorSpell bit not null
+);
+create table MaybeSpellName
+(--汉字可能读音
+	Id uniqueidentifier primary key,
+	Name nvarchar(3) not null,
+	Code nvarchar(16) not null,
+	CreateTime DateTime not null,
+	CreateDayInt int not null,
+	IsSpecialChinese bit not null 
+);
+go 
+Create table App
+(
+	Id int identity(1,1) primary key ,
+	AppName nvarchar(32) not null,
+	AppCode varchar(32) not null,
+	IsDelete int default(0)
+);
+create table AppVer
+(
+	Id int identity(1,1),
+	AppVersion varchar(32)not null,
+	AppId int not null ,
+	IsNowVersion bit not null,--is now version
+	CreateTime DateTime default(getdate()) 
+);
+alter table AppVer add constraint FK_AppId foreign key (AppId) references App(Id)
+Create table KeyWord
+(
+	Id uniqueidentifier primary key,
+	Word nvarchar(64) not null,
+	Useage nvarchar(128) not null,
+	IsDelete int default(0),
+	AppId int not null
+);
+alter table KeyWord add constraint FK_AppKeyWordId foreign key (AppId) references App(Id);
+go
  CREATE TABLE [dbo].[CategoryItems](
 	[ID] [int] NOT NULL primary key identity(1,1),--主键自增长
 	[Name] [nvarchar](32) not NULL,
