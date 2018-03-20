@@ -97,6 +97,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 账户分类归档 的本地化字符串。
+        /// </summary>
+        public static string LblAccountGroup {
+            get {
+                return ResourceManager.GetString("LblAccountGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 系统程序管理 的本地化字符串。
         /// </summary>
         public static string LblAppManage {

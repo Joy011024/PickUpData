@@ -1,4 +1,6 @@
-﻿@{
+﻿@using HRApp.Web;
+@using AppLanguage;
+@{
     Layout = null;
 }
 
@@ -7,15 +9,15 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <title>@Lang.LblAccountGroup</title>
     <script src="~/Scripts/jquery-1.9.1.js"></script>
     <script src="~/Scripts/layer3.0/layer.js"></script>
     <script src="~/Scripts/Common/Common.js"></script>
     <script type="text/javascript">
         $(function () {
             bindPostAjax('/ContactManage/QueryUinDataList', {
-                'StartTime': '2017-05-11',
-                'EndTime': '2018-03-16',
+                'StartTime': '@DateTime.Now.AddMonths(-1).AddDays(1).ToString(Common.Data.CommonFormat.DateFormat)',
+                'EndTime': '@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)',
                 BeginRow: 0,
                 EndRow:200
             },

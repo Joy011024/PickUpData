@@ -129,6 +129,9 @@
   <data name="BtnUpdate" xml:space="preserve">
     <value>更新</value>
   </data>
+  <data name="LblAccountGroup" xml:space="preserve">
+    <value>账户分类归档</value>
+  </data>
   <data name="LblAppManage" xml:space="preserve">
     <value>系统程序管理</value>
   </data>
