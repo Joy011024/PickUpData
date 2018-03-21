@@ -591,6 +591,10 @@ namespace CaptureWebData
             }
             param.province = pro.Code;
             NodeData city = (NodeData)cmbCity.SelectedItem;
+            if (city == null)
+            {
+                return param;
+            }
             if (string.IsNullOrEmpty(city.Code))
             {
                 return param;
