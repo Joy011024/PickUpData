@@ -10,8 +10,10 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@Lang.LblAccountGroup</title>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
     <style type="text/css">
@@ -29,30 +31,45 @@
     </style>
     <script type="text/javascript">
         $(function () {
-            bindPostAjax('/ContactManage/QueryUinDataList', {
+            SearchEvent();
+            $('#btnQuery').click(function () {
+                SearchEvent();
+            });
+        });
+        function SearchEvent(param) {
+            if (!param) { param = {};}
+            $.extend(param, {
                 'StartTime': '@DateTime.Now.AddMonths(-1).AddDays(1).ToString(Common.Data.CommonFormat.DateFormat)',
                 'EndTime': '@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)',
                 BeginRow: 0,
-                EndRow:200
-            },
-                function (response, statue) {
-                    var tmpl = $('.tmpl')[0].outerHTML;
-                    var div = $('.dataRowArea');
-                    $(response.Data).each(function (i, ele) {//疑难杂症？each内部不能调用到tmpl变量
-                        var ht = $('.tmpl')[0].outerHTML;
-                        ht = ht.formatObject(ele);
-                        ht = ht.replace("{i}", i);
-                        ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
-                        $('.dataRowArea').before(ht);
-                    });
-                    
+                EndRow: 200
             });
-        });
+            bindPostAjax('/ContactManage/QueryUinDataList',param,
+               function (response, statue) {
+                   var tmpl = $('.tmpl')[0].outerHTML;
+                   var div = $('.dataRowArea');
+                   $(response.Data).each(function (i, ele) {//疑难杂症？each内部不能调用到tmpl变量
+                       var ht = $('.tmpl')[0].outerHTML;
+                       ht = ht.formatObject(ele);
+                       ht = ht.replace("{i}", i);
+                       ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
+                       $('.dataRowArea').prepend(ht);
+                   });
+
+               });
+        }
     </script>
 </head>
 <body>
     <div>
         <div>qq图片分类汇总处理</div>
+        <div> @*query where*@
+            <label>采集时间</label>
+            <input type="text"/>
+            <label>QQ号</label>
+            <input type="text" />
+            <input type="button" class="button" id="btnQuery" value="查询"/>
+        </div>
         <div class="dataRowTmpl" style="display:none;">
             <div class="tmpl">
                 <span class="column">
