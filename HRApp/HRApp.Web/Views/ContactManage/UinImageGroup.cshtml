@@ -22,6 +22,10 @@
         .column {
              display: grid;
         }
+        .imgIcon {
+            width:128px;
+            height:128px;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
@@ -37,7 +41,8 @@
                     $(response.Data).each(function (i, ele) {//疑难杂症？each内部不能调用到tmpl变量
                         var ht = $('.tmpl')[0].outerHTML;
                         ht = ht.formatObject(ele);
-                        ht = ht.replace('<img>', '<img src="{Url}">'.formatObject(ele));
+                        ht = ht.replace("{i}", i);
+                        ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
                         $('.dataRowArea').before(ht);
                     });
                     
@@ -51,6 +56,7 @@
         <div class="dataRowTmpl" style="display:none;">
             <div class="tmpl">
                 <span class="column">
+                    <span style="display:none;">{i}</span>
                     <span> {Nick}</span>
                     <span> {Uin}</span>
                 </span>
