@@ -118,7 +118,8 @@ namespace DataHelp
         }
 
         public static List<T> DataSetConvert<T>(this DataSet ds) where T : class
-        {
+        {/* 特性名称定义转换*/
+
             List<T> items = new List<T>();
             if (ds == null || ds.Tables.Count == 0)
             {//空数据

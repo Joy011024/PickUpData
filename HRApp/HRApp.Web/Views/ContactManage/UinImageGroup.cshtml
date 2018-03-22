@@ -10,9 +10,19 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@Lang.LblAccountGroup</title>
-    <script src="~/Scripts/jquery-1.9.1.js"></script>
-    <script src="~/Scripts/layer3.0/layer.js"></script>
-    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
+    <style type="text/css">
+        .tmpl {
+            display:inline-block;
+            margin: 0 30px 30px 0;
+        }
+        .column {
+             display: grid;
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             bindPostAjax('/ContactManage/QueryUinDataList', {
@@ -22,7 +32,15 @@
                 EndRow:200
             },
                 function (response, statue) {
-
+                    var tmpl = $('.tmpl')[0].outerHTML;
+                    var div = $('.dataRowArea');
+                    $(response.Data).each(function (i, ele) {//疑难杂症？each内部不能调用到tmpl变量
+                        var ht = $('.tmpl')[0].outerHTML;
+                        ht = ht.formatObject(ele);
+                        ht = ht.replace('<img>', '<img src="{Url}">'.formatObject(ele));
+                        $('.dataRowArea').before(ht);
+                    });
+                    
             });
         });
     </script>
@@ -30,7 +48,24 @@
 <body>
     <div>
         <div>qq图片分类汇总处理</div>
-        <div></div>
+        <div class="dataRowTmpl" style="display:none;">
+            <div class="tmpl">
+                <span class="column">
+                    <span> {Nick}</span>
+                    <span> {Uin}</span>
+                </span>
+                <span class="column">
+                    <img>
+                </span>
+                <span class="column">
+                    <span> {Country} {Province} {City} </span>
+                </span>
+            </div>
+
+        </div>
+        <div class="dataRowArea">
+
+        </div>
     </div>
 </body>
 </html>
