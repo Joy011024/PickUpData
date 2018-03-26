@@ -1,9 +1,15 @@
-﻿@{
+﻿@using HRApp.Web;
+@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
+<link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+<script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+<script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
+<script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+<script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />

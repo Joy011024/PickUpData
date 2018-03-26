@@ -17,6 +17,10 @@ namespace HRApp.Web.Controllers
         {
             return View();
         }
-
+        [Description("录入货物数据对话框")]
+        public ActionResult AddGoodsDialog()
+        {
+            return View();
+        }
     }
 }
