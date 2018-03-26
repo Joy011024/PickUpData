@@ -116,6 +116,7 @@
     <Compile Include="Controllers\FileHelperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\OrderManageController.cs" />
     <Compile Include="Controllers\SpellNameController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -129,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\AppLayout.css" />
+    <Content Include="Content\Doc\概要设计.txt" />
     <Content Include="Content\HtmlEle.css" />
     <Content Include="Global.asax" />
     <Content Include="Note\App Desc.txt" />
@@ -255,6 +257,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ContactManage\UinImageGroup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\OrderManage\GoodsManage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
