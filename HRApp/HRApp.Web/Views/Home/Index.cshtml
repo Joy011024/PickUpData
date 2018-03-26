@@ -57,7 +57,7 @@
                    })
                 });
                 //初始化触发第一项
-                $('#myTab .active>[data-toggle=tab]').trigger('click');
+                $('#myMenu .active>[data-toggle=tab]').trigger('click');
             });
         });
         function toolItemSlt(objEle) {
@@ -133,7 +133,7 @@
     </div>
     <div id="toolTab" style="margin-top: 5px;">
         <ul id="myTab" class="nav nav-tabs" style="margin-bottom: 5px;">
-            <li class="dropdown" style="display:none;">
+            @*<li class="dropdown" style="display:none;">
                 <a href="#" id="myTabDrop1" class="dropdown-toggle"
                    data-toggle="dropdown">
                     应用
@@ -143,7 +143,7 @@
                     <li><a href="#jmeter" tabindex="-1" data-toggle="tab">jmeter</a></li>
                     <li><a href="#ejb" tabindex="-1" data-toggle="tab">ejb</a></li>
                 </ul>
-            </li>
+            </li>*@
         </ul>
         <div id="myTabContent" class="tab-content">
 
