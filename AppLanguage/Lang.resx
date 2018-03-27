@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BtnAdd" xml:space="preserve">
+    <value>添加</value>
+  </data>
   <data name="BtnDelete" xml:space="preserve">
     <value>删除</value>
   </data>
   <data name="BtnEdit" xml:space="preserve">
     <value>编辑</value>
+  </data>
+  <data name="BtnNewAdd" xml:space="preserve">
+    <value>新增</value>
+  </data>
+  <data name="BtnQuery" xml:space="preserve">
+    <value>查询</value>
   </data>
   <data name="BtnSave" xml:space="preserve">
     <value>保存</value>
@@ -146,6 +155,9 @@
   </data>
   <data name="LblFullName" xml:space="preserve">
     <value>姓名</value>
+  </data>
+  <data name="LblKeyWord" xml:space="preserve">
+    <value>关键词</value>
   </data>
   <data name="LblName" xml:space="preserve">
     <value>名称</value>

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+using Infrastructure.ExtService;
 namespace HRApp.Web
 {
     // 注意: 有关启用 IIS6 或 IIS7 经典模式的说明，
@@ -14,12 +14,26 @@ namespace HRApp.Web
     {
         protected void Application_Start()
         {
+            Test();
             AreaRegistration.RegisterAllAreas();
-            InitAppSetting.Version = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat);
+            InitAppSetting.Version = DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat); 
+                //DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat);
             InitAppSetting.CodeVersion = InitAppSetting.CodeVersionFromCfg();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+        }
+        void Test() 
+        {
+            string connString = InitAppSetting.LogicDBConnString;
+            InterfaceIocHelper ioc = new InterfaceIocHelper();
+            string dir= NowAppDirHelper.GetNowAppDir(AppCategory.WebApp);
+            // 获取到的目录 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\
+           IHRApp.Infrastructure.IAppRepository appDal=  ioc.IocConvert<IHRApp.Infrastructure.IAppRepository>(dir + "bin\\", "HRApp.Infrastructure.dll", "HRApp.Infrastructure", "AppRepository");
+            //构造函数的参数注入  判断构造函数的参数是否需要进行注入
+            
+            //属性注入
+           appDal.SqlConnString = connString;
         }
     }
 }

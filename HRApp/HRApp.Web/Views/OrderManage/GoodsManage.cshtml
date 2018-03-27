@@ -1,4 +1,5 @@
 ﻿@using HRApp.Web;
+@using AppLanguage;
 @{
     Layout = null;
 }
@@ -17,7 +18,28 @@
 </head>
 <body>
     <div>
-        
+        <div>
+            <span>
+               <span>
+                   <label>@Lang.LblName</label>
+                   <input type="text" id="txtName" />
+               </span>
+                <span>
+                    <label>@Lang.LblKeyWord</label>
+                    <input type="text" id="txtKeyWord"/>
+                </span>
+                <span>
+                    <button id="btnQuery" class="button buttonSmall">@Lang.BtnQuery</button>
+                </span>
+            </span>
+            <span>
+            <span>
+                <button id="btnNewAdd" class="button buttonSmall">@Lang.BtnNewAdd</button>
+                <button id="btnEdit" class="button buttonSmall">@Lang.BtnEdit</button>
+            </span>
+               
+            </span>
+        </div>
     </div>
 </body>
 </html>

@@ -61,6 +61,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 添加 的本地化字符串。
+        /// </summary>
+        public static string BtnAdd {
+            get {
+                return ResourceManager.GetString("BtnAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 删除 的本地化字符串。
         /// </summary>
         public static string BtnDelete {
@@ -75,6 +84,24 @@ namespace AppLanguage {
         public static string BtnEdit {
             get {
                 return ResourceManager.GetString("BtnEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 新增 的本地化字符串。
+        /// </summary>
+        public static string BtnNewAdd {
+            get {
+                return ResourceManager.GetString("BtnNewAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查询 的本地化字符串。
+        /// </summary>
+        public static string BtnQuery {
+            get {
+                return ResourceManager.GetString("BtnQuery", resourceCulture);
             }
         }
         
@@ -147,6 +174,15 @@ namespace AppLanguage {
         public static string LblFullName {
             get {
                 return ResourceManager.GetString("LblFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 关键词 的本地化字符串。
+        /// </summary>
+        public static string LblKeyWord {
+            get {
+                return ResourceManager.GetString("LblKeyWord", resourceCulture);
             }
         }
         

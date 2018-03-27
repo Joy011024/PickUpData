@@ -37,6 +37,9 @@ textarea {
     background-color: #bfe8ef;
     border-radius: 15px;
 }
+.buttonSmall {
+height:40px;
+}
 .block {
     display:inline-block;
     border:1px solid ;
