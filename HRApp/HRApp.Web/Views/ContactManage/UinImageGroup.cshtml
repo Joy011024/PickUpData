@@ -16,6 +16,7 @@
     <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js?v=@InitAppSetting.Version"></script>
     <style type="text/css">
         .tmpl {
             display:inline-block;
@@ -57,34 +58,53 @@
                    });
 
                });
+            $('#ckAllImg').click(function () {
+                var ck = $(this).is(':checked');
+                $('.dataRowArea .tmpl [type=checkbox]').attr('checked', ck);
+            });
         }
     </script>
 </head>
 <body>
     <div>
-        <div>qq图片分类汇总处理</div>
+        <div>@Lang.LblUinImgGroupManage</div>
         <div> @*query where*@
-            <label>采集时间</label>
-            <input type="text"/>
-            <label>QQ号</label>
+            <label>@Lang.LblPickUpTime</label>
+            <input type="text" onfocus="WdatePicker()" class="input-text Wdate columnLayout" value="@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
+            <label>@Lang.LblUinAccount</label>
             <input type="text" />
-            <input type="button" class="button" id="btnQuery" value="查询"/>
+            <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.BtnQuery"/>
+        </div>
+        <div>
+            <span>
+                <label>
+                    <span style="position:relative;top: -10px;">@Lang.LblSelectAll</span>
+                    <input type="checkbox" class="ckImg" style="width: 30px;"  id="ckAllImg" />
+                </label>
+            </span>
+            <span>
+                <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.LblGroup" />
+               
+            </span>
         </div>
         <div class="dataRowTmpl" style="display:none;">
-            <div class="tmpl">
+            <div class="tmpl" style="border: 1px solid white; padding: 5px;">
                 <span class="column">
                     <span style="display:none;">{i}</span>
+                    <span>
+                        <input type="checkbox" class="ckImg" style="width: 30px;" pid="{ID}" />
+                        <span style="position: relative; top: -10px;"> {Uin}</span>
+                    </span>
                     <span> {Nick}</span>
-                    <span> {Uin}</span>
+                    
                 </span>
                 <span class="column">
                     <img>
                 </span>
                 <span class="column">
-                    <span> {Country} {Province} {City} </span>
+                    <span>{Country} {Province} {City}</span>
                 </span>
             </div>
-
         </div>
         <div class="dataRowArea">
 

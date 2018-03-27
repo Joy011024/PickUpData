@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Reflection;
+using System.EnterpriseServices;
 namespace HRApp.Web
 {
     public class IocFactory
@@ -25,7 +26,7 @@ namespace HRApp.Web
             }
             return (obj as T);
         }
-        [AssemblyDescription("")]
+        [Description("填充构造函数")]
         public void CunstructorFill<T>(T targetClass) 
         {
             Type t = typeof(T).GetType();

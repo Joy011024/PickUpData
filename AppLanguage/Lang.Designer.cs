@@ -178,6 +178,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 归类 的本地化字符串。
+        /// </summary>
+        public static string LblGroup {
+            get {
+                return ResourceManager.GetString("LblGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 关键词 的本地化字符串。
         /// </summary>
         public static string LblKeyWord {
@@ -214,11 +223,47 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 采集时间 的本地化字符串。
+        /// </summary>
+        public static string LblPickUpTime {
+            get {
+                return ResourceManager.GetString("LblPickUpTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 全选 的本地化字符串。
+        /// </summary>
+        public static string LblSelectAll {
+            get {
+                return ResourceManager.GetString("LblSelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 生僻字拼音维护 的本地化字符串。
         /// </summary>
         public static string LblSpecialSpellNameManage {
             get {
                 return ResourceManager.GetString("LblSpecialSpellNameManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 QQ号 的本地化字符串。
+        /// </summary>
+        public static string LblUinAccount {
+            get {
+                return ResourceManager.GetString("LblUinAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 qq图片分类汇总处理 的本地化字符串。
+        /// </summary>
+        public static string LblUinImgGroupManage {
+            get {
+                return ResourceManager.GetString("LblUinImgGroupManage", resourceCulture);
             }
         }
         
