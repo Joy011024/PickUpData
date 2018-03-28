@@ -60,7 +60,7 @@
                });
             $('#ckAllImg').click(function () {
                 var ck = $(this).is(':checked');
-                $('.dataRowArea .tmpl [type=checkbox]').attr('checked', ck);
+                $('.dataRowArea .tmpl [type=checkbox]').prop('checked', ck);
             });
         }
     </script>
@@ -70,7 +70,7 @@
         <div>@Lang.LblUinImgGroupManage</div>
         <div> @*query where*@
             <label>@Lang.LblPickUpTime</label>
-            <input type="text" onfocus="WdatePicker()" class="input-text Wdate columnLayout" value="@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
+            <input type="text" onfocus="WdatePicker()" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
             <label>@Lang.LblUinAccount</label>
             <input type="text" />
             <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.BtnQuery"/>
