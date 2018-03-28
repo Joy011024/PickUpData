@@ -237,6 +237,7 @@ F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Web\obj\Debug\HRApp.Web.pdb
+E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\EntityFramework.dll
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\HRApp.Web.dll.config
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\HRApp.Web.dll
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\HRApp.Web.pdb
@@ -265,7 +266,6 @@ E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\System.Web.WebPages.dll
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\System.Web.WebPages.Razor.dll
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\NPOI.dll
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\NPOI.OOXML.dll
-E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\EntityFramework.dll
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\NPinyin.dll
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\Infrastructure.MsSqlService.SqlHelper.dll
 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\bin\ICSharpCode.SharpZipLib.dll
