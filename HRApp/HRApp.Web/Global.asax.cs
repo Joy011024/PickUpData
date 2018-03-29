@@ -25,15 +25,26 @@ namespace HRApp.Web
         }
         void Test() 
         {
+          
+        }
+        void ServiceLevelFactory() 
+        {
+        
+        }
+        void OrmLevelFactory() 
+        {
+            Dictionary<string, object> dals = new Dictionary<string, object>();
             string connString = InitAppSetting.LogicDBConnString;
             InterfaceIocHelper ioc = new InterfaceIocHelper();
-            string dir= NowAppDirHelper.GetNowAppDir(AppCategory.WebApp);
+            string dir = NowAppDirHelper.GetNowAppDir(AppCategory.WebApp);
             // 获取到的目录 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\
-           IHRApp.Infrastructure.IAppRepository appDal=  ioc.IocConvert<IHRApp.Infrastructure.IAppRepository>(dir + "bin\\", "HRApp.Infrastructure.dll", "HRApp.Infrastructure", "AppRepository");
+            IHRApp.Infrastructure.IAppRepository appDal = ioc.IocConvert<IHRApp.Infrastructure.IAppRepository>(dir + "bin\\", "HRApp.Infrastructure.dll", "HRApp.Infrastructure", "AppRepository");
             //构造函数的参数注入  判断构造函数的参数是否需要进行注入
-            
             //属性注入
-           appDal.SqlConnString = connString;
+            appDal.SqlConnString = connString;
+            Dictionary<string, object> propertyVal = new Dictionary<string, object>();
+            propertyVal.Add("SqlConnString", connString);
+
         }
     }
 }

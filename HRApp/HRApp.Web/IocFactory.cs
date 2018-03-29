@@ -43,5 +43,10 @@ namespace HRApp.Web
 
             }
         }
+        [Description("属性注入")]
+        public void IocFillProperty<T>(T targetClass,Dictionary<string,object> propertyList) where T : class
+        {
+               
+        }
     }
 }
