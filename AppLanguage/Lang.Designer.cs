@@ -151,6 +151,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 开始时间 的本地化字符串。
+        /// </summary>
+        public static string LblBeginTime {
+            get {
+                return ResourceManager.GetString("LblBeginTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 助记码 的本地化字符串。
         /// </summary>
         public static string LblCode {
@@ -165,6 +174,15 @@ namespace AppLanguage {
         public static string LblDescription {
             get {
                 return ResourceManager.GetString("LblDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 结束时间 的本地化字符串。
+        /// </summary>
+        public static string LblEndTime {
+            get {
+                return ResourceManager.GetString("LblEndTime", resourceCulture);
             }
         }
         

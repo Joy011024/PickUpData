@@ -55,6 +55,9 @@
                        ht = ht.replace("{i}", i);
                        ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
                        $('.dataRowArea').prepend(ht);
+                       $('.dataRowArea .tmpl:last [type=checkbox]').click(function () {//没有触发
+
+                       });
                    });
 
                });
@@ -69,11 +72,21 @@
     <div>
         <div>@Lang.LblUinImgGroupManage</div>
         <div> @*query where*@
-            <label>@Lang.LblPickUpTime</label>
-            <input type="text" onfocus="WdatePicker()" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
-            <label>@Lang.LblUinAccount</label>
-            <input type="text" />
-            <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.BtnQuery"/>
+            <span>
+                @*<label>@Lang.LblPickUpTime</label>*@
+                <label>@Lang.LblBeginTime</label>
+                <input type="text" onfocus="WdatePicker()" attr="StartTime" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddMonths(-1).AddDays(1).ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
+                <label>@Lang.LblEndTime</label>
+                <input type="text" onfocus="WdatePicker()" attr="EndTime" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
+
+            </span>   
+            <span>
+                <label>@Lang.LblUinAccount</label>
+                <input type="text" />
+            </span>
+            <span>
+                <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.BtnQuery" />
+            </span>
         </div>
         <div>
             <span>

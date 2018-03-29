@@ -147,11 +147,17 @@
   <data name="LblAppSetValue" xml:space="preserve">
     <value>配置</value>
   </data>
+  <data name="LblBeginTime" xml:space="preserve">
+    <value>开始时间</value>
+  </data>
   <data name="LblCode" xml:space="preserve">
     <value>助记码</value>
   </data>
   <data name="LblDescription" xml:space="preserve">
     <value>描述</value>
+  </data>
+  <data name="LblEndTime" xml:space="preserve">
+    <value>结束时间</value>
   </data>
   <data name="LblFullName" xml:space="preserve">
     <value>姓名</value>

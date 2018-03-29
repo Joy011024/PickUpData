@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Reflection;
 using System.EnterpriseServices;
+using Infrastructure.ExtService;
 namespace HRApp.Web
 {
     public class IocFactory
@@ -46,7 +47,26 @@ namespace HRApp.Web
         [Description("属性注入")]
         public void IocFillProperty<T>(T targetClass,Dictionary<string,object> propertyList) where T : class
         {
-               
+           string[] pns= targetClass.GetEntityProperties();//属性名列表
+           string classProperty = typeof(T).Name;
+           foreach (var item in pns)
+           {
+               string pn = string.Empty;
+               if (propertyList.ContainsKey(classProperty + "." + item))
+               {//首先 实体类名称.属性名 作为字典中存储的key
+                   pn = classProperty + "." + item;
+               }
+               else if (!propertyList.ContainsKey(item))
+               {
+                   pn = item;
+               }
+               else
+               {
+                   continue;
+               }
+               object pv = propertyList[pn];
+               targetClass.SetPropertyValue(item, pv);
+           }
         }
     }
 }
