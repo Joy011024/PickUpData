@@ -47,17 +47,27 @@ namespace HRApp.Web
         [Description("属性注入")]
         public void IocFillProperty<T>(T targetClass,Dictionary<string,object> propertyList) where T : class
         {
-           string[] pns= targetClass.GetEntityProperties();//属性名列表
+           PropertyInfo[] pns= targetClass.GetEntityProperty();//属性名列表
            string classProperty = typeof(T).Name;
-           foreach (var item in pns)
+           foreach (var property in pns)
            {
                string pn = string.Empty;
-               if (propertyList.ContainsKey(classProperty + "." + item))
-               {//首先 实体类名称.属性名 作为字典中存储的key
+               string item = property.Name;
+               string ptName = property.PropertyType.Name;
+               if (propertyList.ContainsKey(classProperty + "." + ptName))
+               {//1  实体类名称.属性数据类型名 作为字典中存储的key
+                   pn = classProperty + "." + ptName;
+               }
+               else if (propertyList.ContainsKey( ptName))
+               {//2  属性数据类型名 作为字典中存储的key
+                   pn = ptName;
+               }
+               else if (propertyList.ContainsKey(classProperty + "." + item))
+               {//3 实体类名称.属性名 作为字典中存储的key
                    pn = classProperty + "." + item;
                }
                else if (!propertyList.ContainsKey(item))
-               {
+               {//4 实体类名称.属性名 作为字典中存储的key
                    pn = item;
                }
                else
