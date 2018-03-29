@@ -12,7 +12,7 @@ namespace Infrastructure.ExtService
     {
         public static PropertyInfo[] GetEntityProperty<T>(this T help) where T : class
         {
-            return help.GetEntityProperty();
+            return help.GetType().GetProperties();
         }
         public static PropertyInfo[] GetEntityProperty<T>() where T : class
         {
@@ -128,6 +128,17 @@ namespace Infrastructure.ExtService
         {
             PropertyInfo pi = helper.GetType().GetProperty(property);
             return pi.GetType();
+        }
+        /// <summary>
+        /// 获取字段列表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="helper"></param>
+        /// <returns></returns>
+        public static FieldInfo[] GetFieldList<T>(this T helper) where T:class
+        {
+            Type t = helper.GetType();
+            return t.GetFields();
         }
     }
     public static class DataConvert
