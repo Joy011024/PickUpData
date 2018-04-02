@@ -14,6 +14,17 @@ namespace Infrastructure.ExtService
         {
             return help.GetType().GetProperties();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="help"></param>
+        /// <param name="propertyFalg">属性继承</param>
+        /// <returns></returns>
+        public static PropertyInfo[] GetEntityProperty<T>(this T help , BindingFlags propertyFalg) where T : class
+        {
+            return help.GetType().GetProperties(propertyFalg);
+        }
         public static PropertyInfo[] GetEntityProperty<T>() where T : class
         {
             Type t = typeof(T);

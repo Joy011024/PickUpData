@@ -9,6 +9,7 @@ using Infrastructure.ExtService;
 using IHRApp.Infrastructure;
 using HRApp.Infrastructure;
 using HRApp.ApplicationService;
+using HRApp.IApplicationService;
 namespace HRApp.Web
 {
     // 注意: 有关启用 IIS6 或 IIS7 经典模式的说明，
@@ -61,10 +62,11 @@ namespace HRApp.Web
             //appDal.SqlConnString = connString;
             Dictionary<string, object> propertyVal = new Dictionary<string, object>();
             propertyVal.Add("SqlConnString", connString);
-            ioc.IocFillProperty(appDal, propertyVal);
+            ioc.IocFillProperty<IAppRepository,IAppRepository>(appDal, propertyVal);
             propertyVal.Add(typeof(IAppRepository).Name, appDal);
-            IApplicationService.IAppSettingService appSetService = ioc.IocConvert<IApplicationService.IAppSettingService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(AppSettingService).Name);
-
+            IAppSettingService appSetService = ioc.IocConvert<IAppSettingService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(AppSettingService).Name);
+            ioc.IocFillProperty<IAppSettingService, AppSettingService>(appSetService, propertyVal);
+             
         }
     }
 }

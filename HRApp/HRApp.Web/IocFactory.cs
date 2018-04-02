@@ -63,11 +63,25 @@ namespace HRApp.Web
             for (int i = 0; i < param.Length; i++)
             {
                 //对于构造函数进行默认值设定
-                Type pt= param[i].GetType();//公共语言运行时导致使用的对象不一致
+                ParameterInfo pi = param[i];
+                object obj = null;
+                if (pi.HasDefaultValue)
+                {
+                    obj = pi.DefaultValue;
+                }
+                else
+                {
+                    Type paramType = pi.ParameterType;//参数的数据类型
+                    if (!paramType.IsInterface)
+                    {//参数为接口类
+                        Type pt = param[i].GetType();//公共语言运行时导致使用的对象不一致
+                        //如果存在系统默认的构造函数，使用默认
+                        obj = System.Activator.CreateInstance(pt);
 
-                //如果存在系统默认的构造函数，使用默认
-                object obj= System.Activator.CreateInstance(pt);
-               // param[i] =( obj as pt);
+                    }
+                  
+                }
+               
                 param.SetValue(obj, i);
             }
             return ( System.Activator.CreateInstance(target, param) as T);
@@ -92,39 +106,53 @@ namespace HRApp.Web
             return false;
         }
         [Description("属性注入")]
-        public void IocFillProperty<T>(T targetClass,Dictionary<string,object> propertyList) where T : class
+        public void IocFillProperty<T,Children>(T targetClass,Dictionary<string,object> propertyList) where T : class where Children:class
         {
-            PropertyInfo[] pns = targetClass.GetEntityProperty();//属性名列表
+            PropertyInfo[] pns = targetClass.GetEntityProperty(BindingFlags.Public | BindingFlags.Instance);//属性名列表
             //由于接口中没法定义 字段,此处只能使用属性
            string classProperty = typeof(T).Name;
-           foreach (var property in pns)
+            //是否需要实例化子类属性
+           if (classProperty != typeof(Children).Name)
            {
-               string pn = string.Empty;
-               string item = property.Name;
-               string ptName = property.PropertyType.Name;
-               if (propertyList.ContainsKey(classProperty + "." + ptName))
-               {//1  实体类名称.属性数据类型名 作为字典中存储的key
-                   pn = classProperty + "." + ptName;
-               }
-               else if (propertyList.ContainsKey( ptName))
-               {//2  属性数据类型名 作为字典中存储的key
-                   pn = ptName;
-               }
-               else if (propertyList.ContainsKey(classProperty + "." + item))
-               {//3 实体类名称.属性名 作为字典中存储的key
-                   pn = classProperty + "." + item;
-               }
-               else if (propertyList.ContainsKey(item))
-               {//4 实体类名称.属性名 作为字典中存储的key
-                   pn = item;
-               }
-               else
-               {
-                   continue;
-               }
-               object pv = propertyList[pn];
-               targetClass.SetPropertyValue(item, pv);
+               Children child = targetClass as Children;
+               IocFillProperty(child, propertyList);
            }
+           IocFillProperty(targetClass, propertyList);
+        }
+        public void IocFillProperty<T>(T targetClass, Dictionary<string, object> propertyList)
+            where T : class
+        {
+            PropertyInfo[] pns = targetClass.GetEntityProperty(BindingFlags.Public | BindingFlags.Instance);//属性名列表
+            //由于接口中没法定义 字段,此处只能使用属性
+            string classProperty = typeof(T).Name;
+            foreach (var property in pns)
+            {
+                string pn = string.Empty;
+                string item = property.Name;
+                string ptName = property.PropertyType.Name;
+                if (propertyList.ContainsKey(classProperty + "." + ptName))
+                {//1  实体类名称.属性数据类型名 作为字典中存储的key
+                    pn = classProperty + "." + ptName;
+                }
+                else if (propertyList.ContainsKey(ptName))
+                {//2  属性数据类型名 作为字典中存储的key
+                    pn = ptName;
+                }
+                else if (propertyList.ContainsKey(classProperty + "." + item))
+                {//3 实体类名称.属性名 作为字典中存储的key
+                    pn = classProperty + "." + item;
+                }
+                else if (propertyList.ContainsKey(item))
+                {//4 实体类名称.属性名 作为字典中存储的key
+                    pn = item;
+                }
+                else
+                {
+                    continue;
+                }
+                object pv = propertyList[pn];
+                targetClass.SetPropertyValue(item, pv);
+            }
         }
     }
 }
