@@ -21,12 +21,13 @@ namespace HRApp.Web
             {//找不到对应的实体类
                 return System.Activator.CreateInstance<T>();
             }
+            //ConstructorInfo[] cis = t.GetConstructors();//BindingFlags.Public使用这个限定查找不到构造列表
             object obj = null;
             //如果 没有为该对象定义无参数的构造函数。
-            if (!ContainDefaultConstryctor(t))
+            if (!ContainDefaultConstryctor<T>(t))
             { //不含有无参构造函数
 
-                obj = GuidConstryctorFill<T>();
+                obj = GuidConstryctorFill<T>(t);
             }
             else
             {
@@ -55,16 +56,25 @@ namespace HRApp.Web
 
             }
         }
-        T GuidConstryctorFill<T>() where T:class //次构造函数只为实体类没有定义无参
+        T GuidConstryctorFill<T>(Type target) where T : class //次构造函数只为实体类没有定义无参
         {
-            Type t = typeof(T).GetType();
-            ConstructorInfo cons = t.GetConstructors()[0];//构造函数列表
+            ConstructorInfo cons = target.GetConstructors()[0];//构造函数列表
             ParameterInfo[] param = cons.GetParameters();
-            return ( System.Activator.CreateInstance(t, param) as T);
+            for (int i = 0; i < param.Length; i++)
+            {
+                //对于构造函数进行默认值设定
+                Type pt= param[i].GetType();//公共语言运行时导致使用的对象不一致
+
+                //如果存在系统默认的构造函数，使用默认
+                object obj= System.Activator.CreateInstance(pt);
+               // param[i] =( obj as pt);
+                param.SetValue(obj, i);
+            }
+            return ( System.Activator.CreateInstance(target, param) as T);
         }
-        bool ContainDefaultConstryctor<T>( T target) where T:class 
+        bool ContainDefaultConstryctor<T>( Type target) where T:class 
         {
-            Type t = typeof(T).GetType();
+            Type t = target;
             ConstructorInfo[] cons = t.GetConstructors();//构造函数列表【出现获取不到构造函数列表的情形】
             if (cons.Length == 0)
             {//这是默认的构造函数
