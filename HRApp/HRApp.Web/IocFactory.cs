@@ -150,8 +150,13 @@ namespace HRApp.Web
             foreach (var item in fis)
             {
                 string fieldName = item.Name;
-                string fieldType = item.GetType().Name;
+                string fieldType = item.FieldType.Name;
                 string fieldKey = GetDictKeyByRule(propertyList, fieldName, fieldType, classProperty);
+                if (string.IsNullOrEmpty(fieldKey))
+                {
+                    continue;
+                }
+                item.SetValue(targetClass, propertyList[fieldKey]);
             }
             #endregion
         }

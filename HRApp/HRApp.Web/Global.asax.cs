@@ -64,20 +64,30 @@ namespace HRApp.Web
                 string dir = NowAppDirHelper.GetNowAppDir(AppCategory.WebApp);
                 // 获取到的目录 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\
                 string dllDir = dir + "bin\\";
+                #region dll路径配置
                 Dictionary<MvcLevel, AssemblyData> mvc = new Dictionary<MvcLevel, AssemblyData>();
                 mvc.Add(MvcLevel.DAL, new AssemblyData() { AssemblyName = "HRApp.Infrastructure.dll", Namespace = "HRApp.Infrastructure" });
                 mvc.Add(MvcLevel.Bll, new AssemblyData() { AssemblyName = "HRApp.ApplicationService.dll", Namespace = "HRApp.ApplicationService" });
-                IAppRepository appDal = ioc.IocConvert<IHRApp.Infrastructure.IAppRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppRepository).Name);
-                //构造函数的参数注入  判断构造函数的参数是否需要进行注入
-                //属性注入
-                //appDal.SqlConnString = connString;
+                #endregion
                 propertyVal.Add("SqlConnString", connString);
+                #region dal层属性
+                IAppRepository appDal = ioc.IocConvert<IHRApp.Infrastructure.IAppRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppRepository).Name);
                 ioc.IocFillProperty<IAppRepository, IAppRepository>(appDal, propertyVal);
+                IAppSettingRepository appSettingDal = ioc.IocConvert<IHRApp.Infrastructure.IAppSettingRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppSettingRepository).Name);
+                ioc.IocFillProperty(appSettingDal, propertyVal);
+                #endregion
+                #region orm中dal层实例化存储到字典中
                 propertyVal.Add(typeof(IAppRepository).Name, appDal);
+                propertyVal.Add(typeof(IAppSettingRepository).Name, appSettingDal);
+                #endregion
+                #region 业务层 
+                //构造函数的参数注入  判断构造函数的参数是否需要进行注入
+               
                 IAppSettingService appSetService = ioc.IocConvert<IAppSettingService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(AppSettingService).Name);
-                ioc.IocFillProperty<IAppSettingService, AppSettingService>(appSetService, propertyVal);
+                ioc.IocFillProperty<IAppSettingService, AppSettingService>(appSetService, propertyVal); //属性和字段注入 
                 propertyVal.Add(typeof(IAppSettingService).Name, appSetService);
-               // appSetService.QueryWhere(new Model.CategoryItems());
+                appSetService.QueryWhere(new Model.CategoryItems());
+                #endregion
             }
         }
     }
