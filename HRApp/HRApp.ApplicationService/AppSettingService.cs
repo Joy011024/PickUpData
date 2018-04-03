@@ -12,7 +12,7 @@ namespace HRApp.ApplicationService
 {
     public class AppSettingService:IAppSettingService
     {
-        public IAppSettingRepository appSettingRepository;
+        public IAppSettingRepository appSettingRepository { get; set; }
         public AppSettingService(IAppSettingRepository appSet)
         {
             appSettingRepository = appSet;
@@ -70,8 +70,9 @@ namespace HRApp.ApplicationService
 
         public List<CategoryItems> QueryWhere(CategoryItems model)
         {
-
-            throw new NotImplementedException();
+            string cmd = string.Empty;
+            return appSettingRepository.Query(cmd).ToList();
+            //throw new NotImplementedException();
         }
 
 

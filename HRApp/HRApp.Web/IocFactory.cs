@@ -129,7 +129,13 @@ namespace HRApp.Web
             {
                 string pn = string.Empty;
                 string item = property.Name;
+                //如果该属性是实体类或者接口要进行特殊处理（接口中只会传递接口，不会传递具体的实例化类对象）
                 string ptName = property.PropertyType.Name;
+                //Type pt = property.GetType();
+                //if (pt.IsClass)
+                //{//调用该实例化对象的接口
+                //    ptName = pt.BaseType.Name;
+                //}
                 if (propertyList.ContainsKey(classProperty + "." + ptName))
                 {//1  实体类名称.属性数据类型名 作为字典中存储的key
                     pn = classProperty + "." + ptName;

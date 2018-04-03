@@ -19,7 +19,6 @@ namespace HRApp.Web
         static Dictionary<string, object> dals = new Dictionary<string, object>();
         protected void Application_Start()
         {
-            OrmLevelFactory();
             AreaRegistration.RegisterAllAreas();
             InitAppSetting.Version = DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat); 
                 //DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat);
@@ -27,46 +26,59 @@ namespace HRApp.Web
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            IocMvcFactoryHelper mvc = new IocMvcFactoryHelper();
+            mvc.GetIocDict(true);
         }
-        void Test() 
+       
+        public class IocMvcFactoryHelper
         {
-          
-        }
-        void ServiceLevelFactory() 
-        {
-        
-        }
-        enum MvcLevel
-        {
-            DAL=1,
-            Bll=2
-        }
-        class AssemblyData
-        {
-            public string AssemblyName { get; set; }
-            public string Namespace { get; set; }
-        }
-        static void OrmLevelFactory() 
-        {
-            string connString = InitAppSetting.LogicDBConnString;
-            InterfaceIocHelper ioc = new InterfaceIocHelper();
-            string dir = NowAppDirHelper.GetNowAppDir(AppCategory.WebApp);
-            // 获取到的目录 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\
-            string dllDir=dir + "bin\\";
-            Dictionary<MvcLevel, AssemblyData> mvc = new Dictionary<MvcLevel, AssemblyData>();
-            mvc.Add(MvcLevel.DAL,new AssemblyData(){ AssemblyName= "HRApp.Infrastructure.dll",Namespace="HRApp.Infrastructure"});
-            mvc.Add(MvcLevel.Bll, new AssemblyData() { AssemblyName = "HRApp.ApplicationService.dll", Namespace = "HRApp.ApplicationService" });
-            IAppRepository appDal = ioc.IocConvert<IHRApp.Infrastructure.IAppRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppRepository).Name);
-            //构造函数的参数注入  判断构造函数的参数是否需要进行注入
-            //属性注入
-            //appDal.SqlConnString = connString;
-            Dictionary<string, object> propertyVal = new Dictionary<string, object>();
-            propertyVal.Add("SqlConnString", connString);
-            ioc.IocFillProperty<IAppRepository,IAppRepository>(appDal, propertyVal);
-            propertyVal.Add(typeof(IAppRepository).Name, appDal);
-            IAppSettingService appSetService = ioc.IocConvert<IAppSettingService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(AppSettingService).Name);
-            ioc.IocFillProperty<IAppSettingService, AppSettingService>(appSetService, propertyVal);
-             
+            enum MvcLevel
+            {
+                DAL = 1,
+                Bll = 2
+            }
+            class AssemblyData
+            {
+                public string AssemblyName { get; set; }
+                public string Namespace { get; set; }
+            }
+            static Dictionary<string, object> propertyVal = new Dictionary<string, object>();
+            /// <summary>
+            /// 获取ioc注入实例
+            /// </summary>
+            /// <param name="updateIoc">是否更新ioc注入</param>
+            /// <returns></returns>
+            public Dictionary<string, object> GetIocDict(bool updateIoc) 
+            {
+                if (updateIoc||propertyVal.Count == 0)
+                {
+                    propertyVal.Clear();
+                    OrmIocFactory();
+                }
+                return propertyVal;
+            }
+            static void OrmIocFactory()
+            {
+                string connString = InitAppSetting.LogicDBConnString;
+                InterfaceIocHelper ioc = new InterfaceIocHelper();
+                string dir = NowAppDirHelper.GetNowAppDir(AppCategory.WebApp);
+                // 获取到的目录 E:\Code\DayDayStudy\PickUpData\HRApp\HRApp.Web\
+                string dllDir = dir + "bin\\";
+                Dictionary<MvcLevel, AssemblyData> mvc = new Dictionary<MvcLevel, AssemblyData>();
+                mvc.Add(MvcLevel.DAL, new AssemblyData() { AssemblyName = "HRApp.Infrastructure.dll", Namespace = "HRApp.Infrastructure" });
+                mvc.Add(MvcLevel.Bll, new AssemblyData() { AssemblyName = "HRApp.ApplicationService.dll", Namespace = "HRApp.ApplicationService" });
+                IAppRepository appDal = ioc.IocConvert<IHRApp.Infrastructure.IAppRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppRepository).Name);
+                //构造函数的参数注入  判断构造函数的参数是否需要进行注入
+                //属性注入
+                //appDal.SqlConnString = connString;
+                propertyVal.Add("SqlConnString", connString);
+                ioc.IocFillProperty<IAppRepository, IAppRepository>(appDal, propertyVal);
+                propertyVal.Add(typeof(IAppRepository).Name, appDal);
+                IAppSettingService appSetService = ioc.IocConvert<IAppSettingService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(AppSettingService).Name);
+                ioc.IocFillProperty<IAppSettingService, AppSettingService>(appSetService, propertyVal);
+                propertyVal.Add(typeof(IAppSettingService).Name, appSetService);
+               // appSetService.QueryWhere(new Model.CategoryItems());
+            }
         }
     }
 }
