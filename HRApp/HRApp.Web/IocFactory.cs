@@ -122,43 +122,68 @@ namespace HRApp.Web
         public void IocFillProperty<T>(T targetClass, Dictionary<string, object> propertyList)
             where T : class
         {
+            #region 属性注入
             PropertyInfo[] pns = targetClass.GetEntityProperty(BindingFlags.Public | BindingFlags.Instance);//属性名列表
             //由于接口中没法定义 字段,此处只能使用属性
             string classProperty = typeof(T).Name;
             foreach (var property in pns)
             {
-                string pn = string.Empty;
+                Type pt = property.GetType();
+                if (property.SetMethod == null) 
+                {
+                    continue;
+                }
                 string item = property.Name;
                 //如果该属性是实体类或者接口要进行特殊处理（接口中只会传递接口，不会传递具体的实例化类对象）
                 string ptName = property.PropertyType.Name;
-                //Type pt = property.GetType();
-                //if (pt.IsClass)
-                //{//调用该实例化对象的接口
-                //    ptName = pt.BaseType.Name;
-                //}
-                if (propertyList.ContainsKey(classProperty + "." + ptName))
-                {//1  实体类名称.属性数据类型名 作为字典中存储的key
-                    pn = classProperty + "." + ptName;
-                }
-                else if (propertyList.ContainsKey(ptName))
-                {//2  属性数据类型名 作为字典中存储的key
-                    pn = ptName;
-                }
-                else if (propertyList.ContainsKey(classProperty + "." + item))
-                {//3 实体类名称.属性名 作为字典中存储的key
-                    pn = classProperty + "." + item;
-                }
-                else if (propertyList.ContainsKey(item))
-                {//4 实体类名称.属性名 作为字典中存储的key
-                    pn = item;
-                }
-                else
+                string pn = GetDictKeyByRule(propertyList, item, ptName, classProperty);
+                if (string.IsNullOrEmpty(pn))
                 {
                     continue;
                 }
                 object pv = propertyList[pn];
                 targetClass.SetPropertyValue(item, pv);
             }
+            #endregion
+            #region 字段注入
+            FieldInfo[] fis=  targetClass.GetFieldList();
+            foreach (var item in fis)
+            {
+                string fieldName = item.Name;
+                string fieldType = item.GetType().Name;
+                string fieldKey = GetDictKeyByRule(propertyList, fieldName, fieldType, classProperty);
+            }
+            #endregion
+        }
+        /// <summary>
+        /// 根据字段或者属性的名称/数据类型 所属实体类生成可能在字典中的键
+        /// </summary>
+        /// <param name="iocDataDict">可用注入的字典集合</param>
+        /// <param name="itemName">属性或者变量名称</param>
+        /// <param name="typeName">属性或者字典的数据类型</param>
+        /// <param name="classTypeName">属性或者字典所属的实体类名</param>
+        /// <returns></returns>
+        string GetDictKeyByRule(Dictionary<string, object> iocDataDict, string itemName, string typeName, string classTypeName) 
+        {
+            string pn = string.Empty;
+            //如果该属性是实体类或者接口要进行特殊处理（接口中只会传递接口，不会传递具体的实例化类对象）
+            if (iocDataDict.ContainsKey(classTypeName + "." + typeName))
+            {//1  实体类名称.属性数据类型名 作为字典中存储的key
+                pn = classTypeName + "." + typeName;
+            }
+            else if (iocDataDict.ContainsKey(typeName))
+            {//2  属性数据类型名 作为字典中存储的key
+                pn = typeName;
+            }
+            else if (iocDataDict.ContainsKey(classTypeName + "." + itemName))
+            {//3 实体类名称.属性名 作为字典中存储的key
+                pn = classTypeName + "." + itemName;
+            }
+            else if (iocDataDict.ContainsKey(itemName))
+            {//4 实体类名称.属性名 作为字典中存储的key
+                pn = itemName;
+            }
+            return pn;
         }
     }
 }

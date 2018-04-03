@@ -12,7 +12,7 @@ namespace HRApp.ApplicationService
 {
     public class AppSettingService:IAppSettingService
     {
-        public IAppSettingRepository appSettingRepository { get; set; }
+        public IAppSettingRepository appSettingRepository;
         public AppSettingService(IAppSettingRepository appSet)
         {
             appSettingRepository = appSet;

@@ -10,6 +10,7 @@ namespace Infrastructure.ExtService
 {
     public static class EntityReflection
     {
+        #region 属性
         public static PropertyInfo[] GetEntityProperty<T>(this T help) where T : class
         {
             return help.GetType().GetProperties();
@@ -95,6 +96,19 @@ namespace Infrastructure.ExtService
             }
             pi.SetValue(helper, Convert.ChangeType(value, pi.PropertyType), null);
         }
+        #endregion
+        #region 变量
+        /// <summary>
+        /// 获取字段列表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static FieldInfo[] GetField<T>(this T obj) where T:class
+        {
+           return  obj.GetType().GetFields();
+        }
+        #endregion
         /// <summary>
         /// 使用正则表达式提取xml格式字符串中的内容到实体内【实体类中的属性名称需要保持待提取文本中key形式】
         /// </summary>
