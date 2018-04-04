@@ -7,9 +7,6 @@ using System.EnterpriseServices;
 using Infrastructure.ExtService;
 namespace HRApp.Web
 {
-    public class IocFactory
-    {
-    }
     public class InterfaceIocHelper 
     {
         public T IocConvert<T>(string assemblyDir, string assemblyName, string namespaceName, string className) where T : class
@@ -77,9 +74,7 @@ namespace HRApp.Web
                         Type pt = param[i].GetType();//公共语言运行时导致使用的对象不一致
                         //如果存在系统默认的构造函数，使用默认
                         obj = System.Activator.CreateInstance(pt);
-
                     }
-                  
                 }
                
                 param.SetValue(obj, i);
