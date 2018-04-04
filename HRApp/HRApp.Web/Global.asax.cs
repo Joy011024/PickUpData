@@ -75,6 +75,7 @@ namespace HRApp.Web
             mvc.Add(MvcLevel.Bll, new AssemblyData() { AssemblyName = "HRApp.ApplicationService.dll", Namespace = "HRApp.ApplicationService" });
             #endregion
             propertyVal.Add("SqlConnString", connString);
+            propertyVal.Add(typeof(IDataFromOtherRepository).Name + ".SqlConnString", InitAppSetting.QueryUinDB);//这个是用于系统中查询其他库的数据切换操作
             #region dal层属性
             IAppRepository appDal = ioc.IocConvert<IHRApp.Infrastructure.IAppRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppRepository).Name);
             ioc.IocFillProperty<IAppRepository, IAppRepository>(appDal, propertyVal);
