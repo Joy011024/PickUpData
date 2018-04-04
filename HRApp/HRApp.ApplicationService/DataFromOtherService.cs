@@ -30,13 +30,13 @@ SELECT	'Return Value' = @return_value
         {
             //根据数据库配置
             int count = 0;
-            Common.Data.JsonData json = new Common.Data.JsonData();
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
             try
             {
-                //查询配置判断是否需要切换数据库
-
+                //查询配置判断是否需要切换数据库[ioc代码注入时会切换库]
                 json.Data = dataFromRepository.QueryUinList(beginTime, endTime, beginRow, endRow, out count);
                 json.Total = count;
+                json.Success = true;
             }
             catch (Exception ex)
             {

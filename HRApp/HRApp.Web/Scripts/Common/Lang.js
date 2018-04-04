@@ -27,7 +27,7 @@
         endTime: '结束时间',
         Province: '省',
         Country: '国家',
-        City:'市'
+        City: '市'
     },
     tip: {
         to: '至',
@@ -43,7 +43,9 @@
         opetioning: '执行中。。。',
         loading: '数据加载中。。。',
         timeSpanError: '开始使用应小于结束时间',
-        delRowNoExists:'待删除数据不存在'
+        delRowNoExists: '待删除数据不存在',
+        totla: '总共{0}条',
+        nowRecord: '当前{0} - {1} 条'
     },
     cmd: {
         btnAdd: '增加',

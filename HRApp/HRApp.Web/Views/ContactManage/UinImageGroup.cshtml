@@ -42,13 +42,15 @@
             $.extend(param, {
                 'StartTime': '@DateTime.Now.AddMonths(-1).AddDays(1).ToString(Common.Data.CommonFormat.DateFormat)',
                 'EndTime': '@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)',
-                BeginRow: 0,
+                BeginRow: 1,
                 EndRow: 200
             });
             bindPostAjax('/ContactManage/QueryUinDataList',param,
                function (response, statue) {
                    var tmpl = $('.tmpl')[0].outerHTML;
                    var div = $('.dataRowArea');
+                   var queryParam = response.AttachData;
+                   $('.list').html(lang.tip.totla.format(response.Total) + ' ' + lang.tip.nowRecord.format(queryParam.BeginRow,queryParam.EndRow));
                    $(response.Data).each(function (i, ele) {//疑难杂症？each内部不能调用到tmpl变量
                        var ht = $('.tmpl')[0].outerHTML;
                        ht = ht.formatObject(ele);
@@ -98,6 +100,9 @@
             <span>
                 <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.LblGroup" />
                
+            </span>
+            <span>
+                <span class="list"></span>
             </span>
         </div>
         <div class="dataRowTmpl" style="display:none;">
