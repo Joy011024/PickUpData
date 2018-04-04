@@ -54,9 +54,14 @@
         btnEdit: '编辑',
         btnUpload: '上传',
         close: '关闭',
-        del: '删除'
+        del: '删除',
+        btnNewAdd:'新增'
     },
     statue: {
        
+    },
+    orderItems: {
+        addDialog: '新增商品信息对话框',
+        editDialog:'编辑商品信息对话框'
     }
 };
