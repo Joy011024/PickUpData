@@ -110,7 +110,8 @@ namespace HRApp.Web
         {
             PropertyInfo[] pns = targetClass.GetEntityProperty(BindingFlags.Public | BindingFlags.Instance);//属性名列表
             //由于接口中没法定义 字段,此处只能使用属性
-           string classProperty = typeof(T).Name;
+            Type tt = typeof(T);
+           string classProperty = tt.Name;
             //是否需要实例化子类属性
            if (classProperty != typeof(Children).Name)
            {
@@ -118,6 +119,10 @@ namespace HRApp.Web
                IocFillProperty(child, propertyList);
            }
            IocFillProperty(targetClass, propertyList);
+           if (!ContainDefaultConstryctor<T>(tt))
+           {//不含有默认构造函数时才进行私有函数的配置处理
+               IocFillConstructor(targetClass, propertyList);
+           }
         }
         public void IocFillProperty<T>(T targetClass, Dictionary<string, object> propertyList)
             where T : class
@@ -191,8 +196,46 @@ namespace HRApp.Web
             return pn;
         }
         public void IocFillConstructor<T>(T targetClass, Dictionary<string, object> paramValue)
-        { //填充构造函数
-            
+        { //填充构造函数【该函数主要是对于定义的私有属性或者字段不能进行IOC注入】
+            Type type = targetClass.GetType();
+            ConstructorInfo[] cons=type.GetConstructors();
+            if (cons.Length == 0)
+            {
+                return;
+            }
+            ConstructorInfo con = cons[0];
+            //随机选择一个构造函数作为初始化的构造对象
+            ParameterInfo[] param = con.GetParameters();
+            for (int i = 0; i < param.Length; i++)
+            { //对于构造函数进行默认值设定
+                ParameterInfo pi = param[i];
+                object obj = null;
+                //首先查看是否在字典中提供了构造函数需要的参数列表
+                Type paramType = pi.ParameterType;//参数的数据类型
+                string dictKey = GetDictKeyByRule(paramValue, pi.Name, paramType.Name, type.Name);//字典中的key
+                if (!string.IsNullOrEmpty(dictKey))
+                {
+                    obj = paramValue[dictKey];
+                    param.SetValue(obj, i);
+                    continue;
+                }
+                if (pi.HasDefaultValue)
+                {
+                    obj = pi.DefaultValue;
+                }
+                else
+                {
+                    
+                    if (!paramType.IsInterface)
+                    {//参数为接口类
+                        Type pt = param[i].GetType();//公共语言运行时导致使用的对象不一致
+                        //如果存在系统默认的构造函数，使用默认
+                        obj = System.Activator.CreateInstance(pt);
+
+                    }
+                }
+                param.SetValue(obj, i);
+            }
         }
     }
 }
