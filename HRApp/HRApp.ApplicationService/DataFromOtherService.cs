@@ -21,7 +21,7 @@ EXEC	@return_value = TecentDataUinDA.[dbo].[SP_QueryAccount]
 
 SELECT	'Return Value' = @return_value
          */
-        IDataFromOtherRepository dataFromRepository;
+        public IDataFromOtherRepository dataFromRepository;//使用反射进行注入时这个变量的设置public
         public DataFromOtherService(IDataFromOtherRepository repository)
         {
             dataFromRepository = repository;

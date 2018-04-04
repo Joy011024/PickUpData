@@ -190,5 +190,9 @@ namespace HRApp.Web
             }
             return pn;
         }
+        public void IocFillConstructor<T>(T targetClass, Dictionary<string, object> paramValue)
+        { //填充构造函数
+            
+        }
     }
 }
