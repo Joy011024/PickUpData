@@ -45,8 +45,8 @@ namespace HRApp.Web.Controllers
         }
         public JsonResult QueryUinDataList(QueryRequestParam param) 
         {
-            IDataFromOtherRepository contactRep = new DataFromOtherRepository() { SqlConnString = InitAppSetting.QueryUinDB };
-            IDataFromOtherService contactService = new DataFromOtherService(contactRep);
+            //IDataFromOtherRepository contactRep = new DataFromOtherRepository() { SqlConnString = InitAppSetting.QueryUinDB };
+            IDataFromOtherService contactService = IocMvcFactoryHelper.GetIocDict(false)[typeof(IDataFromOtherService).Name] as IDataFromOtherService;// new DataFromOtherService(contactRep);
             Common.Data.JsonData json = contactService.QueryUinList(DateTime.Parse(param.StartTime), DateTime.Parse(param.EndTime), param.BeginRow, param.EndRow);
             return Json(json);
         }
