@@ -1,3 +1,5 @@
+use  HrApp
+go
 Create table  SpecialSpellName
 (--chinese convert english
 	Id int identity(1,1) primary key,
