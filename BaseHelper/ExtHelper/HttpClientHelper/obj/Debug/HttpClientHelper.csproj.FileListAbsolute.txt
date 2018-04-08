@@ -21,5 +21,6 @@ D:\CodeFile\GithubCode\Code\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj
 D:\CodeFile\GithubCode\Code\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.pdb
 E:\Code\DayDayStudy\PickUpData\BaseHelper\bin\Debug\HttpClientHelper.dll
 E:\Code\DayDayStudy\PickUpData\BaseHelper\bin\Debug\HttpClientHelper.pdb
+E:\Code\DayDayStudy\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.csprojResolveAssemblyReference.cache
 E:\Code\DayDayStudy\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.dll
 E:\Code\DayDayStudy\PickUpData\BaseHelper\ExtHelper\HttpClientHelper\obj\Debug\HttpClientHelper.pdb

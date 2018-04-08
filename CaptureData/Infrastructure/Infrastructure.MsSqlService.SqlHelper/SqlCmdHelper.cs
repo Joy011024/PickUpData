@@ -128,7 +128,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
             DataSet ds = new DataSet();
             if (beginRow.HasValue)
             {
-                dap.Fill(ds, beginRow.Value, (endRow.HasValue ? endRow.Value : int.MaxValue), tableName);
+                dap.Fill(ds, beginRow.Value-1, (endRow.HasValue ? endRow.Value : int.MaxValue), tableName);
             }
             else {
                 dap.Fill(ds);
