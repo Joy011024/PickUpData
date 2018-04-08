@@ -48,16 +48,15 @@
             this.WebPanel.Controls.Add(this.web);
             this.WebPanel.Location = new System.Drawing.Point(3, 100);
             this.WebPanel.Name = "WebPanel";
-            this.WebPanel.Size = new System.Drawing.Size(534, 577);
+            this.WebPanel.Size = new System.Drawing.Size(624, 577);
             this.WebPanel.TabIndex = 0;
             // 
             // web
             // 
-            this.web.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.web.Location = new System.Drawing.Point(0, 0);
+            this.web.Location = new System.Drawing.Point(1, 0);
             this.web.MinimumSize = new System.Drawing.Size(20, 20);
             this.web.Name = "web";
-            this.web.Size = new System.Drawing.Size(534, 577);
+            this.web.Size = new System.Drawing.Size(620, 577);
             this.web.TabIndex = 0;
             // 
             // lblUrl
@@ -73,13 +72,13 @@
             // 
             this.rtbUrl.Location = new System.Drawing.Point(51, -2);
             this.rtbUrl.Name = "rtbUrl";
-            this.rtbUrl.Size = new System.Drawing.Size(379, 29);
+            this.rtbUrl.Size = new System.Drawing.Size(459, 29);
             this.rtbUrl.TabIndex = 2;
             this.rtbUrl.Text = "https://mail.qq.com";
             // 
             // btnGoto
             // 
-            this.btnGoto.Location = new System.Drawing.Point(437, 3);
+            this.btnGoto.Location = new System.Drawing.Point(527, 4);
             this.btnGoto.Name = "btnGoto";
             this.btnGoto.Size = new System.Drawing.Size(47, 23);
             this.btnGoto.TabIndex = 3;
@@ -88,7 +87,7 @@
             // 
             // btnPickUp
             // 
-            this.btnPickUp.Location = new System.Drawing.Point(490, 3);
+            this.btnPickUp.Location = new System.Drawing.Point(580, 4);
             this.btnPickUp.Name = "btnPickUp";
             this.btnPickUp.Size = new System.Drawing.Size(47, 23);
             this.btnPickUp.TabIndex = 4;
@@ -108,13 +107,13 @@
             // 
             this.rtbCookie.Location = new System.Drawing.Point(51, 33);
             this.rtbCookie.Name = "rtbCookie";
-            this.rtbCookie.Size = new System.Drawing.Size(379, 29);
+            this.rtbCookie.Size = new System.Drawing.Size(459, 29);
             this.rtbCookie.TabIndex = 6;
             this.rtbCookie.Text = "";
             // 
             // btnRemoveCookie
             // 
-            this.btnRemoveCookie.Location = new System.Drawing.Point(437, 37);
+            this.btnRemoveCookie.Location = new System.Drawing.Point(527, 38);
             this.btnRemoveCookie.Name = "btnRemoveCookie";
             this.btnRemoveCookie.Size = new System.Drawing.Size(47, 23);
             this.btnRemoveCookie.TabIndex = 7;
@@ -123,7 +122,7 @@
             // 
             // btnClearCookie
             // 
-            this.btnClearCookie.Location = new System.Drawing.Point(490, 37);
+            this.btnClearCookie.Location = new System.Drawing.Point(580, 38);
             this.btnClearCookie.Name = "btnClearCookie";
             this.btnClearCookie.Size = new System.Drawing.Size(47, 23);
             this.btnClearCookie.TabIndex = 8;
@@ -143,7 +142,7 @@
             // 
             this.rtbTip.Location = new System.Drawing.Point(51, 65);
             this.rtbTip.Name = "rtbTip";
-            this.rtbTip.Size = new System.Drawing.Size(379, 29);
+            this.rtbTip.Size = new System.Drawing.Size(459, 29);
             this.rtbTip.TabIndex = 10;
             this.rtbTip.Text = "";
             // 
@@ -163,7 +162,7 @@
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.WebPanel);
             this.Name = "PickUpIEWebCookieData";
-            this.Size = new System.Drawing.Size(545, 694);
+            this.Size = new System.Drawing.Size(639, 694);
             this.WebPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

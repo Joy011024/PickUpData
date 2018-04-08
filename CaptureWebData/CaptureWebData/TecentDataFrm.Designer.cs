@@ -72,7 +72,7 @@
             // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(599, 242);
+            this.btnQuery.Location = new System.Drawing.Point(702, 242);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
             this.btnQuery.TabIndex = 1;
@@ -83,7 +83,7 @@
             // lblTimeSpan
             // 
             this.lblTimeSpan.AutoSize = true;
-            this.lblTimeSpan.Location = new System.Drawing.Point(595, 350);
+            this.lblTimeSpan.Location = new System.Drawing.Point(698, 350);
             this.lblTimeSpan.Name = "lblTimeSpan";
             this.lblTimeSpan.Size = new System.Drawing.Size(77, 12);
             this.lblTimeSpan.TabIndex = 2;
@@ -92,7 +92,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(595, 385);
+            this.label1.Location = new System.Drawing.Point(698, 385);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 3;
@@ -100,7 +100,7 @@
             // 
             // txtTimeSpan
             // 
-            this.txtTimeSpan.Location = new System.Drawing.Point(687, 341);
+            this.txtTimeSpan.Location = new System.Drawing.Point(790, 341);
             this.txtTimeSpan.Name = "txtTimeSpan";
             this.txtTimeSpan.Size = new System.Drawing.Size(103, 21);
             this.txtTimeSpan.TabIndex = 4;
@@ -108,7 +108,7 @@
             // 
             // txtRepeact
             // 
-            this.txtRepeact.Location = new System.Drawing.Point(687, 376);
+            this.txtRepeact.Location = new System.Drawing.Point(790, 376);
             this.txtRepeact.Name = "txtRepeact";
             this.txtRepeact.Size = new System.Drawing.Size(103, 21);
             this.txtRepeact.TabIndex = 5;
@@ -153,7 +153,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(595, 311);
+            this.label3.Location = new System.Drawing.Point(698, 311);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 10;
@@ -161,7 +161,7 @@
             // 
             // txtCurrentLimit
             // 
-            this.txtCurrentLimit.Location = new System.Drawing.Point(687, 308);
+            this.txtCurrentLimit.Location = new System.Drawing.Point(790, 308);
             this.txtCurrentLimit.Name = "txtCurrentLimit";
             this.txtCurrentLimit.Size = new System.Drawing.Size(103, 21);
             this.txtCurrentLimit.TabIndex = 11;
@@ -187,7 +187,7 @@
             // lblGender
             // 
             this.lblGender.AutoSize = true;
-            this.lblGender.Location = new System.Drawing.Point(602, 279);
+            this.lblGender.Location = new System.Drawing.Point(705, 279);
             this.lblGender.Name = "lblGender";
             this.lblGender.Size = new System.Drawing.Size(29, 12);
             this.lblGender.TabIndex = 14;
@@ -197,7 +197,7 @@
             // 
             this.cmbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGender.FormattingEnabled = true;
-            this.cmbGender.Location = new System.Drawing.Point(689, 276);
+            this.cmbGender.Location = new System.Drawing.Point(792, 276);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(103, 20);
             this.cmbGender.TabIndex = 15;
@@ -205,7 +205,7 @@
             // ckStartQuartz
             // 
             this.ckStartQuartz.AutoSize = true;
-            this.ckStartQuartz.Location = new System.Drawing.Point(597, 144);
+            this.ckStartQuartz.Location = new System.Drawing.Point(700, 144);
             this.ckStartQuartz.Name = "ckStartQuartz";
             this.ckStartQuartz.Size = new System.Drawing.Size(72, 16);
             this.ckStartQuartz.TabIndex = 16;
@@ -215,7 +215,7 @@
             // 
             // rtbTip
             // 
-            this.rtbTip.Location = new System.Drawing.Point(591, 541);
+            this.rtbTip.Location = new System.Drawing.Point(694, 541);
             this.rtbTip.Name = "rtbTip";
             this.rtbTip.Size = new System.Drawing.Size(205, 91);
             this.rtbTip.TabIndex = 17;
@@ -223,7 +223,7 @@
             // 
             // btnDeleteQuartz
             // 
-            this.btnDeleteQuartz.Location = new System.Drawing.Point(667, 140);
+            this.btnDeleteQuartz.Location = new System.Drawing.Point(770, 140);
             this.btnDeleteQuartz.Name = "btnDeleteQuartz";
             this.btnDeleteQuartz.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteQuartz.TabIndex = 18;
@@ -239,7 +239,7 @@
             this.groupBox1.Controls.Add(this.lblCity);
             this.groupBox1.Controls.Add(this.lblDistinct);
             this.groupBox1.Controls.Add(this.cmbCity);
-            this.groupBox1.Location = new System.Drawing.Point(591, 410);
+            this.groupBox1.Location = new System.Drawing.Point(694, 410);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(214, 125);
             this.groupBox1.TabIndex = 21;
@@ -249,7 +249,7 @@
             // lblTodayPickUp
             // 
             this.lblTodayPickUp.AutoSize = true;
-            this.lblTodayPickUp.Location = new System.Drawing.Point(597, 24);
+            this.lblTodayPickUp.Location = new System.Drawing.Point(700, 24);
             this.lblTodayPickUp.Name = "lblTodayPickUp";
             this.lblTodayPickUp.Size = new System.Drawing.Size(89, 12);
             this.lblTodayPickUp.TabIndex = 22;
@@ -259,7 +259,7 @@
             // 
             this.lsbStatic.FormattingEnabled = true;
             this.lsbStatic.ItemHeight = 12;
-            this.lsbStatic.Location = new System.Drawing.Point(599, 50);
+            this.lsbStatic.Location = new System.Drawing.Point(702, 50);
             this.lsbStatic.Name = "lsbStatic";
             this.lsbStatic.Size = new System.Drawing.Size(206, 88);
             this.lsbStatic.TabIndex = 24;
@@ -269,7 +269,7 @@
             this.gbPollingType.Controls.Add(this.rbDepth);
             this.gbPollingType.Controls.Add(this.rbGuid);
             this.gbPollingType.Controls.Add(this.rbNormal);
-            this.gbPollingType.Location = new System.Drawing.Point(599, 166);
+            this.gbPollingType.Location = new System.Drawing.Point(702, 166);
             this.gbPollingType.Name = "gbPollingType";
             this.gbPollingType.Size = new System.Drawing.Size(202, 41);
             this.gbPollingType.TabIndex = 25;
@@ -313,7 +313,7 @@
             // 
             this.lblPageIndex.AccessibleRole = System.Windows.Forms.AccessibleRole.SplitButton;
             this.lblPageIndex.AutoSize = true;
-            this.lblPageIndex.Location = new System.Drawing.Point(599, 209);
+            this.lblPageIndex.Location = new System.Drawing.Point(702, 209);
             this.lblPageIndex.Name = "lblPageIndex";
             this.lblPageIndex.Size = new System.Drawing.Size(29, 12);
             this.lblPageIndex.TabIndex = 26;
@@ -322,7 +322,7 @@
             // 
             // txtPageIndex
             // 
-            this.txtPageIndex.Location = new System.Drawing.Point(687, 209);
+            this.txtPageIndex.Location = new System.Drawing.Point(790, 209);
             this.txtPageIndex.Name = "txtPageIndex";
             this.txtPageIndex.Size = new System.Drawing.Size(100, 21);
             this.txtPageIndex.TabIndex = 27;
@@ -330,7 +330,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(748, 140);
+            this.btnExit.Location = new System.Drawing.Point(851, 140);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(57, 23);
             this.btnExit.TabIndex = 28;
@@ -340,7 +340,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(735, 24);
+            this.btnRefresh.Location = new System.Drawing.Point(838, 24);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(57, 23);
             this.btnRefresh.TabIndex = 29;
@@ -411,14 +411,14 @@
             this.pickUpIEWebCookie.CallBack = null;
             this.pickUpIEWebCookie.Location = new System.Drawing.Point(18, 45);
             this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
-            this.pickUpIEWebCookie.Size = new System.Drawing.Size(549, 594);
+            this.pickUpIEWebCookie.Size = new System.Drawing.Size(654, 594);
             this.pickUpIEWebCookie.TabIndex = 19;
             // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 635);
+            this.ClientSize = new System.Drawing.Size(935, 656);
             this.Controls.Add(this.switchPanel);
             this.Controls.Add(this.workPanel);
             this.Controls.Add(this.btnRefresh);
