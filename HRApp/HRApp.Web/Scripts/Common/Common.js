@@ -1,6 +1,7 @@
 ﻿//调用前，请先引用 lang.js
 function bindPostAjax(url, param, succFun, errorFun, complateFun) {
     var fullUrl = "http://" + window.location.host + url;
+    //layer.load(1, {type:3,text:'Handing。。。。。',title:'tip'}); 
     $.ajax({
         url: fullUrl,
         data: param,

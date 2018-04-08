@@ -1,7 +1,7 @@
 ﻿.clearTag {
             cursor: pointer;
             display: inline-block;
-            color: white;
+            color: red;
             background-color: #ccc;
             left: -24px;
             position: relative;
