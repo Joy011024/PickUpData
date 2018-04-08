@@ -6,10 +6,15 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Threading;
 namespace Infrastructure.MsSqlService.SqlHelper
 {
     public class SqlCmdHelper
     {
+        /// <summary>
+        /// 超时时长
+        /// </summary>
+        public int? Timeout { get; set; }
         public string SqlConnString { get; set; }
         /// <summary>
         /// 执行非查询命令时收影响的行数
@@ -73,8 +78,51 @@ namespace Infrastructure.MsSqlService.SqlHelper
         public DataSet QueryDataSet(string sql,string sqlconnString,SqlParameter[] param,int? beginRow,int? endRow,string dataSetName)
         {
             SqlConnection conn = new SqlConnection(sqlconnString);
-            conn.Open();
+            Stopwatch sw = new Stopwatch();//语句运行时间检测
+            if (Timeout.HasValue)
+            {
+                Exception exMsg = null;
+                bool connSuccess = false;
+                Thread t = new Thread(delegate()
+                {
+                    try
+                    {
+                        sw.Start();
+                        conn.Open(); //如果一开始数据库就没法连接则不会进入到操作超时过程
+                        connSuccess = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        if (exMsg == null)
+                        {
+                            exMsg = ex;
+                        }
+                    }
+                });
+                t.Start();
+                //如果执行成功则跳过这个步骤
+                while (Timeout.Value > sw.ElapsedMilliseconds / 1000)
+                { //秒级别比较
+                    if (t.Join(1)) break;
+                    if (connSuccess) {
+                        break;
+                    }
+                }
+                if (!connSuccess)
+                { //如果没有执行成功的
+                    throw exMsg;
+                }
+            }
+            else 
+            {
+                conn.Open();
+            }
             SqlCommand comm = new SqlCommand(sql, conn);
+            if (Timeout.HasValue)
+            {
+                comm.CommandTimeout = Timeout.Value;//单位为秒
+            }
+            
             if (param != null && param.Length > 0)
             {
                 comm.Parameters.AddRange(param);

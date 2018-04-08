@@ -109,7 +109,7 @@ namespace HRApp.Infrastructure
         }
         public static List<T> QueryModelList<T>(string sql, SqlParameter[] param, string sqlConnString,int beginRow,int endRow) where T:class
         {
-            DataSet ds = new SqlCmdHelper().QueryDataSet(sql, sqlConnString, param, beginRow, endRow, typeof(T).Name);
+            DataSet ds = new SqlCmdHelper() { Timeout=60}.QueryDataSet(sql, sqlConnString, param, beginRow, endRow, typeof(T).Name);
             return DataHelp.DataReflection.DataSetConvert<T>(ds);
         }
         public static int ExecuteCount(string sql,SqlParameter[] param,string sqlConnString)

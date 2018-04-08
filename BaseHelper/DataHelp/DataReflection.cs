@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Data;
+using System.ComponentModel;
 namespace DataHelp
 {
     public static class DataReflection
@@ -178,7 +179,14 @@ namespace DataHelp
                     {
                         continue;
                     }
-                    if (value.GetType().Name != typeof(DBNull).Name&&value.GetType().Name != pi.PropertyType.Name)
+                    //如果属性定义的数据类型为可空情形，需要特殊处理
+                    if (pi.PropertyType.Name == typeof(Nullable<>).Name) 
+                    {
+                        NullableConverter nullableConverter = new NullableConverter(pi.PropertyType);//如何获取可空类型属性非空时的数据类型
+                        Type nt = nullableConverter.UnderlyingType;
+                        pi.SetValue(entity, Convert.ChangeType(value, nt), null);
+                    }
+                    else if (value.GetType().Name != typeof(DBNull).Name&&value.GetType().Name != pi.PropertyType.Name)
                     {
                        object  pv= Convert.ChangeType(value, pi.PropertyType);
                        pi.SetValue(entity, pv, null);
