@@ -18,8 +18,7 @@ namespace HRApp.Web.Controllers
         [Domain.CommonData.DescriptionSort("添加联系人对话框")]
         public ActionResult AddContacterDialog()
         {
-            IAppSettingRepository appSetRepository = new AppSettingRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            IAppSettingService appSetService = new AppSettingService(appSetRepository);
+            IAppSettingService appSetService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
             ViewData["ParentNode"] = appSetService.SelectNodeItemByParentCode("LianXiRenLeiXingGuanLi");
             return View();
         }
@@ -33,8 +32,7 @@ namespace HRApp.Web.Controllers
                 Value=param.Value,
                 Desc = param.Desc
             };
-            IContactDataRepository contactRep = new ContactDataRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            IContactDataService contactService = new ContactDataService(contactRep);
+            IContactDataService contactService = IocMvcFactoryHelper.GetInterface<IContactDataService>();
             json = contactService.Add(contacter);
             return Json(json);
         }
@@ -45,8 +43,7 @@ namespace HRApp.Web.Controllers
         }
         public JsonResult QueryUinDataList(QueryRequestParam param) 
         {
-            //IDataFromOtherRepository contactRep = new DataFromOtherRepository() { SqlConnString = InitAppSetting.QueryUinDB };
-            IDataFromOtherService contactService = IocMvcFactoryHelper.GetIocDict(false)[typeof(IDataFromOtherService).Name] as IDataFromOtherService;// new DataFromOtherService(contactRep);
+            IDataFromOtherService contactService = IocMvcFactoryHelper.GetInterface<IDataFromOtherService>();
             Common.Data.JsonData json = contactService.QueryUinList(DateTime.Parse(param.StartTime), DateTime.Parse(param.EndTime), param.BeginRow, param.EndRow);
             json.AttachData = param;
             return Json(json);

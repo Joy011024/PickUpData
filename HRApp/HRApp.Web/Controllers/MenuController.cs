@@ -29,8 +29,7 @@ namespace HRApp.Web.Controllers
                 json.Message = AppLanguage.Lang.Tip_MenuUrlIsRequired;
                 return Json(json);
             }
-            IMenuRepository mr = new MenuRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            IMenuService ms = new MenuService(mr);
+            IMenuService ms = IocMvcFactoryHelper.GetInterface<IMenuService>();
             json = ms.Add(new Model.Menu() { Name = param.Name, Code = param.Code, Remark = param.Desc,Url=param.Value });
             return Json(json);
         }
@@ -42,8 +41,7 @@ namespace HRApp.Web.Controllers
         public JsonResult QueryAllMenus() 
         {
             Common.Data.JsonData json = new Common.Data.JsonData();
-            IMenuRepository mr = new MenuRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            IMenuService ms = new MenuService(mr);
+            IMenuService ms = IocMvcFactoryHelper.GetInterface<IMenuService>();
             json = ms.QueryAllMenu();
             return Json(json);
         }

@@ -46,8 +46,7 @@ namespace HRApp.Web.Controllers
             { 
            
             }
-            ISpecialSpellNameRepository spellRepository = new SpecialSpellNameRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            ISpecialSpellNameService appSetService = new SpecialSpellNameService(spellRepository);
+            ISpecialSpellNameService appSetService = IocMvcFactoryHelper.GetInterface<ISpecialSpellNameService>();
             json = appSetService.Add(new SpecialSpellName()
             {
                 Name = param.Name[0].ToString(),//只读取第一个字符

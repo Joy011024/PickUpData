@@ -58,6 +58,16 @@ namespace HRApp.Web
             }
             return propertyVal;
         }
+        /// <summary>
+        /// 提取接口实例化
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T GetInterface<T>() where T:class
+        {
+            string name = typeof(T).Name;
+            return  GetIocDict(false)[name] as T;
+        }
         static void OrmIocFactory()
         {
             if (propertyVal.Count > 0)

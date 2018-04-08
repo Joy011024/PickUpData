@@ -31,8 +31,7 @@ namespace HRApp.Web.Controllers
         }
         public JsonResult SaveAppSetting(NodeRequestParam param)
         {
-            IAppSettingRepository appSetRepository = new AppSettingRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            IAppSettingService appSetService = new AppSettingService(appSetRepository);
+            IAppSettingService appSetService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
             JsonData json = appSetService.Add(new CategoryItems()
             {
                 ItemDesc = param.Desc,
@@ -53,8 +52,7 @@ namespace HRApp.Web.Controllers
         public JsonResult InsertAppData(NodeRequestParam param) 
         {
             JsonData json = new JsonData();
-            IAppRepository appSetRepository = new AppRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            IAppDataService appSetService = new AppDataService(appSetRepository);
+            IAppDataService appSetService = IocMvcFactoryHelper.GetInterface<IAppDataService>();
             json= appSetService.Add(new AppModel()
             {
                 AppName=param.Name,
@@ -67,8 +65,7 @@ namespace HRApp.Web.Controllers
         public JsonResult QueryNodes(string parenCode)
         {
             Common.Data.JsonData json = new JsonData();
-            IAppSettingRepository appSetRepository = new AppSettingRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            IAppSettingService appSetService = new AppSettingService(appSetRepository);
+            IAppSettingService appSetService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
             json = appSetService.SelectNodesByParent(parenCode);
             return Json(json);
         }
