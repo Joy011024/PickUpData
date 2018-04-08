@@ -133,6 +133,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 追加显示 的本地化字符串。
+        /// </summary>
+        public static string LblAppendDisplay {
+            get {
+                return ResourceManager.GetString("LblAppendDisplay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 系统程序管理 的本地化字符串。
         /// </summary>
         public static string LblAppManage {

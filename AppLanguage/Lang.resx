@@ -141,6 +141,9 @@
   <data name="LblAccountGroup" xml:space="preserve">
     <value>账户分类归档</value>
   </data>
+  <data name="LblAppendDisplay" xml:space="preserve">
+    <value>追加显示</value>
+  </data>
   <data name="LblAppManage" xml:space="preserve">
     <value>系统程序管理</value>
   </data>

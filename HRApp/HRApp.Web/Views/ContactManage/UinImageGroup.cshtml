@@ -4,8 +4,6 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -47,18 +45,25 @@
             });
             bindPostAjax('/ContactManage/QueryUinDataList',param,
                function (response, statue) {
+                   if (!response.Success) {
+                       layer.alert(response.Message, { title: lang.label.tip });
+                       return;
+                   }
                    var tmpl = $('.tmpl')[0].outerHTML;
                    var div = $('.dataRowArea');
                    var queryParam = response.AttachData;
                    $('.list').html(lang.tip.totla.format(response.Total) + ' ' + lang.tip.nowRecord.format(queryParam.BeginRow,queryParam.EndRow));
+                   if (!$('#ckAppendDisplay').is(':checked')) {
+                       $('.dataRowArea').empty();//采用非追加形式
+                   }
                    $(response.Data).each(function (i, ele) {//疑难杂症？each内部不能调用到tmpl变量
                        var ht = $('.tmpl')[0].outerHTML;
                        ht = ht.formatObject(ele);
                        ht = ht.replace("{i}", i);
                        ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
                        $('.dataRowArea').prepend(ht);
-                       $('.dataRowArea .tmpl:last [type=checkbox]').click(function () {//没有触发
-
+                       $('.dataRowArea .tmpl:last[type=checkbox]').click(function () {//没有触发
+                           debugger;
                        });
                    });
 
@@ -87,6 +92,10 @@
                 <input type="text" />
             </span>
             <span>
+                <label>
+                    <span>@Lang.LblAppendDisplay</span>
+                    <span><input type="checkbox" id="ckAppendDisplay" style="width: 30px;position: relative; top: 10px;" /></span>
+                </label>
                 <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.BtnQuery" />
             </span>
         </div>
