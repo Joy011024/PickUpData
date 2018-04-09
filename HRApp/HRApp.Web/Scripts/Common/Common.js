@@ -1,6 +1,7 @@
 ﻿//调用前，请先引用 lang.js
 function bindPostAjax(url, param, succFun, errorFun, complateFun) {
     var fullUrl = "http://" + window.location.host + url;
+    layer.load(1, { type: 3 });
     //layer.load(1, {type:3,text:'Handing。。。。。',title:'tip'}); 
     $.ajax({
         url: fullUrl,
@@ -8,6 +9,7 @@ function bindPostAjax(url, param, succFun, errorFun, complateFun) {
         type: 'post',
         traditional:true,//支持传递数组
         success: function (response, statue) {
+            layer.close(layer.index);
             if (succFun == undefined) {
                 return;
             }
