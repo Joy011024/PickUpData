@@ -17,6 +17,11 @@ namespace HRApp.Web.Controllers
     {
         //
         // GET: /AppSettingManage/
+        [Description("¡–±Ì“≥")]
+        public ActionResult AppSettingList() 
+        {
+            return View();
+        }
         public JsonResult QueryRootAppSetting()
         {
             Common.Data.JsonData json = new JsonData() { Result=true};

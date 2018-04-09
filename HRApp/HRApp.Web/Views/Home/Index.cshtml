@@ -30,14 +30,20 @@
         #myTab .active {
             background-color: #1f1d1d;
         }
+        .warming {
+            color:red;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
             //$('#menus')
-            bindPostAjax('/Menu/QueryAllMenus',null, function (response, statue) {
+            bindPostAjax('/Menu/QueryAllMenus', null, function (response, statue) {
+                var tipEle = $('.warming');
+                tipEle.hide();
                 if (!response.Success)
                 {
-                    $('.warming').html(response.Message);
+                    tipEle.html(response.Message);
+                    tipEle.show();
                     return;
                 }
                 $(response.Data).each(function (i, ele) {//跟节点
@@ -149,8 +155,7 @@
 
         </div>
     </div>
-    <div class="loading" style="display:none;">
-        Handing。。。。。。
+    <div class="warming" style="display:none;">
     </div>
 </body>
 </html>
