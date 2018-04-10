@@ -1,4 +1,5 @@
-﻿@{
+﻿@using HRApp.Web
+@{
     Layout = null;
 }
 
@@ -8,10 +9,52 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>AppSettingList</title>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    @*<script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>*@
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/jquery.combo.select.js/combo.select.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/jquery.combo.select.js/jquery.combo.select.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-select/bootstrap-select.js?v=@InitAppSetting.Version"></script>
+    <script type="text/javascript">
+        var btns = [
+            {
+                id: 'btnAdd', url: '/AppSettingManage/AppSettingDialog', text: lang.cmd.btnAdd
+            }
+        ];
+        $(function () {
+            initBtns(btns);
+            
+        });
+        function initBtns(btns) {
+            var tmpl = '<button id="{id}" class="button buttonSmall" link="{url}">{text}</button>';
+            $(btns).each(function (i, ele) {
+                var btnTool = $('.btnTool');
+                var btn = tmpl.formatObject(ele);
+                btnTool.append(btn);
+                btnTool.find('.buttonSmall:last').click(function (i, e) {
+                    var el = $(e);
+                    if (el.attr('param') != '') {//需要选择具体数据进行编辑
+
+                    }
+                });
+            });
+        }
+    </script>
 </head>
 <body>
     <div>
-        
+        <div class="btnTool">
+
+        </div>
     </div>
 </body>
 </html>
