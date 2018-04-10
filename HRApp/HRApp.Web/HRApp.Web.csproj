@@ -199,9 +199,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AppSettingManage\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\AppLanguage\AppLanguage.csproj">
       <Project>{3da2bb21-14a7-49ca-9bb4-7eb8f26c415a}</Project>
       <Name>AppLanguage</Name>
@@ -285,6 +282,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AppSettingManage\AppSettingList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AppSettingManage\AppSettingDialog.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
