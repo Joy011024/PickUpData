@@ -28,16 +28,6 @@ F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\bi
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.pdb
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.dll
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.pdb
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.CommonData.dll
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\bin\Debug\Common.Data.dll
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\bin\Debug\EntityFramework.dll
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.CommonData.pdb
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\bin\Debug\EntityFramework.xml
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.csprojResolveAssemblyReference.cache
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.dll
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.pdb
 D:\CodeFile\GithubCode\Code\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.dll
 D:\CodeFile\GithubCode\Code\PickUpData\HRApp\HRApp.Model\bin\Debug\HRApp.Model.pdb
 D:\CodeFile\GithubCode\Code\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.CommonData.dll
