@@ -29,7 +29,7 @@ namespace HRApp.Web.Controllers
             json.Success = true;
             return Json(json);
         }
-        public ActionResult Index()
+        public ActionResult AppSettingDialog()
         {
             ViewData["ParentNode"] = QueryAppSettingList("-1");
             return View();
