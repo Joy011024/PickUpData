@@ -40,11 +40,20 @@
                 var btnTool = $('.btnTool');
                 var btn = tmpl.formatObject(ele);
                 btnTool.append(btn);
-                btnTool.find('.buttonSmall:last').click(function (i, e) {
-                    var el = $(e);
-                    if (el.attr('param') != '') {//需要选择具体数据进行编辑
-
+                btnTool.find('.buttonSmall:last').click(function () {
+                    var el = $(this);
+                    var url = el.attr('link');
+                    var param=el.attr('param');
+                    if ($.trim(param) != '') {//需要选择具体数据进行编辑
+                        url+='?'+$.trim(param);
                     }
+                    //对话框加载
+                    layer.open({
+                        type: 2,
+                        area: ['360px', '560px'],
+                        content: url,
+                        title:el.text()
+                    });
                 });
             });
         }
