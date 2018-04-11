@@ -28,7 +28,10 @@
         var btns = [
             {
                 id: 'btnAdd', url: '/AppSettingManage/AppSettingDialog', text: lang.cmd.btnAdd
-            }
+            },
+            {
+                id: 'btnRefresh', text: lang.cmd.btnRefresh
+            },
         ];
         $(function () {
             initBtns(btns);
@@ -56,13 +59,38 @@
                     });
                 });
             });
+            initData();
+        }
+        function initData() {
+            var grid = $('.grid');
+            bindPostAjax('/AppSettingManage/QueryAllAppSettingData', {},
+                function (response, statue) {
+                    console.log(response);
+            });
         }
     </script>
+    <style type="text/css">
+        .btnTool {
+            background-color:#14c1ca;
+            padding:5px;
+        }
+        .btnTool button {
+            margin-right:10px;
+        }
+        .bg {
+            background-color:#14c1ca;
+        }
+    </style>
 </head>
 <body>
     <div>
         <div class="btnTool">
 
+        </div>
+        <div class="container"> @*核心区域*@
+            <div class="grid bg">
+
+            </div>
         </div>
     </div>
 </body>

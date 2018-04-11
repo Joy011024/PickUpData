@@ -55,7 +55,8 @@
         btnUpload: '上传',
         close: '关闭',
         del: '删除',
-        btnNewAdd:'新增'
+        btnNewAdd: '新增',
+        btnRefresh: '刷新'
     },
     statue: {
        

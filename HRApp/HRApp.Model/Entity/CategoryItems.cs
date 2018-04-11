@@ -15,7 +15,7 @@ namespace HRApp.Model
         public string ItemDesc { get; set; }
         [Description("配置的值")]
         public string ItemValue { get; set; }
-        public string GetQueryModelSampleSql()
+        string GetQueryModelSampleSql()
         {
             return @"SELECT [ID],[Name],[ParentID],[ParentCode],[Code],[Sort],[IsDelete],[ItemValue],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc]
   FROM [dbo].[CategoryItems] ";
@@ -23,8 +23,12 @@ namespace HRApp.Model
         public string BuilderSqlParam()
         {
             string sql = GetQueryModelSampleSql() + " where ParentCode=@code";
-
             return sql;
+        }
+        [DescriptionSort("查询全部配置")]
+        public string QueryAllDataOfSql() 
+        {
+            return GetQueryModelSampleSql();
         }
         public static string BuilderValideSql() 
         {

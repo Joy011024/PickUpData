@@ -85,6 +85,14 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
             };
             return CommonRepository.QueryModelList<CategoryItems>(sql, param, SqlConnString, 0, int.MaxValue);
         }
+        [DescriptionSort("无条件查询全部")]
+        public IList<CategoryItems> QueryAll() 
+        {
+            List<CategoryItems> datas = new List<CategoryItems>();
+            CategoryItems model = new CategoryItems();
+            string sql = model.QueryAllDataOfSql();
+            return CommonRepository.QueryModelList<CategoryItems>(sql, null, SqlConnString, 0, int.MaxValue);
+        }
         public int ValideExists(string key)
         {
             string sql = CategoryItems.BuilderValideSql();

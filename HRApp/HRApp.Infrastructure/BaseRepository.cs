@@ -51,5 +51,11 @@ namespace HRApp.Infrastructure
         {
             throw new NotImplementedException();
         }
+
+
+        public IList<T> QueryAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

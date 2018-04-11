@@ -10,7 +10,7 @@ using Common.Data;
 using Infrastructure.ExtService;
 namespace HRApp.ApplicationService
 {
-    public class AppSettingService:IAppSettingService
+    public class AppSettingService :IAppSettingService
     {
         public IAppSettingRepository appSettingRepository;
         public AppSettingService(IAppSettingRepository appSet)
@@ -96,6 +96,10 @@ namespace HRApp.ApplicationService
         public List<CategoryItems> SelectNodeItemByParentCode(string parentCode)
         {
             return appSettingRepository.GetNodeListByParent(parentCode);
+        }
+        public List<CategoryItems> QueryAll() 
+        {
+            return appSettingRepository.QueryAll().ToList();
         }
     }
 }

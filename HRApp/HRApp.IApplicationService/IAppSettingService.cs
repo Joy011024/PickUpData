@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRApp.IApplicationService
 {
-    public interface IAppSettingService:IBaseServiceWithSqlConnstring<CategoryItems>
+    public interface IAppSettingService : IBaseAllWithSqlConnString<CategoryItems>
     {
        new  string SqlConnString { get; set; }
        new  JsonData Add(CategoryItems item);

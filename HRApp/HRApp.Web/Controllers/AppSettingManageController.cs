@@ -34,6 +34,21 @@ namespace HRApp.Web.Controllers
             ViewData["ParentNode"] = QueryAppSettingList("-1");
             return View();
         }
+        [HttpPost]
+        public JsonResult QueryAllAppSettingData() 
+        {
+            JsonData json = new JsonData() { Result=true};
+            try
+            {
+                json.Data = QueryAllAppSetting();
+                json.Success = true;
+            }
+            catch (Exception ex)
+            {
+                json.Message = ex.Message;
+            }
+            return Json(json);
+        }
         public JsonResult SaveAppSetting(NodeRequestParam param)
         {
             IAppSettingService appSetService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();

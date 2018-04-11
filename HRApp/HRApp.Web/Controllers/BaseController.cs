@@ -22,16 +22,19 @@ namespace HRApp.Web.Controllers
         //
         // GET: /Base/
         [DescriptionSort("根据父节点id查询节点列表")]
-       public List<CategoryItems> QueryAppSettingList(string parentCode)
+        public List<CategoryItems> QueryAppSettingList(string parentCode)
         {
-            //查询节点列表
-            IAppSettingRepository appSetRepository = new AppSettingRepository() { SqlConnString = InitAppSetting.LogicDBConnString };
-            IAppSettingService appSetService = new AppSettingService(appSetRepository);
+            IAppSettingService appSetService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
             List<CategoryItems> items = appSetService.SelectNodeItemByParentCode(parentCode);
             return items;
         }
-       
-
+        [DescriptionSort("查询全部配置")]
+        public List<CategoryItems> QueryAllAppSetting() 
+        {
+            IAppSettingService appSetService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
+            List<CategoryItems> items = appSetService.QueryAll();
+            return items;
+        }
     }
     public class MvcActionResultHelperAttribute : System.Web.Mvc.ActionFilterAttribute
     {

@@ -73,5 +73,11 @@ namespace HRApp.Infrastructure
         {
             throw new NotImplementedException();
         }
+
+
+        public IList<FindQQDataTable> QueryAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace HRApp.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            InitAppSetting.Version = DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat); 
+            InitAppSetting.Version = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat); 
                 //DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat);
             InitAppSetting.CodeVersion = InitAppSetting.CodeVersionFromCfg();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
