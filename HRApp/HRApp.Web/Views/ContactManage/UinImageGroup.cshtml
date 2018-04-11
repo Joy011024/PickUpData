@@ -41,7 +41,7 @@
                 'StartTime': '@DateTime.Now.AddMonths(-1).AddDays(1).ToString(Common.Data.CommonFormat.DateFormat)',
                 'EndTime': '@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)',
                 BeginRow: 1,
-                EndRow: 200
+                EndRow: 30
             });
             bindPostAjax('/ContactManage/QueryUinDataList',param,
                function (response, statue) {
@@ -62,11 +62,26 @@
                        ht = ht.replace("{i}", i);
                        ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
                        $('.dataRowArea').prepend(ht);
-                       $('.dataRowArea .tmpl:last[type=checkbox]').click(function () {//没有触发
+                       $('.dataRowArea .tmpl:last [type=checkbox]').click(function () {//没有触发
                            debugger;
                        });
+                       $($('.dataRowArea .tmpl:last [type=checkbox]')[0]).click(function () {
+                           console.log($(this).attr('pid'));
+                       });
                    });
-
+                   $('.dataRowArea .tmpl [type=checkbox]').click(function () {
+                       var ck = $(this);
+                       //当前选择的列表数目
+                       var ckAll = $('#ckAllImg');//选中全部 CheckBox
+                       var checkedLen = $('.dataRowArea .tmpl [type=checkbox]:checked').length;//当前选中的数目
+                       var ckLen = $('.dataRowArea .tmpl [type=checkbox]').length;//总共数目
+                       if (ckAll.is(':checked')) {//之前为选中状态
+                           ckAll.prop('checked', ck.is(':checked'));
+                       }
+                       else {
+                           ckAll.prop('checked', checkedLen == ckLen);
+                       }
+                   })
                });
             $('#ckAllImg').click(function () {
                 var ck = $(this).is(':checked');
