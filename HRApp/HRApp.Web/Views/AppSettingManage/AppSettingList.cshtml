@@ -38,15 +38,16 @@
             
         });
         function initBtns(btns) {
-            var tmpl = '<button id="{id}" class="button buttonSmall" link="{url}">{text}</button>';
+            var tmpl = '<button id="{id}" index="{i}" class="button buttonSmall" link="{url}">{text}</button>';
             $(btns).each(function (i, ele) {
                 var btnTool = $('.btnTool');
-                var btn = tmpl.formatObject(ele);
+                var btn = tmpl.formatObject(ele).replace(/{i}/g, i);
                 btnTool.append(btn);
                 btnTool.find('.buttonSmall:last').click(function () {
                     var el = $(this);
                     //如果定义了调用函数，直接访问函数
-                    var call = el.attr('func');
+                    var index = el.attr('index');
+                    var call = btns[i].func;
                     if ($.trim(call) != '') {
                         $.apply(call);
                         return;
@@ -75,7 +76,15 @@
             bindPostAjax('/AppSettingManage/QueryAllAppSettingData', {},
                 function (response, statue) {
                     console.log(response);
+                    $(response.Data).each(function (i, ele) {
+                        var tmpl = $('.grid .tpml')[0].outerHTML;
+                        var item = tmpl.formatObject(ele).replace(/{i}/g,i+1);
+                        $('#dataRow').append(item);
+                    });
             });
+        }
+        function editData(id) {
+
         }
     </script>
     <style type="text/css">
@@ -89,6 +98,16 @@
         .bg {
             background-color:#14c1ca;
         }
+        .item {
+           display: block;
+        }
+        .tpml>span {
+             display: block;
+             margin: 15px;
+        }
+        .cell>span{
+            margin-right:20px;
+        }
     </style>
 </head>
 <body>
@@ -97,9 +116,19 @@
 
         </div>
         <div class="container"> @*核心区域*@
-            <div class="grid bg">
+        <div style="display:none;" class="grid">
+            <span class="item tpml" onclick="editData('{Id}')">
+                <span id="{Id}" style="color:red;">{i}.  {Name}</span>
+                <span class="cell">
+                    <span>{Code}</span>
+                    <span>{ItemDesc}</span>
+                </span>
 
-            </div>
+            </span>
+        </div>
+        <div id="dataRow" class="grid bg">
+               
+        </div>
         </div>
     </div>
 </body>

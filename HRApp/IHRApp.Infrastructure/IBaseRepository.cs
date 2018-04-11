@@ -63,6 +63,7 @@ namespace IHRApp.Infrastructure
         /// <param name="param">key为参数名称，value为参数值</param>
         /// <returns></returns>
         IList<T> QueryList(string cmd, Dictionary<string, object> param);
+        IList<T> QueryAll();
     }
     /// <summary>
     /// 含有批量操作的扩展功能
