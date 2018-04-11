@@ -30,7 +30,7 @@
                 id: 'btnAdd', url: '/AppSettingManage/AppSettingDialog', text: lang.cmd.btnAdd
             },
             {
-                id: 'btnRefresh', text: lang.cmd.btnRefresh
+                id: 'btnRefresh', text: lang.cmd.btnRefresh, func: 'initData'
             },
         ];
         $(function () {
@@ -45,10 +45,19 @@
                 btnTool.append(btn);
                 btnTool.find('.buttonSmall:last').click(function () {
                     var el = $(this);
+                    //如果定义了调用函数，直接访问函数
+                    var call = el.attr('func');
+                    if ($.trim(call) != '') {
+                        $.apply(call);
+                        return;
+                    }
                     var url = el.attr('link');
                     var param=el.attr('param');
                     if ($.trim(param) != '') {//需要选择具体数据进行编辑
                         url+='?'+$.trim(param);
+                    }
+                    if ($.trim(url) == '') {
+                        return;
                     }
                     //对话框加载
                     layer.open({
