@@ -57,6 +57,7 @@
                        $('.dataRowArea').empty();//采用非追加形式
                    }
                    $(response.Data).each(function (i, ele) {//疑难杂症？each内部不能调用到tmpl变量
+                       $('#ckAllImg').prop('checked', false);
                        var ht = $('.tmpl')[0].outerHTML;
                        ht = ht.formatObject(ele);
                        ht = ht.replace("{i}", i);
