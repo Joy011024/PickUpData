@@ -66,20 +66,25 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ExtAttribute\" />
+    <Folder Include="SqlCmd\CommonDBSqlCmd\-1_SP\" />
+    <Folder Include="SqlCmd\CommonDBSqlCmd\2_InitData\" />
+    <Folder Include="SqlCmd\CommonDBSqlCmd\3_LogicCmd\" />
+    <Folder Include="SqlCmd\CommonDBSqlCmd\4_LogicData\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SqlCmd\CreateSql\TecentDataUinDA.sql" />
-    <Content Include="SqlCmd\LogicData\CategoryData.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_ErrorGatherImageList.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_GetWaitGatherImageList.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_PickUpStaticWithDay.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_StaticCountToday.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\SP_SuccessGatherImageList.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.1\TecentQQ.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.2\TecentQQData_imageType.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.3\EveryDayStatics.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.4\IgnoreNoImageData.sql" />
-    <Content Include="SqlCmd\UpdateSp\V1.5\InitGatherImageProperty.sql" />
+    <Content Include="SqlCmd\CommonDBSqlCmd\1_Create\CommonAppSetting.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\CreateSql\TecentDataUinDA.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\LogicData\CategoryData.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.1\SP_ErrorGatherImageList.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.1\SP_GetWaitGatherImageList.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.1\SP_PickUpStaticWithDay.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.1\SP_StaticCountToday.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.1\SP_SuccessGatherImageList.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.1\TecentQQ.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.2\TecentQQData_imageType.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.3\EveryDayStatics.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.4\IgnoreNoImageData.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.5\InitGatherImageProperty.sql" />
     <Content Include="TicketDBSqlCmd\CreateSql\AppSettingCfg.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
