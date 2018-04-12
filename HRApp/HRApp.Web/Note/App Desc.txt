@@ -9,3 +9,6 @@ Request = {System.Web.HttpRequestWrapper}
  使用的是UC浏览器进行访问，但是在代码中 Request>Browser> Browser = "Chrome"识别的浏览器类型不一致
  MobileDeviceModel = "Linux" 手机操作系统类型
  使用Platform来获取pc端的操作系统类型，MobileDeviceModel 获取移动端的操作系统类型
+
+ 一).设计文档
+ 1.selectbox选择项在进行操作是默认绑定数据源，使用快捷键Alt+S进行输入的内容查找（根据输入的内容ajax查找服务端）
