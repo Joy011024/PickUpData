@@ -4,3 +4,9 @@
 其他信息: 从“System.Int32”到“System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]”的强制转换无效。
 分析：属性定义的数据类型为 int? ,查询到的数据为int类型在进行数据强行转换
 NullableConverte进行转换
+(3.)查询联系人列表数据发现在统计限定日期内会查询总共数据作为符合要求的总数据量
+declare @p5 int
+set @p5=877056
+exec SP_QueryAccount @beginDayInt=20180313,@endDayInt=20180412,@beginRow=1,@endRow=30,@total=@p5 output
+select @p5
+经过sql  profire追踪执行语句发现在执行存储过程SP_QueryAccount前数据总量已经进行了查询
