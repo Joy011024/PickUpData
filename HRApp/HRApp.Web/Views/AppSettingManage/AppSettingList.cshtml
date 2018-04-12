@@ -50,7 +50,8 @@
                     var call = btns[i].func;
                     if ($.trim(call) != '') {
                         //$.apply(call);
-                        eval(call);
+                        var fun = eval(call);
+                        fun();
                         return;
                     }
                     var url = el.attr('link');
