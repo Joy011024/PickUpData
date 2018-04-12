@@ -32,17 +32,21 @@
         $(function () {
             //SearchEvent();
             $('#btnQuery').click(function () {
-                SearchEvent();
+                var param = {
+                    'StartTime': $('[attr=StartTime]').val(),
+                    'EndTime': $('[attr=EndTime]').val()
+                };
+                SearchEvent(param);
             });
         });
         function SearchEvent(param) {
             if (!param) { param = {};}
-            $.extend(param, {
+            param= $.extend( {
                 'StartTime': '@DateTime.Now.AddMonths(-1).AddDays(1).ToString(Common.Data.CommonFormat.DateFormat)',
                 'EndTime': '@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)',
                 BeginRow: 1,
                 EndRow: 30
-            });
+            }, param);
             bindPostAjax('/ContactManage/QueryUinDataList',param,
                function (response, statue) {
                    if (!response.Success) {
