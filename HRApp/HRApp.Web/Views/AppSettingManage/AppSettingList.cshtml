@@ -49,7 +49,8 @@
                     var index = el.attr('index');
                     var call = btns[i].func;
                     if ($.trim(call) != '') {
-                        $.apply(call);
+                        //$.apply(call);
+                        eval(call);
                         return;
                     }
                     var url = el.attr('link');
