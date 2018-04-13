@@ -38,7 +38,7 @@
         function SearchEvent(param) {
             if (!param) { param = {};}
             $.extend(param, {
-                'StartTime': '@DateTime.Now.AddMonths(-1).AddDays(1).ToString(Common.Data.CommonFormat.DateFormat)',
+                'StartTime': '@DateTime.Now.AddDays(-1).ToString(Common.Data.CommonFormat.DateFormat)',
                 'EndTime': '@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)',
                 BeginRow: 1,
                 EndRow: 30
@@ -98,7 +98,7 @@
             <span>
                 @*<label>@Lang.LblPickUpTime</label>*@
                 <label>@Lang.LblBeginTime</label>
-                <input type="text" onfocus="WdatePicker()" attr="StartTime" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddMonths(-1).AddDays(1).ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
+                <input type="text" onfocus="WdatePicker()" attr="StartTime" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddDays(-1).ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
                 <label>@Lang.LblEndTime</label>
                 <input type="text" onfocus="WdatePicker()" attr="EndTime" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
 
