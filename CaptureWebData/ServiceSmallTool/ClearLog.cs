@@ -60,7 +60,7 @@ namespace ServiceSmallTool
             for (int i = 0; i < fis.Length; i++)
             {
                 FileInfo item = fis[i];
-                if (item.CreationTime < time)
+                if (item.CreationTime <= time)
                 {
                     item.Delete();
                 }
