@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClearLogFrm.cs" />
+    <Compile Include="ClearLogFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ClearLogFrm.designer.cs">
       <DependentUpon>ClearLogFrm.cs</DependentUpon>
     </Compile>
@@ -58,6 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ClearLogFrm.resx">
       <DependentUpon>ClearLogFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExcelCompareToolFrm.resx">
+      <DependentUpon>ExcelCompareToolFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
