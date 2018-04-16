@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,7 +60,6 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -69,10 +68,9 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -87,10 +85,9 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -112,126 +109,9 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BtnAdd" xml:space="preserve">
-    <value>添加</value>
-  </data>
-  <data name="BtnDelete" xml:space="preserve">
-    <value>删除</value>
-  </data>
-  <data name="BtnEdit" xml:space="preserve">
-    <value>编辑</value>
-  </data>
-  <data name="BtnNewAdd" xml:space="preserve">
-    <value>新增</value>
-  </data>
-  <data name="BtnQuery" xml:space="preserve">
-    <value>查询</value>
-  </data>
-  <data name="BtnSave" xml:space="preserve">
-    <value>保存</value>
-  </data>
-  <data name="BtnUpdate" xml:space="preserve">
-    <value>更新</value>
-  </data>
-  <data name="LblAccountGroup" xml:space="preserve">
-    <value>账户分类归档</value>
-  </data>
-  <data name="LblAppendDisplay" xml:space="preserve">
-    <value>追加显示</value>
-  </data>
-  <data name="LblAppManage" xml:space="preserve">
-    <value>系统程序管理</value>
-  </data>
-  <data name="LblAppSetValue" xml:space="preserve">
-    <value>配置</value>
-  </data>
-  <data name="LblBeginTime" xml:space="preserve">
-    <value>开始时间</value>
-  </data>
-  <data name="LblCode" xml:space="preserve">
-    <value>助记码</value>
-  </data>
-  <data name="LblDescription" xml:space="preserve">
-    <value>描述</value>
-  </data>
-  <data name="LblEndTime" xml:space="preserve">
-    <value>结束时间</value>
-  </data>
-  <data name="LblFullName" xml:space="preserve">
-    <value>姓名</value>
-  </data>
-  <data name="LblGroup" xml:space="preserve">
-    <value>归类</value>
-  </data>
-  <data name="LblKeyWord" xml:space="preserve">
-    <value>关键词</value>
-  </data>
-  <data name="LblName" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <data name="LblNewMenu" xml:space="preserve">
-    <value>新增菜单</value>
-  </data>
-  <data name="LblParentCode" xml:space="preserve">
-    <value>父节点</value>
-  </data>
-  <data name="LblPickUpTime" xml:space="preserve">
-    <value>采集时间</value>
-  </data>
-  <data name="LblSelectAll" xml:space="preserve">
-    <value>全选</value>
-  </data>
-  <data name="LblSpecialSpellNameManage" xml:space="preserve">
-    <value>生僻字拼音维护</value>
-  </data>
-  <data name="LblUinAccount" xml:space="preserve">
-    <value>QQ号</value>
-  </data>
-  <data name="LblUinImgGroupManage" xml:space="preserve">
-    <value>qq图片分类汇总处理</value>
-  </data>
-  <data name="LblUrl" xml:space="preserve">
-    <value>网址</value>
-  </data>
-  <data name="LblUserName" xml:space="preserve">
-    <value>用户名</value>
-  </data>
-  <data name="Tip_12306_GoStation" xml:space="preserve">
-    <value>出发地</value>
-  </data>
-  <data name="Tip_12306_QueryTicketIsRequired" xml:space="preserve">
-    <value>查询车票时，必须提供的信息有：【{0}】,当前未输入项有:【{1}】</value>
-  </data>
-  <data name="Tip_12306_ToStation" xml:space="preserve">
-    <value>目的地</value>
-  </data>
-  <data name="Tip_CodeHasUsed" xml:space="preserve">
-    <value>编码【{0}】已被使用</value>
-  </data>
-  <data name="Tip_MenuUrlIsRequired" xml:space="preserve">
-    <value>菜单路径不能为空。</value>
-  </data>
-  <data name="Tip_PleaseSelect" xml:space="preserve">
-    <value>请选择。</value>
-  </data>
-  <data name="Tip_PleaseSelectFile" xml:space="preserve">
-    <value>请选择文件。</value>
-  </data>
-  <data name="Tip_PleaseSelectParentNode" xml:space="preserve">
-    <value>请选择父节点</value>
-  </data>
-  <data name="BtnReport" xml:space="preserve">
-    <value>报表</value>
-  </data>
-  <data name="BtnReporting" xml:space="preserve">
-    <value>举报</value>
-  </data>
-  <data name="LblReportingType" xml:space="preserve">
-    <value>举报分类</value>
-  </data>
 </root>

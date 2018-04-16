@@ -8,13 +8,17 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@Lang.LblAccountGroup</title>
-    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/My97DatePicker/WdatePicker.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-select/bootstrap-select.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <style type="text/css">
         .tmpl {
             display:inline-block;
@@ -120,7 +124,7 @@
             </span>
         </div>
         <div>
-            <span>
+            <span style="position: relative;top: 10px;">
                 <label>
                     <span style="position:relative;top: -10px;">@Lang.LblSelectAll</span>
                     <input type="checkbox" class="ckImg" style="width: 30px;"  id="ckAllImg" />
@@ -128,7 +132,7 @@
             </span>
             <span>
                 <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.LblGroup" />
-               
+                <input type="button" class="button buttonSmall" id="btnReporting" value="@Lang.BtnReporting"/>
             </span>
             <span>
                 <span class="list"></span>
@@ -155,6 +159,12 @@
         </div>
         <div class="dataRowArea">
 
+        </div>
+        <div id="reportDiv"> @*举报的对话框*@
+            <span>
+                <label>@Lang.LblReportingType ：</label>
+                <select class="selectpicker"></select>
+            </span>
         </div>
     </div>
 </body>

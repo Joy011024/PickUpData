@@ -106,6 +106,24 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 报表 的本地化字符串。
+        /// </summary>
+        public static string BtnReport {
+            get {
+                return ResourceManager.GetString("BtnReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 举报 的本地化字符串。
+        /// </summary>
+        public static string BtnReporting {
+            get {
+                return ResourceManager.GetString("BtnReporting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 保存 的本地化字符串。
         /// </summary>
         public static string BtnSave {
@@ -255,6 +273,15 @@ namespace AppLanguage {
         public static string LblPickUpTime {
             get {
                 return ResourceManager.GetString("LblPickUpTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 举报分类 的本地化字符串。
+        /// </summary>
+        public static string LblReportingType {
+            get {
+                return ResourceManager.GetString("LblReportingType", resourceCulture);
             }
         }
         
