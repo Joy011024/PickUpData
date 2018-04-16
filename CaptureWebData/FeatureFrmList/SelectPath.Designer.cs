@@ -35,7 +35,7 @@
             // 
             // btnSelectPath
             // 
-            this.btnSelectPath.Location = new System.Drawing.Point(280, 10);
+            this.btnSelectPath.Location = new System.Drawing.Point(280, 8);
             this.btnSelectPath.Name = "btnSelectPath";
             this.btnSelectPath.Size = new System.Drawing.Size(75, 23);
             this.btnSelectPath.TabIndex = 0;
