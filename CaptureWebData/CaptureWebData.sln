@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureWebData", "CaptureWebData\CaptureWebData.csproj", "{A3F54BBB-F751-4660-AA9A-FED9D94281D1}"
 EndProject
@@ -113,6 +113,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRApp.IApplicationService",
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientHelper", "..\BaseHelper\ExtHelper\HttpClientHelper\HttpClientHelper.csproj", "{D182918A-32DC-4B35-A998-DAC7CADC2369}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSmallTool", "ServiceSmallTool\ServiceSmallTool.csproj", "{C1636431-277A-47AF-965D-1DE68AE0361C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -276,6 +278,10 @@ Global
 		{D182918A-32DC-4B35-A998-DAC7CADC2369}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D182918A-32DC-4B35-A998-DAC7CADC2369}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D182918A-32DC-4B35-A998-DAC7CADC2369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1636431-277A-47AF-965D-1DE68AE0361C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1636431-277A-47AF-965D-1DE68AE0361C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1636431-277A-47AF-965D-1DE68AE0361C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1636431-277A-47AF-965D-1DE68AE0361C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -312,5 +318,6 @@ Global
 		{138002EC-0A16-4C91-BC84-9F76A71DD6FC} = {DD4A1552-786D-46D8-A077-FBFD480E4199}
 		{64CADAC1-0042-48D0-A25F-9BC78DF1DF00} = {DD4A1552-786D-46D8-A077-FBFD480E4199}
 		{D182918A-32DC-4B35-A998-DAC7CADC2369} = {E3D724CF-ED9D-461B-8796-D7846E5D7F17}
+		{C1636431-277A-47AF-965D-1DE68AE0361C} = {A6454CE8-AC13-4840-B473-8D3234D62EBB}
 	EndGlobalSection
 EndGlobal
