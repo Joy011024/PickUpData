@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Data">
+      <HintPath>..\bin\SelfDefine\Common.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="DataHelp">
+      <HintPath>..\bin\SelfDefine\DataHelp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -90,6 +96,10 @@
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
       <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
       <Name>Infrastructure.ExtService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FeatureFrmList\FeatureFrmList.csproj">
+      <Project>{9843B4C8-9CC6-444D-8C34-371F828B3717}</Project>
+      <Name>FeatureFrmList</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
