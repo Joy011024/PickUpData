@@ -28,7 +28,7 @@ namespace CommonHelperEntity
         [Description("列名")]
         public string ColumnName { get; set; }
         [Description("该列开始的索引")]
-        public int BeingCellIndex { get; set; }
+        public int BeginCellIndex { get; set; }
         [Description("占用列数")]
         public int OccuopationCell { get; set; }
         [Description("占用行数")]
@@ -37,6 +37,10 @@ namespace CommonHelperEntity
         public int RowPosition { get; set; }
         [Description("列宽（设置100以上才能查看到显示的效果）")]
         public int ColumnWidth { get; set; }
+        [Description("只作为列名应用【特殊列合并】")]
+        public bool JustColumnNoRowText { get; set; }
+        [Description("纵向进行单元格自动合并")]
+        public bool MergeCellInY { get; set; }
     }
      public delegate void SheetHeadDataToDo(NPOI.SS.UserModel.ISheet sheet);
      public delegate void SheetRowDataToDo<T>(NPOI.SS.UserModel.ISheet sheet, List<T> rows) where T : class;
@@ -173,13 +177,13 @@ namespace CommonHelperEntity
             //sheetHead = sheetHead.OrderBy(s => s.ColumnIndex).ToList();//进行一次排序
             foreach (ExcelHeadAttribute column in sheetHead)
             {
-                ICell cell = newRow[column.RowPosition].CreateCell(column.BeingCellIndex);
+                ICell cell = newRow[column.RowPosition].CreateCell(column.BeginCellIndex);
                 cell.SetCellValue(column.ColumnName);
             }
             //合并单元格 
             foreach (ExcelHeadAttribute item in sheetHead)
             {
-                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(item.RowPosition, item.RowPosition + item.OccupationRow-1, item.BeingCellIndex,item.BeingCellIndex+item.OccuopationCell-1));                
+                sheet.AddMergedRegion(new NPOI.SS.Util.CellRangeAddress(item.RowPosition, item.RowPosition + item.OccupationRow - 1, item.BeginCellIndex, item.BeginCellIndex + item.OccuopationCell - 1));                
             }
             
         }
