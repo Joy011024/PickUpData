@@ -90,9 +90,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BaseHelper\CommonHelperEntity\CommonHelperEntity.csproj">
+      <Project>{32c60c3a-c56e-457d-b553-be076218fd5a}</Project>
+      <Name>CommonHelperEntity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
       <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
       <Name>Infrastructure.ExtService</Name>
@@ -103,7 +109,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ToolConfig.xml" />
+    <Content Include="ToolConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

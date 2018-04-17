@@ -11,9 +11,9 @@ using Infrastructure.ExtService;
 using System.IO;
 namespace ServiceSmallTool
 {
-    public partial class ClearLog : Form
+    public partial class ClearLogFrm : Form
     {
-        public ClearLog()
+        public ClearLogFrm()
         {
             InitializeComponent();
             txtLogDir.Text = ExeDir;

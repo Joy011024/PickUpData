@@ -1,6 +1,6 @@
 ﻿namespace ServiceSmallTool
 {
-    partial class ClearLog
+    partial class ClearLogFrm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -106,7 +106,7 @@
             this.btnClearNote.Text = "清档";
             this.btnClearNote.UseVisualStyleBackColor = true;
             // 
-            // ClearLog
+            // ClearLogFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -119,8 +119,8 @@
             this.Controls.Add(this.txtLogDir);
             this.Controls.Add(this.lblLogDir);
             this.Controls.Add(this.btnClearLog);
-            this.Name = "ClearLog";
-            this.Text = "Form1";
+            this.Name = "ClearLogFrm";
+            this.Text = "清除日志";
             this.ResumeLayout(false);
             this.PerformLayout();
 

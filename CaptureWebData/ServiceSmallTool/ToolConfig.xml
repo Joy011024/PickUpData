@@ -4,4 +4,10 @@
     <add key="OriginExcel" value="原始Excel"/>
     <add key="TargetExcel" value="目标Excel"/>
   </appSettings>
+  <appSettings name="OriginExcel"> <!--第一份Excel的列-->
+    
+  </appSettings>
+  <appSettings name="TargetExcel"> <!--第二份Excel的列-->
+    
+    </appSettings>
 </configuration>
