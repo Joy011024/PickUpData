@@ -133,7 +133,7 @@ namespace FeatureFrmList
         public static void InsertRow<T>(this ListView lst, T row) where T:class
         {
             List<string> columns = PickupColumn(lst);
-            InsertRow(lst,columns, row,true);
+            InsertRow(lst,columns, row,false);
         }
         static void InsertRow<T>(ListView lst, List<string> columns, T row, bool addIndex) where T : class
         { 

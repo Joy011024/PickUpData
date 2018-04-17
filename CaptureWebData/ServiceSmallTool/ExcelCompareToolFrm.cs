@@ -52,7 +52,8 @@ namespace ServiceSmallTool
             Left=1,
             Right=2
         }
-       
+        List<bool> leftHead = new List<bool>();
+        List<bool> rightHead = new List<bool>();
         void ReadExcelHead()
         {
             string dir = @"D:\LogFile\ExcelCompare.xlsx";
@@ -78,27 +79,78 @@ namespace ServiceSmallTool
             ECompareTarget area = (ECompareTarget)lst.Tag;
             rtbNote.Text +=string.Format( "Dirction:【{0}】 Row Index :【{1}】\r\n",area.ToString(),index);
             ExcelHeadAttribute head= item.Tag as ExcelHeadAttribute;
-            CompareData compare = new CompareData();
-          
+            CompareData compare = null;
+            bool isInsert = false;
+            if (leftHead.Count == rightHead.Count||
+                (leftHead.Count>rightHead.Count&&area==ECompareTarget.Left)
+                || (leftHead.Count < rightHead.Count&&area==ECompareTarget.Right))
+            { //什么情况是进行添加操作呢？
+                /*
+                 1.左右两侧都已近补充完整
+                 2.等待添加的数据来自现补充列较多的
+                 */
+                compare = new CompareData();
+                isInsert = true;
+            }
+            else if (area == ECompareTarget.Left)
+            {//此时进行的是单方补充
+                //当前是数据补充到缺少项中
+                compare = lstCompare.Items[rightHead.Count - 1].Tag as CompareData;
+            }
+            else 
+            {
+                compare = lstCompare.Items[leftHead.Count - 1].Tag as CompareData;
+            }
             switch (area)
             {
                 case ECompareTarget.Left:
                     compare.OriginHeadName = head.ColumnName;
                     compare.OriginHeadIndex = head.ColumnIndex;
+                    leftHead.Add(true);
                     break;
                 case ECompareTarget.Right:
                      compare.NewHeadName = head.ColumnName;
                     compare.NewHeadIndex = head.ColumnIndex;
+                    rightHead.Add(true);
                     break;
             }
             //添加到中间区域时进行判断【组合成一项完整的匹配列】
             //【左右都存在内容才是一组完整数据】
-            lstCompare.InsertRow(compare);
+            if (isInsert)
+            {
+                lstCompare.InsertRow(compare);
+            }
+            else 
+            {//还需要对于UI进行改动
+                
+            }
+            lstCompare.Refresh();
             lst.Items.RemoveAt(index);
         }
         void CompareListView_Select(object obj ,EventArgs e) 
         {//移除选择项，添加到左右两侧
-        
+            ListView lst = obj as ListView;
+            if (lst.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            ListViewItem focus= lst.FocusedItem;
+            int index = focus.Index;
+            CompareData merge = focus.Tag as CompareData;
+            if (leftHead.Count > index)
+            {  //左侧
+                ExcelHeadAttribute left = new ExcelHeadAttribute() { ColumnIndex = merge.OriginHeadIndex, ColumnName = merge.OriginHeadName };
+                lstLeft.InsertRow(left);
+                leftHead.RemoveAt(index);
+            }
+            if (rightHead.Count > index)
+            {//右侧
+                ExcelHeadAttribute right = new ExcelHeadAttribute() { ColumnIndex = merge.NewHeadIndex, ColumnName = merge.NewHeadName };
+                lstRight.InsertRow(right);
+                rightHead.RemoveAt(index);
+            }
+            //合并项
+            lst.Items.RemoveAt(index);
         }
     }
     public class ExcelCompareHelper
