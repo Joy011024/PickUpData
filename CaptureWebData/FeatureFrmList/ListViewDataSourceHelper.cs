@@ -24,8 +24,15 @@ namespace FeatureFrmList
             {//控件自身限制：没有定义列不会显示数据
                 return;
             }
-            PropertyInfo[] pis = EntityReflection.GetEntityProperty<T>();
+           
             lst.Items.Clear();
+            //提取列
+            List<string> columns = new List<string>();
+            foreach (ColumnHeader item in lst.Columns)
+            {
+                columns.Add(item.Name);
+            }
+            PropertyInfo[] pis = EntityReflection.GetEntityProperty<T>();
             for (int i = 0; i < dataSource.Count; i++)
             {
                 T item = dataSource[i];
@@ -34,12 +41,11 @@ namespace FeatureFrmList
                 {
                     row.Add(new ListViewItem.ListViewSubItem() { Text = (i + 1).ToString() });
                 }
-                foreach (PropertyInfo property in pis)
+                foreach (var cell in columns)
                 {
                     ListViewItem.ListViewSubItem subs = new ListViewItem.ListViewSubItem();
-
-                    subs.Name = property.Name;
-                    object value = property.GetValue(item,null);
+                    subs.Name = cell;
+                    object value = item.GetPropertyValue(cell);
                     if (value != null)
                     {
                         subs.Text = value.ToString();
@@ -103,6 +109,18 @@ namespace FeatureFrmList
                 {
                     lst.Columns.Insert(0, new ColumnHeader() { Name = CodeInsertColumn, Text = CodeInsertColumn, Tag = CodeInsertColumn });
                 }
+            }
+        }
+        public static void BindHead(this ListView lst, Dictionary<string,string> head)
+        {
+            if (lst.Columns.Count > 0)
+            {
+                lst.Columns.Clear();
+            }
+            lst.View = View.Details;
+            foreach (var item in head)
+            {
+                lst.Columns.Add(new ColumnHeader() { Text=item.Value, Name=item.Key });
             }
         }
     }

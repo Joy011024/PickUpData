@@ -38,6 +38,10 @@
     <Reference Include="DataHelp">
       <HintPath>..\bin\SelfDefine\DataHelp.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\BaseHelper\bin\NPOI\Net40\NPOI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

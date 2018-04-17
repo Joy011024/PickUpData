@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.listView3 = new System.Windows.Forms.ListView();
+            this.lstCompare = new System.Windows.Forms.ListView();
+            this.lstLeft = new System.Windows.Forms.ListView();
+            this.lstRight = new System.Windows.Forms.ListView();
             this.selectFile1 = new FeatureFrmList.SelectFile();
             this.selectFile2 = new FeatureFrmList.SelectFile();
             this.btnCompare = new System.Windows.Forms.Button();
@@ -38,29 +38,29 @@
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // listView1
+            // lstCompare
             // 
-            this.listView1.Location = new System.Drawing.Point(150, 119);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(198, 181);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lstCompare.Location = new System.Drawing.Point(266, 119);
+            this.lstCompare.Name = "lstCompare";
+            this.lstCompare.Size = new System.Drawing.Size(282, 181);
+            this.lstCompare.TabIndex = 0;
+            this.lstCompare.UseCompatibleStateImageBehavior = false;
             // 
-            // listView2
+            // lstLeft
             // 
-            this.listView2.Location = new System.Drawing.Point(23, 119);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(89, 181);
-            this.listView2.TabIndex = 1;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.lstLeft.Location = new System.Drawing.Point(23, 119);
+            this.lstLeft.Name = "lstLeft";
+            this.lstLeft.Size = new System.Drawing.Size(164, 181);
+            this.lstLeft.TabIndex = 1;
+            this.lstLeft.UseCompatibleStateImageBehavior = false;
             // 
-            // listView3
+            // lstRight
             // 
-            this.listView3.Location = new System.Drawing.Point(401, 119);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(84, 181);
-            this.listView3.TabIndex = 2;
-            this.listView3.UseCompatibleStateImageBehavior = false;
+            this.lstRight.Location = new System.Drawing.Point(620, 119);
+            this.lstRight.Name = "lstRight";
+            this.lstRight.Size = new System.Drawing.Size(199, 181);
+            this.lstRight.TabIndex = 2;
+            this.lstRight.UseCompatibleStateImageBehavior = false;
             // 
             // selectFile1
             // 
@@ -73,14 +73,14 @@
             // selectFile2
             // 
             this.selectFile2.CallBack = null;
-            this.selectFile2.Location = new System.Drawing.Point(118, 64);
+            this.selectFile2.Location = new System.Drawing.Point(118, 53);
             this.selectFile2.Name = "selectFile2";
             this.selectFile2.Size = new System.Drawing.Size(362, 35);
             this.selectFile2.TabIndex = 4;
             // 
             // btnCompare
             // 
-            this.btnCompare.Location = new System.Drawing.Point(191, 322);
+            this.btnCompare.Location = new System.Drawing.Point(351, 324);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(75, 23);
             this.btnCompare.TabIndex = 5;
@@ -109,15 +109,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 373);
+            this.ClientSize = new System.Drawing.Size(844, 374);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCompare);
             this.Controls.Add(this.selectFile2);
             this.Controls.Add(this.selectFile1);
-            this.Controls.Add(this.listView3);
-            this.Controls.Add(this.listView2);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lstRight);
+            this.Controls.Add(this.lstLeft);
+            this.Controls.Add(this.lstCompare);
             this.Name = "ExcelCompareToolFrm";
             this.Text = "ExcelToolFrm";
             this.ResumeLayout(false);
@@ -127,9 +127,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.ListView listView3;
+        private System.Windows.Forms.ListView lstCompare;
+        private System.Windows.Forms.ListView lstLeft;
+        private System.Windows.Forms.ListView lstRight;
         private FeatureFrmList.SelectFile selectFile1;
         private FeatureFrmList.SelectFile selectFile2;
         private System.Windows.Forms.Button btnCompare;

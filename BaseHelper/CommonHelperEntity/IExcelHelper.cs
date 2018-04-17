@@ -156,6 +156,84 @@ namespace CommonHelperEntity
             }
             return table;
         }
+        #region 从Excel的sheet页中进行数据读取
+        [Description("Excel的工作页进行逐行读取，justReadHead是否值读取第一行")]
+        static void ReadSheetRow(ISheet sheet,ReadRowCallBack rowRead,bool justReadHead) 
+        {
+            int rowIndex = sheet.LastRowNum;
+            if (justReadHead)
+            {
+               IRow row= sheet.GetRow(0);
+               rowRead(row);
+               return;
+            }
+            for (int i = 0; i < rowIndex; i++)
+            {
+                IRow row = sheet.GetRow(i);
+                rowRead(row);
+            }
+        }
+        [Description("从Excel中进行数据读取,readAllSheet是否读取全部的工作页，设置true时sheetPageIndex无效")]
+        public static void ReadSheet(string excelFullPath,bool readAllSheet,int sheetPageIndex, ReadRowCallBack readRowFun, bool justReadHead)
+        {
+            EExcelType type = EExcelType.Xlsx;
+            IWorkbook book = GetExcelWorkBook(excelFullPath, type);
+            int sheetPage = book.NumberOfSheets;//总共存储多少sheet页
+            //是否增加页索引判断->
+            if (!readAllSheet)
+            {
+                if (sheetPageIndex > sheetPage)
+                {//超出行索引没必要进行后续操作
+                    book.Close();
+                    return;
+                }
+                ReadSheet(book, sheetPageIndex, readRowFun, justReadHead);
+                book.Close();
+                return;
+            }
+            for (int i = 0; i < sheetPage; i++)
+            {
+                ReadSheet(book, i, readRowFun, justReadHead);
+            }
+            book.Close();//是释放流文件
+        }
+        [Description("从Excel中读取指定工作页的数据")]
+        static void ReadSheet(IWorkbook book, int sheetIndex, ReadRowCallBack readRowFun, bool justReadHead)
+        {
+            int sheetPage = book.NumberOfSheets;//总共存储多少sheet页
+            if (sheetPage < sheetIndex)
+            {
+                return;
+            }
+            ISheet sheet = book.GetSheetAt(sheetIndex);
+            ReadSheetRow(sheet, readRowFun, justReadHead);
+        }
+        public static void ReadRowInSheet(IRow row)
+        {
+            short cellIndex = row.LastCellNum;//总共多少列
+            for (short i = 0; i < cellIndex; i++)
+            {
+                ICell cell = row.GetCell(i);
+                if (cell == null)
+                { //对于空列的处理
+                    continue;
+                }
+                IRichTextString rtext = cell.RichStringCellValue;
+                string text = rtext.String;
+                //文本内容，列索引 
+                if (!string.IsNullOrEmpty(text))
+                {
+                    ExcelHeadAttribute head = new ExcelHeadAttribute()
+                    {
+                        ColumnIndex = i,
+                        ColumnName = text.Trim()
+                    };
+                }
+            }
+        }
+        #endregion
+        [Description("对行数据进行处理的回调函数")]
+        public delegate void ReadRowCallBack(IRow row);
         /// <summary>
         /// 数据保存
         /// </summary>
