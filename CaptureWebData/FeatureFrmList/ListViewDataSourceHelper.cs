@@ -57,6 +57,8 @@ namespace FeatureFrmList
                 rowitem.Tag = item;
                 lst.Items.Add(rowitem);
             }
+            //设置显示下划线
+            lst.GridLines = true;
             if (addIndex)
             {//在listview中插入一列
                 ColumnHeader first = lst.Columns[0];
@@ -66,16 +68,21 @@ namespace FeatureFrmList
                 }
             }
         }
-        public static void BindDataSourceRelyColumnName<T>(this  ListView lst, List<T> dataSource, bool addIndex = false) where T : class
+        static List<string> PickupColumn(ListView lst)
         {
+             List<string> columns = new List<string>();
             ListView.ColumnHeaderCollection heads = lst.Columns;
-            List<string> columns = new List<string>();
-            lst.Items.Clear();
-            //按照列头的顺序增加显示的行数据
             foreach (ColumnHeader item in heads)
             {
                 columns.Add(item.Name);
             }
+            return columns;
+        }
+        public static void BindDataSourceRelyColumnName<T>(this  ListView lst, List<T> dataSource, bool addIndex = false) where T : class
+        {
+            ListView.ColumnHeaderCollection heads = lst.Columns;
+            lst.Items.Clear();
+            List<string> columns = PickupColumn(lst);
             if (columns.Count == 0)
             {//没有设置listView的匹配列
                 return;
@@ -120,8 +127,34 @@ namespace FeatureFrmList
             lst.View = View.Details;
             foreach (var item in head)
             {
-                lst.Columns.Add(new ColumnHeader() { Text=item.Value, Name=item.Key });
+                lst.Columns.Add(new ColumnHeader() { Text=item.Value, Name=item.Key,Width=85 });
             }
+        }
+        public static void InsertRow<T>(this ListView lst, T row) where T:class
+        {
+            List<string> columns = PickupColumn(lst);
+            InsertRow(lst,columns, row,true);
+        }
+        static void InsertRow<T>(ListView lst, List<string> columns, T row, bool addIndex) where T : class
+        { 
+            List<ListViewItem.ListViewSubItem> rowSub = new List<ListViewItem.ListViewSubItem>();
+            if (addIndex)
+            {
+                rowSub.Add(new ListViewItem.ListViewSubItem() { Text = (rowSub.Count + 1).ToString() });
+            }
+            foreach (string column in columns)
+            {
+                ListViewItem.ListViewSubItem subs = new ListViewItem.ListViewSubItem();
+                subs.Name = column;
+                PropertyInfo pi = row.GetPropertyInfo(column);
+                object value = row.GetPropertyValue(pi);
+                subs.Text = value == null ? string.Empty : value.ToString();
+                rowSub.Add(subs);
+            }
+            ListViewItem rowitem = new ListViewItem();
+            rowitem = new ListViewItem(rowSub.ToArray(), 0);
+            rowitem.Tag = row;
+            lst.Items.Add(rowitem);
         }
     }
 }

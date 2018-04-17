@@ -4,6 +4,10 @@
     <add key="OriginExcel" value="原始Excel"/>
     <add key="TargetExcel" value="目标Excel"/>
   </appSettings>
+  <appSettings name="lstViewColumn">
+    <add key="ColumnName" value="列名"/>
+    <add key="ColumnIndex" value="列序号"/>
+  </appSettings>
   <appSettings name="OriginExcel"> <!--第一份Excel的列-->
     
   </appSettings>

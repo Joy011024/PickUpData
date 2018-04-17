@@ -31,18 +31,19 @@
             this.lstCompare = new System.Windows.Forms.ListView();
             this.lstLeft = new System.Windows.Forms.ListView();
             this.lstRight = new System.Windows.Forms.ListView();
-            this.selectFile1 = new FeatureFrmList.SelectFile();
-            this.selectFile2 = new FeatureFrmList.SelectFile();
             this.btnCompare = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.selectFile2 = new FeatureFrmList.SelectFile();
+            this.selectFile1 = new FeatureFrmList.SelectFile();
+            this.rtbNote = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // lstCompare
             // 
-            this.lstCompare.Location = new System.Drawing.Point(266, 119);
+            this.lstCompare.Location = new System.Drawing.Point(292, 119);
             this.lstCompare.Name = "lstCompare";
-            this.lstCompare.Size = new System.Drawing.Size(282, 181);
+            this.lstCompare.Size = new System.Drawing.Size(381, 181);
             this.lstCompare.TabIndex = 0;
             this.lstCompare.UseCompatibleStateImageBehavior = false;
             // 
@@ -50,37 +51,21 @@
             // 
             this.lstLeft.Location = new System.Drawing.Point(23, 119);
             this.lstLeft.Name = "lstLeft";
-            this.lstLeft.Size = new System.Drawing.Size(164, 181);
+            this.lstLeft.Size = new System.Drawing.Size(211, 181);
             this.lstLeft.TabIndex = 1;
             this.lstLeft.UseCompatibleStateImageBehavior = false;
             // 
             // lstRight
             // 
-            this.lstRight.Location = new System.Drawing.Point(620, 119);
+            this.lstRight.Location = new System.Drawing.Point(718, 119);
             this.lstRight.Name = "lstRight";
-            this.lstRight.Size = new System.Drawing.Size(199, 181);
+            this.lstRight.Size = new System.Drawing.Size(226, 181);
             this.lstRight.TabIndex = 2;
             this.lstRight.UseCompatibleStateImageBehavior = false;
             // 
-            // selectFile1
-            // 
-            this.selectFile1.CallBack = null;
-            this.selectFile1.Location = new System.Drawing.Point(118, 12);
-            this.selectFile1.Name = "selectFile1";
-            this.selectFile1.Size = new System.Drawing.Size(362, 35);
-            this.selectFile1.TabIndex = 3;
-            // 
-            // selectFile2
-            // 
-            this.selectFile2.CallBack = null;
-            this.selectFile2.Location = new System.Drawing.Point(118, 53);
-            this.selectFile2.Name = "selectFile2";
-            this.selectFile2.Size = new System.Drawing.Size(362, 35);
-            this.selectFile2.TabIndex = 4;
-            // 
             // btnCompare
             // 
-            this.btnCompare.Location = new System.Drawing.Point(351, 324);
+            this.btnCompare.Location = new System.Drawing.Point(420, 323);
             this.btnCompare.Name = "btnCompare";
             this.btnCompare.Size = new System.Drawing.Size(75, 23);
             this.btnCompare.TabIndex = 5;
@@ -99,17 +84,42 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 74);
+            this.label2.Location = new System.Drawing.Point(505, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 12);
             this.label2.TabIndex = 7;
             this.label2.Text = "第二份Excel";
             // 
+            // selectFile2
+            // 
+            this.selectFile2.CallBack = null;
+            this.selectFile2.Location = new System.Drawing.Point(582, 12);
+            this.selectFile2.Name = "selectFile2";
+            this.selectFile2.Size = new System.Drawing.Size(362, 35);
+            this.selectFile2.TabIndex = 4;
+            // 
+            // selectFile1
+            // 
+            this.selectFile1.CallBack = null;
+            this.selectFile1.Location = new System.Drawing.Point(118, 12);
+            this.selectFile1.Name = "selectFile1";
+            this.selectFile1.Size = new System.Drawing.Size(362, 35);
+            this.selectFile1.TabIndex = 3;
+            // 
+            // rtbNote
+            // 
+            this.rtbNote.Location = new System.Drawing.Point(23, 367);
+            this.rtbNote.Name = "rtbNote";
+            this.rtbNote.Size = new System.Drawing.Size(921, 96);
+            this.rtbNote.TabIndex = 8;
+            this.rtbNote.Text = "";
+            // 
             // ExcelCompareToolFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 374);
+            this.ClientSize = new System.Drawing.Size(956, 475);
+            this.Controls.Add(this.rtbNote);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCompare);
@@ -135,5 +145,6 @@
         private System.Windows.Forms.Button btnCompare;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox rtbNote;
     }
 }
