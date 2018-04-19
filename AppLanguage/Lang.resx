@@ -234,4 +234,7 @@
   <data name="LblReportingType" xml:space="preserve">
     <value>举报分类</value>
   </data>
+  <data name="BtnPickupAccount" xml:space="preserve">
+    <value>提取账号</value>
+  </data>
 </root>
