@@ -31,6 +31,8 @@ namespace ServiceSmallTool
             ClearTip=1,
             ClearLog=2
         }
+        OpenFileDialog of = new OpenFileDialog();
+        FolderBrowserDialog file = new FolderBrowserDialog();
         string ExeDir
         {
             get 
@@ -73,7 +75,12 @@ namespace ServiceSmallTool
         public void TextDir_DoubleClick(object sender, EventArgs e)
         {//鼠标左键双击加载url 
             MouseEventArgs mouse = e as MouseEventArgs;
+            TextBox txt=sender as TextBox;
             lstNote.Items.Add(mouse.Button.ToString());
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                txt.Text = file.SelectedPath;
+            }
         }
     }
     public class ClearLogHelp 
