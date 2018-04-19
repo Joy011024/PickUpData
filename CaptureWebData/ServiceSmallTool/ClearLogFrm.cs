@@ -17,7 +17,19 @@ namespace ServiceSmallTool
         {
             InitializeComponent();
             txtLogDir.Text = ExeDir;
+            btnClearLog.Tag = ButtonTag.ClearLog;
+            btnClearNote.Tag = ButtonTag.ClearTip;
             btnClearLog.Click += new EventHandler(Button_Click);
+            txtLogDir.MouseDoubleClick += new MouseEventHandler(TextDir_DoubleClick);
+            lstNote.View = View.Details;
+            lstNote.Columns.Add(new ColumnHeader() {  Text="Tip",Width=400});
+            lstNote.GridLines = true;
+            btnClearNote.Click += new EventHandler(Button_Click);
+        }
+        enum ButtonTag 
+        {
+            ClearTip=1,
+            ClearLog=2
         }
         string ExeDir
         {
@@ -27,6 +39,25 @@ namespace ServiceSmallTool
             }
         }
         public void Button_Click(object sender,EventArgs e)
+        {
+            Button btn = sender as Button;
+            ButtonTag tag;
+            object bt = btn.Tag;
+            if (bt == null)
+            {
+                return;
+            }
+            Enum.TryParse(bt.ToString(), out tag);
+            switch (tag)
+            {
+                case ButtonTag.ClearTip:
+                    lstNote.Items.Clear();
+                    break;
+                case ButtonTag.ClearLog: ClearLog(); break;
+            }
+            
+        }
+        void ClearLog() 
         {
             string day = txtDayBefore.Text;
             string dir = txtLogDir.Text;
@@ -38,6 +69,11 @@ namespace ServiceSmallTool
             }
             ClearLogHelp help = new ClearLogHelp();
             help.ClearLogOfDayBefore(dir, DayBefore);
+        }
+        public void TextDir_DoubleClick(object sender, EventArgs e)
+        {//鼠标左键双击加载url 
+            MouseEventArgs mouse = e as MouseEventArgs;
+            lstNote.Items.Add(mouse.Button.ToString());
         }
     }
     public class ClearLogHelp 
