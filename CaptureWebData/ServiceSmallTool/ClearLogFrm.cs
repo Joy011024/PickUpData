@@ -74,7 +74,10 @@ namespace ServiceSmallTool
                     break;
                 case ButtonTag.ClearLog: ClearLog(); break;
                 case ButtonTag.OutputDir://日志输出
-                    OutputDirNames(txtLogDir.Text, ckContainerNode.Checked, PickupFolderType.FolderName); 
+                    KeyValuePair<string, string> pickFolder = (KeyValuePair<string, string>)cmbFolderNameType.SelectedItem;
+                    PickupFolderType pickFolderE;
+                    Enum.TryParse(pickFolder.Key,out pickFolderE);
+                    OutputDirNames(txtLogDir.Text, ckContainerNode.Checked, pickFolderE); 
                     break;
             }
             
@@ -82,6 +85,7 @@ namespace ServiceSmallTool
         void OutputDirNames(string fatherDir, bool foreachNode, PickupFolderType folder) 
         {
             List<string> outputDirNames = new List<string>();
+            logHelp.OriginDir = fatherDir;
             logHelp.OutputDirInLog(fatherDir, foreachNode, folder, outputDirNames);
             LogHelperExtend.WriteDocument(ExeDir,DateTime.Now.ToString( CommonFormat.DateToHourIntFormat)+FileSuffix.Log, string.Join("\r\n", outputDirNames));
         }
@@ -170,6 +174,7 @@ namespace ServiceSmallTool
            // string originDir=fatherDir;
             DirectoryInfo di = new DirectoryInfo(fatherDir);
             DirectoryInfo[] nodes = di.GetDirectories();
+           
             //是否需要继续遍历子目录
             foreach (var item in nodes)
             {
@@ -182,7 +187,11 @@ namespace ServiceSmallTool
                         break;
                     case PickupFolderType.RelativeDir:
                         //相对路径，需要剔除原始目录
-                        outName = item.FullName.Replace(OriginDir, string.Empty);
+                        outName = item.FullName;
+                        if(!string.IsNullOrEmpty(OriginDir))
+                        {
+                            outName = outName.Replace(OriginDir, string.Empty);
+                        }
                         break;
                     case PickupFolderType.FullName:
                         outName = item.FullName;
