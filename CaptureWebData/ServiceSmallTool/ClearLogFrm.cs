@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Infrastructure.ExtService;
 using System.IO;
 using CommonHelperEntity;
+using Common.Data;
 namespace ServiceSmallTool
 {
     public partial class ClearLogFrm : Form
@@ -35,6 +36,7 @@ namespace ServiceSmallTool
             ClearLog=2,
             OutputDir=3
         }
+        
         OpenFileDialog of = new OpenFileDialog();
         ClearLogHelp logHelp = new ClearLogHelp();
         FolderBrowserDialog file = new FolderBrowserDialog();
@@ -62,16 +64,16 @@ namespace ServiceSmallTool
                     break;
                 case ButtonTag.ClearLog: ClearLog(); break;
                 case ButtonTag.OutputDir://日志输出
-                    OutputDirNames(txtLogDir.Text, ckContainerNode.Checked, true); 
+                    OutputDirNames(txtLogDir.Text, ckContainerNode.Checked, PickupFolderType.FolderName); 
                     break;
             }
             
         }
-        void OutputDirNames(string fatherDir, bool foreachNode, bool justOutputFolderName) 
+        void OutputDirNames(string fatherDir, bool foreachNode, PickupFolderType folder) 
         {
             List<string> outputDirNames = new List<string>();
-            logHelp.OutputDirInLog(fatherDir, foreachNode, justOutputFolderName, outputDirNames);
-            LogHelperExtend.WriteDocument(ExeDir, Common.Data.CommonFormat.DateToMinuteIntFormat+Common.Data.FileSuffix.Log, string.Join("\r\n", outputDirNames));
+            logHelp.OutputDirInLog(fatherDir, foreachNode, folder, outputDirNames);
+            LogHelperExtend.WriteDocument(ExeDir,DateTime.Now.ToString( CommonFormat.DateToHourIntFormat)+FileSuffix.Log, string.Join("\r\n", outputDirNames));
         }
         void ClearLog() 
         {
@@ -97,6 +99,16 @@ namespace ServiceSmallTool
             }
         }
         
+    }
+    [Description("提取文件夹名称枚举")]
+    public enum PickupFolderType
+    {
+        [Description("文件夹名")]
+        FolderName = 1,
+        [Description("相对路径名（作用于子文件夹）")]
+        RelativeDir = 2,
+        [Description("全路径")]
+        FullName = 3
     }
     public class ClearLogHelp 
     {
@@ -141,21 +153,38 @@ namespace ServiceSmallTool
                 ClearLogOfDayBefore(dis[i].FullName, dayBefore, deleteNodeDir);
             }
         }
-        [Description("将子目录进行日志输入，foreachNode是否遍历多级子目录，justOutputFolderName只输出文件夹名称,outputDirNames输出的子目录名称列表")]
-        public void OutputDirInLog(string fatherDir, bool foreachNode, bool justOutputFolderName, List<string> outputDirNames)
+        public string OriginDir;
+        [Description("将子目录进行日志输入，foreachNode是否遍历多级子目录，folderType选择输出文件夹信息,outputDirNames输出的子目录名称列表")]
+        public void OutputDirInLog(string fatherDir, bool foreachNode, PickupFolderType folderType, List<string> outputDirNames)
         {
+           // string originDir=fatherDir;
             DirectoryInfo di = new DirectoryInfo(fatherDir);
             DirectoryInfo[] nodes = di.GetDirectories();
             //是否需要继续遍历子目录
             foreach (var item in nodes)
             {
                 string dir = item.FullName;
-                string outName = justOutputFolderName ? item.Name : dir;
+                string outName =item.Name;// justOutputFolderName ? item.Name : dir;
+                switch (folderType)
+                {
+                    case PickupFolderType.FolderName:
+                        outName = item.Name;
+                        break;
+                    case PickupFolderType.RelativeDir:
+                        //相对路径，需要剔除原始目录
+                        outName = item.FullName.Replace(OriginDir, string.Empty);
+                        break;
+                    case PickupFolderType.FullName:
+                        outName = item.FullName;
+                        break;
+                    default:
+                        break;
+                }
                 outputDirNames.Add(outName);//日志追加
                 //输出到日志
                 if (foreachNode)
                 {
-                    OutputDirInLog(dir, foreachNode, justOutputFolderName, outputDirNames);
+                    OutputDirInLog(dir, foreachNode, folderType, outputDirNames);
                 }
             }
         }
