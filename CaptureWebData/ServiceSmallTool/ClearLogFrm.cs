@@ -11,6 +11,7 @@ using Infrastructure.ExtService;
 using System.IO;
 using CommonHelperEntity;
 using Common.Data;
+using FeatureFrmList;
 namespace ServiceSmallTool
 {
     public partial class ClearLogFrm : Form
@@ -18,17 +19,7 @@ namespace ServiceSmallTool
         public ClearLogFrm()
         {
             InitializeComponent();
-            txtLogDir.Text = ExeDir;
-            btnClearLog.Tag = ButtonTag.ClearLog;
-            btnClearNote.Tag = ButtonTag.ClearTip;
-            btnClearLog.Click += new EventHandler(Button_Click);
-            txtLogDir.MouseDoubleClick += new MouseEventHandler(TextDir_DoubleClick);
-            lstNote.View = View.Details;
-            lstNote.Columns.Add(new ColumnHeader() {  Text="Tip",Width=400});
-            lstNote.GridLines = true;
-            btnClearNote.Click += new EventHandler(Button_Click);
-            btnDirOutput.Tag = ButtonTag.OutputDir;
-            btnDirOutput.Click += new EventHandler(Button_Click);
+            InitUI();
         }
         enum ButtonTag 
         {
@@ -36,7 +27,26 @@ namespace ServiceSmallTool
             ClearLog=2,
             OutputDir=3
         }
-        
+        void InitUI() 
+        {
+            txtLogDir.Text = ExeDir;
+            btnClearLog.Tag = ButtonTag.ClearLog;
+            btnClearNote.Tag = ButtonTag.ClearTip;
+            btnClearLog.Click += new EventHandler(Button_Click);
+            txtLogDir.MouseDoubleClick += new MouseEventHandler(TextDir_DoubleClick);
+            lstNote.View = View.Details;
+            lstNote.Columns.Add(new ColumnHeader() { Text = "Tip", Width = 400 });
+            lstNote.GridLines = true;
+            btnClearNote.Click += new EventHandler(Button_Click);
+            btnDirOutput.Tag = ButtonTag.OutputDir;
+            btnDirOutput.Click += new EventHandler(Button_Click);
+            BindSelect();
+        }
+        void BindSelect() 
+        {
+           // Dictionary<string,string> dict= PickupFolderType.FullName.EnumFieldDescDict<DescriptionAttribute>("Description");
+            cmbFolderNameType.BindDataSource(PickupFolderType.FolderName);
+        }
         OpenFileDialog of = new OpenFileDialog();
         ClearLogHelp logHelp = new ClearLogHelp();
         FolderBrowserDialog file = new FolderBrowserDialog();

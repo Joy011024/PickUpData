@@ -39,6 +39,7 @@
             this.ckDeleteDir = new System.Windows.Forms.CheckBox();
             this.btnDirOutput = new System.Windows.Forms.Button();
             this.ckContainerNode = new System.Windows.Forms.CheckBox();
+            this.cmbFolderNameType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnClearLog
@@ -102,7 +103,7 @@
             // 
             // btnClearNote
             // 
-            this.btnClearNote.Location = new System.Drawing.Point(88, 73);
+            this.btnClearNote.Location = new System.Drawing.Point(14, 73);
             this.btnClearNote.Name = "btnClearNote";
             this.btnClearNote.Size = new System.Drawing.Size(75, 23);
             this.btnClearNote.TabIndex = 7;
@@ -121,7 +122,7 @@
             // 
             // btnDirOutput
             // 
-            this.btnDirOutput.Location = new System.Drawing.Point(253, 73);
+            this.btnDirOutput.Location = new System.Drawing.Point(335, 73);
             this.btnDirOutput.Name = "btnDirOutput";
             this.btnDirOutput.Size = new System.Drawing.Size(75, 23);
             this.btnDirOutput.TabIndex = 9;
@@ -131,18 +132,27 @@
             // ckContainerNode
             // 
             this.ckContainerNode.AutoSize = true;
-            this.ckContainerNode.Location = new System.Drawing.Point(178, 77);
+            this.ckContainerNode.Location = new System.Drawing.Point(104, 77);
             this.ckContainerNode.Name = "ckContainerNode";
             this.ckContainerNode.Size = new System.Drawing.Size(60, 16);
             this.ckContainerNode.TabIndex = 10;
             this.ckContainerNode.Text = "含子集";
             this.ckContainerNode.UseVisualStyleBackColor = true;
             // 
+            // cmbFolderNameType
+            // 
+            this.cmbFolderNameType.FormattingEnabled = true;
+            this.cmbFolderNameType.Location = new System.Drawing.Point(179, 73);
+            this.cmbFolderNameType.Name = "cmbFolderNameType";
+            this.cmbFolderNameType.Size = new System.Drawing.Size(149, 20);
+            this.cmbFolderNameType.TabIndex = 11;
+            // 
             // ClearLogFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 221);
+            this.Controls.Add(this.cmbFolderNameType);
             this.Controls.Add(this.ckContainerNode);
             this.Controls.Add(this.btnDirOutput);
             this.Controls.Add(this.ckDeleteDir);
@@ -174,6 +184,7 @@
         private System.Windows.Forms.CheckBox ckDeleteDir;
         private System.Windows.Forms.Button btnDirOutput;
         private System.Windows.Forms.CheckBox ckContainerNode;
+        private System.Windows.Forms.ComboBox cmbFolderNameType;
     }
 }
 

@@ -57,6 +57,10 @@ namespace FeatureFrmList
             }
             cmb.DisplayMember = "Value";
             cmb.ValueMember = "Key";
+            if (cmb.Items.Count > 0)
+            {
+                cmb.SelectedIndex = 0;
+            }
         }
         /// <summary>
         /// 为combobox绑定数据源，并设置第一项自动选中
