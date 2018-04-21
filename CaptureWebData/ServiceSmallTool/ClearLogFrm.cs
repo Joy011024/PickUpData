@@ -12,6 +12,8 @@ using System.IO;
 using CommonHelperEntity;
 using Common.Data;
 using FeatureFrmList;
+using System.Threading;
+using Domain.CommonData;
 namespace ServiceSmallTool
 {
     public partial class ClearLogFrm : Form
@@ -53,6 +55,7 @@ namespace ServiceSmallTool
         ClearLogHelp logHelp = new ClearLogHelp();
         FolderBrowserDialog file = new FolderBrowserDialog();
         BackgroundWorker bg = new BackgroundWorker();
+        Dictionary<string, ThreadStart> workList = new Dictionary<string, ThreadStart>();
         string ExeDir
         {
             get 
@@ -75,7 +78,7 @@ namespace ServiceSmallTool
                 case ButtonTag.ClearTip:
                     lstNote.Items.Clear();
                     break;
-                case ButtonTag.ClearLog: ClearLog(); break;
+                case ButtonTag.ClearLog: DoWork(); break;
                 case ButtonTag.OutputDir://日志输出
                     KeyValuePair<string, string> pickFolder = (KeyValuePair<string, string>)cmbFolderNameType.SelectedItem;
                     PickupFolderType pickFolderE;
@@ -92,6 +95,19 @@ namespace ServiceSmallTool
             logHelp.OutputDirInLog(fatherDir, foreachNode, folder, outputDirNames);
             LogHelperExtend.WriteDocument(ExeDir,DateTime.Now.ToString( CommonFormat.DateToHourIntFormat)+FileSuffix.Log, string.Join("\r\n", outputDirNames));
         }
+        void DoClearLogEvent() 
+        {
+            DoClearLog(null);
+        }
+        void DoClearLog(object data) 
+        {//跨进程调度要实现UI联动需要进程回调
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new BaseDelegate(DoClearLog), data);
+                return;
+            }
+            ClearLog();
+        }
         void ClearLog() 
         {
             string day = txtDayBefore.Text;
@@ -102,8 +118,12 @@ namespace ServiceSmallTool
             {
                 DayBefore = 1;
             }
-
+            DateTime begin = DateTime.Now;
             logHelp.ClearLogOfDayBefore(dir, DayBefore, ckDeleteDir.Checked);
+            DateTime end = DateTime.Now;
+            //其他信息: 线程间操作无效: 从不是创建控件“lstNote”的线程访问它。
+            
+            //lstNote.Items.Add("Run time: "+begin.ToString(CommonFormat.DateTimeFormat) + " ~ " + end.ToString(CommonFormat.DateTimeFormat));
         }
         public void TextDir_DoubleClick(object sender, EventArgs e)
         {//鼠标左键双击加载url 
@@ -119,7 +139,30 @@ namespace ServiceSmallTool
         {
             while (true)
             {//轮询调度 
-                
+                //检测是否为设置中断的轮询
+                foreach (var item in workList)
+                {
+                    Thread th = new Thread(item.Value);
+                    th.Start();
+                }
+                Thread.Sleep(30 * 1000);//休眠30秒
+            }
+        }
+        void DoWork() 
+        {
+            string tag = ButtonTag.ClearLog.ToString();
+            if (!workList.ContainsKey(tag)) 
+            {//增加日志清除进程
+                ThreadStart ts = new ThreadStart(DoClearLogEvent);//清除日志
+                workList.Add(tag, ts);
+            }
+        }
+        void StopWork() 
+        {
+            string tag = ButtonTag.ClearLog.ToString();
+            if (!workList.ContainsKey(tag))
+            { //停止日志清除进程
+                workList.Remove(tag);
             }
         }
     }
