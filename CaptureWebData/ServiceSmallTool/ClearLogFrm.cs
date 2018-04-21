@@ -41,6 +41,8 @@ namespace ServiceSmallTool
             btnDirOutput.Tag = ButtonTag.OutputDir;
             btnDirOutput.Click += new EventHandler(Button_Click);
             BindSelect();
+            bg.DoWork += new DoWorkEventHandler(Background_DoWork);
+            bg.RunWorkerAsync();
         }
         void BindSelect() 
         {
@@ -50,6 +52,7 @@ namespace ServiceSmallTool
         OpenFileDialog of = new OpenFileDialog();
         ClearLogHelp logHelp = new ClearLogHelp();
         FolderBrowserDialog file = new FolderBrowserDialog();
+        BackgroundWorker bg = new BackgroundWorker();
         string ExeDir
         {
             get 
@@ -112,7 +115,13 @@ namespace ServiceSmallTool
                 txt.Text = file.SelectedPath;
             }
         }
-        
+        void Background_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {//轮询调度 
+                
+            }
+        }
     }
     [Description("提取文件夹名称枚举")]
     public enum PickupFolderType
@@ -123,6 +132,20 @@ namespace ServiceSmallTool
         RelativeDir = 2,
         [Description("全路径")]
         FullName = 3
+    }
+    [Description("执行事件")]
+    public class DoEventTag
+    {
+        [Description("上次执行的事件")]
+        public string LastEvent { get; set; }
+        [Description("现在执行的事件")]
+        public string NowEvent { get; set; }
+        [Description("是否继续执行")]
+        public bool ContinueDo { get; set; }
+        [Description("总共执行次数")]
+        public int DoNumber { get; set; }
+        [Description("中断次数")]
+        public int StopNumber { get; set; }
     }
     public class ClearLogHelp 
     {
