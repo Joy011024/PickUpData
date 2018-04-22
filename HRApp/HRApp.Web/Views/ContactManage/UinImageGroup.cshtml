@@ -90,12 +90,26 @@
                        else {
                            ckAll.prop('checked', checkedLen == ckLen);
                        }
-                   })
+                   });
+                   $('#btnPickupAccount').click(function () {
+                       DownloadAccount();
+                   });
                });
             $('#ckAllImg').click(function () {
                 var ck = $(this).is(':checked');
                 $('.dataRowArea .tmpl [type=checkbox]').prop('checked', ck);
             });
+            function DownloadAccount() {
+                var slt = $('.dataRowArea .tmpl [type=checkbox]:checked');
+                if (slt.length == 0){
+                    layer.alert('请选择待导出的数据!', { title: '提示' });
+                    return;
+                }
+                var items = [];
+                $.each(slt, function (i, ele) {
+
+                });
+            }
         }
     </script>
 </head>
@@ -133,7 +147,7 @@
             <span>
                 <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.LblGroup" />
                 <input type="button" class="button buttonSmall" id="btnReporting" value="@Lang.BtnReporting"/>
-                <input type="button" class="button buttonSmall" value="@Lang.BtnPickupAccount" />
+                <input type="button" class="button buttonSmall" id="btnPickupAccount" value="@Lang.BtnPickupAccount" />
             </span>
             <span>
                 <span class="list"></span>
