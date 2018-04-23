@@ -105,10 +105,24 @@
                     layer.alert('请选择待导出的数据!', { title: '提示' });
                     return;
                 }
-                var items = [];
-                $.each(slt, function (i, ele) {
-
-                });
+                var coll = Foreach(slt);
+                $.fn.WriteFile(coll.join('\r\n'), 'text/latex', (~new Date()) + '.log');
+            }
+            function Foreach(items,isOnlyUin) {
+                var data = [];
+                var len = items.length;
+                for (var i = 0; i < len; i++) {
+                    var ele = $(items[i]).parents('.tmpl');
+                    var Uin = ele.find('[attr=Uin]').text();
+                    if (isOnlyUin)
+                        data.push(Uin);
+                    else {
+                        var nick = ele.find('[attr=Nick]').text();
+                        var city = ele.find('[attr=City]').text();
+                        data.push(Uin + "=" + nick + "=" + city);
+                    }
+                }
+                return data;
             }
         }
     </script>
@@ -159,16 +173,16 @@
                     <span style="display:none;">{i}</span>
                     <span>
                         <input type="checkbox" class="ckImg" style="width: 30px;" pid="{ID}" />
-                        <span style="position: relative; top: -10px;"> {Uin}</span>
+                        <span style="position: relative; top: -10px;" attr="Uin"> {Uin}</span>
                     </span>
-                    <span> {Nick}</span>
+                    <span attr="Nick"> {Nick}</span>
                     
                 </span>
                 <span class="column">
                     <img>
                 </span>
                 <span class="column">
-                    <span>{Country} {Province} {City}</span>
+                    <span attr="City">{Country} {Province} {City}</span>
                 </span>
             </div>
         </div>

@@ -27,8 +27,17 @@ namespace HRApp.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             IocMvcFactoryHelper.GetIocDict(true);
+            QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
         }
-       
+        Dictionary<string,string> QueryAllAppSetting(IAppSettingService service)
+        {
+            Dictionary<string, string> app = new Dictionary<string, string>();
+            foreach (var item in service.QueryAll())
+            {
+                app.Add(item.Code, item.ItemValue);
+            }
+            return app;
+        }
       
     }
     public class IocMvcFactoryHelper
@@ -136,5 +145,6 @@ namespace HRApp.Web
             propertyVal.Add(typeof(IDataFromOtherService).Name, dataFormService);
             #endregion
         }
+        
     }
 }
