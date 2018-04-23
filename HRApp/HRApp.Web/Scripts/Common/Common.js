@@ -108,6 +108,9 @@ $(function () {
             {
                 type = "text/latex";
             }
+            if ($.trim(name) == '') {
+                name = (~new Date()) + '.log';
+            }
             var blob;
             if (typeof window.Blob == "function") {
                 blob = new Blob([value], { type: type });
