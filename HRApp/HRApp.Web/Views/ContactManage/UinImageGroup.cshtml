@@ -34,7 +34,9 @@
     </style>
     <script type="text/javascript">
         $(function () {
-            //SearchEvent();
+            $('#btnPickupAccount').click(function () {
+                DownloadAccount();
+            });
             $('#btnQuery').click(function () {
                 var param = {
                     'StartTime': $('[attr=StartTime]').val(),
@@ -91,39 +93,36 @@
                            ckAll.prop('checked', checkedLen == ckLen);
                        }
                    });
-                   $('#btnPickupAccount').click(function () {
-                       DownloadAccount();
-                   });
                });
             $('#ckAllImg').click(function () {
                 var ck = $(this).is(':checked');
                 $('.dataRowArea .tmpl [type=checkbox]').prop('checked', ck);
             });
-            function DownloadAccount() {
-                var slt = $('.dataRowArea .tmpl [type=checkbox]:checked');
-                if (slt.length == 0){
-                    layer.alert('请选择待导出的数据!', { title: '提示' });
-                    return;
-                }
-                var coll = Foreach(slt);
-                $.fn.WriteFile(coll.join('\r\n'), 'text/latex', (~new Date()) + '.log');
+        }
+        function DownloadAccount() {
+            var slt = $('.dataRowArea .tmpl [type=checkbox]:checked');
+            if (slt.length == 0) {
+                layer.alert('请选择待导出的数据!', { title: '提示' });
+                return;
             }
-            function Foreach(items,isOnlyUin) {
-                var data = [];
-                var len = items.length;
-                for (var i = 0; i < len; i++) {
-                    var ele = $(items[i]).parents('.tmpl');
-                    var Uin = ele.find('[attr=Uin]').text();
-                    if (isOnlyUin)
-                        data.push(Uin);
-                    else {
-                        var nick = ele.find('[attr=Nick]').text();
-                        var city = ele.find('[attr=City]').text();
-                        data.push(Uin + "=" + nick + "=" + city);
-                    }
+            var coll = Foreach(slt);
+            $.fn.WriteFile(coll.join('\r\n'), 'text/latex', (~new Date()) + '.log');
+        }
+        function Foreach(items, isOnlyUin) {
+            var data = [];
+            var len = items.length;
+            for (var i = 0; i < len; i++) {
+                var ele = $(items[i]).parents('.tmpl');
+                var Uin = ele.find('[attr=Uin]').text();
+                if (isOnlyUin)
+                    data.push(Uin);
+                else {
+                    var nick = ele.find('[attr=Nick]').text();
+                    var city = ele.find('[attr=City]').text();
+                    data.push(Uin + "=" + nick + "=" + city);
                 }
-                return data;
             }
+            return data;
         }
     </script>
 </head>
