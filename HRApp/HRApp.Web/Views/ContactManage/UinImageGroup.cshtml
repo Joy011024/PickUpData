@@ -73,12 +73,12 @@
                        ht = ht.replace("{i}", i);
                        ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
                        $('.dataRowArea').prepend(ht);
-                       $('.dataRowArea .tmpl:last [type=checkbox]').click(function () {//没有触发
-                           debugger;
-                       });
-                       $($('.dataRowArea .tmpl:last [type=checkbox]')[0]).click(function () {
-                           console.log($(this).attr('pid'));
-                       });
+                       //$('.dataRowArea .tmpl:last [type=checkbox]').click(function () {//没有触发
+                       //    debugger;
+                       //});
+                       //$($('.dataRowArea .tmpl:last [type=checkbox]')[0]).click(function () {
+                       //    console.log($(this).attr('pid'));
+                       //});
                    });
                    $('.dataRowArea .tmpl [type=checkbox]').click(function () {
                        var ck = $(this);
