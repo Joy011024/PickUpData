@@ -132,6 +132,9 @@
         <div>@Lang.LblUinImgGroupManage</div>
         <div> @*query where*@
             <span>
+                <input type="hidden" id="txtPageIndex" value="1"/>
+            </span>
+            <span>
                 @*<label>@Lang.LblPickUpTime</label>*@
                 <label>@Lang.LblBeginTime</label>
                 <input type="text" onfocus="WdatePicker()" attr="StartTime" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddDays(-1).ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
