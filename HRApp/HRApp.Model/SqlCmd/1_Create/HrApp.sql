@@ -74,7 +74,9 @@ Create table RelyTable
 	Id int primary key identity(1,1),
 	TableName varchar(32) not null,
 	KeyColumnName varchar(32) not null,
-	CreateTime Datetime not null 
+	CreateTime Datetime not null ,
+    Note nvarchar(1024),
+    IsDelete bit not null
 )
 go
 Create table OptionEvent
@@ -86,6 +88,8 @@ Create table OptionEvent
 	 RelyTableRowValue varchar(32) not null,
 	 IsDelete bit not null
 );
+alter table OptionEvent add constraint fj_OptionEventId foreign key (RelyTableId) 
+references RelyTable(Id)
 create table ContactData
 (--联系人信息列表
 	Id uniqueidentifier primary key,
@@ -111,3 +115,14 @@ create table Account
 	CreateTime datetime not null,
 	CreateDayInt int not null
 );
+create table ClickFlag
+(
+	Id uniqueidentifier primary key,
+	Createtime datetime not null,
+	RelyTableId int not null,
+	TableId uniqueidentifier not null,
+	ClickId int not null,
+	OptionIP varchar(16)
+)
+ alter table ClickFlag add constraint fj_RelyTableId foreign key (RelyTableId) 
+ references RelyTable(Id)

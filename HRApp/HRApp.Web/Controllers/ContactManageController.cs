@@ -39,6 +39,8 @@ namespace HRApp.Web.Controllers
         [DescriptionSort("qq图片分类处理")]
         public ActionResult UinImageGroup() 
         {
+            IAppSettingService service = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
+            ViewData["report"] = service.SelectNodeItemByParentCode("");
             return View();
         }
         public JsonResult QueryUinDataList(QueryRequestParam param) 
