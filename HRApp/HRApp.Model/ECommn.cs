@@ -34,12 +34,14 @@ namespace HRApp.Model
         [DescriptionSort("默认数据库在相同的服务器")]
         DefaultDBIsSameServicePC=3
     }
-    public enum AppSetting 
+    public enum EAppSetting 
     {
         [DescriptionSort("强制刷新服务端配置")]
         ForceRefreshServiceAppSetting=100,
         [DescriptionSort("UI配置")]
         UiAppSetting = 200,
+        [DescriptionSort("文件日期戳格式")]
+        FileVersionFormat=210,
         [DescriptionSort("动作分类")]
         OptionType=300,
         [DescriptionSort("点赞")]

@@ -52,5 +52,9 @@ namespace HRApp.Web
         {
             return ConfigurationManager.AppSettings["CodeVersion"];
         }
+        /// <summary>
+        /// 数据库中存储的系统配置项集合
+        /// </summary>
+        public static Dictionary<string, string> AppSettingItemsInDB = new Dictionary<string, string>();
     }
 }

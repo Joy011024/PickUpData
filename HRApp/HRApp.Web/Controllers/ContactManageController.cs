@@ -40,7 +40,7 @@ namespace HRApp.Web.Controllers
         public ActionResult UinImageGroup() 
         {
             IAppSettingService service = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
-            ViewData["report"] = service.SelectNodeItemByParentCode("");
+            ViewData["ReportEnum"] = service.SelectNodeItemByParentCode("ReportEnum");
             return View();
         }
         public JsonResult QueryUinDataList(QueryRequestParam param) 

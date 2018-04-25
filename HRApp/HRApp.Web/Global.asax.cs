@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Infrastructure.ExtService;
+using HRApp.Model;
 using IHRApp.Infrastructure;
 using HRApp.Infrastructure;
 using HRApp.ApplicationService;
@@ -20,14 +21,12 @@ namespace HRApp.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            InitAppSetting.Version = DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat); 
-                //DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat);
-            InitAppSetting.CodeVersion = InitAppSetting.CodeVersionFromCfg();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             IocMvcFactoryHelper.GetIocDict(true);
-            QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
+            InitAppSetting.AppSettingItemsInDB= QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
+            RefreshAppSetting.RefreshFileVersion();
         }
         Dictionary<string,string> QueryAllAppSetting(IAppSettingService service)
         {
@@ -38,7 +37,6 @@ namespace HRApp.Web
             }
             return app;
         }
-      
     }
     public class IocMvcFactoryHelper
     {
@@ -146,5 +144,25 @@ namespace HRApp.Web
             #endregion
         }
         
+    }
+    public class RefreshAppSetting 
+    {
+        /// <summary>
+        /// 刷新文件版本控制串
+        /// </summary>
+        public static void RefreshFileVersion() 
+        {
+            string version = Common.Data.CommonFormat.DateToHourIntFormat;
+            if (InitAppSetting.AppSettingItemsInDB.ContainsKey(EAppSetting.FileVersionFormat.ToString()))
+            {
+                string dbVersionFormat = InitAppSetting.AppSettingItemsInDB[EAppSetting.FileVersionFormat.ToString()];
+                if (!string.IsNullOrEmpty(dbVersionFormat))
+                {
+                    version = dbVersionFormat;
+                }
+            }
+            InitAppSetting.Version = DateTime.Now.ToString(version);
+            InitAppSetting.CodeVersion = InitAppSetting.CodeVersionFromCfg();
+        }
     }
 }

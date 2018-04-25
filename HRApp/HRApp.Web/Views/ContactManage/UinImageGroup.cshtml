@@ -1,5 +1,6 @@
 ﻿@using HRApp.Web;
 @using AppLanguage;
+@using HRApp.Model;
 @{
     Layout = null;
 }
@@ -15,8 +16,8 @@
     <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/My97DatePicker/WdatePicker.js?v=@InitAppSetting.Version"></script>
     <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
-    <link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/bootstrap-select/bootstrap-select.js?v=@InitAppSetting.Version"></script>
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <style type="text/css">
@@ -195,8 +196,11 @@
             <span>
                 <label>@Lang.LblReportingType ：</label>
                 <select class="selectpicker">
-
-
+                    <option value="0">@Lang.Tip_PleaseSelect</option>
+                    @foreach (var item in ViewData["ReportEnum"] as List<CategoryItems>)
+                    {
+                        <option value="@item.ItemValue">@item.Name</option>
+                    }
                 </select>
             </span>
         </div>
