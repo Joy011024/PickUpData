@@ -70,6 +70,24 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 取消 的本地化字符串。
+        /// </summary>
+        public static string BtnCancel {
+            get {
+                return ResourceManager.GetString("BtnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 关闭 的本地化字符串。
+        /// </summary>
+        public static string BtnClose {
+            get {
+                return ResourceManager.GetString("BtnClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 删除 的本地化字符串。
         /// </summary>
         public static string BtnDelete {
@@ -201,6 +219,15 @@ namespace AppLanguage {
         public static string LblCode {
             get {
                 return ResourceManager.GetString("LblCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 描述内容 的本地化字符串。
+        /// </summary>
+        public static string LblDesc {
+            get {
+                return ResourceManager.GetString("LblDesc", resourceCulture);
             }
         }
         

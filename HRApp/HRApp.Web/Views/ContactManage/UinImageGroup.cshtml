@@ -45,6 +45,14 @@
                 };
                 SearchEvent(param);
             });
+            $('#btnReporting').click(function () {
+                layer.open({
+                    content: '/ReportEnum/FlagReportDialog',
+                    type: 2,
+                    area: [400, 300],
+                    title:'举报'
+                });
+            });
         });
         function SearchEvent(param) {
             if (!param) { param = {};}
@@ -192,18 +200,7 @@
         <div class="dataRowArea">
 
         </div>
-        <div id="reportDiv"> @*举报的对话框*@
-            <span>
-                <label>@Lang.LblReportingType ：</label>
-                <select class="selectpicker" data-live-search="true">
-                    <option value="0">@Lang.Tip_PleaseSelect</option>
-                    @foreach (var item in ViewData["ReportEnum"] as List<CategoryItems>)
-                    {
-                        <option value="@item.ItemValue">@item.Name</option>
-                    }
-                </select>
-            </span>
-        </div>
+        
     </div>
 </body>
 </html>

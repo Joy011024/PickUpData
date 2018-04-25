@@ -237,4 +237,13 @@
   <data name="BtnPickupAccount" xml:space="preserve">
     <value>提取账号</value>
   </data>
+  <data name="LblDesc" xml:space="preserve">
+    <value>描述内容</value>
+  </data>
+  <data name="BtnCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="BtnClose" xml:space="preserve">
+    <value>关闭</value>
+  </data>
 </root>
