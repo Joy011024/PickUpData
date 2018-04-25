@@ -1,0 +1,37 @@
+﻿@using AppLanguage;
+@using HRApp.Model;
+@using HRApp.Web;
+<script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+<script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+<link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+<link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select/bootstrap-select.js?v=@InitAppSetting.Version"></script>
+<link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+<style type="text/css">
+    .OneCell {
+        display: block;
+        margin-bottom: 5px;
+    }
+</style>
+<div id="reportDiv" style="margin:20px;">
+    @*举报的对话框*@
+    <span class="OneCell">
+        <label>@Lang.LblReportingType ：</label>
+        <select class="selectpicker" data-live-search="true">
+            <option value="0">@Lang.Tip_PleaseSelect</option>
+            @foreach (var item in ViewData[EAppSetting.ReportEnum.ToString()] as List<CategoryItems>)
+            {
+                <option value="@item.ItemValue">@item.Name</option>
+            }
+        </select>
+    </span>
+    <span class="OneCell">
+        <label>@Lang.LblDesc ：</label>
+        <textarea id="txtNote" style=" width: 220px;height:100px;"></textarea>
+    </span>
+</div>
+<div>
+    <input type="button" class="button buttonSmall" id="btnSave" value="@Lang.BtnSave" />
+    <input type="button" class="button buttonSmall" id="btnClose" value="@Lang.BtnClose" />
+</div>

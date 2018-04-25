@@ -117,6 +117,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\OrderManageController.cs" />
+    <Compile Include="Controllers\ReportEnumController.cs" />
     <Compile Include="Controllers\SpellNameController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -285,6 +286,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AppSettingManage\AppSettingDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ReportEnum\FlagReportDialog.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
