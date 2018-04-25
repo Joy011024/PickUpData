@@ -59,7 +59,28 @@
                     console.log(response);
                 });
             });
+            var cmb = $('[apikey=ParentCode]');
+            cmb.selectpicker();
+            //在UI渲染完毕（加载出该选择框）之后 该元素ParentCode的兄弟节点role="combobox"下的输入框aria-label="Search"
+            BindBootStrapSelect(cmb, function () {
+
+            });
+            $('#btnClose').on('click', function () {
+                if (parent) {
+                    var lay = parent.layer;
+                    lay.close(lay.index);
+                }
+            });
         });
+        function BindBootStrapSelect(cmb,enterEvennt) {
+            cmb.siblings('.dropdown-menu').find('[aria-label=Search]').on('keydown', function (e) {//keypress 不能获取组合键 keyup 不能获取shift+Enter组合键
+                //console.log(e);
+                if (e.altKey && e.keyCode == 13) {//组合键 Alt+Entre
+                    console.log('组合键');
+                    enterEvennt();
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -106,6 +127,7 @@
     </div>
     <div>
         <button id="btnSave" class="button">@Lang.BtnSave</button>
+        <button id="btnClose" class="button">@Lang.BtnClose</button>
     </div>
 </body>
 </html>

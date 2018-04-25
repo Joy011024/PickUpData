@@ -14,6 +14,16 @@
         margin-bottom: 5px;
     }
 </style>
+<script type="text/javascript">
+    $(function () {
+        $('#btnClose').on('click', function () {
+            if (parent) {
+                var lay = parent.layer;
+                lay.close(lay.index);
+            }
+        });
+    });
+</script>
 <div id="reportDiv" style="margin:20px;">
     @*举报的对话框*@
     <span class="OneCell">
