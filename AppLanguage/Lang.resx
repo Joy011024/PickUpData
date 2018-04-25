@@ -246,4 +246,10 @@
   <data name="BtnClose" xml:space="preserve">
     <value>关闭</value>
   </data>
+  <data name="LblTip" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="Tip_PleaseSelectData" xml:space="preserve">
+    <value>请选择数据</value>
+  </data>
 </root>

@@ -340,6 +340,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 提示 的本地化字符串。
+        /// </summary>
+        public static string LblTip {
+            get {
+                return ResourceManager.GetString("LblTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 QQ号 的本地化字符串。
         /// </summary>
         public static string LblUinAccount {
@@ -426,6 +435,15 @@ namespace AppLanguage {
         public static string Tip_PleaseSelect {
             get {
                 return ResourceManager.GetString("Tip_PleaseSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请选择数据 的本地化字符串。
+        /// </summary>
+        public static string Tip_PleaseSelectData {
+            get {
+                return ResourceManager.GetString("Tip_PleaseSelectData", resourceCulture);
             }
         }
         

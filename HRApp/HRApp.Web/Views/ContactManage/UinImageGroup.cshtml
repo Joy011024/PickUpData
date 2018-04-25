@@ -47,12 +47,28 @@
             });
             $('#btnReporting').click(function () {
                 //选择项
-
-                layer.open({
+                //获取列表
+                var checkedLen = $('.dataRowArea .tmpl [type=checkbox]:checked').length;
+                var at =parent? parent.layer:layer;
+                if (checkedLen == 0) {
+                    at.alert('@Lang.Tip_PleaseSelectData', { title: '@Lang.LblTip', icon: 6 });
+                    return;
+                }
+                at.open({
                     content: '/ReportEnum/FlagReportDialog?usingParentWinSelfTool=true',
                     type: 2,
-                    area: [400, 300],
-                    title:'举报'
+                    area: [400, 390],
+                    title: '举报',
+                    btn: [
+                        '@Lang.BtnSave','@Lang.BtnClose'
+                    ],
+                    yes: function (index, layerNo) {
+                        var slt = $('.dataRowArea .tmpl [type=checkbox]:checked');
+
+                    },
+                    btn2: function (index, layerNo) {
+
+                    }
                 });
             });
         });
