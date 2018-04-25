@@ -25,6 +25,10 @@
     });
 </script>
 <div id="reportDiv" style="margin:20px;">
+    @if (ViewData["optionId"]!=null) 
+    {
+        <input type="hidden" value="@ViewData["optionId"]" id="txtTargetId" apiKey="Id"/>
+    }
     @*举报的对话框*@
     <span class="OneCell">
         <label>@Lang.LblReportingType ：</label>
