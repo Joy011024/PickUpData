@@ -48,5 +48,12 @@ namespace HRApp.Web.Controllers
             json.AttachData = param;
             return Json(json);
         }
+        [DescriptionSort("批量举报")]
+        [HttpPost]
+        public JsonResult SignAccount(ReportParam param) 
+        {
+            Common.Data.JsonData json = new Common.Data.JsonData();
+            return Json(json);
+        }
     }
 }

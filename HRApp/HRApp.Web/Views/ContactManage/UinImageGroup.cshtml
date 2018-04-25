@@ -64,7 +64,17 @@
                     ],
                     yes: function (index, layerNo) {
                         var slt = $('.dataRowArea .tmpl [type=checkbox]:checked');
+                        bindPostAjax('/ContactManage/SignAccount', {
+                            'Table': '',
+                            'Ids': [],
+                            'ReportType': '',
+                            'Note':''
+                        }, function (response, statue) {
 
+                        });
+                        retur;
+                        var at = parent ? parent.layer : layer;
+                        at.close(index);
                     },
                     btn2: function (index, layerNo) {
 
