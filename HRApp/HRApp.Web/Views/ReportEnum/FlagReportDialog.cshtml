@@ -41,7 +41,10 @@
         <textarea id="txtNote" style=" width: 220px;height:100px;"></textarea>
     </span>
 </div>
-<div>
-    <input type="button" class="button buttonSmall" id="btnSave" value="@Lang.BtnSave" />
-    <input type="button" class="button buttonSmall" id="btnClose" value="@Lang.BtnClose" />
-</div>
+@if ((bool)ViewData["usingParentWinSelfTool"] != true)
+{
+    <div>
+        <input type="button" class="button buttonSmall" id="btnSave" value="@Lang.BtnSave" />
+        <input type="button" class="button buttonSmall" id="btnClose" value="@Lang.BtnClose" />
+    </div>
+}

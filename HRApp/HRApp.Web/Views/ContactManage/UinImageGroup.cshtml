@@ -46,8 +46,10 @@
                 SearchEvent(param);
             });
             $('#btnReporting').click(function () {
+                //选择项
+
                 layer.open({
-                    content: '/ReportEnum/FlagReportDialog',
+                    content: '/ReportEnum/FlagReportDialog?usingParentWinSelfTool=true',
                     type: 2,
                     area: [400, 300],
                     title:'举报'

@@ -12,12 +12,13 @@ namespace HRApp.Web.Controllers
     {
         //
         // GET: /ReportEnum/
-        [DescriptionSort("举报对话框")]
-        public ActionResult FlagReportDialog()
+        [DescriptionSort("举报对话框 usingParentWinSelfTool=true使用父窗体自定义工具栏")]
+        public ActionResult FlagReportDialog(bool usingParentWinSelfTool)
         {
             IAppSettingService service = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
             string item=EAppSetting.ReportEnum.ToString();
             ViewData[item] = service.SelectNodeItemByParentCode(item);
+            ViewData["usingParentWinSelfTool"] = usingParentWinSelfTool;
             return View();
         }
 
