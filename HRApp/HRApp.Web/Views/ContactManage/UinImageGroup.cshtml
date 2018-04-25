@@ -195,7 +195,7 @@
         <div id="reportDiv"> @*举报的对话框*@
             <span>
                 <label>@Lang.LblReportingType ：</label>
-                <select class="selectpicker">
+                <select class="selectpicker" data-live-search="true">
                     <option value="0">@Lang.Tip_PleaseSelect</option>
                     @foreach (var item in ViewData["ReportEnum"] as List<CategoryItems>)
                     {

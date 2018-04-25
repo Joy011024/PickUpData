@@ -394,7 +394,7 @@ namespace AppLanguage {
         }
         
         /// <summary>
-        ///   查找类似 请选择。 的本地化字符串。
+        ///   查找类似 请选择 的本地化字符串。
         /// </summary>
         public static string Tip_PleaseSelect {
             get {
@@ -403,7 +403,7 @@ namespace AppLanguage {
         }
         
         /// <summary>
-        ///   查找类似 请选择文件。 的本地化字符串。
+        ///   查找类似 请选择文件 的本地化字符串。
         /// </summary>
         public static string Tip_PleaseSelectFile {
             get {
