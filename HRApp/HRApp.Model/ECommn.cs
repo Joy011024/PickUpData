@@ -79,6 +79,8 @@ namespace HRApp.Model
         [DescriptionSort("默认单次查询数据量")]
         DefaultQueryLimit=7200,
         [DescriptionSort("默认查询数目")]
-        DefaultQuerySize=7300
+        DefaultQuerySize=7300,
+        [DescriptionSort("举报分类")]
+        ReportEnum=8000
     }
 }
