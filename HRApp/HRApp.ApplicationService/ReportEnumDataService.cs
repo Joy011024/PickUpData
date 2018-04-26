@@ -16,7 +16,7 @@ namespace HRApp.ApplicationService
             get;
             set;
         }
-        public IReportEnumDataRepository reportRepository { get; set; }
+        public IReportEnumDataRepository reportRepository;
         public ReportEnumDataService(IReportEnumDataRepository dal)
         {
             reportRepository = dal;
