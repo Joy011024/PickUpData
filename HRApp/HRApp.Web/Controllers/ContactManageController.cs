@@ -52,7 +52,9 @@ namespace HRApp.Web.Controllers
         [HttpPost]
         public JsonResult SignAccount(ReportParam param) 
         {
-            Common.Data.JsonData json = new Common.Data.JsonData();
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
+            //写入举报记录表
+            json.Success = true;
             return Json(json);
         }
     }
