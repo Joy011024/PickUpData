@@ -58,21 +58,33 @@
                     content: '/ReportEnum/FlagReportDialog?usingParentWinSelfTool=true',
                     type: 2,
                     area: [400, 390],
+                    id:'reportPanel',
                     title: '举报',
                     btn: [
                         '@Lang.BtnSave','@Lang.BtnClose'
                     ],
                     yes: function (index, layerNo) {
                         var slt = $('.dataRowArea .tmpl [type=checkbox]:checked');
-                        bindPostAjax('/ContactManage/SignAccount', {
+                        var ids = [];
+                        for (var i = 0; i < slt.length; i++) {
+                            var id = $(slt[i]).attr('pid');
+                            ids.push(id);
+                        }
+                        var iframe = parent.$('#reportPanel').find('iframe').contents();
+                        var param={
                             'Table': '',
-                            'Ids': [],
-                            'ReportType': '',
-                            'Note':''
-                        }, function (response, statue) {
+                            'Ids': ids,
+                            'ReportType': iframe.find('.selectpicker option:selected').val(),
+                            'Note': iframe.find('#txtNote').val()
+                        };
+                        if (param.ReportType < 1&&$.trim(param.Note)=='') {//
+                            parent.layer.alert('没有使用定义的举报类型，必须提供举报信息描述', { title: '@Lang.LblTip' });
+                            return;
+                        }
+                        bindPostAjax('/ContactManage/SignAccount', param, function (response, statue) {
 
                         });
-                        retur;
+                        return;
                         var at = parent ? parent.layer : layer;
                         at.close(index);
                     },
