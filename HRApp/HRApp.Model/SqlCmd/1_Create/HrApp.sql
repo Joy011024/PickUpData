@@ -125,4 +125,14 @@ create table ClickFlag
 	OptionIP varchar(16)
 )
  alter table ClickFlag add constraint fj_RelyTableId foreign key (RelyTableId) 
- references RelyTable(Id)
+ references RelyTable(Id);
+ create table UserSetting
+(
+	Id uniqueidentifier primary key,
+	Name nvarchar(32) not null,
+	Code varchar(32) not null,
+	Value varchar(16) not null,
+	IsDelete bit not null,
+	CreateTime datetime not null,
+	Belonger varchar(16)
+);
