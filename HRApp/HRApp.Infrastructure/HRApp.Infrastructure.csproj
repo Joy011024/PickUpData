@@ -49,6 +49,7 @@
     <Compile Include="MaybeSpecialRepository.cs" />
     <Compile Include="MenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportEnumDataRepository.cs" />
     <Compile Include="SpecialSpellNameRepository.cs" />
   </ItemGroup>
   <ItemGroup>

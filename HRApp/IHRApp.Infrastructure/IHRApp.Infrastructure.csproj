@@ -46,6 +46,7 @@
     <Compile Include="IDataFromOtherRepository.cs" />
     <Compile Include="IMaybeSpecialRepository.cs" />
     <Compile Include="IMenuRepository.cs" />
+    <Compile Include="IReportEnumDataRepository.cs" />
     <Compile Include="ISpecialSpellNameRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
