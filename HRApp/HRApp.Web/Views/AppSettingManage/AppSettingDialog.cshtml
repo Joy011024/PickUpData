@@ -45,14 +45,22 @@
                 if (!valid) {
                     return;
                 }
-                var data= $('[apiKey=ParentCode]').getSelected();
                 var api = GetXPathObject(root, "apiKey");
+                var slt = $('[apiKey=ParentCode]');
+                //该插件是什么类型
+                var data = null;
+                if (slt.hasClass('selectpicker')) {//bootstrap select插件下拉框
+                    data = $('[apiKey=ParentCode]').find("option:selected");
+                } else if (slt.hasClass('jq22')) {//jq的combobox插件
+                    var data = slt.getSelected();
+                } else {
+                    data = $('[apiKey=ParentCode]').find("option:selected");
+                }
                 if (data) {
                     api["ParentId"] = $(data).attr('ParentId');
                 }
-                if (!api["ParentId"])
-                {
-                 api["ParentId"] = -1;
+                if (!api["ParentId"]) {
+                    api["ParentId"] = -1;
                 }
                 bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
                     AjaxWarming($('#btnSave'), response);
