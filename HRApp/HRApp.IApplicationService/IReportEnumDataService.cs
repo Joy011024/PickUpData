@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HRApp.Model;
 namespace HRApp.IApplicationService
 {
-   public  interface IReportEnumDataService:IBaseServiceWithSqlConnstring<ReportEnumDetail>
+   public  interface IReportEnumDataService:IBaseServiceWithSqlConnstring<ReportParam>
     {
     }
 }

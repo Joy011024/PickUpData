@@ -142,6 +142,7 @@ create table ReportEnumRec
 	ReportEnum int not null,
 	CreateTime datetime not null,
 	Reporter varchar(16) not null,--sys flag ,set the value=-1
+	BeenReporterId uniqueidentifier not null,
 	IsDelete bit not null
 );
 create table ReportNote
@@ -151,15 +152,15 @@ create table ReportNote
 	UINote nvarchar(256) not null,
 	IsDelete bit not null
 );
-create table ReportEnumNote
+create table ReporterAndNote
 (
 	Id uniqueidentifier primary key,
 	ReportId uniqueidentifier not null,
 	ReportNoteId uniqueidentifier not null,
 	IsDelete bit not null,
 	CreateTime datetime not null
-)
-alter table ReportEnumNote add constraint fj_ReportId foreign key (ReportId) 
+);
+alter table ReporterAndNote add constraint fj_ReportId foreign key (ReportId) 
  references ReportEnumRec(Id);
- alter table ReportEnumNote add constraint fj_ReportNoteId foreign key (ReportNoteId) 
+ alter table ReporterAndNote add constraint fj_ReportNoteId foreign key (ReportNoteId) 
  references ReportNote(Id);

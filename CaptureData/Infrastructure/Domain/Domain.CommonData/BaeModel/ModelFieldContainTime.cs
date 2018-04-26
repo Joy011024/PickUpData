@@ -31,4 +31,18 @@ namespace Domain.CommonData
     {
         public Guid Id { get; set; }
     }
+    public class GuidTimeField : GuidPrimaryKey
+    {
+        public DateTime CreateTime { get; set; }
+    }
+    public class GuidTimeFieldwithDelete : GuidTimeField
+    {
+        public bool IsDelete { get; set; }
+        public void Init() 
+        {
+            Id = Guid.NewGuid();
+            CreateTime = DateTime.Now;
+        }
+    }
+    
 }

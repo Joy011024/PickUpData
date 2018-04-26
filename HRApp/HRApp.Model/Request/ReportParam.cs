@@ -10,7 +10,7 @@ namespace HRApp.Model
     {
         public string Table { get; set; }
         public List<Guid> Ids { get; set; }
-        public string ReportType { get; set; }
+        public int ReportType { get; set; }
         public string Note { get; set; }
     }
 }
