@@ -42,7 +42,7 @@ namespace HRApp.ApplicationService
                 {
                     ReportEnumRec rec = new ReportEnumRec() { ReportEnum = model.ReportType, BeenReporterId = item, CreateTime = time };
                     detail.Report.Add(rec);
-                    ReporterAndNote rn = new ReporterAndNote() { CreateTime = time, ReportNoteId = detail.Note.Id };
+                    ReporterAndNote rn = new ReporterAndNote() { CreateTime = time, ReportNoteId = detail.Note.Id,ReportId=rec.Id };
                     detail.ReportContainerNote.Add(rn);
                 }
                 //举报的对象入库
