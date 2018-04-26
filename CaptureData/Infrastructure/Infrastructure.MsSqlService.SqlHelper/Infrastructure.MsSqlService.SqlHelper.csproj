@@ -42,6 +42,12 @@
     <Compile Include="SqlCmdHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BaseHelper\CommonHelperEntity\CommonHelperEntity.csproj">
+      <Project>{32c60c3a-c56e-457d-b553-be076218fd5a}</Project>
+      <Name>CommonHelperEntity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

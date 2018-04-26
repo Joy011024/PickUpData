@@ -29,22 +29,34 @@ namespace HRApp.ApplicationService
             {
                 Report = new List<ReportEnumRec>()
             };
-            if (string.IsNullOrEmpty(model.Note))
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
+            try
             {
-                detail.Note = new ReportNote() { UINote = model.Note, CreateTime = time };
-                detail.ReportContainerNote = new List<ReporterAndNote>();
+                if (string.IsNullOrEmpty(model.Note))
+                {
+                    detail.Note = new ReportNote() { UINote = model.Note, CreateTime = time };
+                    reportRepository.SaveNote(detail.Note);
+                    detail.ReportContainerNote = new List<ReporterAndNote>();
+                }
+                foreach (Guid item in model.Ids)
+                {
+                    ReportEnumRec rec = new ReportEnumRec() { ReportEnum = model.ReportType, BeenReporterId = item, CreateTime = time };
+                    detail.Report.Add(rec);
+                    ReporterAndNote rn = new ReporterAndNote() { CreateTime = time, ReportNoteId = detail.Note.Id };
+                    detail.ReportContainerNote.Add(rn);
+                }
+                //举报的对象入库
+                reportRepository.SaveReported(detail.Report);
+                reportRepository.SaveReportedAndNote(detail.ReportContainerNote);
+                //关联举报的对象
+                json.Data = detail;
+                json.Success = true;
             }
-            foreach (Guid item in model.Ids)
+            catch (Exception ex)
             {
-                ReportEnumRec rec = new ReportEnumRec() { ReportEnum = model.ReportType,BeenReporterId=item,CreateTime=time };
-                detail.Report.Add(rec);
-                ReporterAndNote rn = new ReporterAndNote() { CreateTime = time, ReportNoteId = detail.Note.Id };
-                detail.ReportContainerNote.Add(rn);
+                json.Message = ex.Message;
             }
-            //举报的对象入库
-            //关联举报的对象
-           bool success= reportRepository.Add(detail);
-           return new  Common.Data.JsonData();
+            return json;
         }
 
         public List<ReportParam> QueryWhere(ReportParam model)

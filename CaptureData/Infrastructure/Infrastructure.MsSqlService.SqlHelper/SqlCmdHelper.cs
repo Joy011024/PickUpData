@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
+using CommonHelperEntity;
 namespace Infrastructure.MsSqlService.SqlHelper
 {
     public class SqlCmdHelper
@@ -182,6 +183,44 @@ namespace Infrastructure.MsSqlService.SqlHelper
                 dap.Fill(ds);
             }
             return ds;
+        }
+        /// <summary>
+        /// 提供待执行的SQL语句进行参数化执行SQL语句
+        /// </summary>
+        /// <typeparam name="T">参数实体类</typeparam>
+        /// <param name="sqlCmd">sql 中参数预设值为 {paramName}</param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public int GenerateNoQuerySqlAndExcute<T>(string sqlCmd, T entity) where T : class
+        {
+            Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
+            List<SqlParameter> pms = new List<SqlParameter>();
+            foreach (KeyValuePair<string, object> item in properties)
+            {
+                string paramName = "@" + item.Key;
+                string field = "{" + item.Key + "}";
+                if (sqlCmd.Contains(field))
+                {
+                    sqlCmd = sqlCmd.Replace(field, paramName);
+                    //获取参数的数据类型
+                    SqlParameter p = new SqlParameter(paramName, item.Value == null ? DBNull.Value : item.Value);
+                    pms.Add(p);
+                }
+            }
+            if (string.IsNullOrEmpty(SqlConnString))
+            {
+                return -1;
+            }
+            SqlConnection conn = new SqlConnection(SqlConnString);
+            conn.Open();
+            SqlCommand comm = new SqlCommand(sqlCmd, conn);
+            if (pms != null && pms.Count > 0)
+            {
+                comm.Parameters.AddRange(pms.ToArray());
+            }
+            int result = comm.ExecuteNonQuery();
+            conn.Close();
+            return result;
         }
     }
 }

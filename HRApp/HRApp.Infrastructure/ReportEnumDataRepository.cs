@@ -9,50 +9,36 @@ namespace HRApp.Infrastructure
 {
     public class ReportEnumDataRepository:IReportEnumDataRepository
     {
-        public IList<ReportEnumDetail> QueryList(string cmd, Dictionary<string, object> param)
+        public bool SaveNote(ReportNote note)
         {
-            throw new NotImplementedException();
+            string sql = note.GetInsertSql();
+            return CommonRepository.ExtInsert<ReportNote>(sql, SqlConnString, note);
         }
 
-        public IList<ReportEnumDetail> QueryAll()
+        public bool SaveReported(List<ReportEnumRec> recs)
         {
-            throw new NotImplementedException();
+            if (recs == null || recs.Count == 0)
+            {
+                return false;
+            }
+            string sql = recs[0].GetInsertSql();
+            return CommonRepository.ExtBatchInsert<ReportEnumRec>(sql, SqlConnString, recs)==recs.Count;
+        }
+
+        public bool SaveReportedAndNote(List<ReporterAndNote> notes)
+        {
+            if (notes == null || notes.Count == 0) 
+            {
+                return false;
+            }
+            string sql = notes[0].GetInsertSql();
+            return CommonRepository.ExtBatchInsert<ReporterAndNote>(sql, SqlConnString, notes)==notes.Count;
         }
 
         public string SqlConnString
         {
             get;
             set;
-        }
-
-        public bool Add(ReportEnumDetail entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Edit(ReportEnumDetail entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(object key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool LogicDel(object key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ReportEnumDetail Get(object key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<ReportEnumDetail> Query(string cmd)
-        {
-            throw new NotImplementedException();
         }
     }
 }

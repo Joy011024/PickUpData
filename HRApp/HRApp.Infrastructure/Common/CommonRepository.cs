@@ -39,6 +39,52 @@ namespace HRApp.Infrastructure
             SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = connString };
             return helper.ExcuteNoQuery(cmd, ps.ToArray()) > 0;
         }
+        /// <summary>
+        /// 批量添加
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql">单挑新增的SQL脚本</param>
+        /// <param name="connString">数据库连接串</param>
+        /// <param name="entitys"></param>
+        /// <returns>批量执行非查询的数目</returns>
+        public static int ExtBatchInsert<T>(string sql, string connString, List<T> entitys) where T : class
+        {
+            if (entitys.Count == 0)
+            { 
+            
+            }
+            string[] properties = entitys[0].GetAllProperties();
+            List<string> pis = new List<string>();
+            foreach (string item in properties)
+            {
+                string field = "{" + item + "}";
+                if (sql.Contains(field))
+                {
+                    pis.Add(item);
+                }
+            }
+            List<SqlParameter> ps = new List<SqlParameter>();
+            List<string> batchSql = new List<string>();
+            for (int i=0; i<entitys.Count;i++ )
+            {
+                T item = entitys[i];
+                string  cmd=sql ;
+                foreach (var pi in pis)
+                {
+                    string paramName = "@" + pi+i;
+                    string field = "{" +pi + "}";
+                    cmd = cmd.Replace(field, paramName);
+                    bool exists=false;
+                    object obj = item.GetPropertyValue(pi, out exists);
+                    //获取参数的数据类型
+                    SqlParameter p = new SqlParameter(paramName, obj == null ? DBNull.Value : obj);
+                    ps.Add(p);
+                }
+                batchSql.Add(cmd);
+            }
+            SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = connString };
+            return helper.ExcuteNoQuery(string.Join(";", batchSql), ps.ToArray());
+        }
          class SqlExcuteParam
         {
             public string Cmd { get; set; }

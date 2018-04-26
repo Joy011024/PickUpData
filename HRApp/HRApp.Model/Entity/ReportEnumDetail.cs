@@ -16,6 +16,11 @@ namespace HRApp.Model
             Reporter = "-1";//默认操作者是系统
             base.Init();
         }
+        public string GetInsertSql()
+        {
+            return @"INSERT INTO  [dbo].[ReportEnumRec]    ([Id],[ReportEnum],[CreateTime],[Reporter],[BeenReporterId],[IsDelete])
+VALUES  ({Id},{ReportEnum},{CreateTime},{Reporter},{BeenReporterId},{IsDelete})";
+        }
     }
     public class ReportNote : GuidTimeFieldwithDelete
     {
@@ -23,6 +28,10 @@ namespace HRApp.Model
         public ReportNote() 
         {
             base.Init();
+        }
+        public string GetInsertSql() 
+        {
+            return @"INSERT INTO [dbo].[ReportNote] ([Id],[CreateTime],[UINote],[IsDelete]) VALUES ({Id},{CreateTime},{UINote},{IsDelete})";
         }
     }
     public class ReporterAndNote : GuidTimeFieldwithDelete
@@ -32,6 +41,11 @@ namespace HRApp.Model
         public ReporterAndNote() 
         {
             base.Init();
+        }
+        public string GetInsertSql()
+        {
+            return @"INSERT INTO  [dbo].[ReporterAndNote] ([Id],[ReportId],[ReportNoteId],[IsDelete],[CreateTime])
+     VALUES ({Id},{ReportId},{ReportNoteId},{IsDelete},{CreateTime}) ";
         }
     }
     public class ReportEnumDetail
