@@ -27,16 +27,16 @@ namespace HRApp.ApplicationService
             DateTime time = DateTime.Now;
             ReportEnumDetail detail = new ReportEnumDetail()
             {
-                Report = new List<ReportEnumRec>()
+                Report = new List<ReportEnumRec>(),
+                ReportContainerNote = new List<ReporterAndNote>()
             };
             Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
             try
             {
-                if (string.IsNullOrEmpty(model.Note))
+                if (!string.IsNullOrEmpty(model.Note))
                 {
                     detail.Note = new ReportNote() { UINote = model.Note, CreateTime = time };
                     reportRepository.SaveNote(detail.Note);
-                    detail.ReportContainerNote = new List<ReporterAndNote>();
                 }
                 foreach (Guid item in model.Ids)
                 {
@@ -47,7 +47,8 @@ namespace HRApp.ApplicationService
                 }
                 //举报的对象入库
                 reportRepository.SaveReported(detail.Report);
-                reportRepository.SaveReportedAndNote(detail.ReportContainerNote);
+                if (detail.ReportContainerNote.Count > 0)
+                    reportRepository.SaveReportedAndNote(detail.ReportContainerNote);
                 //关联举报的对象
                 json.Data = detail;
                 json.Success = true;
