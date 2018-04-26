@@ -136,3 +136,11 @@ create table ClickFlag
 	CreateTime datetime not null,
 	Belonger varchar(16)
 );
+create table ReportEnumRec
+(
+	Id uniqueidentifier primary key,
+	ReportEnum int not null,
+	CreateTime datetime not null,
+	Reporter varchar(16) not null,--sys flag ,set the value=-1
+	IsDelete bit not null
+)
