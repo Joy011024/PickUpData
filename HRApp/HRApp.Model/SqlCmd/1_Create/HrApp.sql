@@ -148,7 +148,7 @@ create table ReportNote
 (
 	Id uniqueidentifier primary key,
 	CreateTime datetime not null,
-	Note nvarchar(256) not null,
+	UINote nvarchar(256) not null,
 	IsDelete bit not null
 );
 create table ReportEnumNote
