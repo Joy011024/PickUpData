@@ -85,6 +85,8 @@
     <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.3\EveryDayStatics.sql" />
     <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.4\IgnoreNoImageData.sql" />
     <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.5\InitGatherImageProperty.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.6\1_InitPickUpStopFlag.sql" />
+    <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.7\SP_QueryAccount.sql" />
     <Content Include="TicketDBSqlCmd\CreateSql\AppSettingCfg.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
