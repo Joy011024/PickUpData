@@ -50,6 +50,7 @@ go
 	[ParentID] [int] not NULL,
 	[ParentCode] [nvarchar](64) not null,
 	[Code] [nvarchar](64) not NULL unique,--UI层次没有设定的话通过文本转拼音进行设置
+	Spell varchar(256) not null,--query of key
 	[Sort] [int] NULL,
 	[IsDelete] [bit] not NULL,
 	ItemValue varchar(1024) not null,--可能存储URL
@@ -164,3 +165,11 @@ alter table ReporterAndNote add constraint fj_ReportId foreign key (ReportId)
  references ReportEnumRec(Id);
  alter table ReporterAndNote add constraint fj_ReportNoteId foreign key (ReportNoteId) 
  references ReportNote(Id);
+create table KeySpell
+(
+	Id uniqueidentifier primary key,
+	SpellWord varchar(256) not null,
+	TableId int not null,
+	TableRowId uniqueidentifier not null,
+	CreateTime datetime not null
+)
