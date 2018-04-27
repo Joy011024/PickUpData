@@ -1,7 +1,8 @@
 ﻿//调用前，请先引用 lang.js
 function bindPostAjax(url, param, succFun, errorFun, complateFun) {
     var fullUrl = "http://" + window.location.host + url;
-    layer.load(1, { type: 3 });
+    var lay = parent.layer ? parent.layer : layer;
+    lay.load(1, { type: 3 });
     //layer.load(1, {type:3,text:'Handing。。。。。',title:'tip'}); 
     $.ajax({
         url: fullUrl,
@@ -9,18 +10,20 @@ function bindPostAjax(url, param, succFun, errorFun, complateFun) {
         type: 'post',
         traditional:true,//支持传递数组
         success: function (response, statue) {
-            layer.close(layer.index);
+            var lay = parent.layer ? parent.layer : layer;
+            lay.close(layer.index);
             if (succFun == undefined) {
                 return;
             }
             succFun(response, statue);
         },
         error: function (response, statue) {
+            var lay = parent.layer ? parent.layer : layer;
             if (errorFun == undefined) {
-                if (layer == undefined) {
+                if (lay == undefined) {
                     return;
                 }
-                layer.alert('Error', {
+                lay.alert('Error', {
                     title: lang.tip.error
                 });
                 return;
