@@ -28,7 +28,7 @@ namespace HRApp.Infrastructure
             ps.Add(new SqlParameter() { ParameterName = "@beginRow", Value = beginRow, DbType = DbType.Int32 });
             ps.Add(new SqlParameter() { ParameterName = "@endRow", Value = endRow, DbType = DbType.Int32 });
             ps.Add(new SqlParameter() { ParameterName = "@total", Direction = ParameterDirection.Output, DbType = DbType.Int32 });
-            List<FindQQDataTable> data = CommonRepository.QuerySPModelList<FindQQDataTable>("SP_QueryAccount", ps.ToArray(), SqlConnString, beginRow, endRow);
+            List<FindQQDataTable> data = CommonRepository.QuerySPModelList<FindQQDataTable>("SP_QueryAccount", ps.ToArray(), SqlConnString, 0, int.MaxValue);
             count = (int)ps[ps.Count - 1].Value;
             return data;
         }

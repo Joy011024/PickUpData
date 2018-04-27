@@ -160,6 +160,16 @@ namespace Infrastructure.MsSqlService.SqlHelper
             SqlDataReader reader= comm.ExecuteReader();
             return reader;
         }
+        /// <summary>
+        /// 当SQL语句中没有进行分页时，提供beginRow，endRow进行数据集填充分页限定
+        /// </summary>
+        /// <param name="sp"></param>
+        /// <param name="connString"></param>
+        /// <param name="beginRow"></param>
+        /// <param name="endRow"></param>
+        /// <param name="tableName"></param>
+        /// <param name="ps"></param>
+        /// <returns></returns>
         [Description("执行查询的存储过程")]
         public DataSet ExcuteQuerySP(string sp,string connString,int? beginRow,int? endRow,string tableName,params SqlParameter[] ps) 
         {
@@ -177,7 +187,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
             DataSet ds = new DataSet();
             if (beginRow.HasValue)
             {
-                dap.Fill(ds, beginRow.Value-1, (endRow.HasValue ? endRow.Value : int.MaxValue), tableName);
+                dap.Fill(ds, beginRow.Value, (endRow.HasValue ? endRow.Value : int.MaxValue), tableName);
             }
             else {
                 dap.Fill(ds);
