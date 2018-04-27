@@ -111,12 +111,16 @@
             });
         });
         function SearchEvent(param) {
-            if (!param) { param = {};}
+            if (!param) { param = {}; }
+            //获取 当前选择页
+            var page = $('#page .active .pageItemSpan.index').text();
+            var pageSize = 30;
+            var pi = parseInt(page);
             param= $.extend( {
                 'StartTime': '@DateTime.Now.AddDays(-1).ToString(Common.Data.CommonFormat.DateFormat)',
                 'EndTime': '@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)',
-                BeginRow: 1,
-                EndRow: 30
+                BeginRow: (pi-1)*pageSize+1,
+                EndRow: pi*pageSize
             }, param);
             bindPostAjax('/ContactManage/QueryUinDataList',param,
                function (response, statue) {
@@ -124,8 +128,10 @@
                        layer.alert(response.Message, { title: lang.label.tip });
                        return;
                    }
-                   var currentPage = 1;
-                   var totalPages = 25;
+                   //now active page index:
+                   var page = $('#page .active .pageItemSpan.index').text();
+                   var currentPage = parseInt(page);
+                   var totalPages = response.Total/30+1;
                    DrwaPageEle(currentPage, totalPages);
                    var tmpl = $('.tmpl')[0].outerHTML;
                    var div = $('.dataRowArea');
@@ -252,7 +258,7 @@
                 <span class="list"></span>
             </span>
         </div>
-        <div class="container">
+        <div> @*css:container*@
             <div style="margin-top: 10px;">
                 <ul id="page"></ul>
             </div>

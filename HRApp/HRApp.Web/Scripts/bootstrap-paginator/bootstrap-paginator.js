@@ -363,7 +363,7 @@
             }
             //新加的
             var itemCustom = $("<li></li>");//创建一个容器
-            var itemHtml = "<span clss='pageItemSpan'><input type='text' style='width: 30px;height: 20px;' value='" + this.currentPage + "'/>/" + this.totalPages + "</span>";
+            var itemHtml = "<span clss='pageItemSpan'><input type='text' style='width: 40px;height: 20px;' value='" + this.currentPage + "'/>/" + this.totalPages + "</span>";
             itemCustom.append(itemHtml);
             listContainer.append(itemCustom);
             var itemlast = $("<li></li>");//创建一个‘跳转’的span
@@ -382,18 +382,18 @@
          * @return 构造的页面元素
          * */
         buildPageItem: function (type, page) {
-
-            var itemContainer = $("<li></li>"),//创建一个容器
-                itemContent = $('<span class="pageItemSpan"><a></a></span>'),//创建一个内容
-                text = "",
-                title = "",
+            var itemContainer = $("<li></li>");//创建一个容器
+            var itemContent = null;
+            if(type=="page"){
+                itemContent = $('<span class="pageItemSpan index"><a></a></span>');//创建一个内容[这是页码]
+            }else{
+                itemContent = $('<span class="pageItemSpan"><a></a></span>');//创建一个内容
+            }
+             var  text = "", title = "",
                 itemContainerClass = this.options.itemContainerClass(type, page, this.currentPage),
                 itemContentClass = this.getValueFromOption(this.options.itemContentClass, type, page, this.currentPage),
                 tooltipOpts = null;
-
-
             switch (type) {
-
                 case "first":
                     if (!this.getValueFromOption(this.options.shouldShowPage, type, page, this.currentPage)) { return; }
                     text = this.options.itemTexts(type, page, this.currentPage);
@@ -420,27 +420,20 @@
                     title = this.options.tooltipTitles(type, page, this.currentPage);
                     break;
             }
-
             itemContainer.addClass(itemContainerClass).append(itemContent);
-
             itemContent.addClass(itemContentClass).html(text).on("click", null, { type: type, page: page }, $.proxy(this.onPageItemClicked, this));
 
             if (this.options.pageUrl) {
                 itemContent.attr("href", this.getValueFromOption(this.options.pageUrl, type, page, this.currentPage));
             }
-
             if (this.options.useBootstrapTooltip) {
                 tooltipOpts = $.extend({}, this.options.bootstrapTooltipOptions, { title: title });
-
                 itemContent.tooltip(tooltipOpts);
             } else {
                 itemContent.attr("title", title);
             }
-
             return itemContainer;
-
         },
-
         setCurrentPage: function (page) {
             if (page > this.totalPages || page < 1) {// 如果当前页码超出范围，则抛出异常
 
