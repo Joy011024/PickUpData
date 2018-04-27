@@ -19,6 +19,7 @@
     <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
     <link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/bootstrap-select/bootstrap-select.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-paginator/bootstrap-paginator.js?v=@InitAppSetting.Version"></script>
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <style type="text/css">
         .tmpl {
@@ -32,9 +33,18 @@
             width:128px;
             height:128px;
         }
+        .pagination {
+            display: inline-block;
+            padding-left: 0;  
+            border-radius: 4px;
+        }
+        .pageItemSpan {
+            height:40px;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
+            DrwaPageEle(1, 1);
             $('#btnPickupAccount').click(function () {
                 DownloadAccount();
             });
@@ -114,6 +124,9 @@
                        layer.alert(response.Message, { title: lang.label.tip });
                        return;
                    }
+                   var currentPage = 1;
+                   var totalPages = 25;
+                   DrwaPageEle(currentPage, totalPages);
                    var tmpl = $('.tmpl')[0].outerHTML;
                    var div = $('.dataRowArea');
                    var queryParam = response.AttachData;
@@ -179,6 +192,21 @@
             }
             return data;
         }
+        function DrwaPageEle(currentPage,totalPages) {
+            $("#page").bootstrapPaginator({
+                bootstrapMajorVersion: 3, //对应的bootstrap版本
+                currentPage: currentPage, //当前页数
+                numberOfPages: 10, //每次显示页数
+                totalPages: totalPages, //总页数
+                shouldShowPage: true,//是否显示该按钮
+                useBootstrapTooltip: true,
+                //点击事件
+                onPageClicked: function (event, originalEvent, type, page) {
+
+
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -223,6 +251,11 @@
             <span>
                 <span class="list"></span>
             </span>
+        </div>
+        <div class="container">
+            <div style="margin-top: 10px;">
+                <ul id="page"></ul>
+            </div>
         </div>
         <div class="dataRowTmpl" style="display:none;">
             <div class="tmpl" style="border: 1px solid white; padding: 5px;width:147px;height:220px;">

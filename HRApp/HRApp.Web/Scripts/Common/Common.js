@@ -11,7 +11,7 @@ function bindPostAjax(url, param, succFun, errorFun, complateFun) {
         traditional:true,//支持传递数组
         success: function (response, statue) {
             var lay = parent.layer ? parent.layer : layer;
-            lay.close(layer.index);
+            lay.close(lay.index);
             if (succFun == undefined) {
                 return;
             }

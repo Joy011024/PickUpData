@@ -138,6 +138,7 @@
     <Content Include="Note\Exception.txt" />
     <Content Include="Scripts\bootstrap-modal\2.2.4\bootstrap-modal.js" />
     <Content Include="Scripts\bootstrap-modal\2.2.4\bootstrap-modalmanager.js" />
+    <Content Include="Scripts\bootstrap-paginator\bootstrap-paginator.js" />
     <Content Include="Scripts\bootstrap-select\bootstrap-select.css" />
     <Content Include="Scripts\bootstrap-select\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap-select\bootstrap.min.css" />
