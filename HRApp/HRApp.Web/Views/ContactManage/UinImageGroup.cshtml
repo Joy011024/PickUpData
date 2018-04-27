@@ -82,7 +82,13 @@
                             return;
                         }
                         bindPostAjax('/ContactManage/SignAccount', param, function (response, statue) {
-
+                            var lay = parent.layer ? parent.layer : layer;
+                            if (response.Success) {
+                                lay.close(lay.index);
+                                lay.alert('操作成功', { title: '提示' });
+                                return;
+                            }
+                            lay.alert(response.Message, { title: '提示' });
                         });
                         return;
                         var at = parent ? parent.layer : layer;
