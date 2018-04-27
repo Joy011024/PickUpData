@@ -12,3 +12,4 @@ Request = {System.Web.HttpRequestWrapper}
 
  一).设计文档
  1.selectbox选择项在进行操作是默认绑定数据源，使用快捷键Alt+S进行输入的内容查找（根据输入的内容ajax查找服务端）
+ 2.在联系人列表中增加分页功能
