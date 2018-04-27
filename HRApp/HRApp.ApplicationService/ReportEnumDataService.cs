@@ -33,21 +33,26 @@ namespace HRApp.ApplicationService
             Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
             try
             {
+                bool writeReportNote = false;
                 if (!string.IsNullOrEmpty(model.Note))
                 {
                     detail.Note = new ReportNote() { UINote = model.Note, CreateTime = time };
                     reportRepository.SaveNote(detail.Note);
+                    writeReportNote = true;
                 }
                 foreach (Guid item in model.Ids)
                 {
                     ReportEnumRec rec = new ReportEnumRec() { ReportEnum = model.ReportType, BeenReporterId = item, CreateTime = time };
                     detail.Report.Add(rec);
-                    ReporterAndNote rn = new ReporterAndNote() { CreateTime = time, ReportNoteId = detail.Note.Id,ReportId=rec.Id };
-                    detail.ReportContainerNote.Add(rn);
+                    if (writeReportNote)
+                    {//填写了举报信息描述 
+                        ReporterAndNote rn = new ReporterAndNote() { CreateTime = time, ReportNoteId = detail.Note.Id, ReportId = rec.Id };
+                        detail.ReportContainerNote.Add(rn);
+                    }
                 }
                 //举报的对象入库
                 reportRepository.SaveReported(detail.Report);
-                if (detail.ReportContainerNote.Count > 0)
+                if (writeReportNote)
                     reportRepository.SaveReportedAndNote(detail.ReportContainerNote);
                 //关联举报的对象
                 json.Data = detail;
