@@ -126,5 +126,9 @@ namespace HRApp.ApplicationService
             string spell = keySpell.TextConvertChar(false);
             return appSettingRepository.QueryNodesByIndex(spell);
         }
+        public CategoryItems Get(object id)
+        {
+            return appSettingRepository.Get(id);
+        }
     }
 }

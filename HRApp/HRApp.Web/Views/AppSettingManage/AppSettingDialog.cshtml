@@ -1,11 +1,9 @@
 ﻿@using AppLanguage;
 @using HRApp.Web;
+@model HRApp.Model.CategoryItems
 @{
     Layout = null;
 }
-
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -96,7 +94,7 @@
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblName :</span>
             <span>
-                <input type="text" id="txtName" apiKey="Name" autocomplete="off" class="required" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
+                <input type="text" value="@Model.Name" id="txtName" apiKey="Name" autocomplete="off" class="required" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
             </span>
         </div>
         <div class="alongLine">
@@ -107,10 +105,16 @@
                     @{
                         foreach (HRApp.Model.CategoryItems item in ViewData["ParentNode"] as List<HRApp.Model.CategoryItems>)
                         {
-                            <option appvalue="@item.ItemValue" value="@item.Code" parentid="@item.Id" nodeparentid="@item.ParentId">@item.Name</option>
+                            if (@Model.Code == item.Code)
+                            {
+                                <option selected="selected" appvalue="@item.ItemValue" value="@item.Code" parentid="@item.Id" nodeparentid="@item.ParentId">@item.Name</option>
+                            }
+                            else
+                            {
+                                <option  appvalue="@item.ItemValue" value="@item.Code" parentid="@item.Id" nodeparentid="@item.ParentId">@item.Name</option>
+                            }
                         }
-
-                    }
+                     }
                 </select>
             </span>
         </div>

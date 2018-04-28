@@ -60,5 +60,11 @@ SELECT	'Return Value' = @return_value
         {
             throw new NotImplementedException();
         }
+
+
+        public FindQQDataTable Get(object id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

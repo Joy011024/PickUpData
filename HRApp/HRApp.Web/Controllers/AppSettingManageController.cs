@@ -25,14 +25,23 @@ namespace HRApp.Web.Controllers
         public JsonResult QueryRootAppSetting()
         {
             Common.Data.JsonData json = new JsonData() { Result=true};
-            json.Data = QueryAppSettingList("-1");
+            json.Data = QueryAppSettingList(InitAppSetting.DefaultAppsettingRootCode);
             json.Success = true;
             return Json(json);
         }
-        public ActionResult AppSettingDialog()
+        public ActionResult AppSettingDialog(int id=0)
         {
-            ViewData["ParentNode"] = QueryAppSettingList("-1");
-            return View();
+            CategoryItems item = new CategoryItems();
+            if (id > 0)
+            { //查询带编辑的数据
+                IAppSettingService appService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
+                item = appService.Get(id);
+            }
+            ViewData[ParamNameTemplate.AppSettingParentNode] =
+                item.Id>0?
+                QueryAppSettingList(item.ParentCode)
+                :QueryAppSettingList(InitAppSetting.DefaultAppsettingRootCode);
+            return View(item);
         }
         [HttpPost]
         public JsonResult QueryAllAppSettingData() 

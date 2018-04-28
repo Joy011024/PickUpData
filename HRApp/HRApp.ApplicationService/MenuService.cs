@@ -53,5 +53,11 @@ namespace HRApp.ApplicationService
             }
             return json;
         }
+
+
+        public Menu Get(object id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -86,7 +86,11 @@
             });
         }
         function editData(id) {
-
+            layer.open({
+                type: 2,
+                content: '/AppSettingManage/AppSettingDialog?id' + id,
+                area: ['360px', '560px']
+            });
         }
     </script>
     <style type="text/css">

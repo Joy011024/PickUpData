@@ -32,6 +32,10 @@ namespace HRApp.Model
         {
             return GetQueryModelSampleSql();
         }
+        public string GetFirstOneSql() 
+        {
+            return GetQueryModelSampleSql() + " where ID={ID}";
+        }
         public static string BuilderValideSql() 
         {
             return @"select count(id) from CategoryItems where code=@code";

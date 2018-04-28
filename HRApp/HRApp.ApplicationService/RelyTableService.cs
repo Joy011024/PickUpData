@@ -29,5 +29,17 @@ namespace HRApp.ApplicationService
         {
            return relyService.QueryAllTableColumns().ToList();
         }
+
+        string IRelyTableService.SqlConnString
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

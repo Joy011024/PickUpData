@@ -65,7 +65,16 @@ namespace HRApp.Infrastructure
 
         public CategoryItems Get(object key)
         {
-            throw new NotImplementedException();
+            int id = Convert.ToInt32(key);
+            CategoryItems item = new CategoryItems() { Id = id };
+            string sql = item.GetFirstOneSql();
+            DataSet ds= new SqlCmdHelper().GenerateQuerySqlAndExcute(sql, item);
+            List<CategoryItems> data =DataHelp.DataReflection.DataSetConvert<CategoryItems>(ds);
+            if (data == null||data.Count==0)
+            {
+                return null;
+            }
+            return data[0];
         }
 
         public IList<CategoryItems> Query(string cmd)

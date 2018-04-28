@@ -12,6 +12,7 @@ namespace HRApp.IApplicationService
         string SqlConnString { get; set; }
         JsonData Add(T model);
         List<T> QueryWhere(T model);
+        T Get(object id);
     }
     public interface IBaseAllWithSqlConnString<T> : IBaseServiceWithSqlConnstring<T> where T : class
     {
