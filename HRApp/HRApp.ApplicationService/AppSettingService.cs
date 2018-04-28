@@ -108,7 +108,8 @@ namespace HRApp.ApplicationService
                     dict.Add(item.Id, spell);
                 }
             }
-            appSettingRepository.BatchChangeSpell(dict);
+            if (dict.Count > 0)
+                appSettingRepository.BatchChangeSpell(dict);
             return items;
         }
         /// <summary>

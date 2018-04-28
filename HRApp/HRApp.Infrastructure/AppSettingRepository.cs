@@ -110,6 +110,10 @@ namespace HRApp.Infrastructure
         }
         public int BatchChangeSpell(Dictionary<int, string> idWithSpells)
         {
+            if (idWithSpells.Count == 0)
+            {
+                return idWithSpells.Count;
+            }
             List<CategoryItems> entities = new List<CategoryItems>();
             foreach (var item in idWithSpells)
             {
