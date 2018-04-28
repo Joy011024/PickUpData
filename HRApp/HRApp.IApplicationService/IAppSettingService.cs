@@ -14,5 +14,6 @@ namespace HRApp.IApplicationService
        new  JsonData Add(CategoryItems item);
        Common.Data.JsonData SelectNodesByParent(string parentNodeCode);
        List<CategoryItems> SelectNodeItemByParentCode(string parentCode);
+       List<CategoryItems> QueryNodes(string keySpell);
     }
 }

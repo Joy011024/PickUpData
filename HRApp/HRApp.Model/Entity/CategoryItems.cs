@@ -15,9 +15,11 @@ namespace HRApp.Model
         public string ItemDesc { get; set; }
         [Description("配置的值")]
         public string ItemValue { get; set; }
+        [Description("索引拼音")]
+        public string IndexSpell { get; set; }
         string GetQueryModelSampleSql()
         {
-            return @"SELECT [ID],[Name],[ParentID],[ParentCode],[Code],[Sort],[IsDelete],[ItemValue],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc]
+            return @"SELECT [ID],[Name],[ParentID],[ParentCode],[Code],[Sort],[IsDelete],[ItemValue],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc],[IndexSpell]
   FROM [dbo].[CategoryItems] ";
         }
         public string BuilderSqlParam()
@@ -30,9 +32,49 @@ namespace HRApp.Model
         {
             return GetQueryModelSampleSql();
         }
+        public string GetFirstOneSql() 
+        {
+            return GetQueryModelSampleSql() + " where ID={Id}";
+        }
         public static string BuilderValideSql() 
         {
             return @"select count(id) from CategoryItems where code=@code";
+        }
+        /// <summary>
+        /// 修改的SQL
+        /// </summary>
+        /// <returns></returns>
+        public   string GetUpdateSql() 
+        {
+            return @"UPDATE [HrApp].[dbo].[CategoryItems]
+                       SET [Name] = {Name}
+                          ,[Code] = {Code}
+                          ,[Sort] = {Sort}
+                          ,[IsDelete] = {IsDelete}
+                          ,[ItemValue] = {ItemValue}
+                          ,[ItemUsingSize] ={ItemUsingSize}
+                          ,[CreateTime] = {CreateTime}
+                          ,[NodeLevel] = {NodeLevel}
+                          ,[ItemDesc] = {ItemDesc}
+                          ,[IndexSpell] = {IndexSpell}
+	                      where ID={Id}";
+        }
+        /// <summary>
+        /// 修改检索关键字的SQL
+        /// </summary>
+        /// <returns></returns>
+        public string GetChangeSpellWord() 
+        {
+            return @"UPDATE [HrApp].[dbo].[CategoryItems]  SET [IndexSpell] = {IndexSpell}   where ID={Id}";
+        }
+        public string GetInsertSql() 
+        {
+            return @"insert into CategoryItems([Name],[ParentID],[ParentCode],[Code],[Sort],[IsDelete],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc],[ItemValue],[IndexSpell])
+values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{CreateTime},{NodeLevel},{ItemDesc},{ItemValue},{IndexSpell})";
+        }
+        public string GetQueryByIndexSpell() 
+        {
+            return GetQueryModelSampleSql() + " where IndexSpell like {IndexSpell}";
         }
     }
 }

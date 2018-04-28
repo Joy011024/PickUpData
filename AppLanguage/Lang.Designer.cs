@@ -259,6 +259,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 性别 的本地化字符串。
+        /// </summary>
+        public static string LblGender {
+            get {
+                return ResourceManager.GetString("LblGender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 归类 的本地化字符串。
         /// </summary>
         public static string LblGroup {

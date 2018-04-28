@@ -69,5 +69,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public ReportParam Get(object id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

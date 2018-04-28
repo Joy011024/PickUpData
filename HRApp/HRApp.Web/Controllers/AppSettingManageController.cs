@@ -25,14 +25,23 @@ namespace HRApp.Web.Controllers
         public JsonResult QueryRootAppSetting()
         {
             Common.Data.JsonData json = new JsonData() { Result=true};
-            json.Data = QueryAppSettingList("-1");
+            json.Data = QueryAppSettingList(InitAppSetting.DefaultAppsettingRootCode);
             json.Success = true;
             return Json(json);
         }
-        public ActionResult AppSettingDialog()
+        public ActionResult AppSettingDialog(int id=0)
         {
-            ViewData["ParentNode"] = QueryAppSettingList("-1");
-            return View();
+            CategoryItems item = new CategoryItems();
+            IAppSettingService appService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
+            if (id > 0)
+            { //查询带编辑的数据
+                item = appService.Get(id);
+            }
+            ViewData[ParamNameTemplate.AppSettingParentNode] =
+                (item.Id > 0&&item.ParentCode!=InitAppSetting.DefaultAppsettingRootCode) ?
+                appService.QueryNodes(item.ParentCode)
+                :QueryAppSettingList(InitAppSetting.DefaultAppsettingRootCode);
+            return View(item);
         }
         [HttpPost]
         public JsonResult QueryAllAppSettingData() 
@@ -87,6 +96,17 @@ namespace HRApp.Web.Controllers
             Common.Data.JsonData json = new JsonData();
             IAppSettingService appSetService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
             json = appSetService.SelectNodesByParent(parenCode);
+            return Json(json);
+        }
+        [Description("根据检索的关键字查询配置列表")]
+        public JsonResult QueryNodesByIndex(string keySpell)
+        {
+            Common.Data.JsonData json = new JsonData() { Result=true};
+            IAppSettingService appService= IocMvcFactoryHelper.GetInterface<IAppSettingService>();
+            List<CategoryItems> data= appService.QueryNodes(keySpell);
+            json.Data = data;
+            json.Total = data.Count;
+            json.Success = true;
             return Json(json);
         }
     }

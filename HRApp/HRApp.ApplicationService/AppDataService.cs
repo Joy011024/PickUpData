@@ -51,5 +51,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public AppModel Get(object id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

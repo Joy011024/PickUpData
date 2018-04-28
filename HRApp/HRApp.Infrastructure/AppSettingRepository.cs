@@ -28,8 +28,7 @@ namespace HRApp.Infrastructure
         public bool Add(CategoryItems entity)
         {
             //拼接SQL语句
-            string cmd = @"insert into CategoryItems([Name],[ParentID],[ParentCode],[Code],[Sort],[IsDelete],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc],[ItemValue])
-values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{CreateTime},{NodeLevel},{ItemDesc},{ItemValue})";
+            string cmd = entity.GetInsertSql();
             //读取属性名
             Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
             List<SqlParameter> ps = new List<SqlParameter>();
@@ -66,7 +65,16 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
 
         public CategoryItems Get(object key)
         {
-            throw new NotImplementedException();
+            int id = Convert.ToInt32(key);
+            CategoryItems item = new CategoryItems() { Id = id };
+            string sql = item.GetFirstOneSql();
+            DataSet ds = new SqlCmdHelper() { SqlConnString=SqlConnString}.GenerateQuerySqlAndExcute(sql, item);
+            List<CategoryItems> data =DataHelp.DataReflection.DataSetConvert<CategoryItems>(ds);
+            if (data == null||data.Count==0)
+            {
+                return null;
+            }
+            return data[0];
         }
 
         public IList<CategoryItems> Query(string cmd)
@@ -101,6 +109,34 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
                 new SqlParameter(){ParameterName="@code",Value=key}
             };
             return CommonRepository.ExecuteCount(sql, param, SqlConnString);
+        }
+        public bool ChangeSpell(int id, string spell)
+        {
+            CategoryItems item = new CategoryItems() { Id = id, IndexSpell = spell };
+            string sql = item.GetChangeSpellWord();
+            SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = SqlConnString };
+            return helper.GenerateNoQuerySqlAndExcute(sql, item) > 0;
+        }
+        public int BatchChangeSpell(Dictionary<int, string> idWithSpells)
+        {
+            if (idWithSpells.Count == 0)
+            {
+                return idWithSpells.Count;
+            }
+            List<CategoryItems> entities = new List<CategoryItems>();
+            foreach (var item in idWithSpells)
+            {
+                CategoryItems spell = new CategoryItems() { Id = item.Key, IndexSpell = item.Value };
+                entities.Add(spell);
+            }
+            string sql = entities[0].GetChangeSpellWord();
+            return CommonRepository.ExtBatchInsert(sql, SqlConnString, entities);
+        }
+        public List<CategoryItems> QueryNodesByIndex(string keySpell)
+        {
+            CategoryItems item = new CategoryItems() { IndexSpell="%"+keySpell+"%"};
+            DataSet  ds= new SqlCmdHelper() { SqlConnString = SqlConnString }.GenerateQuerySqlAndExcute(item.GetQueryByIndexSpell(), item);
+            return DataHelp.DataReflection.DataSetConvert<CategoryItems>(ds);
         }
     }
 }

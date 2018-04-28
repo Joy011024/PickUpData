@@ -114,7 +114,7 @@
             if (!param) { param = {}; }
             //获取 当前选择页
             var page = $('#page .active .pageItemSpan.index').text();
-            var pageSize = 30;
+            var pageSize = 100;
             var pi = parseInt(page);
             param= $.extend( {
                 'StartTime': '@DateTime.Now.AddDays(-1).ToString(Common.Data.CommonFormat.DateFormat)',
@@ -143,16 +143,11 @@
                    $(response.Data).each(function (i, ele) {//疑难杂症？each内部不能调用到tmpl变量
                        $('#ckAllImg').prop('checked', false);
                        var ht = $('.tmpl')[0].outerHTML;
+                       ht = ht.replace('{Gender}', lang.dict.Gender[ele.Gender]);
                        ht = ht.formatObject(ele);
                        ht = ht.replace("{i}", i);
                        ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
                        $('.dataRowArea').prepend(ht);
-                       //$('.dataRowArea .tmpl:last [type=checkbox]').click(function () {//没有触发
-                       //    debugger;
-                       //});
-                       //$($('.dataRowArea .tmpl:last [type=checkbox]')[0]).click(function () {
-                       //    console.log($(this).attr('pid'));
-                       //});
                    });
                    $('.dataRowArea .tmpl [type=checkbox]').click(function () {
                        var ck = $(this);
@@ -279,6 +274,7 @@
                 </span>
                 <span class="column">
                     <span attr="City">{Country} {Province} {City}</span>
+                    <span attr="Base">@Lang.LblGender :{Gender}</span>
                 </span>
             </div>
         </div>

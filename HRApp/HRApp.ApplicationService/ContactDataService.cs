@@ -41,5 +41,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public ContactData Get(object id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

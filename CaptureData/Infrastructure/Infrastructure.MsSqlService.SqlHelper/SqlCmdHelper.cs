@@ -232,5 +232,41 @@ namespace Infrastructure.MsSqlService.SqlHelper
             conn.Close();
             return result;
         }
+
+        public DataSet GenerateQuerySqlAndExcute<T>(string sqlCmd, T entity) where T : class
+        {
+            if (string.IsNullOrEmpty(SqlConnString))
+            {
+                return null;
+            }
+            Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
+            List<SqlParameter> pms = new List<SqlParameter>();
+            foreach (KeyValuePair<string, object> item in properties)
+            {
+                string paramName = "@" + item.Key;
+                string field = "{" + item.Key + "}";
+                if (sqlCmd.Contains(field))
+                {
+                    sqlCmd = sqlCmd.Replace(field, paramName);
+                    //获取参数的数据类型
+                    SqlParameter p = new SqlParameter(paramName, item.Value == null ? DBNull.Value : item.Value);
+                    pms.Add(p);
+                }
+            }
+            
+            SqlConnection conn = new SqlConnection(SqlConnString);
+            conn.Open();
+            SqlCommand comm = new SqlCommand(sqlCmd, conn);
+            if (pms != null && pms.Count > 0)
+            {
+                comm.Parameters.AddRange(pms.ToArray());
+            }
+            SqlDataAdapter dap = new SqlDataAdapter();
+            dap.SelectCommand = comm;
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            conn.Close();
+            return ds;
+        }
     }
 }

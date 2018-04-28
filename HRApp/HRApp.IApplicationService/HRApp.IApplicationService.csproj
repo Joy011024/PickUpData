@@ -47,6 +47,7 @@
     <Compile Include="IFileService.cs" />
     <Compile Include="IMaybeSpecialService.cs" />
     <Compile Include="IMenuService.cs" />
+    <Compile Include="IRelyTableService.cs" />
     <Compile Include="IReportEnumDataService.cs" />
     <Compile Include="ISpecialSpellNameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -252,4 +252,7 @@
   <data name="Tip_PleaseSelectData" xml:space="preserve">
     <value>请选择数据</value>
   </data>
+  <data name="LblGender" xml:space="preserve">
+    <value>性别</value>
+  </data>
 </root>

@@ -47,5 +47,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public SpecialSpellName Get(object id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

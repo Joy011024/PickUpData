@@ -50,6 +50,7 @@ namespace HRApp.ApplicationService
             {
                 //首先检测编码是否已经使用
                 string code = item.Code;
+                item.IndexSpell = GenerateQuerySpellKey(item);
                 if (appSettingRepository.ValideExists(code) == 0)
                 {
                     json.Success = appSettingRepository.Add(item);
@@ -72,10 +73,7 @@ namespace HRApp.ApplicationService
         {
             string cmd = string.Empty;
             return appSettingRepository.Query(cmd).ToList();
-            //throw new NotImplementedException();
         }
-
-
         public Common.Data.JsonData SelectNodesByParent(string parentNode)
         {
             Common.Data.JsonData json = new JsonData() { Result=true};
@@ -99,7 +97,38 @@ namespace HRApp.ApplicationService
         }
         public List<CategoryItems> QueryAll() 
         {
-            return appSettingRepository.QueryAll().ToList();
+            List<CategoryItems> items= appSettingRepository.QueryAll().ToList();
+            //批量录入检索关键字
+            Dictionary<int, string> dict = new Dictionary<int, string>();
+            foreach (var item in items)
+            {
+                if (string.IsNullOrEmpty(item.IndexSpell))
+                {
+                    string spell = GenerateQuerySpellKey(item);
+                    dict.Add(item.Id, spell);
+                }
+            }
+            if (dict.Count > 0)
+                appSettingRepository.BatchChangeSpell(dict);
+            return items;
+        }
+        /// <summary>
+        /// 生成检索关键词
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        string GenerateQuerySpellKey(CategoryItems item) 
+        {
+            return item.Code + item.Name.TextConvertChar() + item.Name.TextConvertChar(true) + item.Name.TextConvertFirstChar(true) + item.Name.TextConvertFirstChar(false);
+        }
+        public List<CategoryItems> QueryNodes(string keySpell)
+        {
+            string spell = keySpell.TextConvertChar(false);
+            return appSettingRepository.QueryNodesByIndex(spell);
+        }
+        public CategoryItems Get(object id)
+        {
+            return appSettingRepository.Get(id);
         }
     }
 }

@@ -56,5 +56,14 @@ namespace HRApp.Web
         /// 数据库中存储的系统配置项集合
         /// </summary>
         public static Dictionary<string, string> AppSettingItemsInDB = new Dictionary<string, string>();
+        /// <summary>
+        /// 默认系统配置根节点代码
+        /// </summary>
+        public static string DefaultAppsettingRootCode = "-1";
+    }
+    public class ParamNameTemplate
+    {
+        public static string ViewDataModelName = "Model";
+        public static string AppSettingParentNode = "ParentNode";
     }
 }

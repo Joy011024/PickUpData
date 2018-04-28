@@ -44,5 +44,9 @@ namespace Domain.CommonData
             CreateTime = DateTime.Now;
         }
     }
+    public class IntPrimaryKey
+    {
+        public int Id { get; set; }
+    }
     
 }
