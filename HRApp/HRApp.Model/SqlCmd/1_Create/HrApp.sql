@@ -77,7 +77,7 @@ Create table RelyTable
 	ColumnName varchar(32) not null,
 	CreateTime Datetime not null ,
     Note nvarchar(1024),
-	IsPrimaryKey bit null,
+	IsPrimaryKey bit not null,
     IsDelete bit not null
 )
 go

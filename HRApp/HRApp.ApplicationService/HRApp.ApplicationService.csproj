@@ -48,6 +48,7 @@
     <Compile Include="MaybeSpecialService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelyTableService.cs" />
     <Compile Include="ReportEnumDataService.cs" />
     <Compile Include="SpecialSpellNameService.cs" />
   </ItemGroup>
