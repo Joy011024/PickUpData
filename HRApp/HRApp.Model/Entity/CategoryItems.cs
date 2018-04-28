@@ -68,5 +68,9 @@ namespace HRApp.Model
             return @"insert into CategoryItems([Name],[ParentID],[ParentCode],[Code],[Sort],[IsDelete],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc],[ItemValue],[IndexSpell])
 values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{CreateTime},{NodeLevel},{ItemDesc},{ItemValue},{IndexSpell})";
         }
+        public string GetQueryByIndexSpell() 
+        {
+            return GetQueryModelSampleSql() + " where IndexSpell={IndexSpell}";
+        }
     }
 }

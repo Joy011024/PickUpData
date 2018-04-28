@@ -119,5 +119,11 @@ namespace HRApp.Infrastructure
             string sql = entities[0].GetChangeSpellWord();
             return CommonRepository.ExtBatchInsert(sql, SqlConnString, entities);
         }
+        public List<CategoryItems> QueryNodesByIndex(string keySpell)
+        {
+            CategoryItems item = new CategoryItems() { IndexSpell=keySpell};
+            SqlParameter[] param=new SqlParameter[]{ new SqlParameter(){ ParameterName="",Value=keySpell}};
+            return CommonRepository.QueryModelList<CategoryItems>(item.GetQueryByIndexSpell(),param,SqlConnString,0,int.MaxValue);
+        }
     }
 }

@@ -15,5 +15,8 @@ namespace IHRApp.Infrastructure
         /// <param name="code"></param>
         /// <returns></returns>
         int ValideExists(string key);
+        bool ChangeSpell(int id, string spell);
+        int BatchChangeSpell(Dictionary<int, string> idWithSpells);
+        List<CategoryItems> QueryNodesByIndex(string keySpell);
     }
 }

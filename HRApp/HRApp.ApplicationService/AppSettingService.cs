@@ -120,5 +120,10 @@ namespace HRApp.ApplicationService
         {
             return item.Code + item.Name.TextConvertChar() + item.Name.TextConvertChar(true) + item.Name.TextConvertFirstChar(true) + item.Name.TextConvertFirstChar(false);
         }
+        public List<CategoryItems> QueryNodes(string keySpell)
+        {
+            string spell = keySpell.TextConvertChar(false);
+            return appSettingRepository.QueryNodesByIndex(spell);
+        }
     }
 }

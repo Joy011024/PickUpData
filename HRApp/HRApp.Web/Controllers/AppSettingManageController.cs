@@ -89,5 +89,12 @@ namespace HRApp.Web.Controllers
             json = appSetService.SelectNodesByParent(parenCode);
             return Json(json);
         }
+        [Description("根据检索的关键字查询配置列表")]
+        public JsonResult QueryNodesByIndex(string keySpell)
+        {
+            Common.Data.JsonData json = new JsonData();
+
+            return Json(json);
+        }
     }
 }
