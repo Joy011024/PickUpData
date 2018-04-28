@@ -58,6 +58,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SqlCmd\-1_SP\DBMigration20180428.sql" />
     <Content Include="SqlCmd\-1_SP\SP20180409\1_menu.sql" />
     <Content Include="SqlCmd\-1_SP\SP20180427\AddSpellsql.sql" />
     <Content Include="SqlCmd\-1_SP\SP20180428\TableColumn.sql" />
