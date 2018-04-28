@@ -34,7 +34,7 @@ namespace HRApp.Model
         }
         public string GetFirstOneSql() 
         {
-            return GetQueryModelSampleSql() + " where ID={ID}";
+            return GetQueryModelSampleSql() + " where ID={Id}";
         }
         public static string BuilderValideSql() 
         {
@@ -74,7 +74,7 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
         }
         public string GetQueryByIndexSpell() 
         {
-            return GetQueryModelSampleSql() + " where IndexSpell={IndexSpell}";
+            return GetQueryModelSampleSql() + " where IndexSpell like {IndexSpell}";
         }
     }
 }

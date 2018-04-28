@@ -32,14 +32,14 @@ namespace HRApp.Web.Controllers
         public ActionResult AppSettingDialog(int id=0)
         {
             CategoryItems item = new CategoryItems();
+            IAppSettingService appService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
             if (id > 0)
             { //查询带编辑的数据
-                IAppSettingService appService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
                 item = appService.Get(id);
             }
             ViewData[ParamNameTemplate.AppSettingParentNode] =
-                item.Id>0?
-                QueryAppSettingList(item.ParentCode)
+                (item.Id > 0&&item.ParentCode!=InitAppSetting.DefaultAppsettingRootCode) ?
+                appService.QueryNodes(item.ParentCode)
                 :QueryAppSettingList(InitAppSetting.DefaultAppsettingRootCode);
             return View(item);
         }
@@ -101,8 +101,12 @@ namespace HRApp.Web.Controllers
         [Description("根据检索的关键字查询配置列表")]
         public JsonResult QueryNodesByIndex(string keySpell)
         {
-            Common.Data.JsonData json = new JsonData();
-
+            Common.Data.JsonData json = new JsonData() { Result=true};
+            IAppSettingService appService= IocMvcFactoryHelper.GetInterface<IAppSettingService>();
+            List<CategoryItems> data= appService.QueryNodes(keySpell);
+            json.Data = data;
+            json.Total = data.Count;
+            json.Success = true;
             return Json(json);
         }
     }

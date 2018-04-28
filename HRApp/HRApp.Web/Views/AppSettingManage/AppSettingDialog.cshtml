@@ -69,7 +69,12 @@
             cmb.selectpicker();
             //在UI渲染完毕（加载出该选择框）之后 该元素ParentCode的兄弟节点role="combobox"下的输入框aria-label="Search"
             BindBootStrapSelect(cmb, function () {
-
+                bindPostAjax('/AppSettingManage/QueryNodesByIndex', {
+                    keySpell: $('[apiKey=ParentCode]').text()
+                }, function (response, statue) {
+                    //AjaxWarming($('#btnSave'), response);
+                    console.log(response);
+                });
             });
             $('#btnClose').on('click', function () {
                 if (parent) {
@@ -105,7 +110,7 @@
                     @{
                         foreach (HRApp.Model.CategoryItems item in ViewData["ParentNode"] as List<HRApp.Model.CategoryItems>)
                         {
-                            if (@Model.Code == item.Code)
+                            if (@Model.Code!="-1"&& @Model.ParentCode == item.Code)
                             {
                                 <option selected="selected" appvalue="@item.ItemValue" value="@item.Code" parentid="@item.Id" nodeparentid="@item.ParentId">@item.Name</option>
                             }

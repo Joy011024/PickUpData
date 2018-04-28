@@ -68,7 +68,7 @@ namespace HRApp.Infrastructure
             int id = Convert.ToInt32(key);
             CategoryItems item = new CategoryItems() { Id = id };
             string sql = item.GetFirstOneSql();
-            DataSet ds= new SqlCmdHelper().GenerateQuerySqlAndExcute(sql, item);
+            DataSet ds = new SqlCmdHelper() { SqlConnString=SqlConnString}.GenerateQuerySqlAndExcute(sql, item);
             List<CategoryItems> data =DataHelp.DataReflection.DataSetConvert<CategoryItems>(ds);
             if (data == null||data.Count==0)
             {
@@ -134,9 +134,9 @@ namespace HRApp.Infrastructure
         }
         public List<CategoryItems> QueryNodesByIndex(string keySpell)
         {
-            CategoryItems item = new CategoryItems() { IndexSpell=keySpell};
-            SqlParameter[] param=new SqlParameter[]{ new SqlParameter(){ ParameterName="",Value=keySpell}};
-            return CommonRepository.QueryModelList<CategoryItems>(item.GetQueryByIndexSpell(),param,SqlConnString,0,int.MaxValue);
+            CategoryItems item = new CategoryItems() { IndexSpell="%"+keySpell+"%"};
+            DataSet  ds= new SqlCmdHelper() { SqlConnString = SqlConnString }.GenerateQuerySqlAndExcute(item.GetQueryByIndexSpell(), item);
+            return DataHelp.DataReflection.DataSetConvert<CategoryItems>(ds);
         }
     }
 }
