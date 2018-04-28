@@ -64,5 +64,15 @@
     orderItems: {
         addDialog: '新增商品信息对话框',
         editDialog:'编辑商品信息对话框'
+    },
+    dict: {
+        Gender: {
+            0: '系统性别',
+            1: '男',
+            2: '女',
+            3: '不明',
+            255: '隐藏',
+            error:'error'
+        }
     }
 };
