@@ -89,7 +89,7 @@ Create table OptionEvent
 	 RelyTableRowValue varchar(32) not null,
 	 IsDelete bit not null
 );
-alter table OptionEvent add constraint fj_OptionEventId foreign key (RelyTableId) 
+alter table OptionEvent add constraint fk_OptionEventId foreign key (RelyTableId) 
 references RelyTable(Id)
 create table ContactData
 (--联系人信息列表
@@ -125,7 +125,7 @@ create table ClickFlag
 	ClickId int not null,
 	OptionIP varchar(16)
 )
- alter table ClickFlag add constraint fj_RelyTableId foreign key (RelyTableId) 
+ alter table ClickFlag add constraint fk_RelyTableId foreign key (RelyTableId) 
  references RelyTable(Id);
  create table UserSetting
 (
@@ -161,11 +161,11 @@ create table ReporterAndNote
 	IsDelete bit not null,
 	CreateTime datetime not null
 );
-alter table ReporterAndNote add constraint fj_ReportId foreign key (ReportId) 
+alter table ReporterAndNote add constraint fk_ReportId foreign key (ReportId) 
  references ReportEnumRec(Id);
- alter table ReporterAndNote add constraint fj_ReportNoteId foreign key (ReportNoteId) 
+ alter table ReporterAndNote add constraint fk_ReportNoteId foreign key (ReportNoteId) 
  references ReportNote(Id);
-create table KeySpell
+create table KeySpellGuid
 (
 	Id uniqueidentifier primary key,
 	SpellWord varchar(256) not null,
@@ -173,3 +173,15 @@ create table KeySpell
 	TableRowId uniqueidentifier not null,
 	CreateTime datetime not null
 )
+alter table KeySpellGuid add constraint fk_KeySpellGuid foreign key (TableId) 
+ references RelyTable(Id);
+create table KeySpellInt
+(
+	Id int primary key,
+	SpellWord varchar(256) not null,
+	TableId int not null,
+	TableRowId uniqueidentifier not null,
+	CreateTime datetime not null
+)
+alter table KeySpellInt add constraint fk_KeySpellInt foreign key (TableId) 
+ references RelyTable(Id);
