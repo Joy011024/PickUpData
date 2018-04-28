@@ -60,6 +60,7 @@
                 if (!api["ParentId"]) {
                     api["ParentId"] = -1;
                 }
+                //判断是进行编辑还是保存
                 bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
                     AjaxWarming($('#btnSave'), response);
                     console.log(response);
@@ -96,6 +97,9 @@
 </head>
 <body>
     <div class="ApiParam">
+        <div>
+            <input type="hidden" id="txtId" value="@Model.Id"/>
+        </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblName :</span>
             <span>
@@ -126,25 +130,28 @@
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblCode :</span>
             <span>
-                <input type="text" id="txtMemnorideCode" apikey="Code" class="required" autocomplete="off" />
+                <input type="text" value="@Model.Code" id="txtMemnorideCode" apikey="Code" class="required" autocomplete="off" />
             </span>
         </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblAppSetValue :</span>
             <span>
-                <input type="text" id="txtDescription" class="required" apikey="Value" />
+                <input type="text" value="@Model.ItemValue" id="txtDescription" class="required" apikey="Value" />
             </span>
         </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblDescription :</span>
             <span>
-                <textarea id="txtDescription" apikey="Desc"></textarea>
+                <textarea  id="txtDescription" apikey="Desc">@Model.ItemDesc</textarea>
             </span>
         </div>
     </div>
-    <div>
-        <button id="btnSave" class="button">@Lang.BtnSave</button>
-        <button id="btnClose" class="button">@Lang.BtnClose</button>
-    </div>
+    @if (Model.Id == 0)
+    {
+        <div>
+            <button id="btnSave" class="button">@Lang.BtnSave</button>
+            <button id="btnClose" class="button">@Lang.BtnClose</button>
+        </div>
+    }
 </body>
 </html>
