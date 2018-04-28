@@ -28,8 +28,7 @@ namespace HRApp.Infrastructure
         public bool Add(CategoryItems entity)
         {
             //拼接SQL语句
-            string cmd = @"insert into CategoryItems([Name],[ParentID],[ParentCode],[Code],[Sort],[IsDelete],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc],[ItemValue])
-values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{CreateTime},{NodeLevel},{ItemDesc},{ItemValue})";
+            string cmd = entity.GetInsertSql();
             //读取属性名
             Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
             List<SqlParameter> ps = new List<SqlParameter>();
@@ -101,6 +100,24 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
                 new SqlParameter(){ParameterName="@code",Value=key}
             };
             return CommonRepository.ExecuteCount(sql, param, SqlConnString);
+        }
+        public bool ChangeSpell(int id, string spell)
+        {
+            CategoryItems item = new CategoryItems() { Id = id, IndexSpell = spell };
+            string sql = item.GetChangeSpellWord();
+            SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = SqlConnString };
+            return helper.GenerateNoQuerySqlAndExcute(sql, item) > 0;
+        }
+        public int BatchChangeSpell(Dictionary<int, string> idWithSpells)
+        {
+            List<CategoryItems> entities = new List<CategoryItems>();
+            foreach (var item in idWithSpells)
+            {
+                CategoryItems spell = new CategoryItems() { Id = item.Key, IndexSpell = item.Value };
+                entities.Add(spell);
+            }
+            string sql = entities[0].GetChangeSpellWord();
+            return CommonRepository.ExtBatchInsert(sql, SqlConnString, entities);
         }
     }
 }

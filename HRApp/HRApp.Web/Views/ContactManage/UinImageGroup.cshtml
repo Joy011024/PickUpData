@@ -114,7 +114,7 @@
             if (!param) { param = {}; }
             //获取 当前选择页
             var page = $('#page .active .pageItemSpan.index').text();
-            var pageSize = 30;
+            var pageSize = 100;
             var pi = parseInt(page);
             param= $.extend( {
                 'StartTime': '@DateTime.Now.AddDays(-1).ToString(Common.Data.CommonFormat.DateFormat)',
