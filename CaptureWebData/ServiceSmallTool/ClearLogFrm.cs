@@ -145,7 +145,7 @@ namespace ServiceSmallTool
                     Thread th = new Thread(item.Value);
                     th.Start();
                 }
-                Thread.Sleep(30 * 1000);//休眠30秒
+                Thread.Sleep(300 * 1000);//休眠30秒
             }
         }
         void DoWork() 
