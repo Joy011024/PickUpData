@@ -109,5 +109,13 @@ namespace HRApp.Web.Controllers
             json.Success = true;
             return Json(json);
         }
+
+        [HttpPost]
+        public JsonResult EditAppSetting(NodeRequestParam node) 
+        {
+            Common.Data.JsonData json = new JsonData();
+
+            return Json(json);
+        }
     }
 }

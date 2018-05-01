@@ -1,9 +1,16 @@
 ﻿$(function () {
-    $('input').each(function (i,ele) {//增加带删除的标签
+    $('input.required').each(function (i, ele) {//增加带删除的标签
+        //if  the ele is hide
+        if ($(ele).is(':hidden')) {
+            return;
+        }
         inputAddClear(ele);
     });
 });
 function inputAddClear(ele) {
+    if ($(ele).hasClass('null')) {//allow null
+        return;
+    }
     //判断该元素是否增加了标签
     var silbing = $(ele).next('.clearTag');
     if (silbing.length == 0) {

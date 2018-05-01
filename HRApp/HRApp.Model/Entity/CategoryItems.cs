@@ -17,20 +17,30 @@ namespace HRApp.Model
         public string ItemValue { get; set; }
         [Description("索引拼音")]
         public string IndexSpell { get; set; }
+        public string ParentName { get; set; }
         string GetQueryModelSampleSql()
         {
             return @"SELECT [ID],[Name],[ParentID],[ParentCode],[Code],[Sort],[IsDelete],[ItemValue],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc],[IndexSpell]
-  FROM [dbo].[CategoryItems] ";
+  FROM [dbo].[CategoryItems]";
+        }
+        public string GetNodelRelySql() 
+        {
+            return @"SELECT node.[ID],node.[Name],node.[ParentID],node.[ParentCode],node.[Code],node.[Sort],node.[IsDelete],node.[ItemValue],
+node.[ItemUsingSize],node.[CreateTime],node.[NodeLevel],node.[ItemDesc],node.[IndexSpell],father.Name as ParentName
+  FROM [dbo].[CategoryItems] node left join (
+SELECT [ID],[Name]
+  FROM [dbo].[CategoryItems]  
+) father on node.ParentID=father.ID";
         }
         public string BuilderSqlParam()
         {
-            string sql = GetQueryModelSampleSql() + " where ParentCode=@code";
+            string sql = GetNodelRelySql() + " where node.ParentCode=@code";
             return sql;
         }
         [DescriptionSort("查询全部配置")]
         public string QueryAllDataOfSql() 
         {
-            return GetQueryModelSampleSql();
+            return GetNodelRelySql();
         }
         public string GetFirstOneSql() 
         {

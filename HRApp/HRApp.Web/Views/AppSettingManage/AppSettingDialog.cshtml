@@ -1,5 +1,6 @@
 ﻿@using AppLanguage;
 @using HRApp.Web;
+@model HRApp.Model.CategoryItems
 @{
     Layout = null;
 }
@@ -40,28 +41,8 @@
                 console.log(response);
             });
             $('#btnSave').on('click', function () {
-                var root = $(".ApiParam");
-                var valid= ValidEleIsRequired(root, '.required')
-                if (!valid) {
-                    return;
-                }
-                var api = GetXPathObject(root, "apiKey");
-                var slt = $('[apiKey=ParentCode]');
-                //该插件是什么类型
-                var data = null;
-                if (slt.hasClass('selectpicker')) {//bootstrap select插件下拉框
-                    data = $('[apiKey=ParentCode]').find("option:selected");
-                } else if (slt.hasClass('jq22')) {//jq的combobox插件
-                    var data = slt.getSelected();
-                } else {
-                    data = $('[apiKey=ParentCode]').find("option:selected");
-                }
-                if (data) {
-                    api["ParentId"] = $(data).attr('ParentId');
-                }
-                if (!api["ParentId"]) {
-                    api["ParentId"] = -1;
-                }
+                var api = {};
+                PickupUIData(api);
                 bindPostAjax('/AppSettingManage/SaveAppSetting', api, function (response, statue) {
                     AjaxWarming($('#btnSave'), response);
                     console.log(response);
@@ -81,6 +62,9 @@
                     lay.close(lay.index);
                 }
             });
+            $('#btnEdit').on('click', function () {
+                BindEditEvent();
+            });
         });
         function BindBootStrapSelect(cmb,enterEvennt) {
             cmb.siblings('.dropdown-menu').find('[aria-label=Search]').on('keydown', function (e) {//keypress 不能获取组合键 keyup 不能获取shift+Enter组合键
@@ -93,14 +77,49 @@
                 }
             });
         }
+        function PickupUIData(options) {
+            var root = $(".ApiParam");
+            var valid = ValidEleIsRequired(root, '.required')
+            if (!valid) {
+                return;
+            }
+            var api = GetXPathObject(root, "apiKey");
+            var slt = $('[apiKey=ParentCode]');
+            //该插件是什么类型
+            var data = null;
+            if (slt.hasClass('selectpicker')) {//bootstrap select插件下拉框
+                data = $('[apiKey=ParentCode]').find("option:selected");
+            } else if (slt.hasClass('jq22')) {//jq的combobox插件
+                var data = slt.getSelected();
+            } else {
+                data = $('[apiKey=ParentCode]').find("option:selected");
+            }
+            if (data) {
+                api["ParentId"] = $(data).attr('ParentId');
+            }
+            if (!api["ParentId"]) {
+                api["ParentId"] = -1;
+            }
+            return $.extend(options, api);
+        }
+        function BindEditEvent() {
+            // AppSettingManage/EditAppSetting
+            bindPostAjax('/AppSettingManage/EditAppSetting', PickupUIData({}), function (response, statue) {
+                AjaxWarming($('#btnSave'), response);
+                console.log(response);
+            });
+        }
     </script>
 </head>
 <body>
     <div class="ApiParam">
+        <span>
+            <input type="hidden" id="txtId" apikey="Id" value="@Model.Id" />
+        </span>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblName :</span>
             <span>
-                <input type="text" id="txtName" apiKey="Name" autocomplete="off" class="required" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
+                <input type="text" id="txtName" value="@Model.Name" apikey="Name" autocomplete="off" class="required" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
             </span>
         </div>
         <div class="alongLine">
@@ -111,9 +130,15 @@
                     @{
                         foreach (HRApp.Model.CategoryItems item in ViewData["ParentNode"] as List<HRApp.Model.CategoryItems>)
                         {
-                            <option appvalue="@item.ItemValue" value="@item.Code" parentid="@item.Id" nodeparentid="@item.ParentId">@item.Name</option>
+                            if (@Model.Code != "-1" && @Model.ParentCode == item.Code)
+                            {
+                                <option selected="selected" appvalue="@item.ItemValue" value="@item.Code" parentid="@item.Id" nodeparentid="@item.ParentId">@item.Name</option>
+                            }
+                            else
+                            {
+                                <option appvalue="@item.ItemValue" value="@item.Code" parentid="@item.Id" nodeparentid="@item.ParentId">@item.Name</option>
+                            }
                         }
-
                     }
                 </select>
             </span>
@@ -121,24 +146,31 @@
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblCode :</span>
             <span>
-                <input type="text" id="txtMemnorideCode" apikey="Code" class="required" autocomplete="off" />
+                <input type="text" value="@Model.Code" id="txtMemnorideCode" apikey="Code" class="required" autocomplete="off" />
             </span>
         </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblAppSetValue :</span>
             <span>
-                <input type="text" id="txtDescription" class="required" apikey="Value" />
+                <input type="text" value="@Model.ItemValue" id="txtDescription" class="required" apikey="Value" />
             </span>
         </div>
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblDescription :</span>
             <span>
-                <textarea id="txtDescription" apikey="Desc"></textarea>
+                <textarea id="txtDescription" apikey="Desc">@Model.ItemDesc</textarea>
             </span>
         </div>
     </div>
     <div>
-        <button id="btnSave" class="button">@Lang.BtnSave</button>
+        @if (@Model.Id > 0)
+        {
+         <button id="btnEdit" class="button">@Lang.BtnSave</button>
+        }
+        else
+        { 
+         <button id="btnSave" class="button">@Lang.BtnSave</button>
+        }
         <button id="btnClose" class="button">@Lang.BtnClose</button>
     </div>
 </body>

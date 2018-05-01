@@ -80,6 +80,9 @@
                     console.log(response);
                     $(response.Data).each(function (i, ele) {
                         var tmpl = $('.grid .tpml')[0].outerHTML;
+                        //ParentName
+                        var pn = $.trim(ele.ParentName)=='' ? 'Root' : ele.ParentName;
+                        tmpl = tmpl.replace(/{ParentName}/g, pn);
                         var item = tmpl.formatObject(ele).replace(/{i}/g,i+1);
                         $('#dataRow').append(item);
                     });
@@ -124,7 +127,7 @@
         <div class="container"> @*核心区域*@
         <div style="display:none;" class="grid">
             <span class="item tpml"  ondblclick="editData('{Id}')">
-                <span id="{Id}" style="color:red;">{i}.  {Name}</span>
+                <span id="{Id}" style="color:red;">{i}.  {Name} 【{ParentName} 】</span>
                 <span class="cell">
                     <span>{Code}</span>
                     <span>{ItemValue}</span>
