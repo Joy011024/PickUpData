@@ -55,15 +55,23 @@ namespace HRApp.Web.Controllers
                 ui.Childerns = new List<Menu>();
                 IAppSettingService appSettingService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
                 List<CategoryItems> reports = appSettingService.SelectNodeItemByParentCode(EAppSetting.ReportEnum.ToString());//查询举报分类集合
-                foreach (CategoryItems item in reports)
+                //将该菜单变为子节点菜单
+                if (reports.Count > 0)
                 {
-                    UinMenuObjcet copy = uin.MapObject<Menu, UinMenuObjcet>();//进行一个实体Copy,避免引用类型更改集合中数据项
-                    copy.Url = copy.Url + "?" + EAppSetting.ReportEnum.ToString() + "=" + item.ItemValue;
-                    copy.Name += " - " + item.Name;
-                    copy.IsChild = true;
-                    copy.ParetnId = copy.Id;
-                    ui.Childerns.Add(copy);
+                    UinMenuObjcet first = uin.MapObject<Menu, UinMenuObjcet>();
+                    ui.Childerns.Add(first);
+                    foreach (CategoryItems item in reports)
+                    {
+                        UinMenuObjcet copy = uin.MapObject<Menu, UinMenuObjcet>();//进行一个实体Copy,避免引用类型更改集合中数据项
+                        copy.Url = copy.Url + "?" + EAppSetting.ReportEnum.ToString() + "=" + item.ItemValue;
+                        copy.Name += " - " + item.Name;
+                        copy.IsChild = true;
+                        copy.ParentCode = uin.Code;
+                        copy.ParetnId = copy.Id;
+                        ui.Childerns.Add(copy);
+                    }
                 }
+                
             }
             json.Data = menus;
             json.Success = true;

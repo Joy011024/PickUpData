@@ -46,6 +46,8 @@
                     tipEle.show();
                     return;
                 }
+                DrawMenu(response.Data);
+                return;
                 $(response.Data).each(function (i, ele) {//跟节点
                     var active = '';
                     if (i == 0) {
@@ -56,16 +58,34 @@
                     $('#myMenu').append(tmplLi);
                     var tmpl = '<div class="block" url="{1}" id="{2}" title="{3}">{0}</div>';
                    var html=  tmpl.format(ele.Name, ele.Url, ele.Id, ele.Remark);
-                  // $('#menus').append(html);
                    $('#myMenu').find('[data-toggle=tab]:last').click(function () {
                        toolItemSlt(this);
-                      // btnMenuClick(this);
                    })
                 });
                 //初始化触发第一项
                 $('#myMenu .active>[data-toggle=tab]').trigger('click');
             });
         });
+        function DrawMenu(data,container) {
+            if (!data) {
+                return;
+            }
+            $(data).each(function (i, ele) {
+                var container = ele.ParentCode != '@InitAppSetting.DefaultAppsettingRootCode' ? $('#myMenu') : $('#menu' + ele.ParentCode);
+                if (ele.IsChild && ele.Childerns.length > 0) { //如果存在子节点进行子节点的渲染
+                    //渲染节点
+                    var items = ' <ul class="dropdown-menu" id="#menu{Code}" role="menu" aria-labelledby="{title}" style="display:none;"> </ul>';
+                    items = items.replace(/{Code}/g, ele.Code).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
+                    container.append(items);
+                    DrawMenu(ele.Childerns, $('#menu' + ele.Code));
+                }
+                else {
+                    var node = '<li><a href="#menu{Code} data-toggle="tab" url="{url}"> {title} </a> </li>';
+                    node = node.replace(/{Code}/g, ele.Code).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
+                    container.append(node);
+                }
+            });
+        }
         function toolItemSlt(objEle) {
             var tabId = $(objEle).attr('href').replace('#', '');
             var item = 'tab_' + tabId;

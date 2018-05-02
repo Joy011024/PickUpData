@@ -33,6 +33,7 @@ namespace HRApp.Model
         #region ui
         public bool IsChild { get; set; }
         public int ParetnId { get; set; }
+        public string ParentCode { get; set; }
         public List<Menu> Childerns { get; set; }
         #endregion
     }
