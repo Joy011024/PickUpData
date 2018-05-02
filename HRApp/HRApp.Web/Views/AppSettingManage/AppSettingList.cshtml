@@ -75,6 +75,7 @@
         }
         function initData() {
             var grid = $('.grid');
+            $('#dataRow').empty()
             bindPostAjax('/AppSettingManage/QueryAllAppSettingData', {},
                 function (response, statue) {
                     console.log(response);

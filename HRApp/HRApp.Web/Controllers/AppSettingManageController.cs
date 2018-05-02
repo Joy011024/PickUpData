@@ -121,6 +121,7 @@ namespace HRApp.Web.Controllers
                 if (node.ParentId == -1)
                 {
                     node.ParentCode = InitAppSetting.DefaultAppsettingRootCode;
+                    
                 }
                json.Success= appService.Update(new CategoryItems()
                 {
