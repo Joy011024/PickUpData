@@ -59,6 +59,7 @@ namespace HRApp.Web.Controllers
                 if (reports.Count > 0)
                 {
                     UinMenuObjcet first = uin.MapObject<Menu, UinMenuObjcet>();
+                    first.ParentCode = first.Code;
                     ui.Childerns.Add(first);
                     foreach (CategoryItems item in reports)
                     {
