@@ -118,6 +118,10 @@ namespace HRApp.Web.Controllers
             IAppSettingService appService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
             try
             {
+                if (node.ParentId == -1)
+                {
+                    node.ParentCode = InitAppSetting.DefaultAppsettingRootCode;
+                }
                json.Success= appService.Update(new CategoryItems()
                 {
                     Id = int.Parse(node.Id),
@@ -127,6 +131,11 @@ namespace HRApp.Web.Controllers
                     ItemDesc = node.Desc,
                     ItemValue = node.Value
                 });
+               if (json.Success)
+               {//更新系统配置 
+                   InitAppSetting.AppSettingItemsInDB= RefreshAppSetting.QueryAllAppSetting(appService);
+                   RefreshAppSetting.RefreshFileVersion();
+               }
             }
             catch (Exception ex)
             {

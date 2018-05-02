@@ -25,18 +25,10 @@ namespace HRApp.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             IocMvcFactoryHelper.GetIocDict(true);
-            InitAppSetting.AppSettingItemsInDB= QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
+            InitAppSetting.AppSettingItemsInDB = RefreshAppSetting.QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
             RefreshAppSetting.RefreshFileVersion();
         }
-        Dictionary<string,string> QueryAllAppSetting(IAppSettingService service)
-        {
-            Dictionary<string, string> app = new Dictionary<string, string>();
-            foreach (var item in service.QueryAll())
-            {
-                app.Add(item.Code, item.ItemValue);
-            }
-            return app;
-        }
+        
     }
     public class IocMvcFactoryHelper
     {
@@ -159,6 +151,15 @@ namespace HRApp.Web
     }
     public class RefreshAppSetting 
     {
+        public static Dictionary<string, string> QueryAllAppSetting(IAppSettingService service)
+        {
+            Dictionary<string, string> app = new Dictionary<string, string>();
+            foreach (var item in service.QueryAll())
+            {
+                app.Add(item.Code, item.ItemValue);
+            }
+            return app;
+        }
         /// <summary>
         /// 刷新文件版本控制串
         /// </summary>
