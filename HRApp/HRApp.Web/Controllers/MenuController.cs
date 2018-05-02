@@ -68,6 +68,7 @@ namespace HRApp.Web.Controllers
                         copy.Name += " - " + item.Name;
                         copy.IsChild = true;
                         copy.ParentCode = uin.Code;
+                        copy.Code = uin.Code + "." + item.Code.ToString();
                         copy.ParetnId = copy.Id;
                         ui.Childerns.Add(copy);
                     }

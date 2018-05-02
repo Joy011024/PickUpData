@@ -47,6 +47,8 @@
                     return;
                 }
                 DrawMenu(response.Data);
+                //初始化触发第一项
+                $('#myMenu .active>[data-toggle=tab]').trigger('click');
                 return;
                 $(response.Data).each(function (i, ele) {//跟节点
                     var active = '';
@@ -58,12 +60,8 @@
                     $('#myMenu').append(tmplLi);
                     var tmpl = '<div class="block" url="{1}" id="{2}" title="{3}">{0}</div>';
                    var html=  tmpl.format(ele.Name, ele.Url, ele.Id, ele.Remark);
-                   $('#myMenu').find('[data-toggle=tab]:last').click(function () {
-                       toolItemSlt(this);
-                   })
                 });
-                //初始化触发第一项
-                $('#myMenu .active>[data-toggle=tab]').trigger('click');
+                
             });
         });
         function DrawMenu(data,container) {
@@ -83,9 +81,12 @@
                     DrawMenu(ele.Childerns, $('#menu' + ele.Code));
                 }
                 else {
-                    var node = '<li><a href="#menu{Code} data-toggle="tab" url="{url}"> {title} </a> </li>';
+                    var node = '<li><a href="#menu{Code}" data-toggle="tab" url="{url}"> {title} </a> </li>';
                     node = node.replace(/{Code}/g, ele.Code).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
                     container.append(node);
+                    container.find('[data-toggle=tab]:last').click(function () {
+                        toolItemSlt(this);
+                    });
                 }
             });
         }
