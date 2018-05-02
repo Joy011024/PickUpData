@@ -13,11 +13,9 @@
     <title>系统配置</title>
     <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
-    @*<script src="~/Scripts/jquery-1.7.2.js?v=@InitAppSetting.Version"></script>*@
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
-    @*<link href="~/Scripts/jquery.combo.select.js/combo.select.css?v=@InitAppSetting.Version" rel="stylesheet" />
-    <script src="~/Scripts/jquery.combo.select.js/jquery.combo.select.js?v=@InitAppSetting.Version"></script>*@
     <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
@@ -143,12 +141,15 @@
                 </select>
             </span>
         </div>
-        <div class="alongLine">
-            <span style="width:100px;">@Lang.LblCode :</span>
-            <span>
-                <input type="text" value="@Model.Code" id="txtMemnorideCode" apikey="Code" class="required" autocomplete="off" />
-            </span>
-        </div>
+        @if (Model.Id == 0)
+        { //在进行编辑的情况下，不允许直接修改编码，需要在另一个接口中进行更改编码，以防调用的子节点不能联动修改
+            <div class="alongLine">
+                <span style="width:100px;">@Lang.LblCode :</span>
+                <span>
+                    <input type="text" value="@Model.Code" id="txtMemnorideCode" apikey="Code" class="required" autocomplete="off" />
+                </span>
+            </div>
+        }
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblAppSetValue :</span>
             <span>

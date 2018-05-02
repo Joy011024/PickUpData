@@ -113,8 +113,35 @@ namespace HRApp.Web.Controllers
         [HttpPost]
         public JsonResult EditAppSetting(NodeRequestParam node) 
         {
-            Common.Data.JsonData json = new JsonData();
-
+            Common.Data.JsonData json = new JsonData() { Result=true};
+            node.Code = string.Empty;//这个接口不运行修改编码【为实现子节点直接相互联动，需要另一接口进行控制】
+            IAppSettingService appService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
+            try
+            {
+                if (node.ParentId == -1)
+                {
+                    node.ParentCode = InitAppSetting.DefaultAppsettingRootCode;
+                    
+                }
+               json.Success= appService.Update(new CategoryItems()
+                {
+                    Id = int.Parse(node.Id),
+                    ParentId = node.ParentId,
+                    ParentCode = node.ParentCode,
+                    Name = node.Name,
+                    ItemDesc = node.Desc,
+                    ItemValue = node.Value
+                });
+               if (json.Success)
+               {//更新系统配置 
+                   InitAppSetting.AppSettingItemsInDB= RefreshAppSetting.QueryAllAppSetting(appService);
+                   RefreshAppSetting.RefreshFileVersion();
+               }
+            }
+            catch (Exception ex)
+            {
+                json.Message = ex.Message;
+            }
             return Json(json);
         }
     }

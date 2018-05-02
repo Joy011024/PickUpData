@@ -53,5 +53,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public bool Update(SpecialSpellName entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

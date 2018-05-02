@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Configuration;
+using HRApp.Model;
 namespace HRApp.Web
 {
     public class InitAppSetting
@@ -60,6 +61,18 @@ namespace HRApp.Web
         /// 默认系统配置根节点代码
         /// </summary>
         public static string DefaultAppsettingRootCode = "-1";
+        public static int DefaultGridRowSize
+        {
+            get 
+            {
+                if (AppSettingItemsInDB.Count > 0)
+                {
+                    string cfg = InitAppSetting.AppSettingItemsInDB[EAppSetting.DefaultQuerySize.ToString()];
+                    return int.Parse(cfg);
+                }
+                return 30;
+            }
+        }
     }
     public class ParamNameTemplate
     {

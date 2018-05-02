@@ -75,5 +75,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public bool Update(ReportParam entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -75,6 +75,7 @@
         }
         function initData() {
             var grid = $('.grid');
+            $('#dataRow').empty()
             bindPostAjax('/AppSettingManage/QueryAllAppSettingData', {},
                 function (response, statue) {
                     console.log(response);
@@ -127,7 +128,7 @@
         <div class="container"> @*核心区域*@
         <div style="display:none;" class="grid">
             <span class="item tpml"  ondblclick="editData('{Id}')">
-                <span id="{Id}" style="color:red;">{i}.  {Name} 【{ParentName} 】</span>
+                <span id="{Id}" style="color:red;">{i}.  {Name} 【{ParentName} 】  <span onclick="editData('{Id}');">@AppLanguage.Lang.BtnEdit</span></span>
                 <span class="cell">
                     <span>{Code}</span>
                     <span>{ItemValue}</span>

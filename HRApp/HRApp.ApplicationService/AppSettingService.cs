@@ -130,5 +130,12 @@ namespace HRApp.ApplicationService
         {
             return appSettingRepository.Get(id);
         }
+
+
+        public bool Update(CategoryItems entity)
+        {
+           
+           return  appSettingRepository.Edit(entity);
+        }
     }
 }

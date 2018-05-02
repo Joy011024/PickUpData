@@ -47,5 +47,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public bool Update(ContactData entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

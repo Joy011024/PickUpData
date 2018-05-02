@@ -66,5 +66,11 @@ SELECT	'Return Value' = @return_value
         {
             throw new NotImplementedException();
         }
+
+
+        public bool Update(FindQQDataTable entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

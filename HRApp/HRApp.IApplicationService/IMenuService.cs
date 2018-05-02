@@ -9,5 +9,6 @@ namespace HRApp.IApplicationService
     public interface IMenuService : IBaseServiceWithSqlConnstring<Menu>
     {
         Common.Data.JsonData QueryAllMenu();
+        List<Menu> QueryMenusByAuthor(string userCode);
     }
 }
