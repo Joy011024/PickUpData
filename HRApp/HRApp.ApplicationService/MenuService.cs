@@ -65,5 +65,15 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// 查询授权的用户菜单列表
+        /// </summary>
+        /// <param name="userCode"></param>
+        /// <returns></returns>
+        public List<Menu> QueryMenusByAuthor(string userCode)
+        {
+            return menuRepository.QueryMenus();
+        }
     }
 }

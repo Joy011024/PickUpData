@@ -26,5 +26,14 @@ namespace HRApp.Model
         {
             return " select [Id], [Name],[Code],[Url],[Remark],[CreateTime]  from [dbo].[Menu] ";
         }
+        
+    }
+    public class UinMenuObjcet:Menu
+    {
+        #region ui
+        public bool IsChild { get; set; }
+        public int ParetnId { get; set; }
+        public List<Menu> Childerns { get; set; }
+        #endregion
     }
 }
