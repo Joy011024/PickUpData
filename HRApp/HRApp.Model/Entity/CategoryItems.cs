@@ -58,15 +58,11 @@ SELECT [ID],[Name]
         {
             return @"UPDATE [HrApp].[dbo].[CategoryItems]
                        SET [Name] = {Name}
-                          ,[Code] = {Code}
                           ,[Sort] = {Sort}
-                          ,[IsDelete] = {IsDelete}
+                          ,[ParentID]={ParentId}
+                          ,[ParentCode]={ParentCode}
                           ,[ItemValue] = {ItemValue}
-                          ,[ItemUsingSize] ={ItemUsingSize}
-                          ,[CreateTime] = {CreateTime}
-                          ,[NodeLevel] = {NodeLevel}
                           ,[ItemDesc] = {ItemDesc}
-                          ,[IndexSpell] = {IndexSpell}
 	                      where ID={Id}";
         }
         /// <summary>
