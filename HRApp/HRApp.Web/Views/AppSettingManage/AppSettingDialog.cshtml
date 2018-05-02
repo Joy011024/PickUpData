@@ -143,12 +143,16 @@
                 </select>
             </span>
         </div>
-        <div class="alongLine">
-            <span style="width:100px;">@Lang.LblCode :</span>
-            <span>
-                <input type="text" value="@Model.Code" id="txtMemnorideCode" apikey="Code" class="required" autocomplete="off" />
-            </span>
-        </div>
+        @if (Model.Id == 0)
+        { //在进行编辑的情况下，不允许直接修改编码，需要在另一个接口中进行更改编码，以防调用的子节点不能联动修改
+            <div class="alongLine">
+                <span style="width:100px;">@Lang.LblCode :</span>
+                <span>
+                    <input type="text" value="@Model.Code" id="txtMemnorideCode" apikey="Code" class="required" autocomplete="off" />
+                </span>
+            </div>
+        }
+        
         <div class="alongLine">
             <span style="width:100px;">@Lang.LblAppSetValue :</span>
             <span>

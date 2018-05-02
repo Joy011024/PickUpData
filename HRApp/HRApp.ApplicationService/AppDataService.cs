@@ -57,5 +57,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public bool Update(AppModel entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

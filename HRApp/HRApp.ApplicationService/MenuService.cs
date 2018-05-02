@@ -59,5 +59,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public bool Update(Menu entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

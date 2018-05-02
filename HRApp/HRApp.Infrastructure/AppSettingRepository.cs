@@ -50,7 +50,9 @@ namespace HRApp.Infrastructure
 
         public bool Edit(CategoryItems entity)
         {
-            throw new NotImplementedException();
+            string sql = entity.GetUpdateSql();
+            SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = SqlConnString };
+            return helper.GenerateNoQuerySqlAndExcute(sql, entity)>0;
         }
 
         public bool Delete(object key)
