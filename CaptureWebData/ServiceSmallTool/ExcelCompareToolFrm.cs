@@ -81,6 +81,7 @@ namespace ServiceSmallTool
             ExcelHeadAttribute head= item.Tag as ExcelHeadAttribute;
             CompareData compare = null;
             bool isInsert = false;
+            int dataRowIndex = 0;
             if (leftHead.Count == rightHead.Count||
                 (leftHead.Count>rightHead.Count&&area==ECompareTarget.Left)
                 || (leftHead.Count < rightHead.Count&&area==ECompareTarget.Right))
@@ -95,11 +96,13 @@ namespace ServiceSmallTool
             else if (area == ECompareTarget.Left)
             {//此时进行的是单方补充
                 //当前是数据补充到缺少项中
-                compare = lstCompare.Items[rightHead.Count - 1].Tag as CompareData;
+                dataRowIndex=rightHead.Count - 1;
+                compare = lstCompare.Items[dataRowIndex].Tag as CompareData;
             }
             else 
             {
-                compare = lstCompare.Items[leftHead.Count - 1].Tag as CompareData;
+                dataRowIndex=leftHead.Count - 1;
+                compare = lstCompare.Items[dataRowIndex].Tag as CompareData;
             }
             switch (area)
             {
@@ -122,7 +125,19 @@ namespace ServiceSmallTool
             }
             else 
             {//还需要对于UI进行改动
-                
+                ListViewItem vc= lstCompare.Items[dataRowIndex];
+                //界面重绘
+                switch (area)
+                {
+                    case ECompareTarget.Left:
+                        vc.SubItems["OriginHeadName"].Text = compare.OriginHeadName;
+                        vc.SubItems["OriginHeadIndex"].Text = compare.OriginHeadIndex.ToString();
+                        break;
+                    case ECompareTarget.Right:
+                        vc.SubItems["NewHeadName"].Text = compare.NewHeadName;
+                        vc.SubItems["NewHeadIndex"].Text = compare.NewHeadIndex.ToString();
+                        break;
+                }
             }
             lstCompare.Refresh();
             lst.Items.RemoveAt(index);
