@@ -268,5 +268,100 @@ namespace Infrastructure.MsSqlService.SqlHelper
             conn.Close();
             return ds;
         }
+        /// <summary>
+        /// 根据SQL参数规则（参数名全小写=属性名）进行实体属性匹配，并生成待执行的参数调节项
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="containerRuleInSqlCmd">规则化的SQL语句</param>
+        /// <param name="entity"></param>
+        /// <param name="sqlCmdMapRegexRule">SQL参数匹配规则=默认 {参数名}</param>
+        /// <returns></returns>
+        [Description("使用正则从字符串中获取指定的属性列表")]
+        public SqlRuleMapResult GetPropertiesFromString<T>(string containerRuleInSqlCmd, T entity, string sqlCmdMapRegexRule = "{(.*?)}") 
+        {// 结果字典：key=字符串中的关键字，value=实体属性
+            System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex(sqlCmdMapRegexRule);
+            System.Text.RegularExpressions.MatchCollection matchs= reg.Matches(containerRuleInSqlCmd);
+            List<string> param = new List<string>();
+            System.Reflection.PropertyInfo[] pis= entity.GetType().GetProperties();
+            Dictionary<string, string> ruleAsProperty = new Dictionary<string, string>();
+            List<string> loseMapRule = new List<string>();//语句规则中没法匹配的规则项
+            List<SqlParameter> sqlParam = new List<SqlParameter>();//在规则全部符合的情形下进行执行命令的参数列表
+            string waitExuet = containerRuleInSqlCmd;
+            foreach (System.Text.RegularExpressions.Match item in matchs)
+            {
+                System.Text.RegularExpressions.GroupCollection gc = item.Groups;
+                string  ruleParamName= gc[1].Value;
+                string ruleParamFormat = gc[0].Value;//数组元素  表达式1 {(.*?)} =[{属性},属性] ，表达式2 ({.*?})=[{属性},{属性}]
+                if (ruleAsProperty.ContainsKey(ruleParamFormat))
+                {//定义了多个相对规则参数名，会在第一次出现时进行处理
+                    continue;
+                }
+                bool noMap = true;
+                System.Reflection.PropertyInfo targetProperty = null;
+                foreach (System.Reflection.PropertyInfo pi in pis)
+                {
+                    string pn = pi.Name;
+                    if (pn.ToLower() == ruleParamName.ToLower())
+                    {//这是目标属性
+                        ruleAsProperty.Add(ruleParamFormat, pn);
+                        noMap = false;
+                        targetProperty = pi;
+                        break;
+                    }
+                }
+                if (loseMapRule.Count>0|| noMap)
+                {//存在规则参数没有匹配的属性
+                    loseMapRule.Add(ruleParamFormat);
+                }
+                else
+                {
+                    #region 将规则映射到参数
+                    string pn = "@" + ruleAsProperty[ruleParamFormat];
+                    waitExuet = waitExuet.Replace(ruleParamFormat, pn);
+                    object obj= targetProperty.GetValue(entity, null);
+                    if (obj != null)
+                    {
+                        sqlParam.Add(new SqlParameter() { ParameterName = pn, Value = obj });
+                    }
+                    else 
+                    {
+                        sqlParam.Add(new SqlParameter() { ParameterName = pn, Value = DBNull.Value});
+                    }
+                    #endregion
+                }
+            }
+            return new SqlRuleMapResult()
+            {
+                OriginSql = containerRuleInSqlCmd,
+                WaitExcuteSql = waitExuet,
+                NoMapRule = loseMapRule.ToArray(),
+                SqlParams = sqlParam.ToArray(),
+                RuleMapProperty = ruleAsProperty
+            };
+        }
+        public class SqlRuleMapResult
+        {
+            /// <summary>
+            /// 原始sql
+            /// </summary>
+            public string OriginSql { get; set; }
+            /// <summary>
+            /// 执行规则处理后的sql
+            /// </summary>
+            public string WaitExcuteSql { get; set; }
+            /// <summary>
+            /// 规则匹配的参数列表
+            /// </summary>
+            public SqlParameter[] SqlParams { get; set; }
+            /// <summary>
+            /// 没有匹配的规则集合
+            /// </summary>
+            public string[] NoMapRule { get; set; }
+            /// <summary>
+            /// 规则匹配的实体属性
+            /// </summary>
+            public Dictionary<string, string> RuleMapProperty { get; set; }
+        }
+        
     }
 }

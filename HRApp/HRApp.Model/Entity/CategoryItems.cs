@@ -82,5 +82,16 @@ values({Name},{ParentId},{ParentCode},{Code},{Sort},{IsDelete},{ItemUsingSize},{
         {
             return GetQueryModelSampleSql() + " where IndexSpell like {IndexSpell}";
         }
+        public string MssqlExportInsertSql() 
+        {
+            return @"INSERT INTO  [dbo].[CategoryItems] ([Name],[ParentID],[ParentCode],[Code],[IndexSpell],[Sort],[IsDelete],[ItemValue],[ItemUsingSize],[CreateTime],[NodeLevel],[ItemDesc])
+                 VALUES  ({Name},{ParentID},{ParentCode},{Code},{IndexSpell},{Sort},{IsDelete},{ItemValue},{ItemUsingSize},{CreateTime},{NodeLevel},{ItemDesc}) ";
+        }
+        public string MssqlExportEditSql() 
+        {
+            return @"UPDATE  [dbo].[CategoryItems]
+   SET [Name] = {Name},[ParentID] ={ParentID},[ParentCode] = {ParentCode},[Code] = {Code},[IndexSpell] = {IndexSpell},[Sort] = {Sort},[IsDelete] = {IsDelete},[ItemValue] = {ItemValue},[ItemUsingSize] = {ItemUsingSize},[CreateTime] = {CreateTime},[NodeLevel] ={NodeLevel},[ItemDesc] ={ItemDesc}
+ WHERE ID={ID} ";
+        }
     }
 }

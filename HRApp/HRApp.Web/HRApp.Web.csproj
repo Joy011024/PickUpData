@@ -225,6 +225,10 @@
       <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
       <Name>Infrastructure.ExtService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.MsSqlService.SqlHelper\Infrastructure.MsSqlService.SqlHelper.csproj">
+      <Project>{43847d96-253a-4525-97ed-aca52340013b}</Project>
+      <Name>Infrastructure.MsSqlService.SqlHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HRApp.ApplicationService\HRApp.ApplicationService.csproj">
       <Project>{0f4f36cc-572b-44f1-a1b7-f2ca95afd9d6}</Project>
       <Name>HRApp.ApplicationService</Name>
