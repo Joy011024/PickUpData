@@ -9,6 +9,7 @@ using NPOI.SS.UserModel;
 using System.Data;
 using System.Data.OleDb;
 using System.ComponentModel;
+using DataHelp;
 namespace CommonHelperEntity
 {
     public class ExcelDataHelper : IExcelHelper { }
@@ -160,14 +161,14 @@ namespace CommonHelperEntity
         [Description("Excel的工作页进行逐行读取，justReadHead是否值读取第一行")]
         static void ReadSheetRow(ISheet sheet,ReadRowCallBack rowRead,bool justReadHead) 
         {
-            int rowIndex = sheet.LastRowNum;
+            int rowIndex = sheet.LastRowNum;//行号从0开始
             if (justReadHead)
             {
                IRow row= sheet.GetRow(0);
                rowRead(row);
                return;
             }
-            for (int i = 0; i < rowIndex; i++)
+            for (int i = 0; i <= rowIndex; i++)
             {
                 IRow row = sheet.GetRow(i);
                 rowRead(row);
@@ -354,9 +355,95 @@ namespace CommonHelperEntity
     }
     public class ExcelCompareActionHelp
     {
-        public void DoExcelCompare(string firstExcelDir, string secondExcelDir, List<CompareData> mapColumn) 
+        public Dictionary<ErrorMsgCode, string> errorCode = new Dictionary<ErrorMsgCode, string>();
+        Dictionary<ExcelDataSource, Dictionary<int, List<string>>> dataSource = new Dictionary<ExcelDataSource, Dictionary<int, List<string>>>();
+        List<CompareData> mapRule = new List<CompareData>();//列匹配规则
+        Dictionary<ExcelDataSource, List<int>> compareColumn = new Dictionary<ExcelDataSource, List<int>>();
+        bool nowReadFirstExcel = true;
+        public enum ErrorMsgCode
+        { 
+            None=-1,
+            FirstExcelIndexDistinct=1,
+            SecondExcelIndexDistinct=2
+        }
+        enum ExcelDataSource
         {
-        
+            [Description("第一份Excel（Left）")]
+            OriginExcel = 1,
+            [Description("第二份Excel（Right）")]
+            TargetExcel = 2
+        }
+        public ExcelCompareActionHelp() 
+        {
+            errorCode.Add(ErrorMsgCode.None, "Success");
+            errorCode.Add(ErrorMsgCode.FirstExcelIndexDistinct, "第一份excel中列序号存在重复项");
+            errorCode.Add(ErrorMsgCode.SecondExcelIndexDistinct, "第一份excel中列序号存在重复项");
+        }
+        public ErrorMsgCode DoExcelCompare(string firstExcelDir, string secondExcelDir, List<CompareData> mapColumn) 
+        {
+            //参数校验->是否列序号存在重复
+            int[] left = mapColumn.Select(s => s.OriginHeadIndex).ToArray();
+            int[] distinctLeft = mapColumn.Select(s => s.OriginHeadIndex).Distinct().ToArray();
+            if (left.Length > distinctLeft.Length)
+            {
+                return ErrorMsgCode.FirstExcelIndexDistinct;
+            }
+            int[] right = mapColumn.Select(s => s.NewHeadIndex).ToArray();
+            int[] distinctRight= mapColumn.Select(s => s.NewHeadIndex).Distinct().ToArray();
+            if (right.Length > distinctRight.Length)
+            {
+                return ErrorMsgCode.SecondExcelIndexDistinct;
+            }
+            //读取excel
+            dataSource.Clear();
+            compareColumn.Clear();
+            foreach (var item in ExcelDataSource.TargetExcel.GetEnumMembers())
+            {
+                ExcelDataSource tar;
+                Enum.TryParse(item, out tar);
+                compareColumn.Add(tar, new List<int>());//列比较规则
+                dataSource.Add(tar, new Dictionary<int, List<string>>());
+            }
+            foreach (CompareData item in mapColumn)
+            {
+                compareColumn[ExcelDataSource.OriginExcel].Add(item.OriginHeadIndex);
+                compareColumn[ExcelDataSource.TargetExcel].Add(item.NewHeadIndex);
+            }
+            ExcelHelper.ReadSheet(firstExcelDir, false, 0, OrderReaderExcelRow, false);
+            nowReadFirstExcel = false;//开始进行第二份excel的读取
+            ExcelHelper.ReadSheet(secondExcelDir, false, 0, OrderReaderExcelRow, false);
+            //进行excel数据入组
+            //组内excel数据比较
+            //比较结果进行差异化汇总入档
+            return ErrorMsgCode.None;
+        }
+        void OrderReaderExcelRow(IRow row) 
+        {
+            int index = row.RowNum;//这是第几行
+            if (index == 0)
+            {//不读取列信息
+                return;
+            }
+            List<int> cellIndex;
+            ExcelDataSource target;
+            if (nowReadFirstExcel)
+            {
+                target=ExcelDataSource.OriginExcel;
+                cellIndex = compareColumn[target];
+            }
+            else 
+            {
+                target=ExcelDataSource.TargetExcel;
+                cellIndex = compareColumn[target];
+            }
+            dataSource[target].Add(index,new List<string>());
+            List<string> leftRowData = new List<string>();//行数据
+            for (int i = 0; i < cellIndex.Count; i++)
+            {
+                int ci = cellIndex[i];
+                ICell cell = row.GetCell(ci);
+                dataSource[target][index].Add(cell == null ? string.Empty : cell.ToString());
+            }
         }
     }
     public class CompareData

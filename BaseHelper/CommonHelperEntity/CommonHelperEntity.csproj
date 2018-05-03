@@ -78,6 +78,10 @@
       <Project>{22B5A7B7-9809-4927-8538-6F7680701C5B}</Project>
       <Name>Common.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataHelp\DataHelp.csproj">
+      <Project>{f2af7a2a-3c36-4979-b10e-997d20a42dbc}</Project>
+      <Name>DataHelp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -70,10 +70,12 @@ namespace ServiceSmallTool
         {
             string exeDir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
             string dir =exeDir+ @"\LogFile\ExcelCompare.xlsx";
+            firstFile.SetPath(dir);
             ExcelDataHelper helper = new ExcelDataHelper();
             helper.QueryExcelHead(dir);
             lstLeft.BindDataSource<ExcelHeadAttribute>(helper.heads);
             string rightDir = exeDir+@"\LogFile\ExcelCompareCh.xlsx";
+            secondFile.SetPath(rightDir);
             helper.QueryExcelHead(rightDir);
             lstRight.BindDataSource<ExcelHeadAttribute>(helper.heads);
             
@@ -236,13 +238,7 @@ namespace ServiceSmallTool
     }
     public class ExcelDataHelper
     {
-        public enum ExcelDataSource
-        {
-            [Description("第一份Excel（Left）")]
-            OriginExcel = 1,
-            [Description("第二份Excel（Right）")]
-            TargetExcel = 2
-        }
+       
         public List<ExcelHeadAttribute> heads;
         [Description("查询Excel的列头")]
         public void QueryExcelHead(string excelPath)
