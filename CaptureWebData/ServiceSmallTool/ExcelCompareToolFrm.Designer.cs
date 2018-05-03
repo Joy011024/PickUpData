@@ -34,9 +34,10 @@
             this.btnCompare = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.rtbNote = new System.Windows.Forms.RichTextBox();
             this.selectFile2 = new FeatureFrmList.SelectFile();
             this.selectFile1 = new FeatureFrmList.SelectFile();
-            this.rtbNote = new System.Windows.Forms.RichTextBox();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstCompare
@@ -90,6 +91,14 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "第二份Excel";
             // 
+            // rtbNote
+            // 
+            this.rtbNote.Location = new System.Drawing.Point(23, 367);
+            this.rtbNote.Name = "rtbNote";
+            this.rtbNote.Size = new System.Drawing.Size(921, 96);
+            this.rtbNote.TabIndex = 8;
+            this.rtbNote.Text = "";
+            // 
             // selectFile2
             // 
             this.selectFile2.CallBack = null;
@@ -106,19 +115,21 @@
             this.selectFile1.Size = new System.Drawing.Size(362, 35);
             this.selectFile1.TabIndex = 3;
             // 
-            // rtbNote
+            // btnClear
             // 
-            this.rtbNote.Location = new System.Drawing.Point(23, 367);
-            this.rtbNote.Name = "rtbNote";
-            this.rtbNote.Size = new System.Drawing.Size(921, 96);
-            this.rtbNote.TabIndex = 8;
-            this.rtbNote.Text = "";
+            this.btnClear.Location = new System.Drawing.Point(23, 338);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 9;
+            this.btnClear.Text = "清空";
+            this.btnClear.UseVisualStyleBackColor = true;
             // 
             // ExcelCompareToolFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 475);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.rtbNote);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -146,5 +157,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox rtbNote;
+        private System.Windows.Forms.Button btnClear;
     }
 }

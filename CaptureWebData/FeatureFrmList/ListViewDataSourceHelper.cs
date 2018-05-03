@@ -118,9 +118,9 @@ namespace FeatureFrmList
                 }
             }
         }
-        public static void BindHead(this ListView lst, Dictionary<string,string> head)
+        public static void BindHead(this ListView lst, Dictionary<string,string> head,bool keepOriginColumn=false)
         {
-            if (lst.Columns.Count > 0)
+            if (!keepOriginColumn&&lst.Columns.Count > 0)
             {
                 lst.Columns.Clear();
             }

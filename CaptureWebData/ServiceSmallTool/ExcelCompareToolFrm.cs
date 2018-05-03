@@ -20,6 +20,10 @@ namespace ServiceSmallTool
         {
             InitializeComponent();
             InitListViewHead();
+            btnCompare.Tag = ButtonEvent.CompareExcelData.ToString();
+            btnCompare.Click += new EventHandler(Button_Click);
+            btnClear.Tag = ButtonEvent.ClearRecord;
+            btnClear.Click += new EventHandler(Button_Click);
         }
         void InitListViewHead()
         {
@@ -37,12 +41,13 @@ namespace ServiceSmallTool
             lstRight.SelectedIndexChanged += new EventHandler(ListViewRow_SelctClick);
             //如何增加拖拽事件
             //比较
-            Dictionary<string, string> compareHead = new Dictionary<string, string>();
-            compareHead.Add("OriginHeadName", "左侧列");
-            compareHead.Add("OriginHeadIndex", "左侧列序号");
-            compareHead.Add("NewHeadName", "右侧列");
-            compareHead.Add("NewHeadIndex", "右侧列序号");
-            lstCompare.BindHead(compareHead);
+
+            leftExcelData.Add("OriginHeadName", "左侧列");
+            leftExcelData.Add("OriginHeadIndex", "左侧列序号");
+            lstCompare.BindHead(leftExcelData,true);
+            rightExcelData.Add("NewHeadName", "右侧列");
+            rightExcelData.Add("NewHeadIndex", "右侧列序号");
+            lstCompare.BindHead(rightExcelData, true);
             lstCompare.FullRowSelect = true;
             lstCompare.SelectedIndexChanged += new EventHandler(CompareListView_Select);
             ReadExcelHead();
@@ -52,8 +57,15 @@ namespace ServiceSmallTool
             Left=1,
             Right=2
         }
+        enum ButtonEvent
+        { 
+            CompareExcelData=1,
+            ClearRecord=2
+        }
         List<bool> leftHead = new List<bool>();
         List<bool> rightHead = new List<bool>();
+        Dictionary<string, string> leftExcelData = new Dictionary<string, string>();
+        Dictionary<string, string> rightExcelData = new Dictionary<string, string>();
         void ReadExcelHead()
         {
             string exeDir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
@@ -131,12 +143,16 @@ namespace ServiceSmallTool
                 switch (area)
                 {
                     case ECompareTarget.Left:
-                        vc.SubItems["OriginHeadName"].Text = compare.OriginHeadName;
-                        vc.SubItems["OriginHeadIndex"].Text = compare.OriginHeadIndex.ToString();
+                        foreach (var column in leftExcelData)
+                        {
+                           vc.SubItems[column.Key].Text=  compare.GetPropertyValue(column.Key);   
+                        }
                         break;
                     case ECompareTarget.Right:
-                        vc.SubItems["NewHeadName"].Text = compare.NewHeadName;
-                        vc.SubItems["NewHeadIndex"].Text = compare.NewHeadIndex.ToString();
+                        foreach (var column in rightExcelData)
+                        {
+                            vc.SubItems[column.Key].Text = compare.GetPropertyValue(column.Key);
+                        }
                         break;
                 }
             }
@@ -167,6 +183,52 @@ namespace ServiceSmallTool
             }
             //合并项
             lst.Items.RemoveAt(index);
+        }
+        void Button_Click(object sender,EventArgs e) 
+        {
+            Button btn=sender as Button;
+            if(btn==null)
+            {
+                return;
+            }
+            object tag = btn.Tag;
+            string bt = tag == null ? string.Empty : tag.ToString();
+            ButtonEvent be;
+            if (!Enum.TryParse(bt, out be)) 
+            {
+                return;
+            }
+            switch (be)
+            {
+                case ButtonEvent.CompareExcelData:
+                    DoComapreExcelEvent();
+                    break;
+                case ButtonEvent.ClearRecord:
+                    DoClearRecordEvent();
+                    break;
+                default:
+                    break;
+            }
+        }
+        void DoComapreExcelEvent() 
+        {
+            ListView.ListViewItemCollection lvs = lstCompare.Items;
+            //提取列表
+            List<CompareData> heads = new List<CompareData>();
+            if (lvs.Count == 0)
+            {
+                rtbNote.Text += "\r\n请选择比较的excel列";
+            }
+            foreach (ListViewItem item in lvs)
+            {
+                CompareData column = item.Tag as CompareData;
+                heads.Add(column);
+            }
+
+        }
+        void DoClearRecordEvent() 
+        {
+            rtbNote.Text = string.Empty;
         }
     }
     public class ExcelCompareHelper
