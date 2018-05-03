@@ -139,6 +139,10 @@ namespace ServiceSmallTool
         {
             while (true)
             {//轮询调度 
+                if (workList.Count == 0)
+                {
+                    return;
+                }
                 //检测是否为设置中断的轮询
                 foreach (var item in workList)
                 {
@@ -150,11 +154,20 @@ namespace ServiceSmallTool
         }
         void DoWork() 
         {
+            bool needRunBackGround = false;
+            if (workList.Count==0)
+            {
+                needRunBackGround = true;
+            }
             string tag = ButtonTag.ClearLog.ToString();
             if (!workList.ContainsKey(tag)) 
             {//增加日志清除进程
                 ThreadStart ts = new ThreadStart(DoClearLogEvent);//清除日志
                 workList.Add(tag, ts);
+            }
+            if (needRunBackGround)
+            {//重新启动
+                bg.RunWorkerAsync();
             }
         }
         void StopWork() 

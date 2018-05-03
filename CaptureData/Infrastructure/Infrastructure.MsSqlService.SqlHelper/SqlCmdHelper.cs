@@ -269,15 +269,15 @@ namespace Infrastructure.MsSqlService.SqlHelper
             return ds;
         }
         /// <summary>
-        /// 根据SQL参数规则（参数名全小写=属性名）进行实体属性匹配，并生成待执行的参数调节项
+        /// 根据SQL参数规则（参数名全小写=属性名全小写）进行实体属性匹配，并生成待执行的参数调节项
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="containerRuleInSqlCmd">规则化的SQL语句</param>
         /// <param name="entity"></param>
         /// <param name="sqlCmdMapRegexRule">SQL参数匹配规则=默认 {参数名}</param>
-        /// <returns></returns>
+        /// <returns>如果结果中属性NoMapRule长度》0则存在没有匹配成功的规则，不能成功执行SQL语句</returns>
         [Description("使用正则从字符串中获取指定的属性列表")]
-        public SqlRuleMapResult GetPropertiesFromString<T>(string containerRuleInSqlCmd, T entity, string sqlCmdMapRegexRule = "{(.*?)}") 
+        public SqlRuleMapResult PreparePropertiesFromString<T>(string containerRuleInSqlCmd, T entity, string sqlCmdMapRegexRule = "{(.*?)}")  where T:class
         {// 结果字典：key=字符串中的关键字，value=实体属性
             System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex(sqlCmdMapRegexRule);
             System.Text.RegularExpressions.MatchCollection matchs= reg.Matches(containerRuleInSqlCmd);
@@ -362,6 +362,12 @@ namespace Infrastructure.MsSqlService.SqlHelper
             /// </summary>
             public Dictionary<string, string> RuleMapProperty { get; set; }
         }
-        
+        [Description("批量准备实体参数列表")]
+        public List<SqlRuleMapResult> PrepareMapObjectListFormString<T>(string containerRuleSqlCmd, List<T> entity, string sqlCmdMapRegexRule = "{(.*?)}") where T : class
+        {
+            List<SqlRuleMapResult> result = new List<SqlRuleMapResult>();
+
+            return result;
+        }
     }
 }
