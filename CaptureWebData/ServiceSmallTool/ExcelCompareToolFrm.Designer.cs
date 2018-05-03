@@ -35,8 +35,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.rtbNote = new System.Windows.Forms.RichTextBox();
-            this.selectFile2 = new FeatureFrmList.SelectFile();
-            this.selectFile1 = new FeatureFrmList.SelectFile();
+            this.secondFile = new FeatureFrmList.SelectFile();
+            this.firstFile = new FeatureFrmList.SelectFile();
             this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -99,21 +99,21 @@
             this.rtbNote.TabIndex = 8;
             this.rtbNote.Text = "";
             // 
-            // selectFile2
+            // secondFile
             // 
-            this.selectFile2.CallBack = null;
-            this.selectFile2.Location = new System.Drawing.Point(582, 12);
-            this.selectFile2.Name = "selectFile2";
-            this.selectFile2.Size = new System.Drawing.Size(362, 35);
-            this.selectFile2.TabIndex = 4;
+            this.secondFile.CallBack = null;
+            this.secondFile.Location = new System.Drawing.Point(582, 12);
+            this.secondFile.Name = "secondFile";
+            this.secondFile.Size = new System.Drawing.Size(362, 35);
+            this.secondFile.TabIndex = 4;
             // 
-            // selectFile1
+            // firstFile
             // 
-            this.selectFile1.CallBack = null;
-            this.selectFile1.Location = new System.Drawing.Point(118, 12);
-            this.selectFile1.Name = "selectFile1";
-            this.selectFile1.Size = new System.Drawing.Size(362, 35);
-            this.selectFile1.TabIndex = 3;
+            this.firstFile.CallBack = null;
+            this.firstFile.Location = new System.Drawing.Point(118, 12);
+            this.firstFile.Name = "firstFile";
+            this.firstFile.Size = new System.Drawing.Size(362, 35);
+            this.firstFile.TabIndex = 3;
             // 
             // btnClear
             // 
@@ -134,8 +134,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCompare);
-            this.Controls.Add(this.selectFile2);
-            this.Controls.Add(this.selectFile1);
+            this.Controls.Add(this.secondFile);
+            this.Controls.Add(this.firstFile);
             this.Controls.Add(this.lstRight);
             this.Controls.Add(this.lstLeft);
             this.Controls.Add(this.lstCompare);
@@ -151,8 +151,8 @@
         private System.Windows.Forms.ListView lstCompare;
         private System.Windows.Forms.ListView lstLeft;
         private System.Windows.Forms.ListView lstRight;
-        private FeatureFrmList.SelectFile selectFile1;
-        private FeatureFrmList.SelectFile selectFile2;
+        private FeatureFrmList.SelectFile firstFile;
+        private FeatureFrmList.SelectFile secondFile;
         private System.Windows.Forms.Button btnCompare;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

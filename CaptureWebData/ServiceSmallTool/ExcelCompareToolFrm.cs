@@ -70,7 +70,7 @@ namespace ServiceSmallTool
         {
             string exeDir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
             string dir =exeDir+ @"\LogFile\ExcelCompare.xlsx";
-            ExcelCompareHelper helper = new ExcelCompareHelper();
+            ExcelDataHelper helper = new ExcelDataHelper();
             helper.QueryExcelHead(dir);
             lstLeft.BindDataSource<ExcelHeadAttribute>(helper.heads);
             string rightDir = exeDir+@"\LogFile\ExcelCompareCh.xlsx";
@@ -224,32 +224,35 @@ namespace ServiceSmallTool
                 CompareData column = item.Tag as CompareData;
                 heads.Add(column);
             }
-
+            ExcelCompareActionHelp helper = new ExcelCompareActionHelp();
+            string firstExcel=firstFile.SelectFileFullName;
+            string secondExcel=secondFile.SelectFileFullName;
+            helper.DoExcelCompare(firstExcel, secondExcel, heads);
         }
         void DoClearRecordEvent() 
         {
             rtbNote.Text = string.Empty;
         }
     }
-    public class ExcelCompareHelper
+    public class ExcelDataHelper
     {
-        enum ExcelDataSource 
+        public enum ExcelDataSource
         {
             [Description("第一份Excel（Left）")]
-            OriginExcel=1,
+            OriginExcel = 1,
             [Description("第二份Excel（Right）")]
-            TargetExcel=2
+            TargetExcel = 2
         }
         public List<ExcelHeadAttribute> heads;
         [Description("查询Excel的列头")]
-        public void QueryExcelHead(string excelPath) 
+        public void QueryExcelHead(string excelPath)
         {
             /*
              读取第一列
              */
             ExcelHelper.ReadSheet(excelPath, false, 0, ReadRowInSheet, true);
         }
-        public   void ReadRowInSheet(IRow row)
+        public void ReadRowInSheet(IRow row)
         {
             heads = new List<ExcelHeadAttribute>();
             short cellIndex = row.LastCellNum;//总共多少列
@@ -275,17 +278,7 @@ namespace ServiceSmallTool
             }
         }
     }
-    public class CompareData 
-    {
-        [Description("原始列")]
-        public string OriginHeadName { get; set; }
-        [Description("原始列序号")]
-        public int OriginHeadIndex { get; set; }
-        [Description("新列")]
-        public string NewHeadName { get; set; }
-        [Description("新列序号")]
-        public int NewHeadIndex { get; set; }
-    }
+    
 }
 /*
  1.ListView 增加拖拽事件

@@ -352,4 +352,22 @@ namespace CommonHelperEntity
             return excelBook;
         }
     }
+    public class ExcelCompareActionHelp
+    {
+        public void DoExcelCompare(string firstExcelDir, string secondExcelDir, List<CompareData> mapColumn) 
+        {
+        
+        }
+    }
+    public class CompareData
+    {
+        [Description("原始列")]
+        public string OriginHeadName { get; set; }
+        [Description("原始列序号")]
+        public int OriginHeadIndex { get; set; }
+        [Description("新列")]
+        public string NewHeadName { get; set; }
+        [Description("新列序号")]
+        public int NewHeadIndex { get; set; }
+    }
 }
