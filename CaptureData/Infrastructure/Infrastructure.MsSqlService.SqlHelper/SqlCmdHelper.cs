@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Text.RegularExpressions;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.ComponentModel;
@@ -333,7 +334,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
             return new SqlRuleMapResult()
             {
                 OriginSql = containerRuleInSqlCmd,
-                WaitExcuteSql = waitExuet,
+                WaitExcuteSql = new string[] { waitExuet },
                 NoMapRule = loseMapRule.ToArray(),
                 SqlParams = sqlParam.ToArray(),
                 RuleMapProperty = ruleAsProperty
@@ -348,7 +349,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
             /// <summary>
             /// 执行规则处理后的sql
             /// </summary>
-            public string WaitExcuteSql { get; set; }
+            public string[] WaitExcuteSql { get; set; }
             /// <summary>
             /// 规则匹配的参数列表
             /// </summary>
@@ -362,12 +363,91 @@ namespace Infrastructure.MsSqlService.SqlHelper
             /// </summary>
             public Dictionary<string, string> RuleMapProperty { get; set; }
         }
+        /// <summary>
+        /// 根据参数规则批量准备带执行脚本
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="containerRuleSqlCmd"></param>
+        /// <param name="entity"></param>
+        /// <param name="sqlCmdMapRegexRule"></param>
+        /// <returns></returns>
         [Description("批量准备实体参数列表")]
-        public List<SqlRuleMapResult> PrepareMapObjectListFormString<T>(string containerRuleSqlCmd, List<T> entity, string sqlCmdMapRegexRule = "{(.*?)}") where T : class
+        public SqlRuleMapResult PrepareMapObjectListFormString<T>(string containerRuleSqlCmd, List<T> entity, string sqlCmdMapRegexRule = "{(.*?)}") where T : class
         {
-            List<SqlRuleMapResult> result = new List<SqlRuleMapResult>();
-
-            return result;
+            //查找出匹配的属性列表
+            System.Reflection.PropertyInfo[] pis= typeof(T).GetProperties();
+            Regex reg = new Regex(sqlCmdMapRegexRule);
+            MatchCollection mc = reg.Matches(containerRuleSqlCmd);
+            Dictionary<string, string> ruleMapPorperty = new Dictionary<string, string>();
+            List<string> noMapRules = new List<string>();
+            #region 属性与规则匹配
+            foreach (Match item in mc)
+            {
+                string ruleFormat = item.Groups[0].Value;//规则格式
+                string ruleName = item.Groups[1].Value;//规则名
+                if (ruleMapPorperty.ContainsKey(ruleFormat))
+                {
+                    continue;  
+                }
+                bool hasNoMap = true;
+                foreach (System.Reflection.PropertyInfo pi in pis)
+                {
+                    string propertyName = pi.Name;
+                    if (propertyName.ToLower() == ruleName.ToLower())
+                    {
+                        ruleMapPorperty.Add(ruleFormat, propertyName);
+                        hasNoMap = false;
+                        break;
+                    }
+                }
+                if (hasNoMap)
+                {//存在没有匹配的规则 
+                    noMapRules.Add(ruleFormat);
+                }
+            }
+            #endregion
+            List<SqlParameter> param = new List<SqlParameter>();
+            List<string> batchSqlArr = new List<string>();
+            if (noMapRules.Count > 0)
+            {
+                return new SqlRuleMapResult()
+                {
+                    OriginSql = containerRuleSqlCmd,
+                    WaitExcuteSql = batchSqlArr.ToArray(),
+                    NoMapRule = noMapRules.ToArray(),
+                    RuleMapProperty = ruleMapPorperty,
+                    SqlParams = param.ToArray()
+                };
+            }
+            for (int i = 0; i < entity.Count; i++)
+            {
+                T item = entity[i];
+                Type t=item.GetType();
+                string arrSql = containerRuleSqlCmd;
+                foreach (var kv in ruleMapPorperty)
+                {
+                    string paramName="@"+kv.Value+i;
+                    arrSql = arrSql.Replace(kv.Key, paramName);
+                    object obj = t.GetProperty(kv.Value).GetValue(item,null);
+                    if (obj == null)
+                    {
+                        param.Add(new SqlParameter() { ParameterName = paramName, Value = DBNull.Value });
+                    }
+                    else 
+                    {
+                        param.Add(new SqlParameter() { ParameterName = paramName, Value = obj });
+                    }
+                }
+                batchSqlArr.Add(arrSql);//批量执行的SQL列表
+            }
+            return new SqlRuleMapResult()
+            {
+                OriginSql = containerRuleSqlCmd,
+                WaitExcuteSql = batchSqlArr.ToArray(),
+                NoMapRule = noMapRules.ToArray(),
+                RuleMapProperty = ruleMapPorperty,
+                SqlParams = param.ToArray()
+            };
         }
     }
 }
