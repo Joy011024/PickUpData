@@ -408,12 +408,30 @@ namespace CommonHelperEntity
             {
                 compareColumn[ExcelDataSource.OriginExcel].Add(item.OriginHeadIndex);
                 compareColumn[ExcelDataSource.TargetExcel].Add(item.NewHeadIndex);
-            }
+            } 
+            //进行excel数据入组
             ExcelHelper.ReadSheet(firstExcelDir, false, 0, OrderReaderExcelRow, false);
             nowReadFirstExcel = false;//开始进行第二份excel的读取
             ExcelHelper.ReadSheet(secondExcelDir, false, 0, OrderReaderExcelRow, false);
-            //进行excel数据入组
+            List<int> noMap = new List<int>();
             //组内excel数据比较
+            foreach (KeyValuePair<int,List<string>> first in dataSource[ExcelDataSource.OriginExcel])
+            {
+                bool found=false;
+                foreach (KeyValuePair<int,List<string>> second in dataSource[ExcelDataSource.TargetExcel])
+                {
+                    //比较这一行是否存在响应数据
+                    if (string.Join("", first.Value) == string.Join("", second.Value))
+                    {
+                        found = true;
+                    }
+                }
+                //记录没有比较出的数据结果集
+                if (!found)
+                {
+                    noMap.Add(first.Key);
+                }
+            }
             //比较结果进行差异化汇总入档
             return ErrorMsgCode.None;
         }
@@ -442,7 +460,7 @@ namespace CommonHelperEntity
             {
                 int ci = cellIndex[i];
                 ICell cell = row.GetCell(ci);
-                dataSource[target][index].Add(cell == null ? string.Empty : cell.ToString());
+                dataSource[target][index].Add(cell == null ? string.Empty : cell.ToString().Trim());
             }
         }
     }
