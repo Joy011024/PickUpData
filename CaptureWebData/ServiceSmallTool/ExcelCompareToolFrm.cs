@@ -96,12 +96,12 @@ namespace ServiceSmallTool
             else if (area == ECompareTarget.Left)
             {//此时进行的是单方补充
                 //当前是数据补充到缺少项中
-                dataRowIndex=rightHead.Count - 1;
+                dataRowIndex = leftHead.Count;
                 compare = lstCompare.Items[dataRowIndex].Tag as CompareData;
             }
             else 
             {
-                dataRowIndex=leftHead.Count - 1;
+                dataRowIndex = rightHead.Count;
                 compare = lstCompare.Items[dataRowIndex].Tag as CompareData;
             }
             switch (area)
