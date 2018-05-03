@@ -413,10 +413,10 @@ namespace CommonHelperEntity
             ExcelHelper.ReadSheet(firstExcelDir, false, 0, OrderReaderExcelRow, false);
             nowReadFirstExcel = false;//开始进行第二份excel的读取
             ExcelHelper.ReadSheet(secondExcelDir, false, 0, OrderReaderExcelRow, false);
-            List<int> noMap = new List<int>();
+            List<int> fisrtDiff = new List<int>();
             //组内excel数据比较
             foreach (KeyValuePair<int,List<string>> first in dataSource[ExcelDataSource.OriginExcel])
-            {
+            {//第一份excel
                 bool found=false;
                 foreach (KeyValuePair<int,List<string>> second in dataSource[ExcelDataSource.TargetExcel])
                 {
@@ -424,14 +424,35 @@ namespace CommonHelperEntity
                     if (string.Join("", first.Value) == string.Join("", second.Value))
                     {
                         found = true;
+                        break;
                     }
                 }
                 //记录没有比较出的数据结果集
                 if (!found)
                 {
-                    noMap.Add(first.Key);
+                    fisrtDiff.Add(first.Key);
                 }
             }
+            List<int> secondDiff = new List<int>();
+            foreach (KeyValuePair<int, List<string>> second in dataSource[ExcelDataSource.TargetExcel])
+            {//第二份结果中的差异
+                bool found = false;
+                foreach (KeyValuePair<int, List<string>> first in dataSource[ExcelDataSource.OriginExcel])
+                {
+                    //比较这一行是否存在响应数据
+                    if (string.Join("", second.Value) == string.Join("", first.Value))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                //记录没有比较出的数据结果集
+                if (!found)
+                {
+                    secondDiff.Add(second.Key);
+                }
+            }
+
             //比较结果进行差异化汇总入档
             return ErrorMsgCode.None;
         }
