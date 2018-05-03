@@ -56,11 +56,12 @@ namespace ServiceSmallTool
         List<bool> rightHead = new List<bool>();
         void ReadExcelHead()
         {
-            string dir = @"D:\LogFile\ExcelCompare.xlsx";
+            string exeDir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
+            string dir =exeDir+ @"\LogFile\ExcelCompare.xlsx";
             ExcelCompareHelper helper = new ExcelCompareHelper();
             helper.QueryExcelHead(dir);
             lstLeft.BindDataSource<ExcelHeadAttribute>(helper.heads);
-            string rightDir = @"D:\LogFile\ExcelCompareCh.xlsx";
+            string rightDir = exeDir+@"\LogFile\ExcelCompareCh.xlsx";
             helper.QueryExcelHead(rightDir);
             lstRight.BindDataSource<ExcelHeadAttribute>(helper.heads);
             
