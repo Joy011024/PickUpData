@@ -255,4 +255,7 @@
   <data name="LblGender" xml:space="preserve">
     <value>性别</value>
   </data>
+  <data name="LblDisplayImg" xml:space="preserve">
+    <value>显示照片</value>
+  </data>
 </root>

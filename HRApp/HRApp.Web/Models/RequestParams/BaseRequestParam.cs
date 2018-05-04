@@ -38,4 +38,8 @@ namespace HRApp.Web
     {
         public string Value { get; set; }
     }
+    public class QueryContactParam : QueryRequestParam
+    {
+        public int ReportEnum { get; set; }
+    }
 }

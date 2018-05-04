@@ -43,6 +43,8 @@
         }
     </style>
     <script type="text/javascript">
+        var releativeUrl = '@Request.RawUrl';
+        var type = '@Request.QueryString["ReportEnum"]';//类型
         $(function () {
             DrwaPageEle(1, 1);
             $('#btnPickupAccount').click(function () {
@@ -51,7 +53,8 @@
             $('#btnQuery').click(function () {
                 var param = {
                     'StartTime': $('[attr=StartTime]').val(),
-                    'EndTime': $('[attr=EndTime]').val()
+                    'EndTime': $('[attr=EndTime]').val(),
+                    'ReportEnum':type
                 };
                 SearchEvent(param);
             });
@@ -146,7 +149,9 @@
                        ht = ht.replace('{Gender}', lang.dict.Gender[ele.Gender]);
                        ht = ht.formatObject(ele);
                        ht = ht.replace("{i}", i);
-                       ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
+                       if ($('#ckShowImg').is(':checked')) {
+                           ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
+                       }
                        $('.dataRowArea').prepend(ht);
                    });
                    $('.dataRowArea .tmpl [type=checkbox]').click(function () {
@@ -233,6 +238,10 @@
                 <label>
                     <span>@Lang.LblAppendDisplay</span>
                     <span><input type="checkbox" id="ckAppendDisplay" style="width: 30px;position: relative; top: 10px;" /></span>
+                </label>
+                <label>
+                    <span>@Lang.LblDisplayImg</span>
+                    <span><input type="checkbox" id="ckShowImg" style="width: 30px;position: relative; top: 10px;" /></span>
                 </label>
                 <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.BtnQuery" />
             </span>

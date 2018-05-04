@@ -241,6 +241,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 显示照片 的本地化字符串。
+        /// </summary>
+        public static string LblDisplayImg {
+            get {
+                return ResourceManager.GetString("LblDisplayImg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 结束时间 的本地化字符串。
         /// </summary>
         public static string LblEndTime {

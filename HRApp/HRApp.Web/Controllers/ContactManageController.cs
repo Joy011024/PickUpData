@@ -41,7 +41,7 @@ namespace HRApp.Web.Controllers
         {
             return View();
         }
-        public JsonResult QueryUinDataList(QueryRequestParam param) 
+        public JsonResult QueryUinDataList(QueryContactParam param) 
         {
             IDataFromOtherService contactService = IocMvcFactoryHelper.GetInterface<IDataFromOtherService>();
             Common.Data.JsonData json = contactService.QueryUinList(DateTime.Parse(param.StartTime), DateTime.Parse(param.EndTime), param.BeginRow, param.EndRow);
