@@ -186,3 +186,32 @@ create table KeySpellInt
 )
 alter table KeySpellInt add constraint fk_KeySpellInt foreign key (TableId) 
  references RelyTable(Id);
+create table BaseOrderData
+(--
+	Id uniqueidentifier primary key,
+	Name nvarchar(16) not null,
+	CreateTime DateTime not null,
+	Remark nvarchar(1028)
+);
+create table Saller
+(
+	Id int primary key identity(1,1),
+	Name nvarchar(16) not null,
+	JoinTime datetime not null,
+	CancelTime datetime not null,
+	[Level] smallint not null,
+	Address nvarchar(128) not null,
+	Contact varchar(16) not null
+)
+create table UserOrderData
+(
+	Id uniqueidentifier primary key,
+	Name nvarchar(16) not null,
+	CreateTime DateTime not null,
+	Remark nvarchar(1028),
+	BelongSallerId int not null,--µÍº“
+	DayStock int not null,--ø‚¥Ê
+	DayPrice float not null-- €º€
+);
+ alter table UserOrderData add constraint fk_BelongSallerId foreign key (BelongSallerId) 
+ references Saller(Id);
