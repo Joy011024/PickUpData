@@ -364,7 +364,7 @@ namespace CommonHelperEntity
         /// <summary>
         /// 在进行excel列进行数据处理时每个结果单元列处理事件
         /// </summary>
-        public List<CellFormatEvent> CellValueFormat = new List<CellFormatEvent>();
+        public Dictionary<int, CellFormatEvent> CellValueFormat = new Dictionary<int, CellFormatEvent>();
         public enum ErrorMsgCode
         { 
             None=-1,
@@ -480,7 +480,7 @@ namespace CommonHelperEntity
                 ICell cell = row.GetCell(ci);
                 //是否需要对列进行特殊化处理：比如int数据在数据表中增加了 ".00"后缀,以及对日期类型进行规范化处理
                 string valueStr=cell == null ? string.Empty : cell.ToString().Trim();
-                if (CellValueFormat.Count >= i)
+                if (CellValueFormat.ContainsKey(i))
                 {
                    valueStr= CellValueFormat[i](valueStr);
                 }
