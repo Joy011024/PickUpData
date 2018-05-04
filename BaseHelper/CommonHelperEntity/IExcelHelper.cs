@@ -480,9 +480,10 @@ namespace CommonHelperEntity
                 ICell cell = row.GetCell(ci);
                 //是否需要对列进行特殊化处理：比如int数据在数据表中增加了 ".00"后缀,以及对日期类型进行规范化处理
                 string valueStr=cell == null ? string.Empty : cell.ToString().Trim();
+                //excel 使用npoi操作读取单元格 ，发现使用NumericCellValue取出的值为203.0，cell.ToString()取出的值为203
                 if (CellValueFormat.ContainsKey(i))
                 {
-                   valueStr= CellValueFormat[i](valueStr);
+                   valueStr= CellValueFormat[i](valueStr);//使用比较集合中的索引是为了兼容两个excel中列头排序不一致的情形
                 }
                 dataSource[target][index].Add(valueStr);
             }

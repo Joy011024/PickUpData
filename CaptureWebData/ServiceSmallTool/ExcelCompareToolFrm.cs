@@ -229,11 +229,41 @@ namespace ServiceSmallTool
             ExcelCompareActionHelp helper = new ExcelCompareActionHelp();
             string firstExcel=firstFile.SelectFileFullName;
             string secondExcel=secondFile.SelectFileFullName;
+            //特殊列处理情形事件
+            for (int i = 0; i < heads.Count; i++)
+            {
+                if (heads[i].OriginHeadName == "CreateTime")
+                {
+                    helper.CellValueFormat.Add(i, CreateTimeFormatEvent);
+                }
+                else if (heads[i].OriginHeadName == "Total")
+                {
+                    helper.CellValueFormat.Add(i, TotalFormatEvent);   
+                }
+            }
             helper.DoExcelCompare(firstExcel, secondExcel, heads);
         }
         void DoClearRecordEvent() 
         {
             rtbNote.Text = string.Empty;
+        }
+        string CreateTimeFormatEvent(string cellValue) 
+        {
+
+            return cellValue;
+        }
+        string TotalFormatEvent(string cellValue)
+        {
+            if (string.IsNullOrEmpty(cellValue))
+            {
+                return string.Empty;
+            }
+            int total = 0;
+            if(int.TryParse(cellValue,out total))
+            {
+                return total.ToString();
+            }
+            return cellValue;
         }
     }
     public class ExcelDataHelper
