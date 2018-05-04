@@ -220,6 +220,12 @@ namespace ServiceSmallTool
             if (lvs.Count == 0)
             {
                 rtbNote.Text += "\r\n请选择比较的excel列";
+                return;
+            }
+            if (leftHead.Count != rightHead.Count)
+            {
+                rtbNote.Text += "两个excel待比较的列数目不一致 ";
+                return;
             }
             foreach (ListViewItem item in lvs)
             {

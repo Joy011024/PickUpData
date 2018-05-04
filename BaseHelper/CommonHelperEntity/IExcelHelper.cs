@@ -70,6 +70,20 @@ namespace CommonHelperEntity
                 fs.Close();
             }
         }
+        /// <summary>
+        /// 只读取指定的工作页
+        /// </summary>
+        /// <param name="excelDir"></param>
+        /// <param name="version"></param>
+        /// <param name="sheetIndex"></param>
+        /// <returns></returns>
+        public static ISheet ReadExcelSheet(string excelDir,EExcelType version, int sheetIndex)
+        {
+            IWorkbook booke = GetExcelWorkBook(excelDir, version);
+            ISheet sheet= booke.GetSheetAt(sheetIndex);
+            booke.Close();
+            return sheet;
+        }
         public static List<DataTable> ReadExcelSheets<T>(this T helper,FileStream stream) where T:IExcelHelper
         {//读取excel的所有工作页
             List<DataTable> tables = new List<DataTable>();
@@ -314,7 +328,13 @@ namespace CommonHelperEntity
             fs.Flush();
             SaveSheet(excelBook, fs);
         }
-        static IWorkbook GetExcelWorkBook(string fileFullName, EExcelType excel)
+        /// <summary>
+        /// 读取excel的工作单元【如果不存在则新建】
+        /// </summary>
+        /// <param name="fileFullName"></param>
+        /// <param name="excel"></param>
+        /// <returns></returns>
+        public static IWorkbook GetExcelWorkBook(string fileFullName, EExcelType excel)
         {
             if (File.Exists(fileFullName))
             {
@@ -384,7 +404,7 @@ namespace CommonHelperEntity
             errorCode.Add(ErrorMsgCode.FirstExcelIndexDistinct, "第一份excel中列序号存在重复项");
             errorCode.Add(ErrorMsgCode.SecondExcelIndexDistinct, "第一份excel中列序号存在重复项");
         }
-        public ErrorMsgCode DoExcelCompare(string firstExcelDir, string secondExcelDir, List<CompareData> mapColumn) 
+        public ErrorMsgCode DoExcelCompare(string firstExcelDir, string secondExcelDir, List<CompareData> mapColumn)
         {
             //参数校验->是否列序号存在重复
             int[] left = mapColumn.Select(s => s.OriginHeadIndex).ToArray();
@@ -394,7 +414,7 @@ namespace CommonHelperEntity
                 return ErrorMsgCode.FirstExcelIndexDistinct;
             }
             int[] right = mapColumn.Select(s => s.NewHeadIndex).ToArray();
-            int[] distinctRight= mapColumn.Select(s => s.NewHeadIndex).Distinct().ToArray();
+            int[] distinctRight = mapColumn.Select(s => s.NewHeadIndex).Distinct().ToArray();
             if (right.Length > distinctRight.Length)
             {
                 return ErrorMsgCode.SecondExcelIndexDistinct;
@@ -413,16 +433,22 @@ namespace CommonHelperEntity
             {
                 compareColumn[ExcelDataSource.OriginExcel].Add(item.OriginHeadIndex);
                 compareColumn[ExcelDataSource.TargetExcel].Add(item.NewHeadIndex);
-            } 
+            }
             //进行excel数据入组
             ExcelHelper.ReadSheet(firstExcelDir, false, 0, OrderReaderExcelRow, false);
             nowReadFirstExcel = false;//开始进行第二份excel的读取
             ExcelHelper.ReadSheet(secondExcelDir, false, 0, OrderReaderExcelRow, false);
-           int[] fisrtDiff =DiffInData(dataSource[ExcelDataSource.OriginExcel],dataSource[ExcelDataSource.TargetExcel]);
+            int[] firstDiff = DiffInData(dataSource[ExcelDataSource.OriginExcel], dataSource[ExcelDataSource.TargetExcel]);
             //组内excel数据比较
-           int[] secondDiff = DiffInData(dataSource[ExcelDataSource.TargetExcel], dataSource[ExcelDataSource.OriginExcel]);
+            int[] secondDiff = DiffInData(dataSource[ExcelDataSource.TargetExcel], dataSource[ExcelDataSource.OriginExcel]);
             //比较结果进行差异化汇总入档
-
+            //分别从两份原始excel中读出差异行，写入到另一份excel
+            FileInfo fi = new FileInfo(firstExcelDir);
+            string newDir = fi.DirectoryName;//目录
+            string on= fi.Name.Replace(fi.Extension,string.Empty);
+            string excelName =newDir+"\\"+on+ DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat) + fi.Extension;
+            WriteDiffRowInBook(excelName, 0, firstExcelDir, 0, firstDiff);
+            WriteDiffRowInBook(excelName, 1,secondExcelDir, 0, secondDiff);
             return ErrorMsgCode.None;
         }
         /// <summary>
@@ -487,6 +513,47 @@ namespace CommonHelperEntity
                 }
                 dataSource[target][index].Add(valueStr);
             }
+        }
+        void WriteDiffRowInBook(string excelFullPath,int writeSheetIndex,string dataSourceFullPath,int sheetIndex,int[] rowIndex) 
+        {
+            EExcelType version=EExcelType.Xlsx;
+            IWorkbook book = ExcelHelper.GetExcelWorkBook(excelFullPath, version);
+            ISheet sheet= ExcelHelper.ReadExcelSheet(dataSourceFullPath, version, sheetIndex);
+            IRow head = sheet.GetRow(0);
+            ISheet excuteSheet = null;
+            if (book.NumberOfSheets>0&&book.NumberOfSheets-1 >= writeSheetIndex)
+            {
+                excuteSheet = book.GetSheetAt(writeSheetIndex);
+            }
+            else 
+            {
+                excuteSheet = book.CreateSheet();
+            }
+            IRow wr= excuteSheet.CreateRow(0);//这是要写入的头
+            int cellSize = head.LastCellNum;
+            for (int i = 0; i < cellSize; i++)
+            {
+                ICell cell=head.GetCell(i);
+                ICell wc= wr.CreateCell(i,cell==null?CellType.String: cell.CellType);
+                wc.SetCellValue(cell==null?string.Empty: cell.ToString());
+            }
+            for (int i = 0; i < rowIndex.Length; i++)
+            {
+                IRow tr =sheet.GetRow( rowIndex[i]);
+                IRow wrRow = excuteSheet.CreateRow(i + 1);
+                for (int c = 0; c < cellSize; c++)
+                {
+                    ICell cell = tr.GetCell(c);
+                    ICell wc = wrRow.CreateCell(c, cell == null ? CellType.String : cell.CellType);
+                    wc.SetCellValue(cell == null ? string.Empty : cell.ToString());
+                }
+            }
+            //保存
+            FileStream fs = new FileStream(excelFullPath, FileMode.Open, FileAccess.Write, FileShare.ReadWrite); //数据存储
+            fs.Flush();
+            book.Write(fs);
+            fs.Close();
+            book.Close();
         }
     }
     public class CompareData
