@@ -413,31 +413,26 @@ namespace CommonHelperEntity
             ExcelHelper.ReadSheet(firstExcelDir, false, 0, OrderReaderExcelRow, false);
             nowReadFirstExcel = false;//开始进行第二份excel的读取
             ExcelHelper.ReadSheet(secondExcelDir, false, 0, OrderReaderExcelRow, false);
-            List<int> fisrtDiff = new List<int>();
+           int[] fisrtDiff =DiffInData(dataSource[ExcelDataSource.OriginExcel],dataSource[ExcelDataSource.TargetExcel]);
             //组内excel数据比较
-            foreach (KeyValuePair<int,List<string>> first in dataSource[ExcelDataSource.OriginExcel])
-            {//第一份excel
-                bool found=false;
-                foreach (KeyValuePair<int,List<string>> second in dataSource[ExcelDataSource.TargetExcel])
-                {
-                    //比较这一行是否存在响应数据
-                    if (string.Join("", first.Value) == string.Join("", second.Value))
-                    {
-                        found = true;
-                        break;
-                    }
-                }
-                //记录没有比较出的数据结果集
-                if (!found)
-                {
-                    fisrtDiff.Add(first.Key);
-                }
-            }
-            List<int> secondDiff = new List<int>();
-            foreach (KeyValuePair<int, List<string>> second in dataSource[ExcelDataSource.TargetExcel])
+           int[] secondDiff = DiffInData(dataSource[ExcelDataSource.TargetExcel], dataSource[ExcelDataSource.OriginExcel]);
+            //比较结果进行差异化汇总入档
+
+            return ErrorMsgCode.None;
+        }
+        /// <summary>
+        /// 查找字符串差异索引
+        /// </summary>
+        /// <param name="firstColl"></param>
+        /// <param name="secondColl"></param>
+        /// <returns></returns>
+        int[] DiffInData(Dictionary<int,List<string>> firstColl,Dictionary<int,List<string>> secondColl) 
+        {
+            List<int> diff = new List<int>();
+            foreach (KeyValuePair<int, List<string>> first  in firstColl)
             {//第二份结果中的差异
                 bool found = false;
-                foreach (KeyValuePair<int, List<string>> first in dataSource[ExcelDataSource.OriginExcel])
+                foreach (KeyValuePair<int, List<string>> second in secondColl)
                 {
                     //比较这一行是否存在响应数据
                     if (string.Join("", second.Value) == string.Join("", first.Value))
@@ -449,12 +444,10 @@ namespace CommonHelperEntity
                 //记录没有比较出的数据结果集
                 if (!found)
                 {
-                    secondDiff.Add(second.Key);
+                    diff.Add(first.Key);
                 }
             }
-
-            //比较结果进行差异化汇总入档
-            return ErrorMsgCode.None;
+            return diff.ToArray();
         }
         void OrderReaderExcelRow(IRow row) 
         {

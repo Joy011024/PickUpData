@@ -73,7 +73,6 @@ namespace HRApp.Web.Controllers
                         ui.Childerns.Add(copy);
                     }
                 }
-                
             }
             json.Data = menus;
             json.Success = true;
