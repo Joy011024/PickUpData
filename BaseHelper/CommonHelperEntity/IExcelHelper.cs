@@ -360,6 +360,11 @@ namespace CommonHelperEntity
         List<CompareData> mapRule = new List<CompareData>();//列匹配规则
         Dictionary<ExcelDataSource, List<int>> compareColumn = new Dictionary<ExcelDataSource, List<int>>();
         bool nowReadFirstExcel = true;
+        public delegate string CellFormatEvent(string cellValue);
+        /// <summary>
+        /// 在进行excel列进行数据处理时每个结果单元列处理事件
+        /// </summary>
+        public List<CellFormatEvent> CellValueFormat = new List<CellFormatEvent>();
         public enum ErrorMsgCode
         { 
             None=-1,
@@ -433,8 +438,7 @@ namespace CommonHelperEntity
             {//第二份结果中的差异
                 bool found = false;
                 foreach (KeyValuePair<int, List<string>> second in secondColl)
-                {
-                    //比较这一行是否存在响应数据
+                {//比较这一行是否存在相应数据
                     if (string.Join("", second.Value) == string.Join("", first.Value))
                     {
                         found = true;
@@ -474,7 +478,13 @@ namespace CommonHelperEntity
             {
                 int ci = cellIndex[i];
                 ICell cell = row.GetCell(ci);
-                dataSource[target][index].Add(cell == null ? string.Empty : cell.ToString().Trim());
+                //是否需要对列进行特殊化处理：比如int数据在数据表中增加了 ".00"后缀,以及对日期类型进行规范化处理
+                string valueStr=cell == null ? string.Empty : cell.ToString().Trim();
+                if (CellValueFormat.Count >= i)
+                {
+                   valueStr= CellValueFormat[i](valueStr);
+                }
+                dataSource[target][index].Add(valueStr);
             }
         }
     }
