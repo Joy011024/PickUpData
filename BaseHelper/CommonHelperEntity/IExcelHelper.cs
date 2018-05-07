@@ -527,10 +527,10 @@ namespace CommonHelperEntity
                 ICell cell = row.GetCell(ci);
                 ICellStyle cs = cell.CellStyle;
                 //如果是日期列则需要进行特殊处理
-                int temp = 0;
+                float temp = 0;
                 //是否需要对列进行特殊化处理：比如int数据在数据表中增加了 ".00"后缀,以及对日期类型进行规范化处理
                 string valueStr = cell == null ? string.Empty : cell.ToString().Trim();
-                if (cell.CellType == CellType.Numeric && !int.TryParse(valueStr, out temp))
+                if (cell.CellType == CellType.Numeric && ! float.TryParse(valueStr, out temp))
                 {
                     DateTime time = cell.DateCellValue;
                     valueStr = time.ToString("yyyy-MM-dd");

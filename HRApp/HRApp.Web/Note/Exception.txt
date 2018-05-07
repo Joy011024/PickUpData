@@ -10,3 +10,6 @@ set @p5=877056
 exec SP_QueryAccount @beginDayInt=20180313,@endDayInt=20180412,@beginRow=1,@endRow=30,@total=@p5 output
 select @p5
 经过sql  profire追踪执行语句发现在执行存储过程SP_QueryAccount前数据总量已经进行了查询
+(4.)npoi操作excel
+npoi解析日期类型时，格式为Numeric，而数字也是Numeric，如何区分是否为数字/日期？
+不能使用int.TryPare，不兼容判断浮点小数
