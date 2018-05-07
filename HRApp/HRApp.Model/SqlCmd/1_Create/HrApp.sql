@@ -186,6 +186,38 @@ create table KeySpellInt
 )
 alter table KeySpellInt add constraint fk_KeySpellInt foreign key (TableId) 
  references RelyTable(Id);
+create table Organze
+(
+	Id int identity(1,1) primary key,
+	Name nvarchar(16) not null,
+	Code varchar(32) not null,
+	CreateTime datetime not null,
+	Scale int not null,--人员规模
+	ParentId int not null
+);
+create table OrganzeLeader
+(
+	Id int identity(1,1) primary key,
+	OrganzeId int not null,
+	Name nvarchar(16) not null,
+	ServeTime datetime not null,--上任时间
+	Createtime datetime not null,
+	Statue smallint not null
+);
+ alter table OrganzeLeader add constraint fk_OrganzeId foreign key (OrganzeId) 
+ references Organze(Id);
+create table OrganzeMember
+(
+	Id int identity(1,1) primary key,
+	Name nvarchar(16) not null,
+	SpellName varchar(16) not null,
+	IsLeader bit not null,
+	CreateTime datetime not null,
+	ServeTime datetime not null,
+	OrganzeId int not null
+)
+ alter table OrganzeMember add constraint fk_OrganzeMemberId foreign key (OrganzeId) 
+ references Organze(Id);
 create table BaseOrderData
 (--
 	Id uniqueidentifier primary key,

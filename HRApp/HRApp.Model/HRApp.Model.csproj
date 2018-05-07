@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\OrderModule\BaseOrder.cs" />
     <Compile Include="ECommn.cs" />
     <Compile Include="Entity\ContactData.cs" />
     <Compile Include="Entity\AppModel.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="Entity\SpecialSpellName.cs" />
     <Compile Include="Entity\KeySpell.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="Entity\OrganzeModule\Organze.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\ReportEnumDetail.cs" />
     <Compile Include="Entity\RelyTable.cs" />
