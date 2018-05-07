@@ -47,6 +47,7 @@
     <Compile Include="Entity\Users.cs" />
     <Compile Include="Entity\SpecialSpellName.cs" />
     <Compile Include="Entity\KeySpell.cs" />
+    <Compile Include="Entity\WorkFlowModule\WorkFlow.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Entity\OrganzeModule\Organze.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,6 +74,7 @@
     <Content Include="SqlCmd\4_LogicData\4_1_LogicData.sql" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Entity\BaseModule\" />
     <Folder Include="Setting\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
