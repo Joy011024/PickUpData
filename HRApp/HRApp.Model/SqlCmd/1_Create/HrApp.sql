@@ -195,26 +195,18 @@ create table Organze
 	Scale int not null,--人员规模
 	ParentId int not null
 );
-create table OrganzeLeader
-(
-	Id int identity(1,1) primary key,
-	OrganzeId int not null,
-	Name nvarchar(16) not null,
-	ServeTime datetime not null,--上任时间
-	Createtime datetime not null,
-	Statue smallint not null
-);
- alter table OrganzeLeader add constraint fk_OrganzeId foreign key (OrganzeId) 
- references Organze(Id);
 create table OrganzeMember
 (
 	Id int identity(1,1) primary key,
 	Name nvarchar(16) not null,
 	SpellName varchar(16) not null,
 	IsLeader bit not null,
+	IsBoss bit not null,
 	CreateTime datetime not null,
 	ServeTime datetime not null,
-	OrganzeId int not null
+	OrganzeId int not null,
+	Statue smallint not null,
+	LastUpdateTime datetime not null
 )
  alter table OrganzeMember add constraint fk_OrganzeMemberId foreign key (OrganzeId) 
  references Organze(Id);
