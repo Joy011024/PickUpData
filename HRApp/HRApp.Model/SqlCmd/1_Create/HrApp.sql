@@ -248,6 +248,8 @@ create table UserOrderData
 	Remark nvarchar(1028),
 	Code varchar(32) not null,
 	CreateTime DateTime not null,
-	ParentId int not null,--返现查找子节点，这是处理流程转向情形
-	BackId int not null,--拒绝时返项流程
+	ParentId int not null,--用于记录是所属流程
+	GotoFlowId int not null,--查找流程下一步骤节点，这是流程进度图
+	BackId int not null--拒绝时返项流程
+	 
  )
