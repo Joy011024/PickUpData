@@ -33,7 +33,7 @@ namespace ServiceSmallTool
             string exeDir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
             string dir = exeDir + @"\LogFile\ExcelCompare.xlsx";
             firstFile.SetPath(dir);
-            string rightDir = exeDir + @"\LogFile\Keyword2.xlsx";// exeDir + @"\LogFile\ExcelCompareCh.xlsx";
+            string rightDir = exeDir + @"\LogFile\ExcelCompareCh.xlsx";
             secondFile.SetPath(rightDir);
         }
         void InitListViewHead()
@@ -258,6 +258,8 @@ namespace ServiceSmallTool
                     helper.CellValueFormat.Add(i, TotalFormatEvent);   
                 }
             }
+            //列数据筛选
+            helper.RowDataFilterEvent = FilterExcelRowData;
             helper.DoExcelCompare(firstExcel, secondExcel, heads);
         }
         void DoClearRecordEvent() 
@@ -281,6 +283,10 @@ namespace ServiceSmallTool
                 return total.ToString();
             }
             return cellValue;
+        }
+        bool FilterExcelRowData(object row) 
+        {
+            return true;
         }
     }
     public class ExcelDataHelper
