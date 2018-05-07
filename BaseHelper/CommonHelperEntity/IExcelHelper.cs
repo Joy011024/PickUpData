@@ -188,10 +188,19 @@ namespace CommonHelperEntity
                 rowRead(row);
             }
         }
+        [Description("根据excel文件名的后缀信息选择文件版本")]
+        public static EExcelType SelectExcelVersion(string excelFullPath) 
+        {
+            FileInfo fi = new FileInfo(excelFullPath);
+            string ext = fi.Extension;//文件扩展名/文件后缀
+            EExcelType type = ext.ToLower() == EExcelType.Xls.ToString().ToLower()
+                ? EExcelType.Xls : EExcelType.Xlsx;
+            return type;
+        }
         [Description("从Excel中进行数据读取,readAllSheet是否读取全部的工作页，设置true时sheetPageIndex无效")]
         public static void ReadSheet(string excelFullPath,bool readAllSheet,int sheetPageIndex, ReadRowCallBack readRowFun, bool justReadHead)
         {
-            EExcelType type = EExcelType.Xlsx;
+            EExcelType type = SelectExcelVersion(excelFullPath);
             IWorkbook book = GetExcelWorkBook(excelFullPath, type);
             int sheetPage = book.NumberOfSheets;//总共存储多少sheet页
             //是否增加页索引判断->
@@ -524,16 +533,16 @@ namespace CommonHelperEntity
                    valueStr= CellValueFormat[i](valueStr);//使用比较集合中的索引是为了兼容两个excel中列头排序不一致的情形
                 }
                 rowString.Add(valueStr);
-                
             }
-            if (RowDataFilterEvent(rowString))
+            string[] rowDataArr = rowString.ToArray();
+            if (RowDataFilterEvent(rowDataArr))
             {
-                dataSource[target][index].AddRange(rowString.ToArray());
+                dataSource[target][index].AddRange(rowDataArr);
             }
         }
         void WriteDiffRowInBook(string excelFullPath,int writeSheetIndex,string dataSourceFullPath,int sheetIndex,int[] rowIndex) 
         {
-            EExcelType version=EExcelType.Xlsx;
+            EExcelType version = ExcelHelper.SelectExcelVersion(excelFullPath);
             IWorkbook book = ExcelHelper.GetExcelWorkBook(excelFullPath, version);
             ISheet sheet= ExcelHelper.ReadExcelSheet(dataSourceFullPath, version, sheetIndex);
             IRow head = sheet.GetRow(0);
@@ -575,7 +584,7 @@ namespace CommonHelperEntity
             book.Close();
         }
         bool ValidRowDataExtend(object rowData)
-        {
+        {//兼容验证行数据
             return true;   
         }
     }
