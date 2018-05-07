@@ -380,11 +380,18 @@ namespace CommonHelperEntity
         List<CompareData> mapRule = new List<CompareData>();//列匹配规则
         Dictionary<ExcelDataSource, List<int>> compareColumn = new Dictionary<ExcelDataSource, List<int>>();
         bool nowReadFirstExcel = true;
+        [Description("列数据格式化处理")]
         public delegate string CellFormatEvent(string cellValue);
+        [Description("进行行数据过滤")]
+        public delegate bool RowDataFilter(object rowData);
         /// <summary>
         /// 在进行excel列进行数据处理时每个结果单元列处理事件
         /// </summary>
         public Dictionary<int, CellFormatEvent> CellValueFormat = new Dictionary<int, CellFormatEvent>();
+        /// <summary>
+        /// 自定义excel行数据限定条件【如果使用该数据则返回true】
+        /// </summary>
+        public RowDataFilter RowDataFilterEvent;
         public enum ErrorMsgCode
         { 
             None=-1,
@@ -500,6 +507,11 @@ namespace CommonHelperEntity
             }
             dataSource[target].Add(index,new List<string>());
             List<string> leftRowData = new List<string>();//行数据
+            if (RowDataFilterEvent == null) 
+            {
+                RowDataFilterEvent = ValidRowDataExtend;//行数据校验
+            }
+            List<string> rowString = new List<string>();
             for (int i = 0; i < cellIndex.Count; i++)
             {
                 int ci = cellIndex[i];
@@ -511,7 +523,12 @@ namespace CommonHelperEntity
                 {
                    valueStr= CellValueFormat[i](valueStr);//使用比较集合中的索引是为了兼容两个excel中列头排序不一致的情形
                 }
-                dataSource[target][index].Add(valueStr);
+                rowString.Add(valueStr);
+                
+            }
+            if (RowDataFilterEvent(rowString))
+            {
+                dataSource[target][index].AddRange(rowString.ToArray());
             }
         }
         void WriteDiffRowInBook(string excelFullPath,int writeSheetIndex,string dataSourceFullPath,int sheetIndex,int[] rowIndex) 
@@ -556,6 +573,10 @@ namespace CommonHelperEntity
             book.Write(fs);
             fs.Close();
             book.Close();
+        }
+        bool ValidRowDataExtend(object rowData)
+        {
+            return true;   
         }
     }
     public class CompareData
