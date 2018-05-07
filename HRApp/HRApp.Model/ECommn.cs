@@ -85,4 +85,20 @@ namespace HRApp.Model
         [DescriptionSort("举报分类")]
         ReportEnum=8000
     }
+    [DescriptionSort("任职状态")]
+    public enum EmployerServeStatue
+    { 
+        [DescriptionSort("任职")]
+        Serve=1,
+        [DescriptionSort("离职")]
+        Departure= 2,
+        [DescriptionSort("晋升")]
+        Promotion=3,
+        [DescriptionSort("平调")]
+        ChangeOrganze=4,
+        [DescriptionSort("卸任")]
+        Resign=5,
+        [DescriptionSort("退休")]
+        Retirement=6
+    }
 }

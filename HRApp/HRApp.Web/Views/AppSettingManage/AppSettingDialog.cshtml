@@ -18,6 +18,7 @@
     <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/bootstrap-select/bootstrap-select.js?v=@InitAppSetting.Version"></script>
@@ -51,8 +52,37 @@
             //在UI渲染完毕（加载出该选择框）之后 该元素ParentCode的兄弟节点role="combobox"下的输入框aria-label="Search"
             BindBootStrapSelect(cmb, function () {
 
-                parent.selectpicker('refresh');
-                children.selectpicker('refresh');
+               /* parent.selectpicker('refresh');
+                children.selectpicker('refresh');*/
+                var slt = $('[apikey=ParentCode]').siblings().find('.bs-searchbox .form-control');
+                //获取输入文本
+                var text = slt.val();
+                bindPostAjax('/AppSettingManage/QueryNodesByIndex', {
+                    keySpell: text
+                }, function (response, statue) {
+                    var data = [
+                        {
+                            id: '-1', text: '请选择', parentId: '-1', parentCode: '-1'
+                        }
+                    ]
+                    console.log(response);
+                    if (!response.Success) {
+                        console.log('Error\t' + response.Message);
+                    }//function do visit  var int outsider
+                    var slt = $('[apikey=ParentCode]');
+                    var ul = $('[apikey=ParentCode]').siblings('.dropdown-menu').find('ul');
+                    //remove the selectbox of items 
+                    slt.empty();
+                    ul.empty();
+                    var nulmsg = '<option value="-1" parentid="-1">@AppLanguage.Lang.Tip_PleaseSelectParentNode</option>';
+                    slt.append(nulmsg);
+                    for (var i = 0; i < response.Total; i++) {
+                        var ele = response.Data[i];
+                        var op = '<option appvalue="{ItemValue}" value="{Code}" parentid="{Id}" nodeparentid="{ParentId}">{Name}</option>';
+                        slt.append( op.formatObject(ele));
+                    }
+                    $('[apikey=ParentCode]').selectpicker('refresh');
+                });
             });
             $('#btnClose').on('click', function () {
                 if (parent) {
@@ -124,7 +154,7 @@
             <span style="width:100px;">@Lang.LblParentCode :</span>
             <span style="display: inline-table;">
                 <select class="selectpicker" data-live-search="true" apikey="ParentCode" style="width:250px;">
-                    <option value="">@AppLanguage.Lang.Tip_PleaseSelectParentNode</option>
+                    <option value="-1" parentid="-1">@AppLanguage.Lang.Tip_PleaseSelectParentNode</option>
                     @{
                         foreach (HRApp.Model.CategoryItems item in ViewData["ParentNode"] as List<HRApp.Model.CategoryItems>)
                         {
