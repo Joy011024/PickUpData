@@ -525,8 +525,16 @@ namespace CommonHelperEntity
             {
                 int ci = cellIndex[i];
                 ICell cell = row.GetCell(ci);
+                ICellStyle cs = cell.CellStyle;
+                //如果是日期列则需要进行特殊处理
+                int temp = 0;
                 //是否需要对列进行特殊化处理：比如int数据在数据表中增加了 ".00"后缀,以及对日期类型进行规范化处理
-                string valueStr=cell == null ? string.Empty : cell.ToString().Trim();
+                string valueStr = cell == null ? string.Empty : cell.ToString().Trim();
+                if (cell.CellType == CellType.Numeric && !int.TryParse(valueStr, out temp))
+                {
+                    DateTime time = cell.DateCellValue;
+                    valueStr = time.ToString("yyyy-MM-dd");
+                }
                 //excel 使用npoi操作读取单元格 ，发现使用NumericCellValue取出的值为203.0，cell.ToString()取出的值为203
                 if (CellValueFormat.ContainsKey(i))
                 {
