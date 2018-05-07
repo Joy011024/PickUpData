@@ -48,5 +48,13 @@ namespace Domain.CommonData
     {
         public int Id { get; set; }
     }
-    
+    public class BaseFieldAsIntKey : IntPrimaryKey
+    {
+        public DateTime CreateTime { get; set; }
+        public string Name { get; set; }
+    }
+    public class FieldContainerCode : BaseFieldAsIntKey
+    {
+        public string Code { get; set; }
+    }
 }

@@ -239,3 +239,15 @@ create table UserOrderData
 );
  alter table UserOrderData add constraint fk_BelongSallerId foreign key (BelongSallerId) 
  references Saller(Id);
+ create table WorkFlow
+ (--数据流程节点表
+	Id int primary key,
+	FlowNodeName nvarchar(32) not null,--流程（节点）名
+	Sort smallint not null,--根据这个标志查找下一流程
+	UseFlow bit not null,
+	Remark nvarchar(1028),
+	Code varchar(32) not null,
+	CreateTime DateTime not null,
+	ParentId int not null,--返现查找子节点，这是处理流程转向情形
+	BackId int not null,--拒绝时返项流程
+ )
