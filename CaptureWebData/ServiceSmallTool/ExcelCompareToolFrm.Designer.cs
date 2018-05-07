@@ -38,6 +38,7 @@
             this.secondFile = new FeatureFrmList.SelectFile();
             this.firstFile = new FeatureFrmList.SelectFile();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnLoadExcel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstCompare
@@ -124,11 +125,21 @@
             this.btnClear.Text = "清空";
             this.btnClear.UseVisualStyleBackColor = true;
             // 
+            // btnLoadExcel
+            // 
+            this.btnLoadExcel.Location = new System.Drawing.Point(420, 70);
+            this.btnLoadExcel.Name = "btnLoadExcel";
+            this.btnLoadExcel.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadExcel.TabIndex = 10;
+            this.btnLoadExcel.Text = "加载Excel";
+            this.btnLoadExcel.UseVisualStyleBackColor = true;
+            // 
             // ExcelCompareToolFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 475);
+            this.Controls.Add(this.btnLoadExcel);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.rtbNote);
             this.Controls.Add(this.label2);
@@ -158,5 +169,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox rtbNote;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnLoadExcel;
     }
 }

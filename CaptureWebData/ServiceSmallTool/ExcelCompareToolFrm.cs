@@ -19,11 +19,22 @@ namespace ServiceSmallTool
         public ExcelCompareToolFrm()
         {
             InitializeComponent();
-            InitListViewHead();
             btnCompare.Tag = ButtonEvent.CompareExcelData.ToString();
             btnCompare.Click += new EventHandler(Button_Click);
             btnClear.Tag = ButtonEvent.ClearRecord;
             btnClear.Click += new EventHandler(Button_Click);
+            btnLoadExcel.Tag = ButtonEvent.LoadExcel.ToString();
+            btnLoadExcel.Click += new EventHandler(Button_Click);
+            InitLoad();
+            InitListViewHead();
+        }
+        void InitLoad() 
+        {
+            string exeDir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
+            string dir = exeDir + @"\LogFile\ExcelCompare.xlsx";
+            firstFile.SetPath(dir);
+            string rightDir = exeDir + @"\LogFile\Keyword2.xlsx";// exeDir + @"\LogFile\ExcelCompareCh.xlsx";
+            secondFile.SetPath(rightDir);
         }
         void InitListViewHead()
         {
@@ -60,7 +71,8 @@ namespace ServiceSmallTool
         enum ButtonEvent
         { 
             CompareExcelData=1,
-            ClearRecord=2
+            ClearRecord=2,
+            LoadExcel=3
         }
         List<bool> leftHead = new List<bool>();
         List<bool> rightHead = new List<bool>();
@@ -68,17 +80,13 @@ namespace ServiceSmallTool
         Dictionary<string, string> rightExcelData = new Dictionary<string, string>();
         void ReadExcelHead()
         {
-            string exeDir = new AppDirHelper().GetAppDir(AppCategory.WinApp);
-            string dir =exeDir+ @"\LogFile\ExcelCompare.xlsx";
-            firstFile.SetPath(dir);
+            string dir = firstFile.SelectFileFullName;
             ExcelDataHelper helper = new ExcelDataHelper();
             helper.QueryExcelHead(dir);
             lstLeft.BindDataSource<ExcelHeadAttribute>(helper.heads);
-            string rightDir = exeDir+@"\LogFile\ExcelCompareCh.xlsx";
-            secondFile.SetPath(rightDir);
+            string rightDir = secondFile.SelectFileFullName;
             helper.QueryExcelHead(rightDir);
             lstRight.BindDataSource<ExcelHeadAttribute>(helper.heads);
-            
         }
         void ListViewRow_SelctClick(object sender,EventArgs e) 
         {
@@ -207,6 +215,9 @@ namespace ServiceSmallTool
                     break;
                 case ButtonEvent.ClearRecord:
                     DoClearRecordEvent();
+                    break;
+                case ButtonEvent.LoadExcel:
+                    ReadExcelHead();
                     break;
                 default:
                     break;

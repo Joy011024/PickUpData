@@ -537,10 +537,12 @@ namespace CommonHelperEntity
                 ICell wc= wr.CreateCell(i,cell==null?CellType.String: cell.CellType);
                 wc.SetCellValue(cell==null?string.Empty: cell.ToString());
             }
+            int rowPoint = 0;
             for (int i = 0; i < rowIndex.Length; i++)
             {
                 IRow tr =sheet.GetRow( rowIndex[i]);
-                IRow wrRow = excuteSheet.CreateRow(i + 1);
+                rowPoint++;//行位置重新编排
+                IRow wrRow = excuteSheet.CreateRow(rowPoint);
                 for (int c = 0; c < cellSize; c++)
                 {
                     ICell cell = tr.GetCell(c);
