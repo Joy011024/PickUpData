@@ -224,23 +224,39 @@ namespace Infrastructure.ExtService
             }
             doc.Save(xmlFile);
         }
-        public static void GetNodeSpecialeAttribute(this string xmlFile, XmlNodeDataAttribute parentNode, XmlNodeDataAttribute nodeAttribute)
+        /// <summary>
+        /// 获取节点指定关键字
+        /// </summary>
+        /// <param name="xmlFile"></param>
+        /// <param name="parentNode">节点所属父项</param>
+        /// <param name="nodeAttribute">节点项特性内容</param>
+        /// <returns></returns>
+        public static Dictionary<string, string> GetNodeSpecialeAttribute(this string xmlFile, XmlNodeDataAttribute parentNode, XmlNodeDataAttribute nodeAttribute)
         {
+            string[] att=new string[] { nodeAttribute.NodeKeyName, nodeAttribute.NodeKeyValue };
+            Dictionary<string, string> cfg = new Dictionary<string, string>();
             GetNodeAttribute(xmlFile, parentNode, new ChildAttributeInNodeEvent(atts =>
             {
-                foreach (XmlAttribute ele in atts)
-                {
-                    XmlAttribute att = ele.Attributes[nodeAttribute.NodeKeyName];
-                    XmlAttribute value = ele.Attributes[nodeAttribute.NodeKeyValue];
-                    if (att == null || value == null)
+                Dictionary<string, string> sort = new Dictionary<string, string>();
+                foreach(XmlAttribute  item in atts)
+                {//先出现的是哪个属性
+                    if (item.Name == nodeAttribute.NodeKeyName)
                     {
-                        continue;
+                        sort.Add(nodeAttribute.NodeKeyName, item.Value);
+                    }
+                    else if (item.Name == nodeAttribute.NodeKeyValue)
+                    {
+                        sort.Add(nodeAttribute.NodeKeyValue, item.Value);
                     }
                 }
+                if (sort.Count == att.Length)
+                {
+                    cfg.Add(sort[nodeAttribute.NodeKeyName], sort[nodeAttribute.NodeKeyValue]);
+                }
             }));
-           
+            return cfg;
         }
-        delegate void ChildAttributeInNodeEvent(XmlAttributeCollection atts);
+        public delegate void ChildAttributeInNodeEvent(XmlAttributeCollection atts);
         public static void GetNodeAttribute(this string xmlFile, XmlNodeDataAttribute parentNode, ChildAttributeInNodeEvent attEvent)
         {
             List<XmlNodeDataAttribute> atts = new List<XmlNodeDataAttribute>();
@@ -249,18 +265,14 @@ namespace Infrastructure.ExtService
             string nodeFormat = "[@{0}='{1}']";
             XmlNode node = doc.SelectSingleNode(parentNode.NodeName + string.Format(nodeFormat, parentNode.NodeKeyName, parentNode.NodeKeyValue));
             XmlNodeList targets = node.ChildNodes;//全部子节点
-           
-            foreach (var item in targets)
+            foreach (XmlNode item in targets)
             {
-                XmlElement ele = (XmlElement)item;
-                if (ele.NodeType == XmlNodeType.Comment || ele.NodeType == XmlNodeType.Text)
+                if (item.NodeType == XmlNodeType.Comment || item.NodeType == XmlNodeType.Text)
                 {
                     continue;
                 }
-                XmlAttributeCollection attColl = ele.Attributes;
-
-                
-               
+                XmlElement ele = (XmlElement)item;
+                attEvent(ele.Attributes);
             }
         }
     }

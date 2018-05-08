@@ -2,7 +2,7 @@
 <configuration>
   <appSettings name="UiConfig"> 
     <!--UI配置-->
-    <add key="ClearLogDir" value="D:\CodeFile\GithubCode\Code\PickUpData\CaptureWebData\ServiceSmallTool\bin\Debug" />
+    <add key="ClearLogDir" value="D:\Dream\ExcuteHttpCmd\CaptureWebLogger\AutoLogger" />
     <!--清除日志的目录 用户可选配置-->
     <add key="ClearBeforeDay" value="1" />
     <!--清除多少天之前的日志-->

@@ -40,6 +40,7 @@
             this.btnDirOutput = new System.Windows.Forms.Button();
             this.ckContainerNode = new System.Windows.Forms.CheckBox();
             this.cmbFolderNameType = new System.Windows.Forms.ComboBox();
+            this.btnSaveCfg = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClearLog
@@ -147,11 +148,21 @@
             this.cmbFolderNameType.Size = new System.Drawing.Size(149, 20);
             this.cmbFolderNameType.TabIndex = 11;
             // 
+            // btnSaveCfg
+            // 
+            this.btnSaveCfg.Location = new System.Drawing.Point(335, 40);
+            this.btnSaveCfg.Name = "btnSaveCfg";
+            this.btnSaveCfg.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveCfg.TabIndex = 12;
+            this.btnSaveCfg.Text = "保存配置";
+            this.btnSaveCfg.UseVisualStyleBackColor = true;
+            // 
             // ClearLogFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 221);
+            this.Controls.Add(this.btnSaveCfg);
             this.Controls.Add(this.cmbFolderNameType);
             this.Controls.Add(this.ckContainerNode);
             this.Controls.Add(this.btnDirOutput);
@@ -185,6 +196,7 @@
         private System.Windows.Forms.Button btnDirOutput;
         private System.Windows.Forms.CheckBox ckContainerNode;
         private System.Windows.Forms.ComboBox cmbFolderNameType;
+        private System.Windows.Forms.Button btnSaveCfg;
     }
 }
 

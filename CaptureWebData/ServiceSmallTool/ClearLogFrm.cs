@@ -27,7 +27,8 @@ namespace ServiceSmallTool
         {
             ClearTip=1,
             ClearLog=2,
-            OutputDir=3
+            OutputDir=3,
+            SaveCfg=4
         }
         enum UiConfig
         {
@@ -43,16 +44,20 @@ namespace ServiceSmallTool
         void InitUI() 
         {
             txtLogDir.Text = ExeDir;
+            txtLogDir.Tag = UiConfig.ClearLogDir.ToString();
             btnClearLog.Tag = ButtonTag.ClearLog;
             btnClearNote.Tag = ButtonTag.ClearTip;
             btnClearLog.Click += new EventHandler(Button_Click);
             txtLogDir.MouseDoubleClick += new MouseEventHandler(TextDir_DoubleClick);
+            txtDayBefore.Tag = UiConfig.ClearBeforeDay.ToString();
             lstNote.View = View.Details;
             lstNote.Columns.Add(new ColumnHeader() { Text = "Tip", Width = 400 });
             lstNote.GridLines = true;
             btnClearNote.Click += new EventHandler(Button_Click);
             btnDirOutput.Tag = ButtonTag.OutputDir;
             btnDirOutput.Click += new EventHandler(Button_Click);
+            btnSaveCfg.Tag = ButtonTag.SaveCfg;
+            btnSaveCfg.Click += new EventHandler(Button_Click);
             BindSelect();
             bg.DoWork += new DoWorkEventHandler(Background_DoWork);
             bg.RunWorkerAsync();
@@ -90,9 +95,17 @@ namespace ServiceSmallTool
         }
         void ReadXmlCfgUpdateUi()
         {
-            XmlCfgDir.GetNodeSpecialeAttribute(UiCfgNode, nodeCfgFormat);
+           Dictionary<string,string> dict=  XmlCfgDir.GetNodeSpecialeAttribute(UiCfgNode, nodeCfgFormat);
             //提取目标属性
-
+           PageDataHelp page = new PageDataHelp();
+           foreach (var item in dict)
+           {
+              List<Control> ele= page.ForeachControl(this, item.Key);
+              if (ele.Count > 0)
+              {
+                  ele[0].Text = item.Value;
+              }
+           }
         }
         void BindSelect() 
         {
@@ -132,6 +145,9 @@ namespace ServiceSmallTool
                     PickupFolderType pickFolderE;
                     Enum.TryParse(pickFolder.Key,out pickFolderE);
                     OutputDirNames(txtLogDir.Text, ckContainerNode.Checked, pickFolderE); 
+                    break;
+                case ButtonTag.SaveCfg:
+                    SaveConfig();
                     break;
             }
             
