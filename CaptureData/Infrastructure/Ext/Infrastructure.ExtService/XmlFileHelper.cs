@@ -16,7 +16,7 @@ namespace Infrastructure.ExtService
         /// <param name="xmlFile"></param>
         /// <param name="node"></param>
         /// <returns></returns>
-        public static List<Dictionary<string, string>> ReadXmlNodeItemInAttribute(string xmlFile, string node)
+        public static List<Dictionary<string, string>> ReadXmlNodeItemInAttribute(this string xmlFile, string node)
         {
             if (string.IsNullOrEmpty(xmlFile))
             {
@@ -202,8 +202,6 @@ namespace Infrastructure.ExtService
             XmlNode parent= doc.SelectSingleNode(entityBelongNode.NodeName+"[@"+entityBelongNode.NodeKeyName+"='"+entityBelongNode.NodeKeyValue+"']");
             //查找目标
             string nodeFormat = "[@{0}='{1}']";
-            //查找一个节点模板
-            string nodeTemplate = string.Format("<{0} {1}='{2}' /> <!--{3}-->", dictBelongNode.NodeName, dictBelongNode.NodeKeyName, dictBelongNode.NodeKeyValue,dictBelongNode.NodeRemark);
             foreach (var item in obj)
             {
                 XmlNode node = parent.SelectSingleNode(dictBelongNode.NodeName+string.Format(nodeFormat,dictBelongNode.NodeKeyName,item.Key));
@@ -226,7 +224,45 @@ namespace Infrastructure.ExtService
             }
             doc.Save(xmlFile);
         }
-       
+        public static void GetNodeSpecialeAttribute(this string xmlFile, XmlNodeDataAttribute parentNode, XmlNodeDataAttribute nodeAttribute)
+        {
+            GetNodeAttribute(xmlFile, parentNode, new ChildAttributeInNodeEvent(atts =>
+            {
+                foreach (XmlAttribute ele in atts)
+                {
+                    XmlAttribute att = ele.Attributes[nodeAttribute.NodeKeyName];
+                    XmlAttribute value = ele.Attributes[nodeAttribute.NodeKeyValue];
+                    if (att == null || value == null)
+                    {
+                        continue;
+                    }
+                }
+            }));
+           
+        }
+        delegate void ChildAttributeInNodeEvent(XmlAttributeCollection atts);
+        public static void GetNodeAttribute(this string xmlFile, XmlNodeDataAttribute parentNode, ChildAttributeInNodeEvent attEvent)
+        {
+            List<XmlNodeDataAttribute> atts = new List<XmlNodeDataAttribute>();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlFile);
+            string nodeFormat = "[@{0}='{1}']";
+            XmlNode node = doc.SelectSingleNode(parentNode.NodeName + string.Format(nodeFormat, parentNode.NodeKeyName, parentNode.NodeKeyValue));
+            XmlNodeList targets = node.ChildNodes;//全部子节点
+           
+            foreach (var item in targets)
+            {
+                XmlElement ele = (XmlElement)item;
+                if (ele.NodeType == XmlNodeType.Comment || ele.NodeType == XmlNodeType.Text)
+                {
+                    continue;
+                }
+                XmlAttributeCollection attColl = ele.Attributes;
+
+                
+               
+            }
+        }
     }
     public class XmlNodeDataAttribute:Attribute
     {

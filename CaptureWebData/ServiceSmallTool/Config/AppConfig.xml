@@ -1,14 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-  <appSettings name="UiConfig">
-    <add key="ClearLogDir" value=""/> <!--清除日志的目录 用户可选配置-->
-    <add key="ClearBeforeDay" value="3"/> <!--清除多少天之前的日志-->
-    <add key="ConfigLastUpdateTime" value=""/>
+  <appSettings name="UiConfig"> 
+    <!--UI配置-->
+    <add key="ClearLogDir" value="D:\CodeFile\GithubCode\Code\PickUpData\CaptureWebData\ServiceSmallTool\bin\Debug" />
+    <!--清除日志的目录 用户可选配置-->
+    <add key="ClearBeforeDay" value="1" />
+    <!--清除多少天之前的日志-->
+    <add key="ConfigLastUpdateTime" value="2018-05-08 10:59:22" />
   </appSettings>
-  <appSettings name="ForeachLogSetting"> <!--系统配置，不可进行用户选择-->
-    <add key="ForeachFolder" value="1"/> <!--是否遍历子目录 0 否，1 是-->
-    <add key="ClearLogFunc" value="1"/> <!--清除日志的方式 1 野蛮删除 2 移动路径 3 制成压缩文件-->
-    <add key="ClearLogContainerNode"  value="1"/> <!--删除日志时包含子级目录 0 否 1是-->
-    <add key="ClearLogContainerFolder" value="0" /><!--删除日志时同时删除目录-->
+  <appSettings name="ForeachLogSetting">
+    <!--系统配置，不可进行用户选择-->
+    <add key="ForeachFolder" value="1" />
+    <!--是否遍历子目录 0 否，1 是-->
+    <add key="ClearLogFunc" value="1" />
+    <!--清除日志的方式 1 野蛮删除 2 移动路径 3 制成压缩文件-->
+    <add key="ClearLogContainerNode" value="1" />
+    <!--删除日志时包含子级目录 0 否 1是-->
+    <add key="ClearLogContainerFolder" value="0" />
+    <!--删除日志时同时删除目录-->
   </appSettings>
 </configuration>

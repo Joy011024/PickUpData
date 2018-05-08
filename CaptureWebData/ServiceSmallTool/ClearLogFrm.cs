@@ -56,26 +56,43 @@ namespace ServiceSmallTool
             BindSelect();
             bg.DoWork += new DoWorkEventHandler(Background_DoWork);
             bg.RunWorkerAsync();
-            SaveConfig();
+            ReadXmlCfgUpdateUi();
+            //SaveConfig();
         }
-        void SaveConfig() 
+        string XmlCfgDir 
         {
-            string dir = new AppDirHelper().GetAppDir(AppCategory.WinApp) + @"\Config\AppConfig.xml";
-            Dictionary<string, string> setting = new Dictionary<string, string>();
-            setting.Add(UiConfig.ClearLogDir.ToString(), txtLogDir.Text);
-            setting.Add(UiConfig.ClearBeforeDay.ToString(), txtDayBefore.Text);
-            setting.Add(ConfigCommonNode.ConfigLastUpdateTime.ToString(), DateTime.Now.ToString(CommonFormat.DateTimeFormat));
-            dir.UpdateConfigNode(setting, new XmlNodeDataAttribute()
+            get
+            {
+               return  new AppDirHelper().GetAppDir(AppCategory.WinApp) + @"\Config\AppConfig.xml";
+            }
+        }
+        XmlNodeDataAttribute UiCfgNode = new XmlNodeDataAttribute()
             {//字典所属上级节点信息
                 NodeName = "configuration/appSettings",
                 NodeKeyName = "name",
                 NodeKeyValue = "UiConfig"
-            }, new XmlNodeDataAttribute()
+            };
+        XmlNodeDataAttribute nodeCfgFormat = new XmlNodeDataAttribute()
             {//字典中每一项节点配置项
                 NodeName = "add",
                 NodeKeyName = "key",
                 NodeKeyValue = "value"
-            });
+            };
+        void SaveConfig() 
+        {
+            //判断配置节点是否更新
+            string dir = XmlCfgDir;
+            Dictionary<string, string> setting = new Dictionary<string, string>();
+            setting.Add(UiConfig.ClearLogDir.ToString(), txtLogDir.Text);
+            setting.Add(UiConfig.ClearBeforeDay.ToString(), txtDayBefore.Text);
+            setting.Add(ConfigCommonNode.ConfigLastUpdateTime.ToString(), DateTime.Now.ToString(CommonFormat.DateTimeFormat));
+            dir.UpdateConfigNode(setting, UiCfgNode, nodeCfgFormat);
+        }
+        void ReadXmlCfgUpdateUi()
+        {
+            XmlCfgDir.GetNodeSpecialeAttribute(UiCfgNode, nodeCfgFormat);
+            //提取目标属性
+
         }
         void BindSelect() 
         {
