@@ -29,6 +29,17 @@ namespace ServiceSmallTool
             ClearLog=2,
             OutputDir=3
         }
+        enum UiConfig
+        {
+            ClearLogDir=1,
+            ClearBeforeDay=2
+        }
+        [Description("公用节点")]
+        enum ConfigCommonNode
+        {
+            [Description("节点修改时间")]
+            ConfigLastUpdateTime=1
+        }
         void InitUI() 
         {
             txtLogDir.Text = ExeDir;
@@ -45,6 +56,26 @@ namespace ServiceSmallTool
             BindSelect();
             bg.DoWork += new DoWorkEventHandler(Background_DoWork);
             bg.RunWorkerAsync();
+            SaveConfig();
+        }
+        void SaveConfig() 
+        {
+            string dir = new AppDirHelper().GetAppDir(AppCategory.WinApp) + @"\Config\AppConfig.xml";
+            Dictionary<string, string> setting = new Dictionary<string, string>();
+            setting.Add(UiConfig.ClearLogDir.ToString(), txtLogDir.Text);
+            setting.Add(UiConfig.ClearBeforeDay.ToString(), txtDayBefore.Text);
+            setting.Add(ConfigCommonNode.ConfigLastUpdateTime.ToString(), DateTime.Now.ToString(CommonFormat.DateTimeFormat));
+            dir.UpdateConfigNode(setting, new XmlNodeDataAttribute()
+            {//字典所属上级节点信息
+                NodeName = "configuration/appSettings",
+                NodeKeyName = "name",
+                NodeKeyValue = "UiConfig"
+            }, new XmlNodeDataAttribute()
+            {//字典中每一项节点配置项
+                NodeName = "add",
+                NodeKeyName = "key",
+                NodeKeyValue = "value"
+            });
         }
         void BindSelect() 
         {

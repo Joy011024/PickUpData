@@ -22,6 +22,7 @@ namespace CaptureManage.AppWin
             InitializeComponent();
             ReadAppCfg();
             btnQuerySubwayData.Click += new EventHandler(Button_Click);
+            ChangeCityNode();
         }
         private void Button_Click(object sender,EventArgs e) 
         {
@@ -57,6 +58,13 @@ namespace CaptureManage.AppWin
             string nodeName = BaseCfgItem.AppCfgXmlNodeFormat + "/" + table.Name;
             //读取节点项
             string addSqlCmd= XmlFileHelper.ReadXmlItemValue(xml, nodeName, "key", "value", "Insert");
+        }
+        void ChangeCityNode()
+        {
+            AppDirHelper dir = new AppDirHelper();
+            string path = dir.GetAppDir(AppCategory.WinApp) + @"\Config\CitySubwayCfg.xml";
+            CitySubway city = new CitySubway();
+
         }
     }
 }

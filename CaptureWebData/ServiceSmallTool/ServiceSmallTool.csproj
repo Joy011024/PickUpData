@@ -124,6 +124,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\AppConfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Node\Exception\Excel-Cell.png" />
     <Content Include="ToolConfig.xml">
       <SubType>Designer</SubType>

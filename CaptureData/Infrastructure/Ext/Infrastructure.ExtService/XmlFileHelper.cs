@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Reflection;
+using System.ComponentModel;
 namespace Infrastructure.ExtService
 {
     public static class XmlFileHelper
@@ -193,5 +194,49 @@ namespace Infrastructure.ExtService
             }
             return entity;
         }
+        public static void UpdateConfigNode(this string xmlFile, Dictionary<string, string> obj, XmlNodeDataAttribute entityBelongNode, XmlNodeDataAttribute dictBelongNode)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlFile);
+            //查找目标节点
+            XmlNode parent= doc.SelectSingleNode(entityBelongNode.NodeName+"[@"+entityBelongNode.NodeKeyName+"='"+entityBelongNode.NodeKeyValue+"']");
+            //查找目标
+            string nodeFormat = "[@{0}='{1}']";
+            //查找一个节点模板
+            string nodeTemplate = string.Format("<{0} {1}='{2}' /> <!--{3}-->", dictBelongNode.NodeName, dictBelongNode.NodeKeyName, dictBelongNode.NodeKeyValue,dictBelongNode.NodeRemark);
+            foreach (var item in obj)
+            {
+                XmlNode node = parent.SelectSingleNode(dictBelongNode.NodeName+string.Format(nodeFormat,dictBelongNode.NodeKeyName,item.Key));
+                if (node == null)
+                { //如果没有这个节点则需要增加
+                    XmlNode xm = doc.CreateNode("element", dictBelongNode.NodeName, string.Empty);
+                    XmlElement ele = (XmlElement)xm;
+                    ele.SetAttribute(dictBelongNode.NodeKeyName, item.Key);
+                    ele.SetAttribute(dictBelongNode.NodeKeyValue, item.Value);
+                    parent.AppendChild(xm);
+                }
+                else 
+                {
+                    XmlNode newNode= node.CloneNode(true);
+                    XmlElement ele = (XmlElement)newNode;
+                    ele.SetAttribute(dictBelongNode.NodeKeyName, item.Key);
+                    ele.SetAttribute(dictBelongNode.NodeKeyValue, item.Value);
+                    parent.ReplaceChild(newNode, node);//节点更新
+                }
+            }
+            doc.Save(xmlFile);
+        }
+       
+    }
+    public class XmlNodeDataAttribute:Attribute
+    {
+        [Description("节点名")]
+        public string NodeName { get; set; }
+        [Description("节点标志")]
+        public string NodeKeyName { get; set; }
+        [Description("节点标志的值")]
+        public string NodeKeyValue { get; set; }
+        [Description("节点描述")]
+        public string NodeRemark { get; set; }
     }
 }
