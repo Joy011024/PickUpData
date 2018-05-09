@@ -250,6 +250,47 @@ create table UserOrderData
 	CreateTime DateTime not null,
 	ParentId int not null,--用于记录是所属流程
 	GotoFlowId int not null,--查找流程下一步骤节点，这是流程进度图
-	BackId int not null--拒绝时返项流程
-	 
- )
+	BackId int not null--拒绝时返项流程 
+ );
+Create table AppEmail
+(
+	ID uniqueidentifier primary key,
+	Body nvarchar(1024) not null,
+	BodyType smallint not null,
+	[Subject] nvarchar(128) not null,
+	IsDelete bit not null,
+	ParentId uniqueidentifier not null,
+	CreateTime datetime not null
+);
+create table AppEmailPlan
+(--邮件定时计划
+	Id uniqueidentifier primary key,
+	PrimaryMsgId uniqueidentifier not null,
+	SendTime datetime ,
+	CreateTime datetime not null,
+	SendSize smallint not null
+);
+alter table AppEmailPlan add constraint fk_PlanPrimaryMsgId foreign key (PrimaryMsgId) 
+references AppEmail(ID);
+create table AppEmailReceiverPlan
+(--邮件接收人计划列表
+	Id uniqueidentifier primary key,
+	PrimaryMsgId uniqueidentifier not null,
+	CreateTime datetime not null,
+	IsMailer bit not null,
+	SendTo varchar(64) not null
+);
+alter table AppEmailReceiverPlan add constraint fk_AppEmailReceiverPlanMsgId foreign key (PrimaryMsgId) 
+references AppEmail(ID);
+create table AppEmailReceiver
+(--邮件实际发送情形
+	Id uniqueidentifier primary key,
+	PrimaryMsgId uniqueidentifier not null,
+	IsMailer bit not null,
+	SendTo varchar(64) not null,
+	SendTime datetime ,
+	CreateTime datetime not null,
+	SendResult smallint not null
+);
+ alter table AppEmailReceiver add constraint fk_PrimaryMsgId foreign key (PrimaryMsgId) 
+ references AppEmail(ID);

@@ -43,7 +43,11 @@ namespace Domain.CommonData
         [Description("Http请求响应")]
         HttpResponse=11,
         [Description("压缩日志")]
-        ZipLog=12
+        ZipLog=12,
+        [Description("邮件日志")]
+        EmailLog=13,
+        [Description("邮件正文")]
+        EmailBody=14
     }
     /// <summary>
     /// 程序类型

@@ -20,9 +20,9 @@ namespace Domain.CommonData
         public DateTime CreateTime { get; set; }
           
     }
-    public class FieldContainTime:BaseField
-    { 
-        
+    public class GuidBaseFieldContainTime:BaseField
+    {
+        public DateTime CreateTime { get; set; }
     }
     /// <summary>
     /// 主键字段

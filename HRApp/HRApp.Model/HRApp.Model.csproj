@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\EmailModule\AppEmailData.cs" />
     <Compile Include="Entity\OrderModule\BaseOrder.cs" />
     <Compile Include="ECommn.cs" />
     <Compile Include="Entity\ContactData.cs" />
