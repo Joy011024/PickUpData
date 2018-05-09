@@ -83,7 +83,18 @@ namespace HRApp.Model
         [DescriptionSort("默认Grid查询数目")]
         DefaultQuerySize=7300,
         [DescriptionSort("举报分类")]
-        ReportEnum=8000
+        ReportEnum=8000,
+        [DescriptionSort("系统邮件账户配置")]
+        SystemEmailSetting = 9000,
+        [DescriptionSort("系统邮件账户")]
+        SystemEmailSendBy=9100,
+        [DescriptionSort("邮件授权码")]
+        SystemEmailSMPTAuthor=9110,
+        [DescriptionSort("SMTP服务类型")]
+        SMTP=9111,
+        [DescriptionSort("邮箱客户端")]
+        SMTPClient=9200
+
     }
     [DescriptionSort("任职状态")]
     public enum EmployerServeStatue
@@ -100,5 +111,12 @@ namespace HRApp.Model
         Resign=5,
         [DescriptionSort("退休")]
         Retirement=6
+    }
+    public enum EnumSMTP
+    { 
+        [DescriptionSort("腾讯SMTP服务")]
+        QQ=1,
+        [DescriptionSort("网易SMTP服务")]
+        NETS163= 2
     }
 }

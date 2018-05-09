@@ -158,5 +158,27 @@ namespace EmailHelper
                 mail.Attachments.Add(attach);
             }
         }
+        public void SendEmailBy163(EmailData text) 
+        {
+            SmtpClient smtp = new SmtpClient(EmailClient);
+            smtp.Port = 25;
+            if (EmailClientPort.HasValue)
+            {
+                smtp.Port = EmailClientPort.Value;
+            }
+            smtp.EnableSsl = true;
+            smtp.Credentials = new System.Net.NetworkCredential(EmailId, EmailKey);
+            MailMessage msg = new MailMessage();
+            msg.From =new MailAddress( EmailId);
+            msg.To.Add(text.EmailTo);
+            msg.Subject = text.EmailSubject;//邮件标题
+            msg.SubjectEncoding = Encoding.UTF8;
+            msg.Body = text.EmailBody;//邮件内容
+            msg.BodyEncoding = Encoding.UTF8;
+            msg.IsBodyHtml = true;
+            msg.Priority = MailPriority.High;//邮件优先级
+            Guid gid=Guid.NewGuid();
+            smtp.SendAsync(msg,gid );
+        }
     }
 }
