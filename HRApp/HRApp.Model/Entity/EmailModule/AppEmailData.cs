@@ -18,6 +18,8 @@ namespace HRApp.Model
     }
     public class AppEmailData
     {
+        [DescriptionSort("数据库中存储的邮件id")]
+        public Guid EmailId { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
         public string From { get; set; }

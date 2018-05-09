@@ -51,12 +51,12 @@ namespace HRApp.Web.Controllers
                     EmailFrom = sendBy
                 };
                 es.SendEmailBy163(email);
-                LoggerWriter.CreateLogFile("进行163发送邮件", logDir, ELogType.LogicLog, day);
+                LoggerWriter.CreateLogFile("进行163发送邮件", logDir, ELogType.EmailLog, day);
             }
             catch (Exception ex)
             {
                 string msg = ex.Message;
-                LoggerWriter.CreateLogFile(msg, logDir, ELogType.LogicLog, day);
+                LoggerWriter.CreateLogFile(msg, logDir, ELogType.EmailLog, day);
             }
         }
     }

@@ -44,6 +44,7 @@
     <Compile Include="IBaseRepository.cs" />
     <Compile Include="IContactDataRepository.cs" />
     <Compile Include="IDataFromOtherRepository.cs" />
+    <Compile Include="IEmailDataRepository.cs" />
     <Compile Include="IMaybeSpecialRepository.cs" />
     <Compile Include="IMenuRepository.cs" />
     <Compile Include="IRelyTableRepository.cs" />

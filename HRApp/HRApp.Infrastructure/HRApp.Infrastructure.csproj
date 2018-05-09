@@ -46,6 +46,7 @@
     <Compile Include="Common\CommonRepository.cs" />
     <Compile Include="ContactDataRepository.cs" />
     <Compile Include="DataFromOtherRepository.cs" />
+    <Compile Include="EmailDataRepository.cs" />
     <Compile Include="MaybeSpecialRepository.cs" />
     <Compile Include="MenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

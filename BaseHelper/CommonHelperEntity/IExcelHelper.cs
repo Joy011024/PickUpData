@@ -18,8 +18,12 @@ namespace CommonHelperEntity
     }
     public enum EExcelType
     { 
+        [Description("2003版本")]
         Xls=1,
-        Xlsx=2
+        [Description("无宏启用的2007版本")]
+        Xlsx=2,
+        [Description("有宏启用的2007版本")]
+        Xlsm=3
     }
     [Description("Excel列头信息设置")]
     public class ExcelHeadAttribute:Attribute

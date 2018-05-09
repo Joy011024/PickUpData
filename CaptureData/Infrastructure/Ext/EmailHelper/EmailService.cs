@@ -17,7 +17,7 @@ namespace EmailHelper
     {
         class SmtpEmailKey
         {
-            public string EmailId;
+            public string emailSmtpAccount;
             public string EmailKey;
             public string EmailClient;
             public int? EmailClientPort;
@@ -40,10 +40,10 @@ namespace EmailHelper
         public bool MailEnablePswAuthentication { get; set; }
         public string LogPath { get; set; }
         SmtpEmailKey ek;
-        public EmailService(string emailClient, string emailId, string emailKey,int? emailClientPort,bool enableSsl) 
+        public EmailService(string emailClient, string emailSmtpAccount, string emailKey, int? emailClientPort, bool enableSsl) 
         {
             EmailClient = emailClient;
-            EmailId = emailId;
+            EmailId = emailSmtpAccount;
             EmailKey = emailKey;
             if (emailClientPort.HasValue) 
             {
@@ -56,7 +56,7 @@ namespace EmailHelper
             //新调整业务->直接设置邮件接收的基础配置【后期直接提供邮件的内容，邮件的接收人即可】
             EnableSsl = enableSsl;
             ek.EmailClient = emailClient;
-            ek.EmailId = emailId;
+            ek.emailSmtpAccount = emailSmtpAccount;
             ek.EmailKey = emailKey;
             ek.enableSsl =enableSsl;
             ek.EmailClientPort = emailClientPort;
