@@ -104,6 +104,8 @@ namespace HRApp.Web
             ioc.IocFillProperty<IReportEnumDataRepository>(reportDal, propertyVal);
             IRelyTableRepository relyDal = ioc.IocConvert<IRelyTableRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(RelyTableRepository).Name);
             ioc.IocFillProperty<IRelyTableRepository>(relyDal, propertyVal);
+            IEmailDataRepository emailDal = ioc.IocConvert<IEmailDataRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(EmailDataRepository).Name);
+            ioc.IocFillProperty<IEmailDataRepository>(emailDal, propertyVal);
             #endregion
             #region orm中dal层实例化存储到字典中
             propertyVal.Add(typeof(IAppRepository).Name, appDal);
@@ -115,6 +117,7 @@ namespace HRApp.Web
             propertyVal.Add(typeof(IDataFromOtherRepository).Name, dataFormOtherDal);
             propertyVal.Add(typeof(IReportEnumDataRepository).Name, reportDal);
             propertyVal.Add(typeof(IRelyTableRepository).Name, relyDal);
+            propertyVal.Add(typeof(IEmailDataRepository).Name, emailDal);
             #endregion
             #region 业务层
             //构造函数的参数注入  判断构造函数的参数是否需要进行注入
@@ -145,6 +148,9 @@ namespace HRApp.Web
             IRelyTableService relyBll = ioc.IocConvert<IRelyTableService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(RelyTableService).Name);
             ioc.IocFillProperty<IRelyTableService>(relyBll, propertyVal);
             propertyVal.Add(typeof(IRelyTableService).Name, relyBll);
+            IEmailDataService emailBll = ioc.IocConvert<IEmailDataService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(EmailDataService).Name);
+            ioc.IocFillProperty<IEmailDataService>(emailBll, propertyVal);
+            propertyVal.Add(typeof(IEmailDataService).Name, emailBll);
             #endregion
         }
         

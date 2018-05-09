@@ -14,6 +14,8 @@ using HRApp.Infrastructure;
 using IHRApp.Infrastructure;
 using HRApp.IApplicationService;
 using HRApp.ApplicationService;
+using System.ComponentModel;
+using Domain.CommonData;
 namespace HRApp.Web.Controllers
 {
     [MvcActionResultHelper]
@@ -35,6 +37,21 @@ namespace HRApp.Web.Controllers
             List<CategoryItems> items = appSetService.QueryAll();
             return items;
         }
+        BackgroundWorker backGround;//后台线程
+        public BaseController() 
+        {
+            //增加触发事件，用于检查控制器的生存周期
+            if (backGround == null)
+            {
+                backGround = new BackgroundWorker();//后台线程
+                //进入这里需要使用日志进行记录
+                string dir = new AppDirHelper().GetAppDir(AppCategory.WebApp);
+                string file = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
+                LoggerWriter.CreateLogFile("Call Constructor\t"+DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), dir, ELogType.DataLog, file,true);
+            }
+
+        }
+
     }
     public class MvcActionResultHelperAttribute : System.Web.Mvc.ActionFilterAttribute
     {

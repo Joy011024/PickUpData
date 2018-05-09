@@ -17,7 +17,7 @@ namespace HRApp.Web.Controllers
 
         public ActionResult Index()
         {
-            TestEmail();
+            //TestEmail();
             return View();
         }
         public ActionResult UILayout() 
@@ -51,12 +51,12 @@ namespace HRApp.Web.Controllers
                     EmailFrom = sendBy
                 };
                 es.SendEmailBy163(email);
-                LoggerWriter.CreateLogFile("进行163发送邮件", logDir, ELogType.EmailLog, day);
+                LoggerWriter.CreateLogFile("进行163发送邮件", logDir, ELogType.EmailLog, day,true);
             }
             catch (Exception ex)
             {
                 string msg = ex.Message;
-                LoggerWriter.CreateLogFile(msg, logDir, ELogType.EmailLog, day);
+                LoggerWriter.CreateLogFile(msg, logDir, ELogType.EmailLog, day,true);
             }
         }
     }

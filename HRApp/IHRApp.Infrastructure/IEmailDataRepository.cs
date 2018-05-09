@@ -22,7 +22,7 @@ namespace IHRApp.Infrastructure
         /// 保存待发送的邮件列表
         /// </summary>
         /// <param name="email"></param>
-        int SaveWaitSendEmailData(AppEmailData email);
+        bool SaveWaitSendEmailData(AppEmailData email);
         int SaveWaitSendEmailListData(List<AppEmailData> emails);
     }
 }

@@ -113,6 +113,7 @@ namespace Domain.CommonData
             {
                 if (File.Exists(file))
                 {
+                    text = "\r\n" + text;
                     fs = new FileStream(file, FileMode.Append, FileAccess.Write, FileShare.Write);
                 }
                 else 

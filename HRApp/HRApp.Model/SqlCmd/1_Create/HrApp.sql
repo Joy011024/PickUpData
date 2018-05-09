@@ -266,9 +266,9 @@ create table AppEmailPlan
 (--邮件定时计划
 	Id uniqueidentifier primary key,
 	PrimaryMsgId uniqueidentifier not null,
-	SendTime datetime ,
+	SendTime datetime not null,
 	CreateTime datetime not null,
-	SendSize smallint not null
+	SendNumber smallint not null
 );
 alter table AppEmailPlan add constraint fk_PlanPrimaryMsgId foreign key (PrimaryMsgId) 
 references AppEmail(ID);

@@ -113,6 +113,7 @@
     <Compile Include="Controllers\AppSettingManageController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContactManageController.cs" />
+    <Compile Include="Controllers\EmailDataController.cs" />
     <Compile Include="Controllers\FileHelperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />

@@ -16,6 +16,19 @@ namespace HRApp.Model
         [DescriptionSort("补充消息")]//比如进行消息回复时候关联到上级消息
         public Guid ParentId { get; set; }
     }
+    [DescriptionSort("日志定时发送计划")]
+    public class AppEmailPlan : GuidTimeField
+    {
+        public Guid PrimaryMsgId { get; set; }
+        /// <summary>
+        /// [发送失败]重新主要用于记录重新发送次数
+        /// </summary>
+        public short SendNumber { get; set; }
+        /// <summary>
+        /// 发送时间
+        /// </summary>
+        public DateTime SendTime { get; set; }
+    }
     public class AppEmailData
     {
         [DescriptionSort("数据库中存储的邮件id")]
