@@ -49,6 +49,10 @@ namespace EmailHelper
             {
                 EmailClientPort = emailClientPort;
             }
+            if (ek == null)
+            {
+                ek = new SmtpEmailKey();
+            }
             //新调整业务->直接设置邮件接收的基础配置【后期直接提供邮件的内容，邮件的接收人即可】
             EnableSsl = enableSsl;
             ek.EmailClient = emailClient;
@@ -178,7 +182,11 @@ namespace EmailHelper
             msg.IsBodyHtml = true;
             msg.Priority = MailPriority.High;//邮件优先级
             Guid gid=Guid.NewGuid();
-            smtp.SendAsync(msg,gid );
+            smtp.Send(msg);
+            /*
+             * smtp.SendAsync(msg,gid );
+             现在无法开始异步操作。异步操作只能在异步处理程序或模块中开始，或在页生存期中的特定事件过程中开始。如果此异常在执行 Page 时发生，请确保 Page 标记为 <%@ Page Async="true" %>。此异常也可能表明试图调用“异步无效”方法，在 ASP.NET 请求处理内一般不支持这种方法。相反，该异步方法应该返回一个任务，而调用方应该等待该任务。
+             */
         }
     }
 }
