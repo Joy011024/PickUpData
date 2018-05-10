@@ -17,7 +17,7 @@ namespace HRApp.Web.Controllers
 
         public ActionResult Index()
         {
-            //TestEmail();
+            TestEmail();
             return View();
         }
         public ActionResult UILayout() 

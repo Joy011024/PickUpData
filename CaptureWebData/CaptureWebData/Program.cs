@@ -7,6 +7,8 @@ using EmailHelper;
 using Domain.CommonData;
 using CaptureManage.AppWin;
 using Infrastructure.ExtService;
+using System.Text;
+using Domain.CommonData;
 namespace CaptureWebData
 {
     static class Program
@@ -19,12 +21,18 @@ namespace CaptureWebData
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-          //  Test();
+            Test();
            // Application.Run(new Main());
             Application.Run(new TecentDataFrm());
         }
         static void Test() 
         {
+            DataLink dl = new DataLink();
+            StringBuilder tip = new StringBuilder();
+            tip.AppendLine("time:\t" + DateTime.Now.ToString(SystemConfig.DateTimeFormat));
+            tip.AppendLine("Guid:\t" + Guid.NewGuid());
+            dl.SendDataToOtherPlatform(LanguageItem.Tip_PickUpErrorlockAccount, tip.ToString());//需要知道当前在进行采集的账户
+
             PickUpTianMaoHtml tm = new PickUpTianMaoHtml();
             string dir= new AppDirHelper().GetAppDir(AppCategory.WinApp);
             tm.DoHtmlFileAnalysis(dir + @"\HttpResponse\list.tmall.com\HttpResponse");
@@ -281,11 +289,25 @@ namespace CaptureWebData
         }  
         void SendEmail(string subject, string body)
         {
-            string from=SystemConfig.EmailId;
-            EmailService email = new EmailService(SystemConfig.EmailClient,from, SystemConfig.EmailKey, 
-                SystemConfig.EmailClientPort, SystemConfig.EmailEnableSsl);
-            //此处需要验证 发信人和发件人的区别
-            email.SendEmail(subject, body, from, from, SystemConfig.DefaultEmailTo, null, false, System.Net.Mail.MailPriority.High, null);
+            string dir = SystemConfig.ExeDir + "\\" + typeof(ELogType).Name;
+            string file = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
+            string msg = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat) + "\r\n";
+            try
+            {
+                string from = SystemConfig.EmailId;
+                EmailService email = new EmailService(SystemConfig.EmailClient, from, SystemConfig.EmailKey,
+                    SystemConfig.EmailClientPort, SystemConfig.EmailEnableSsl);
+                email.LogPath = dir;
+                //此处需要验证 发信人和发件人的区别
+                email.SendEmail(subject, body, from, from, SystemConfig.DefaultEmailTo, null, false, System.Net.Mail.MailPriority.High, null);
+                msg +="EmailSend Success";
+                LoggerWriter.CreateLogFile(msg, dir, ELogType.EmailLog, file, true);
+            }
+            catch (Exception ex)
+            {
+                 msg += ex.Message;
+                LoggerWriter.CreateLogFile(msg, dir, ELogType.EmailLog, file, true);
+            }
         }
     }
 }

@@ -138,7 +138,6 @@ namespace EmailHelper
             }
             catch (Exception ex)
             {
-                //ex.AppendLog(
                 LoggerWriter.CreateLogFile(ex.ToString(), LogPath,ELogType.ErrorLog);
             }
         }
