@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Domain.CommonData;
 namespace HRApp.Model
 {
-    public class AppEmail : GuidBaseFieldContainTime
+    public class AppEmail : GuidTimeField
     {
         public string Body { get; set; }
         public short BodyType { get; set; }//正文数据库存储形式 1 内容 2 文本路径（内容超过长度时不直接进行数据库存储，写入到文本中）
@@ -15,6 +15,13 @@ namespace HRApp.Model
         public string Subject { get; set; }
         [DescriptionSort("补充消息")]//比如进行消息回复时候关联到上级消息
         public Guid ParentId { get; set; }
+        [DescriptionSort("邮件发送人")]
+        public string SendBy { get; set; }
+        public string GetInsertSql() 
+        {
+            return @"INSERT INTO  [dbo].[AppEmail]   ([ID],[Body],[BodyType],[Subject],[IsDelete],[ParentId],[SendBy],[CreateTime])
+VALUES  ({ID},{Body},{BodyType},{Subject},{IsDelete},{ParentId},{SendBy},{CreateTime})";
+        }
     }
     [DescriptionSort("日志定时发送计划")]
     public class AppEmailPlan : GuidTimeField
@@ -28,6 +35,25 @@ namespace HRApp.Model
         /// 发送时间
         /// </summary>
         public DateTime SendTime { get; set; }
+        public string GetInsertSql()
+        {
+            return @"INSERT INTO  [dbo].[AppEmailPlan] ([Id],[PrimaryMsgId],[SendTime],[CreateTime],[IsDelete],[SendNumber])
+VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) ";
+        }
+    }
+    [DescriptionSort("邮件接收人计划列表")]
+    public class AppEmailReceiverPlan:GuidTimeField
+    {
+        public Guid PrimaryMsgId { get; set; }
+        [DescriptionSort("是否为抄送人")]
+        public bool IsMailer { get; set; }
+        [DescriptionSort("接收人")]
+        public string SendTo { get; set; }
+        public string GetInsertSql()
+        {
+            return @"INSERT INTO  [dbo].[AppEmailReceiver] ([Id],[PrimaryMsgId],[IsMailer],[SendTo],[SendTime],[CreateTime],[IsDelete],[SendResult],[DayInt])
+     VALUES ({Id},{PrimaryMsgId},{IsMailer},{SendTo},{SendTime},{CreateTime},{IsDelete},{SendResult},{DayInt}) ";
+        }
     }
     public class AppEmailData
     {

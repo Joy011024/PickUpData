@@ -260,6 +260,7 @@ Create table AppEmail
 	[Subject] nvarchar(128) not null,
 	IsDelete bit not null,
 	ParentId uniqueidentifier not null,
+	SendBy varchar(64) not null,
 	CreateTime datetime not null
 );
 create table AppEmailPlan
@@ -268,6 +269,7 @@ create table AppEmailPlan
 	PrimaryMsgId uniqueidentifier not null,
 	SendTime datetime not null,
 	CreateTime datetime not null,
+	IsDelete bit not null,
 	SendNumber smallint not null
 );
 alter table AppEmailPlan add constraint fk_PlanPrimaryMsgId foreign key (PrimaryMsgId) 
@@ -278,6 +280,7 @@ create table AppEmailReceiverPlan
 	PrimaryMsgId uniqueidentifier not null,
 	CreateTime datetime not null,
 	IsMailer bit not null,
+	IsDelete bit not null,
 	SendTo varchar(64) not null
 );
 alter table AppEmailReceiverPlan add constraint fk_AppEmailReceiverPlanMsgId foreign key (PrimaryMsgId) 
@@ -290,6 +293,7 @@ create table AppEmailReceiver
 	SendTo varchar(64) not null,
 	SendTime datetime ,
 	CreateTime datetime not null,
+	IsDelete bit not null,
 	SendResult smallint not null,
 	DayInt int not null --增加快速比较标志
 );

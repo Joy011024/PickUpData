@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using HRApp.Model;
 namespace IHRApp.Infrastructure
 {
-    public interface IEmailDataRepository:IBaseListRepository<AppEmail>
+    public interface IEmailDataRepository
     {
+        string SqlConnString { set; get; }
         /// <summary>
         /// 查询出待发送的邮件信息
         /// </summary>

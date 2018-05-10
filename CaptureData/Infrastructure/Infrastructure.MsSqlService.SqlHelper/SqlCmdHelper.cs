@@ -334,9 +334,9 @@ namespace Infrastructure.MsSqlService.SqlHelper
             return new SqlRuleMapResult()
             {
                 OriginSql = containerRuleInSqlCmd,
-                WaitExcuteSql = new string[] { waitExuet },
-                NoMapRule = loseMapRule.ToArray(),
-                SqlParams = sqlParam.ToArray(),
+                WaitExcuteSql = new List<string>() { waitExuet },
+                NoMapRule = loseMapRule,
+                SqlParams = sqlParam,
                 RuleMapProperty = ruleAsProperty
             };
         }
@@ -349,15 +349,15 @@ namespace Infrastructure.MsSqlService.SqlHelper
             /// <summary>
             /// 执行规则处理后的sql
             /// </summary>
-            public string[] WaitExcuteSql { get; set; }
+            public List<string> WaitExcuteSql { get; set; }
             /// <summary>
             /// 规则匹配的参数列表
             /// </summary>
-            public SqlParameter[] SqlParams { get; set; }
+            public List<SqlParameter> SqlParams { get; set; }
             /// <summary>
             /// 没有匹配的规则集合
             /// </summary>
-            public string[] NoMapRule { get; set; }
+            public List<string> NoMapRule = new List<string>();
             /// <summary>
             /// 规则匹配的实体属性
             /// </summary>
@@ -413,10 +413,10 @@ namespace Infrastructure.MsSqlService.SqlHelper
                 return new SqlRuleMapResult()
                 {
                     OriginSql = containerRuleSqlCmd,
-                    WaitExcuteSql = batchSqlArr.ToArray(),
-                    NoMapRule = noMapRules.ToArray(),
+                    WaitExcuteSql = batchSqlArr,
+                    NoMapRule = noMapRules,
                     RuleMapProperty = ruleMapPorperty,
-                    SqlParams = param.ToArray()
+                    SqlParams = param
                 };
             }
             for (int i = 0; i < entity.Count; i++)
@@ -443,11 +443,51 @@ namespace Infrastructure.MsSqlService.SqlHelper
             return new SqlRuleMapResult()
             {
                 OriginSql = containerRuleSqlCmd,
-                WaitExcuteSql = batchSqlArr.ToArray(),
-                NoMapRule = noMapRules.ToArray(),
+                WaitExcuteSql = batchSqlArr,
+                NoMapRule = noMapRules,
                 RuleMapProperty = ruleMapPorperty,
-                SqlParams = param.ToArray()
+                SqlParams = param
             };
+        }
+        public void InsertSqlParam<T>(string sql, T data, SqlRuleMapResult result, string paramMapRule = "{(.*?)}") where T : class
+        { 
+            //提取出参数列表
+            Regex reg = new Regex(paramMapRule);
+            MatchCollection mc= reg.Matches(sql);
+            string sqlResult = sql;
+            List<SqlParameter> param = new List<SqlParameter>();
+            List<string> sqlNoMapParam = new List<string>();//命令中没有匹配的参数集合
+            Type obj=typeof(T);
+            string objName=obj.Name;
+            Dictionary<string,object> propertyValue=obj.GetAllPorpertiesNameAndValues();
+            Dictionary<string, string> paramMapPropertyRule = new Dictionary<string, string>();
+            //当前SQL语句是第几组
+            int index = result.WaitExcuteSql.Count;
+            foreach (Match item in mc)
+            {
+                string g = item.Groups[0].Value;//参数串
+                string pn = item.Groups[1].Value;//参数名剔除特殊限定
+                string lowerName = pn.ToLower();
+                bool map = false;
+                foreach (var property in propertyValue)
+                {
+                    if (property.Key.ToLower() == lowerName)
+                    {
+                        map = true;
+                        paramMapPropertyRule.Add(g, property.Key);
+                        string name = "@" + objName +"_"+ index + "_" + property.Key;
+                        sqlResult = sqlResult.Replace(g, name);
+                        result.SqlParams.Add(new SqlParameter(name, property.Value));
+                    }
+                }
+                if (!map)
+                {//属性没有匹配 
+                    sqlNoMapParam.Add(g);
+                }
+            }
+            result.WaitExcuteSql.Add(sqlResult);
+            //本次没有匹配的参数列表
+            result.NoMapRule.Add(string.Join("|", sqlNoMapParam));
         }
     }
 }

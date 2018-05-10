@@ -5,10 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using HRApp.Model;
 using IHRApp.Infrastructure;
+using Infrastructure.MsSqlService.SqlHelper;
 namespace HRApp.Infrastructure
 {
     public class EmailDataRepository:IEmailDataRepository
     {
+
+        public string SqlConnString
+        {
+            get;
+            set;
+        }
 
         public void QueryWaitSendEmailData(Guid id)
         {
@@ -22,56 +29,67 @@ namespace HRApp.Infrastructure
 
         public bool SaveWaitSendEmailData(AppEmailData email)
         {
-            throw new NotImplementedException();
+            DateTime now = DateTime.Now;
+            SqlCmdHelper.SqlRuleMapResult mapSql = new SqlCmdHelper.SqlRuleMapResult();
+            //数据存储到数据表
+            AppEmail ae = new AppEmail()
+            {
+                Id = Guid.NewGuid(),
+                Body = email.Body,
+                Subject = email.Subject,
+                CreateTime =now,
+                IsDelete = false,
+                ParentId = new Guid(),
+                SendBy = email.From
+            };
+            SqlCmdHelper help = new SqlCmdHelper() { SqlConnString = SqlConnString };
+            help.InsertSqlParam(ae.GetInsertSql(), ae, mapSql);
+            if (email.SendTime.HasValue)
+            { //进行定时计划存储
+                AppEmailPlan plan = new AppEmailPlan()
+                {
+                    CreateTime =now,
+                    Id = Guid.NewGuid(),
+                    PrimaryMsgId = ae.Id,
+                    SendNumber = 0,
+                    SendTime = email.SendTime.Value
+                };
+                help.InsertSqlParam(plan.GetInsertSql(), plan, mapSql);
+            }
+            AppEmailReceiverPlan emailTo = new AppEmailReceiverPlan()
+            {
+                CreateTime =now,
+                Id = Guid.NewGuid(),
+                IsMailer = false,
+                PrimaryMsgId = ae.Id,
+                SendTo = email.To
+            };
+            help.InsertSqlParam(emailTo.GetInsertSql(), emailTo, mapSql);
+            List<AppEmailReceiverPlan> emailToColl = new List<AppEmailReceiverPlan>();
+            emailToColl.Add(emailTo);
+            foreach (var item in email.Mailer)
+            {//抄送人
+                AppEmailReceiverPlan emailers = new AppEmailReceiverPlan()
+                {
+                    IsMailer = true,
+                    SendTo = item,
+                    PrimaryMsgId = ae.Id,
+                    Id = Guid.NewGuid(),
+                    CreateTime = now
+                };
+                help.InsertSqlParam(emailers.GetInsertSql(), emailers, mapSql);
+                //emailToColl.Add(emailers);
+            }
+            if (mapSql.NoMapRule.Count > 0)
+            {
+                //日志输出没有匹配的规则
+                return false;
+            }
+            string sql = string.Join(";", mapSql.WaitExcuteSql);
+            return help.ExcuteNoQuery(sql, mapSql.SqlParams.ToArray()) == mapSql.WaitExcuteSql.Count;
         }
 
         public int SaveWaitSendEmailListData(List<AppEmailData> emails)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<AppEmail> QueryList(string cmd, Dictionary<string, object> param)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<AppEmail> QueryAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string SqlConnString
-        {
-            get;
-            set;
-        }
-
-        public bool Add(AppEmail entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Edit(AppEmail entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(object key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool LogicDel(object key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public AppEmail Get(object key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IList<AppEmail> Query(string cmd)
         {
             throw new NotImplementedException();
         }
