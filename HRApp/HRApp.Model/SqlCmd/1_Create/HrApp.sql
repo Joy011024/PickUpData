@@ -252,6 +252,18 @@ create table UserOrderData
 	GotoFlowId int not null,--查找流程下一步骤节点，这是流程进度图
 	BackId int not null--拒绝时返项流程 
  );
+create table ReserveEmailAccount
+(--备用邮箱
+	Id smallint identity(1,1) primary key,
+	Account varchar(32) not null,
+	AuthortyCode varchar(32) not null,
+	Smtp smallint not null,
+	SmtpHost varchar(32) not null,
+	CreateTime datetime not null,
+	IsDelete bit not null,
+	Remark nvarchar(128),
+	UsePriority smallint not null
+);
 Create table AppEmail
 (
 	ID uniqueidentifier primary key,
