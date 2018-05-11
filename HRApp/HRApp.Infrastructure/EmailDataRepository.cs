@@ -34,14 +34,22 @@ namespace HRApp.Infrastructure
             //数据存储到数据表
             AppEmail ae = new AppEmail()
             {
-                Id = Guid.NewGuid(),
                 Body = email.Body,
                 Subject = email.Subject,
-                CreateTime =now,
+                CreateTime = now,
                 IsDelete = false,
                 ParentId = new Guid(),
-                SendBy = email.From
+                SendBy = email.From,
+                BodyType = (short)email.BodyType.GetHashCode()
             };
+            if (email.EmailId.Equals(new Guid()))
+            {
+                ae.Id = Guid.NewGuid();
+            }
+            else 
+            {
+                ae.Id = email.EmailId;
+            }
             SqlCmdHelper help = new SqlCmdHelper() { SqlConnString = SqlConnString };
             help.InsertSqlParam(ae.GetInsertSql(), ae, mapSql);
             if (email.SendTime.HasValue)
@@ -67,20 +75,23 @@ namespace HRApp.Infrastructure
             help.InsertSqlParam(emailTo.GetInsertSql(), emailTo, mapSql);
             List<AppEmailReceiverPlan> emailToColl = new List<AppEmailReceiverPlan>();
             emailToColl.Add(emailTo);
-            foreach (var item in email.Mailer)
-            {//抄送人
-                AppEmailReceiverPlan emailers = new AppEmailReceiverPlan()
-                {
-                    IsMailer = true,
-                    SendTo = item,
-                    PrimaryMsgId = ae.Id,
-                    Id = Guid.NewGuid(),
-                    CreateTime = now
-                };
-                help.InsertSqlParam(emailers.GetInsertSql(), emailers, mapSql);
-                //emailToColl.Add(emailers);
+            if (email.Mailer != null)
+            {
+                foreach (var item in email.Mailer)
+                {//抄送人
+                    AppEmailReceiverPlan emailers = new AppEmailReceiverPlan()
+                    {
+                        IsMailer = true,
+                        SendTo = item,
+                        PrimaryMsgId = ae.Id,
+                        Id = Guid.NewGuid(),
+                        CreateTime = now
+                    };
+                    help.InsertSqlParam(emailers.GetInsertSql(), emailers, mapSql);
+                    //emailToColl.Add(emailers);
+                }
             }
-            if (mapSql.NoMapRule.Count > 0)
+            if (!string.IsNullOrEmpty(string.Join("", mapSql.NoMapRule)))
             {
                 //日志输出没有匹配的规则
                 return false;

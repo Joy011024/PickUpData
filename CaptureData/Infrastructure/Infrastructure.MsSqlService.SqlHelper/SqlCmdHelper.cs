@@ -349,11 +349,11 @@ namespace Infrastructure.MsSqlService.SqlHelper
             /// <summary>
             /// 执行规则处理后的sql
             /// </summary>
-            public List<string> WaitExcuteSql { get; set; }
+            public List<string> WaitExcuteSql = new List<string>();
             /// <summary>
             /// 规则匹配的参数列表
             /// </summary>
-            public List<SqlParameter> SqlParams { get; set; }
+            public List<SqlParameter> SqlParams = new List<SqlParameter>();
             /// <summary>
             /// 没有匹配的规则集合
             /// </summary>
@@ -457,9 +457,9 @@ namespace Infrastructure.MsSqlService.SqlHelper
             string sqlResult = sql;
             List<SqlParameter> param = new List<SqlParameter>();
             List<string> sqlNoMapParam = new List<string>();//命令中没有匹配的参数集合
-            Type obj=typeof(T);
+            Type obj=data.GetType();
             string objName=obj.Name;
-            Dictionary<string,object> propertyValue=obj.GetAllPorpertiesNameAndValues();
+            Dictionary<string, object> propertyValue = data.GetAllPorpertiesNameAndValues();
             Dictionary<string, string> paramMapPropertyRule = new Dictionary<string, string>();
             //当前SQL语句是第几组
             int index = result.WaitExcuteSql.Count;
@@ -478,6 +478,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
                         string name = "@" + objName +"_"+ index + "_" + property.Key;
                         sqlResult = sqlResult.Replace(g, name);
                         result.SqlParams.Add(new SqlParameter(name, property.Value));
+                        break;
                     }
                 }
                 if (!map)

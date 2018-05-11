@@ -24,7 +24,7 @@ VALUES  ({ID},{Body},{BodyType},{Subject},{IsDelete},{ParentId},{SendBy},{Create
         }
     }
     [DescriptionSort("日志定时发送计划")]
-    public class AppEmailPlan : GuidTimeField
+    public class AppEmailPlan : GuidTimeFieldwithDelete
     {
         public Guid PrimaryMsgId { get; set; }
         /// <summary>
@@ -42,13 +42,28 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         }
     }
     [DescriptionSort("邮件接收人计划列表")]
-    public class AppEmailReceiverPlan:GuidTimeField
+    public class AppEmailReceiverPlan : GuidTimeFieldwithDelete
     {
         public Guid PrimaryMsgId { get; set; }
         [DescriptionSort("是否为抄送人")]
         public bool IsMailer { get; set; }
         [DescriptionSort("接收人")]
         public string SendTo { get; set; }
+        public string GetInsertSql()
+        {
+            return @"INSERT INTO  [dbo].[AppEmailReceiverPlan] ([Id],[PrimaryMsgId],[IsMailer],[SendTo],[CreateTime],[IsDelete])
+     VALUES ({Id},{PrimaryMsgId},{IsMailer},{SendTo},{CreateTime},{IsDelete}) ";
+        }
+    }
+    [DescriptionSort("邮件接收人接收情况")]
+    public class AppEmailReceiver : GuidTimeFieldwithDelete
+    {
+        public Guid PrimaryMsgId { get; set; }
+        public bool IsMailer { get; set; }
+        public string SendTo { get; set; }
+        public DateTime SendTime { get; set; }
+        public short SendResult { get; set; }
+        public int DayInt { get; set; }
         public string GetInsertSql()
         {
             return @"INSERT INTO  [dbo].[AppEmailReceiver] ([Id],[PrimaryMsgId],[IsMailer],[SendTo],[SendTime],[CreateTime],[IsDelete],[SendResult],[DayInt])
@@ -73,5 +88,14 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         public short SendResult { get; set; }
         [DescriptionSort("重发次数")]
         public short TryAgain { get; set; }
+        public EnumEmailBodyType BodyType { get; set; }
+    }
+    [DescriptionSort("邮件系统配置")]
+    public class EmailSystemSetting
+    {
+        public string EmailAccount { get; set; }
+        public string EmailAuthortyCode { get; set; }
+        public string EmailHost { get; set; }
+        public int? EmailHostPort { get; set; }
     }
 }

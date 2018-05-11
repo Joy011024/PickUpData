@@ -119,4 +119,9 @@ namespace HRApp.Model
         [DescriptionSort("网易SMTP服务")]
         NETS163= 2
     }
+    public enum EnumEmailBodyType
+    { 
+        Body=1,
+        TextPath=2
+    }
 }

@@ -13,3 +13,4 @@ select @p5
 (4.)npoi操作excel
 npoi解析日期类型时，格式为Numeric，而数字也是Numeric，如何区分是否为数字/日期？
 不能使用int.TryPare，不兼容判断浮点小数
+(5)事务失败。 服务器响应为:DT:SPM 163 smtp14,EsCowACHpQbLAvVa36yPBA--.10761S3 1526006475,please see http://mail.163.com/help/help_spam_16.htm?ip=118.144.141.153&hostid=smtp14&time=1526006475
