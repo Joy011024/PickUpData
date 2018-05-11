@@ -79,7 +79,7 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         public string From { get; set; }
         public string To { get; set; }
         [DescriptionSort("抄送人")]
-        public List<string> Mailer { get; set; }
+        public List<string> Mailer = new List<string>();
         [DescriptionSort("邮件创建时间")]
         public DateTime EmailCreateTime { get; set; }
         [DescriptionSort("邮件发送时间")]

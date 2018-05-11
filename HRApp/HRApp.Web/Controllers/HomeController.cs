@@ -44,23 +44,24 @@ namespace HRApp.Web.Controllers
                 string sendBy = emailSetting[EAppSetting.SystemEmailSendBy.ToString()];
                 string authorCode = emailSetting[EAppSetting.SystemEmailSMPTAuthor.ToString()];
                 string smtpClient = emailSetting[EAppSetting.SMTPClient.ToString()];
+                EnumSMTP smtp;
+                Enum.TryParse(type, out smtp);
                 AppEmailData emailData = new AppEmailData()
                 {
                     EmailCreateTime = DateTime.Now,
-                    To = "158055983@qq.com",
+                    To = "3188787227@qq.com",
                     Subject = "HrApp主题_测试163邮件",
                     From = sendBy,
                     Body = text
                 };
                 EmailSystemSetting setting = new Model.EmailSystemSetting()
                 {
-                    EmailHostPort = 25,
+                    EmailHostPort =smtp==EnumSMTP.NETS163? 25:0,
                     EmailAuthortyCode = authorCode,
                     EmailAccount = sendBy,
                     EmailHost = smtpClient
                 };
-                EnumSMTP smtp;
-                Enum.TryParse(type, out smtp);
+                
                 #region 直接发送，不存储【测试可用】
                 /*
                 EmailData email = new EmailData()
