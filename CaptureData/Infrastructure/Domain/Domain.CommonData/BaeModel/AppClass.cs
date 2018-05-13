@@ -12,16 +12,16 @@ namespace Domain.CommonData
         public int Id { get; set; }
 
     }
-    public class BaseLogicWithIntPRimary:BaseIntPrimary
+    public class BaseLogicWithIntPrimary:BaseIntPrimary
     {
         public int IsDelete { get; set; }
     }
-    public class App : BaseLogicWithIntPRimary
+    public class App : BaseLogicWithIntPrimary
     {
         public string AppName { get; set; }
         public string AppCode { get; set; }
     }
-    public class AppVer:BaseLogicWithIntPRimary
+    public class AppVer : BaseLogicWithIntPrimary
     {
         public string AppVersion { get; set; }
         public string AppId { get; set; }

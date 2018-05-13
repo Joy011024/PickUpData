@@ -183,5 +183,10 @@ namespace HRApp.Web
             InitAppSetting.Version = DateTime.Now.ToString(version);
             InitAppSetting.CodeVersion = InitAppSetting.CodeVersionFromCfg();
         }
+        public static void EverydayActiveEmailAccount(IEmailDataService emailService) 
+        {//每日激活邮件账户
+            //查询邮件账户列表
+
+        }
     }
 }

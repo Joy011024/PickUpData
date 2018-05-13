@@ -262,8 +262,21 @@ create table ReserveEmailAccount
 	CreateTime datetime not null,
 	IsDelete bit not null,
 	Remark nvarchar(128),
-	UsePriority smallint not null
+	UsePriority smallint not null,
+	IsPrimaryAccount bit not null,
+	IsEnable bit not null
 );
+Create table EveryDayActive
+(
+	ID uniqueidentifier primary key,
+	EmailAccountId smallint not null,
+	CreateTime datetime not null,
+	IsSuccess bit not null,
+	DayActiveNumber int not null,
+	DayInt int not null
+)
+alter table EveryDayActive add constraint fk_EmailAccountId foreign key (EmailAccountId) 
+references ReserveEmailAccount(ID);
 Create table AppEmail
 (
 	ID uniqueidentifier primary key,

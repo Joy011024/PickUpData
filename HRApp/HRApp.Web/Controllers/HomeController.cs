@@ -49,7 +49,7 @@ namespace HRApp.Web.Controllers
                 AppEmailData emailData = new AppEmailData()
                 {
                     EmailCreateTime = DateTime.Now,
-                    To = "3188787227@qq.com",
+                    To = "158055983@qq.com",
                     Subject = "HrApp主题_测试163邮件",
                     From = sendBy,
                     Body = text
