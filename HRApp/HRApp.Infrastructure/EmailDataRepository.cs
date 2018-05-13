@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HRApp.Model;
 using IHRApp.Infrastructure;
 using Infrastructure.MsSqlService.SqlHelper;
+using System.ComponentModel;
 namespace HRApp.Infrastructure
 {
     public class EmailDataRepository:IEmailDataRepository
@@ -103,6 +104,14 @@ namespace HRApp.Infrastructure
         public int SaveWaitSendEmailListData(List<AppEmailData> emails)
         {
             throw new NotImplementedException();
+        }
+
+        [Description("查询email列表")]
+        public List<ReserveEmailAccount> QueryEmailAccounts()
+        {
+            string sql = new ReserveEmailAccount().GetSelectAllSql();
+            SqlCmdHelper help = new SqlCmdHelper(){SqlConnString=SqlConnString};
+            return CommonRepository.QuerySPModelList<ReserveEmailAccount>(sql, null, SqlConnString, 0, int.MaxValue);
         }
     }
 }

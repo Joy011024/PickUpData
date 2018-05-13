@@ -71,5 +71,17 @@ namespace HRApp.ApplicationService
             }
             return true;
         }
+
+
+        public List<EmailAccount> QueryEmailAccountInDB()
+        {
+            List<EmailAccount> account = new List<EmailAccount>();
+            foreach (var item in emailDataDal.QueryEmailAccounts())
+            {
+                EmailAccount acc = item;
+                account.Add(acc);
+            }
+            return account;
+        }
     }
 }

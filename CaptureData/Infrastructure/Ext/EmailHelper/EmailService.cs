@@ -96,7 +96,7 @@ namespace EmailHelper
             //验证邮件数据是否符合要求
 
             SmtpClient client = new SmtpClient() { Host =EmailClient };
-            if (EmailClientPort.HasValue) 
+            if (EmailClientPort.HasValue&&EmailClientPort.Value>0) 
             {
                 client.Port = EmailClientPort.Value;
             }

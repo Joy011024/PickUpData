@@ -98,14 +98,9 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         public string EmailHost { get; set; }
         public int? EmailHostPort { get; set; }
     }
-    public class ReserveEmailAccount : BaseLogicWithIntPrimary
+    public class ReserveEmailAccount : EmailAccount
     {
         public DateTime CreateTime { get; set; }
-        public string Account { get; set; }
-        [DescriptionSort("账户授权码")]
-        public string AuthoryCode { get; set; }
-        public short Smtp { get; set; }
-        public string SmtpHost { get; set; }
         public string Remark { get; set; }
         [DescriptionSort("账户使用的优先级")]
         public short UsePriority { get; set; }
@@ -119,5 +114,14 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
             return @"SELECT  [Id],[Account],[AuthortyCode],[Smtp],[SmtpHost],[CreateTime],[IsDelete],[Remark],[UsePriority],[IsPrimaryAccount],[IsEnable]
   FROM [HrApp].[dbo].[ReserveEmailAccount]";
         }
+       
+    }
+    public class EmailAccount : BaseLogicWithIntPrimary
+    {
+        public string Account { get; set; }
+        [DescriptionSort("账户授权码")]
+        public string AuthoryCode { get; set; }
+        public short Smtp { get; set; }
+        public string SmtpHost { get; set; }
     }
 }

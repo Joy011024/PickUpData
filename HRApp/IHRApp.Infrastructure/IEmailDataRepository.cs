@@ -25,5 +25,6 @@ namespace IHRApp.Infrastructure
         /// <param name="email"></param>
         bool SaveWaitSendEmailData(AppEmailData email);
         int SaveWaitSendEmailListData(List<AppEmailData> emails);
+        List<ReserveEmailAccount> QueryEmailAccounts();
     }
 }

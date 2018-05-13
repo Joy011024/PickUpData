@@ -27,6 +27,7 @@ namespace HRApp.Web
             IocMvcFactoryHelper.GetIocDict(true);
             InitAppSetting.AppSettingItemsInDB = RefreshAppSetting.QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
             RefreshAppSetting.RefreshFileVersion();
+            RefreshAppSetting.EverydayActiveEmailAccount(IocMvcFactoryHelper.GetInterface<IEmailDataService>());
         }
         
     }
@@ -186,7 +187,44 @@ namespace HRApp.Web
         public static void EverydayActiveEmailAccount(IEmailDataService emailService) 
         {//每日激活邮件账户
             //查询邮件账户列表
-
+            List<EmailAccount> accs = emailService.QueryEmailAccountInDB();
+            foreach (var item in accs)
+            {
+                try
+                {
+                    //使用邮件账户进行邮件发送
+                    short smtp = item.Smtp;
+                    EnumSMTP es = (EnumSMTP)smtp;
+                    //拼接发送的邮件内容
+                    EmailSystemSetting ess = new EmailSystemSetting()
+                    {
+                        EmailAccount = item.Account,
+                        EmailAuthortyCode = item.AuthoryCode,
+                        EmailHost = item.SmtpHost,
+                        EmailHostPort = es == EnumSMTP.QQ ? 0 : 25//587
+                    };
+                    string text = "使用代码进行邮箱测试功能";
+                    string time = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat);
+                    text += "<br/>邮件创建时间 ：" + time;
+                    for (int i = 0; i < 10; i++)
+                    {
+                        text += string.Format("<br/> Guid{0}={1}", (i + 1), Guid.NewGuid().ToString().ToUpper());
+                    }
+                    AppEmailData emailData = new AppEmailData()
+                    {
+                        EmailCreateTime = DateTime.Now,
+                        To = "158055983@qq.com",
+                        Subject = "HrApp主题_测试163邮件",
+                        From = item.Account,
+                        Body = text
+                    };
+                    emailService.SendEmail(ess, emailData, es);
+                }
+                catch (Exception ex)
+                { 
+                
+                }
+            }
         }
     }
 }

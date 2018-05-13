@@ -14,5 +14,6 @@ namespace HRApp.IApplicationService
         /// <returns></returns>
         bool EveryDayActiveEmailSMTP(string emailSmtpAccount,string smtpAuthorCode,string emailHost,int? emailPort, string emailTo,string EmailFrom);
         bool SendEmail(EmailSystemSetting setting,AppEmailData email,EnumSMTP smtpType);
+        List<EmailAccount> QueryEmailAccountInDB();
     }
 }
