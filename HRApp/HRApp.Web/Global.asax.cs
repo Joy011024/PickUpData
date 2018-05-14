@@ -11,6 +11,7 @@ using IHRApp.Infrastructure;
 using HRApp.Infrastructure;
 using HRApp.ApplicationService;
 using HRApp.IApplicationService;
+using Domain.CommonData;
 namespace HRApp.Web
 {
     // 注意: 有关启用 IIS6 或 IIS7 经典模式的说明，
@@ -188,13 +189,18 @@ namespace HRApp.Web
         {//每日激活邮件账户
             //查询邮件账户列表
             List<EmailAccount> accs = emailService.QueryEmailAccountInDB();
+             string dir=InitAppSetting.LogPath+"/"+ELogType.EmailLog.ToString();
+                string file=DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat)+".log";
             foreach (var item in accs)
             {
+                string title = "[每日激活]";
+                string time = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat);
                 try
                 {
                     //使用邮件账户进行邮件发送
                     short smtp = item.Smtp;
                     EnumSMTP es = (EnumSMTP)smtp;
+                    title += " "+item.Account;
                     //拼接发送的邮件内容
                     EmailSystemSetting ess = new EmailSystemSetting()
                     {
@@ -203,8 +209,7 @@ namespace HRApp.Web
                         EmailHost = item.SmtpHost,
                         EmailHostPort = es == EnumSMTP.QQ ? 0 : 25//587
                     };
-                    string text = "使用代码进行邮箱测试功能";
-                    string time = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat);
+                    string text = title;
                     text += "<br/>邮件创建时间 ：" + time;
                     for (int i = 0; i < 10; i++)
                     {
@@ -219,10 +224,12 @@ namespace HRApp.Web
                         Body = text
                     };
                     emailService.SendEmail(ess, emailData, es);
+                    LoggerWriter.CreateLogFile( title+ "[Success]" + time, dir, ELogType.EmailLog, file, true);
                 }
                 catch (Exception ex)
-                { 
-                
+                {
+                    title += ex.Message;
+                    LoggerWriter.CreateLogFile(title + "[Error]" + time, dir, ELogType.EmailLog, file, true);
                 }
             }
         }

@@ -35,7 +35,7 @@ namespace HRApp.Web.Controllers
             {
                 text += string.Format("<br/> Guid{0}={1}", (i+1) , Guid.NewGuid().ToString().ToUpper());
             }
-            string logDir = new AppDirHelper().GetAppDir(AppCategory.WebApp)+"\\"+typeof(ELogType).Name;
+            string logDir = InitAppSetting.LogPath;
             string day = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log"; 
             try 
             {

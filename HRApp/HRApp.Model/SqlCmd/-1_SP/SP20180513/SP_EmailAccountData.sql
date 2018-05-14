@@ -1,3 +1,5 @@
+use HrApp
+go
 select *  into ReserveEmailAccountBU from ReserveEmailAccount
 if(object_id('EveryDayActive','U') is not null)
 	drop table EveryDayActive
@@ -29,6 +31,6 @@ Create table EveryDayActive
 alter table EveryDayActive add constraint fk_EmailAccountId foreign key (EmailAccountId) 
 references ReserveEmailAccount(ID);
 insert into ReserveEmailAccount
-select [Account], [AuthortyCode], [Smtp], [SmtpHost], [CreateTime], [IsDelete], [Remark], [UsePriority], [IsPrimaryAccount], [IsEnable]
+select [Account], [AuthortyCode], [Smtp], [SmtpHost], [CreateTime], [IsDelete], [Remark], [UsePriority], 0, 0
 from ReserveEmailAccountBU;
 drop table ReserveEmailAccountBU

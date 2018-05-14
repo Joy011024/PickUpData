@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 using HRApp.Model;
+using Infrastructure.ExtService;
+using Domain.CommonData;
 namespace HRApp.Web
 {
     public class InitAppSetting
@@ -71,6 +73,25 @@ namespace HRApp.Web
                     return int.Parse(cfg);
                 }
                 return 30;
+            }
+        }
+        static string dir;
+        public static string DefaultLogPath 
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(dir))
+                {
+                    dir = new AppDirHelper().GetAppDir(AppCategory.WebApp);
+                }
+                return dir;
+            }
+        }
+        public static string LogPath
+        {
+            get 
+            {
+                return DefaultLogPath + "/" + typeof(ELogType).Name;
             }
         }
     }

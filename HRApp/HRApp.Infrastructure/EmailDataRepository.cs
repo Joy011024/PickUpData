@@ -111,7 +111,7 @@ namespace HRApp.Infrastructure
         {
             string sql = new ReserveEmailAccount().GetSelectAllSql();
             SqlCmdHelper help = new SqlCmdHelper(){SqlConnString=SqlConnString};
-            return CommonRepository.QuerySPModelList<ReserveEmailAccount>(sql, null, SqlConnString, 0, int.MaxValue);
+            return CommonRepository.QueryModelList<ReserveEmailAccount>(sql, null, SqlConnString, 0, int.MaxValue);
         }
     }
 }
