@@ -189,7 +189,7 @@ namespace HRApp.Web
         {//每日激活邮件账户
             //查询邮件账户列表
             List<EmailAccount> accs = emailService.QueryEmailAccountInDB();
-             string dir=InitAppSetting.LogPath+"/"+ELogType.EmailLog.ToString();
+             string dir=InitAppSetting.LogPath;
                 string file=DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat)+".log";
             foreach (var item in accs)
             {
@@ -200,7 +200,6 @@ namespace HRApp.Web
                     //使用邮件账户进行邮件发送
                     short smtp = item.Smtp;
                     EnumSMTP es = (EnumSMTP)smtp;
-                    title += " "+item.Account;
                     //拼接发送的邮件内容
                     EmailSystemSetting ess = new EmailSystemSetting()
                     {
@@ -210,6 +209,7 @@ namespace HRApp.Web
                         EmailHostPort = es == EnumSMTP.QQ ? 0 : 25//587
                     };
                     string text = title;
+                    title += " " + item.Account;
                     text += "<br/>邮件创建时间 ：" + time;
                     for (int i = 0; i < 10; i++)
                     {
