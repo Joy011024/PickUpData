@@ -62,12 +62,15 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         public bool IsMailer { get; set; }
         public string SendTo { get; set; }
         public DateTime SendTime { get; set; }
-        public short SendResult { get; set; }
+        [DescriptionSort("邮件发送结果")]
+        public bool SendResult { get; set; }
+        [DescriptionSort("发送次数")]
+        public short SendNumber { get; set; }
         public int DayInt { get; set; }
         public string GetInsertSql()
         {
-            return @"INSERT INTO  [dbo].[AppEmailReceiver] ([Id],[PrimaryMsgId],[IsMailer],[SendTo],[SendTime],[CreateTime],[IsDelete],[SendResult],[DayInt])
-     VALUES ({Id},{PrimaryMsgId},{IsMailer},{SendTo},{SendTime},{CreateTime},{IsDelete},{SendResult},{DayInt}) ";
+            return @"INSERT INTO  [dbo].[AppEmailReceiver] ([Id],[PrimaryMsgId],[IsMailer],[SendTo],[SendTime],[CreateTime],[IsDelete],[DayInt])
+     VALUES ({Id},{PrimaryMsgId},{IsMailer},{SendTo},{SendTime},{CreateTime},{IsDelete},{DayInt}) ";
         }
     }
     public class AppEmailData

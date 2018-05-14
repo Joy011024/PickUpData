@@ -319,8 +319,17 @@ create table AppEmailReceiver
 	SendTime datetime ,
 	CreateTime datetime not null,
 	IsDelete bit not null,
-	SendResult smallint not null,
 	DayInt int not null --增加快速比较标志
 );
- alter table AppEmailReceiver add constraint fk_PrimaryMsgId foreign key (PrimaryMsgId) 
+ alter table AppEmailReceiver add constraint fk_EmailSendHistoryMsgID foreign key (PrimaryMsgId) 
+ references AppEmail(ID);
+ create table EmailSendHistory
+ (
+	Id uniqueidentifier primary key,
+ 	SendResult bit not null,
+	SendNumber smallint not null,
+	SendTime datetime not null,
+	PrimaryMsgId uniqueidentifier not null,
+ )
+ alter table EmailSendHistory add constraint fk_PrimaryMsgId foreign key (PrimaryMsgId) 
  references AppEmail(ID);
