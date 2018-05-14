@@ -56,7 +56,7 @@ namespace HRApp.Web.Controllers
                 };
                 EmailSystemSetting setting = new Model.EmailSystemSetting()
                 {
-                    EmailHostPort =smtp==EnumSMTP.NETS163? 25:0,
+                    EmailHostPort =smtp==EnumSMTP.NETS163? 25:587,
                     EmailAuthortyCode = authorCode,
                     EmailAccount = sendBy,
                     EmailHost = smtpClient

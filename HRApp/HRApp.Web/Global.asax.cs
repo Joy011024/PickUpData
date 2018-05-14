@@ -204,9 +204,9 @@ namespace HRApp.Web
                     EmailSystemSetting ess = new EmailSystemSetting()
                     {
                         EmailAccount = item.Account,
-                        EmailAuthortyCode = item.AuthoryCode,
+                        EmailAuthortyCode = item.AuthortyCode,
                         EmailHost = item.SmtpHost,
-                        EmailHostPort = es == EnumSMTP.QQ ? 0 : 25//587
+                        EmailHostPort = es == EnumSMTP.QQ ? 587 : 25//587
                     };
                     string text = title;
                     title += " " + item.Account;
@@ -219,7 +219,7 @@ namespace HRApp.Web
                     {
                         EmailCreateTime = DateTime.Now,
                         To = "158055983@qq.com",
-                        Subject = "HrApp主题_测试163邮件",
+                        Subject = "激活Email_主题163邮件",
                         From = item.Account,
                         Body = text
                     };

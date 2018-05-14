@@ -120,7 +120,7 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
     {
         public string Account { get; set; }
         [DescriptionSort("账户授权码")]
-        public string AuthoryCode { get; set; }
+        public string AuthortyCode { get; set; }
         public short Smtp { get; set; }
         public string SmtpHost { get; set; }
     }
