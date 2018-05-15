@@ -45,7 +45,7 @@ namespace HRApp.Web.Controllers
             {
                 backGround = new BackgroundWorker();//后台线程
                 //进入这里需要使用日志进行记录
-                string dir = new AppDirHelper().GetAppDir(AppCategory.WebApp);
+                string dir = InitAppSetting.LogPath;
                 string file = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
                 LoggerWriter.CreateLogFile("Call Constructor\t"+DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), dir, ELogType.DataLog, file,true);
             }
@@ -111,7 +111,7 @@ namespace HRApp.Web.Controllers
                 sb.AppendLine("Platform=\t"+browserInfo.Platform);
                 string[] browserSupperMimeType = req.AcceptTypes;//HTTP预返回前端支持的文件格式
                 sb.AppendLine("\nAcceptTypes=\t" + string.Join(" ", browserSupperMimeType));
-                LoggerWriter.CreateLogFile(sb.ToString(), new AppDirHelper().GetAppDir(AppCategory.WebApp) + "/" + ELogType.DebugData, ELogType.DebugData);
+                LoggerWriter.CreateLogFile(sb.ToString(), InitAppSetting.LogPath, ELogType.DebugData);
             }
             IDictionary<string, object> apiParamList = filterContext.ActionParameters;//进入接口传递的参数
             RouteData rd = filterContext.RouteData;

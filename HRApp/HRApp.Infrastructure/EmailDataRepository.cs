@@ -55,7 +55,7 @@ namespace HRApp.Infrastructure
             help.InsertSqlParam(ae.GetInsertSql(), ae, mapSql);
             if (!email.SendTime.HasValue)
             {//这条邮件数据是此刻进行发送
-                email.SendTime = DateTime.Now;
+                email.SendTime = now;
             }
             //进行定时计划存储
             AppEmailPlan plan = new AppEmailPlan()
@@ -66,6 +66,10 @@ namespace HRApp.Infrastructure
                 SendNumber = 0,
                 SendTime = email.SendTime.Value
             };
+            if (plan.SendTime <= now)
+            {//已发送
+                plan.SendNumber = 1;
+            }
             help.InsertSqlParam(plan.GetInsertSql(), plan, mapSql);
             AppEmailReceiverPlan emailTo = new AppEmailReceiverPlan()
             {
