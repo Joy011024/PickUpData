@@ -94,6 +94,13 @@ namespace HRApp.Web
                 return DefaultLogPath + "/" + typeof(ELogType).Name;
             }
         }
+        public static string TodayLogFileName
+        {
+            get 
+            {
+                return DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
+            }
+        }
     }
     public class ParamNameTemplate
     {

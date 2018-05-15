@@ -28,7 +28,7 @@ namespace HRApp.Web
             IocMvcFactoryHelper.GetIocDict(true);
             InitAppSetting.AppSettingItemsInDB = RefreshAppSetting.QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
             RefreshAppSetting.RefreshFileVersion();
-            RefreshAppSetting.EverydayActiveEmailAccount(IocMvcFactoryHelper.GetInterface<IEmailDataService>());
+            AppProcess.CallTodo();
         }
         
     }
@@ -157,7 +157,7 @@ namespace HRApp.Web
         }
         
     }
-    public class RefreshAppSetting 
+    public   class RefreshAppSetting
     {
         public static Dictionary<string, string> QueryAllAppSetting(IAppSettingService service)
         {
@@ -185,12 +185,12 @@ namespace HRApp.Web
             InitAppSetting.Version = DateTime.Now.ToString(version);
             InitAppSetting.CodeVersion = InitAppSetting.CodeVersionFromCfg();
         }
-        public static void EverydayActiveEmailAccount(IEmailDataService emailService) 
+        public static void EverydayActiveEmailAccount(IEmailDataService emailService)
         {//每日激活邮件账户
             //查询邮件账户列表
             List<EmailAccount> accs = emailService.QueryEmailAccountInDB();
-             string dir=InitAppSetting.LogPath;
-                string file=DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat)+".log";
+            string dir = InitAppSetting.LogPath;
+            string file = InitAppSetting.TodayLogFileName;
             foreach (var item in accs)
             {
                 string title = "[每日激活]";
@@ -224,7 +224,7 @@ namespace HRApp.Web
                         Body = text
                     };
                     emailService.SendEmail(ess, emailData, es);
-                    LoggerWriter.CreateLogFile( title+ "[Success]" + time, dir, ELogType.EmailLog, file, true);
+                    LoggerWriter.CreateLogFile(title + "[Success]" + time, dir, ELogType.EmailLog, file, true);
                 }
                 catch (Exception ex)
                 {
@@ -232,6 +232,51 @@ namespace HRApp.Web
                     LoggerWriter.CreateLogFile(title + "[Error]" + time, dir, ELogType.EmailLog, file, true);
                 }
             }
+        }
+    }
+    public class AppProcess
+    {
+        static System.ComponentModel.BackgroundWorker appProcess = new System.ComponentModel.BackgroundWorker();
+        public static bool StopBackProcess;
+        static bool bindProcess = false;//是否已经绑定后台进程
+        static void EveryDayTrigger() 
+        {
+            if (!bindProcess)
+            {
+                appProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(BackProcessDoWork);
+            }
+           
+        }
+        static void BackProcessDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                if (StopBackProcess)
+                {
+                    return;
+                }
+                EveryDayDo();
+                System.Threading.Thread.Sleep(3000 * 60*15);//15 分钟触发一次
+            }
+            
+        }
+        static void EveryDayDo() 
+        {
+            LoggerWriter.CreateLogFile("Background process ="+DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
+            RefreshAppSetting.EverydayActiveEmailAccount(IocMvcFactoryHelper.GetInterface<IEmailDataService>());
+        }
+        public static void CallTodo() 
+        {
+            if (!bindProcess)
+            {
+                EveryDayTrigger();
+                bindProcess = true;
+            }
+            appProcess.RunWorkerAsync();
+        }
+        public static void StopTodo() 
+        {
+            StopBackProcess = true;
         }
     }
 }

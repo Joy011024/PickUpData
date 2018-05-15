@@ -47,7 +47,9 @@ namespace Domain.CommonData
         [Description("邮件日志")]
         EmailLog=13,
         [Description("邮件正文")]
-        EmailBody=14
+        EmailBody=14,
+        [Description("后台进程")]
+        BackgroundProcess=15
     }
     /// <summary>
     /// 程序类型

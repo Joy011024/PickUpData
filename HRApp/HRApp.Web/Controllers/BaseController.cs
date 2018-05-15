@@ -15,7 +15,6 @@ using IHRApp.Infrastructure;
 using HRApp.IApplicationService;
 using HRApp.ApplicationService;
 using System.ComponentModel;
-using Domain.CommonData;
 namespace HRApp.Web.Controllers
 {
     [MvcActionResultHelper]
@@ -37,18 +36,8 @@ namespace HRApp.Web.Controllers
             List<CategoryItems> items = appSetService.QueryAll();
             return items;
         }
-        BackgroundWorker backGround;//后台线程
         public BaseController() 
         {
-            //增加触发事件，用于检查控制器的生存周期
-            if (backGround == null)
-            {
-                backGround = new BackgroundWorker();//后台线程
-                //进入这里需要使用日志进行记录
-                string dir = InitAppSetting.LogPath;
-                string file = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
-                LoggerWriter.CreateLogFile("Call Constructor\t"+DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), dir, ELogType.DataLog, file,true);
-            }
 
         }
 
@@ -111,7 +100,7 @@ namespace HRApp.Web.Controllers
                 sb.AppendLine("Platform=\t"+browserInfo.Platform);
                 string[] browserSupperMimeType = req.AcceptTypes;//HTTP预返回前端支持的文件格式
                 sb.AppendLine("\nAcceptTypes=\t" + string.Join(" ", browserSupperMimeType));
-                LoggerWriter.CreateLogFile(sb.ToString(), InitAppSetting.LogPath, ELogType.DebugData);
+                LoggerWriter.CreateLogFile(sb.ToString(), InitAppSetting.LogPath, ELogType.DebugData,InitAppSetting.TodayLogFileName,true);
             }
             IDictionary<string, object> apiParamList = filterContext.ActionParameters;//进入接口传递的参数
             RouteData rd = filterContext.RouteData;
