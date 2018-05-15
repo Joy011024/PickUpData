@@ -258,4 +258,7 @@
   <data name="LblDisplayImg" xml:space="preserve">
     <value>显示照片</value>
   </data>
+  <data name="LblSendEmail" xml:space="preserve">
+    <value>发送邮件</value>
+  </data>
 </root>

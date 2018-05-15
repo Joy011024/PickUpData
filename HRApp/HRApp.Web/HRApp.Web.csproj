@@ -300,6 +300,9 @@
   <ItemGroup>
     <Content Include="Views\ReportEnum\FlagReportDialog.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EmailData\SendEmailDialog.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

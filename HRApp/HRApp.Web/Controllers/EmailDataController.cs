@@ -23,5 +23,9 @@ namespace HRApp.Web.Controllers
             IEmailDataService es = IocMvcFactoryHelper.GetInterface<IEmailDataService>();
             //es.SendEmail(setting,email)
         }
+        public ActionResult SendEmailDialog()
+        {
+            return View();
+        }
     }
 }

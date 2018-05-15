@@ -100,7 +100,7 @@ namespace HRApp.Web.Controllers
                 sb.AppendLine("Platform=\t"+browserInfo.Platform);
                 string[] browserSupperMimeType = req.AcceptTypes;//HTTP预返回前端支持的文件格式
                 sb.AppendLine("\nAcceptTypes=\t" + string.Join(" ", browserSupperMimeType));
-                LoggerWriter.CreateLogFile(sb.ToString(), InitAppSetting.LogPath, ELogType.DebugData,InitAppSetting.TodayLogFileName,true);
+                LoggerWriter.CreateLogFile(sb.ToString(), InitAppSetting.LogPath, ELogType.DebugData);
             }
             IDictionary<string, object> apiParamList = filterContext.ActionParameters;//进入接口传递的参数
             RouteData rd = filterContext.RouteData;

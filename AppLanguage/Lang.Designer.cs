@@ -349,6 +349,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 发送邮件 的本地化字符串。
+        /// </summary>
+        public static string LblSendEmail {
+            get {
+                return ResourceManager.GetString("LblSendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 生僻字拼音维护 的本地化字符串。
         /// </summary>
         public static string LblSpecialSpellNameManage {
