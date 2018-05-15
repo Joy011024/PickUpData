@@ -253,10 +253,11 @@ namespace HRApp.Web
             {
                 if (StopBackProcess)
                 {
+                    LoggerWriter.CreateLogFile("Stop Background process =" + DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
                     return;
                 }
                 EveryDayDo();
-                System.Threading.Thread.Sleep(3000 * 60*15);//15 分钟触发一次
+                System.Threading.Thread.Sleep(1000 * 60*15);//15 分钟触发一次
             }
             
         }
