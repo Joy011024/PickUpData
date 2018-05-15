@@ -73,16 +73,13 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
      VALUES ({Id},{PrimaryMsgId},{IsMailer},{SendTo},{SendTime},{CreateTime},{IsDelete},{DayInt}) ";
         }
     }
-    public class AppEmailData
+    public class AppEmailData : SampleEmailData
     {
         [DescriptionSort("数据库中存储的邮件id")]
         public Guid EmailId { get; set; }
-        public string Subject { get; set; }
-        public string Body { get; set; }
+       
         public string From { get; set; }
-        public string To { get; set; }
-        [DescriptionSort("抄送人")]
-        public List<string> Mailer = new List<string>();
+       
         [DescriptionSort("邮件创建时间")]
         public DateTime EmailCreateTime { get; set; }
         [DescriptionSort("邮件发送时间")]
@@ -92,6 +89,18 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         [DescriptionSort("重发次数")]
         public short TryAgain { get; set; }
         public EnumEmailBodyType BodyType { get; set; }
+    }
+    public class SampleEmailData 
+    {
+        public string Body { get; set; }
+        public string To { get; set; }
+        public string Subject { get; set; }
+        [DescriptionSort("抄送人")]
+        public List<string> Mailer = new List<string>();
+    }
+    public class SendEmailData : SampleEmailData
+    {
+        public string SendTime { get; set; }
     }
     [DescriptionSort("邮件系统配置")]
     public class EmailSystemSetting

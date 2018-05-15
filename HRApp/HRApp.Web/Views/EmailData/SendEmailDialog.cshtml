@@ -1,4 +1,5 @@
 ﻿@using AppLanguage
+@using HRApp.Web
 @{
     Layout = null;
 }
@@ -9,10 +10,91 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@AppLanguage.Lang.LblSendEmail</title>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-select/bootstrap-select.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $('#btnSave').click(function () {
+                BtnSendEmail();
+            });
+        });
+        function BtnSendEmail(param) {
+            param= $.extend( {
+               
+            }, param);
+            var time = $('#txtSendTimeDate').val() + " " + $('#txtSendTimeSpan').val();
+            var area = $('.email');
+            var api = GetXPathObject(area, "apiKey");
+            api.SendTime = time;
+            var mailers= $('#txtEmailMailer').val();
+            if ($.trim(mailers) != '')
+                api.Mailer = mailers.split(';');
+            bindPostAjax('/EmailData/CallEmailService', api,
+               function (response, statue) {
+
+               });
+        }
+    </script>
 </head>
 <body>
     <div>
-        
+        <div class="email">
+            <span class="alongLine">
+                <span>
+                    <label>邮件接收人</label>
+                </span>
+               <span>
+                   <input type="text" id="txtEmailTo" apikey="To" />
+               </span>
+            </span>
+            <span class="alongLine">
+                <span>
+                    指定发送时间
+                </span>
+                <span>
+                    <input type="text" id="txtSendTimeDate" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'yyyy-MM-dd' })" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddDays(-1).ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
+                    <input type="text" id="txtSendTimeSpan" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'HH-mm' })" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddDays(-1).ToString("HH:mm")" placeholder="选择时间" />
+                </span>
+            </span>
+            <span class="alongLine">
+               <span>
+                   <label>邮件主题</label>
+               </span>
+                <span>
+                    <input type="text" id="txtEmailSubject" apikey="Subject" />
+                </span>
+            </span>
+            <span class="alongLine">
+                <span>
+                    <label>抄送人</label>
+                </span>
+                <span>
+                    <input type="text" id="txtEmailMailer"  />
+                </span>
+            </span>
+            <span class="alongLine">
+                <span>
+                    <label>邮件内容</label>
+                </span>
+                <span>
+                    <textarea id="txtEmailBody" cols="100" rows="10" apikey="Body"> </textarea>
+                </span>
+            </span>
+        </div>
+        <div>
+            <button id="btnSave" class="button">@Lang.BtnSave</button>
+        </div>
     </div>
 </body>
 </html>

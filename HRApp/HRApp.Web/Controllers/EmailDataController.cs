@@ -16,12 +16,15 @@ namespace HRApp.Web.Controllers
         {
             return View();
         }
-        public void CallEmailService(AppEmailData email) 
+        public JsonResult CallEmailService(SendEmailData email) 
         {
+            Common.Data.JsonData json = new Common.Data.JsonData();
             //查询邮件账户
             EmailSystemSetting setting=new EmailSystemSetting();
             IEmailDataService es = IocMvcFactoryHelper.GetInterface<IEmailDataService>();
             //es.SendEmail(setting,email)
+            json.AttachData = email;
+            return Json(json);
         }
         public ActionResult SendEmailDialog()
         {
