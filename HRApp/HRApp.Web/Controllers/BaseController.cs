@@ -40,7 +40,7 @@ namespace HRApp.Web.Controllers
         {
 
         }
-
+        
     }
     public class MvcActionResultHelperAttribute : System.Web.Mvc.ActionFilterAttribute
     {

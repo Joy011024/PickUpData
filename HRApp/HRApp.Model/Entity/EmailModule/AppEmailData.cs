@@ -96,7 +96,7 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         public string To { get; set; }
         public string Subject { get; set; }
         [DescriptionSort("抄送人")]
-        public List<string> Mailer = new List<string>();
+        public List<string> Mailer;
     }
     public class SendEmailData : SampleEmailData
     {
@@ -109,6 +109,13 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         public string EmailAuthortyCode { get; set; }
         public string EmailHost { get; set; }
         public int? EmailHostPort { get; set; }
+        public EnumSMTP Smtp { get; set; }
+        [DescriptionSort("根据smtp类型获取端口")]
+        public static int GetHostPortSmtp(short smtpType)
+        {
+            EnumSMTP smtp = (EnumSMTP)smtpType;
+            return smtp == EnumSMTP.QQ ? 587 : 25;
+        }
     }
     public class ReserveEmailAccount : EmailAccount
     {

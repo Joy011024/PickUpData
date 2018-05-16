@@ -199,15 +199,15 @@ namespace HRApp.Web
                 {
                     //使用邮件账户进行邮件发送
                     short smtp = item.Smtp;
-                    EnumSMTP es = (EnumSMTP)smtp;
                     //拼接发送的邮件内容
                     EmailSystemSetting ess = new EmailSystemSetting()
                     {
                         EmailAccount = item.Account,
                         EmailAuthortyCode = item.AuthortyCode,
                         EmailHost = item.SmtpHost,
-                        EmailHostPort = es == EnumSMTP.QQ ? 587 : 25//587
+                        EmailHostPort = EmailSystemSetting.GetHostPortSmtp(smtp)
                     };
+                    ess.Smtp = (EnumSMTP)smtp;
                     string text = title;
                     title += " " + item.Account;
                     text += "<br/>邮件创建时间 ：" + time;
@@ -223,7 +223,7 @@ namespace HRApp.Web
                         From = item.Account,
                         Body = text
                     };
-                    emailService.SendEmail(ess, emailData, es);
+                    emailService.SendEmail(ess, emailData, ess.Smtp);
                     LoggerWriter.CreateLogFile(title + "[Success]" + time, dir, ELogType.EmailLog, file, true);
                 }
                 catch (Exception ex)
@@ -232,6 +232,20 @@ namespace HRApp.Web
                     LoggerWriter.CreateLogFile(title + "[Error]" + time, dir, ELogType.EmailLog, file, true);
                 }
             }
+        }
+        public static EmailSystemSetting GetSystemEmailAccount()
+        {
+            string type = InitAppSetting.AppSettingItemsInDB[EAppSetting.SMTP.ToString()];
+            short tv = short.Parse(type);
+            EmailSystemSetting setting = new EmailSystemSetting()
+            {
+                EmailHost = InitAppSetting.AppSettingItemsInDB[EAppSetting.SMTPClient.ToString()],
+                EmailAuthortyCode = InitAppSetting.AppSettingItemsInDB[EAppSetting.SystemEmailSMPTAuthor.ToString()],
+                EmailAccount = InitAppSetting.AppSettingItemsInDB[EAppSetting.SystemEmailSendBy.ToString()],
+                EmailHostPort = EmailSystemSetting.GetHostPortSmtp(tv),
+                Smtp = (EnumSMTP)tv
+            };
+            return setting;
         }
     }
     public class AppProcess

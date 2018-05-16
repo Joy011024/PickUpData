@@ -18,11 +18,23 @@ namespace HRApp.Web.Controllers
         }
         public JsonResult CallEmailService(SendEmailData email) 
         {
-            Common.Data.JsonData json = new Common.Data.JsonData();
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
             //查询邮件账户
-            EmailSystemSetting setting=new EmailSystemSetting();
+            EmailSystemSetting setting = RefreshAppSetting.GetSystemEmailAccount();
             IEmailDataService es = IocMvcFactoryHelper.GetInterface<IEmailDataService>();
-            //es.SendEmail(setting,email)
+            AppEmailData data = new AppEmailData()
+            {
+                Body = email.Body,
+                From = setting.EmailAccount,
+                Mailer = email.Mailer,
+                To = email.To,
+                Subject=email.Subject
+            };
+            if (!string.IsNullOrEmpty(email.SendTime))
+            {
+                data.SendTime = Convert.ToDateTime(email.SendTime);
+            }
+            json.Success= es.SendEmail(setting, data, setting.Smtp);
             json.AttachData = email;
             return Json(json);
         }
