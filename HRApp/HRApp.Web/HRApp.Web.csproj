@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\InitAppSetting.cs" />
+    <Compile Include="Controllers\AppAccountManageController.cs" />
     <Compile Include="Controllers\AppSettingManageController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContactManageController.cs" />
@@ -309,6 +310,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\OrganizationManage\OrganzeDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AppAccountManage\AccountList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AppAccountManage\SignInAccount.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
