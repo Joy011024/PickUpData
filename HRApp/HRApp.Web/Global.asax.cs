@@ -253,6 +253,8 @@ namespace HRApp.Web
     }
     public class AppProcess
     {
+        [DescriptionSort("后台运行次数")]
+        static int BackRunNumber = 0;
         static System.ComponentModel.BackgroundWorker appProcess = new System.ComponentModel.BackgroundWorker();
         public static bool StopBackProcess;
         static bool bindProcess = false;//是否已经绑定后台进程
@@ -273,6 +275,7 @@ namespace HRApp.Web
                     LoggerWriter.CreateLogFile("Stop Background process =" + DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
                     return;
                 }
+                BackRunNumber++;
                 EveryDayDo();
                 System.Threading.Thread.Sleep(1000 * 60*15);//15 分钟触发一次
             }
@@ -281,7 +284,7 @@ namespace HRApp.Web
         static void EveryDayDo() 
         {
             StringBuilder text = new StringBuilder();
-            text.AppendFormat("Background process【{0}】 ={1}" ,GetStartWebOfProcess(), DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat));
+            text.AppendFormat("Background process【{0}】,index={1} ,time ={2}" ,GetStartWebOfProcess(),BackRunNumber, DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat));
             LoggerWriter.CreateLogFile(text.ToString(), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
             RefreshAppSetting.EverydayActiveEmailAccount(IocMvcFactoryHelper.GetInterface<IEmailDataService>());
         }
@@ -296,6 +299,7 @@ namespace HRApp.Web
         }
         public static void StopTodo() 
         {
+            BackRunNumber = 0;
             StopBackProcess = true;
         }
         public static void NowProcess() 
