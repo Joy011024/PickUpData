@@ -11,30 +11,48 @@
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
     <script type="text/javascript">
         var btns = [
-            { url: 'OrderManage/AddGoodsDialog', id: 'btnAddOrderData', text: lang.cmd.btnNewAdd, title: lang.orderItems.addDialog },
-            { url: 'OrderManage/AddGoodsDialog', id: 'btnEditOrderData', text: lang.cmd.btnEdit, title: lang.orderItems.editDialog, param: 'oid' }
+            { url: '/OrderManage/AddGoodsDialog', id: 'btnAddOrderData', text: lang.cmd.btnNewAdd, title: lang.orderItems.addDialog },
+            { url: '/OrderManage/AddGoodsDialog', id: 'btnEditOrderData', text: lang.cmd.btnEdit, title: lang.orderItems.editDialog, param: 'oid' }
         ];
         var tmpl = '<button id="{id}" class="button buttonSmall" link="{url}">{text}</button>';
         $(function () {
             //渲染button按钮
-           // var btnTool = $('.btns');//无法访问到这个变量
+            // var btnTool = $('.btns');//无法访问到这个变量
             $(btns).each(function (i, ele) {
                 var btnTool = $('.btns');
+                tmpl = tmpl.replace('{url}', ele.url + ($.trim(ele.param) != '' ? '?' + ele.param : ''));
                 var btn = tmpl.formatObject(ele);
                 btnTool.append(btn);
-                btnTool.find('.buttonSmall:last').click(function (i,e) {
-                    var el = $(e);
+                btnTool.find('.buttonSmall:last').click(function (i, e) {
+                    var el = $(this);
                     if (el.attr('param') != '') {//需要选择具体数据进行编辑
 
                     }
+                    var link = el.attr('link');
+                    var title = el.text();
+                    openDialog(link, title);
                 });
             });
-        })
+        });
+        function openDialog(url, title) {
+            var at = parent ? parent.layer : layer;
+            at.open({
+                content: url,
+                type: 2,
+                area: ['400px', '500px'],
+                id: 'dialog',
+                title: title,
+                btn: [
+                    '@Lang.BtnSave', '@Lang.BtnClose'
+                ]
+            });
+        }
     </script>
 </head>
 <body>
