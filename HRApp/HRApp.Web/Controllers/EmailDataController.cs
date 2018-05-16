@@ -22,6 +22,7 @@ namespace HRApp.Web.Controllers
             //查询邮件账户
             EmailSystemSetting setting = RefreshAppSetting.GetSystemEmailAccount();
             IEmailDataService es = IocMvcFactoryHelper.GetInterface<IEmailDataService>();
+            es.LogPath = InitAppSetting.LogPath;
             AppEmailData data = new AppEmailData()
             {
                 Body = email.Body,
