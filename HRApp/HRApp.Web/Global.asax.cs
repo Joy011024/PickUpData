@@ -287,7 +287,24 @@ namespace HRApp.Web
             text.AppendFormat("Background process【{0}】,index={1} ,time ={2}" ,GetStartWebOfProcess(),BackRunNumber, DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat));
             LoggerWriter.CreateLogFile(text.ToString(), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
             RefreshAppSetting.EverydayActiveEmailAccount(IocMvcFactoryHelper.GetInterface<IEmailDataService>());
+            //读取xml配置
+            string xmlFile = InitAppSetting.DefaultLogPath + "/XmlConfig/AppConfig.xml";
+            //执行成功时间写入到xml中
+            AppEmailAccount appEmail = xmlFile.GetNodeSpecialeAttribute<AppEmailAccount>(UiCfgNode, nodeCfgFormat);
+            LoggerWriter.CreateLogFile(Newtonsoft.Json.JsonConvert.SerializeObject(appEmail), InitAppSetting.LogPath, ELogType.DebugData, InitAppSetting.TodayLogFileName, false);
         }
+       static XmlNodeDataAttribute UiCfgNode = new XmlNodeDataAttribute()
+        {//字典所属上级节点信息
+            NodeName = "configuration/appSettings",
+            NodeKeyName = "name",
+            NodeKeyValue = "AppEmailAccount"
+        };
+        static XmlNodeDataAttribute nodeCfgFormat = new XmlNodeDataAttribute()
+        {//字典中每一项节点配置项
+            NodeName = "add",
+            NodeKeyName = "key",
+            NodeKeyValue = "value"
+        };
         public static void CallTodo() 
         {
             if (!bindProcess)
@@ -325,5 +342,13 @@ namespace HRApp.Web
         {
            return Environment.GetEnvironmentVariable("APP_POOL_ID", EnvironmentVariableTarget.Process);
         }
+    }
+    public class AppEmailAccount
+    {
+        public string EmailAccount { get;set;}
+        public string EmailLastActiveTime { get; set; }
+        public string EmailLastActiveSuccessTime { get; set; }
+        public string EmailTodayActiveIsSuccess { get; set; }
+        public string EmailTodayActiveFailureNumber { get; set; }
     }
 }

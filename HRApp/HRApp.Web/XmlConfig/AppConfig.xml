@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings name="AppEmailAccount"> 
+    <!--email配置-->
+    <add key="EmailAccount" value="" />
+    <!--上一次邮件发送时间-->
+    <add key="EmailLastActiveTime" value="" />
+    <!--上一次成功发送时间-->
+    <add key="EmailLastActiveSuccessTime" value="" />
+    <!--今日邮件是否激活成功-->
+    <add key="EmailTodayActiveIsSuccess" value="0" />
+    <!--今日邮件是否激活失败次数-->
+    <add key="EmailTodayActiveFailureNumber" value="0" />
+  </appSettings>
+</configuration>
