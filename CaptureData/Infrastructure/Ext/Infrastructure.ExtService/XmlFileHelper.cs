@@ -302,6 +302,11 @@ namespace Infrastructure.ExtService
              }));
              return data;
         }
+        [Description("更新xml节点")]
+        public static void UpdateXmlNode<T>(this string xmlFile, XmlNodeDataAttribute parentNode, XmlNodeDataAttribute nodeAttribute) where T:class
+        {
+        
+        }
     }
     public class XmlNodeDataAttribute:Attribute
     {

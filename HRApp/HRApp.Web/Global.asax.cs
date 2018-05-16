@@ -291,7 +291,7 @@ namespace HRApp.Web
             string xmlFile = InitAppSetting.DefaultLogPath + "/XmlConfig/AppConfig.xml";
             //执行成功时间写入到xml中
             AppEmailAccount appEmail = xmlFile.GetNodeSpecialeAttribute<AppEmailAccount>(UiCfgNode, nodeCfgFormat);
-            LoggerWriter.CreateLogFile(Newtonsoft.Json.JsonConvert.SerializeObject(appEmail), InitAppSetting.LogPath, ELogType.DebugData, InitAppSetting.TodayLogFileName, false);
+           // LoggerWriter.CreateLogFile(Newtonsoft.Json.JsonConvert.SerializeObject(appEmail), InitAppSetting.LogPath, ELogType.DebugData, InitAppSetting.TodayLogFileName, false);
         }
        static XmlNodeDataAttribute UiCfgNode = new XmlNodeDataAttribute()
         {//字典所属上级节点信息
