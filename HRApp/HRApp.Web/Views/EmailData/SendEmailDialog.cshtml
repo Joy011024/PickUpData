@@ -63,7 +63,7 @@
                     指定发送时间
                 </span>
                 <span>
-                    <input type="text" id="txtSendTimeDate" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'yyyy-MM-dd' })" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddDays(-1).ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
+                    <input type="text" id="txtSendTimeDate" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'yyyy-MM-dd' })" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddDays(1).ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
                     <input type="text" id="txtSendTimeSpan" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'HH:mm' })" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddDays(-1).ToString("HH:mm")" placeholder="选择时间" />
                 </span>
             </span>
