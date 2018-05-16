@@ -331,6 +331,24 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 均价 的本地化字符串。
+        /// </summary>
+        public static string LblPrice {
+            get {
+                return ResourceManager.GetString("LblPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 参考图 的本地化字符串。
+        /// </summary>
+        public static string LblReferencePicture {
+            get {
+                return ResourceManager.GetString("LblReferencePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 举报分类 的本地化字符串。
         /// </summary>
         public static string LblReportingType {
@@ -363,6 +381,24 @@ namespace AppLanguage {
         public static string LblSpecialSpellNameManage {
             get {
                 return ResourceManager.GetString("LblSpecialSpellNameManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 库存管理 的本地化字符串。
+        /// </summary>
+        public static string LblStockManage {
+            get {
+                return ResourceManager.GetString("LblStockManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 库存数量 的本地化字符串。
+        /// </summary>
+        public static string LblStockNumber {
+            get {
+                return ResourceManager.GetString("LblStockNumber", resourceCulture);
             }
         }
         

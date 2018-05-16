@@ -261,4 +261,16 @@
   <data name="LblSendEmail" xml:space="preserve">
     <value>发送邮件</value>
   </data>
+  <data name="LblPrice" xml:space="preserve">
+    <value>均价</value>
+  </data>
+  <data name="LblReferencePicture" xml:space="preserve">
+    <value>参考图</value>
+  </data>
+  <data name="LblStockManage" xml:space="preserve">
+    <value>库存管理</value>
+  </data>
+  <data name="LblStockNumber" xml:space="preserve">
+    <value>库存数量</value>
+  </data>
 </root>

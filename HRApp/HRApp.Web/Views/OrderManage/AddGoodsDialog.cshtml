@@ -1,4 +1,6 @@
-﻿@{
+﻿@using AppLanguage
+@using HRApp.Web
+@{
     Layout = null;
 }
 
@@ -7,18 +9,27 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>AddGoodsDialog</title>
+    <title>@Lang.LblStockManage</title>
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
 </head>
 <body>
     <div>
         <div >
             <span class="alongLine">
-                <span><label>名称</label></span>
+                <span><label>@Lang.LblName</label></span>
                 <span><input type="text" id="txtName"/></span>
             </span>
             <span class="alongLine">
-                <span><label>数目</label></span>
+                <span><label>@Lang.LblStockNumber</label></span>
                 <span><input type="text" id="txtNumber" /></span>
+            </span>
+            <span class="alongLine">
+                <span><label>@Lang.LblPrice</label></span>
+                <span><input type="text" id="txtPrice" /></span>
+            </span>
+            <span class="alongLine">
+                <span><label>@Lang.LblReferencePicture</label></span>
             </span>
         </div>
     </div>
