@@ -273,4 +273,10 @@
   <data name="LblStockNumber" xml:space="preserve">
     <value>库存数量</value>
   </data>
+  <data name="LblCompanyList" xml:space="preserve">
+    <value>公司列表</value>
+  </data>
+  <data name="LblCompanyRepairService" xml:space="preserve">
+    <value>公司信息维护</value>
+  </data>
 </root>

@@ -223,6 +223,24 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 公司列表 的本地化字符串。
+        /// </summary>
+        public static string LblCompanyList {
+            get {
+                return ResourceManager.GetString("LblCompanyList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 公司信息维护 的本地化字符串。
+        /// </summary>
+        public static string LblCompanyRepairService {
+            get {
+                return ResourceManager.GetString("LblCompanyRepairService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 描述内容 的本地化字符串。
         /// </summary>
         public static string LblDesc {

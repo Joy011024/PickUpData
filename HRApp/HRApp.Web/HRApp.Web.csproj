@@ -118,6 +118,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\OrderManageController.cs" />
+    <Compile Include="Controllers\OrganizationManageController.cs" />
     <Compile Include="Controllers\ReportEnumController.cs" />
     <Compile Include="Controllers\SpellNameController.cs" />
     <Compile Include="Global.asax.cs">
@@ -302,6 +303,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EmailData\SendEmailDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\OrganizationManage\OrganzeListManage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\OrganizationManage\OrganzeDialog.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
