@@ -96,7 +96,7 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         public string To { get; set; }
         public string Subject { get; set; }
         [DescriptionSort("抄送人")]
-        public List<string> Mailer;
+        public List<string> Mailer { get; set; }
     }
     public class SendEmailData : SampleEmailData
     {
