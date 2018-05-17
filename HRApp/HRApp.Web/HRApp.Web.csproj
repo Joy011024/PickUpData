@@ -113,6 +113,7 @@
     <Compile Include="Controllers\AppAccountManageController.cs" />
     <Compile Include="Controllers\AppSettingManageController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommonDialogController.cs" />
     <Compile Include="Controllers\ContactManageController.cs" />
     <Compile Include="Controllers\EmailDataController.cs" />
     <Compile Include="Controllers\FileHelperController.cs" />
@@ -317,6 +318,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AppAccountManage\SignInAccount.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CommonDialog\SampleDataDialog.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
