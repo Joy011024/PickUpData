@@ -1,15 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <configuration>
-  <appSettings name="AppEmailAccount"> 
+  <appSettings name="AppEmailAccount">
     <!--email配置-->
-    <add key="EmailAccount" value="" />
+    <add key="EmailAccount" value="joy011024@163.com" />
     <!--上一次邮件发送时间-->
-    <add key="EmailLastActiveTime" value="" />
+    <add key="EmailLastActiveTime" value="2018-05-17 10:20:59" />
     <!--上一次成功发送时间-->
     <add key="EmailLastActiveSuccessTime" value="" />
     <!--今日邮件是否激活成功-->
     <add key="EmailTodayActiveIsSuccess" value="0" />
     <!--今日邮件是否激活失败次数-->
     <add key="EmailTodayActiveFailureNumber" value="0" />
+    <!--存在未激活的账号-->
+    <add key="ExistsNoActiveEmailAccount" value="1" />
   </appSettings>
 </configuration>

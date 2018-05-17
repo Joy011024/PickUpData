@@ -284,14 +284,24 @@ namespace HRApp.Web
         static void EveryDayDo() 
         {
             StringBuilder text = new StringBuilder();
-            text.AppendFormat("Background process【{0}】,index={1} ,time ={2}" ,GetStartWebOfProcess(),BackRunNumber, DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat));
-            LoggerWriter.CreateLogFile(text.ToString(), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
-            RefreshAppSetting.EverydayActiveEmailAccount(IocMvcFactoryHelper.GetInterface<IEmailDataService>());
-            //读取xml配置
-            string xmlFile = InitAppSetting.DefaultLogPath + "/XmlConfig/AppConfig.xml";
-            //执行成功时间写入到xml中
-            AppEmailAccount appEmail = xmlFile.GetNodeSpecialeAttribute<AppEmailAccount>(UiCfgNode, nodeCfgFormat);
-           // LoggerWriter.CreateLogFile(Newtonsoft.Json.JsonConvert.SerializeObject(appEmail), InitAppSetting.LogPath, ELogType.DebugData, InitAppSetting.TodayLogFileName, false);
+            try
+            {
+                text.AppendFormat("Background process【{0}】,index={1} ,time ={2}", GetStartWebOfProcess(), BackRunNumber, DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat));
+                LoggerWriter.CreateLogFile(text.ToString(), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
+                RefreshAppSetting.EverydayActiveEmailAccount(IocMvcFactoryHelper.GetInterface<IEmailDataService>());
+                //读取xml配置
+                string xmlFile = InitAppSetting.DefaultLogPath + "/XmlConfig/AppConfig.xml";
+                //执行成功时间写入到xml中
+                AppEmailAccount appEmail = xmlFile.GetNodeSpecialeAttribute<AppEmailAccount>(UiCfgNode, nodeCfgFormat);
+                appEmail.EmailLastActiveTime = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat);
+                appEmail.EmailAccount = InitAppSetting.AppSettingItemsInDB[EAppSetting.SystemEmailSendBy.ToString()];
+                xmlFile.UpdateXmlNode(appEmail, UiCfgNode, nodeCfgFormat);
+                LoggerWriter.CreateLogFile(Newtonsoft.Json.JsonConvert.SerializeObject(appEmail), InitAppSetting.LogPath, ELogType.DebugData, InitAppSetting.TodayLogFileName, false);
+            }
+            catch (Exception ex)
+            {
+                LoggerWriter.CreateLogFile("【Error】"+ex.Message.ToString(), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
+            }
         }
        static XmlNodeDataAttribute UiCfgNode = new XmlNodeDataAttribute()
         {//字典所属上级节点信息
@@ -350,5 +360,6 @@ namespace HRApp.Web
         public string EmailLastActiveSuccessTime { get; set; }
         public string EmailTodayActiveIsSuccess { get; set; }
         public string EmailTodayActiveFailureNumber { get; set; }
+        public string ExistsNoActiveEmailAccount { get; set; }
     }
 }

@@ -303,9 +303,42 @@ namespace Infrastructure.ExtService
              return data;
         }
         [Description("更新xml节点")]
-        public static void UpdateXmlNode<T>(this string xmlFile, XmlNodeDataAttribute parentNode, XmlNodeDataAttribute nodeAttribute) where T:class
+        public static void UpdateXmlNode<T>(this string xmlFile,T data, XmlNodeDataAttribute parentNode, XmlNodeDataAttribute nodeAttribute) where T:class
         {
-        
+            string[] xmlAtt = new string[] { nodeAttribute.NodeKeyName,nodeAttribute.NodeKeyValue};
+            Type obj= typeof(T);
+            PropertyInfo[] pis = obj.GetProperties();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlFile);
+            string nodeFormat = "[@{0}='{1}']";
+            string appItem = string.Format(nodeFormat, parentNode.NodeKeyName, parentNode.NodeKeyValue);
+            XmlNode node = doc.SelectSingleNode(parentNode.NodeName + appItem);
+            //读取xml
+            foreach (PropertyInfo item in pis)
+            {
+                //首先查看特性是否存储
+                string rec = item.Name;
+                object appValue = item.GetValue(data, null);
+                string appValueStr = appValue == null ? string.Empty : appValue.ToString();
+                XmlNode row= node.SelectSingleNode(nodeAttribute.NodeName + string.Format(nodeFormat, nodeAttribute.NodeKeyName, rec));//是否有这一属性
+                if (row == null)
+                {
+                    XmlNode xm = doc.CreateNode("element", nodeAttribute.NodeName, string.Empty);
+                    XmlElement ele = (XmlElement)xm;
+                    ele.SetAttribute(nodeAttribute.NodeKeyName, rec);
+                    ele.SetAttribute(nodeAttribute.NodeKeyValue, appValueStr);
+                    node.AppendChild(xm);
+                }
+                else
+                {//更改这一行配置的值
+                    XmlNode newNode = row.CloneNode(true);
+                    XmlElement ele = (XmlElement)newNode;
+                    ele.SetAttribute(nodeAttribute.NodeKeyName,rec);
+                    ele.SetAttribute(nodeAttribute.NodeKeyValue, appValueStr);
+                    node.ReplaceChild(newNode, row);//节点更新
+                }
+            }
+            doc.Save(xmlFile);
         }
     }
     public class XmlNodeDataAttribute:Attribute
