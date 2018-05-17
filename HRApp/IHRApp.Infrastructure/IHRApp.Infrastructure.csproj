@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAppAccountRepository.cs" />
     <Compile Include="IAppRepository.cs" />
     <Compile Include="IAppSettingRepository.cs" />
     <Compile Include="IBaseRepository.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="IEmailDataRepository.cs" />
     <Compile Include="IMaybeSpecialRepository.cs" />
     <Compile Include="IMenuRepository.cs" />
+    <Compile Include="IOrganizationRepository.cs" />
     <Compile Include="IRelyTableRepository.cs" />
     <Compile Include="IReportEnumDataRepository.cs" />
     <Compile Include="ISpecialSpellNameRepository.cs" />

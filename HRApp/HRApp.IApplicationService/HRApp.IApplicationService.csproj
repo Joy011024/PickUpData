@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAppAccountService.cs" />
     <Compile Include="IAppDataService.cs" />
     <Compile Include="IAppSettingService.cs" />
     <Compile Include="IBaseService.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="IRelyTableService.cs" />
     <Compile Include="IReportEnumDataService.cs" />
     <Compile Include="ISpecialSpellNameService.cs" />
+    <Compile Include="OrganizationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
