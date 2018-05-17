@@ -12,6 +12,8 @@ using HRApp.Infrastructure;
 using HRApp.ApplicationService;
 using HRApp.IApplicationService;
 using Domain.CommonData;
+using System.Diagnostics;
+using System.Text;
 namespace HRApp.Web
 {
     // 注意: 有关启用 IIS6 或 IIS7 经典模式的说明，
@@ -29,6 +31,7 @@ namespace HRApp.Web
             InitAppSetting.AppSettingItemsInDB = RefreshAppSetting.QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
             RefreshAppSetting.RefreshFileVersion();
             AppProcess.CallTodo();
+            //AppProcess.NowProcess();
         }
         
     }
@@ -250,6 +253,8 @@ namespace HRApp.Web
     }
     public class AppProcess
     {
+        [DescriptionSort("后台运行次数")]
+        static int BackRunNumber = 0;
         static System.ComponentModel.BackgroundWorker appProcess = new System.ComponentModel.BackgroundWorker();
         public static bool StopBackProcess;
         static bool bindProcess = false;//是否已经绑定后台进程
@@ -270,6 +275,7 @@ namespace HRApp.Web
                     LoggerWriter.CreateLogFile("Stop Background process =" + DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
                     return;
                 }
+                BackRunNumber++;
                 EveryDayDo();
                 System.Threading.Thread.Sleep(1000 * 60*15);//15 分钟触发一次
             }
@@ -277,9 +283,28 @@ namespace HRApp.Web
         }
         static void EveryDayDo() 
         {
-            LoggerWriter.CreateLogFile("Background process ="+DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
+            StringBuilder text = new StringBuilder();
+            text.AppendFormat("Background process【{0}】,index={1} ,time ={2}" ,GetStartWebOfProcess(),BackRunNumber, DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat));
+            LoggerWriter.CreateLogFile(text.ToString(), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
             RefreshAppSetting.EverydayActiveEmailAccount(IocMvcFactoryHelper.GetInterface<IEmailDataService>());
+            //读取xml配置
+            string xmlFile = InitAppSetting.DefaultLogPath + "/XmlConfig/AppConfig.xml";
+            //执行成功时间写入到xml中
+            AppEmailAccount appEmail = xmlFile.GetNodeSpecialeAttribute<AppEmailAccount>(UiCfgNode, nodeCfgFormat);
+           // LoggerWriter.CreateLogFile(Newtonsoft.Json.JsonConvert.SerializeObject(appEmail), InitAppSetting.LogPath, ELogType.DebugData, InitAppSetting.TodayLogFileName, false);
         }
+       static XmlNodeDataAttribute UiCfgNode = new XmlNodeDataAttribute()
+        {//字典所属上级节点信息
+            NodeName = "configuration/appSettings",
+            NodeKeyName = "name",
+            NodeKeyValue = "AppEmailAccount"
+        };
+        static XmlNodeDataAttribute nodeCfgFormat = new XmlNodeDataAttribute()
+        {//字典中每一项节点配置项
+            NodeName = "add",
+            NodeKeyName = "key",
+            NodeKeyValue = "value"
+        };
         public static void CallTodo() 
         {
             if (!bindProcess)
@@ -291,7 +316,39 @@ namespace HRApp.Web
         }
         public static void StopTodo() 
         {
+            BackRunNumber = 0;
             StopBackProcess = true;
         }
+        public static void NowProcess() 
+        {
+            //获取当前进程
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            Process cur = Process.GetCurrentProcess();
+            string pn = cur.ProcessName;//当前运行进程 w3wp/iisexpress
+            sb.AppendLine("ProcessName=" + pn);
+            string site =cur.Site!=null? cur.Site.Name:string.Empty;
+            sb.AppendLine("Site=" + site);
+            string maiche = cur.MachineName;
+            sb.AppendLine("MachineName{.=local}=" + maiche);
+            string window = cur.MainWindowTitle;
+            sb.AppendLine("MainWindowTitle=" + window);
+            string poolName = Environment.GetEnvironmentVariable("APP_POOL_ID", EnvironmentVariableTarget.Process);//应用程序池名称 HrApp/Clr4IntegratedAppPool
+            sb.AppendLine("APP_POOL_ID=" + poolName);
+            // string json = Newtonsoft.Json.JsonConvert.SerializeObject(cur);
+            LoggerWriter.CreateLogFile(sb.ToString(),
+                InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
+        }
+        public static string GetStartWebOfProcess() 
+        {
+           return Environment.GetEnvironmentVariable("APP_POOL_ID", EnvironmentVariableTarget.Process);
+        }
+    }
+    public class AppEmailAccount
+    {
+        public string EmailAccount { get;set;}
+        public string EmailLastActiveTime { get; set; }
+        public string EmailLastActiveSuccessTime { get; set; }
+        public string EmailTodayActiveIsSuccess { get; set; }
+        public string EmailTodayActiveFailureNumber { get; set; }
     }
 }

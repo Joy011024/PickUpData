@@ -237,21 +237,15 @@ namespace Infrastructure.ExtService
             Dictionary<string, string> cfg = new Dictionary<string, string>();
             GetNodeAttribute(xmlFile, parentNode, new ChildAttributeInNodeEvent(atts =>
             {
-                Dictionary<string, string> sort = new Dictionary<string, string>();
-                foreach(XmlAttribute  item in atts)
-                {//先出现的是哪个属性
-                    if (item.Name == nodeAttribute.NodeKeyName)
-                    {
-                        sort.Add(nodeAttribute.NodeKeyName, item.Value);
-                    }
-                    else if (item.Name == nodeAttribute.NodeKeyValue)
-                    {
-                        sort.Add(nodeAttribute.NodeKeyValue, item.Value);
-                    }
-                }
-                if (sort.Count == att.Length)
+                XmlAttribute rec = atts[att[0]];
+                if (rec == null)
                 {
-                    cfg.Add(sort[nodeAttribute.NodeKeyName], sort[nodeAttribute.NodeKeyValue]);
+                    return;
+                }
+                XmlAttribute recValue = atts[att[1]];
+                if (!string.IsNullOrEmpty(rec.Value)&& !cfg.ContainsKey(rec.Value))
+                {
+                    cfg.Add(rec.Value, recValue==null?string.Empty:recValue.Value);
                 }
             }));
             return cfg;
@@ -264,6 +258,10 @@ namespace Infrastructure.ExtService
             doc.Load(xmlFile);
             string nodeFormat = "[@{0}='{1}']";
             XmlNode node = doc.SelectSingleNode(parentNode.NodeName + string.Format(nodeFormat, parentNode.NodeKeyName, parentNode.NodeKeyValue));
+            if (node == null)
+            {//未找到节点
+                return;
+            }
             XmlNodeList targets = node.ChildNodes;//全部子节点
             foreach (XmlNode item in targets)
             {
@@ -274,6 +272,40 @@ namespace Infrastructure.ExtService
                 XmlElement ele = (XmlElement)item;
                 attEvent(ele.Attributes);
             }
+        }
+        [Description("从xml节点中读取实体信息")]
+        public static T GetNodeSpecialeAttribute<T>(this string xmlFile, XmlNodeDataAttribute parentNode, XmlNodeDataAttribute nodeAttribute) where T : class
+        {
+             string[] att=new string[] { nodeAttribute.NodeKeyName, nodeAttribute.NodeKeyValue };
+             T data = System.Activator.CreateInstance<T>();
+             Type objT = typeof(T);
+             GetNodeAttribute(xmlFile, parentNode, new ChildAttributeInNodeEvent(atts =>
+             {//读取每一项（属性）的值
+                 XmlAttribute obj = atts[att[0]];
+                 if (obj == null)
+                 {
+                     return;
+                 }
+                 XmlAttribute recValue = atts[att[1]];
+                 if (recValue == null || string.IsNullOrEmpty(recValue.Value))
+                 {
+                     return;
+                 }
+                 string property = obj.Value;
+                 PropertyInfo pi = objT.GetProperty(property);
+                 if (pi == null)
+                 {
+                     return;
+                 }
+                 //设置
+                 pi.SetValue(data, recValue.Value, null);
+             }));
+             return data;
+        }
+        [Description("更新xml节点")]
+        public static void UpdateXmlNode<T>(this string xmlFile, XmlNodeDataAttribute parentNode, XmlNodeDataAttribute nodeAttribute) where T:class
+        {
+        
         }
     }
     public class XmlNodeDataAttribute:Attribute
