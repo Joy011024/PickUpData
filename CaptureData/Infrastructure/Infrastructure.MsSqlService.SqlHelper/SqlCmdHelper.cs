@@ -139,7 +139,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
                 dap.Fill(ds);
             }
             else 
-            {
+            {//fill 索引从0开始 
                 dap.Fill(ds, beginRow.Value, endRow.HasValue ? endRow.Value : int.MaxValue, dataSetName);
             }
             conn.Close();
@@ -516,7 +516,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
             object[] att= ty.GetCustomAttributes(typeof(TableFieldAttribute), false);
             List<string> dbGenrateField = new List<string>();//数据库生成字段
             List<string> ignoreProperty=new List<string>();//忽略的属性
-            if (att != null)
+            if (att != null&&att.Length>0)
             {
                 TableFieldAttribute mapp = att[0] as TableFieldAttribute;
                 table =string.IsNullOrEmpty(mapp.TableName)?table: mapp.TableName;
@@ -544,7 +544,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
                 }
                 //该属性是否存在被忽略特性
                 object[] isIgnoreProperty= item.GetCustomAttributes(typeof(PropertyIgnoreFieldAttribute), false);
-                if (isIgnoreProperty != null)
+                if (isIgnoreProperty != null && isIgnoreProperty.Length>0)
                 {
                     continue;
                 }
@@ -552,7 +552,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
                 string field = property;
                 //判断是否存在转换特性
                 object[] obj= item.GetCustomAttributes(typeof(ColumnAttribute), false);
-                if (obj != null)
+                if (obj != null&&obj.Length>0)
                 {
                     ColumnAttribute column = obj[0] as ColumnAttribute;
                     field = column.Name;
@@ -566,6 +566,46 @@ namespace Infrastructure.MsSqlService.SqlHelper
             string sql = "Insert into dbo.{table} ({columns}) values({columnsValueFormat})";
             return sql.Replace("{table}", table).Replace("{columns}", string.Join(",", columnMapProperty.Values.ToArray()))
                 .Replace("{columnsValueFormat}", string.Join(",", columnMapProperty.Keys.ToArray()));
+        }
+        public static string GenerateSampleSelectSql<T>() where T:class
+        {
+            Type ty = typeof(T);
+            string table = ty.Name;
+            List<string> ignoreField = new List<string>();
+            object[] obj = ty.GetCustomAttributes(typeof(TableFieldAttribute), false);
+            if (obj != null && obj.Length > 0)
+            {
+                TableFieldAttribute map = obj[0] as TableFieldAttribute;
+                table = string.IsNullOrEmpty(map.TableName) ? table : map.TableName;
+                if (map.IgnoreProperty != null)
+                {
+                    ignoreField.AddRange(map.IgnoreProperty);
+                }
+            }
+            List<string> columns = new List<string>();
+            foreach (PropertyInfo item in ty.GetProperties())
+            {
+                string pn = item.Name;
+                //是否是被忽略的属性
+                object[] ignore= item.GetCustomAttributes(typeof(PropertyIgnoreFieldAttribute), false);
+                if (ignore != null&&ignore.Length>0)
+                {
+                    ignoreField.Add(pn);
+                    continue;
+                }
+                object[] propertyMapColumn = item.GetCustomAttributes(typeof(ColumnAttribute), false);
+                if (propertyMapColumn != null && propertyMapColumn.Length > 1)
+                {
+                    ColumnAttribute col = propertyMapColumn[0] as ColumnAttribute;
+                    pn = string.IsNullOrEmpty(col.Name) ? pn : col.Name;
+                }
+                columns.Add("[" + pn+"]");
+            }
+            if (columns.Count == 0)
+            {//没有匹配的数据库列 
+                return string.Empty;
+            }
+            return "Select {columns} from dbo.{table}".Replace("{columns}", string.Join(",", columns)).Replace("{table}", table);
         }
     }
 }

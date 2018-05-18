@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using HRApp.Model;
 using IHRApp.Infrastructure;
 using Infrastructure.MsSqlService.SqlHelper;
@@ -63,6 +64,19 @@ namespace HRApp.Infrastructure
         public IList<Organze> Query(string cmd)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Organze> QueryOrganzes(RequestParam param)
+        {
+            string sql = SqlCmdHelper.GenerateSampleSelectSql<Organze>()+" where 1=1";
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+            if (!string.IsNullOrEmpty(param.QueryKey))
+            {
+                sql += "and  Code like @key+'%' or Name like @key+'%'";
+                sqlParam.Add(new SqlParameter() { ParameterName = "@key", Value = param.QueryKey });
+            }
+            SqlCmdHelper help = new SqlCmdHelper() { SqlConnString = SqlConnString };
+            return CommonRepository.QueryModelList<Organze>(sql, sqlParam.ToArray(), SqlConnString, param.RowBeginIndex, param.RowEndIndex);
         }
     }
 }

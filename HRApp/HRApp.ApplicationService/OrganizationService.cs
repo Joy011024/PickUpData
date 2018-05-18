@@ -9,6 +9,7 @@ using System.ComponentModel;
 using Infrastructure.ExtService;
 using AppLanguage;
 using IHRApp.Infrastructure;
+using Domain.CommonData;
 namespace HRApp.ApplicationService
 {
     public class OrganizationService:IOrganizationService
@@ -65,6 +66,17 @@ namespace HRApp.ApplicationService
         public bool Update(Organze entity)
         {
             throw new NotImplementedException();
+        }
+
+        public List<FieldContainerCode> QueryOrganzes(string queryKey)
+        {
+            List<Organze> list= organzeDal.QueryOrganzes(new RequestParam() { QueryKey = queryKey, RowBeginIndex = 0, RowEndIndex = int.MaxValue });
+            List<FieldContainerCode> output = new List<FieldContainerCode>();
+            foreach (Organze item in list)
+            {
+                output.Add(item);
+            }
+            return output;
         }
     }
 }

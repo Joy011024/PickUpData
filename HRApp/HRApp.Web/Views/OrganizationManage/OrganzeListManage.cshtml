@@ -10,18 +10,30 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@Lang.LblCompanyList</title>
-    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+   
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <style type="text/css">
+        .trLine {
+            border-bottom: solid 2px black;
+        }
+    </style>
     <script type="text/javascript">
     var btns = [
         { url: '/CommonDialog/SampleDataDialog', id: 'btnAddOrderData', text: lang.cmd.btnNewAdd, title: lang.orderItems.addDialog },
         { url: '/OrganizationManage/OrganzeDialog', id: 'btnEditOrderData', text: lang.cmd.btnEdit, title: lang.orderItems.editDialog, param: 'oid' }
+    ];
+    var columns = [
+        { text: '@Lang.LblName', map: 'Name' },
+        { text: '@Lang.LblCode', map: 'Code' }
     ];
     var tmpl = '<button id="{id}" class="button buttonSmall" link="{url}">{text}</button>';
     $(function () {
@@ -41,6 +53,13 @@
                 var title = el.text();
                 openDialog(link, title);
             });
+        });
+        $('#grid').append('<table class="table"><thead><tr></tr></thead><tbody></tbody></table>');
+        $(columns).each(function (i, ele) {
+            $('#grid table thead tr').append('<td>' + ele.text + '</td>');
+        });
+        $('#btnQuery').click(function () {
+            btnQuery();
         });
     });
     function openDialog(url, title) {
@@ -62,19 +81,37 @@
                 if (data == null) {//存在未输入的内容
                     return;
                 }
-                bindPostAjax('/OrganizationManage/SaveCompany', param, function (response, statue) {
+                bindPostAjax('/OrganizationManage/SaveCompany', data, function (response, statue) {
                     var lay = parent.layer ? parent.layer : layer;
                     if (response.Success) {
                         lay.close(lay.index);
                         lay.alert('操作成功', { title: '@Lang.LblTip' });
-                            return;
-                        }
-                        lay.alert(response.Message, { title: '@Lang.LblTip' });
-                    });
-                },
-                btn2: function (index,lay) {
+                        return;
+                    }
+                    lay.alert(response.Message, { title: '@Lang.LblTip' });
+                });
+            },
+            btn2: function (index, lay) {
 
+            }
+        });
+    }
+        function btnQuery() {
+            bindPostAjax('/OrganizationManage/QueryCompnayList', {
+                QueryKey: $('#txtKeyWord').val()
+            }, function (response, statue) {
+                $('#grid table tbody').empty();
+                if (!response.Success) {
+                    lay.alert(response.Message, { title: '@Lang.LblTip' });
+                    return;
                 }
+                $(response.Data).each(function (i, ele) {
+                    var row = [];
+                    for (var i = 0; i < columns.length; i++) {
+                        row.push('<td>' + ele[columns[i].map] + '</td>');
+                    }
+                    $('#grid table tbody').append('<tr class="trLine">' + row.join('') + '</tr>')
+                });
             });
         }
     </script>
@@ -99,8 +136,13 @@
                 </span>
             </span>
         </div>
-        <div id="grid">
+        <div id="gridArea" class="table table-condensed table-hover table-striped" style="margin-top:10px;">
+            <div id="gridPage">
 
+            </div>
+            <div id="grid">
+
+            </div>
         </div>
     </div>
 </body>

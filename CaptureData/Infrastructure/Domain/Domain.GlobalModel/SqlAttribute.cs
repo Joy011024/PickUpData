@@ -14,7 +14,7 @@ namespace Domain.GlobalModel
         [Description("数据库生成字段列表")]
         public string[] DbGeneratedFields;
         public string TableName { get; set; }
-        [Description("忽略字段")]
+        [Description("忽略字段[兼容属性封装公共使用]")]
         public string[] IgnoreProperty { get; set; }
     }
     [Description("属性忽略匹配字段")]
