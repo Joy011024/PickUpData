@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HRApp.Model;
 namespace IHRApp.Infrastructure
 {
-    interface IOrganizationRepository
+    public interface IOrganizationRepository:IBaseListRepository<Organze>
     {
     }
 }

@@ -279,4 +279,7 @@
   <data name="LblCompanyRepairService" xml:space="preserve">
     <value>公司信息维护</value>
   </data>
+  <data name="Tip_NameIsRequired" xml:space="preserve">
+    <value>名称不能为空</value>
+  </data>
 </root>

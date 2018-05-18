@@ -97,6 +97,8 @@ namespace HRApp.Web
             ioc.IocFillProperty(appSettingDal, propertyVal);
             IMenuRepository menuDal = ioc.IocConvert<IMenuRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(MenuRepository).Name);
             ioc.IocFillProperty(menuDal, propertyVal);
+            IOrganizationRepository organzeDal = ioc.IocConvert<IOrganizationRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(OrganizationRepository).Name);
+            ioc.IocFillProperty(organzeDal, propertyVal);
             IContactDataRepository contacterDal = ioc.IocConvert<IContactDataRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(ContactDataRepository).Name);
             ioc.IocFillProperty(contacterDal, propertyVal);
             IMaybeSpecialRepository maybeSpecialDal = ioc.IocConvert<IMaybeSpecialRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(MaybeSpecialRepository).Name);
@@ -116,6 +118,7 @@ namespace HRApp.Web
             propertyVal.Add(typeof(IAppRepository).Name, appDal);
             propertyVal.Add(typeof(IAppSettingRepository).Name, appSettingDal);
             propertyVal.Add(typeof(IMenuRepository).Name, menuDal);
+            propertyVal.Add(typeof(IOrganizationRepository).Name, organzeDal);
             propertyVal.Add(typeof(IContactDataRepository).Name, contacterDal);
             propertyVal.Add(typeof(IMaybeSpecialRepository).Name, maybeSpecialDal);
             propertyVal.Add(typeof(ISpecialSpellNameRepository).Name, speicalSpellDal);
@@ -135,6 +138,9 @@ namespace HRApp.Web
             IMenuService menuService = ioc.IocConvert<IMenuService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(MenuService).Name);
             ioc.IocFillProperty<IMenuService, MenuService>(menuService, propertyVal);
             propertyVal.Add(typeof(IMenuService).Name, menuService);
+            IOrganizationService organzeService = ioc.IocConvert<IOrganizationService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(OrganizationService).Name);
+            ioc.IocFillProperty<IOrganizationService, OrganizationService>(organzeService, propertyVal);
+            propertyVal.Add(typeof(IOrganizationService).Name, organzeService);
             IContactDataService contactService = ioc.IocConvert<IContactDataService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(ContactDataService).Name);
             ioc.IocFillProperty<IContactDataService, ContactDataService>(contactService, propertyVal);
             propertyVal.Add(typeof(IContactDataService).Name, contactService);

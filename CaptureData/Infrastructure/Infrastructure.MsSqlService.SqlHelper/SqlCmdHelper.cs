@@ -5,10 +5,13 @@ using System.Text;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
+using System.Data.Linq.Mapping;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
 using CommonHelperEntity;
+using Domain.GlobalModel;
+using System.Reflection;
 namespace Infrastructure.MsSqlService.SqlHelper
 {
     public class SqlCmdHelper
@@ -449,6 +452,14 @@ namespace Infrastructure.MsSqlService.SqlHelper
                 SqlParams = param
             };
         }
+        /// <summary>
+        /// 填充SQL的参数列表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <param name="data"></param>
+        /// <param name="result"></param>
+        /// <param name="paramMapRule"></param>
         public void InsertSqlParam<T>(string sql, T data, SqlRuleMapResult result, string paramMapRule = "{(.*?)}") where T : class
         { 
             //提取出参数列表
@@ -489,6 +500,72 @@ namespace Infrastructure.MsSqlService.SqlHelper
             result.WaitExcuteSql.Add(sqlResult);
             //本次没有匹配的参数列表
             result.NoMapRule.Add(string.Join("|", sqlNoMapParam));
+        }
+        /// <summary>
+        /// 根据实体生成insert语句
+        /// </summary>
+        /// <typeparam name="T">实体类
+        /// 【TableFieldAttribute可以匹配实体和表关系,
+        /// PropertyIgnoreFieldAttribute修饰的属性不组装到命令中】</typeparam>
+        /// <returns>返回拼装的insert语句</returns>
+        public static string GenerateInsertSql<T>() where T:class
+        {
+            Type ty = typeof(T);
+            string table = ty.Name;
+            //判断是否存在特性指定表名称
+            object[] att= ty.GetCustomAttributes(typeof(TableFieldAttribute), false);
+            List<string> dbGenrateField = new List<string>();//数据库生成字段
+            List<string> ignoreProperty=new List<string>();//忽略的属性
+            if (att != null)
+            {
+                TableFieldAttribute mapp = att[0] as TableFieldAttribute;
+                table =string.IsNullOrEmpty(mapp.TableName)?table: mapp.TableName;
+                if (mapp.DbGeneratedFields != null)
+                {
+                    dbGenrateField.AddRange(mapp.DbGeneratedFields);
+                }
+                if (mapp.IgnoreProperty != null)
+                {
+                    ignoreProperty.AddRange(mapp.IgnoreProperty);
+                }
+            }
+            Dictionary<string, string> columnMapProperty = new Dictionary<string, string>();
+            foreach (PropertyInfo item in ty.GetProperties())
+            {
+                string property = item.Name;
+                #region 过滤掉不组装到语句中的属性
+                if (ignoreProperty.Contains(property))
+                {
+                    continue;
+                }
+                if (dbGenrateField.Contains(property))
+                {
+                    continue;
+                }
+                //该属性是否存在被忽略特性
+                object[] isIgnoreProperty= item.GetCustomAttributes(typeof(PropertyIgnoreFieldAttribute), false);
+                if (isIgnoreProperty != null)
+                {
+                    continue;
+                }
+                #endregion
+                string field = property;
+                //判断是否存在转换特性
+                object[] obj= item.GetCustomAttributes(typeof(ColumnAttribute), false);
+                if (obj != null)
+                {
+                    ColumnAttribute column = obj[0] as ColumnAttribute;
+                    field = column.Name;
+                }
+                columnMapProperty.Add("{" + property+"}", field);
+            }
+            if (columnMapProperty.Count == 0)
+            {
+                return string.Empty;
+            }
+            string sql = "Insert into dbo.{table} ({columns}) values({columnsValueFormat})";
+            return sql.Replace("{table}", table).Replace("{columns}", string.Join(",", columnMapProperty.Values.ToArray()))
+                .Replace("{columnsValueFormat}", string.Join(",", columnMapProperty.Keys.ToArray()));
         }
     }
 }

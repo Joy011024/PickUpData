@@ -32,7 +32,34 @@
             border-image: initial;
             border-radius: 5px;
         }
+        .nullMsg {
+            border:solid 1px red;
+        }
     </style>
+    <script type="text/javascript">
+        var data = null;
+        function gatherUiData() {//提取UI的元素值
+            if (!VaildUiRequire()) {//存在没有输入的必填内容
+                return null;
+            }
+            var area = $('.ApiParam');
+            var api = GetXPathObject(area, "apiKey");
+            return api;
+        }
+        function VaildUiRequire() {//校验数据必填项是否为空
+            $('.required:visible').each(function (i, ele) {//只判断显示的元素
+                var el = $(ele);
+                var val = el.val();
+                if (val == '') {
+                    el.addClass('nullMsg');
+                    return false;
+                } else {
+                    el.removeClass('nullMsg');
+                }
+            });
+            return $('.required.nullMsg:visible').length == 0;
+        }
+    </script>
 </head>
 <body>
     <div>

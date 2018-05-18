@@ -511,6 +511,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 名称不能为空 的本地化字符串。
+        /// </summary>
+        public static string Tip_NameIsRequired {
+            get {
+                return ResourceManager.GetString("Tip_NameIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 请选择 的本地化字符串。
         /// </summary>
         public static string Tip_PleaseSelect {
