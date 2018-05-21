@@ -66,12 +66,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ExtAttribute\" />
+    <Folder Include="SqlCmd\AccountDBSqlCmd\SqlCmd\-1_SP\" />
     <Folder Include="SqlCmd\CommonDBSqlCmd\-1_SP\" />
     <Folder Include="SqlCmd\CommonDBSqlCmd\2_InitData\" />
     <Folder Include="SqlCmd\CommonDBSqlCmd\3_LogicCmd\" />
     <Folder Include="SqlCmd\CommonDBSqlCmd\4_LogicData\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SqlCmd\AccountDBSqlCmd\SqlCmd\1_Create\AccountDB.sql" />
+    <Content Include="SqlCmd\AccountDBSqlCmd\SqlCmd\2_InitData\2-InitLogicData.sql" />
+    <Content Include="SqlCmd\AccountDBSqlCmd\SqlCmd\3_LogicCmd\3_LogicSqlCmd.sql" />
+    <Content Include="SqlCmd\AccountDBSqlCmd\SqlCmd\4_LogicData\4_0_LogicData.sql" />
     <Content Include="SqlCmd\CommonDBSqlCmd\1_Create\CommonAppSetting.sql" />
     <Content Include="SqlCmd\TecentDataUinDASqlCmd\CreateSql\TecentDataUinDA.sql" />
     <Content Include="SqlCmd\TecentDataUinDASqlCmd\LogicData\CategoryData.sql" />

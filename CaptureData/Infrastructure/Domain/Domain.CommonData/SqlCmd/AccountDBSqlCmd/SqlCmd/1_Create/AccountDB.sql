@@ -7,14 +7,6 @@ create table Encry
 	Remark nvarchar(128),
 	IsNowEncryKey  bit not null --是否现在被使用【必须存在一行数据该值为true】 
 );
-create table [Role]
-(
-	Id smallint primary key,
-	Name nvarchar(16) not null,
-	Code varchar(16) not null,
-	IsDelete bit null,
-	Createtime datetime not null
-);
 Create table Enum
 (
 	Id int primary key identity(1,1),
@@ -22,7 +14,15 @@ Create table Enum
 	Remark varchar(128) not null,
 	HashValue int not null,
 	Createtime datetime not null
-)
+);
+create table [Role]
+(
+	Id int primary key,
+	Name nvarchar(16) not null,
+	Code varchar(16) not null,
+	IsDelete bit null,
+	Createtime datetime not null
+);
 create table Authorty
 (
 	Id int primary key,
@@ -34,30 +34,40 @@ create table Authorty
 )
 create table RoleAuthorty
 (
-	RoleId smallint not null,
+	RoleId int not null,
 	AuthortyId int not null,
 	Createtime datetime not null
-)
-create table Account
+);
+create table [User]
 (
-	UserName varchar(16) not null primary key,
+	Id uniqueidentifier primary key,
+	UserName varchar(16) not null unique,
 	Nick nvarchar(32) not null,
 	CreateTime datetime not null,--注册事件
 	Psw varchar(16) not null,
 	EncryId smallint not null,--密码加密关键词
 	IsActive bit not null--账号是否激活
 );
-create table AccountActiveCode
+create table UserActiveCode
 (
-	UserName varchar(16),
+	
+	UserId  uniqueidentifier not null,
 	ActiveCode varchar(8) not null,
 	GenerateCodeTime datetime not null,
-	CodeValidTime datetime not null--激活码过期时间
-)
-create table AccountActive
+	CodeValidTime datetime not null,--激活码过期时间
+	DayInt int not null
+);
+create table UserActive
 (
 	UserName varchar(16) not null,
 	ActiveType smallint not null,
-	ActiveWay varchar(32) not null,
+	ToolCode varchar(32) not null,
 	CreateTime datetime not null
+);
+Create table UserRole
+(
+	Id uniqueidentifier primary key,
+	UserId uniqueidentifier not null,
+	RoleId int not null ,
+	Createtime datetime not null
 )
