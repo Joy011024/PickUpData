@@ -46,12 +46,14 @@
     <Compile Include="IContactDataRepository.cs" />
     <Compile Include="IDataFromOtherRepository.cs" />
     <Compile Include="IEmailDataRepository.cs" />
+    <Compile Include="IEnumDataRepository.cs" />
     <Compile Include="IMaybeSpecialRepository.cs" />
     <Compile Include="IMenuRepository.cs" />
     <Compile Include="IOrganizationRepository.cs" />
     <Compile Include="IRelyTableRepository.cs" />
     <Compile Include="IReportEnumDataRepository.cs" />
     <Compile Include="ISpecialSpellNameRepository.cs" />
+    <Compile Include="ILogDataRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

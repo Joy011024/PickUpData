@@ -46,7 +46,9 @@
     <Compile Include="IContactDataService.cs" />
     <Compile Include="IDataFromOtherService.cs" />
     <Compile Include="IEmailDataService.cs" />
+    <Compile Include="IEnumDataService.cs" />
     <Compile Include="IFileService.cs" />
+    <Compile Include="ILogDataService.cs" />
     <Compile Include="IMaybeSpecialService.cs" />
     <Compile Include="IMenuService.cs" />
     <Compile Include="IRelyTableService.cs" />

@@ -48,6 +48,8 @@
     <Compile Include="ContactDataRepository.cs" />
     <Compile Include="DataFromOtherRepository.cs" />
     <Compile Include="EmailDataRepository.cs" />
+    <Compile Include="EnumDataRepository.cs" />
+    <Compile Include="LogDataRepository.cs" />
     <Compile Include="MaybeSpecialRepository.cs" />
     <Compile Include="MenuRepository.cs" />
     <Compile Include="OrganizationRepository.cs" />

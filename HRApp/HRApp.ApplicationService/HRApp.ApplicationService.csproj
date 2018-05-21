@@ -46,7 +46,9 @@
     <Compile Include="ContactDataService.cs" />
     <Compile Include="DataFromOtherService.cs" />
     <Compile Include="EmailDataService.cs" />
+    <Compile Include="EnumDataService.cs" />
     <Compile Include="FileService.cs" />
+    <Compile Include="LogDataService.cs" />
     <Compile Include="MaybeSpecialService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="OrganizationService.cs" />

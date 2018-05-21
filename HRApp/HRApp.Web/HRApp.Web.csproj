@@ -116,8 +116,10 @@
     <Compile Include="Controllers\CommonDialogController.cs" />
     <Compile Include="Controllers\ContactManageController.cs" />
     <Compile Include="Controllers\EmailDataController.cs" />
+    <Compile Include="Controllers\EnumDataController.cs" />
     <Compile Include="Controllers\FileHelperController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogDataController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\OrderManageController.cs" />
     <Compile Include="Controllers\OrganizationManageController.cs" />
