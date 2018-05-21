@@ -55,6 +55,7 @@
     <Compile Include="IReportEnumDataService.cs" />
     <Compile Include="IRoleDataService.cs" />
     <Compile Include="ISpecialSpellNameService.cs" />
+    <Compile Include="IUseSettingService.cs" />
     <Compile Include="OrganizationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

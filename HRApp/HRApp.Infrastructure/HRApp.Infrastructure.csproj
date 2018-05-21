@@ -58,6 +58,7 @@
     <Compile Include="ReportEnumDataRepository.cs" />
     <Compile Include="RoleDataRepository.cs" />
     <Compile Include="SpecialSpellNameRepository.cs" />
+    <Compile Include="UseSettingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BaseHelper\CommonHelperEntity\CommonHelperEntity.csproj">

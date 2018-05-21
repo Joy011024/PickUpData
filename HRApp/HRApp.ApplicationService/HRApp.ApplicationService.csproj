@@ -57,6 +57,7 @@
     <Compile Include="ReportEnumDataService.cs" />
     <Compile Include="RoleDataService.cs" />
     <Compile Include="SpecialSpellNameService.cs" />
+    <Compile Include="UseSettingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\AppLanguage\AppLanguage.csproj">

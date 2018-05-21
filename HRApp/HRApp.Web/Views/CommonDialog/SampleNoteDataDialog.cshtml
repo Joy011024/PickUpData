@@ -1,0 +1,89 @@
+﻿@using AppLanguage
+@using HRApp.Web
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SampleDataDialog</title>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
+    <style type="text/css">
+        .clearTag {
+            cursor: pointer;
+            display: inline-block;
+            color: red;
+            background-color: rgb(204, 204, 204);
+            left: 230px;
+            top: -30px;
+            position: relative;
+            width: 10px;
+            padding-left: 2px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: rgb(204, 204, 204);
+            border-image: initial;
+            border-radius: 5px;
+        }
+
+        .nullMsg {
+            border: solid 1px red;
+        }
+    </style>
+    <script type="text/javascript">
+        var data = null;
+        function gatherUiData() {//提取UI的元素值
+            if (!VaildUiRequire()) {//存在没有输入的必填内容
+                return null;
+            }
+            var area = $('.ApiParam');
+            var api = GetXPathObject(area, "apiKey");
+            return api;
+        }
+        function VaildUiRequire() {//校验数据必填项是否为空
+            $('.required:visible').each(function (i, ele) {//只判断显示的元素
+                var el = $(ele);
+                var val = el.val();
+                if (val == '') {
+                    el.addClass('nullMsg');
+                    return false;
+                } else {
+                    el.removeClass('nullMsg');
+                }
+            });
+            return $('.required.nullMsg:visible').length == 0;
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div class="ApiParam">
+            <div class="alongLine">
+                <span style="width:100px;"><span style="color:red;">@Lang.LblName *:</span></span>
+                <span>
+                    <input type="text" id="txtName" apikey="Name" class="required" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
+                </span>
+            </div>
+            <div class="alongLine">
+                <span style="width:100px;">@Lang.LblCode :</span>
+                <span>
+                    <input type="text" id="txtMemnorideCode" apikey="Code" autocomplete="off" />
+                </span>
+            </div>
+            <div class="alongLine">
+                <span style="width:100px;">@Lang.LblRemark :</span>
+                <span>
+                    <input type="text" id="txtRemark" apikey="Remark" autocomplete="off" />
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

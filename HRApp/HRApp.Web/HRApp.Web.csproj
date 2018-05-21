@@ -126,6 +126,7 @@
     <Compile Include="Controllers\ReportEnumController.cs" />
     <Compile Include="Controllers\RoleDataManageController.cs" />
     <Compile Include="Controllers\SpellNameController.cs" />
+    <Compile Include="Controllers\UseSettingManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -336,6 +337,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\RoleDataManage\RoleDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CommonDialog\SampleNoteDataDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UseSettingManage\UseSettingDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UseSettingManage\UseSettingLsit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

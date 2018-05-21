@@ -55,6 +55,7 @@
     <Compile Include="IRoleDataRepository.cs" />
     <Compile Include="ISpecialSpellNameRepository.cs" />
     <Compile Include="ILogDataRepository.cs" />
+    <Compile Include="IUseSettingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

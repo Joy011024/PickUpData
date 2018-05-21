@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace HRApp.Web.Controllers
 {
-    public class CommonDialogController : Controller
+    public class UseSettingManageController : Controller
     {
         //
-        // GET: /CommonDialog/
-        [Description("公用对话框")]
-        public ActionResult SampleDataDialog()
+        // GET: /UseSettingManage/
+
+        public ActionResult UseSettingLsit()
         {
             return View();
         }
-        public ActionResult SampleNoteDataDialog() 
+        public ActionResult UseSettingDialog() 
         {
             return View();
         }
