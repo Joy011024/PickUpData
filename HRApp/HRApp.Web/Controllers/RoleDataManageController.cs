@@ -6,16 +6,16 @@ using System.Web.Mvc;
 
 namespace HRApp.Web.Controllers
 {
-    public class EnumDataController : Controller
+    public class RoleDataManageController : Controller
     {
         //
-        // GET: /EnumData/
+        // GET: /RoleDataManage/
 
-        public ActionResult EnumList()
+        public ActionResult Index()
         {
             return View();
         }
-        public ActionResult EnumDataDialog() 
+        public ActionResult RoleDialog() 
         {
             return View();
         }

@@ -59,6 +59,7 @@
     <Compile Include="Entity\RelyTable.cs" />
     <Compile Include="Request\ReportParam.cs" />
     <Compile Include="Response\ReportEnumData.cs" />
+    <Compile Include="Entity\Authorty\RoleData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">

@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelyTableService.cs" />
     <Compile Include="ReportEnumDataService.cs" />
+    <Compile Include="RoleDataService.cs" />
     <Compile Include="SpecialSpellNameService.cs" />
   </ItemGroup>
   <ItemGroup>

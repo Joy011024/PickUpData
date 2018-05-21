@@ -124,6 +124,7 @@
     <Compile Include="Controllers\OrderManageController.cs" />
     <Compile Include="Controllers\OrganizationManageController.cs" />
     <Compile Include="Controllers\ReportEnumController.cs" />
+    <Compile Include="Controllers\RoleDataManageController.cs" />
     <Compile Include="Controllers\SpellNameController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -323,6 +324,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\CommonDialog\SampleDataDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\LogData\LogDataList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EnumData\EnumDataDialog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EnumData\EnumList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\RoleDataManage\RoleDialog.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
