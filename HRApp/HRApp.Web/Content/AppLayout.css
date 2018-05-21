@@ -2,7 +2,7 @@
     margin: 20px;
     background-color: #ccc;
 }
-input,textarea {
+input,textarea,password {
     box-sizing: border-box;
     border: solid 1px #ddd;
     width: 250px;

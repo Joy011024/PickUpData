@@ -178,6 +178,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 账号 的本地化字符串。
+        /// </summary>
+        public static string LblAccountService {
+            get {
+                return ResourceManager.GetString("LblAccountService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 追加显示 的本地化字符串。
         /// </summary>
         public static string LblAppendDisplay {
@@ -237,6 +246,15 @@ namespace AppLanguage {
         public static string LblCompanyRepairService {
             get {
                 return ResourceManager.GetString("LblCompanyRepairService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确认密码 的本地化字符串。
+        /// </summary>
+        public static string LblConfirmPassword {
+            get {
+                return ResourceManager.GetString("LblConfirmPassword", resourceCulture);
             }
         }
         
@@ -331,11 +349,29 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 昵称 的本地化字符串。
+        /// </summary>
+        public static string LblNick {
+            get {
+                return ResourceManager.GetString("LblNick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 父节点 的本地化字符串。
         /// </summary>
         public static string LblParentCode {
             get {
                 return ResourceManager.GetString("LblParentCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 密码 的本地化字符串。
+        /// </summary>
+        public static string LblPassword {
+            get {
+                return ResourceManager.GetString("LblPassword", resourceCulture);
             }
         }
         
@@ -367,6 +403,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 备注 的本地化字符串。
+        /// </summary>
+        public static string LblRemark {
+            get {
+                return ResourceManager.GetString("LblRemark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 举报分类 的本地化字符串。
         /// </summary>
         public static string LblReportingType {
@@ -390,6 +435,33 @@ namespace AppLanguage {
         public static string LblSendEmail {
             get {
                 return ResourceManager.GetString("LblSendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 登录 的本地化字符串。
+        /// </summary>
+        public static string LblSignIn {
+            get {
+                return ResourceManager.GetString("LblSignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 注销 的本地化字符串。
+        /// </summary>
+        public static string LblSignOut {
+            get {
+                return ResourceManager.GetString("LblSignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 注册 的本地化字符串。
+        /// </summary>
+        public static string LblSignUp {
+            get {
+                return ResourceManager.GetString("LblSignUp", resourceCulture);
             }
         }
         

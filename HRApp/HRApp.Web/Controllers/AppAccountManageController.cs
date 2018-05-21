@@ -19,6 +19,8 @@ namespace HRApp.Web.Controllers
         [Description("注册账号")]
         public ActionResult SignInAccount() 
         {
+            string tocken = Guid.NewGuid().ToString().Replace("-","");//使用生产的唯一tocken进行防恶意攻击保护
+
             return View();
         }
     }

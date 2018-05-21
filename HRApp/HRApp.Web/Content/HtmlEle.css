@@ -10,7 +10,7 @@
             width: 10px;
             padding-left: 2px;
         }
-input[type=text] {
+input[type=text],input[type=password] {
     height: 42px;
 }
 .validWarming {

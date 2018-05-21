@@ -82,7 +82,7 @@
                     return;
                 }
                 bindPostAjax('/OrganizationManage/SaveCompany', data, function (response, statue) {
-                    var lay = parent.layer ? parent.layer : layer;
+                    var lay =layer;
                     if (response.Success) {
                         lay.close(lay.index);
                         lay.alert('操作成功', { title: '@Lang.LblTip' });

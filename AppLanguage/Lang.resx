@@ -282,4 +282,28 @@
   <data name="Tip_NameIsRequired" xml:space="preserve">
     <value>名称不能为空</value>
   </data>
+  <data name="LblAccountService" xml:space="preserve">
+    <value>账号</value>
+  </data>
+  <data name="LblConfirmPassword" xml:space="preserve">
+    <value>确认密码</value>
+  </data>
+  <data name="LblNick" xml:space="preserve">
+    <value>昵称</value>
+  </data>
+  <data name="LblPassword" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="LblRemark" xml:space="preserve">
+    <value>备注</value>
+  </data>
+  <data name="LblSignIn" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="LblSignOut" xml:space="preserve">
+    <value>注销</value>
+  </data>
+  <data name="LblSignUp" xml:space="preserve">
+    <value>注册</value>
+  </data>
 </root>

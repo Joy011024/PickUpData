@@ -1,17 +1,55 @@
-﻿@{
+﻿@using AppLanguage
+@using HRApp.Web
+@{
     Layout = null;
 }
-
-<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>SignInAccount</title>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
 </head>
 <body>
     <div>
-        
+        <div>
+            <span class="alongLine">
+                <span>
+                    <label>@Lang.LblNick</label>
+                </span>
+                <span>
+                    <input type="text" id="txtNick" />
+                </span>
+            </span>
+            <span class="alongLine">
+                <span>
+                    <label>@Lang.LblUserName</label>
+                </span>
+                <span>
+                    <input type="text" id="txtUserName" />
+                </span>
+            </span>
+            <span class="alongLine">
+                <span>
+                    <label>@Lang.LblPassword</label>
+                </span>
+                <span>
+                    <input type="text" id="txtPsw"/>
+                </span>
+            </span>
+            <span class="alongLine">
+                <span>
+                    <label>@Lang.LblConfirmPassword</label>
+                </span>
+                <span>
+                    <input type="password" id="txtConfirmPsw"/>
+                </span>
+            </span>
+        </div>
     </div>
 </body>
 </html>
