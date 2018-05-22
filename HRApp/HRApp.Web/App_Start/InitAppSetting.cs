@@ -101,6 +101,16 @@ namespace HRApp.Web
                 return DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
             }
         }
+        /// <summary>
+        /// 账户库
+        /// </summary>
+        public static string AccountDBConnString
+        {
+            get
+            {
+                return ConfigurationManager.ConnectionStrings["AccountDBConnString"].ConnectionString;
+            }
+        }
     }
     public class ParamNameTemplate
     {
