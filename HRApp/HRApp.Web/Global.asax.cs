@@ -97,6 +97,10 @@ namespace HRApp.Web
             IEnumDataRepository enumDal = ioc.IocConvert<IHRApp.Infrastructure.IEnumDataRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(EnumDataRepository).Name);
             ioc.IocFillProperty(enumDal, propertyVal);
             #endregion
+            #region log --all
+            ILogDataRepository logDal = ioc.IocConvert<ILogDataRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(LogDataRepository).Name);
+            ioc.IocFillProperty(logDal, propertyVal);
+            #endregion
             IAppRepository appDal = ioc.IocConvert<IHRApp.Infrastructure.IAppRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppRepository).Name);
             ioc.IocFillProperty<IAppRepository, IAppRepository>(appDal, propertyVal);
             IAppSettingRepository appSettingDal = ioc.IocConvert<IAppSettingRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppSettingRepository).Name);
@@ -172,6 +176,9 @@ namespace HRApp.Web
             IEmailDataService emailBll = ioc.IocConvert<IEmailDataService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(EmailDataService).Name);
             ioc.IocFillProperty<IEmailDataService>(emailBll, propertyVal);
             propertyVal.Add(typeof(IEmailDataService).Name, emailBll);
+            ILogDataService logBll = ioc.IocConvert<ILogDataService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(LogDataService).Name);
+            ioc.IocFillProperty<ILogDataService>(logBll, propertyVal);
+            propertyVal.Add(typeof(ILogDataService).Name, logBll);
             #endregion
         }
         

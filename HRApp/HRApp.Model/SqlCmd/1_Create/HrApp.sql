@@ -333,3 +333,13 @@ create table AppEmailReceiver
  )
  alter table EmailSendHistory add constraint fk_PrimaryMsgId foreign key (PrimaryMsgId) 
  references AppEmail(ID);
+create table EventLog
+(
+	Id uniqueidentifier primary key,
+	Category smallint not null,
+	Note nvarchar(2048) not null,
+	Title nvarchar(128) not null,
+	IsError bit not null,
+	CreateTime datetime not null,
+	DayInt int not null
+)

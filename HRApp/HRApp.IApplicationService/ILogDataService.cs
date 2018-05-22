@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HRApp.Model;
 namespace HRApp.IApplicationService
 {
-    interface ILogDataService
+   public interface ILogDataService
     {
+       string SqlConnString { get; set; }
+       List<LogData> QueryLogs(RequestParam param);
     }
 }

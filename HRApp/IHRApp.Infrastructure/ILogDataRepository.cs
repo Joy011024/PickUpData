@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HRApp.Model;
 namespace IHRApp.Infrastructure
 {
     public interface ILogDataRepository
     {
+        string SqlConnString { get; set; }
+        bool WriteLog(LogData log);
     }
 }
