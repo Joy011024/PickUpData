@@ -18,18 +18,18 @@ namespace HRApp.Infrastructure
             set;
         }
 
-        public bool WriteLog(ELogType type,string log,string title,bool  isError)
+        public bool WriteLog(ELogType type, string log, string title, bool isNormalLog)
         {
             LogData data = new LogData()
             {
                 CreateTime = DateTime.Now,
                 Category = (short)type.GetHashCode(),
                 Id = Guid.NewGuid(),
-                IsError = isError,
+                IsError = !isNormalLog,
                 Note = log,
                 Title = title
             };
-            data.DayInt =int.Parse( data.CreateTime.ToString(CommonFormat.DateTimeIntFormat));
+            data.DayInt =int.Parse( data.CreateTime.ToString(CommonFormat.DateIntFormat));
             SqlCmdHelper cmd = new SqlCmdHelper() {  SqlConnString=SqlConnString};
             string sql= SqlCmdHelper.GenerateInsertSql<LogData>();
             return CommonRepository.ExtInsert(sql, SqlConnString, data);

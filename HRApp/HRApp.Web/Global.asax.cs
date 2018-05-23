@@ -125,6 +125,7 @@ namespace HRApp.Web
             ioc.IocFillProperty<IEmailDataRepository>(emailDal, propertyVal);
             #endregion
             #region orm中dal层实例化存储到字典中
+            propertyVal.Add(typeof(ILogDataRepository).Name, logDal);
             propertyVal.Add(typeof(IEnumDataRepository).Name, enumDal);
             propertyVal.Add(typeof(IAppRepository).Name, appDal);
             propertyVal.Add(typeof(IAppSettingRepository).Name, appSettingDal);
@@ -245,7 +246,7 @@ namespace HRApp.Web
                     {
                         EmailCreateTime = DateTime.Now,
                         To = "158055983@qq.com",
-                        Subject = "激活Email_主题163邮件",
+                        Subject = "激活Email_"+DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat),
                         From = item.Account,
                         Body = text
                     };

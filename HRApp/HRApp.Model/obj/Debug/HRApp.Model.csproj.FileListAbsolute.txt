@@ -58,3 +58,5 @@ D:\CodeFile\GithubCode\Code\PickUpData\HRApp\HRApp.Model\bin\Debug\EntityFramewo
 D:\CodeFile\GithubCode\Code\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.csprojResolveAssemblyReference.cache
 D:\CodeFile\GithubCode\Code\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.dll
 D:\CodeFile\GithubCode\Code\PickUpData\HRApp\HRApp.Model\obj\Debug\HRApp.Model.pdb
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.GlobalModel.dll
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\HRApp\HRApp.Model\bin\Debug\Domain.GlobalModel.pdb

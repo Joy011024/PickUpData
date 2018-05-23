@@ -117,6 +117,13 @@ namespace EmailHelper
                 mail.From = new MailAddress(emailFrom);//发信人地址
                 mail.Sender = new MailAddress(emailSender);//发件人地址
                 mail.To.Add(emailTo);
+                if (copySomeoneEmai != null)
+                {
+                    foreach (var item in copySomeoneEmai)
+                    {
+                        mail.To.Add(item);
+                    }
+                }
                 mail.Subject = subject;
                 StringBuilder sb = new StringBuilder();
                 if (!string.IsNullOrEmpty(BodyHeadText))
@@ -138,7 +145,8 @@ namespace EmailHelper
             }
             catch (Exception ex)
             {
-                LoggerWriter.CreateLogFile(ex.ToString(), LogPath,ELogType.ErrorLog);
+                if (!string.IsNullOrEmpty(LogPath))
+                    LoggerWriter.CreateLogFile(ex.ToString(), LogPath, ELogType.ErrorLog);
             }
         }
 
@@ -174,6 +182,13 @@ namespace EmailHelper
             MailMessage msg = new MailMessage();
             msg.From =new MailAddress( EmailId);
             msg.To.Add(text.EmailTo);
+            if (text.Mailer != null)
+            {
+                foreach (var item in text.Mailer)
+                {//抄送人
+                    msg.To.Add(item);
+                }
+            }
             msg.Subject = text.EmailSubject;//邮件标题
             msg.SubjectEncoding = Encoding.UTF8;
             msg.Body = text.EmailBody;//邮件内容

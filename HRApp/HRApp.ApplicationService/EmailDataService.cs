@@ -8,23 +8,24 @@ using EmailHelper;
 using IHRApp.Infrastructure;
 using HRApp.Model;
 using Domain.CommonData;
-using Domain.CommonData;
 namespace HRApp.ApplicationService
 {
     public class EmailDataService:IEmailDataService
     {
         public IAppSettingRepository appSettingDal;
         public IEmailDataRepository emailDataDal;
+        public ILogDataRepository logDal;
         public string SqlConnString { get; set; }
         public string LogPath { get; set; }
         /// <summary>
         /// 是否进行日志写入
         /// </summary>
         bool WriteLog { get { return !string.IsNullOrEmpty(LogPath); } }
-        public EmailDataService(IAppSettingRepository appSetting,IEmailDataRepository emailDal) 
+        public EmailDataService(IAppSettingRepository appSetting,IEmailDataRepository emailDal,ILogDataRepository logRepository) 
         {
             appSettingDal = appSetting;
             emailDataDal = emailDal;
+            logDal = logRepository;
         }
         public bool EveryDayActiveEmailSMTP(string emailSmtpAccount, string smtpAuthorCode, string emailHost, int? emailPort, string emailTo, string EmailFrom)
         {
@@ -59,30 +60,42 @@ namespace HRApp.ApplicationService
                 LoggerWriter.CreateLogFile(email.Body, emailPath, ELogType.EmailBody, file);
                 email.Body = emailPath +"\\"+ file;
             }
-            //将邮件内容进行存档
-            bool succ= emailDataDal.SaveWaitSendEmailData(email);
-            //判断是否需要进行此刻邮件发送
-            if (email.SendTime.HasValue && email.SendTime.Value > DateTime.Now)
-            {//定时发送
-                return true;
+            DateTime now = DateTime.Now;
+            string logFile = now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
+            string mailTo = email.To+";";
+            if (email.Mailer != null)
+            {
+                mailTo += string.Join(";", email.Mailer);
             }
-            EmailService es = new EmailService(setting.EmailHost, setting.EmailAccount, setting.EmailAuthortyCode, setting.EmailHostPort, true);
-            DateTime now=DateTime.Now;
-            string logFile=now.ToString(Common.Data.CommonFormat.DateIntFormat)+".log";
             try
             {
+                //将邮件内容进行存档
+                bool succ = emailDataDal.SaveWaitSendEmailData(email);
+                logDal.WriteLog(ELogType.EmailLog, string.Format("email data into db ,email Account=【{0}】",email.From)
+                    , ELogType.EmailLog.ToString(), succ);
+                //判断是否需要进行此刻邮件发送
+                if (email.SendTime.HasValue && email.SendTime.Value > DateTime.Now)
+                {//定时发送
+                    return true;
+                }
+                EmailService es = new EmailService(setting.EmailHost, setting.EmailAccount, setting.EmailAuthortyCode, setting.EmailHostPort, true) { LogPath=LogPath};
                 //开始进行邮件发送
                 switch (smtpType)
                 {
                     case EnumSMTP.QQ:
-                        es.SendEmail(email.Subject, email.Body, email.From, email.From, email.To, email.Mailer.ToArray(), true, System.Net.Mail.MailPriority.High, null);
+                        es.SendEmail(email.Subject, email.Body, email.From, email.From, email.To, 
+                            (email.Mailer == null ? null : email.Mailer.ToArray()),
+                            true, System.Net.Mail.MailPriority.High, null);
                         break;
                     case EnumSMTP.NETS163:
-                        es.SendEmailBy163(new EmailData() { CreateTime = email.EmailCreateTime, EmailBody = email.Body, EmailFrom = email.From, EmailSubject = email.Subject, EmailTo = email.To });
+                        es.SendEmailBy163(new EmailData() { CreateTime = email.EmailCreateTime, EmailBody = email.Body, EmailFrom = email.From, EmailSubject = email.Subject, EmailTo = email.To,Mailer=email.Mailer });
                         break;
                     default:
                         break;
                 }
+                logDal.WriteLog(ELogType.EmailBody,
+                    string.Format("Send email to user:【{0}】" ,mailTo)
+                , ELogType.EmailBody.ToString(), true);
                 //进行日志存储
                 if (WriteLog)
                 {
@@ -93,8 +106,12 @@ namespace HRApp.ApplicationService
             }
             catch (Exception ex)
             {
+                string msg = ex.Message;
+                logDal.WriteLog(ELogType.EmailBody,
+                    string.Format("Send email to user:【{0}】\r\n error msg=【{1}】", mailTo, msg)
+                    ,ELogType.EmailBody.ToString(), false);
                 if (WriteLog)
-                LoggerWriter.CreateLogFile(string.Format("send email 【Error】 -{0}- msg: {}" , now.ToString(),ex.Message.ToString()),
+                    LoggerWriter.CreateLogFile(string.Format("send email 【Error】 -{0}- msg: {}", now.ToString(), msg),
                     LogPath, ELogType.EmailLog, logFile, true);
                 return false;  
             }
