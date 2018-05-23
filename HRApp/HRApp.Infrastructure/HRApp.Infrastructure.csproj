@@ -61,6 +61,10 @@
     <Compile Include="UseSettingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BaseHelper\Common.Data\Common.Data.csproj">
+      <Project>{22b5a7b7-9809-4927-8538-6f7680701c5b}</Project>
+      <Name>Common.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\BaseHelper\CommonHelperEntity\CommonHelperEntity.csproj">
       <Project>{32c60c3a-c56e-457d-b553-be076218fd5a}</Project>
       <Name>CommonHelperEntity</Name>
