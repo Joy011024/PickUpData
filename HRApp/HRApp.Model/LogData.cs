@@ -15,5 +15,13 @@ namespace HRApp.Model
         public string Title { get; set; }
         public bool IsError { get; set; }
         public int DayInt { get; set; }
+        /// <summary>
+        /// 表数据入库记录内容
+        /// </summary>
+        /// <returns></returns>
+        public static string InsertDbNoteFormat() 
+        {
+            return "into db the  table 【{0}】";
+        }
     }
 }

@@ -101,23 +101,24 @@ namespace HRApp.Web
             return false;
         }
         [Description("属性注入")]
-        public void IocFillProperty<T,Children>(T targetClass,Dictionary<string,object> propertyList) where T : class where Children:class
+        public void IocFillProperty<T, Children>(T targetClass, Dictionary<string, object> propertyList)
+            where T : class
+            where Children : class
         {
-            PropertyInfo[] pns = targetClass.GetEntityProperty(BindingFlags.Public | BindingFlags.Instance);//属性名列表
             //由于接口中没法定义 字段,此处只能使用属性
             Type tt = typeof(T);
-           string classProperty = tt.Name;
+            string classProperty = tt.Name;
             //是否需要实例化子类属性
-           if (classProperty != typeof(Children).Name)
-           {
-               Children child = targetClass as Children;
-               IocFillProperty(child, propertyList);
-           }
-           IocFillProperty(targetClass, propertyList);
-           if (!ContainDefaultConstryctor<T>(tt))
-           {//不含有默认构造函数时才进行私有函数的配置处理
-               IocFillConstructor(targetClass, propertyList);
-           }
+            if (classProperty != typeof(Children).Name)
+            {
+                Children child = targetClass as Children;
+                IocFillProperty(child, propertyList);
+            }
+            IocFillProperty(targetClass, propertyList);
+            if (!ContainDefaultConstryctor<T>(tt))
+            {//不含有默认构造函数时才进行私有函数的配置处理
+                IocFillConstructor(targetClass, propertyList);
+            }
         }
         public void IocFillProperty<T>(T targetClass, Dictionary<string, object> propertyList)
             where T : class
@@ -190,7 +191,7 @@ namespace HRApp.Web
             }
             return pn;
         }
-        public void IocFillConstructor<T>(T targetClass, Dictionary<string, object> paramValue)
+        public void IocFillConstructor<T>(T targetClass, Dictionary<string, object> paramValue) where T:class
         { //填充构造函数【该函数主要是对于定义的私有属性或者字段不能进行IOC注入】
             Type type = targetClass.GetType();
             ConstructorInfo[] cons=type.GetConstructors();
@@ -198,6 +199,7 @@ namespace HRApp.Web
             {
                 return;
             }
+            #region 构造函数进行注入
             ConstructorInfo con = cons[0];
             //随机选择一个构造函数作为初始化的构造对象
             ParameterInfo[] param = con.GetParameters();
@@ -229,6 +231,46 @@ namespace HRApp.Web
                 }
                 param.SetValue(obj, i);
             }
+            #endregion
+            #region 构造函数没有注入的 属性进行注入
+            //进行属性的注入
+            PropertyInfo[] pns = targetClass.GetEntityProperty(BindingFlags.Public | BindingFlags.Instance);//属性名列表
+            foreach (PropertyInfo item in pns)
+            {
+               //判断属性是否赋值
+                object obj = item.GetValue(targetClass, null);
+                if (obj != null)
+                {
+                    continue;
+                }
+                string dictKey = GetDictKeyByRule(paramValue, item.Name, item.PropertyType.Name, type.Name);//字典中的key
+                if (!string.IsNullOrEmpty(dictKey))
+                {
+                    object val = paramValue[dictKey];
+                    item.SetValue(targetClass, val);
+                    continue;
+                }
+            }
+            #endregion
+            #region 构造函数没有注入的 字段进行注入
+            //字段注入
+            FieldInfo[] waitIocField = targetClass.GetFieldList();
+            foreach (FieldInfo item in waitIocField)
+            {
+                object obj = item.GetValue(targetClass);
+                if (obj != null)
+                {//已经注入
+                    continue;
+                }
+                string dictKey = GetDictKeyByRule(paramValue, item.Name, item.FieldType.Name, type.Name);//字典中的key
+                if (!string.IsNullOrEmpty(dictKey))
+                {
+                    object val = paramValue[dictKey];
+                    item.SetValue(targetClass, val);
+                    continue;
+                }
+            }
+            #endregion
         }
     }
 }

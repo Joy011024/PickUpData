@@ -7,6 +7,7 @@ using HRApp.Model;
 using HRApp.IApplicationService;
 using IHRApp.Infrastructure;
 using Infrastructure.ExtService;
+using Domain.CommonData;
 namespace HRApp.ApplicationService
 {
     public class MenuService:IMenuService
@@ -17,6 +18,7 @@ namespace HRApp.ApplicationService
             set;
         }
         public IMenuRepository menuRepository;
+        public ILogDataRepository logDal;
         public MenuService(IMenuRepository menu)
         {
             menuRepository = menu;
@@ -29,7 +31,22 @@ namespace HRApp.ApplicationService
                 model.Code = model.Name.TextConvertChar(true);// 转换形式 助手  =ZhuShou
             }
             model.CreateTime = DateTime.Now;
-            json.Success = menuRepository.Add(model);
+            try
+            {
+                bool succ = menuRepository.Add(model);
+                logDal.WriteLog(ELogType.DataInDBLog,
+                  string.Format(LogData.InsertDbNoteFormat(), typeof(Menu).Name),
+                  "insert", succ);
+                json.Success = true;
+            }
+            catch (Exception ex)
+            {
+                string msg=ex.Message;
+                logDal.WriteLog(ELogType.DataInDBLog,
+                     string.Format(LogData.InsertDbNoteFormat(), typeof(Menu).Name)+"\r\n"+msg,
+                     "insert Error", false);
+                json.Message = msg;
+            }
             return json;
         }
 
