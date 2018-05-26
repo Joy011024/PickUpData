@@ -284,4 +284,21 @@ ldw:1053723692";
         public FindQQResponse responseData { get; set; }
 
     }
+    public class UinDataSyncHelp
+    {
+        public string SyncToCodeDB() 
+        {
+            return @"insert into tecentdatada.dbo.tecentqqdata
+(ID,PickUpWhereId,age,city,country,distance,face,gender,nick,province,stat,uin,HeadImageUrl,CreateTime,ImgType)
+select top 200 
+ID,PickUpWhereId,age,city,country,distance,face,gender,nick,province,stat,uin,HeadImageUrl,CreateTime,ImgType
+ from tecentqqdata t
+where not exists (select id from SyncFlag where id=t.id)
+and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id)
+--update SyncFlag
+insert into SyncFlag  (id,SyncTime)
+select top 200 id,getdate()
+from tecentqqdata";
+        }
+    }
 }

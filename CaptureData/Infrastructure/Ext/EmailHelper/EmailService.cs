@@ -86,68 +86,60 @@ namespace EmailHelper
         /// <param name="isHtmlFormat"></param>
         /// <param name="priority"></param>
         /// <param name="fileUrls"></param>
-        public void SendEmail(string subject,string body,string emailFrom,string emailSender, string emailTo,
-            string[] copySomeoneEmai,bool isHtmlFormat,MailPriority priority,List<string> fileUrls) 
+        public void SendEmail(string subject, string body, string emailFrom, string emailSender, string emailTo,
+            string[] copySomeoneEmai, bool isHtmlFormat, MailPriority priority, List<string> fileUrls)
         {
-            if (!ValidateEmailClientParam()) 
+            if (!ValidateEmailClientParam())
             {
                 return;
             }
             //验证邮件数据是否符合要求
 
-            SmtpClient client = new SmtpClient() { Host =EmailClient };
-            if (EmailClientPort.HasValue&&EmailClientPort.Value>0) 
+            SmtpClient client = new SmtpClient() { Host = EmailClient };
+            if (EmailClientPort.HasValue && EmailClientPort.Value > 0)
             {
                 client.Port = EmailClientPort.Value;
             }
             client.EnableSsl = EnableSsl;
-           // client.UseDefaultCredentials = false;
-            try
+            // client.UseDefaultCredentials = false;
+            if (!MailEnablePswAuthentication)
             {
-                if (!MailEnablePswAuthentication)
-                {
-                    NetworkCredential nc = new NetworkCredential(EmailId, EmailKey);
-                    client.Credentials = nc.GetCredential(client.Host, client.Port, "NTLM");
-                }
-                else
-                {
-                    client.Credentials = new NetworkCredential(EmailId, EmailKey);
-                } //  client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress(emailFrom);//发信人地址
-                mail.Sender = new MailAddress(emailSender);//发件人地址
-                mail.To.Add(emailTo);
-                if (copySomeoneEmai != null)
-                {
-                    foreach (var item in copySomeoneEmai)
-                    {
-                        mail.To.Add(item);
-                    }
-                }
-                mail.Subject = subject;
-                StringBuilder sb = new StringBuilder();
-                if (!string.IsNullOrEmpty(BodyHeadText))
-                {
-                    sb.AppendLine(BodyHeadText);
-                }
-                sb.AppendLine(body);
-                if (!string.IsNullOrEmpty(BodyFeetText))
-                {
-                    sb.AppendLine(BodyFeetText);
-                }
-                mail.Body = sb.ToString();
-                mail.IsBodyHtml = isHtmlFormat;
-                mail.BodyEncoding = Encoding.UTF8;
-                mail.Priority = priority;
-                PreperAttachFile(fileUrls, ref mail);
-                client.Send(mail);
-                mail.Dispose();
+                NetworkCredential nc = new NetworkCredential(EmailId, EmailKey);
+                client.Credentials = nc.GetCredential(client.Host, client.Port, "NTLM");
             }
-            catch (Exception ex)
+            else
             {
-                if (!string.IsNullOrEmpty(LogPath))
-                    LoggerWriter.CreateLogFile(ex.ToString(), LogPath, ELogType.ErrorLog);
+                client.Credentials = new NetworkCredential(EmailId, EmailKey);
+            } //  client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(emailFrom);//发信人地址
+            mail.Sender = new MailAddress(emailSender);//发件人地址
+            mail.To.Add(emailTo);
+            if (copySomeoneEmai != null)
+            {
+                foreach (var item in copySomeoneEmai)
+                {
+                    mail.To.Add(item);
+                }
             }
+            mail.Subject = subject;
+            StringBuilder sb = new StringBuilder();
+            if (!string.IsNullOrEmpty(BodyHeadText))
+            {
+                sb.AppendLine(BodyHeadText);
+            }
+            sb.AppendLine(body);
+            if (!string.IsNullOrEmpty(BodyFeetText))
+            {
+                sb.AppendLine(BodyFeetText);
+            }
+            mail.Body = sb.ToString();
+            mail.IsBodyHtml = isHtmlFormat;
+            mail.BodyEncoding = Encoding.UTF8;
+            mail.Priority = priority;
+            PreperAttachFile(fileUrls, ref mail);
+            client.Send(mail);
+            mail.Dispose();
         }
 
         /// <summary>

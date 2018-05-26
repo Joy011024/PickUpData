@@ -80,4 +80,9 @@ create table EventLog
 	IsError bit not null,
 	CreateTime datetime not null,
 	DayInt int not null
+);
+create table SyncFlag
+(
+	Id uniqueidentifier primary key,
+	SyncTime datetime not null
 )
