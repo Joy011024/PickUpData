@@ -13,5 +13,9 @@ namespace Domain.CommonData
         public delegate void SampleDelegate();
         public delegate void BaseDelegate(object data);
         public BaseDelegate BaseDel { get; set; }
+        /// <summary>
+        /// 请求使用的参数
+        /// </summary>
+        public object BaseDelegateParam { get; set; }
     }
 }

@@ -65,6 +65,7 @@
             this.lblSwitchShow = new System.Windows.Forms.Label();
             this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
             this.ckSyncUin = new System.Windows.Forms.CheckBox();
+            this.ckBackGroundCall = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.gbPollingType.SuspendLayout();
             this.workPanel.SuspendLayout();
@@ -341,7 +342,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(838, 24);
+            this.btnRefresh.Location = new System.Drawing.Point(788, 19);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(57, 23);
             this.btnRefresh.TabIndex = 29;
@@ -425,11 +426,22 @@
             this.ckSyncUin.Text = "同步数据";
             this.ckSyncUin.UseVisualStyleBackColor = true;
             // 
+            // ckBackGroundCall
+            // 
+            this.ckBackGroundCall.AutoSize = true;
+            this.ckBackGroundCall.Location = new System.Drawing.Point(851, 24);
+            this.ckBackGroundCall.Name = "ckBackGroundCall";
+            this.ckBackGroundCall.Size = new System.Drawing.Size(72, 16);
+            this.ckBackGroundCall.TabIndex = 32;
+            this.ckBackGroundCall.Text = "后台采集";
+            this.ckBackGroundCall.UseVisualStyleBackColor = true;
+            // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(935, 656);
+            this.Controls.Add(this.ckBackGroundCall);
             this.Controls.Add(this.ckSyncUin);
             this.Controls.Add(this.switchPanel);
             this.Controls.Add(this.workPanel);
@@ -508,6 +520,7 @@
         private System.Windows.Forms.Label lblSwitchShow;
         private System.Windows.Forms.Button btnTodayPickupResult;
         private System.Windows.Forms.CheckBox ckSyncUin;
+        private System.Windows.Forms.CheckBox ckBackGroundCall;
 
 
 

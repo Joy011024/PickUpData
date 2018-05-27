@@ -297,14 +297,14 @@ ldw:1053723692";
 (ID,PickUpWhereId,age,city,country,distance,face,gender,nick,province,stat,uin,HeadImageUrl,CreateTime,ImgType)
 select top {number} 
 ID,PickUpWhereId,age,city,country,distance,face,gender,nick,province,stat,uin,HeadImageUrl,CreateTime,ImgType
- from {waitSycnDBName}.dbo.tecentqqdata t
-where not exists (select id from {waitSycnDBName}.dbo.SyncFlag where id=t.id)
+ from dbo.tecentqqdata t
+where not exists (select id from dbo.SyncFlag where id=t.id)
 and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id);
 --update SyncFlag
 insert into SyncFlag  (id,SyncTime)
 select top  {number}  id,getdate()
-from {waitSycnDBName}.dbo.tecentqqdata t 
-where not exists (select id from {waitSycnDBName}.dbo.SyncFlag where id=t.id)
+from dbo.tecentqqdata t 
+where not exists (select id from dbo.SyncFlag where id=t.id)
 and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id)"
                 .Replace("{waitSycnDBName}", waitSycnDBName).Replace("{number}", number.ToString());
         }
