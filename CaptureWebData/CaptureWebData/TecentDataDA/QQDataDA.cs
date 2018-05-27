@@ -10,6 +10,11 @@ using Domain.CommonData;
 using System.ComponentModel;
 using Common.Data;
 using System.Globalization;
+using Infrastructure.MsSqlService.SqlHelper;
+using DataHelp;
+using CommonHelperEntity;
+using Common.Data;
+using Infrastructure.ExtService;
 namespace CaptureWebData
 {
     public enum EGender
@@ -286,7 +291,7 @@ ldw:1053723692";
     }
     public class UinDataSyncHelp
     {
-        public string SyncToCodeDB() 
+        public string SyncToCodeDB(int number) 
         {
             return @"insert into tecentdatada.dbo.tecentqqdata
 (ID,PickUpWhereId,age,city,country,distance,face,gender,nick,province,stat,uin,HeadImageUrl,CreateTime,ImgType)
@@ -299,6 +304,34 @@ and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id)
 insert into SyncFlag  (id,SyncTime)
 select top 200 id,getdate()
 from tecentqqdata";
+        }
+        public void DoIntervalSync(string connDBString) 
+        {
+            SqlCmdHelper help = new SqlCmdHelper() { SqlConnString = connDBString };
+            string sql=SyncToCodeDB(50);
+            string time = DateTime.Now.ToString(CommonFormat.DateTimeFormat);
+            LogHelperExt.WriteLog("will Sync  uin data,time=" + time);
+            try
+            {
+                help.ExcuteNoQuery(sql, null);
+                string endTime = DateTime.Now.ToString(CommonFormat.DateTimeFormat);
+                LogHelperExt.WriteLog("end Sync  uin data,time=" + endTime);
+            }
+            catch (Exception ex)
+            {
+                string endTime = DateTime.Now.ToString(CommonFormat.DateTimeFormat);
+                LogHelperExt.WriteLog("Sync uin data error \r\n" + endTime + " \r\n" + ex.Message);
+            }
+        }
+        
+    }
+    public class LogHelperExt 
+    {
+        public static void WriteLog(string text)
+        {
+            LoggerWriter.CreateLogFile(text,
+                new AppDirHelper().GetAppDir(AppCategory.WinApp) + "/" + typeof(ELogType).Name,
+                ELogType.DebugData, DateTime.Now.ToString(CommonFormat.DateIntFormat) + ".log", true);
         }
     }
 }

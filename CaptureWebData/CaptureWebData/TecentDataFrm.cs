@@ -57,22 +57,24 @@ namespace CaptureWebData
         List<CategoryData> cityList = new List<CategoryData>();
         CategoryData targetCountry = null;
         bool GatherFirstUin = true;
+        BackgroundWorker backRun = new BackgroundWorker();//开启的后台进程
+
         public TecentDataFrm()
         {
             InitializeComponent();
-           
+            backRun.DoWork += new DoWorkEventHandler(BackGroundDoWork);
+
         }
         private void TecentDataFrm_Load(object sender, EventArgs e)
         {
             try
             {
                 InitBaseConfig();
-                Test();
                 Init();
             }
             catch (Exception ex)
             { 
-                LoggerWriter.CreateLogFile(ex.ToString(),SystemConfig.ExeDir+ELogType.ErrorLog.ToString(),ELogType.ErrorLog);
+                LogHelperExt.WriteLog(ex.ToString());
             }
         }
         void ReadCountryCity() 
@@ -122,10 +124,6 @@ namespace CaptureWebData
                 job.CreateJobWithParam<JobDelegate<Common.Data.EISOSex>>(new object[] { del, null }, DateTime.Now.AddSeconds(5), 30, 0);//
             }
         }
-        void Test()
-        {
-            ProcessHelp.ForeachProcess();
-        }
        
         void Init()
         {
@@ -136,12 +134,12 @@ namespace CaptureWebData
             gbPollingType.Enabled = false;
             BindProvince();//绑定省会的数据源
             GetProcessPath();
-            QueryTodayPickUp();
             rbtWorkPanel.Click += new EventHandler(RadioButton_Click);
             rbtWorkPanel.Tag = workPanel.Name;
             rbtWebPanel.Click += new EventHandler(RadioButton_Click);
             rbtWebPanel.Tag = pickUpIEWebCookie.Name;
             this.FormClosing += new FormClosingEventHandler(Form_FormBeforeClosed);
+            QueryTodayPickUp();
         }
         void InitProvinceData() 
         {
@@ -401,6 +399,10 @@ namespace CaptureWebData
                 }
                 QuartzCallBack(response);
             }
+            if (ckSyncUin.Checked)
+            { //同步数据
+                backRun.RunWorkerAsync();
+            }
         }
         void BackstageRun<T>(object param) where T:Quartz.IJob
         {
@@ -528,14 +530,21 @@ namespace CaptureWebData
         }
         private void QueryTodayPickUp()
         {
-            PickUpStatic pc = (new QQDataDA()).TodayStatic();
-            lsbStatic.Items.Clear();
-            lsbStatic.Items.Add("时间戳" + DateTime.Now.ToString());
-            lsbStatic.Items.Add("库\t" + pc.DBTotal);
-            lsbStatic.Items.Add("库唯一\t" + pc.DBPrimaryTotal);
-            lsbStatic.Items.Add("日期\t" + pc.StaticDay);
-            lsbStatic.Items.Add("今日总计\t" + pc.Total);
-            lsbStatic.Items.Add("今日QQ号\t" + pc.IdTotal);
+            try
+            {
+                PickUpStatic pc = (new QQDataDA()).TodayStatic();
+                lsbStatic.Items.Clear();
+                lsbStatic.Items.Add("时间戳" + DateTime.Now.ToString());
+                lsbStatic.Items.Add("库\t" + pc.DBTotal);
+                lsbStatic.Items.Add("库唯一\t" + pc.DBPrimaryTotal);
+                lsbStatic.Items.Add("日期\t" + pc.StaticDay);
+                lsbStatic.Items.Add("今日总计\t" + pc.Total);
+                lsbStatic.Items.Add("今日QQ号\t" + pc.IdTotal);
+            }
+            catch (Exception ex)
+            {
+                LogHelperExt.WriteLog("Query pick up number\r\n"+ex.Message);
+            }
         }
         void QuartzGuidForach(object quartzParam)
         {
@@ -847,6 +856,19 @@ namespace CaptureWebData
         void StopOtherThread() 
         {
             job.DeleteJob<JobDelegate<Common.Data.EISOSex>>();
+        }
+        void BackGroundDoWork(object sender,DoWorkEventArgs e) 
+        {
+            BackgroundWorker bg = sender as BackgroundWorker;
+            if (!bg.IsBusy)
+            {
+                while (true)
+                {
+                    UinDataSyncHelp helper = new UinDataSyncHelp();
+                    helper.DoIntervalSync(ConfigurationItems.GetWaitSyncDBString);
+                    Thread.Sleep(10 * 1000 * 60);//10分钟执行一次
+                }
+            }
         }
     }
 }

@@ -1918,6 +1918,10 @@
       <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
       <Name>Infrastructure.ExtService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.MsSqlService.SqlHelper\Infrastructure.MsSqlService.SqlHelper.csproj">
+      <Project>{43847d96-253a-4525-97ed-aca52340013b}</Project>
+      <Name>Infrastructure.MsSqlService.SqlHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CaptureManage.AppWin\CaptureManage.AppWin.csproj">
       <Project>{11861a4e-e136-4395-9abd-31637e3dae9a}</Project>
       <Name>CaptureManage.AppWin</Name>

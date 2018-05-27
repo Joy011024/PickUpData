@@ -8,7 +8,6 @@ using Domain.CommonData;
 using CaptureManage.AppWin;
 using Infrastructure.ExtService;
 using System.Text;
-using Domain.CommonData;
 namespace CaptureWebData
 {
     static class Program

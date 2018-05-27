@@ -64,6 +64,7 @@
             this.switchPanel = new System.Windows.Forms.Panel();
             this.lblSwitchShow = new System.Windows.Forms.Label();
             this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
+            this.ckSyncUin = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.gbPollingType.SuspendLayout();
             this.workPanel.SuspendLayout();
@@ -414,11 +415,22 @@
             this.pickUpIEWebCookie.Size = new System.Drawing.Size(654, 594);
             this.pickUpIEWebCookie.TabIndex = 19;
             // 
+            // ckSyncUin
+            // 
+            this.ckSyncUin.AutoSize = true;
+            this.ckSyncUin.Location = new System.Drawing.Point(818, 245);
+            this.ckSyncUin.Name = "ckSyncUin";
+            this.ckSyncUin.Size = new System.Drawing.Size(72, 16);
+            this.ckSyncUin.TabIndex = 31;
+            this.ckSyncUin.Text = "同步数据";
+            this.ckSyncUin.UseVisualStyleBackColor = true;
+            // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(935, 656);
+            this.Controls.Add(this.ckSyncUin);
             this.Controls.Add(this.switchPanel);
             this.Controls.Add(this.workPanel);
             this.Controls.Add(this.btnRefresh);
@@ -495,6 +507,7 @@
         private System.Windows.Forms.Panel switchPanel;
         private System.Windows.Forms.Label lblSwitchShow;
         private System.Windows.Forms.Button btnTodayPickupResult;
+        private System.Windows.Forms.CheckBox ckSyncUin;
 
 
 

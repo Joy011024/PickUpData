@@ -123,5 +123,21 @@ namespace CaptureWebData
             Assembly now = Assembly.GetEntryAssembly();
             return now.FullName.Split(',')[0];
         }
+        public static string GetConfiguration(string cfg) 
+        {
+            ConnectionStringSettings item = ConfigurationManager.ConnectionStrings[cfg];
+            if (item == null)
+            {
+                return string.Empty;
+            }
+            return item.ConnectionString;
+        }
+        /// <summary>
+        /// 读取待同步的数据库连接串
+        /// </summary>
+        public static string GetWaitSyncDBString
+        {
+            get { return GetConfiguration("WaitSyncTecentDA"); }
+        }
     }
 }
