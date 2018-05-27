@@ -139,5 +139,12 @@ namespace CaptureWebData
         {
             get { return GetConfiguration("WaitSyncTecentDA"); }
         }
+        public static bool OupputSql
+        {
+            get 
+            {
+                return ConfigurationManager.AppSettings["OupputSql"]=="1";
+            }
+        }
     }
 }

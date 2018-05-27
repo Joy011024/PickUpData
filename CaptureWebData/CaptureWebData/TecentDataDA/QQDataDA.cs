@@ -291,28 +291,44 @@ ldw:1053723692";
     }
     public class UinDataSyncHelp
     {
-        public string SyncToCodeDB(int number) 
+        public string SyncToCodeDB(int number,string waitSycnDBName) 
         {
             return @"insert into tecentdatada.dbo.tecentqqdata
 (ID,PickUpWhereId,age,city,country,distance,face,gender,nick,province,stat,uin,HeadImageUrl,CreateTime,ImgType)
-select top 200 
+select top {number} 
 ID,PickUpWhereId,age,city,country,distance,face,gender,nick,province,stat,uin,HeadImageUrl,CreateTime,ImgType
- from tecentqqdata t
-where not exists (select id from SyncFlag where id=t.id)
-and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id)
+ from {waitSycnDBName}.dbo.tecentqqdata t
+where not exists (select id from {waitSycnDBName}.dbo.SyncFlag where id=t.id)
+and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id);
 --update SyncFlag
 insert into SyncFlag  (id,SyncTime)
-select top 200 id,getdate()
-from tecentqqdata";
+select top  {number}  id,getdate()
+from {waitSycnDBName}.dbo.tecentqqdata t 
+where not exists (select id from {waitSycnDBName}.dbo.SyncFlag where id=t.id)
+and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id)"
+                .Replace("{waitSycnDBName}", waitSycnDBName).Replace("{number}", number.ToString());
         }
         public void DoIntervalSync(string connDBString) 
         {
             SqlCmdHelper help = new SqlCmdHelper() { SqlConnString = connDBString };
-            string sql=SyncToCodeDB(50);
+            string[] dbArr = connDBString.Split(';');
+            string waitSyncDB = string.Empty;
+            foreach (var item in dbArr)
+            {
+                if (item.Contains("Initial Catalog"))
+                {
+                    waitSyncDB = item.Split('=')[1].Trim();
+                }
+            }
+            string sql = SyncToCodeDB(200, waitSyncDB);
             string time = DateTime.Now.ToString(CommonFormat.DateTimeFormat);
-            LogHelperExt.WriteLog("will Sync  uin data,time=" + time);
+            LogHelperExt.WriteLog("will Sync uin in  " + waitSyncDB + ".dbo.tecentqqdata  data,time=" + time);
             try
             {
+                if (ConfigurationItems.OupputSql)
+                {
+                    LogHelperExt.WriteLog("will exucte sql= " + sql);
+                }
                 help.ExcuteNoQuery(sql, null);
                 string endTime = DateTime.Now.ToString(CommonFormat.DateTimeFormat);
                 LogHelperExt.WriteLog("end Sync  uin data,time=" + endTime);

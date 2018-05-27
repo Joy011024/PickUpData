@@ -401,6 +401,7 @@ namespace CaptureWebData
             }
             if (ckSyncUin.Checked)
             { //同步数据
+                if(!backRun.IsBusy)
                 backRun.RunWorkerAsync();
             }
         }
@@ -860,14 +861,11 @@ namespace CaptureWebData
         void BackGroundDoWork(object sender,DoWorkEventArgs e) 
         {
             BackgroundWorker bg = sender as BackgroundWorker;
-            if (!bg.IsBusy)
+            while (true)
             {
-                while (true)
-                {
-                    UinDataSyncHelp helper = new UinDataSyncHelp();
-                    helper.DoIntervalSync(ConfigurationItems.GetWaitSyncDBString);
-                    Thread.Sleep(10 * 1000 * 60);//10分钟执行一次
-                }
+                UinDataSyncHelp helper = new UinDataSyncHelp();
+                helper.DoIntervalSync(ConfigurationItems.GetWaitSyncDBString);
+                Thread.Sleep(20 * 1000);//20秒执行一次
             }
         }
     }
