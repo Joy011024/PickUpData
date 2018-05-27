@@ -320,7 +320,7 @@ and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id)"
                     waitSyncDB = item.Split('=')[1].Trim();
                 }
             }
-            string sql = SyncToCodeDB(200, waitSyncDB);
+            string sql = SyncToCodeDB(10, waitSyncDB);
             string time = DateTime.Now.ToString(CommonFormat.DateTimeFormat);
             LogHelperExt.WriteLog("will Sync uin in  " + waitSyncDB + ".dbo.tecentqqdata  data,time=" + time);
             try

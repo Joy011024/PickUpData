@@ -406,7 +406,18 @@ namespace CaptureWebData
             }
             if (ckSyncUin.Checked)
             { //同步数据
-                if(!backRun.IsBusy)
+                string key=ForachCallEvent.SyncUinToCodeDB.ToString();
+                if (BackGroundCallRunEvent.ContainsKey(key))
+                {
+                    BackGroundCallRunEvent.Remove(key);
+                }
+                DelegateData del=new DelegateData(){ BaseDel=BackGrounSyncUinToCoreDB,BaseDelegateParam=null};
+                BackGroundCallRunEvent.Add(key, del);
+                
+            }
+            if (!backRun.IsBusy)
+            {
+
                 backRun.RunWorkerAsync();
             }
         }
@@ -891,10 +902,13 @@ namespace CaptureWebData
                         delete.BaseDel(delete.BaseDelegateParam);
                     }
                 }
-                UinDataSyncHelp helper = new UinDataSyncHelp();
-                helper.DoIntervalSync(ConfigurationItems.GetWaitSyncDBString);
-                Thread.Sleep(20 * 1000);//20秒执行一次
+                Thread.Sleep(3 * 1000);//20秒执行一次
             }
+        }
+        void BackGrounSyncUinToCoreDB(object param) 
+        {
+            UinDataSyncHelp helper = new UinDataSyncHelp();
+            helper.DoIntervalSync(ConfigurationItems.GetWaitSyncDBString);
         }
     }
 }
