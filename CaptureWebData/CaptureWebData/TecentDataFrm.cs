@@ -37,6 +37,7 @@ namespace CaptureWebData
         RedisCacheService redis;
         int currentIndex = 1;
         string Uin;//当前进行爬虫时使用到的账户信息
+        int intervalSec = 3;
         enum ForachCallEvent
         { 
             [Description("采集QQ数据")]
@@ -327,6 +328,14 @@ namespace CaptureWebData
             int interval = 0;
             string inter = txtTimeSpan.Text;
             int.TryParse(inter, out interval);
+            if (interval > 0)
+            {
+                intervalSec = interval;
+            }
+            else 
+            {
+                interval = intervalSec;
+            }
             int repeact = 0;
             string rep = txtRepeact.Text;
             int.TryParse(rep, out repeact);
@@ -902,7 +911,7 @@ namespace CaptureWebData
                         delete.BaseDel(delete.BaseDelegateParam);
                     }
                 }
-                Thread.Sleep(3 * 1000);//20秒执行一次
+                Thread.Sleep(intervalSec * 1000);//20秒执行一次
             }
         }
         void BackGrounSyncUinToCoreDB(object param) 
