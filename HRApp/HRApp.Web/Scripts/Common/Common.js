@@ -79,6 +79,16 @@ function GenerateGuid16String(succFun) {
 function ClearCookie() {
 
 }
+function CloseChrome() {//关闭浏览器
+    var browserName = navigator.appName;
+    alert(browserName);
+    if (browserName == "Netscape") {
+        window.open('', '_self', '');
+        window.close();
+    } else {
+        window.close();
+    }
+}
 $(function () {
     $.fn.extend({
         ClearAllCookie: function () {

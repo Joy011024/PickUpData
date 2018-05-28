@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace IHRApp.Infrastructure
 {
+    public interface IBaseSampleRepository
+    {
+        string SqlConnString { set; get; }
+    }
     /// <summary>
     /// 数据简单操作
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IBaseRepository<T> where T:class
+    public interface IBaseRepository<T> : IBaseSampleRepository where T : class
     {
-        string SqlConnString { set; get; }
         /// <summary>
         /// 新增
         /// </summary>

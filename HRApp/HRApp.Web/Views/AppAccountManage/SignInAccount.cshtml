@@ -13,16 +13,34 @@
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#btnSave').click(function () {
+                var area = $('.ApiParam');
+                var api = GetXPathObject(area, "apiKey");
+                bindPostAjax('/AppAccountManage/SignInAccountData', api, function (response, statue) {
+                    if (!response.Success) {
+                        layer.alert(response.Message);
+                        return;
+                    }
+                    layer.alert('@Lang.Tip_Success', '@Lang.LblTip');
+                    window.open(window.location.href + 'Home/Index?Uid=' + response.AttachData.UserName);//页面跳转
+                    //关闭当前页面
+                    CloseChrome();
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div>
-        <div>
+        <div class="ApiParam">
             <span class="alongLine">
                 <span>
                     <label>@Lang.LblNick</label>
                 </span>
                 <span>
-                    <input type="text" id="txtNick" />
+                    <input type="text" id="txtNick" apikey="Nick" />
                 </span>
             </span>
             <span class="alongLine">
@@ -30,7 +48,7 @@
                     <label>@Lang.LblUserName</label>
                 </span>
                 <span>
-                    <input type="text" id="txtUserName" />
+                    <input type="text" id="txtUserName" apikey="UserName" />
                 </span>
             </span>
             <span class="alongLine">
@@ -38,7 +56,7 @@
                     <label>@Lang.LblPassword</label>
                 </span>
                 <span>
-                    <input type="text" id="txtPsw"/>
+                    <input type="text" id="txtPsw" apikey="Psw" />
                 </span>
             </span>
             <span class="alongLine">
@@ -46,9 +64,12 @@
                     <label>@Lang.LblConfirmPassword</label>
                 </span>
                 <span>
-                    <input type="password" id="txtConfirmPsw"/>
+                    <input type="password" id="txtConfirmPsw" apikey="PswConfirm" />
                 </span>
             </span>
+        </div>
+        <div>
+            <button class="button" id="btnSave">@Lang.BtnSave</button>
         </div>
     </div>
 </body>

@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace HRApp.IApplicationService
 {
-    public interface IBaseServiceWithSqlConnstring<T> where T:class
+    public interface IBaseServiceWithSqlConnstring<T> : BaseService where T : class
     {
-        string SqlConnString { get; set; }
         JsonData Add(T model);
         List<T> QueryWhere(T model);
         T Get(object id);
@@ -18,5 +17,9 @@ namespace HRApp.IApplicationService
     public interface IBaseAllWithSqlConnString<T> : IBaseServiceWithSqlConnstring<T> where T : class
     {
         List<T> QueryAll();
+    }
+    public interface BaseService
+    {
+        string SqlConnString { get; set; }
     }
 }

@@ -306,4 +306,7 @@
   <data name="LblSignUp" xml:space="preserve">
     <value>注册</value>
   </data>
+  <data name="Tip_Success" xml:space="preserve">
+    <value>操作成功</value>
+  </data>
 </root>

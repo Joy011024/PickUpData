@@ -626,5 +626,14 @@ namespace AppLanguage {
                 return ResourceManager.GetString("Tip_PleaseSelectParentNode", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 操作成功 的本地化字符串。
+        /// </summary>
+        public static string Tip_Success {
+            get {
+                return ResourceManager.GetString("Tip_Success", resourceCulture);
+            }
+        }
     }
 }

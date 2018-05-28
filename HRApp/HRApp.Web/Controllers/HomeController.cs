@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using HRApp.Model;
 using Infrastructure.MsSqlService.SqlHelper;
 using EmailHelper;
 using Infrastructure.ExtService;
@@ -17,7 +16,7 @@ namespace HRApp.Web.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index()
+        public ActionResult Index(string Uid)
         {
             TestEmail();
             return View();

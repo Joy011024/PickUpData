@@ -91,11 +91,15 @@ namespace HRApp.Web
             propertyVal.Add("SqlConnString", connString);
             propertyVal.Add(typeof(IEnumDataRepository).Name+".SqlConnString", InitAppSetting.AccountDBConnString);//账号库
             propertyVal.Add(typeof(IEnumDataService).Name + ".SqlConnString", InitAppSetting.AccountDBConnString);//账号库
+            propertyVal.Add(typeof(IAppAccountRepository).Name + ".SqlConnString", InitAppSetting.AccountDBConnString);//账号库
+            propertyVal.Add(typeof(IAppAccountService).Name + ".SqlConnString", InitAppSetting.AccountDBConnString);//账号库
             propertyVal.Add(typeof(IDataFromOtherRepository).Name + ".SqlConnString", InitAppSetting.QueryUinDB);//这个是用于系统中查询其他库的数据切换操作
             #region dal层属性
             #region Account DB
-            IEnumDataRepository enumDal = ioc.IocConvert<IHRApp.Infrastructure.IEnumDataRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(EnumDataRepository).Name);
+            IEnumDataRepository enumDal = ioc.IocConvert<IEnumDataRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(EnumDataRepository).Name);
             ioc.IocFillProperty(enumDal, propertyVal);
+            IAppAccountRepository accountDal = ioc.IocConvert<IAppAccountRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppAccountRepository).Name);
+            ioc.IocFillProperty(accountDal, propertyVal);
             #endregion
             #region log --all
             ILogDataRepository logDal = ioc.IocConvert<ILogDataRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(LogDataRepository).Name);
@@ -127,6 +131,7 @@ namespace HRApp.Web
             #region orm中dal层实例化存储到字典中
             propertyVal.Add(typeof(ILogDataRepository).Name, logDal);
             propertyVal.Add(typeof(IEnumDataRepository).Name, enumDal);
+            propertyVal.Add(typeof(IAppAccountRepository).Name, accountDal);
             propertyVal.Add(typeof(IAppRepository).Name, appDal);
             propertyVal.Add(typeof(IAppSettingRepository).Name, appSettingDal);
             propertyVal.Add(typeof(IMenuRepository).Name, menuDal);
@@ -143,6 +148,9 @@ namespace HRApp.Web
             IEnumDataService  enumBll = ioc.IocConvert<IEnumDataService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(EnumDataService).Name);
             ioc.IocFillProperty<IEnumDataService, EnumDataService>(enumBll, propertyVal);
             propertyVal.Add(typeof(IEnumDataService).Name, enumBll);
+            IAppAccountService accountBll = ioc.IocConvert<IAppAccountService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(AppAccountService).Name);
+            ioc.IocFillProperty<IAppAccountService, AppAccountService>(accountBll, propertyVal);
+            propertyVal.Add(typeof(IAppAccountService).Name, accountBll);
             //构造函数的参数注入  判断构造函数的参数是否需要进行注入
             IAppDataService appService = ioc.IocConvert<IAppDataService>(dllDir, mvc[MvcLevel.Bll].AssemblyName, mvc[MvcLevel.Bll].Namespace, typeof(AppDataService).Name);
             ioc.IocFillProperty<IAppDataService, AppDataService>(appService, propertyVal);
