@@ -18,6 +18,11 @@
             $('#btnSave').click(function () {
                 var area = $('.ApiParam');
                 var api = GetXPathObject(area, "apiKey");
+                var reg = /^[A-Za-z0-9]+$/;//  /^[a-z\d]*$/i
+                if (!reg.test(api.UserName)) {
+                    layer.alert('用户名只能为数字或字符串','@Lang.LblTip');
+                    return;
+                }
                 bindPostAjax('/AppAccountManage/SignInAccountData', api, function (response, statue) {
                     if (!response.Success) {
                         layer.alert(response.Message);
