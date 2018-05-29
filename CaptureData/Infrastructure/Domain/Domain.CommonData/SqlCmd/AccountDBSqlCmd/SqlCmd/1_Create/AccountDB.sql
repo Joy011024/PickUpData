@@ -3,7 +3,7 @@ go
 create table Encry
 (
 	Id smallint primary key identity(1,1),
-	Code varchar(8) not null,--加密关键字[录入之后不运行修改]
+	Code varchar(16) not null,--加密关键字[录入之后不运行修改]
 	Remark nvarchar(128),
 	IsNowEncryKey  bit not null --是否现在被使用【必须存在一行数据该值为true】 
 );
@@ -17,7 +17,7 @@ Create table Enum
 );
 create table [Role]
 (
-	Id int primary key,
+	Id int primary key  identity(1,1),
 	Name nvarchar(16) not null,
 	Code varchar(16) not null,
 	IsDelete bit null,
@@ -25,7 +25,7 @@ create table [Role]
 );
 create table Authorty
 (
-	Id int primary key,
+	Id int primary key identity(1,1),
 	AuthortyId int not null,
 	Code varchar(256) not null,
 	Remark nvarchar(128) ,
@@ -45,7 +45,7 @@ create table [User]
 	Nick nvarchar(32) not null,
 	CreateTime datetime not null,--注册事件
 	Psw varchar(16) not null,
-	EncryId smallint not null,--密码加密关键词
+	Encry varchar(8) not null,--密码加密关键词
 	IsActive bit not null--账号是否激活
 );
 create table UserActiveCode

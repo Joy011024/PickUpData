@@ -119,6 +119,10 @@ namespace HRApp.Web
             {//不含有默认构造函数时才进行私有函数的配置处理
                 IocFillConstructor(targetClass, propertyList);
             }
+            else 
+            {//不操作构造函数
+                JustIocFillPropertyAndField(targetClass, propertyList);
+            }
         }
         public void IocFillProperty<T>(T targetClass, Dictionary<string, object> propertyList)
             where T : class
@@ -238,6 +242,55 @@ namespace HRApp.Web
             foreach (PropertyInfo item in pns)
             {
                //判断属性是否赋值
+                object obj = item.GetValue(targetClass, null);
+                if (obj != null)
+                {
+                    continue;
+                }
+                string dictKey = GetDictKeyByRule(paramValue, item.Name, item.PropertyType.Name, type.Name);//字典中的key
+                if (!string.IsNullOrEmpty(dictKey))
+                {
+                    object val = paramValue[dictKey];
+                    item.SetValue(targetClass, val);
+                    continue;
+                }
+            }
+            #endregion
+            #region 构造函数没有注入的 字段进行注入
+            //字段注入
+            FieldInfo[] waitIocField = targetClass.GetFieldList();
+            foreach (FieldInfo item in waitIocField)
+            {
+                object obj = item.GetValue(targetClass);
+                if (obj != null)
+                {//已经注入
+                    continue;
+                }
+                string dictKey = GetDictKeyByRule(paramValue, item.Name, item.FieldType.Name, type.Name);//字典中的key
+                if (!string.IsNullOrEmpty(dictKey))
+                {
+                    object val = paramValue[dictKey];
+                    item.SetValue(targetClass, val);
+                    continue;
+                }
+            }
+            #endregion
+        }
+        /// <summary>
+        /// 只注入属性和字段
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="targetClass"></param>
+        /// <param name="paramValue"></param>
+        void JustIocFillPropertyAndField<T>(T targetClass, Dictionary<string, object> paramValue) where T : class
+        { //填充构造函数【该函数主要是对于定义的私有属性或者字段不能进行IOC注入】
+            Type type = targetClass.GetType();
+            #region 构造函数没有注入的 属性进行注入
+            //进行属性的注入
+            PropertyInfo[] pns = targetClass.GetEntityProperty(BindingFlags.Public | BindingFlags.Instance);//属性名列表
+            foreach (PropertyInfo item in pns)
+            {
+                //判断属性是否赋值
                 object obj = item.GetValue(targetClass, null);
                 if (obj != null)
                 {

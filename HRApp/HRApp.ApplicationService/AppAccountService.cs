@@ -11,8 +11,8 @@ namespace HRApp.ApplicationService
 {
     public class AppAccountService:IAppAccountService
     {
-        IAppAccountRepository accountDal;
-        ILogDataRepository logDal;
+        public IAppAccountRepository accountDal;
+        public ILogDataRepository logDal;
         public JsonData SignIn(Model.SignInAccountParam param)
         {
             JsonData json = new JsonData() { Result=true};

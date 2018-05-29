@@ -10,7 +10,8 @@ namespace HRApp.Infrastructure
     public class AppAccountRepository:IAppAccountRepository
     {
         public bool SaveSignInInfo(UserAccount user)
-        {
+        {//保存数据
+
             throw new NotImplementedException();
         }
 
