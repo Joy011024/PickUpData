@@ -41,6 +41,7 @@ namespace HRApp.ApplicationService
             }
             catch (Exception ex)
             {
+                logDal.SqlConnString = accountDal.SqlConnString;
                 logDal.WriteLog(Domain.CommonData.ELogType.Account,"Sign in 【"+param.UserName+"】"+ ex.Message, "Sign in", false);
                 json.Message = ex.Message;
                 return json;

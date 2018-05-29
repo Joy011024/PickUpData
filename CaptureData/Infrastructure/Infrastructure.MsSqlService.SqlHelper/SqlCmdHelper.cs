@@ -563,7 +563,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
             {
                 return string.Empty;
             }
-            string sql = "Insert into dbo.{table} ({columns}) values({columnsValueFormat})";
+            string sql = "Insert into dbo.[{table}] ({columns}) values({columnsValueFormat})";
             return sql.Replace("{table}", table).Replace("{columns}", string.Join(",", columnMapProperty.Values.ToArray()))
                 .Replace("{columnsValueFormat}", string.Join(",", columnMapProperty.Keys.ToArray()));
         }
@@ -605,7 +605,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
             {//没有匹配的数据库列 
                 return string.Empty;
             }
-            return "Select {columns} from dbo.{table}".Replace("{columns}", string.Join(",", columns)).Replace("{table}", table);
+            return "Select {columns} from dbo.[{table}]".Replace("{columns}", string.Join(",", columns)).Replace("{table}", table);
         }
     }
 }

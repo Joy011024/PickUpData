@@ -7,13 +7,16 @@ using Domain.GlobalModel;
 using System.ComponentModel;
 namespace HRApp.Model
 {
-    [TableField(TableName = "Account")]
+    [TableField(TableName = "User")]
     public class UserAccount : UserBaseField
     {
-       
+        public Guid Id { get; set; }
         [Description("账号是否激活")]
         public bool IsActive { get; set; }
         public string Psw { get; set; }
+        [Description("加密形式")]
+        public string Encry { get; set; }
+        public DateTime CreateTime { get; set; }
     }
     public class UserBaseField 
     {
