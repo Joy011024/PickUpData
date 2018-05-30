@@ -11,8 +11,10 @@ Create table Enum
 (
 	Id int primary key identity(1,1),
 	Code varchar(64) not null,-- typeof(Enum).Name+"."+Field
+	Name nvarchar(64) not null,
 	Remark varchar(128) not null,
 	HashValue int not null,
+	ParentId int not null,--enum name =-1
 	Createtime datetime not null
 );
 create table [Role]
