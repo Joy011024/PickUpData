@@ -26,5 +26,7 @@ namespace HRApp.Model
         public int RowBeginIndex { get; set; }
         [Description("行结束索引")]
         public int RowEndIndex { get; set; }
+        [Description("名称")]
+        public string Name { get; set; }
     }
 }

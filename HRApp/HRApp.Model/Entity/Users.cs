@@ -24,6 +24,11 @@ namespace HRApp.Model
         [Description("昵称")]
         public string Nick { get; set; }
     }
+    public class Account : UserBaseField
+    {
+        public Guid Id { get; set; }
+        public bool IsActive { get; set; }
+    }
     public class SignInAccountParam : UserBaseField
     {
         public string Psw { get; set; }

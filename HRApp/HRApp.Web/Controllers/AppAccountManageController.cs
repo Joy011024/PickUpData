@@ -24,12 +24,21 @@ namespace HRApp.Web.Controllers
 
             return View();
         }
+        [HttpPost]
+        [Description("注册数据的基础接口")]
         public JsonResult SignInAccountData(SignInAccountParam param) 
         {
             Common.Data.JsonData json = new Common.Data.JsonData();
             IAppAccountService appService = IocMvcFactoryHelper.GetInterface<IAppAccountService>();
             json= appService.SignIn(param);
             json.AttachData = param;
+            return Json(json);
+        }
+        public JsonResult QuerAccont(RequestParam param)
+        {
+            Common.Data.JsonData json = new Common.Data.JsonData();
+            IAppAccountService appService = IocMvcFactoryHelper.GetInterface<IAppAccountService>();
+            json=appService.QuerySignInAccount(param);
             return Json(json);
         }
     }

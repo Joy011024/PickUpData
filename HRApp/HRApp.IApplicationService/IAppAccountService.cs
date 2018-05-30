@@ -10,5 +10,6 @@ namespace HRApp.IApplicationService
     public interface IAppAccountService:BaseService
     {
         JsonData SignIn(SignInAccountParam param);
+        JsonData QuerySignInAccount(RequestParam param);
     }
 }

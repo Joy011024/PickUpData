@@ -7,6 +7,7 @@ using Common.Data;
 using HRApp.IApplicationService;
 using IHRApp.Infrastructure;
 using HRApp.Model;
+using DataHelp;
 namespace HRApp.ApplicationService
 {
     public class AppAccountService:IAppAccountService
@@ -52,6 +53,46 @@ namespace HRApp.ApplicationService
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// 查询注册的账户
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public JsonData QuerySignInAccount(RequestParam param )
+        {
+            JsonData json = new JsonData() { Result=true};
+            try
+            {
+                if (param.RowBeginIndex == 0)
+                {
+                    param.RowBeginIndex = 1;
+                    param.RowEndIndex = param.RowBeginIndex + 30;
+                }
+                //有条件查找 进入接口1
+                List<UserAccount> acc = accountDal.QueryUses(param, false);
+                if (acc == null)
+                {
+                    logDal.WriteLog(Domain.CommonData.ELogType.Account, "QuerySignInAccount not provider query where,will run no found interface", Domain.CommonData.ELogType.Account.ToString(), true);
+                    acc = accountDal.QueryUses(param, true);//无条件查询的情形进入接口2
+                    json.Data = acc;
+                    logDal.WriteLog(Domain.CommonData.ELogType.Account, "QuerySignInAccount call ignore param of interface", Domain.CommonData.ELogType.Account.ToString(), true);
+                }
+                List<Account> sign = new List<Account>();
+                foreach (var item in acc)
+                {
+                    sign.Add(DataHelp.DataReflection.ConvertMapModel<UserAccount, Account>(item));
+                }
+                json.Data = sign;//去除加密痕迹
+                json.Success = true;
+            }
+            catch (Exception ex)
+            {
+                logDal.WriteLog(Domain.CommonData.ELogType.Account, "QuerySignInAccount happend exception:" + ex.ToString(), Domain.CommonData.ELogType.Account.ToString(), true);
+                json.Message = ex.Message;
+            }
+            return json;
         }
     }
 }

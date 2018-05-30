@@ -96,7 +96,7 @@ namespace DataHelp
             }
             return result;
         }
-        public static void ConvertModels<T>(DataSet ds) where T:class
+        public static List<T> ConvertModels<T>(DataSet ds) where T:class
         {
             DataTable table = ds.Tables[0];
             DataColumnCollection columns = table.Columns;
@@ -123,7 +123,7 @@ namespace DataHelp
                 FillRowIntoEntity(d, item, map);
                 list.Add(d);
             }
-            
+            return list;
         }
 
         public static List<T> DataSetConvert<T>(this DataSet ds) where T : class
