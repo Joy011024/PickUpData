@@ -111,6 +111,9 @@
             });
         }
         function DrwaPageEle(currentPage, totalPages) {
+            if ($.trim(currentPage) != '') {
+                currentPage = 1;
+            }
             $("#page").bootstrapPaginator({
                 bootstrapMajorVersion: 3, //对应的bootstrap版本
                 currentPage: currentPage, //当前页数
