@@ -65,9 +65,9 @@ namespace HRApp.ApplicationService
             JsonData json = new JsonData() { Result=true};
             try
             {
-                if (param.RowBeginIndex == 0)
+                if (param.RowBeginIndex <=0)
                 {
-                    param.RowBeginIndex = 1;
+                    param.RowBeginIndex = 0;
                     param.RowEndIndex = param.RowBeginIndex + 30;
                 }
                 //有条件查找 进入接口1

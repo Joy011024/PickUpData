@@ -56,8 +56,8 @@
         });
         function btnQuery() {
             bindPostAjax('/AppAccountManage/QuerAccont', {
-                RowBeginIndex: 1,
-                RowEndIndex: 30
+                RowBeginIndex: 0,
+                RowEndIndex: 29
             }, function (response, statue) {
                 if (!response.Success) {
                     layer.alert(response.Message);
