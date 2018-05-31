@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HRApp.IApplicationService
 {
-    interface IRoleDataService
+    public interface IRoleDataService : IBaseCRUDRepository
     {
     }
 }

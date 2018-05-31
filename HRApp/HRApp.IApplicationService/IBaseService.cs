@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRApp.IApplicationService
 {
-    public interface IBaseServiceWithSqlConnstring<T> : BaseService where T : class
+    public interface IBaseServiceWithSqlConnstring<T> : IBaseService where T : class
     {
         JsonData Add(T model);
         List<T> QueryWhere(T model);
@@ -18,8 +18,55 @@ namespace HRApp.IApplicationService
     {
         List<T> QueryAll();
     }
-    public interface BaseService
+    public interface IBaseService
     {
         string SqlConnString { get; set; }
+    }
+    /// <summary>
+    /// sample insert,delete ,update,select
+    /// </summary>
+    public interface IBaseCRUDRepository : IBaseService
+    {
+        /// <summary>
+        /// insert
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        bool Add<T>(T entity) where T : class;
+        /// <summary>
+        /// update
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        bool Edit(string sql, Dictionary<string, object> param);
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        bool Delete(object key);
+        /// <summary>
+        /// primary key query
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        T Get<T>(object key) where T : class;
+        /// <summary>
+        /// like query
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cmd"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        List<T> Query<T>(string cmd, Dictionary<string, object> param) where T : class;
+        /// <summary>
+        /// logic delete
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        bool LogicDelete(object key);
     }
 }

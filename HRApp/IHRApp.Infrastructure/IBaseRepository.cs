@@ -11,6 +11,53 @@ namespace IHRApp.Infrastructure
         string SqlConnString { set; get; }
     }
     /// <summary>
+    /// sample insert,delete ,update,select
+    /// </summary>
+    public interface IBaseCRUDRepository : IBaseSampleRepository
+    {
+        /// <summary>
+        /// insert
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        bool Add<T>(T entity) where T : class;
+        /// <summary>
+        /// update
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        bool Edit(string sql,Dictionary<string,object> param);
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        bool Delete(object key);
+        /// <summary>
+        /// primary key query
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        T Get<T>(object key) where T:class;
+        /// <summary>
+        /// like query
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cmd"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        List<T> Query<T>(string cmd,Dictionary<string,object> param) where T:class;
+        /// <summary>
+        /// logic delete
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        bool LogicDelete(object key);
+    }
+    /// <summary>
     /// 数据简单操作
     /// </summary>
     /// <typeparam name="T"></typeparam>

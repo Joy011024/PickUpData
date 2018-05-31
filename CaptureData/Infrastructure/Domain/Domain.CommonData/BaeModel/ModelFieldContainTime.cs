@@ -24,6 +24,11 @@ namespace Domain.CommonData
     {
         public DateTime CreateTime { get; set; }
     }
+    public class WithLogicField : GuidBaseFieldContainTime
+    {
+        public string Code { get; set; }
+        public bool IsDelete { get; set; }
+    }
     /// <summary>
     /// 主键字段
     /// </summary>
