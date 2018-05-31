@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using HRApp.Model;
 using IHRApp.Infrastructure;
 using Infrastructure.MsSqlService.SqlHelper;
+using System.Data;
+using System.Data.SqlClient;
 namespace HRApp.Infrastructure
 {
     public class AppAccountRepository:IAppAccountRepository
@@ -40,13 +42,15 @@ namespace HRApp.Infrastructure
             string select= SqlCmdHelper.GenerateSampleSelectSql<UserAccount>();
             bool valid = false;
             List<string> where = new List<string>();
+            List<SqlParameter> ps = new List<SqlParameter>();
             #region 用户名只允许右匹配
             if (!string.IsNullOrEmpty(param.QueryKey))
             {//不允许前置匹配
                 string[] arr = param.QueryKey.Split('%');
                 if (!string.IsNullOrEmpty(arr[0]))
                 {
-                    where.Add("UserName like   {QueryKey} ");
+                    where.Add("UserName like   @QueryKey ");
+                    ps.Add(new SqlParameter() { ParameterName = "@QueryKey", Value = param.QueryKey + "%" });
                 }
                 else 
                 {
@@ -61,21 +65,26 @@ namespace HRApp.Infrastructure
             #region 创建时间检索
             if (!string.IsNullOrEmpty(param.BeginTime)&&!string.IsNullOrEmpty(param.EndTime))
             {
-                where.Add("between CreateTime {BeginTime} and {EndTime}");
+                where.Add("between CreateTime @BeginTime and @EndTime");
+                ps.Add(new SqlParameter() { ParameterName = "@BeginTime", Value = param.BeginTime });
+                ps.Add(new SqlParameter() { ParameterName = "@EndTime", Value = param.EndTime });
             }
             else if (!string.IsNullOrEmpty(param.BeginTime))
             {
-                where.Add("CreateTime>=  {BeginTime} ");
+                where.Add("CreateTime>=  @BeginTime ");
+                ps.Add(new SqlParameter() { ParameterName = "@BeginTime", Value = param.BeginTime  });
             }
             else if (!string.IsNullOrEmpty(param.EndTime))
             {
-                where.Add("CreateTime<=  {EndTime} ");
+                where.Add("CreateTime<=  @EndTime ");
+                ps.Add(new SqlParameter() { ParameterName = "@EndTime", Value = param.EndTime + "%" });
             }
             #endregion
             #region 昵称
             if (!string.IsNullOrEmpty(param.Name))
             {
-                where.Add("Nick like {Name}");
+                where.Add("Nick like @Name");
+                ps.Add(new SqlParameter() { ParameterName = "@Name", Value = "%"+param.Name + "%" });
             }
             #endregion
             if (!canNoWhereQuery && where.Count == 0)
@@ -90,12 +99,11 @@ namespace HRApp.Infrastructure
                 {
                     param.RowEndIndex = param.RowBeginIndex + 30;
                 }
-
             }
-
-            string sql=select+" where "+string.Join(" and ",where);
+            string sql = select + (where.Count > 0 ? " where " + string.Join(" and ", where) : string.Empty) + " order by CreateTime desc";
             SqlCmdHelper cmd = new SqlCmdHelper();
-            return DataHelp.DataReflection.DataSetConvert<UserAccount>(cmd.GenerateQuerySqlAndExcute(sql, param));
+            DataSet ds = cmd.QueryDataSet(sql, SqlConnString, ps.ToArray(), param.RowBeginIndex, param.RowEndIndex, typeof(UserAccount).Name);//限定数量
+            return DataHelp.DataReflection.DataSetConvert<UserAccount>(ds);
         }
     }
 }

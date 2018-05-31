@@ -89,7 +89,8 @@ namespace HRApp.ApplicationService
             }
             catch (Exception ex)
             {
-                logDal.WriteLog(Domain.CommonData.ELogType.Account, "QuerySignInAccount happend exception:" + ex.ToString(), Domain.CommonData.ELogType.Account.ToString(), true);
+                //使用ex.Tostring() 会超出限制
+                logDal.WriteLog(Domain.CommonData.ELogType.Account, "QuerySignInAccount happend exception:" + ex.Message, Domain.CommonData.ELogType.Account.ToString(), true);
                 json.Message = ex.Message;
             }
             return json;

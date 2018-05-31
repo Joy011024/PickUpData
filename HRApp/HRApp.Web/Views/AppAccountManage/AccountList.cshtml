@@ -1,13 +1,28 @@
-﻿@{
+﻿@using HRApp.Web;
+@using HRApp.Model;
+@{
     Layout = null;
 }
-
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>AccountList</title>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
+    <script type="text/javascript">
+        $(function () {
+            bindPostAjax('/AppAccountManage/QuerAccont', {
+                RowBeginIndex: 1,
+                RowEndIndex:2
+            }, function (response, statue) {
+                layer.alert(response.Total);
+            });
+        });
+    </script>
 </head>
 <body>
     <div>
