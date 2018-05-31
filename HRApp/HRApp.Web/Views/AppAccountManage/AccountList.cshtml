@@ -1,5 +1,6 @@
 ﻿@using HRApp.Web;
 @using HRApp.Model;
+@using AppLanguage;
 @{
     Layout = null;
 }
@@ -7,30 +8,201 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>AccountList</title>
-    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select/bootstrap-select.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-paginator/bootstrap-paginator.js?v=@InitAppSetting.Version"></script>
     <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/Common/HtmlEleExt.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <style type="text/css">
+        .tmpl {
+            display: inline-block;
+            margin: 0 30px 30px 0;
+        }
+
+        .column {
+            display: grid;
+        }
+
+        .imgIcon {
+            width: 128px;
+            height: 128px;
+        }
+
+        .pagination {
+            display: inline-block;
+            padding-left: 0;
+            border-radius: 4px;
+        }
+
+        .pageItemSpan {
+            height: 40px;
+        }
+    </style>
+
     <script type="text/javascript">
         $(function () {
-            bindPostAjax('/AppAccountManage/QuerAccont', {
-                RowBeginIndex: 1,
-                RowEndIndex:2
-            }, function (response, statue) {
-                layer.alert(response.Total);
+            btnQuery();
+            $('#btnQuery').click(function () {
+                btnQuery();
             });
         });
+        function btnQuery() {
+            bindPostAjax('/AppAccountManage/QuerAccont', {
+                RowBeginIndex: 1,
+                RowEndIndex: 30
+            }, function (response, statue) {
+                if (!response.Success) {
+                    layer.alert(response.Message);
+                    return;
+                }
+                //now active page index:
+                var page = $('#page .active .pageItemSpan.index').text();
+                var currentPage = parseInt(page);
+                var totalPages = response.Total / 30 + 1;
+                DrwaPageEle(currentPage, totalPages);
+                var tmpl = $('.tmpl')[0].outerHTML;
+                var div = $('.dataRowArea');
+                var queryParam = response.AttachData;
+                $('.list').html(lang.tip.total.format(response.Total) + ' ' + lang.tip.nowRecord.format(queryParam.RowBeginIndex, queryParam.RowEndIndex));
+                if (!$('#ckAppendDisplay').is(':checked')) {
+                    $('.dataRowArea').empty();//采用非追加形式
+                }
+                $(response.Data).each(function (i, ele) {//疑难杂症？each内部不能调用到tmpl变量
+                    $('#ckAllImg').prop('checked', false);
+                    var ht = $('.tmpl')[0].outerHTML;
+                    ht = ht.replace('{Gender}', lang.dict.Gender[ele.Gender]);
+                    ht = ht.formatObject(ele);
+                    ht = ht.replace("{i}", i);
+                    if ($('#ckShowImg').is(':checked')) {
+                        ht = ht.replace('<img>', '<img src="{Url}" class="imgIcon">'.formatObject(ele));
+                    }
+                    $('.dataRowArea').prepend(ht);
+                });
+                $('.dataRowArea .tmpl [type=checkbox]').click(function () {
+                    var ck = $(this);
+                    //当前选择的列表数目
+                    var ckAll = $('#ckAllImg');//选中全部 CheckBox
+                    var checkedLen = $('.dataRowArea .tmpl [type=checkbox]:checked').length;//当前选中的数目
+                    var ckLen = $('.dataRowArea .tmpl [type=checkbox]').length;//总共数目
+                    if (ckAll.is(':checked')) {//之前为选中状态
+                        ckAll.prop('checked', ck.is(':checked'));
+                    }
+                    else {
+                        ckAll.prop('checked', checkedLen == ckLen);
+                    }
+                });
+            });
+        }
+        function DrwaPageEle(currentPage, totalPages) {
+            $("#page").bootstrapPaginator({
+                bootstrapMajorVersion: 3, //对应的bootstrap版本
+                currentPage: currentPage, //当前页数
+                numberOfPages: 10, //每次显示页数
+                totalPages: totalPages, //总页数
+                shouldShowPage: true,//是否显示该按钮
+                useBootstrapTooltip: true,
+                //点击事件
+                onPageClicked: function (event, originalEvent, type, page) {
+
+
+                }
+            });
+        }
     </script>
 </head>
 <body>
     <div>
-        <div id="btnTools">
+        <div>
+            <div>
+                @*query where*@
+                <span>
+                    <input type="hidden" id="txtPageIndex" value="1" />
+                </span>
+                <span>
+                    @*<label>@Lang.LblPickUpTime</label>*@
+                    <label>@Lang.LblBeginTime</label>
+                    <input type="text" onfocus="WdatePicker()" attr="StartTime" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.AddDays(-1).ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
+                    <label>@Lang.LblEndTime</label>
+                    <input type="text" onfocus="WdatePicker()" attr="EndTime" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)" placeholder="选择时间" />
 
-        </div>
-        <div id="grid">
-            
+                </span>
+                <span>
+                    <label>@Lang.LblUinAccount</label>
+                    <input type="text" />
+                </span>
+                <span>
+                    <label>
+                        <span>@Lang.LblAppendDisplay</span>
+                        <span><input type="checkbox" id="ckAppendDisplay" style="width: 30px;position: relative; top: 10px;" /></span>
+                    </label>
+                    <label>
+                        <span>@Lang.LblDisplayImg</span>
+                        <span><input type="checkbox" id="ckShowImg" style="width: 30px;position: relative; top: 10px;" /></span>
+                    </label>
+                    <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.BtnQuery" />
+                </span>
+            </div>
+            <div>
+                <span style="position: relative;top: 10px;">
+                    <label>
+                        <span style="position:relative;top: -10px;">@Lang.LblSelectAll</span>
+                        <input type="checkbox" class="ckImg" style="width: 30px;" id="ckAllImg" />
+                    </label>
+                </span>
+                <span>
+                    <input type="button" class="button buttonSmall" id="btnQuery" value="@Lang.LblGroup" />
+                    <input type="button" class="button buttonSmall" id="btnReporting" value="@Lang.BtnReporting" />
+                    <input type="button" class="button buttonSmall" id="btnPickupAccount" value="@Lang.BtnPickupAccount" />
+                </span>
+                <span>
+                    <span class="list"></span>
+                </span>
+            </div>
+            <div>
+                @*css:container*@
+                <div style="margin-top: 10px;">
+                    <ul id="page"></ul>
+                </div>
+            </div>
+            <div class="dataRowTmpl" style="display:none;">
+                <div class="tmpl" style="border: 1px solid white; padding: 5px;width:147px;height:220px;">
+                    <span class="column">
+                        <span style="display:none;">{i}</span>
+                        <span>
+                            <label>
+                                <input type="checkbox" class="ckImg" style="width: 30px;" pid="{ID}" />
+                                <span style="position: relative; top: -10px;" attr="UserName"> {UserName}</span>
+                            </label>
+                        </span>
+                        <span attr="Nick"> {Nick}</span>
+                    </span>
+                    <span class="column">
+                        <img>
+                    </span>
+                    @*<span class="column">
+                        <span attr="City">{Country} {Province} {City}</span>
+                        <span attr="Base">@Lang.LblGender :{Gender}</span>
+                    </span>*@
+                </div>
+            </div>
+            <div class="dataRowArea">
+
+            </div>
+            <div style="display:none;">
+                <span>
+                    <input type="button" class="button buttonSmall" id="btnQueryBottom" value="@Lang.LblGroup" />
+                    <input type="button" class="button buttonSmall" id="btnReportingBottom" value="@Lang.BtnReporting" />
+                    <input type="button" class="button buttonSmall" id="btnPickupAccountBottom" value="@Lang.BtnPickupAccount" />
+                </span>
+            </div>
         </div>
     </div>
 </body>

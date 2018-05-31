@@ -39,6 +39,7 @@ namespace HRApp.Web.Controllers
             Common.Data.JsonData json = new Common.Data.JsonData();
             IAppAccountService appService = IocMvcFactoryHelper.GetInterface<IAppAccountService>();
             json=appService.QuerySignInAccount(param);
+            json.AttachData = param;
             return Json(json);
         }
     }

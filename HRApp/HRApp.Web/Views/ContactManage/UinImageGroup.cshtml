@@ -139,7 +139,7 @@
                    var tmpl = $('.tmpl')[0].outerHTML;
                    var div = $('.dataRowArea');
                    var queryParam = response.AttachData;
-                   $('.list').html(lang.tip.totla.format(response.Total) + ' ' + lang.tip.nowRecord.format(queryParam.BeginRow,queryParam.EndRow));
+                   $('.list').html(lang.tip.total.format(response.Total) + ' ' + lang.tip.nowRecord.format(queryParam.BeginRow, queryParam.EndRow));
                    if (!$('#ckAppendDisplay').is(':checked')) {
                        $('.dataRowArea').empty();//采用非追加形式
                    }
