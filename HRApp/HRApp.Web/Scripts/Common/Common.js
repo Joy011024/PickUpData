@@ -81,7 +81,8 @@ function ClearCookie() {
 }
 function CloseChrome() {//关闭浏览器
     var browserName = navigator.appName;
-    alert(browserName);
+    console.warm("browser type:")
+    console.log(browserName);
     if (browserName == "Netscape") {
         window.open('', '_self', '');
         window.close();

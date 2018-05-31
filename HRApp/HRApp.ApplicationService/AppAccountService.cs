@@ -38,6 +38,7 @@ namespace HRApp.ApplicationService
                 };
                 bool succ = accountDal.SaveSignInInfo(acc);
                 logDal.WriteLog(Domain.CommonData.ELogType.Account, "Sign in 【" + param.UserName + "】 Success", "Sign in", true);
+                json.Success = succ;
                 return json;
             }
             catch (Exception ex)
@@ -65,10 +66,14 @@ namespace HRApp.ApplicationService
             JsonData json = new JsonData() { Result=true};
             try
             {
-                if (param.RowBeginIndex <=0)
+                if (param.RowBeginIndex <= 0)
                 {
                     param.RowBeginIndex = 0;
                     param.RowEndIndex = param.RowBeginIndex + 30;
+                }
+                else {
+                    param.RowBeginIndex = param.RowBeginIndex - 1;
+                    param.RowEndIndex = param.RowEndIndex - 1;
                 }
                 //有条件查找 进入接口1
                 List<UserAccount> acc = accountDal.QueryUses(param, false);
