@@ -19,6 +19,7 @@
     <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
     <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-paginator/bootstrap-paginator.js?v=@InitAppSetting.Version"></script>
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <style type="text/css">
@@ -27,75 +28,82 @@
         }
     </style>
     <script type="text/javascript">
-    var btns = [
-        { url: '/CommonDialog/SampleDataDialog', id: 'btnAddOrderData', text: lang.cmd.btnNewAdd, title: lang.orderItems.addDialog },
-        { url: '/OrganizationManage/OrganzeDialog', id: 'btnEditOrderData', text: lang.cmd.btnEdit, title: lang.orderItems.editDialog, param: 'oid' }
-    ];
-    var columns = [
-        { text: '@Lang.LblName', map: 'Name' },
-        { text: '@Lang.LblCode', map: 'Code' }
-    ];
-    var tmpl = '<button id="{id}" class="button buttonSmall" link="{url}">{text}</button>';
-    $(function () {
-        //渲染button按钮
-        // var btnTool = $('.btns');//无法访问到这个变量
-        $(btns).each(function (i, ele) {
-            var btnTool = $('.btns');
-            tmpl = tmpl.replace('{url}', ele.url + ($.trim(ele.param) != '' ? '?' + ele.param : ''));
-            var btn = tmpl.formatObject(ele);
-            btnTool.append(btn);
-            btnTool.find('.buttonSmall:last').click(function (i, e) {
-                var el = $(this);
-                if (el.attr('param') != '') {//需要选择具体数据进行编辑
+        var btns = [
+            { url: '/CommonDialog/SampleDataDialog', id: 'btnAddOrderData', text: lang.cmd.btnNewAdd, title: lang.orderItems.addDialog },
+            { url: '/OrganizationManage/OrganzeDialog', id: 'btnEditOrderData', text: lang.cmd.btnEdit, title: lang.orderItems.editDialog, param: 'oid' }
+        ];
+        var columns = [
+            { text: '@Lang.LblName', map: 'Name' },
+            { text: '@Lang.LblCode', map: 'Code' }
+        ];
+        var tmpl = '<button id="{id}" class="button buttonSmall" link="{url}">{text}</button>';
+        var pageNumber = 30;
+        $(function () {
+            DrwaPageEle({
+                rowBegin: 0,
+                rowEnd: 0,
+                total: 0,
+                numberOfPage: pageNumber
+            }, $('#gridPage'));
+            //渲染button按钮
+            // var btnTool = $('.btns');//无法访问到这个变量
+            $(btns).each(function (i, ele) {
+                var btnTool = $('.btns');
+                tmpl = tmpl.replace('{url}', ele.url + ($.trim(ele.param) != '' ? '?' + ele.param : ''));
+                var btn = tmpl.formatObject(ele);
+                btnTool.append(btn);
+                btnTool.find('.buttonSmall:last').click(function (i, e) {
+                    var el = $(this);
+                    if (el.attr('param') != '') {//需要选择具体数据进行编辑
 
-                }
-                var link = el.attr('link');
-                var title = el.text();
-                openDialog(link, title);
+                    }
+                    var link = el.attr('link');
+                    var title = el.text();
+                    openDialog(link, title);
+                });
+            });
+            $('#grid').append('<table class="table"><thead><tr></tr></thead><tbody></tbody></table>');
+            $(columns).each(function (i, ele) {
+                $('#grid table thead tr').append('<td>' + ele.text + '</td>');
+            });
+            $('#btnQuery').click(function () {
+                btnQuery();
             });
         });
-        $('#grid').append('<table class="table"><thead><tr></tr></thead><tbody></tbody></table>');
-        $(columns).each(function (i, ele) {
-            $('#grid table thead tr').append('<td>' + ele.text + '</td>');
-        });
-        $('#btnQuery').click(function () {
-            btnQuery();
-        });
-    });
-    function openDialog(url, title) {
-        var at = parent ? parent.layer : layer;
-        at.open({
-            content: url,
-            type: 2,
-            area: ['300px', '350px'],
-            id: 'dialog',
-            title: title,
-            btn: [
-                '@Lang.BtnSave', '@Lang.BtnClose'
-            ],
-            yes: function (index, lay) {
-                var data = undefined;
-                //var iframe = parent.$('#dialog').find('iframe').contents();
-                var childObj = parent.$('#dialog').find('iframe')[0].contentWindow;
-                var data = childObj.gatherUiData();
-                if (data == null) {//存在未输入的内容
-                    return;
-                }
-                bindPostAjax('/OrganizationManage/SaveCompany', data, function (response, statue) {
-                    var lay =layer;
-                    if (response.Success) {
-                        lay.close(lay.index);
-                        lay.alert('操作成功', { title: '@Lang.LblTip' });
+        function openDialog(url, title) {
+            var at = parent ? parent.layer : layer;
+            at.open({
+                content: url,
+                type: 2,
+                area: ['300px', '350px'],
+                id: 'dialog',
+                title: title,
+                btn: [
+                    '@Lang.BtnSave', '@Lang.BtnClose'
+                ],
+                yes: function (index, lay) {
+                    var data = undefined;
+                    //var iframe = parent.$('#dialog').find('iframe').contents();
+                    var childObj = parent.$('#dialog').find('iframe')[0].contentWindow;
+                    var data = childObj.gatherUiData();
+                    if (data == null) {//存在未输入的内容
                         return;
                     }
-                    lay.alert(response.Message, { title: '@Lang.LblTip' });
-                });
-            },
-            btn2: function (index, lay) {
+                    bindPostAjax('/OrganizationManage/SaveCompany', data, function (response, statue) {
+                        var lay =layer;
+                        if (response.Success) {
+                            lay.close(lay.index);
+                            lay.alert('操作成功', { title: '@Lang.LblTip' });
+                            return;
+                        }
+                        lay.alert(response.Message, { title: '@Lang.LblTip' });
+                    });
+                },
+                btn2: function (index, lay) {
 
-            }
-        });
-    }
+                }
+            });
+        }
         function btnQuery() {
             bindPostAjax('/OrganizationManage/QueryCompnayList', {
                 QueryKey: $('#txtKeyWord').val()
@@ -105,6 +113,13 @@
                     lay.alert(response.Message, { title: '@Lang.LblTip' });
                     return;
                 }
+                //分页
+                DrwaPageEle({
+                    rowBegin: 1,
+                    rowEnd: 30,
+                    total: 30,
+                    numberOfPage: pageNumber
+                }, $('gridPage'));
                 $(response.Data).each(function (i, ele) {
                     var row = [];
                     for (var i = 0; i < columns.length; i++) {
@@ -112,6 +127,46 @@
                     }
                     $('#grid table tbody').append('<tr class="trLine">' + row.join('') + '</tr>')
                 });
+            });
+        }
+        //绘制分页栏
+        function DrwaPageEle(numberOption, pageContainerEle) {
+            var option = {
+                rowBegin: 0,
+                rowEnd: 0,
+                total: 0,
+                numberOfPage:30
+            };
+            option = $.extend(option, numberOption);
+            if (option.numberOfPage == 0) {
+                option.numberOfPage = 30;
+            }
+            var currentPage = option.rowBegin / option.numberOfPage, totalPages = option.total / option.numberOfPage;
+            if ($.trim(currentPage) != '') {
+                currentPage = 1;
+            } if (totalPages == undefined || totalPages < 1) {
+                totalPages = 1;
+            }
+            var pageEle = (pageContainerEle) ? pageContainerEle.find('pageInfo') : undefined;
+            if (pageEle == undefined || pageEle.length == 0) {//没有分页元素，则在页面中进行追加
+                pageContainerEle = pageContainerEle ? pageContainerEle : $('body');
+                pageContainerEle.append('<div><span><ul  id="page"></ul></span><span id="pageInfo" style="display: block;color: red;"></span></div>');
+            }
+            if (pageEle == undefined||pageEle.length==0) {
+                pageEle = $('#page');
+            }
+            $('#pageInfo').text(lang.tip.total.format(option.total) + ' ' + lang.tip.nowRecord.format(option.rowBegin, option.rowEnd));
+            pageEle.bootstrapPaginator({
+                bootstrapMajorVersion: 3, //对应的bootstrap版本
+                currentPage: currentPage, //当前页数
+                numberOfPages: option.numberOfPage, //每次显示页数
+                totalPages: totalPages, //总页数
+                shouldShowPage: true,//是否显示该按钮
+                useBootstrapTooltip: true,
+                //点击事件
+                onPageClicked: function (event, originalEvent, type, page) {
+                    console.log(event);
+                }
             });
         }
     </script>
