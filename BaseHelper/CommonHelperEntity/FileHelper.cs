@@ -105,7 +105,7 @@ namespace CommonHelperEntity
                 return null;
             }
             FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs, GetFileEncode(fs));
+            StreamReader sr = new StreamReader(fs,Encoding.UTF8);// GetFileEncode(fs));
             string txt = sr.ReadToEnd();
             sr.Close();
             fs.Close();

@@ -104,9 +104,14 @@ namespace Domain.CommonData
                 Directory.CreateDirectory(file);
             string filetype = ".txt";
             if (string.IsNullOrEmpty(fileName))
-                file += "/"+log+now.ToString(CommonFormat.DateTimeIntFormat) + filetype;
+                file += "/" + log + now.ToString(CommonFormat.DateTimeIntFormat) + filetype;
             else
-                file += "/"+ fileName + filetype;
+            {//需要判断是否增加后缀
+                if (!fileName.Contains("."))
+                {
+                    file += "/" + fileName + filetype;
+                }
+            }
             FileStream fs ;
             if (!existsWrite)
             {
