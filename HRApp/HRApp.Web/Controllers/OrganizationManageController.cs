@@ -38,6 +38,7 @@ namespace HRApp.Web.Controllers
             if (json.Total > 0)
                 json.Data = organzeService.QueryOrganzes(param.QueryKey);
             json.Success = true;
+            json.AttachData = param;
             return Json(json);
         }
     }

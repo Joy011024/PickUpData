@@ -105,19 +105,30 @@
             });
         }
         function btnQuery() {
+            var page = $('#page .index').text();//页码
             bindPostAjax('/OrganizationManage/QueryCompnayList', {
-                QueryKey: $('#txtKeyWord').val()
+                QueryKey: $('#txtKeyWord').val(),
+                RowBeginIndex: (page - 1) * pageNumber,
+                RowEndIndex:page*pageNumber
             }, function (response, statue) {
                 $('#grid table tbody').empty();
                 if (!response.Success) {
                     lay.alert(response.Message, { title: '@Lang.LblTip' });
                     return;
                 }
+                var param = response.AttachData;
+                //如果数据结果为空，清除表格
+                //数据不为空判断实际查询到的数目
+                var end = response.Data ? response.Data.length : 0;
+                if (end == pageNumber)
+                {
+                    end=param.RowEndIndex;
+                }
                 //分页
                 DrwaPageEle({
-                    rowBegin: 1,
-                    rowEnd: 30,
-                    total: 30,
+                    rowBegin: param.RowBeginIndex,
+                    rowEnd: end,
+                    total: response.Total,
                     numberOfPage: pageNumber
                 }, $('gridPage'));
                 $(response.Data).each(function (i, ele) {
