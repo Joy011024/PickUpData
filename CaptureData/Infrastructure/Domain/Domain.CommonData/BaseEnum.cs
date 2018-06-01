@@ -111,6 +111,9 @@ namespace Domain.CommonData
                 {
                     file += "/" + fileName + filetype;
                 }
+                else {
+                    file += "/" + fileName;
+                }
             }
             FileStream fs ;
             if (!existsWrite)
