@@ -33,6 +33,7 @@
             { url: '/OrganizationManage/OrganzeDialog', id: 'btnEditOrderData', text: lang.cmd.btnEdit, title: lang.orderItems.editDialog, param: 'oid' }
         ];
         var columns = [
+            { text: '@Lang.LblSortName', map: 'Index' },
             { text: '@Lang.LblName', map: 'Name' },
             { text: '@Lang.LblCode', map: 'Code' }
         ];
@@ -108,7 +109,7 @@
             var page = $('#page .index').text();//页码
             bindPostAjax('/OrganizationManage/QueryCompnayList', {
                 QueryKey: $('#txtKeyWord').val(),
-                RowBeginIndex: (page - 1) * pageNumber,
+                RowBeginIndex: (page - 1) * pageNumber+1,
                 RowEndIndex:page*pageNumber
             }, function (response, statue) {
                 $('#grid table tbody').empty();
@@ -131,9 +132,10 @@
                     total: response.Total,
                     numberOfPage: pageNumber
                 }, $('gridPage'));
-                $(response.Data).each(function (i, ele) {
+                $(response.Data).each(function (index, ele) {
                     var row = [];
-                    for (var i = 0; i < columns.length; i++) {
+                    row.push('<td>' + (index+1) + '</td>');
+                    for (var i = 1; i < columns.length; i++) {
                         row.push('<td>' + ele[columns[i].map] + '</td>');
                     }
                     $('#grid table tbody').append('<tr class="trLine">' + row.join('') + '</tr>')

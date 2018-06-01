@@ -466,6 +466,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 排序 的本地化字符串。
+        /// </summary>
+        public static string LblSortName {
+            get {
+                return ResourceManager.GetString("LblSortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 生僻字拼音维护 的本地化字符串。
         /// </summary>
         public static string LblSpecialSpellNameManage {
