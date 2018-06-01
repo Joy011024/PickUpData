@@ -78,5 +78,19 @@ namespace HRApp.Infrastructure
             SqlCmdHelper help = new SqlCmdHelper() { SqlConnString = SqlConnString };
             return CommonRepository.QueryModelList<Organze>(sql, sqlParam.ToArray(), SqlConnString, param.RowBeginIndex, param.RowEndIndex);
         }
+
+
+        public int Count(RequestParam param)
+        {
+            string sql = SqlCmdHelper.GenerateCountSql<Organze>();
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+            if (!string.IsNullOrEmpty(param.QueryKey))
+            {
+                sql += "and  Code like @key+'%' or Name like @key+'%'";
+                sqlParam.Add(new SqlParameter() { ParameterName = "@key", Value = param.QueryKey });
+            }
+            SqlCmdHelper help = new SqlCmdHelper() { SqlConnString = SqlConnString };
+            return CommonRepository.ExecuteCount(sql, sqlParam.ToArray(), SqlConnString);
+        }
     }
 }

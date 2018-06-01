@@ -16,6 +16,10 @@ namespace Domain.GlobalModel
         public string TableName { get; set; }
         [Description("忽略字段[兼容属性封装公共使用]")]
         public string[] IgnoreProperty { get; set; }
+        [Description("唯一列")]
+        public string UniqueColumn { get; set; }
+        [Description("主键列")]
+        public string PrimaryKey { get; set; }
     }
     [Description("属性忽略匹配字段")]
     public class PropertyIgnoreFieldAttribute : Attribute

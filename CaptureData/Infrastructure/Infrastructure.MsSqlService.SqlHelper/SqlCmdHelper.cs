@@ -607,5 +607,58 @@ namespace Infrastructure.MsSqlService.SqlHelper
             }
             return "Select {columns} from dbo.[{table}]".Replace("{columns}", string.Join(",", columns)).Replace("{table}", table);
         }
+        [Description("生成统计数量的SQL")]
+        public static string GenerateCountSql<T>() where T : class
+        {
+            Type ty = typeof(T);
+            string table = ty.Name;
+            List<string> ignoreField = new List<string>();
+            object[] obj = ty.GetCustomAttributes(typeof(TableFieldAttribute), false);
+            string selectColumn = string.Empty;
+            if (obj != null && obj.Length > 0)
+            {
+                TableFieldAttribute map = obj[0] as TableFieldAttribute;
+                table = string.IsNullOrEmpty(map.TableName) ? table : map.TableName;
+                if (map.IgnoreProperty != null)
+                {
+                    ignoreField.AddRange(map.IgnoreProperty);
+                }
+                if (!string.IsNullOrEmpty(map.PrimaryKey))
+                {
+                    selectColumn = map.PrimaryKey;
+                }
+                else if (!string.IsNullOrEmpty(map.UniqueColumn))
+                {
+                    selectColumn = map.UniqueColumn;
+                }
+            }
+            if (string.IsNullOrEmpty(selectColumn))
+            {
+                foreach (PropertyInfo item in ty.GetProperties())
+                {
+                    string pn = item.Name;
+                    //是否是被忽略的属性
+                    object[] ignore = item.GetCustomAttributes(typeof(PropertyIgnoreFieldAttribute), false);
+                    if (ignore != null && ignore.Length > 0)
+                    {
+                        ignoreField.Add(pn);
+                        continue;
+                    }
+                    object[] propertyMapColumn = item.GetCustomAttributes(typeof(ColumnAttribute), false);
+                    if (propertyMapColumn != null && propertyMapColumn.Length > 1)
+                    {
+                        ColumnAttribute col = propertyMapColumn[0] as ColumnAttribute;
+                        pn = string.IsNullOrEmpty(col.Name) ? pn : col.Name;
+                    }
+                    selectColumn="[" + pn + "]";
+                    break;
+                }
+                if (string.IsNullOrEmpty(selectColumn))
+                {//没有匹配的数据库列 
+                    return "Select count(*) from dbo.[{table}]".Replace("{table}", table);
+                }
+            }
+            return "Select count({columns}) from dbo.[{table}]".Replace("{columns}", selectColumn).Replace("{table}", table);
+        }
     }
 }

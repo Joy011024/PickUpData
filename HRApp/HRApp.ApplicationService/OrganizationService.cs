@@ -78,5 +78,12 @@ namespace HRApp.ApplicationService
             }
             return output;
         }
+
+
+        public int Count(object entity)
+        {
+            RequestParam  key = entity as RequestParam;
+            return organzeDal.Count(key);
+        }
     }
 }

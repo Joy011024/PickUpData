@@ -81,5 +81,11 @@ namespace HRApp.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+
+        public int Count(object entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

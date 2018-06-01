@@ -32,7 +32,11 @@ namespace HRApp.Web.Controllers
         public JsonResult QueryCompnayList(RequestParam param) 
         {
             Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
-            json.Data = IocMvcFactoryHelper.GetInterface<IOrganizationService>().QueryOrganzes(param.QueryKey);
+            //条件查询数目 add
+            IOrganizationService organzeService=IocMvcFactoryHelper.GetInterface<IOrganizationService>();
+            json.Total = organzeService.Count(param);
+            if (json.Total > 0)
+                json.Data = organzeService.QueryOrganzes(param.QueryKey);
             json.Success = true;
             return Json(json);
         }

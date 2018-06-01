@@ -1,6 +1,7 @@
 ﻿using Common.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,11 @@ namespace HRApp.IApplicationService
         List<T> QueryWhere(T model);
         T Get(object id);
         bool Update(T entity);
+    }
+    public interface ICountServiceWithConnString<T> : IBaseServiceWithSqlConnstring<T> where T : class
+    {
+        [Description("统计数目")]
+        int Count(object entity);
     }
     public interface IBaseAllWithSqlConnString<T> : IBaseServiceWithSqlConnstring<T> where T : class
     {

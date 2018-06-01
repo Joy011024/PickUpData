@@ -9,5 +9,6 @@ namespace IHRApp.Infrastructure
     public interface IOrganizationRepository:IBaseListRepository<Organze>
     {
         List<Organze> QueryOrganzes(RequestParam param);
+        int Count(RequestParam param);
     }
 }
