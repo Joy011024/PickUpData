@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HRApp.Model;
 using IHRApp.Infrastructure;
+using Infrastructure.MsSqlService.SqlHelper;
 namespace HRApp.Infrastructure
 {
     public class EnumDataRepository:IEnumDataRepository
@@ -27,7 +28,9 @@ namespace HRApp.Infrastructure
 
         public bool Add(EnumData entity)
         {
-            throw new NotImplementedException();
+            entity.Init();
+            string sql= SqlCmdHelper.GenerateInsertSql<EnumData>();
+            return CommonRepository.ExtInsert(sql, SqlConnString, entity);
         }
 
         public bool Edit(EnumData entity)
@@ -53,6 +56,12 @@ namespace HRApp.Infrastructure
         public IList<EnumData> Query(string cmd)
         {
             throw new NotImplementedException();
+        }
+
+        public bool UpdateRemark(int id, string remark)
+        {
+            string sql = new EnumData().GetUpdateRemarkSql();
+            return new SqlCmdHelper().GenerateNoQuerySqlAndExcute(sql, new EnumData() { Id=id,Remark=remark })>0;
         }
     }
 }

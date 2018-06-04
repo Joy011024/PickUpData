@@ -62,4 +62,8 @@ namespace Domain.CommonData
     {
         public string Code { get; set; }
     }
+    public class WithLogicFieldWithInt : FieldContainerCode
+    {
+        public bool IsDelete { get; set; }
+    }
 }

@@ -194,6 +194,7 @@ namespace HRApp.Web
     }
     public   class RefreshAppSetting
     {
+        
         public static Dictionary<string, string> QueryAllAppSetting(IAppSettingService service)
         {
             Dictionary<string, string> app = new Dictionary<string, string>();

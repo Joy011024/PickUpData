@@ -22,7 +22,7 @@ namespace HRApp.ApplicationService
             logDal.WriteLog(ELogType.DataInDBLog, 
                 string.Format(LogData.InsertDbNoteFormat(), typeof(EnumData).Name),
                 "insert", true);
-            throw new NotImplementedException();
+            return enumRepository.Add(data);
         }
 
         public List<EnumData> QueryList(RequestParam param)
@@ -54,6 +54,13 @@ namespace HRApp.ApplicationService
         public bool Update(EnumData entity)
         {
             throw new NotImplementedException();
+        }
+
+
+        public bool UpdateRemark(int id, string remark)
+        {
+            logDal.WriteLog(ELogType.DataInDBLog, "update dict Remark", "Update", true);
+            return enumRepository.UpdateRemark(id, remark);
         }
     }
 }

@@ -8,5 +8,6 @@ namespace IHRApp.Infrastructure
 {
     public interface IEnumDataRepository:IBaseListRepository<EnumData>
     {
+        bool UpdateRemark(int id, string remark);
     }
 }

@@ -13,9 +13,10 @@ Create table Enum
 	Code varchar(64) not null,-- typeof(Enum).Name+"."+Field
 	Name nvarchar(64) not null,
 	Remark varchar(128) not null,
-	HashValue int not null,
+	Value int not null,
 	ParentId int not null,--enum name =-1
-	Createtime datetime not null
+	Createtime datetime not null,
+	IsDelete bit not null
 );
 create table [Role]
 (
