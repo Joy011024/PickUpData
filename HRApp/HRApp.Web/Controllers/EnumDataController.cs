@@ -14,7 +14,6 @@ namespace HRApp.Web.Controllers
 
         public ActionResult EnumList()
         {
-            SaveEnum();
             return View();
         }
         public ActionResult EnumDataDialog() 
@@ -23,7 +22,7 @@ namespace HRApp.Web.Controllers
         }
         [HttpPost]
         [Description("存储")]
-        public JsonResult SaveEnum() 
+        public JsonResult SaveEnum(SampleRequestParam param) 
         {
             Common.Data.JsonData json = new Common.Data.JsonData();
             IEnumDataService enumBll = IocMvcFactoryHelper.GetInterface<IEnumDataService>();

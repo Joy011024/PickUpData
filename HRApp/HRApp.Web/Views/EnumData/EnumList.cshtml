@@ -1,4 +1,6 @@
-﻿@{
+﻿@using AppLanguage
+@using HRApp.Web
+@{
     Layout = null;
 }
 
@@ -8,10 +10,75 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>EnumList</title>
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-paginator/bootstrap-paginator.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $('#btnAdd').click(function () {
+                btnAddClick();
+            });
+        });
+        //EnumDataDialog
+        function btnAddClick() {
+            layerExt.LoadDialog('/CommonDialog/CommonValueDialog', '新增字典', {
+                btns: [
+                '@Lang.BtnSave', '@Lang.BtnClose'
+                ]
+            }, function (i, lay) {
+                var childObj = $('#dialog').find('iframe')[0].contentWindow;
+                if (!childObj.VaildUiRequire()) {
+                    layer.alert('@Lang.Tip_ValidParamWarning', '@Lang.LblTip');
+                    return;
+                }
+                var data = childObj.gatherUiData();
+                console.log(data);
+            }, function (i, lay) {
+                console.log(i);
+            });
+        }
+
+</script>
 </head>
 <body>
     <div>
-        
+        <div id="tool">
+            <span>
+                <span>
+                    <label>@Lang.LblName</label>
+                    <input type="text" id="txtName" />
+                </span>
+                <span>
+                    <label>@Lang.LblKeyWord</label>
+                    <input type="text" id="txtKeyWord" />
+                </span>
+                <span>
+                    <button id="btnQuery" class="button buttonSmall">@Lang.BtnQuery</button>
+                </span>
+                <span>
+                    <button id="btnAdd" class="button buttonSmall">@Lang.BtnAdd</button>
+                </span>
+                <span class="btns">
+
+                </span>
+            </span>
+        </div>
+        <div id="gridArea" class="table table-condensed table-hover table-striped" style="margin-top:10px;">
+            <div id="gridPage">
+
+            </div>
+            <div id="grid">
+
+            </div>
+        </div>
     </div>
 </body>
 </html>

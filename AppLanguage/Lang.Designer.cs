@@ -547,6 +547,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 值 的本地化字符串。
+        /// </summary>
+        public static string LblValue {
+            get {
+                return ResourceManager.GetString("LblValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 出发地 的本地化字符串。
         /// </summary>
         public static string Tip_12306_GoStation {
@@ -642,6 +651,15 @@ namespace AppLanguage {
         public static string Tip_Success {
             get {
                 return ResourceManager.GetString("Tip_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请校验参数是否合法 的本地化字符串。
+        /// </summary>
+        public static string Tip_ValidParamWarning {
+            get {
+                return ResourceManager.GetString("Tip_ValidParamWarning", resourceCulture);
             }
         }
     }

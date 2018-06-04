@@ -17,11 +17,11 @@ input,textarea,password {
 }
 .alongLine { /*独占一行*/
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .alongLine span {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 textarea {
     width: 250px;

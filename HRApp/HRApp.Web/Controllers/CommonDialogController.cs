@@ -20,5 +20,9 @@ namespace HRApp.Web.Controllers
         {
             return View();
         }
+        public ActionResult CommonValueDialog()
+        { 
+            return View();
+        }
     }
 }

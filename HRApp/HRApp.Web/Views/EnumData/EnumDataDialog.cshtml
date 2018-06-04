@@ -1,4 +1,5 @@
-﻿@{
+﻿@using AppLanguage
+@{
     Layout = null;
 }
 
@@ -11,7 +12,27 @@
 </head>
 <body>
     <div>
-        
+        <div class="ApiParam">
+            <div class="alongLine">
+                <span style="width:100px;"><span style="color:red;">@Lang.LblName *:</span></span>
+                <span>
+                    <input type="text" id="txtName" apikey="Name" class="required" autocomplete="off" /> @* autocomplete关闭自动记忆功能*@ @*apiKey 调用接口中匹配json的对象属性*@
+                </span>
+            </div>
+            <div class="alongLine">
+                <span style="width:100px;">@Lang.LblCode :</span>
+                <span>
+                    <input type="text" id="txtMemnorideCode" apikey="Code" autocomplete="off" />
+                </span>
+            </div>
+            <div class="alongLine">
+                <span style="width:100px;">@Lang.LblValue :</span>
+                <span>
+                    <input type="text" id="txtValue" apikey="Value" autocomplete="off" />
+                </span>
+            </div>
+            
+        </div>
     </div>
 </body>
 </html>
