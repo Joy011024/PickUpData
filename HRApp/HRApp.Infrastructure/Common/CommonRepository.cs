@@ -39,6 +39,7 @@ namespace HRApp.Infrastructure
             SqlCmdHelper helper = new SqlCmdHelper() { SqlConnString = connString };
             return helper.ExcuteNoQuery(cmd, ps.ToArray()) > 0;
         }
+        
         /// <summary>
         /// 批量添加
         /// </summary>

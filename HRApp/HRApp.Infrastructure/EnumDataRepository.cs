@@ -28,9 +28,7 @@ namespace HRApp.Infrastructure
 
         public bool Add(EnumData entity)
         {
-            entity.Init();
-            string sql= SqlCmdHelper.GenerateInsertSql<EnumData>();
-            return CommonRepository.ExtInsert(sql, SqlConnString, entity);
+            return false;
         }
 
         public bool Edit(EnumData entity)
@@ -62,6 +60,18 @@ namespace HRApp.Infrastructure
         {
             string sql = new EnumData().GetUpdateRemarkSql();
             return new SqlCmdHelper().GenerateNoQuerySqlAndExcute(sql, new EnumData() { Id=id,Remark=remark })>0;
+        }
+
+
+        public int AddReturnId(EnumData data)
+        {
+            string sql = SqlCmdHelper.GenerateInsertSql<EnumData>();
+            object obj= SqlCmdHelper.ExtInsertReturnGenerateId(sql, SqlConnString, data);
+            if (obj == null)
+            {
+                return -1;
+            }
+            return int.Parse(obj.ToString());//此处  (int)obj  进行强制类型转换会出现异常，因为数据库中查询出的数据没有定义数据类型
         }
     }
 }

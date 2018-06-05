@@ -7,6 +7,7 @@ using HRApp.Model;
 using IHRApp.Infrastructure;
 using HRApp.IApplicationService;
 using Domain.CommonData;
+using Infrastructure.ExtService;
 namespace HRApp.ApplicationService
 {
     public class EnumDataService:IEnumDataService
@@ -61,6 +62,58 @@ namespace HRApp.ApplicationService
         {
             logDal.WriteLog(ELogType.DataInDBLog, "update dict Remark", "Update", true);
             return enumRepository.UpdateRemark(id, remark);
+        }
+
+
+        public int BatchInsert(Enum e)
+        {
+            Dictionary<string, string> dict = e.EnumFieldDescDict<DescriptionSortAttribute>("Description");
+            if (dict.Count == 0)
+            {
+                return -1;
+            } 
+            Type en=e.GetType();
+            List<string> insert = new List<string>();
+            List<string> error = new List<string>();
+            //枚举入库
+            EnumData ep = new EnumData()
+            {
+                Name = en.Name,
+                Code = en.Name
+            };
+            ep.Init();
+            //进行数据库中存储[返回主键id]
+            int id = enumRepository.AddReturnId(ep);
+            //存储子项
+            foreach (var item in dict)
+            {
+                string enumName = en.Name;
+                string name = enumName + "." + item.Key;
+                try
+                {
+                    object val = Enum.Parse(en, item.Key);
+                    int v = val.GetHashCode();
+
+                    EnumData ed = new EnumData()
+                    {
+                        Code = item.Key,
+                        Name = name,
+                        Remark = item.Value,
+                        ParentId = id,
+                        CreateTime = DateTime.Now,
+                        IsDelete = false,
+                        Value = v
+                    };
+                    enumRepository.AddReturnId(ed);
+                    insert.Add(name);
+                }
+                catch (Exception ex)
+                {
+                    error.Add(name+"【"+ex.Message+"】");
+                }
+            }
+            logDal.WriteLog(ELogType.DataInDBLog, "success:" + string.Join(" ", insert) + ",error: " + string.Join(" ", error), "InsertLog", error.Count > 0);
+            return -1;
         }
     }
 }

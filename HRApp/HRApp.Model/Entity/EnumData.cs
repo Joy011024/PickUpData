@@ -7,7 +7,7 @@ using Domain.CommonData;
 using Domain.GlobalModel;
 namespace HRApp.Model
 {
-    [TableField(TableName = "Enum")]
+    [TableField(TableName = "Enum", DbGeneratedFields = new string[] { "Id" })]
     public class EnumData : WithLogicFieldWithInt
     {
         public int ParentId { get; set; }

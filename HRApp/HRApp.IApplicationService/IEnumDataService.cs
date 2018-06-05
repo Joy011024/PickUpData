@@ -11,5 +11,6 @@ namespace HRApp.IApplicationService
         bool Add(EnumData data);
         List<EnumData> QueryList(RequestParam param);
         bool UpdateRemark(int id, string remark);
+        int BatchInsert(Enum e);
     }
 }

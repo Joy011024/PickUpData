@@ -660,5 +660,49 @@ namespace Infrastructure.MsSqlService.SqlHelper
             }
             return "Select count({columns}) from dbo.[{table}]".Replace("{columns}", selectColumn).Replace("{table}", table);
         }
+        /// <summary>
+        /// 执行新增并查询返回的自增长主键
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cmd"></param>
+        /// <param name="connString"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static object ExtInsertReturnGenerateId<T>(string cmd, string connString, T entity) where T : class
+        {
+            Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
+            List<SqlParameter> ps = new List<SqlParameter>();
+            foreach (KeyValuePair<string, object> item in properties)
+            {
+                string paramName = "@" + item.Key;
+                string field = "{" + item.Key + "}";
+                if (cmd.Contains(field))
+                {
+                    cmd = cmd.Replace(field, paramName);
+                    //获取参数的数据类型
+                    SqlParameter p = new SqlParameter(paramName, item.Value == null ? DBNull.Value : item.Value);
+                    ps.Add(p);
+                }
+            }
+            string queryIdCmd = "Select @@Identity";
+            if (!cmd.Contains(queryIdCmd))
+            {
+                cmd += "\r\n"+queryIdCmd;
+            }
+            return ExecuteContainerScalar(cmd, connString, ps.ToArray());
+        }
+        static object ExecuteContainerScalar(string sqlCmd, string SqlConnString, SqlParameter[] param)
+        {
+            SqlConnection conn = new SqlConnection(SqlConnString);
+            conn.Open();
+            SqlCommand comm = new SqlCommand(sqlCmd, conn);
+            if (param != null && param.Length > 0)
+            {
+                comm.Parameters.AddRange(param);
+            }
+            object obj =comm.ExecuteScalar();
+            conn.Close();
+            return obj;
+        }
     }
 }

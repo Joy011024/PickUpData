@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HRApp.IApplicationService;
+using HRApp.Model;
+using Infrastructure.ExtService;
+using Domain.CommonData;
 namespace HRApp.Web.Controllers
 {
     public class EnumDataController : Controller
@@ -14,6 +17,8 @@ namespace HRApp.Web.Controllers
 
         public ActionResult EnumList()
         {
+            EAppSetting app = EAppSetting.AccountComplaintsType;
+            SaveEnum(new SampleRequestParam());
             return View();
         }
         public ActionResult EnumDataDialog() 
@@ -26,8 +31,13 @@ namespace HRApp.Web.Controllers
         {
             Common.Data.JsonData json = new Common.Data.JsonData();
             IEnumDataService enumBll = IocMvcFactoryHelper.GetInterface<IEnumDataService>();
-
+            EmployerServeStatue app = EmployerServeStatue.ChangeOrganze;
+            enumBll.BatchInsert(app);
+            EAppSetting es=EAppSetting.AccountComplaintsType;
+            enumBll.BatchInsert(es);
+            
             return Json(json);
         }
+        
     }
 }
