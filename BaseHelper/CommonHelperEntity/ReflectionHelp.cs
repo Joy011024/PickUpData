@@ -59,7 +59,7 @@ namespace CommonHelperEntity
         public static Dictionary<string, object> GetAllPorpertiesNameAndValues<T>(this T entity) where T : class
         {
             Dictionary<string, object> kv = new Dictionary<string, object>();
-            Type type = typeof(T);
+            Type type = entity.GetType();// typeof(T);//当entity传递的是一个object时找不到属性集合
             PropertyInfo[] fis= type.GetProperties();
             foreach (PropertyInfo item in fis)
             {

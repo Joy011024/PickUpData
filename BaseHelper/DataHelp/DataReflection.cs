@@ -241,7 +241,7 @@ namespace DataHelp
         /// <param name="rec"></param>
         /// <param name="row"></param>
         /// <param name="propertyMapcolumn">属性匹配列的关系字典</param>
-        static void FillRowIntoEntity<T>(T rec, DataRow row, Dictionary<string, string> propertyMapcolumn)
+        public static void FillRowIntoEntity<T>(T rec, DataRow row, Dictionary<string, string> propertyMapcolumn)
         {
             Type targetClass=rec.GetType();
             foreach (var item in propertyMapcolumn)
@@ -262,7 +262,7 @@ namespace DataHelp
         /// <param name="pi"></param>
         /// <param name="entity"></param>
         /// <param name="value"></param>
-        static void SetValueIntoProperty<T>(PropertyInfo pi, T entity,object value)
+        public static void SetValueIntoProperty<T>(PropertyInfo pi, T entity,object value)
         {
             if (value == null)
             {
