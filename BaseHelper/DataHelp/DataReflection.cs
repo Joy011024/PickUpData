@@ -269,10 +269,14 @@ namespace DataHelp
                 return;
             }
             if (pi.PropertyType.Name == typeof(Nullable<>).Name)
-            {
-                NullableConverter nullableConverter = new NullableConverter(pi.PropertyType);//如何获取可空类型属性非空时的数据类型
-                Type nt = nullableConverter.UnderlyingType;
-                pi.SetValue(entity, Convert.ChangeType(value, nt), null);
+            {//如果参数值为   datetime?,[值不为null，但是转换为对应的数据类型为空值]	 {"对象不能从 DBNull 转换为其他类型。"}	System.SystemException {System.InvalidCastException}
+                string nullValue = value.ToString();
+                if (!string.IsNullOrEmpty(nullValue))
+                {
+                    NullableConverter nullableConverter = new NullableConverter(pi.PropertyType);//如何获取可空类型属性非空时的数据类型
+                    Type nt = nullableConverter.UnderlyingType;
+                    pi.SetValue(entity, Convert.ChangeType(value, nt), null);
+                }
             }
             else if (value.GetType().Name != typeof(DBNull).Name && value.GetType().Name != pi.PropertyType.Name)
             {
