@@ -65,9 +65,9 @@ namespace HRApp.ApplicationService
         }
 
 
-        public int BatchInsert(Enum e)
+        public int BatchInsert<EnumFieldAttribute>(Enum e) where EnumFieldAttribute:Attribute
         {
-            Dictionary<string, string> dict = e.EnumFieldDescDict<DescriptionSortAttribute>("Description");
+            Dictionary<string, string> dict = e.EnumFieldDescDict<EnumFieldAttribute>("Description");
             if (dict.Count == 0)
             {
                 return -1;

@@ -9,7 +9,9 @@ namespace HRApp.Model
     [DescriptionSort("数据来源分类")]
     public enum EDataFrom
     {
+        [DescriptionSort("数据来源：数据库")]
         DB=1,
+       [DescriptionSort("数据来源：API接口")]
         WebAPI=2
     }
     [DescriptionSort("以下均为定制化配置，父节点对应鸽子默认配置的父节点下")]
@@ -121,7 +123,9 @@ namespace HRApp.Model
     }
     public enum EnumEmailBodyType
     { 
+        [DescriptionSort("邮件内容")]
         Body=1,
+        [DescriptionSort("邮件日志文本")]
         TextPath=2
     }
 }

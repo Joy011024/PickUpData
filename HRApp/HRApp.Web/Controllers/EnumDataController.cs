@@ -32,7 +32,6 @@ namespace HRApp.Web.Controllers
             Common.Data.JsonData json = new Common.Data.JsonData();
             IEnumDataService enumBll = IocMvcFactoryHelper.GetInterface<IEnumDataService>();
             //EmployerServeStatue EAppSetting
-            
             return Json(json);
         }
         
