@@ -223,6 +223,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 清除数据 的本地化字符串。
+        /// </summary>
+        public static string LblClearData {
+            get {
+                return ResourceManager.GetString("LblClearData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 助记码 的本地化字符串。
         /// </summary>
         public static string LblCode {

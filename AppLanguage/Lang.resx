@@ -318,4 +318,7 @@
   <data name="Tip_ValidParamWarning" xml:space="preserve">
     <value>请校验参数是否合法</value>
   </data>
+  <data name="LblClearData" xml:space="preserve">
+    <value>清除数据</value>
+  </data>
 </root>

@@ -16,7 +16,7 @@ namespace ServiceSmallTool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new  ClearLogFrm());
+            Application.Run(new ExcelSwitchPageFrm());
         }
     }
 }

@@ -67,6 +67,12 @@
     <Compile Include="ExcelCompareToolFrm.Designer.cs">
       <DependentUpon>ExcelCompareToolFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExcelSwitchPageFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExcelSwitchPageFrm.Designer.cs">
+      <DependentUpon>ExcelSwitchPageFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ClearLogFrm.resx">
@@ -74,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExcelCompareToolFrm.resx">
       <DependentUpon>ExcelCompareToolFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExcelSwitchPageFrm.resx">
+      <DependentUpon>ExcelSwitchPageFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -106,6 +115,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AppLanguage\AppLanguage.csproj">
+      <Project>{3da2bb21-14a7-49ca-9bb4-7eb8f26c415a}</Project>
+      <Name>AppLanguage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\BaseHelper\CommonHelperEntity\CommonHelperEntity.csproj">
       <Project>{32c60c3a-c56e-457d-b553-be076218fd5a}</Project>
       <Name>CommonHelperEntity</Name>
