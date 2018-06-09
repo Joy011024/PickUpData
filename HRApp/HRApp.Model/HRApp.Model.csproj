@@ -79,6 +79,7 @@
     <Content Include="SqlCmd\-1_SP\SP20180428\TableColumn.sql" />
     <Content Include="SqlCmd\-1_SP\SP20180514\EmailSendHistroy.sql" />
     <Content Include="SqlCmd\-1_SP\SP20180513\SP_EmailAccountData.sql" />
+    <Content Include="SqlCmd\-1_SP\Sp20180609\MeunDataChnage.sql" />
     <Content Include="SqlCmd\1_Create\HrApp.sql" />
     <Content Include="SqlCmd\2_InitData\2-InitLogicData.sql" />
     <Content Include="SqlCmd\3_LogicCmd\3_LogicSqlCmd.sql" />
