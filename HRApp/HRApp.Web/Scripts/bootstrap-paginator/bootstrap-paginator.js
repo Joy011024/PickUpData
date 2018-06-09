@@ -659,3 +659,48 @@
 
     $.fn.bootstrapPaginator.Constructor = BootstrapPaginator;
 }(window.jQuery));
+
+//绘制分页栏
+function DrwaPageEle(numberOption, pageContainerEle) {
+    var option = {
+        rowBegin: 0,
+        rowEnd: 20,
+        total: 0,
+        numberOfPage: 30
+    };
+    option = $.extend(option, numberOption);
+    if (option.numberOfPage == 0) {
+        option.numberOfPage = 30;
+    }
+    var currentPage =parseInt( option.rowBegin / option.numberOfPage);
+    if (currentPage < 1) {
+        currentPage = 1;
+    }
+    var totalPages = parseInt(option.total / option.numberOfPage) + (option.total % option.numberOfPage>0?1:0);
+    if ($.trim(currentPage) == '') {
+        currentPage = 1;
+    } if (totalPages == undefined || totalPages < 1) {
+        totalPages = 1;
+    }
+    var pageEle = (pageContainerEle) ? pageContainerEle.find('pageInfo') : undefined;
+    if (pageEle == undefined || pageEle.length == 0) {//没有分页元素，则在页面中进行追加
+        pageContainerEle = pageContainerEle ? pageContainerEle : $('body');
+        pageContainerEle.append('<div><span><ul  id="page"></ul></span><span id="pageInfo" style="display: block;color: red;"></span></div>');
+    }
+    if (pageEle == undefined || pageEle.length == 0) {
+        pageEle = $('#page');
+    }
+    $('#pageInfo').text(lang.tip.total.format(option.total) + ' ' + lang.tip.nowRecord.format(option.rowBegin, option.rowEnd));
+    pageEle.bootstrapPaginator({
+        bootstrapMajorVersion: 3, //对应的bootstrap版本
+        currentPage: currentPage, //当前页数
+        numberOfPages: option.numberOfPage, //每次显示页数
+        totalPages: totalPages, //总页数
+        shouldShowPage: true,//是否显示该按钮
+        useBootstrapTooltip: true,
+        //点击事件
+        onPageClicked: function (event, originalEvent, type, page) {
+            console.log(event);
+        }
+    });
+}

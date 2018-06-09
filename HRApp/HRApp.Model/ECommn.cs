@@ -128,4 +128,13 @@ namespace HRApp.Model
         [DescriptionSort("邮件日志文本")]
         TextPath=2
     }
+    public enum EMenuType
+    { 
+        [DescriptionSort("页面元素")]
+        PageElement=1,
+        [DescriptionSort("菜单父节点")]
+        MenuRoot=2,
+        [DescriptionSort("菜单")]
+        MenuNode=3
+    }
 }

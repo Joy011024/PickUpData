@@ -1,17 +1,98 @@
-﻿@{
+﻿@using Common.Data
+@using HRApp.Model
+@using AppLanguage
+@using HRApp.Web
+@model Common.Data.JsonData
+@{
     Layout = null;
+    JsonData json = Model;
+    int total = json.Total;
+    List<UinMenuObjcet> data = json.Data as List<UinMenuObjcet>;
 }
-
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>MenuList</title>
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-paginator/bootstrap-paginator.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script type="text/javascript">
+        var size = parseInt('@total');
+        $(function () {
+            DrwaPageEle({//分页
+                rowBegin: 1,
+                rowEnd: size,
+                total: 30,
+                numberOfPage: size
+            }, $('#gridPage'));
+        });
+    </script>
 </head>
 <body>
     <div>
-        
+        <div id="tool">
+            <span>
+                <span>
+                    <label>@Lang.LblName</label>
+                    <input type="text" id="txtName" />
+                </span>
+                <span>
+                    <label>@Lang.LblKeyWord</label>
+                    <input type="text" id="txtKeyWord" />
+                </span>
+                <span>
+                    <button id="btnQuery" class="button buttonSmall">@Lang.BtnQuery</button>
+                </span>
+                <span class="btns">
+                    <button id="btnAdd" class="button buttonSmall">@Lang.BtnAdd</button>
+                </span>
+            </span>
+        </div>
+        <div id="gridArea" class="table table-condensed table-hover table-striped" style="margin-top:10px;">
+            <div id="gridPage">
+
+            </div>
+            <div id="grid">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td width="100px">@Lang.LblSortName</td>
+                            <td width="100px">@Lang.LblName</td>
+                            <td width="100px">@Lang.LblUrl</td>
+                            <td>@Lang.LblOperate</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < data.Count;i++ )
+                        {
+                            <tr>
+                                <td id="@data[i].Id">@(i+1)</td>
+                                <td>@data[i].Name</td>
+                                <td>@data[i].Url</td>
+                                <td>
+                                    <span itemid="@data[i].Id">
+                                        @Lang.LblEdit
+                                    </span>
+                                    @if (data[i].ParentId != -1)
+                                    { 
+                                        <span pid="@data[i].ParentId">@Lang.LblChangeParentMenu</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

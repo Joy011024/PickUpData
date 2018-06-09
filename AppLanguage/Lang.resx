@@ -321,4 +321,13 @@
   <data name="LblClearData" xml:space="preserve">
     <value>清除数据</value>
   </data>
+  <data name="LblEdit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="LblChangeParentMenu" xml:space="preserve">
+    <value>更换父目录</value>
+  </data>
+  <data name="LblOperate" xml:space="preserve">
+    <value>操作</value>
+  </data>
 </root>

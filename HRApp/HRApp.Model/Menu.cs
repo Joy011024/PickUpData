@@ -17,14 +17,16 @@ namespace HRApp.Model
         public string Remark { get; set; }
         public string Url { get; set; }
         public DateTime CreateTime { get; set; }
+        public int ParentId { get; set; }
+        public short MenuType { get; set; }
         public string InserSql()
         {
-            return @"INSERT INTO [dbo].[Menu] ([Name],[Code],[Url],[Remark],[CreateTime])
-     VALUES  ({Name},{Code},{Url},{Remark},{CreateTime}) ";
+            return @"INSERT INTO [dbo].[Menu] ([Name],[Code],[Url],[Remark],[CreateTime],[ParentId],[MenuType])
+     VALUES  ({Name},{Code},{Url},{Remark},{CreateTime},{ParentId},{MenuType}) ";
         }
         public string QueryMenus()
         {
-            return " select [Id], [Name],[Code],[Url],[Remark],[CreateTime]  from [dbo].[Menu] ";
+            return " select [Id], [Name],[Code],[Url],[Remark],[CreateTime],[ParentId],[MenuType]  from [dbo].[Menu] ";
         }
         
     }
@@ -32,7 +34,6 @@ namespace HRApp.Model
     {
         #region ui
         public bool IsChild { get; set; }
-        public int ParetnId { get; set; }
         public string ParentCode { get; set; }
         public List<Menu> Childerns { get; set; }
         #endregion

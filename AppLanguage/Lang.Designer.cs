@@ -223,6 +223,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 更换父目录 的本地化字符串。
+        /// </summary>
+        public static string LblChangeParentMenu {
+            get {
+                return ResourceManager.GetString("LblChangeParentMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 清除数据 的本地化字符串。
         /// </summary>
         public static string LblClearData {
@@ -295,6 +304,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 编辑 的本地化字符串。
+        /// </summary>
+        public static string LblEdit {
+            get {
+                return ResourceManager.GetString("LblEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 结束时间 的本地化字符串。
         /// </summary>
         public static string LblEndTime {
@@ -363,6 +381,15 @@ namespace AppLanguage {
         public static string LblNick {
             get {
                 return ResourceManager.GetString("LblNick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 操作 的本地化字符串。
+        /// </summary>
+        public static string LblOperate {
+            get {
+                return ResourceManager.GetString("LblOperate", resourceCulture);
             }
         }
         
