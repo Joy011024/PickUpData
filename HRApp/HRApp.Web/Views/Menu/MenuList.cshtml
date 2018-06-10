@@ -34,6 +34,11 @@
                 numberOfPage: size
             }, $('#gridPage'));
         });
+        function btnOpenSltDialog(id) {
+            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?Id' + id, '@Lang.LblChangeParentMenu', {}, function (index, lay) {
+
+            });
+        }
     </script>
 </head>
 <body>
@@ -52,6 +57,7 @@
                     <button id="btnQuery" class="button buttonSmall">@Lang.BtnQuery</button>
                 </span>
                 <span class="btns">
+                    <button id="BtnAddParent" class="button buttonSmall">@Lang.BtnAddParent</button>
                     <button id="btnAdd" class="button buttonSmall">@Lang.BtnAdd</button>
                 </span>
             </span>
@@ -82,8 +88,8 @@
                                         @Lang.LblEdit
                                     </span>
                                     @if (data[i].ParentId != -1)
-                                    { 
-                                        <span pid="@data[i].ParentId">@Lang.LblChangeParentMenu</span>
+                                    {
+                                        <span pid="@data[i].ParentId" onclick="btnOpenSltDialog('@data[i].Id')">@Lang.LblChangeParentMenu</span>
                                     }
                                 </td>
                             </tr>

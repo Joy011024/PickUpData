@@ -70,6 +70,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 新增目录 的本地化字符串。
+        /// </summary>
+        public static string BtnAddParent {
+            get {
+                return ResourceManager.GetString("BtnAddParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 取消 的本地化字符串。
         /// </summary>
         public static string BtnCancel {

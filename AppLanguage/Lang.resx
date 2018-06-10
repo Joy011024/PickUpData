@@ -330,4 +330,7 @@
   <data name="LblOperate" xml:space="preserve">
     <value>操作</value>
   </data>
+  <data name="BtnAddParent" xml:space="preserve">
+    <value>新增目录</value>
+  </data>
 </root>

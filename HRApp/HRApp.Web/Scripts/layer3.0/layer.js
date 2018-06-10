@@ -911,7 +911,7 @@
 var layerExt = {
     LoadDialog: function (url, title, op, yesFun, closeEvent) {
         var option = {
-            btn: [
+            btns: [
                 'add','cancel'
             ],
             area: ['300px', '530px']
