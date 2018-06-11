@@ -35,7 +35,7 @@
             }, $('#gridPage'));
         });
         function btnOpenSltDialog(id) {
-            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?Id' + id, '@Lang.LblChangeParentMenu', {}, function (index, lay) {
+            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?sltEnum=EMenuType&Id' + id, '@Lang.LblChangeParentMenu', {}, function (index, lay) {
 
             });
         }
