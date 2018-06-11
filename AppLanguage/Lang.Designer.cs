@@ -322,6 +322,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 启用 的本地化字符串。
+        /// </summary>
+        public static string LblEnable {
+            get {
+                return ResourceManager.GetString("LblEnable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 结束时间 的本地化字符串。
         /// </summary>
         public static string LblEndTime {
@@ -529,6 +538,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 状态 的本地化字符串。
+        /// </summary>
+        public static string LblStatue {
+            get {
+                return ResourceManager.GetString("LblStatue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 库存管理 的本地化字符串。
         /// </summary>
         public static string LblStockManage {
@@ -543,6 +561,15 @@ namespace AppLanguage {
         public static string LblStockNumber {
             get {
                 return ResourceManager.GetString("LblStockNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 禁用 的本地化字符串。
+        /// </summary>
+        public static string LblStop {
+            get {
+                return ResourceManager.GetString("LblStop", resourceCulture);
             }
         }
         

@@ -33,6 +33,10 @@
                 total: 30,
                 numberOfPage: size
             }, $('#gridPage'));
+            $('#btnQuery').click(function () {
+                //获取选择的数据
+
+            });
         });
         function btnOpenSltDialog(id) {
             layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?Id' + id, '@Lang.LblChangeParentMenu', {}, function (index, lay) {
@@ -40,6 +44,16 @@
             });
         }
     </script>
+    <style type="text/css">
+        .warm {
+            border: solid 2px red;
+            padding: 5px;
+        }
+        .normal {
+               border: solid 2px green;
+               padding: 5px;
+        }
+    </style>
 </head>
 <body>
     <div>
@@ -73,7 +87,8 @@
                             <td width="100px">@Lang.LblSortName</td>
                             <td width="100px">@Lang.LblName</td>
                             <td width="100px">@Lang.LblUrl</td>
-                            <td>@Lang.LblOperate</td>
+                            <td width="50px">@Lang.LblStatue</td>
+                            <td width="200px;">@Lang.LblOperate</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,13 +99,26 @@
                                 <td>@data[i].Name</td>
                                 <td>@data[i].Url</td>
                                 <td>
+                                   @if (data[i].IsEnable)
+                                   {
+                                        <span class="normal"> @Lang.LblEnable</span>
+                                   }
+
+                                   else
+                                   {
+                                        <span  class="warm" )> @Lang.LblStop</span>
+                                   }
+                                </td>
+                                <td>
                                     <span itemid="@data[i].Id">
                                         @Lang.LblEdit
                                     </span>
+                                    <span pid="@data[i].ParentId" class="@(data[i].IsEnable ? "warm" : string.Empty)" onclick="btnOpenSltDialog('@data[i].Id')">@(!data[i].IsEnable ? Lang.LblEnable : Lang.LblStop)</span>
                                     @if (data[i].ParentId != -1)
                                     {
                                         <span pid="@data[i].ParentId" onclick="btnOpenSltDialog('@data[i].Id')">@Lang.LblChangeParentMenu</span>
                                     }
+                                    
                                 </td>
                             </tr>
                         }
