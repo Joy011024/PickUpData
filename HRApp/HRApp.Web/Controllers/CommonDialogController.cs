@@ -24,10 +24,10 @@ namespace HRApp.Web.Controllers
         { 
             return View();
         }
-        public ActionResult CommonSelectDialog(string sltUrl) 
+        public ActionResult CommonSelectDialog(string sltEnum,string id) 
         {//公用的选择框的对话框窗体
             BaseRequestParam param = new BaseRequestParam();
-
+            //EMenuType
             return View();
         }
     }
