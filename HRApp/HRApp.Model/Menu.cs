@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Domain.GlobalModel;
 namespace HRApp.Model
 {
+    [TableField(DbGeneratedFields = new string[] { "Id" })]
     public class Menu : BaseIntPrimary
     {
         [DescriptionSort("菜单名称")]
@@ -19,6 +20,8 @@ namespace HRApp.Model
         public DateTime CreateTime { get; set; }
         public int ParentId { get; set; }
         public short MenuType { get; set; }
+        [DescriptionSort("是否启用")]
+        public bool IsEnable { get; set; }
         public string InserSql()
         {
             return @"INSERT INTO [dbo].[Menu] ([Name],[Code],[Url],[Remark],[CreateTime],[ParentId],[MenuType])

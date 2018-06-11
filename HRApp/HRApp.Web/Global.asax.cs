@@ -93,6 +93,7 @@ namespace HRApp.Web
             propertyVal.Add(typeof(IEnumDataService).Name + ".SqlConnString", InitAppSetting.AccountDBConnString);//账号库
             propertyVal.Add(typeof(IAppAccountRepository).Name + ".SqlConnString", InitAppSetting.AccountDBConnString);//账号库
             propertyVal.Add(typeof(IAppAccountService).Name + ".SqlConnString", InitAppSetting.AccountDBConnString);//账号库
+            propertyVal.Add(typeof(IMenuRepository).Name + ".SqlConnString", InitAppSetting.AccountDBConnString);//账号库
             propertyVal.Add(typeof(IDataFromOtherRepository).Name + ".SqlConnString", InitAppSetting.QueryUinDB);//这个是用于系统中查询其他库的数据切换操作
             #region dal层属性
             #region Account DB
@@ -100,6 +101,8 @@ namespace HRApp.Web
             ioc.IocFillProperty(enumDal, propertyVal);
             IAppAccountRepository accountDal = ioc.IocConvert<IAppAccountRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppAccountRepository).Name);
             ioc.IocFillProperty(accountDal, propertyVal);
+            IMenuRepository menuDal = ioc.IocConvert<IMenuRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(MenuRepository).Name);
+            ioc.IocFillProperty(menuDal, propertyVal);
             #endregion
             #region log --all
             ILogDataRepository logDal = ioc.IocConvert<ILogDataRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(LogDataRepository).Name);
@@ -109,8 +112,7 @@ namespace HRApp.Web
             ioc.IocFillProperty<IAppRepository, IAppRepository>(appDal, propertyVal);
             IAppSettingRepository appSettingDal = ioc.IocConvert<IAppSettingRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(AppSettingRepository).Name);
             ioc.IocFillProperty(appSettingDal, propertyVal);
-            IMenuRepository menuDal = ioc.IocConvert<IMenuRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(MenuRepository).Name);
-            ioc.IocFillProperty(menuDal, propertyVal);
+            
             IOrganizationRepository organzeDal = ioc.IocConvert<IOrganizationRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(OrganizationRepository).Name);
             ioc.IocFillProperty(organzeDal, propertyVal);
             IContactDataRepository contacterDal = ioc.IocConvert<IContactDataRepository>(dllDir, mvc[MvcLevel.DAL].AssemblyName, mvc[MvcLevel.DAL].Namespace, typeof(ContactDataRepository).Name);

@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\AppLayout.css" />
+    <Content Include="Content\bootstrap-treeview.css" />
     <Content Include="Content\Doc\概要设计.txt" />
     <Content Include="Content\HtmlEle.css" />
     <Content Include="Global.asax" />
@@ -153,6 +154,7 @@
     <Content Include="Scripts\bootstrap-select\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap-Switch\bootstrapSwitch.css" />
     <Content Include="Scripts\bootstrap-Switch\bootstrapSwitch.js" />
+    <Content Include="Scripts\bootstrap-treeview.js" />
     <Content Include="Scripts\Common\Common.js" />
     <Content Include="Scripts\Common\DataGrid.js" />
     <Content Include="Scripts\Common\HtmlEleExt.js" />

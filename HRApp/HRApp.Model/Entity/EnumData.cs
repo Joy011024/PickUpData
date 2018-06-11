@@ -25,5 +25,18 @@ namespace HRApp.Model
         {
             return "update Enum set Remark={Remark} where Id={Id}";
         }
+        public string QueryEnumMembersSqlFormat(string[] columns,bool isContainerDelete)
+        {
+            string sql= @"SELECT  {Columns}
+              FROM .[dbo].[Enum] where ParentId =
+              (
+	            SELECT id from dbo.enum where Code='{Code}'
+              )".Replace("{Columns}", string.Join(",", columns));
+            if (!isContainerDelete)
+            {
+                sql += " where IsDelete=0 ";
+            }
+            return sql;
+        }
     }
 }

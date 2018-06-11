@@ -60,18 +60,6 @@ go
 	ItemDesc nvarchar(1024)
 );
 go
-Create table Menu
-(
-	Id int primary key identity(1,1),
-	Name nvarchar(32) not null,
-	Code varchar(64) not null,
-	Url varchar(256) ,
-	Remark nvarchar(1024),
-	CreateTime datetime not null,
-	ParentId int not null,--If it is root ,the value is -1
-	MenuType SmallInt not null--Ele =1, menu=2,
-)
-go
 Create table RelyTable
 (--外键关联的表，此表数据只能管理员进行操作
 	Id int primary key identity(1,1),

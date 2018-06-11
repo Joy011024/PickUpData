@@ -30,5 +30,9 @@ namespace HRApp.Web.Controllers
             //EMenuType
             return View();
         }
+        public ActionResult CommonTreeDialog() 
+        {
+            return View();
+        }
     }
 }
