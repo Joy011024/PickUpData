@@ -15,5 +15,6 @@ namespace IHRApp.Infrastructure
         /// <param name="data"></param>
         /// <returns></returns>
         int AddReturnId(EnumData data);
+        List<EnumData> QueryEnumMember(string enumName, bool isContainerDelete);
     }
 }

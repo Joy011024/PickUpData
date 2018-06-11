@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
 namespace Domain.CommonData
 {
     public class DescriptionSortAttribute : DescriptionAttribute

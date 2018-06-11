@@ -704,5 +704,71 @@ namespace Infrastructure.MsSqlService.SqlHelper
             conn.Close();
             return obj;
         }
+        /// <summary>
+        /// 实体中数据库列-实体属性匹配字典
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static Dictionary<string,string> GenerateColumnMapPropertyDict<T>() where T:class 
+        {
+            Type ty = typeof(T);
+            string table = ty.Name;
+            List<string> ignoreField = new List<string>();
+            object[] obj = ty.GetCustomAttributes(typeof(TableFieldAttribute), false);
+            if (obj != null && obj.Length > 0)
+            {
+                TableFieldAttribute map = obj[0] as TableFieldAttribute;
+                table = string.IsNullOrEmpty(map.TableName) ? table : map.TableName;
+                if (map.IgnoreProperty != null)
+                {
+                    ignoreField.AddRange(map.IgnoreProperty);
+                }
+            }
+            Dictionary<string, string> columns = new Dictionary<string, string>();
+            foreach (PropertyInfo item in ty.GetProperties())
+            {
+                string pn = item.Name;
+                //是否是被忽略的属性
+                object[] ignore = item.GetCustomAttributes(typeof(PropertyIgnoreFieldAttribute), false);
+                if (ignore != null && ignore.Length > 0)
+                {
+                    ignoreField.Add(pn);
+                    continue;
+                }
+                object[] propertyMapColumn = item.GetCustomAttributes(typeof(ColumnAttribute), false);//是否定义属性转换匹配
+                if (propertyMapColumn != null && propertyMapColumn.Length > 1)
+                {
+                    ColumnAttribute col = propertyMapColumn[0] as ColumnAttribute;
+                    pn = string.IsNullOrEmpty(col.Name) ? pn : col.Name;
+                }
+                columns.Add(pn,item.Name);
+            }
+            return columns;
+        }
+        /// <summary>
+        /// 根据SQL语句从实体中生成参数
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sqlCmd"></param>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public SqlParameter[] GenerateSqlparamBySql<T>(string sqlCmd, T entity) where T : class
+        {
+            Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
+            List<SqlParameter> pms = new List<SqlParameter>();
+            foreach (KeyValuePair<string, object> item in properties)
+            {
+                string paramName = "@" + item.Key;
+                string field = "{" + item.Key + "}";
+                if (sqlCmd.Contains(field))
+                {
+                    sqlCmd = sqlCmd.Replace(field, paramName);
+                    //获取参数的数据类型
+                    SqlParameter p = new SqlParameter(paramName, item.Value == null ? DBNull.Value : item.Value);
+                    pms.Add(p);
+                }
+            }
+            return pms.ToArray();
+        }
     }
 }

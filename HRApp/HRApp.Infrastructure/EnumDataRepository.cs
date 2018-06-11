@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -72,6 +74,16 @@ namespace HRApp.Infrastructure
                 return -1;
             }
             return int.Parse(obj.ToString());//此处  (int)obj  进行强制类型转换会出现异常，因为数据库中查询出的数据没有定义数据类型
+        }
+
+
+        public List<EnumData> QueryEnumMember(string enumName, bool isContainerDelete)
+        {
+            Dictionary<string, string> columns = SqlCmdHelper.GenerateColumnMapPropertyDict<EnumData>();
+            string[] col = columns.Keys.ToArray();
+            EnumData ed = new EnumData() { Code = enumName };
+            string sql = ed.QueryEnumMembersSqlFormat(col, isContainerDelete);
+            return CommonRepository.QueryModels<EnumData>(sql, ed, SqlConnString);
         }
     }
 }
