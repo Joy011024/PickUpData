@@ -13,6 +13,8 @@ namespace HRApp.Model
         public int ParentId { get; set; }
         public int Value { get; set; }
         public string Remark { get; set; }
+        [DescriptionSort("是否启用")]
+        public bool IsEnable { get; set; }
         public void Init() 
         {
             ParentId = -1;
