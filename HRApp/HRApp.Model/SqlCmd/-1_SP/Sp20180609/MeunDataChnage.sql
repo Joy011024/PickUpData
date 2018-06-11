@@ -12,7 +12,8 @@ Create table Menu
 	ParentId int  not null,--If it is root ,the value is -1
 	MenuType SmallInt not null --Ele =1, menu=2,
 );
-SET IDENTITY_INSERT [dbo].[CategoryItems] OFF
+go
+SET IDENTITY_INSERT [dbo].[Menu] on
 INSERT [dbo].[Menu] ([Id], [Name], [Code], [Url], [Remark], [CreateTime], [ParentId], [MenuType]) VALUES (1, N'新增菜单', N'XinZengCaiDan', N'/Menu/NewNemu', N'提供直接创建系统菜单的快捷通道', CAST(0x0000A8930171741F AS DateTime), -1, 3)
 INSERT [dbo].[Menu] ([Id], [Name], [Code], [Url], [Remark], [CreateTime], [ParentId], [MenuType]) VALUES (2, N'系统配置', N'XiTongPeiZhi', N'/AppSettingManage/AppSettingList', N'系统配置', CAST(0x0000A89301721895 AS DateTime), -1, 3)
 INSERT [dbo].[Menu] ([Id], [Name], [Code], [Url], [Remark], [CreateTime], [ParentId], [MenuType]) VALUES (3, N'程序管理', N'ChengXuGuanLi', N'/AppSettingManage/AppDataDialog', N'程序名称维护通道', CAST(0x0000A89301726118 AS DateTime), -1, 3)
