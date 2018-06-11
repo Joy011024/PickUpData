@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IHRApp.Infrastructure;
 using HRApp.Model;
+using Infrastructure.MsSqlService.SqlHelper;
 namespace HRApp.Infrastructure
 {
     public class MenuRepository:IMenuRepository
@@ -17,8 +18,11 @@ namespace HRApp.Infrastructure
 
         public bool Add(Model.Menu entity)
         {
-            Menu m = new Menu();
-            string insert = m.InserSql();
+            Menu m = new Menu() 
+            {
+                IsEnable=true
+            };
+            string insert = SqlCmdHelper.GenerateInsertSql<Menu>();// m.InserSql();
             return CommonRepository.ExtInsert<Menu>(insert, SqlConnString, entity);
         }
 
@@ -50,7 +54,7 @@ namespace HRApp.Infrastructure
         public List<Menu> QueryMenus()
         {
             Menu menu = new Menu();
-            string cmd = menu.QueryMenus();
+            string cmd = SqlCmdHelper.GenerateSampleSelectSql<Menu>();// menu.QueryMenus();
             return CommonRepository.QueryModelList<Menu>(cmd, null, SqlConnString, 0, int.MaxValue);
         }
     }
