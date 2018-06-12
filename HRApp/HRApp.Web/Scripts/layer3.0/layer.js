@@ -921,7 +921,7 @@ var layerExt = {
             content: url,
             type: 2,
             area: options.area,
-            id: 'dialog',
+            id: ($.trim(options.id) == '' ? 'dialog' : options.id),
             title: title,
             btn: options.btns,
             yes: function (index, lay) {

@@ -664,6 +664,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 进行菜单数据维护时，菜单分类验证不通过 的本地化字符串。
+        /// </summary>
+        public static string Tip_MenuTypeValidInMenu {
+            get {
+                return ResourceManager.GetString("Tip_MenuTypeValidInMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 菜单路径不能为空。 的本地化字符串。
         /// </summary>
         public static string Tip_MenuUrlIsRequired {
@@ -723,6 +732,15 @@ namespace AppLanguage {
         public static string Tip_Success {
             get {
                 return ResourceManager.GetString("Tip_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 进行菜单数据维护时，网址是不能为空 的本地化字符串。
+        /// </summary>
+        public static string Tip_UrlIsRequestInMenu {
+            get {
+                return ResourceManager.GetString("Tip_UrlIsRequestInMenu", resourceCulture);
             }
         }
         

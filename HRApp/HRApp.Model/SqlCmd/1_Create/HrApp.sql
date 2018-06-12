@@ -60,6 +60,25 @@ go
 	ItemDesc nvarchar(1024)
 );
 go
+create table RowValueType
+(
+	Id int identity(1,1) primary key,
+	ColumnName varchar(32) not null,
+	ColumnType varchar(32) not null,
+	TableName varchar(32) not null,
+	Remark nvarchar(1024) ,
+	CreateTime datetime not null,
+	CreateTimeDayInt int not null
+);
+create TABLE [dbo].[OptionEvent]
+(--操作历史 ：每一次操作都把之前这对应表中的这一行数据进行清除【设置IsDelete=true】
+	[Id] [uniqueidentifier] NOT NULL primary key,
+	[EventId] [smallint] NOT NULL,
+	[CreateTime] [datetime] NOT NULL,
+	[RelyTableRowValue] [varchar](36) NOT NULL,
+	RowValueType int not null,
+	[IsDelete] [bit] NOT NULL,
+) ;
 Create table RelyTable
 (--外键关联的表，此表数据只能管理员进行操作
 	Id int primary key identity(1,1),
@@ -71,17 +90,6 @@ Create table RelyTable
     IsDelete bit not null
 )
 go
-Create table OptionEvent
-(--操作历史 ：每一次操作都把之前这对应表中的这一行数据进行清除【设置IsDelete=true】
-	Id uniqueidentifier primary key,
-	 RelyTableId int not null,
-	 EventId smallint not null,
-	 CreateTime datetime not null,
-	 RelyTableRowValue varchar(32) not null,
-	 IsDelete bit not null
-);
-alter table OptionEvent add constraint fk_OptionEventId foreign key (RelyTableId) 
-references RelyTable(Id)
 create table ContactData
 (--联系人信息列表
 	Id uniqueidentifier primary key,
@@ -332,4 +340,81 @@ create table EventLog
 	IsError bit not null,
 	CreateTime datetime not null,
 	DayInt int not null
+);
+go
+if(object_id('SP_MakeOperateEventByColumn','P') is not null)
+	drop procedure SP_MakeOperateEventByColumn
+go
+create  procedure SP_MakeOperateEventByColumn
+(
+	@rowId varchar(36) ,
+	@OpId smallint ,
+	@tableName nvarchar(32) ,
+	@ColumnName nvarchar(32)
 )
+as
+begin
+INSERT INTO  [dbo].[OperateEvent]
+           ([Id]
+           ,[EventId]
+           ,[CreateTime]
+           ,[RelyTableRowValue]
+           ,[RowValueType]
+           ,[IsDelete])
+     VALUES
+           (NEWID()
+           ,@OpId
+           ,GETDATE()
+           ,@rowId
+           , (select top 1 id from dbo.[RowValueType] where ColumnName=@ColumnName and TableName=@TableName)
+           ,0)
+end
+go
+if(object_id('SP_MakeOperateEventByColumnId','P') is not null)
+	drop procedure SP_MakeOperateEventByColumnId
+go
+create  procedure SP_MakeOperateEventByColumnId
+(
+	@rowId varchar(36) ,
+	@OpId smallint ,
+	@ColumnId nvarchar(32)
+)
+as
+begin
+INSERT INTO  [dbo].[OperateEvent]
+           ([Id]
+           ,[EventId]
+           ,[CreateTime]
+           ,[RelyTableRowValue]
+           ,[RowValueType]
+           ,[IsDelete])
+     VALUES
+           (NEWID()
+           ,@OpId
+           ,GETDATE()
+           ,@rowId
+           , (select top 1 id from dbo.[RowValueType] where ID=@ColumnId)
+           ,0)
+end
+go
+if(OBJECT_ID('SP_InitTableColumnPrimaryType','P') is not null)
+	drop procedure SP_InitTableColumnPrimaryType
+go
+create procedure SP_InitTableColumnPrimaryType
+as
+declare @day int
+declare @time datetime
+set @time=GETDATE()
+set @day=CONVERT(int, CONVERT(varchar(10),@time,112))
+insert into dbo.RowValueType
+([ColumnName] ,[ColumnType] ,[TableName]  ,[Remark],CreateTime,CreateTimeDayInt)
+select  c.name,
+	case c.system_type_id 
+		when 36 then 'uniqueidentifier' 
+		when 56 then 'int'
+			else 'Unkonw'
+		end, t.name,null,@time,@day
+ from sys.columns c left join sys.objects o
+on c.object_id=o.object_id  
+left join sys.tables t on o.object_id=t.object_id 
+where o.type='U' and c.name='id' and t.name not in('RowValueType');

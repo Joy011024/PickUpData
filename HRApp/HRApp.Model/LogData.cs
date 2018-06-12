@@ -24,4 +24,12 @@ namespace HRApp.Model
             return "into db the  table 【{0}】";
         }
     }
+    [DescriptionSort("操作历史/非日志详情")]
+    public class OperateEvent : GuidTimeFieldwithDelete
+    {
+        public short EventId { get; set; }
+        public string RelyTableRowValue { get; set; }
+        [DescriptionSort("外键关联表RowValueType中主键id")]
+        public int RowValueType { get; set; }
+    }
 }

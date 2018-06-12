@@ -28,13 +28,13 @@ namespace HRApp.Model
         public string QueryEnumMembersSqlFormat(string[] columns,bool isContainerDelete)
         {
             string sql= @"SELECT  {Columns}
-              FROM .[dbo].[Enum] where ParentId =
+              FROM [dbo].[Enum] where ParentId =
               (
-	            SELECT id from dbo.enum where Code='{Code}'
+	            SELECT id from dbo.enum where Code={Code}
               )".Replace("{Columns}", string.Join(",", columns));
             if (!isContainerDelete)
             {
-                sql += " where IsDelete=0 ";
+                sql += " and IsDelete=0 ";
             }
             return sql;
         }

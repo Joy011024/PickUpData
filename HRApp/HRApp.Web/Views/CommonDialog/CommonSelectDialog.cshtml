@@ -1,20 +1,31 @@
 ﻿@using HRApp.Web
 @using HRApp.Model
-@{
-    Layout = null;
-}
+@model  List<HRApp.Model.EnumData>
+<title>CommonSelectDialog</title>
+<script src="~/Scripts/Common/Lang.js?@InitAppSetting.Version"></script>
+<script src="~/Scripts/jquery-1.9.1.js?@InitAppSetting.Version"></script>
+<script src="~/Scripts/Common/Common.js?@InitAppSetting.Version"></script>
+<link href="~/Scripts/bootstrap-select/bootstrap.min.css?@InitAppSetting.Version" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select/bootstrap.min.js?@InitAppSetting.Version"></script>
+<link href="~/Scripts/bootstrap-select/bootstrap-select.css?@InitAppSetting.Version" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select/bootstrap-select.js?@InitAppSetting.Version"></script>
+<div style="margin-left:10px;">
+<div>
+    <span>
+        <input type="hidden" id="txtId" value="@ViewData["Id"]" />
+    </span>
+</div>
+<div>
+    <span>
+        <label>@AppLanguage.Lang.LblChangeParentMenu</label>
+        <select id="sltParent" class="selectpicker" data-style="btn-info" data-live-search="true">
+            <option value="-1">@AppLanguage.Lang.Tip_PleaseSelect</option>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <option value="@Model[i].Id">@Model[i].Remark</option>
+            }
+        </select>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>CommonSelectDialog</title>
-    <script src="~/Scripts/Common/Lang.js?@InitAppSetting.Version"></script>
-    <script src="~/Scripts/jquery-1.9.1.js?@InitAppSetting.Version"></script>
-    <script src="~/Scripts/Common/Common.js?@InitAppSetting.Version"></script>
-</head>
-<body>
-    <div>
-        
-    </div>
-</body>
-</html>
+    </span>
+</div>
+</div>

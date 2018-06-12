@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.EnterpriseServices;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -41,5 +41,10 @@ namespace HRApp.Web
     public class QueryContactParam : QueryRequestParam
     {
         public int ReportEnum { get; set; }
+    }
+    public class EnumRequestParam : SampleRequestParam
+    {
+        [Description("枚举成员")]
+        public string EnumMember { get; set; }
     }
 }

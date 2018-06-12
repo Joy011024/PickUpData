@@ -25,10 +25,19 @@ namespace HRApp.ApplicationService
         }
         public Common.Data.JsonData Add(Menu model)
         {
-            Common.Data.JsonData json = new Common.Data.JsonData();
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
             if (string.IsNullOrEmpty(model.Code))
             {//中文转拼音
                 model.Code = model.Name.TextConvertChar(true);// 转换形式 助手  =ZhuShou
+            }
+            if (model.MenuType ==(short) EMenuType.MenuNode.GetHashCode()) 
+            {//存储的是菜单内容，url是必须输入项
+                string msg = string.IsNullOrEmpty(model.Url) ? AppLanguage.Lang.Tip_UrlIsRequestInMenu : string.Empty;
+                if (string.IsNullOrEmpty(msg))
+                {
+                    json.Message = msg;
+                    return json;
+                }
             }
             model.CreateTime = DateTime.Now;
             try
@@ -91,6 +100,18 @@ namespace HRApp.ApplicationService
         public List<Menu> QueryMenusByAuthor(string userCode)
         {
             return menuRepository.QueryMenus();
+        }
+        public bool ChangeMenuType(int id, int type)
+        {
+           bool succ=  menuRepository.ChangeMenuType(id, type);
+           logDal.WriteLog(ELogType.DataInDBLog, string.Format("Update menu type,id={0},target of menu type={1}",id,type), typeof(Menu).Name, succ);
+           return succ;
+        }
+        public bool ChangeMenuStatue(int id, bool operate)
+        {
+            bool succ = menuRepository.ChangeMenuStatue(id, operate);
+            logDal.WriteLog(ELogType.DataInDBLog, string.Format("Update menu isEnable,id={0},target of isEnable={1}", id, operate), typeof(Menu).Name, succ);
+            return succ;
         }
     }
 }

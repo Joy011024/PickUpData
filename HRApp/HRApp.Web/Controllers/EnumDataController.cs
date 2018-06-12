@@ -34,6 +34,11 @@ namespace HRApp.Web.Controllers
             //EmployerServeStatue EAppSetting
             return Json(json);
         }
-        
+        public JsonResult ChangeMenuStatue(int id,bool isStop) 
+        {
+            Common.Data.JsonData json = new Common.Data.JsonData();
+
+            return Json(json);
+        }
     }
 }

@@ -37,10 +37,71 @@
                 //获取选择的数据
 
             });
+            $('#BtnAddParent').click(function () {
+                layerExt.LoadDialog('/CommonDialog/SampleNoteDataDialog', '@Lang.BtnAddParent', {
+                    area: ['300px', '400px'],
+                    btns:[lang.cmd.btnAdd,lang.cmd.btnCancel]
+                }, function (index,lay) {
+                    $('body').data('dialog', lay.index);
+                    var childObj =$('#dialog').find('iframe')[0].contentWindow;
+                    var data = childObj.gatherUiData();
+                    data.EnumMember = 'MenuRoot';
+                    bindPostAjax('/Menu/SaveMenu', data,
+                        function (response, statue) {
+                            var lay = layer;
+                            if (response.Success) {
+                                lay.close(lay.index);
+                                lay.close($('body').data('dialog'));
+                                lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                                return;
+                            }
+                            lay.alert(response.Message, { title: '@Lang.LblTip' });
+                        });
+                });
+            });
         });
         function btnOpenSltDialog(id) {
-            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?sltEnum=EMenuType&Id' + id, '@Lang.LblChangeParentMenu', {}, function (index, lay) {
-
+            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?enumName=EMenuType&Id=' + id, '@Lang.LblChangeParentMenu', {
+                area: ['270px', '300px'],
+                id:'dialog',
+                btns:[lang.cmd.btnAdd,lang.cmd.btnCancel]
+            }, function (index, lay) {
+                var childObj = $('#dialog').find('iframe')[0].contentWindow;
+                var slt = childObj.$('#sltParent').val();
+                var tid = childObj.$('#txtId').val();
+                if (slt == -1) {
+                    layer.alert('@Lang.Tip_PleaseSelect'+' '+'@Lang.LblChangeParentMenu');
+                    return;
+                }
+                //存储当前打开的对话框
+                $('body').data('dialog', index);
+                bindPostAjax('/Menu/ChangeMenuType', {
+                    id: tid,
+                    type: slt
+                }, function (response, statue) {
+                    var lay = layer;
+                    if (response.Success) {
+                        lay.close(lay.index);
+                        lay.close($('body').data('dialog'));
+                        lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                        return;
+                    }
+                    lay.alert(response.Message, { title: '@Lang.LblTip' });
+                });
+            });
+        }
+        function btnControlStatue(id,isStop) {
+            bindPostAjax('/Menu/ChangeMenuStatue', {
+                id: id,
+                isStop:isStop
+            }, function (response, statue) {
+                var lay = layer;
+                if (response.Success) {
+                    lay.close(lay.index);
+                    lay.alert('操作成功', { title: '@Lang.LblTip' });
+                    return;
+                }
+                lay.alert(response.Message, { title: '@Lang.LblTip' });
             });
         }
     </script>
@@ -110,15 +171,12 @@
                                    }
                                 </td>
                                 <td>
-                                    <span itemid="@data[i].Id">
-                                        @Lang.LblEdit
-                                    </span>
-                                    <span pid="@data[i].ParentId" class="@(data[i].IsEnable ? "warm" : string.Empty)" onclick="btnOpenSltDialog('@data[i].Id')">@(!data[i].IsEnable ? Lang.LblEnable : Lang.LblStop)</span>
+                                    <span itemid="@data[i].Id">@Lang.LblEdit</span>
+                                    <span pid="@data[i].ParentId" class="@(data[i].IsEnable ? "warm" : string.Empty)" onclick="btnControlStatue('@data[i].Id','@(data[i].IsEnable==true?1:0)')">@(!data[i].IsEnable ? Lang.LblEnable : Lang.LblStop)</span>
                                     @if (data[i].ParentId != -1)
                                     {
                                         <span pid="@data[i].ParentId" onclick="btnOpenSltDialog('@data[i].Id')">@Lang.LblChangeParentMenu</span>
                                     }
-                                    
                                 </td>
                             </tr>
                         }

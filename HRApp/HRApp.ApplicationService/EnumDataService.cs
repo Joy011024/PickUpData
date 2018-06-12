@@ -115,5 +115,11 @@ namespace HRApp.ApplicationService
             logDal.WriteLog(ELogType.DataInDBLog, "success:" + string.Join(" ", insert) + ",error: " + string.Join(" ", error), "InsertLog", error.Count > 0);
             return -1;
         }
+
+
+        public List<EnumData> QueryEnumMember(string enumName)
+        {
+            return enumRepository.QueryEnumMember(enumName, false);
+        }
     }
 }
