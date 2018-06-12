@@ -348,4 +348,7 @@
   <data name="Tip_UrlIsRequestInMenu" xml:space="preserve">
     <value>进行菜单数据维护时，网址是不能为空</value>
   </data>
+  <data name="LblChangeMenuType" xml:space="preserve">
+    <value>菜单类别</value>
+  </data>
 </root>

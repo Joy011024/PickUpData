@@ -1,17 +1,80 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
+﻿@using HRApp.Model;
+@using HRApp.Web;
+@using AppLanguage;
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>CommonTreeDialog</title>
+    <script src="~/Scripts/jquery-1.9.1.js?@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Lang.js?@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/string.js?@InitAppSetting.Version"></script>
+    <link href="~/Content/bootstrap-treeview.css?@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-treeview.js?@InitAppSetting.Version"></script>
+    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script type="text/javascript">
+    var url = '@ViewData["url"]';
+        $(function () {
+            loadTreeDataSource(url);
+        });
+        function loadTreeDataSource(url) {
+            bindPostAjax(url, {}, function (response, statue) {
+                var lay = layer;
+                if (response.Success) {
+                    lay.close(lay.index);
+                    lay.close($('body').data('dialog'));
+                    builderTree(response.Data);
+                    return;
+                }
+                lay.alert(response.Message, { title: '@Lang.LblTip' });
+            });
+        }
+        function builderTree(data) {
+            var ds = [
+                
+            ];
+            for (var i = 0; i < data.length; i++) {
+                var node = {
+                    text: '{Name}',
+                    id: '{Id}',
+                    icon: "glyphicon glyphicon-stop",
+                    selectedIcon: "glyphicon glyphicon-stop",
+                    color: "#000000",
+                    backColor: "#FFFFFF",
+                    href: "#node-1",
+                    selectable: true,
+                    state: {
+                        checked: true,
+                        disabled: true,
+                        expanded: true,
+                        selected: true
+                    },
+                    tags: ['available']
+                };
+                node.id = node.id.replace(/{Id}/g, data[i].Id);
+                node.text = node.text.replace(/{Name}/g, data[i].Name);
+                ds.push(node);
+            }
+            FillDataSource(ds);
+        }
+        function FillDataSource(ds) {
+            $('#tree').treeview({
+                data: ds,
+                backColor: 'green'
+            });
+        }
+    </script>
 </head>
 <body>
     <div>
-        
+        <div>
+            <input type="hidden" id="txtId" value="@ViewData["id"]"/>
+        </div>
+        <div id="tree">
+
+        </div>
     </div>
 </body>
 </html>

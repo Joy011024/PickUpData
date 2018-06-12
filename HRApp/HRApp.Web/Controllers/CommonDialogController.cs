@@ -21,7 +21,11 @@ namespace HRApp.Web.Controllers
         {
             return View();
         }
-        public ActionResult CommonValueDialog(string enumName, int id)
+        public ActionResult CommonValueDialog()
+        {
+            return View();
+        }
+        public ActionResult CommonSelectDialog(string enumName, int id) 
         { //公用的选择框的对话框窗体
             List<EnumData> list = new List<EnumData>(); try
             {
@@ -35,8 +39,11 @@ namespace HRApp.Web.Controllers
             ViewData["Id"] = id;
             return View(list);
         }
-        public ActionResult CommonTreeDialog() 
+        [Description("树结构数据来源dataSourceUrl，操作项id")]
+        public ActionResult CommonTreeDialog(string dataSourceUrl,int id) 
         {
+            ViewData["url"] = dataSourceUrl;
+            ViewData["id"] = id;
             return View();
         }
     }

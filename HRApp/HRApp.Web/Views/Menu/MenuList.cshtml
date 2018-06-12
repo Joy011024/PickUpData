@@ -15,7 +15,6 @@
     <title>MenuList</title>
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
-    <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Lang.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/string.js?v=@InitAppSetting.Version"></script>
@@ -61,7 +60,7 @@
             });
         });
         function btnOpenSltDialog(id) {
-            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?enumName=EMenuType&Id=' + id, '@Lang.LblChangeParentMenu', {
+            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?enumName=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
                 area: ['270px', '300px'],
                 id:'dialog',
                 btns:[lang.cmd.btnAdd,lang.cmd.btnCancel]
@@ -93,7 +92,7 @@
         function btnControlStatue(id,isStop) {
             bindPostAjax('/Menu/ChangeMenuStatue', {
                 id: id,
-                isStop:isStop
+                operate: isStop==0
             }, function (response, statue) {
                 var lay = layer;
                 if (response.Success) {
@@ -102,6 +101,36 @@
                     return;
                 }
                 lay.alert(response.Message, { title: '@Lang.LblTip' });
+            });
+        }
+        function btnChangeParentDir(id) {//CommonTreeDialog
+            layerExt.LoadDialog('/CommonDialog/CommonTreeDialog?dataSourceUrl=/Menu/QueryAllMenus&=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
+                area: ['270px', '300px'],
+                id: 'dialog',
+                btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
+            }, function (index, lay) {
+                var childObj = $('#dialog').find('iframe')[0].contentWindow;
+                var slt = childObj.$('#sltParent').val();
+                var tid = childObj.$('#txtId').val();
+                if (slt == -1) {
+                    layer.alert('@Lang.Tip_PleaseSelect' + ' ' + '@Lang.LblChangeParentMenu');
+                    return;
+                }
+                //存储当前打开的对话框
+                $('body').data('dialog', index);
+                bindPostAjax('/Menu/ChangeMenuType', {
+                    id: tid,
+                    type: slt
+                }, function (response, statue) {
+                    var lay = layer;
+                    if (response.Success) {
+                        lay.close(lay.index);
+                        lay.close($('body').data('dialog'));
+                        lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                        return;
+                    }
+                    lay.alert(response.Message, { title: '@Lang.LblTip' });
+                });
             });
         }
     </script>
@@ -145,10 +174,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <td width="100px">@Lang.LblSortName</td>
-                            <td width="100px">@Lang.LblName</td>
-                            <td width="100px">@Lang.LblUrl</td>
-                            <td width="50px">@Lang.LblStatue</td>
+                            <td width="30px">@Lang.LblSortName</td>
+                            <td width="80px">@Lang.LblName</td>
+                            <td width="160px">@Lang.LblUrl</td>
+                            <td width="30px">@Lang.LblStatue</td>
                             <td width="200px;">@Lang.LblOperate</td>
                         </tr>
                     </thead>
@@ -172,11 +201,9 @@
                                 </td>
                                 <td>
                                     <span itemid="@data[i].Id">@Lang.LblEdit</span>
-                                    <span pid="@data[i].ParentId" class="@(data[i].IsEnable ? "warm" : string.Empty)" onclick="btnControlStatue('@data[i].Id','@(data[i].IsEnable==true?1:0)')">@(!data[i].IsEnable ? Lang.LblEnable : Lang.LblStop)</span>
-                                    @if (data[i].ParentId != -1)
-                                    {
-                                        <span pid="@data[i].ParentId" onclick="btnOpenSltDialog('@data[i].Id')">@Lang.LblChangeParentMenu</span>
-                                    }
+                                    <span pid="@data[i].ParentId" class="@(data[i].IsEnable ? "warm" : "normal")" onclick="btnControlStatue('@data[i].Id','@(data[i].IsEnable==true?1:0)')">@(!data[i].IsEnable ? Lang.LblEnable : Lang.LblStop)</span>
+                                    <span pid="@data[i].ParentId" class="warm" onclick="btnOpenSltDialog('@data[i].Id')">@Lang.LblChangeMenuType</span>
+                                    <span class="warm" onclick="btnChangeParentDir('@data[i].Id')">@Lang.LblChangeParentMenu</span>
                                 </td>
                             </tr>
                         }

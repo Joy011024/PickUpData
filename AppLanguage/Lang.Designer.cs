@@ -232,6 +232,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 菜单类别 的本地化字符串。
+        /// </summary>
+        public static string LblChangeMenuType {
+            get {
+                return ResourceManager.GetString("LblChangeMenuType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 更换父目录 的本地化字符串。
         /// </summary>
         public static string LblChangeParentMenu {
