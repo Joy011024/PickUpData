@@ -37,6 +37,28 @@
                 //获取选择的数据
 
             });
+            $('#BtnAddParent').click(function () {
+                layerExt.LoadDialog('/CommonDialog/SampleNoteDataDialog', '@Lang.BtnAddParent', {
+                    area: ['300px', '400px'],
+                    btns:[lang.cmd.btnAdd,lang.cmd.btnCancel]
+                }, function (index,lay) {
+                    $('body').data('dialog', lay.index);
+                    var childObj =$('#dialog').find('iframe')[0].contentWindow;
+                    var data = childObj.gatherUiData();
+                    data.EnumMember = 'MenuRoot';
+                    bindPostAjax('/Menu/SaveMenu', data,
+                        function (response, statue) {
+                            var lay = layer;
+                            if (response.Success) {
+                                lay.close(lay.index);
+                                lay.close($('body').data('dialog'));
+                                lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                                return;
+                            }
+                            lay.alert(response.Message, { title: '@Lang.LblTip' });
+                        });
+                });
+            });
         });
         function btnOpenSltDialog(id) {
             layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?enumName=EMenuType&Id=' + id, '@Lang.LblChangeParentMenu', {
@@ -61,7 +83,7 @@
                     if (response.Success) {
                         lay.close(lay.index);
                         lay.close($('body').data('dialog'));
-                        lay.alert('操作成功', { title: '@Lang.LblTip' });
+                        lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
                         return;
                     }
                     lay.alert(response.Message, { title: '@Lang.LblTip' });

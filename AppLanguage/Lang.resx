@@ -342,4 +342,10 @@
   <data name="LblStop" xml:space="preserve">
     <value>禁用</value>
   </data>
+  <data name="Tip_MenuTypeValidInMenu" xml:space="preserve">
+    <value>进行菜单数据维护时，菜单分类验证不通过</value>
+  </data>
+  <data name="Tip_UrlIsRequestInMenu" xml:space="preserve">
+    <value>进行菜单数据维护时，网址是不能为空</value>
+  </data>
 </root>
