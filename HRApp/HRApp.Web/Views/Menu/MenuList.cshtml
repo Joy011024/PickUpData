@@ -43,6 +43,20 @@
 
             });
         }
+        function btnControlStatue(id,isStop) {
+            bindPostAjax('/EnumData/ChangeMenuStatue', {
+                id: id,
+                isStop:isStop
+            }, function (response, statue) {
+                var lay = layer;
+                if (response.Success) {
+                    lay.close(lay.index);
+                    lay.alert('操作成功', { title: '@Lang.LblTip' });
+                    return;
+                }
+                lay.alert(response.Message, { title: '@Lang.LblTip' });
+            });
+        }
     </script>
     <style type="text/css">
         .warm {
@@ -110,15 +124,12 @@
                                    }
                                 </td>
                                 <td>
-                                    <span itemid="@data[i].Id">
-                                        @Lang.LblEdit
-                                    </span>
-                                    <span pid="@data[i].ParentId" class="@(data[i].IsEnable ? "warm" : string.Empty)" onclick="btnOpenSltDialog('@data[i].Id')">@(!data[i].IsEnable ? Lang.LblEnable : Lang.LblStop)</span>
+                                    <span itemid="@data[i].Id">@Lang.LblEdit</span>
+                                    <span pid="@data[i].ParentId" class="@(data[i].IsEnable ? "warm" : string.Empty)" onclick="btnControlStatue('@data[i].Id','@(data[i].IsEnable==true?1:0)')">@(!data[i].IsEnable ? Lang.LblEnable : Lang.LblStop)</span>
                                     @if (data[i].ParentId != -1)
                                     {
                                         <span pid="@data[i].ParentId" onclick="btnOpenSltDialog('@data[i].Id')">@Lang.LblChangeParentMenu</span>
                                     }
-                                    
                                 </td>
                             </tr>
                         }
