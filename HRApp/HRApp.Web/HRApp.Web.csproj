@@ -355,6 +355,9 @@
   <ItemGroup>
     <Content Include="Views\CommonDialog\CommonSelectDialog.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CommonDialog\CommonTreeDialog.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
