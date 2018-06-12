@@ -85,12 +85,5 @@ namespace HRApp.Infrastructure
             string sql = ed.QueryEnumMembersSqlFormat(col, isContainerDelete);
             return CommonRepository.QueryModels<EnumData>(sql, ed, SqlConnString);
         }
-
-
-        public bool ChangeMenuStatue(int id, bool operate)
-        {
-
-            throw new NotImplementedException();
-        }
     }
 }

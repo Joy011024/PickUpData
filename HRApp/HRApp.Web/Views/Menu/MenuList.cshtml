@@ -39,12 +39,37 @@
             });
         });
         function btnOpenSltDialog(id) {
-            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?Id' + id, '@Lang.LblChangeParentMenu', {}, function (index, lay) {
-
+            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?enumName=EMenuType&Id=' + id, '@Lang.LblChangeParentMenu', {
+                area: ['270px', '300px'],
+                id:'dialog',
+                btns:[lang.cmd.btnAdd,lang.cmd.btnCancel]
+            }, function (index, lay) {
+                var childObj = $('#dialog').find('iframe')[0].contentWindow;
+                var slt = childObj.$('#sltParent').val();
+                var tid = childObj.$('#txtId').val();
+                if (slt == -1) {
+                    layer.alert('@Lang.Tip_PleaseSelect'+' '+'@Lang.LblChangeParentMenu');
+                    return;
+                }
+                //存储当前打开的对话框
+                $('body').data('dialog', index);
+                bindPostAjax('/Menu/ChangeMenuType', {
+                    id: tid,
+                    type: slt
+                }, function (response, statue) {
+                    var lay = layer;
+                    if (response.Success) {
+                        lay.close(lay.index);
+                        lay.close($('body').data('dialog'));
+                        lay.alert('操作成功', { title: '@Lang.LblTip' });
+                        return;
+                    }
+                    lay.alert(response.Message, { title: '@Lang.LblTip' });
+                });
             });
         }
         function btnControlStatue(id,isStop) {
-            bindPostAjax('/EnumData/ChangeMenuStatue', {
+            bindPostAjax('/Menu/ChangeMenuStatue', {
                 id: id,
                 isStop:isStop
             }, function (response, statue) {

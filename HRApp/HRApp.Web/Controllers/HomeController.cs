@@ -18,6 +18,7 @@ namespace HRApp.Web.Controllers
 
         public ActionResult Index(string Uid)
         {
+            Test();
             TestEmail();
             return View();
         }
@@ -84,6 +85,11 @@ namespace HRApp.Web.Controllers
                 string msg = time + "\t[ Error]" + ex.Message;
                 LoggerWriter.CreateLogFile(msg, logDir, ELogType.EmailLog, day,true);
             }
+        }
+        public void Test()
+        {
+            long l = 0xE0 | 0x0D;
+            string result= Convert.ToString(l, 16);
         }
     }
 }

@@ -31,7 +31,14 @@ namespace HRApp.Model
         {
             return " select [Id], [Name],[Code],[Url],[Remark],[CreateTime],[ParentId],[MenuType]  from [dbo].[Menu] ";
         }
-        
+        public string ChangeStatueSql() 
+        {
+            return "Update Menu set IsEnable={IsEnable} where Id={Id}";
+        }
+        public string ChangeMenuTypeSql()
+        {
+            return "Update Menu set MenuType={MenuType} where Id={Id}";
+        }
     }
     public class UinMenuObjcet:Menu
     {

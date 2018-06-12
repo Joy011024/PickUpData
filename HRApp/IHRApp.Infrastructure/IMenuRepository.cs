@@ -12,5 +12,7 @@ namespace IHRApp.Infrastructure
     public interface IMenuRepository:IBaseRepository<Menu>
     {
         List<Menu> QueryMenus();
+        bool ChangeMenuType(int id, int type);
+        bool ChangeMenuStatue(int id, bool operate);
     }
 }

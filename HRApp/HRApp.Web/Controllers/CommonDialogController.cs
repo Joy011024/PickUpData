@@ -4,7 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using HRApp.IApplicationService;
+using HRApp.Model;
 namespace HRApp.Web.Controllers
 {
     public class CommonDialogController : Controller
@@ -24,11 +25,22 @@ namespace HRApp.Web.Controllers
         { 
             return View();
         }
-        public ActionResult CommonSelectDialog(string sltUrl) 
+        public ActionResult CommonSelectDialog(string enumName,int id) 
         {//公用的选择框的对话框窗体
             BaseRequestParam param = new BaseRequestParam();
+            List<EnumData> list = new List<EnumData>(); 
 
-            return View();
+            try
+            {
+                IEnumDataService enumService = IocMvcFactoryHelper.GetInterface<IEnumDataService>();
+                list = enumService.QueryEnumMember(enumName);
+            }
+            catch (Exception ex)
+            {
+                list = new List<EnumData>();
+            }
+            ViewData["Id"] = id;
+            return View(list);
         }
         public ActionResult CommonTreeDialog() 
         {

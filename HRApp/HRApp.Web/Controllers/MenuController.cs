@@ -54,8 +54,31 @@ namespace HRApp.Web.Controllers
         [DescriptionSort("修改菜单的类型")]
         public JsonResult ChangeMenuType(int id,int type) 
         {
-            Common.Data.JsonData json = new Common.Data.JsonData();
-
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
+            IMenuService menuService = IocMvcFactoryHelper.GetInterface<IMenuService>();
+            try
+            {
+                json.Success = menuService.ChangeMenuType(id, type);
+            }
+            catch (Exception ex)
+            {
+                json.Message = ex.Message;
+            }
+            return Json(json);
+        }
+        [DescriptionSort("更改状态")]
+        public JsonResult ChangeMenuStatue(int id, bool operate)
+        {
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result = true };
+            IMenuService menuService = IocMvcFactoryHelper.GetInterface<IMenuService>();
+            try
+            {
+                json.Success = menuService.ChangeMenuStatue(id, operate);
+            }
+            catch (Exception ex)
+            {
+                json.Message = ex.Message;
+            }
             return Json(json);
         }
     }

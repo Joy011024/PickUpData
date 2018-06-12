@@ -10,5 +10,7 @@ namespace HRApp.IApplicationService
     {
         Common.Data.JsonData QueryAllMenu();
         List<Menu> QueryMenusByAuthor(string userCode);
+        bool ChangeMenuType(int id, int type);
+        bool ChangeMenuStatue(int id, bool operate);
     }
 }

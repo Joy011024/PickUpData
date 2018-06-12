@@ -92,5 +92,17 @@ namespace HRApp.ApplicationService
         {
             return menuRepository.QueryMenus();
         }
+        public bool ChangeMenuType(int id, int type)
+        {
+           bool succ=  menuRepository.ChangeMenuType(id, type);
+           logDal.WriteLog(ELogType.DataInDBLog, string.Format("Update menu type,id={0},target of menu type={1}",id,type), typeof(Menu).Name, succ);
+           return succ;
+        }
+        public bool ChangeMenuStatue(int id, bool operate)
+        {
+            bool succ = menuRepository.ChangeMenuStatue(id, operate);
+            logDal.WriteLog(ELogType.DataInDBLog, string.Format("Update menu isEnable,id={0},target of isEnable={1}", id, operate), typeof(Menu).Name, succ);
+            return succ;
+        }
     }
 }

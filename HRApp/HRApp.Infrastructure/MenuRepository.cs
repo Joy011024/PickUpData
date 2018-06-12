@@ -57,5 +57,40 @@ namespace HRApp.Infrastructure
             string cmd = SqlCmdHelper.GenerateSampleSelectSql<Menu>();// menu.QueryMenus();
             return CommonRepository.QueryModelList<Menu>(cmd, null, SqlConnString, 0, int.MaxValue);
         }
+
+        /// <summary>
+        /// 设置更改菜单类型
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public bool ChangeMenuType(int id, int type)
+        {
+            Menu menu = new Menu()
+            {
+                Id = id,
+                MenuType = (short)type
+            };
+            string sql = menu.ChangeMenuTypeSql();
+            SqlCmdHelper cmd = new SqlCmdHelper() { SqlConnString=SqlConnString};
+            return cmd.GenerateNoQuerySqlAndExcute(sql, menu) > 0;
+        }
+        /// <summary>
+        /// 设置是否启用菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="operate"></param>
+        /// <returns></returns>
+        public bool ChangeMenuStatue(int id, bool operate)
+        {
+            Menu menu = new Menu()
+            {
+                Id = id,
+                IsEnable=operate
+            };
+            string sql = menu.ChangeStatueSql();
+            SqlCmdHelper cmd = new SqlCmdHelper() { SqlConnString = SqlConnString };
+            return cmd.GenerateNoQuerySqlAndExcute(sql, menu) > 0;
+        }
     }
 }
