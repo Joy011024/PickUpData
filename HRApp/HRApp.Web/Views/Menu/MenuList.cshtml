@@ -36,33 +36,8 @@
             {   text:'',map:''  }
         ]
         $('#btnQuery').click(function () {
-            //获取选择的数据
-            bindPostAjax('/Menu/QueryAllMenus', {},
-                function (response, statue) {
-                    var lay = layer;
-                    if (!response.Success) {
-                        lay.alert(response.Message, { title: '@Lang.LblTip' });
-                        return;
-                    }
-                    var table = $('#grid .table>tbody');
-                    table.empty();
-                    var data = response.Data;
-                    for (var i = 0; i < data.length; i++) {
-                        var tmpl='<tr>'
-                                    + '<td id="{Id}">'+(i+1)+'</td><td>{Name}</td><td>' + data[i].ParentName + '</td><td>{Url}</td>'
-                                    +'<td>'+
-                                    (data[i].IsEnable?'<span class="normal"> @Lang.LblEnable</span>':'<span  class="warm" )> @Lang.LblStop</span>')
-	                                +'</td>'
-                                    +'<td>'
-                                    +' <span itemid="{Id}">@Lang.LblEdit</span>'
-                                    +' <span pid="{ParentId}" class=" '+(data[i].IsEnable? "warm" : "normal")+')" onclick="btnControlStatue(\'{Id}\','+(data[i].IsEnable?1:0)+')">'+(data[i].IsEnable ? '@Lang.LblEnable' : '@Lang.LblStop')+'</span>'
-                                    +' <span pid="{ParentId}" class="warm" onclick="btnOpenSltDialog(\'{Id}\')">@Lang.LblChangeMenuType</span>'
-                                    +'  <span class="warm" onclick="btnChangeParentDir(\'{Id}\')">@Lang.LblChangeParentMenu</span>'
-                                    +'</td>'
-                             + '</tr>'; 
-                       table.append( tmpl.formatObject(data[i]));
-                    }
-                });
+            //获取选择的数据 
+            window.location.reload();
         });
         $('#BtnAddParent').click(function () {
             layerExt.LoadDialog('/CommonDialog/SampleNoteDataDialog', '@Lang.BtnAddParent', {
@@ -83,6 +58,7 @@
                             return;
                         }
                         lay.alert(response.Message, { title: '@Lang.LblTip' });
+                        $('#btnQuery').trigger('click');
                     });
             });
         });
@@ -111,6 +87,7 @@
                     lay.close(lay.index);
                     lay.close($('body').data('dialog'));
                     lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                    $('#btnQuery').trigger('click');
                     return;
                 }
                 lay.alert(response.Message, { title: '@Lang.LblTip' });
@@ -125,7 +102,8 @@
             var lay = layer;
             if (response.Success) {
                 lay.close(lay.index);
-                lay.alert('操作成功', { title: '@Lang.LblTip' });
+                lay.alert(lang.tip.success, { title: '@Lang.LblTip' });
+                $('#btnQuery').trigger('click');
                 return;
             }
             lay.alert(response.Message, { title: '@Lang.LblTip' });
@@ -156,7 +134,7 @@
                 if (response.Success) {
                     lay.close(lay.index);
                     lay.close($('body').data('dialog'));
-                    lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                    lay.alert(lang.tip.success, { title: '@Lang.LblTip' });
                     return;
                 }
                 lay.alert(response.Message, { title: '@Lang.LblTip' });
