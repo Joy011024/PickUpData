@@ -47,4 +47,11 @@ namespace HRApp.Web
         [Description("枚举成员")]
         public string EnumMember { get; set; }
     }
+    public class FilterParam
+    {
+        [Description("忽略的项")]
+        public List<string> Ignores { get; set; }
+        [Description("是否包含被删除的")]
+        public bool ContainerDelete { get; set; }
+    }
 }

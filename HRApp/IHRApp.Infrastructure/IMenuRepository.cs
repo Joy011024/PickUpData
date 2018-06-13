@@ -14,5 +14,6 @@ namespace IHRApp.Infrastructure
         List<Menu> QueryMenus();
         bool ChangeMenuType(int id, int type);
         bool ChangeMenuStatue(int id, bool operate);
+        bool ChangeParentMenu(int id, int parentId);
     }
 }

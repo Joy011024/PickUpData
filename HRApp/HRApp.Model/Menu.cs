@@ -39,6 +39,10 @@ namespace HRApp.Model
         {
             return "Update Menu set MenuType={MenuType} where Id={Id}";
         }
+        public string ChangeParentMenuSql() 
+        {
+            return "Update Menu set ParentId={ParentId} where Id={Id} and {ParentId}<>{Id}";
+        }
     }
     public class UinMenuObjcet:Menu
     {

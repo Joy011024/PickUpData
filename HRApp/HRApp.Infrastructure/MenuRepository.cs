@@ -92,5 +92,12 @@ namespace HRApp.Infrastructure
             SqlCmdHelper cmd = new SqlCmdHelper() { SqlConnString = SqlConnString };
             return cmd.GenerateNoQuerySqlAndExcute(sql, menu) > 0;
         }
+        public bool ChangeParentMenu(int id, int parentId)
+        { 
+            Menu m=new Menu(){ Id=id,ParentId=parentId};
+            string sql = m.ChangeParentMenuSql();
+            SqlCmdHelper cmd = new SqlCmdHelper() { SqlConnString = SqlConnString };
+            return cmd.GenerateNoQuerySqlAndExcute(sql, m) > 0;
+        }
     }
 }

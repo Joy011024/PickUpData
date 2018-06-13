@@ -15,12 +15,15 @@
     <script src="~/Scripts/bootstrap-treeview.js?@InitAppSetting.Version"></script>
     <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
     <script type="text/javascript">
-    var url = '@ViewData["url"]';
+        var url = '@ViewData["url"]';
+        var id='@ViewData["id"]';
         $(function () {
             loadTreeDataSource(url);
         });
         function loadTreeDataSource(url) {
-            bindPostAjax(url, {}, function (response, statue) {
+            bindPostAjax(url, {
+                Ignores: [id] //这是忽略的节点
+            }, function (response, statue) {
                 var lay = layer;
                 if (response.Success) {
                     lay.close(lay.index);
@@ -40,30 +43,46 @@
                     text: '{Name}',
                     id: '{Id}',
                     icon: "glyphicon glyphicon-stop",
-                    selectedIcon: "glyphicon glyphicon-stop",
-                    color: "#000000",
-                    backColor: "#FFFFFF",
-                    href: "#node-1",
-                    selectable: true,
-                    state: {
-                        checked: true,
-                        disabled: false,
-                        expanded: true,
-                        selected: false
-                    },
-                    tags: ['available']
+                    selectedIcon: "glyphicon glyphicon-certificate",
+                    index: '{index}'
+                    //color: "#000000",
+                    //backColor: "#FFFFFF",
+                    //href: "#node-1",
+                    //selectable: true,
+                    //state: {
+                    //    checked: true,
+                    //    disabled: false,
+                    //    expanded: true,
+                    //    selected: false
+                    //},
+                    //tags: ['available']
                 };
                 node.id = node.id.replace(/{Id}/g, data[i].Id);
                 node.text = node.text.replace(/{Name}/g, data[i].Name);
+                node.index = node.id.replace(/{index}/g, i);
                 ds.push(node);
             }
             FillDataSource(ds);
         }
         function FillDataSource(ds) {
-            $('#tree').treeview({
+            $('#tree').treeview({//node-selected 样式设置的是选择的节点
                 data: ds,
-                backColor: 'green'
+                expandIcon: "glyphicon glyphicon-stop",
+                collapseIcon: "glyphicon glyphicon-unchecked",
+                nodeIcon: "glyphicon glyphicon-user",
+                color: "black",
+                //backColor: "purple",
+                onhoverColor: "red",
+                borderColor: "red",
+                showBorder: false,
+                showTags: true,
+                highlightSelected: true,
+                selectedColor: "black",
+                selectedBackColor: "#ccc"
             });
+        }
+        function GetSelectedNode() {
+            return $('#tree').treeview('getSelected');
         }
     </script>
 </head>

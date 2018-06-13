@@ -105,5 +105,36 @@ namespace HRApp.Web.Controllers
             }
             return Json(json);
         }
+        [DescriptionSort("提供带过滤的接口操作")]
+        public JsonResult QueryAllMenuByFilter(FilterParam param) 
+        {
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
+            List<int> ids = new List<int>();
+            //过滤的id
+            if (param.Ignores!=null)
+            {
+                int id = 0;
+                for (int i = 0; i < param.Ignores.Count; i++)
+                {
+                    int.TryParse(param.Ignores[i], out id);
+                    ids.Add(id);
+                }
+            }
+            List<UinMenuObjcet> ms = QueryAllMenuData().Where(s =>
+                 ((!param.ContainerDelete && s.IsEnable)||(param.ContainerDelete)) //对于是否查询已启用项进行处理
+                 &&(!ids.Contains(s.Id)) //是否过滤指定的项
+                ).ToList();
+            json.Data = ms;
+            json.Total = ms.Count;
+            json.Success = true;
+            return Json(json);
+        }
+        public JsonResult ChangeMenuParentNode(int id,int pid) 
+        {
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result = true };
+            IMenuService ms = IocMvcFactoryHelper.GetInterface<IMenuService>();
+            json.Success = ms.ChangeParentMenu(id, pid);
+            return Json(json);
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace HRApp.IApplicationService
         List<Menu> QueryMenusByAuthor(string userCode);
         bool ChangeMenuType(int id, int type);
         bool ChangeMenuStatue(int id, bool operate);
+        bool ChangeParentMenu(int id, int ParentId);
     }
 }

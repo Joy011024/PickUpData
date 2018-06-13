@@ -113,5 +113,11 @@ namespace HRApp.ApplicationService
             logDal.WriteLog(ELogType.DataInDBLog, string.Format("Update menu isEnable,id={0},target of isEnable={1}", id, operate), typeof(Menu).Name, succ);
             return succ;
         }
+        public bool ChangeParentMenu(int id, int parentId)
+        {
+            bool succ = menuRepository.ChangeParentMenu(id, parentId);
+            logDal.WriteLog(ELogType.DataInDBLog, string.Format("Update menu parentDir,id={0},target of parentDirId={1}", id, parentId), typeof(Menu).Name, succ);
+            return succ;
+        }
     }
 }
