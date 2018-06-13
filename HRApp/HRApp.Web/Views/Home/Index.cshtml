@@ -47,7 +47,9 @@
     <script type="text/javascript">
         $(function () {
             //$('#menus')
-            bindPostAjax('/Menu/QueryAllMenus', null, function (response, statue) {
+            bindPostAjax('/Menu/QueryAllMenuByFilter', {
+                ContainerDelete:false
+            }, function (response, statue) {
                 var tipEle = $('.warming');
                 tipEle.hide();
                 if (!response.Success)
@@ -56,7 +58,9 @@
                     tipEle.show();
                     return;
                 }
-                DrawMenu(response.Data);
+                var data = [];
+                MergeNode(response.Data, data);
+                DrawMenu(data);
                 //初始化触发第一项
                 $('#myMenu .active>[data-toggle=tab]').trigger('click');
                 return;
@@ -73,6 +77,35 @@
                 });
                 
             });
+
+            function MergeNode(dataSource, nodeData) { //数据合并为 父-子 节点形式结构
+                //1 先根节点入库
+                var childrens = [];
+                for (var i = 0; i < dataSource.length; i++) {//Root
+                    var rec = dataSource[i];
+                    if (rec && rec.ParentId ==-1) {//需要判断该项是否已经入库
+                        rec.Childerns = [];
+                        nodeData.push(rec);
+                    } else {
+                        childrens.push(rec);
+                    }
+                }
+                MergeChildren(childrens, nodeData); //node:根据跟节点加载子节点数据
+            }
+            function MergeChildren(dataSource, nodeData) {
+                var hasParent = false;
+                for (var i = 0; i < dataSource.length; i++) { //判断父节点是否已经入档
+                    var rec = dataSource[i];
+                    for (var j = 0; j < nodeData.length; j++) {
+                        if (nodeData[j].Id == rec.ParentId) {
+                            nodeData[j].Childerns.push(rec);
+                        }
+                    }
+                }
+                if (!hasParent) {//找不到父节点的直接作为更节点使用
+                    
+                }
+            }
             $('#AccountMenuMenu li a').click(function () {
                 //是否存在链接
                 var a = $(this);
@@ -90,19 +123,23 @@
                 return;
             }
             $(data).each(function (i, ele) {
-                var container = (ele.ParentCode == '@InitAppSetting.DefaultAppsettingRootCode' || $.trim(ele.ParentCode) == '') ?
-                    $('#myMenu') : $('#menu' + ele.ParentCode);
+                var container = (ele.ParentId==-1) ?
+                    $('#myMenu') : $('#menu' + ele.ParentCode.replace('.', '_'));
+                if ($.trim(ele.Url) == '') {
+                    ele.Url = '';
+                }
                 if (ele.Childerns && ele.Childerns.length > 0) { //如果存在子节点进行子节点的渲染
                     //渲染节点
                     var items = '<li class="dropdown" >' 
-                        + ' <a href="#" id="{Code}" class="dropdown-toggle"  data-toggle="dropdown">{title}</a>'
+                        + ' <a href="#" id="{Code}" class="dropdown-toggle"  data-toggle="dropdown">{title} [{Count}]</a>'
                         +' <ul class="dropdown-menu" id="menu{Code}" role="menu" aria-labelledby="{title}"> </ul><li>';
                     items = items.replace(/{Code}/g, ele.Code.replace('.', '_')).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
+                    items = items.replace(/{Count}/g, ele.Childerns.length);
                     container.append(items);
                     DrawMenu(ele.Childerns, $('#menu' + ele.Code));
                 }
                 else {
-                    var node = '<li><a href="#menu{Code}" data-toggle="tab" url="{url}"> {title} </a> </li>';
+                    var node = '<li><a href="#menu{Code}" data-toggle="tab" url="{url}"> {title} [0]</a> </li>';
                     node = node.replace(/{Code}/g, ele.Code.replace('.', '_')).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
                     container.append(node);
                     container.find('[data-toggle=tab]:last').click(function () {
@@ -113,6 +150,9 @@
         }
         function toolItemSlt(objEle) {
             var tabId = $(objEle).attr('href').replace('#', '');
+            if ($.trim(tabId) == '') {
+                return;
+            }
             var item = 'tab_' + tabId;
             //判断该项是否之前已经增加到面板中
             var tab = $('#myTab #' + item);
@@ -122,6 +162,9 @@
                 //不存在则进行追加到面板栏
 
                 var url = $(objEle).attr('url');
+                if ($.trim(url) == '') {
+                    return;
+                }
                 var text = $(objEle).text();
                 var tmplLi = ' <li  class="active tabItem"><span><a id="{item}" href="#menu{item}" data-toggle="tab" url="{url}"> {text} </a></span><span class="topIcon" onclick="btnClosePanel(this)">x</span> </li>';
                 tmplLi = tmplLi.replace(/{item}/g, item).replace(/{url}/g, url).replace(/{text}/g, text);
@@ -144,6 +187,9 @@
             $('#myTabContent .tab-pane').hide();
             var layoutId = $(objEle).attr('href').replace('#','');
             var url = $(objEle).attr('url');
+            if ($.trim(url) == '') {
+                return;
+            }
             var panel = $('#myTabContent #' + layoutId);
             if (panel.length > 0)
             {

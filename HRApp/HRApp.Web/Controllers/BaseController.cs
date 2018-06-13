@@ -62,6 +62,7 @@ namespace HRApp.Web.Controllers
                 else 
                 {
                     menus[i].ParentName = p.Name;
+                    menus[i].ParentCode = p.Code;
                 }
             }
             //对于查询出的菜单列表进行用户查询限定组装
@@ -86,7 +87,8 @@ namespace HRApp.Web.Controllers
                         copy.ParentCode = uin.Code;
                         copy.Code = uin.Code + "." + item.Code.ToString();
                         copy.ParentId = copy.Id;
-                        ui.Childerns.Add(copy);
+                       // ui.Childerns.Add(copy);
+                        menus.Add(copy);
                     }
                 }
             }
