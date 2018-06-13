@@ -23,6 +23,8 @@
     <script src="~/Scripts/bootstrap-paginator/bootstrap-paginator.js?v=@InitAppSetting.Version"></script>
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script type="text/javascript">
     var size = parseInt('@total');
     $(function () {
@@ -32,16 +34,13 @@
             total: 30,
             numberOfPage: size
         }, $('#gridPage'));
-        var columns = [
-            {   text:'',map:''  }
-        ]
         $('#btnQuery').click(function () {
             //获取选择的数据 
             window.location.reload();
         });
         $('#BtnAddParent').click(function () {
             layerExt.LoadDialog('/CommonDialog/SampleNoteDataDialog', '@Lang.BtnAddParent', {
-                area: ['300px', '400px'],
+                //area: ['300px', '400px'],
                 btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
             }, function (index, lay) {
                 $('body').data('dialog', lay.index);
@@ -65,7 +64,7 @@
     });
     function btnOpenSltDialog(id) {
         layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?enumName=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
-            area: ['270px', '300px'],
+            //area: ['270px', '300px'],
             id: 'dialog',
             btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
         }, function (index, lay) {
@@ -111,7 +110,7 @@
     }
     function btnChangeParentDir(id) {//CommonTreeDialog
         layerExt.LoadDialog('/CommonDialog/CommonTreeDialog?dataSourceUrl=/Menu/QueryAllMenuByFilter&=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
-            area: ['270px', '300px'],
+            //area: ['270px', '300px'],
             id: 'dialog',
             btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
         }, function (index, lay) {

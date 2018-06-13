@@ -917,6 +917,13 @@ var layerExt = {
             area: ['300px', '530px']
         };
         var options = $.extend(option, op);
+        layer.config({
+            area: ['300px', '50px'],
+            offset: {
+                offsetTop: '300px',
+                offsetLeft: '50px'
+            }
+        });//由于菜单维护页面出现加载的对话框显示在页面底部导致页面无法操作增加config配置设置语句
         layer.open({
             content: url,
             type: 2,
