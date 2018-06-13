@@ -139,6 +139,10 @@
                     DrawMenu(ele.Childerns, $('#menu' + ele.Code));
                 }
                 else {
+                    var sign = '';
+                    if (ele.ParentId == -1) {
+                        sign = '';
+                    }
                     var node = '<li><a href="#menu{Code}" data-toggle="tab" url="{url}"> {title} [0]</a> </li>';
                     node = node.replace(/{Code}/g, ele.Code.replace('.', '_')).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
                     container.append(node);
