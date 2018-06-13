@@ -40,7 +40,7 @@
         });
         $('#BtnAddParent').click(function () {
             layerExt.LoadDialog('/CommonDialog/SampleNoteDataDialog', '@Lang.BtnAddParent', {
-                //area: ['300px', '400px'],
+                area: ['300px', '400px'],
                 btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
             }, function (index, lay) {
                 $('body').data('dialog', lay.index);
@@ -64,7 +64,7 @@
     });
     function btnOpenSltDialog(id) {
         layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?enumName=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
-            //area: ['270px', '300px'],
+            area: ['270px', '300px'],
             id: 'dialog',
             btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
         }, function (index, lay) {
@@ -110,7 +110,7 @@
     }
     function btnChangeParentDir(id) {//CommonTreeDialog
         layerExt.LoadDialog('/CommonDialog/CommonTreeDialog?dataSourceUrl=/Menu/QueryAllMenuByFilter&=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
-            //area: ['270px', '300px'],
+            area: ['270px', '300px'],
             id: 'dialog',
             btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
         }, function (index, lay) {
