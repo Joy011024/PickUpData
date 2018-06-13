@@ -48,6 +48,22 @@ namespace HRApp.Web.Controllers
             Menu uin = menus.Where(s => s.Code == "UinImageGroupService")
                 .Select(s => s.MapObject<UinMenuObjcet, Menu>())
                 .FirstOrDefault();
+            for (int i = 0; i < menus.Count; i++)
+            {
+                if (menus[i].ParentId == -1)
+                {
+                    continue;
+                }
+                UinMenuObjcet p = menus.Where(s => s.Id == menus[i].ParentId).FirstOrDefault();
+                if (p == null)
+                {
+                    menus[i].Tip = string.Format("Lose isEnable of parent[id={0}]", menus[i].ParentId);
+                }
+                else 
+                {
+                    menus[i].ParentName = p.Name;
+                }
+            }
             //对于查询出的菜单列表进行用户查询限定组装
             if (uin != null)
             { //是否查询举报列表

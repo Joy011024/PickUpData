@@ -24,117 +24,145 @@
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script type="text/javascript">
-        var size = parseInt('@total');
-        $(function () {
-            DrwaPageEle({//分页
-                rowBegin: 1,
-                rowEnd: size,
-                total: 30,
-                numberOfPage: size
-            }, $('#gridPage'));
-            $('#btnQuery').click(function () {
-                //获取选择的数据
-
-            });
-            $('#BtnAddParent').click(function () {
-                layerExt.LoadDialog('/CommonDialog/SampleNoteDataDialog', '@Lang.BtnAddParent', {
-                    area: ['300px', '400px'],
-                    btns:[lang.cmd.btnAdd,lang.cmd.btnCancel]
-                }, function (index,lay) {
-                    $('body').data('dialog', lay.index);
-                    var childObj =$('#dialog').find('iframe')[0].contentWindow;
-                    var data = childObj.gatherUiData();
-                    data.EnumMember = 'MenuRoot';
-                    bindPostAjax('/Menu/SaveMenu', data,
-                        function (response, statue) {
-                            var lay = layer;
-                            if (response.Success) {
-                                lay.close(lay.index);
-                                lay.close($('body').data('dialog'));
-                                lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
-                                return;
-                            }
-                            lay.alert(response.Message, { title: '@Lang.LblTip' });
-                        });
-                });
-            });
-        });
-        function btnOpenSltDialog(id) {
-            layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?enumName=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
-                area: ['270px', '300px'],
-                id:'dialog',
-                btns:[lang.cmd.btnAdd,lang.cmd.btnCancel]
-            }, function (index, lay) {
-                var childObj = $('#dialog').find('iframe')[0].contentWindow;
-                var slt = childObj.$('#sltParent').val();
-                var tid = childObj.$('#txtId').val();
-                if (slt == -1) {
-                    layer.alert('@Lang.Tip_PleaseSelect'+' '+'@Lang.LblChangeParentMenu');
-                    return;
-                }
-                //存储当前打开的对话框
-                $('body').data('dialog', index);
-                bindPostAjax('/Menu/ChangeMenuType', {
-                    id: tid,
-                    type: slt
-                }, function (response, statue) {
+    var size = parseInt('@total');
+    $(function () {
+        DrwaPageEle({//分页
+            rowBegin: 1,
+            rowEnd: size,
+            total: 30,
+            numberOfPage: size
+        }, $('#gridPage'));
+        var columns = [
+            {   text:'',map:''  }
+        ]
+        $('#btnQuery').click(function () {
+            //获取选择的数据
+            bindPostAjax('/Menu/QueryAllMenus', {},
+                function (response, statue) {
                     var lay = layer;
-                    if (response.Success) {
-                        lay.close(lay.index);
-                        lay.close($('body').data('dialog'));
-                        lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                    if (!response.Success) {
+                        lay.alert(response.Message, { title: '@Lang.LblTip' });
                         return;
                     }
-                    lay.alert(response.Message, { title: '@Lang.LblTip' });
+                    var table = $('#grid .table>tbody');
+                    table.empty();
+                    var data = response.Data;
+                    for (var i = 0; i < data.length; i++) {
+                        var tmpl='<tr>'
+                                    + '<td id="{Id}">'+(i+1)+'</td><td>{Name}</td><td>' + data[i].ParentName + '</td><td>{Url}</td>'
+                                    +'<td>'+
+                                    (data[i].IsEnable?'<span class="normal"> @Lang.LblEnable</span>':'<span  class="warm" )> @Lang.LblStop</span>')
+	                                +'</td>'
+                                    +'<td>'
+                                    +' <span itemid="{Id}">@Lang.LblEdit</span>'
+                                    +' <span pid="{ParentId}" class=" '+(data[i].IsEnable? "warm" : "normal")+')" onclick="btnControlStatue(\'{Id}\','+(data[i].IsEnable?1:0)+')">'+(data[i].IsEnable ? '@Lang.LblEnable' : '@Lang.LblStop')+'</span>'
+                                    +' <span pid="{ParentId}" class="warm" onclick="btnOpenSltDialog(\'{Id}\')">@Lang.LblChangeMenuType</span>'
+                                    +'  <span class="warm" onclick="btnChangeParentDir(\'{Id}\')">@Lang.LblChangeParentMenu</span>'
+                                    +'</td>'
+                             + '</tr>'; 
+                       table.append( tmpl.formatObject(data[i]));
+                    }
                 });
+        });
+        $('#BtnAddParent').click(function () {
+            layerExt.LoadDialog('/CommonDialog/SampleNoteDataDialog', '@Lang.BtnAddParent', {
+                area: ['300px', '400px'],
+                btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
+            }, function (index, lay) {
+                $('body').data('dialog', lay.index);
+                var childObj = $('#dialog').find('iframe')[0].contentWindow;
+                var data = childObj.gatherUiData();
+                data.EnumMember = 'MenuRoot';
+                bindPostAjax('/Menu/SaveMenu', data,
+                    function (response, statue) {
+                        var lay = layer;
+                        if (response.Success) {
+                            lay.close(lay.index);
+                            lay.close($('body').data('dialog'));
+                            lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                            return;
+                        }
+                        lay.alert(response.Message, { title: '@Lang.LblTip' });
+                    });
             });
-        }
-        function btnControlStatue(id,isStop) {
-            bindPostAjax('/Menu/ChangeMenuStatue', {
-                id: id,
-                operate: isStop==0
+        });
+    });
+    function btnOpenSltDialog(id) {
+        layerExt.LoadDialog('/CommonDialog/CommonSelectDialog?enumName=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
+            area: ['270px', '300px'],
+            id: 'dialog',
+            btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
+        }, function (index, lay) {
+            var childObj = $('#dialog').find('iframe')[0].contentWindow;
+            var slt = childObj.$('#sltParent').val();
+            var tid = childObj.$('#txtId').val();
+            if (slt == -1) {
+                layer.alert('@Lang.Tip_PleaseSelect' + ' ' + '@Lang.LblChangeParentMenu');
+                return;
+            }
+            //存储当前打开的对话框
+            $('body').data('dialog', index);
+            bindPostAjax('/Menu/ChangeMenuType', {
+                id: tid,
+                type: slt
             }, function (response, statue) {
                 var lay = layer;
                 if (response.Success) {
                     lay.close(lay.index);
-                    lay.alert('操作成功', { title: '@Lang.LblTip' });
+                    lay.close($('body').data('dialog'));
+                    lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
                     return;
                 }
                 lay.alert(response.Message, { title: '@Lang.LblTip' });
             });
-        }
-        function btnChangeParentDir(id) {//CommonTreeDialog
-            layerExt.LoadDialog('/CommonDialog/CommonTreeDialog?dataSourceUrl=/Menu/QueryAllMenuByFilter&=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
-                area: ['270px', '300px'],
-                id: 'dialog',
-                btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
-            }, function (index, lay) {
-                var childObj = $('#dialog').find('iframe')[0].contentWindow;
-                var slt = childObj.GetSelectedNode();
-                if (slt.length == 0) {
-                    layer.alert('@Lang.Tip_PleaseSelect', lang.lbl.tid);
+        });
+    }
+    function btnControlStatue(id, isStop) {
+        bindPostAjax('/Menu/ChangeMenuStatue', {
+            id: id,
+            operate: isStop == 0
+        }, function (response, statue) {
+            var lay = layer;
+            if (response.Success) {
+                lay.close(lay.index);
+                lay.alert('操作成功', { title: '@Lang.LblTip' });
+                return;
+            }
+            lay.alert(response.Message, { title: '@Lang.LblTip' });
+        });
+    }
+    function btnChangeParentDir(id) {//CommonTreeDialog
+        layerExt.LoadDialog('/CommonDialog/CommonTreeDialog?dataSourceUrl=/Menu/QueryAllMenuByFilter&=EMenuType&Id=' + id, '@Lang.LblChangeMenuType', {
+            area: ['270px', '300px'],
+            id: 'dialog',
+            btns: [lang.cmd.btnAdd, lang.cmd.btnCancel]
+        }, function (index, lay) {
+            var childObj = $('#dialog').find('iframe')[0].contentWindow;
+            var slt = childObj.GetSelectedNode();
+            if (slt.length == 0) {
+                layer.alert('@Lang.Tip_PleaseSelect', lang.lbl.tid);
+                return;
+            }
+            var pid = slt[0].id;//设置的父目录id
+            var id = childObj.id;
+            //校验id与当前操作目标是否一致[wait]
+            //存储当前打开的对话框
+            $('body').data('dialog', index);
+            bindPostAjax('/Menu/ChangeMenuParentNode', {
+                id: id,
+                pid: pid
+            }, function (response, statue) {
+                var lay = layer;
+                if (response.Success) {
+                    lay.close(lay.index);
+                    lay.close($('body').data('dialog'));
+                    lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
                     return;
                 }
-                var pid = slt[0].id;//设置的父目录id
-                var id = childObj.id;
-                //校验id与当前操作目标是否一致[wait]
-                //存储当前打开的对话框
-                $('body').data('dialog', index);
-                bindPostAjax('/Menu/ChangeMenuParentNode', {
-                    id: id,
-                    pid: pid
-                }, function (response, statue) {
-                    var lay = layer;
-                    if (response.Success) {
-                        lay.close(lay.index);
-                        lay.close($('body').data('dialog'));
-                        lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
-                        return;
-                    }
-                    lay.alert(response.Message, { title: '@Lang.LblTip' });
-                });
+                lay.alert(response.Message, { title: '@Lang.LblTip' });
             });
-        }
+        });
+    }
     </script>
     <style type="text/css">
         .warm {
@@ -178,6 +206,7 @@
                         <tr>
                             <td width="30px">@Lang.LblSortName</td>
                             <td width="80px">@Lang.LblName</td>
+                            <td width="80px">@Lang.LblParentDir</td>
                             <td width="160px">@Lang.LblUrl</td>
                             <td width="30px">@Lang.LblStatue</td>
                             <td width="200px;">@Lang.LblOperate</td>
@@ -189,6 +218,7 @@
                             <tr>
                                 <td id="@data[i].Id">@(i+1)</td>
                                 <td>@data[i].Name</td>
+                                <td>@data[i].ParentName</td>
                                 <td>@data[i].Url</td>
                                 <td>
                                    @if (data[i].IsEnable)

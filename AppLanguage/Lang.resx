@@ -351,4 +351,7 @@
   <data name="LblChangeMenuType" xml:space="preserve">
     <value>菜单类别</value>
   </data>
+  <data name="LblParentDir" xml:space="preserve">
+    <value>父目录</value>
+  </data>
 </root>

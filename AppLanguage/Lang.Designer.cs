@@ -430,6 +430,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 父目录 的本地化字符串。
+        /// </summary>
+        public static string LblParentDir {
+            get {
+                return ResourceManager.GetString("LblParentDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 密码 的本地化字符串。
         /// </summary>
         public static string LblPassword {

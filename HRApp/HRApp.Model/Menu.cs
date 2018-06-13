@@ -50,6 +50,9 @@ namespace HRApp.Model
         public bool IsChild { get; set; }
         public string ParentCode { get; set; }
         public List<Menu> Childerns { get; set; }
+        [DescriptionSort("父节点名")]
+        public string ParentName { get; set; }
+        public string Tip { get; set; }
         #endregion
     }
 }
