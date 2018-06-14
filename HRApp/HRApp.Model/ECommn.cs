@@ -95,7 +95,9 @@ namespace HRApp.Model
         [DescriptionSort("SMTP服务类型")]
         SMTP=9111,
         [DescriptionSort("邮箱客户端")]
-        SMTPClient=9200
+        SMTPClient=9200,
+        [DescriptionSort("启用邮箱功能")]
+        UsingEmail=400
 
     }
     [DescriptionSort("任职状态")]
