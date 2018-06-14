@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveRepository.cs" />
     <Compile Include="AppAccountRepository.cs" />
     <Compile Include="AppRepository.cs" />
     <Compile Include="AppSettingRepository.cs" />

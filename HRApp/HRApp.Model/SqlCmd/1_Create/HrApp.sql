@@ -442,7 +442,7 @@ create table AddressData
 alter table AddressData add  constraint FK_DataSourceId foreign key(DataSourceId)
 references DataSource(id);
 go
-create table  ActiveEvent
+create table  ActiveData
 (
 	Id uniqueidentifier primary key,
 	Name nvarchar(32) not null,
@@ -453,5 +453,6 @@ create table  ActiveEvent
 	AdressDetail nvarchar(256) not null,
 	ActiveOrganzer nvarchar(32) not null,
 	ActiveStatue smallint not null,--活动审核状态
+	ActiveExecuteStatue smallint not null,--活动进行状态
 	ActiveDetail nvarchar(1028) --活动详细信息
 )

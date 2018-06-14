@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveService.cs" />
     <Compile Include="AppAccountService.cs" />
     <Compile Include="AppDataService.cs" />
     <Compile Include="AppSettingService.cs" />

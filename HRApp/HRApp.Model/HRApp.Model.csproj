@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Active\ActiveData.cs" />
     <Compile Include="Entity\EmailModule\AppEmailData.cs" />
     <Compile Include="Entity\OrderModule\BaseOrder.cs" />
     <Compile Include="ECommn.cs" />
