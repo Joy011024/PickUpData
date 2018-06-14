@@ -354,4 +354,7 @@
   <data name="LblParentDir" xml:space="preserve">
     <value>父目录</value>
   </data>
+  <data name="Tip_EnumValueIsDigit" xml:space="preserve">
+    <value>字典值应该使用数值</value>
+  </data>
 </root>

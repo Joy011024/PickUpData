@@ -21,7 +21,7 @@ namespace HRApp.Model
         /// <returns></returns>
         public static string InsertDbNoteFormat() 
         {
-            return "into db the  table 【{0}】";
+            return "insert into db the  table 【{0}】";
         }
     }
     [DescriptionSort("操作历史/非日志详情")]

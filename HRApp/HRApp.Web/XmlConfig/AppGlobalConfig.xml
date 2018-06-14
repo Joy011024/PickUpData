@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings name="GlobalConfig"> <!--全局依赖配置-->
+      <add key="UsingEmail" value="0"/> <!--是否启用邮箱功能-->
+      <add key="UsingRedisCache" value="false"/>
+  </appSettings>
+</configuration>

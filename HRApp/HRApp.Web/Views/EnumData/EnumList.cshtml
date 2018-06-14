@@ -21,25 +21,36 @@
     <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <link href="~/Content/HtmlEle.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script type="text/javascript">
-        $(function () {
-            $('#btnAdd').click(function () {
-                btnAddClick();
-            });
+    $(function () {
+        $('#btnAdd').click(function () {
+            btnAddClick();
         });
-        //EnumDataDialog
-        function btnAddClick() {
-            layerExt.LoadDialog('/CommonDialog/CommonValueDialog', '新增字典', {
-                btns: [
-                '@Lang.BtnSave', '@Lang.BtnClose'
-                ]
-            }, function (i, lay) {
-                var childObj = $('#dialog').find('iframe')[0].contentWindow;
-                if (!childObj.VaildUiRequire()) {
-                    layer.alert('@Lang.Tip_ValidParamWarning', '@Lang.LblTip');
+    });
+    //EnumDataDialog
+    function btnAddClick() {
+        layerExt.LoadDialog('/CommonDialog/CommonValueDialog', '新增字典', {
+            btns: [
+            '@Lang.BtnSave', '@Lang.BtnClose'
+            ]
+        }, function (i, lay) {
+            var childObj = $('#dialog').find('iframe')[0].contentWindow;
+            if (!childObj.VaildUiRequire()) {
+                layer.alert('@Lang.Tip_ValidParamWarning', '@Lang.LblTip');
                     return;
                 }
                 var data = childObj.gatherUiData();
-                console.log(data);
+                bindPostAjax('/EnumData/SaveEnum', data,
+                    function (response, statue) {
+                        var lay = layer;
+                        if (response.Success) {
+                            lay.close(lay.index);
+                            lay.close($('body').data('dialog'));
+                            lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                            return;
+                        }
+                        lay.alert(response.Message, { title: '@Lang.LblTip' });
+                        $('#btnQuery').trigger('click');
+                    });
             }, function (i, lay) {
                 console.log(i);
             });

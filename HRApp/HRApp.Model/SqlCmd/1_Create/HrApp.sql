@@ -418,3 +418,40 @@ select  c.name,
 on c.object_id=o.object_id  
 left join sys.tables t on o.object_id=t.object_id 
 where o.type='U' and c.name='id' and t.name not in('RowValueType');
+go
+Create table DataSource
+(
+	Id int identity(1,1) primary key,
+	FromName nvarchar(16) not null,
+	Code varchar(16) not null,--便于检索 
+	Remark nvarchar(1028),
+	IsEnable bit not null
+);
+go
+create table AddressData
+(
+	Id int identity(1,1) primary key,
+	Name nvarchar(32) not null,
+	ParentId int not null,
+	Code varchar(16) not null,
+	ParentCode varchar(16) not null,
+	AddressLevel smallint not null,
+	Createtime datetime not null,
+	DataSourceId int not null
+)
+alter table AddressData add  constraint FK_DataSourceId foreign key(DataSourceId)
+references DataSource(id);
+go
+create table  ActiveEvent
+(
+	Id uniqueidentifier primary key,
+	Name nvarchar(32) not null,
+	CreateTime datetime not null,
+	ActiveBeginTime datetime not null,
+	ActiveEndTime datetime not null,
+	ActiveAddress nvarchar(64) not null,
+	AdressDetail nvarchar(256) not null,
+	ActiveOrganzer nvarchar(32) not null,
+	ActiveStatue smallint not null,--活动审核状态
+	ActiveDetail nvarchar(1028) --活动详细信息
+)

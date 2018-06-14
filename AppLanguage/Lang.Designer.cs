@@ -682,6 +682,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 字典值应该使用数值 的本地化字符串。
+        /// </summary>
+        public static string Tip_EnumValueIsDigit {
+            get {
+                return ResourceManager.GetString("Tip_EnumValueIsDigit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 进行菜单数据维护时，菜单分类验证不通过 的本地化字符串。
         /// </summary>
         public static string Tip_MenuTypeValidInMenu {

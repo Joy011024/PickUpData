@@ -8,6 +8,7 @@ using IHRApp.Infrastructure;
 using HRApp.IApplicationService;
 using Domain.CommonData;
 using Infrastructure.ExtService;
+using Common.Data;
 namespace HRApp.ApplicationService
 {
     public class EnumDataService:IEnumDataService
@@ -18,12 +19,25 @@ namespace HRApp.ApplicationService
         {
             enumRepository = enumDal;
         }
-        public bool Add(EnumData data)
+        public JsonData Add(EnumData data)
         {
-            logDal.WriteLog(ELogType.DataInDBLog, 
-                string.Format(LogData.InsertDbNoteFormat(), typeof(EnumData).Name),
-                "insert", true);
-            return enumRepository.Add(data);
+            JsonData json = new JsonData() { Result = true };
+            try
+            {
+                data.Init();
+                int id = enumRepository.AddReturnId(data);
+                string jsonStr= DataHelp.JsonConvert.ConvertJson(data);
+                logDal.WriteLog(ELogType.DataInDBLog,
+                    string.Format(LogData.InsertDbNoteFormat(), typeof(EnumData).Name) + "json: \r\n" + jsonStr + "\r\n generate id=" + id,
+                    "insert", id > 0);
+                json.Success= id > 0;
+                return json;
+            }
+            catch(Exception ex)
+            {
+                json.Message = ex.Message;
+                return json;
+            }
         }
 
         public List<EnumData> QueryList(RequestParam param)

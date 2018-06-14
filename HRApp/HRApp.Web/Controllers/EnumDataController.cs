@@ -29,9 +29,21 @@ namespace HRApp.Web.Controllers
         [Description("存储")]
         public JsonResult SaveEnum(SampleRequestParam param) 
         {
-            Common.Data.JsonData json = new Common.Data.JsonData();
+            Common.Data.JsonData json = new Common.Data.JsonData() { Result=true};
+            int ev = 0;
+            if (!int.TryParse(param.Value, out ev))
+            {
+                json.Message = AppLanguage.Lang.Tip_EnumValueIsDigit;
+                return Json(json);
+            }
             IEnumDataService enumBll = IocMvcFactoryHelper.GetInterface<IEnumDataService>();
-            //EmployerServeStatue EAppSetting
+            json= enumBll.Add(new EnumData()
+            {
+                Name = param.Name,
+                Code = param.Code,
+                Value = ev,
+                Remark = param.Desc
+            });
             return Json(json);
         }
         public JsonResult ChangeMenuStatue(int id,bool isStop) 
