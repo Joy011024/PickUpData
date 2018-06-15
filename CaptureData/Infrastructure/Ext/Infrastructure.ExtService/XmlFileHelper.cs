@@ -297,8 +297,25 @@ namespace Infrastructure.ExtService
                  {
                      return;
                  }
-                 //设置
-                 pi.SetValue(data, recValue.Value, null);
+                 string value = recValue.Value.ToLower().Trim();
+                 if (pi.PropertyType.Name == typeof(bool).Name)
+                 {//xml中节点存储bool类型的内容不能直接转换为bool
+                     // 存的数据可能情形 0/1 ，false/true
+                     string[] arr = new string[] { "false", "true" };
+                    
+                     if (arr.Contains(value))
+                     {//数值
+                         pi.SetValue(data, (value != "true" ? true : false), null);
+                         return;
+                     }
+                     else
+                     {
+                         pi.SetValue(data, (value == "1" ? true : false), null);
+                         return;
+                     }
+                 }
+
+                 pi.SetValue(data, Convert.ChangeType(value,pi.PropertyType), null);
              }));
              return data;
         }

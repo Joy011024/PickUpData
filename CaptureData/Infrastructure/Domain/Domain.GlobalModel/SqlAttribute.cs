@@ -11,6 +11,8 @@ namespace Domain.GlobalModel
     /// </summary>
     public class TableFieldAttribute :Attribute
     {
+        [Description("可以忽略不当做数据表")]
+        public bool CanIgnoreAsTable { get; set; }
         [Description("数据库生成字段列表")]
         public string[] DbGeneratedFields;
         public string TableName { get; set; }

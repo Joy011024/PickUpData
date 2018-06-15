@@ -36,6 +36,28 @@ namespace HRApp.Model
         [DescriptionSort("默认数据库在相同的服务器")]
         DefaultDBIsSameServicePC=3
     }
+    [Domain.GlobalModel.TableField(CanIgnoreAsTable=true)]
+    public class GlobalSetting
+    {//这里面的字段均来自于EAppSetting 枚举成员
+        public bool ForceRefreshServiceAppSetting { get; set; }
+        public bool UsingRedisCache { get; set; }
+        public int DefaultQueryLimit { get; set; }
+        public int DefaultQuerySize { get; set; }
+        public bool UsingEmail { get; set; }
+        [Domain.GlobalModel.PropertyIgnoreField]
+        public short GridMaxLimitNum { get; set; }//调用接口时候进行校验
+        [Domain.GlobalModel.PropertyIgnoreField]
+        public short GridDefaultLimitNum { get; set; }//返回UI时的参数
+        public short GridLimitNum { get; set; }//实际情况
+        [Domain.GlobalModel.PropertyIgnoreField]
+        public short NonGridLimitMaxNum { get; set; }
+        [Domain.GlobalModel.PropertyIgnoreField]
+        public short NonGridLimitDefaultNum { get; set; }
+        public short NoGridLimitNum { get; set; }//实际情况
+        [Domain.GlobalModel.PropertyIgnoreField]
+        public string ReceiverInEmailActive { get; set; }//进行邮件系统激活时邮件接收人
+        public string MailInEmailActive { get; set; } //激活邮件时抄送人
+    }
     public enum EAppSetting 
     {
         [DescriptionSort("强制刷新服务端配置")]

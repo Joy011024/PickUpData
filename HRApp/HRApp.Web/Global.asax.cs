@@ -14,6 +14,7 @@ using HRApp.IApplicationService;
 using Domain.CommonData;
 using System.Diagnostics;
 using System.Text;
+using System.Configuration;
 namespace HRApp.Web
 {
     // 注意: 有关启用 IIS6 或 IIS7 经典模式的说明，
@@ -30,6 +31,7 @@ namespace HRApp.Web
             IocMvcFactoryHelper.GetIocDict(true);
             InitAppSetting.AppSettingItemsInDB = RefreshAppSetting.QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
             RefreshAppSetting.RefreshFileVersion();
+            AppProcess.GlobalXmlManage();
             AppProcess.CallTodo();
             //AppProcess.NowProcess();
         }
@@ -253,10 +255,11 @@ namespace HRApp.Web
                     {
                         text += string.Format("<br/> Guid{0}={1}", (i + 1), Guid.NewGuid().ToString().ToUpper());
                     }
+                    string receive= InitAppSetting.Global.ReceiverInEmailActive;
                     AppEmailData emailData = new AppEmailData()
                     {
                         EmailCreateTime = DateTime.Now,
-                        To = "158055983@qq.com",
+                        To = string.IsNullOrEmpty(receive) ? "158055983@qq.com" : receive,
                         Subject = "激活Email_"+DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat),
                         From = item.Account,
                         Body = text
@@ -327,6 +330,7 @@ namespace HRApp.Web
                 //读取xml配置
                 string xmlFile = InitAppSetting.DefaultLogPath + "/XmlConfig/AppConfig.xml";
                 //执行成功时间写入到xml中
+                UiCfgNode.NodeKeyValue = typeof(AppEmailAccount).Name;
                 AppEmailAccount appEmail = xmlFile.GetNodeSpecialeAttribute<AppEmailAccount>(UiCfgNode, nodeCfgFormat);
                 appEmail.EmailLastActiveTime = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat);
                 appEmail.EmailAccount = InitAppSetting.AppSettingItemsInDB[EAppSetting.SystemEmailSendBy.ToString()];
@@ -341,8 +345,7 @@ namespace HRApp.Web
        static XmlNodeDataAttribute UiCfgNode = new XmlNodeDataAttribute()
         {//字典所属上级节点信息
             NodeName = "configuration/appSettings",
-            NodeKeyName = "name",
-            NodeKeyValue = "AppEmailAccount"
+            NodeKeyName = "name"
         };
         static XmlNodeDataAttribute nodeCfgFormat = new XmlNodeDataAttribute()
         {//字典中每一项节点配置项
@@ -386,6 +389,14 @@ namespace HRApp.Web
         public static string GetStartWebOfProcess() 
         {
            return Environment.GetEnvironmentVariable("APP_POOL_ID", EnvironmentVariableTarget.Process);
+        }
+        public static void GlobalXmlManage() 
+        {//全局xml配置
+            string globalXml = ConfigurationManager.AppSettings["GlobalXmlName"];
+            string xmlDir = HttpContext.Current.Server.MapPath("/XmlConfig/" + globalXml);
+            //读取xml配置
+            UiCfgNode.NodeKeyValue = typeof(GlobalSetting).Name;
+            GlobalSetting global = xmlDir.GetNodeSpecialeAttribute<GlobalSetting>(UiCfgNode, nodeCfgFormat);
         }
     }
     public class AppEmailAccount

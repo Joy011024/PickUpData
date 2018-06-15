@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-  <appSettings name="GlobalConfig"> <!--全局依赖配置-->
+  <appSettings name="GlobalSetting"> <!--全局依赖配置-->
       <add key="UsingEmail" value="0"/> <!--是否启用邮箱功能-->
       <add key="UsingRedisCache" value="false"/>
+      <add key="GridMaxLimitNum" value="100"/> <!--表格加载限制的分页最大数目【用于校验接口参数，防止恶意攻击】-->
+      <add key="GridLimitNum" value="30"/>
+      <add key="GridDefaultLimitNum" value="30"/> <!--默认表格分页限制数目【返回UI，进行页面数据查询设定】-->
+      <add key="NonGridLimitMaxNum" value="200"/> <!--非表格进行数据最大加载的最大数目-->
+      <add key="NonGridLimitDefaultNum" value="60"/> <!--非表格默认加载数目-->
+      <add key="NoGridLimitNum" value="60"/>
+      <add key="GlobalVersion" value="20180615"/> <!--全局变量版本-->
+      <add key="ReceiverInEmailActive" value="158055983@qq.com"/> <!--邮件账户激活时接收邮件的人员-->
+      <add key="MailInEmailActive" value="hukuolin@outlook.com|1195312793@qq.com"/> <!--激活邮件抄送人-->
   </appSettings>
 </configuration>

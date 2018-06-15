@@ -111,6 +111,10 @@ namespace HRApp.Web
                 return ConfigurationManager.ConnectionStrings["AccountDBConnString"].ConnectionString;
             }
         }
+        /// <summary>
+        /// 全局配置
+        /// </summary>
+        public static GlobalSetting Global { get; set; }
     }
     public class ParamNameTemplate
     {
