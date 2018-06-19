@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.CommonData;
+using Domain.GlobalModel;
 namespace HRApp.Model
 {
+    [TableField(TableName = "ActiveData")]
     public class ActiveData:GuidBaseFieldContainTime
     {
         public DateTime ActiveBeginTime { get; set; }

@@ -770,5 +770,16 @@ namespace Infrastructure.MsSqlService.SqlHelper
             }
             return pms.ToArray();
         }
+        /// <summary>
+        /// 执行新增操作
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public  int ExcuteInsert<T>(T data) where T : class
+        {
+            string sql = GenerateInsertSql<T>();
+            return GenerateNoQuerySqlAndExcute(sql, data);
+        }
     }
 }
