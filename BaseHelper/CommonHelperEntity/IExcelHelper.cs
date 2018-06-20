@@ -432,10 +432,11 @@ namespace CommonHelperEntity
             { //行数目小于切割分割限制数目
                 book.Close();
                 return;
-            } try
+            } 
+            try
             {
 
-                DoCuttingExcel(sheet, fullDir, new CuttingParam()
+                DoCuttingExcel(sheet, et, new CuttingParam()
                 {
                     CuttingExcelSaveDir = fullDir,
                     CuttingSheetPageSize = pageSize,
@@ -448,7 +449,7 @@ namespace CommonHelperEntity
             }
             book.Close();
         }
-        static void DoCuttingExcel(ISheet sheet,string cuttingResultDir, CuttingParam param, ExcelOperateTodoCall doCuttingProcess)
+        static void DoCuttingExcel(ISheet sheet,EExcelType type, CuttingParam param, ExcelOperateTodoCall doCuttingProcess)
         {
             IRow head = sheet.GetRow(0);
             int number = sheet.LastRowNum / param.CuttingSheetPageSize;//将要分割多少个excel
@@ -463,7 +464,7 @@ namespace CommonHelperEntity
                }
                columns.Add(i, cn);
             }
-            string dir = cuttingResultDir + "/" + param.OriginExceleName;
+            string dir = param.CuttingExcelSaveDir + "/" + param.OriginExceleName;
             CuttingParam call = new CuttingParam()
             {
                 CuttingSheetPageSize = param.CuttingSheetPageSize,
@@ -474,7 +475,10 @@ namespace CommonHelperEntity
             doCuttingProcess(param);
             string format = Common.Data.CommonFormat.DateToMinuteIntFormat;
             string time = DateTime.Now.ToString(format);//文件夹格式戳
-
+            if (Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
             //提取列头
             for (int i = 0; i < number; i++)
             {
@@ -483,8 +487,15 @@ namespace CommonHelperEntity
                 call.DoCuttitRowEnd = param.CuttingSheetPageSize * (i+1)-1;
                 doCuttingProcess(call);
                 //进行操作
-                string span = DateTime.Now.ToString(format) + i;
+                string span = DateTime.Now.ToString(format) + i+"."+(type==EExcelType.Xls?EExcelType.Xls.ToString():EExcelType.Xlsx.ToString());
+                //只提取列头不为空的单元格
+                int end=call.DoCuttitRowEnd>=number?number:call.DoCuttitRowEnd;
+                //创建excel
 
+                for (int r   = call.DoCuttingRowBegin; r < end; r++)
+                {
+                    
+                }
                 //新建excel
                 call.Statue = OperateStatue.End;
                 doCuttingProcess(call);
