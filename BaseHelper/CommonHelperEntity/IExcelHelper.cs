@@ -49,6 +49,11 @@ namespace CommonHelperEntity
     }
      public delegate void SheetHeadDataToDo(NPOI.SS.UserModel.ISheet sheet);
      public delegate void SheetRowDataToDo<T>(NPOI.SS.UserModel.ISheet sheet, List<T> rows) where T : class;
+    /// <summary>
+    /// 进行excel操作时回调函数
+    /// </summary>
+    /// <param name="data"></param>
+    public delegate void ExcelOperateTodoCall(object data);
     public static class ExcelHelper 
     {
         public static DataTable ReadExcelSingleSheet<T>(this T helper, FileStream stream) where T : IExcelHelper 
@@ -381,10 +386,126 @@ namespace CommonHelperEntity
                     break;
                 case EExcelType.Xlsx:
                     excelBook = new NPOI.XSSF.UserModel.XSSFWorkbook(fs);
+                //其他格式的文件无法加载
+                    /*
+                     “ICSharpCode.SharpZipLib.Zip.ZipException”类型的未经处理的异常在 ICSharpCode.SharpZipLib.dll 中发生 
+其他信息: Wrong Local header signature: 0x4EBFBBEF
+                     */
                     break;
             }
             return excelBook;
         }
+        public static void ExcelCuttingPage(string excelDir, int cuttingSheetIndex, int pageSize, ExcelOperateTodoCall doCuttingProcess)
+        {
+            if (!File.Exists(excelDir))
+            {//文件不存在
+                return;
+            }
+            if (pageSize < 1)
+            {//分割数必须大于0的整数
+                return;
+            }
+            FileInfo fi = new FileInfo(excelDir);
+            string fullDir = fi.Directory.FullName;
+            string ext = fi.Extension;//文件扩展名格式
+            EExcelType et = EExcelType.Xlsx;
+            if (ext.Contains(EExcelType.Xls.ToString()))
+            {
+                et = EExcelType.Xls;
+            }
+            else if (ext.Contains(EExcelType.Xlsx.ToString()) || ext.Contains(EExcelType.Xlsm.ToString()))
+            {
+                et = EExcelType.Xlsx;
+            }
+            string name = fi.Name.Replace(ext, string.Empty);
+            IWorkbook book = GetExcelWorkBook(excelDir, et);
+            int si = book.NumberOfSheets;
+            if (si < cuttingSheetIndex)
+            {//查询页数目超出限制
+                book.Close();
+                return;
+            }
+            ISheet sheet = book.GetSheetAt(cuttingSheetIndex);
+            //读取标题行
+            int rn = sheet.LastRowNum;
+            if (rn <= pageSize - 1)
+            { //行数目小于切割分割限制数目
+                book.Close();
+                return;
+            } try
+            {
+
+                DoCuttingExcel(sheet, fullDir, new CuttingParam()
+                {
+                    CuttingExcelSaveDir = fullDir,
+                    CuttingSheetPageSize = pageSize,
+                    OriginExceleName = name
+                }, doCuttingProcess);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            book.Close();
+        }
+        static void DoCuttingExcel(ISheet sheet,string cuttingResultDir, CuttingParam param, ExcelOperateTodoCall doCuttingProcess)
+        {
+            IRow head = sheet.GetRow(0);
+            int number = sheet.LastRowNum / param.CuttingSheetPageSize;//将要分割多少个excel
+            Dictionary<int, string> columns = new Dictionary<int, string>();
+            for (int i = 0; i < head.LastCellNum; i++)
+            {
+               ICell cell=  head.GetCell(i);
+               string cn = string.Empty;
+               if (cell != null) 
+               {
+                   cn = cell.ToString().Trim();
+               }
+               columns.Add(i, cn);
+            }
+            string dir = cuttingResultDir + "/" + param.OriginExceleName;
+            CuttingParam call = new CuttingParam()
+            {
+                CuttingSheetPageSize = param.CuttingSheetPageSize,
+                CuttingExcelSaveDir = param.CuttingExcelSaveDir,
+                CanCuttingPageNumber = number,
+                Statue = OperateStatue.Will
+            };
+            doCuttingProcess(param);
+            string format = Common.Data.CommonFormat.DateToMinuteIntFormat;
+            string time = DateTime.Now.ToString(format);//文件夹格式戳
+
+            //提取列头
+            for (int i = 0; i < number; i++)
+            {
+                call.Statue = OperateStatue.Begin;
+                call.DoCuttingRowBegin = param.CuttingSheetPageSize * i+1;
+                call.DoCuttitRowEnd = param.CuttingSheetPageSize * (i+1)-1;
+                doCuttingProcess(call);
+                //进行操作
+                string span = DateTime.Now.ToString(format) + i;
+
+                //新建excel
+                call.Statue = OperateStatue.End;
+                doCuttingProcess(call);
+            }
+        }
+        public class CuttingParam
+        {
+            public string CuttingExcelSaveDir { get; set; }
+            public int CuttingSheetPageSize { get; set; }
+            public int DoCuttingRowBegin { get; set; }
+            public int DoCuttitRowEnd { get; set; }
+            public int CanCuttingPageNumber { get; set; }
+            public OperateStatue Statue { get; set; }
+            public string OriginExceleName { get; set; }
+        }
+    }
+    public enum OperateStatue 
+    {
+        Will=1,
+        Begin=2,
+        End=4
     }
     public class ExcelCompareActionHelp
     {
