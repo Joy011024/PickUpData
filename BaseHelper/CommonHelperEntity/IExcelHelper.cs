@@ -382,12 +382,16 @@ namespace CommonHelperEntity
             switch (excel)
             {
                 case EExcelType.Xls:
-                    excelBook = new HSSFWorkbook(fs);
+                    excelBook = new HSSFWorkbook(fs,true);
                     break;
                 case EExcelType.Xlsx:
                     excelBook = new NPOI.XSSF.UserModel.XSSFWorkbook(fs);
                 //其他格式的文件无法加载
+
                     /*
+                     “NPOI.POIFS.FileSystem.NotOLE2FileException”类型的未经处理的异常在 NPOI.dll 中发生 
+其他信息: Invalid header signature; read 0x2C656D614EBFBBEF, expected 0xE11AB1A1E011CFD0 - Your file appears not to be a valid OLE2 document
+                     
                      “ICSharpCode.SharpZipLib.Zip.ZipException”类型的未经处理的异常在 ICSharpCode.SharpZipLib.dll 中发生 
 其他信息: Wrong Local header signature: 0x4EBFBBEF
                      */
@@ -408,12 +412,12 @@ namespace CommonHelperEntity
             FileInfo fi = new FileInfo(excelDir);
             string fullDir = fi.Directory.FullName;
             string ext = fi.Extension;//文件扩展名格式
-            EExcelType et = EExcelType.Xlsx;
+            EExcelType et = EExcelType.Xls;
             if (ext.Contains(EExcelType.Xls.ToString()))
             {
                 et = EExcelType.Xls;
             }
-            else if (ext.Contains(EExcelType.Xlsx.ToString()) || ext.Contains(EExcelType.Xlsm.ToString()))
+            else if (ext.Contains(EExcelType.Xlsx.ToString()) )
             {
                 et = EExcelType.Xlsx;
             }
@@ -730,6 +734,89 @@ namespace CommonHelperEntity
         bool ValidRowDataExtend(object rowData)
         {//兼容验证行数据
             return true;   
+        }
+    }
+    public class CSVHelper 
+    {
+        private static bool IsUTF8Bytes(byte[] data)
+        {
+            int charByteCounter = 1;　 //计算当前正分析的字符应还有的字节数  
+            byte curByte; //当前分析的字节.  
+            for (int i = 0; i < data.Length; i++)
+            {
+                curByte = data[i];
+                if (charByteCounter == 1)
+                {
+                    if (curByte >= 0x80)
+                    {
+                        //判断当前  
+                        while (((curByte <<= 1) & 0x80) != 0)
+                        {
+                            charByteCounter++;
+                        }
+                        //标记位首位若为非0 则至少以2个1开始 如:110XXXXX...........1111110X　  
+                        if (charByteCounter == 1 || charByteCounter > 6)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    //若是UTF-8 此时第一位必须为1  
+                    if ((curByte & 0xC0) != 0x80)
+                    {
+                        return false;
+                    }
+                    charByteCounter--;
+                }
+            }
+            if (charByteCounter > 1)
+            {//非预期的byte格式
+                return false;
+            }
+            return true;
+        } 
+        public static System.Text.Encoding GetType(System.IO.FileStream fs)
+        {
+            byte[] Unicode = new byte[] { 0xFF, 0xFE, 0x41 };
+            byte[] UnicodeBIG = new byte[] { 0xFE, 0xFF, 0x00 };
+            byte[] UTF8 = new byte[] { 0xEF, 0xBB, 0xBF }; //带BOM  
+            System.Text.Encoding reVal = System.Text.Encoding.Default;
+
+            System.IO.BinaryReader r = new System.IO.BinaryReader(fs, System.Text.Encoding.Default);
+            int i;
+            int.TryParse(fs.Length.ToString(), out i);
+            byte[] ss = r.ReadBytes(i);
+            if (IsUTF8Bytes(ss) || (ss[0] == 0xEF && ss[1] == 0xBB && ss[2] == 0xBF))
+            {
+                reVal = System.Text.Encoding.UTF8;
+            }
+            else if (ss[0] == 0xFE && ss[1] == 0xFF && ss[2] == 0x00)
+            {
+                reVal = System.Text.Encoding.BigEndianUnicode;
+            }
+            else if (ss[0] == 0xFF && ss[1] == 0xFE && ss[2] == 0x41)
+            {
+                reVal = System.Text.Encoding.Unicode;
+            }
+            r.Close();
+            return reVal;
+        }  
+        public static void ReadCSVFile(string file) 
+        {
+            FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            Encoding enc= GetType(fs);
+            fs.Close();
+            fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            StreamReader sr = new StreamReader(fs,enc);
+            while (sr.Peek() > 0)
+            {
+                string tex = sr.ReadLine();
+            }
+            sr.Close();
+            fs.Close();
+
         }
     }
     public class CompareData
