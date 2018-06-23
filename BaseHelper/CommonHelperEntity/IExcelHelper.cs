@@ -277,6 +277,7 @@ namespace CommonHelperEntity
             book.Write(fileStream);
             fileStream.Close();
             book.Close();
+            //这里要进行垃圾回收，不然多次调用会出现内存泄漏
         }
         static void FillSheetHead(ISheet sheet)
         {
@@ -518,7 +519,35 @@ namespace CommonHelperEntity
         public static void CSVDataIntoFile(List<string> column,List<string> row,FileData fd,int curPointer)
         { 
             //csv 文件数据写入到excel
-            string file = fd.FileFullDir + "/" + fd.FileName + curPointer +"."+ EExcelType.Xlsx;
+            string cuttingDir = fd.FileFullDir + "/" + DateTime.Now.ToString("yyyyMMddHH");
+            if (!Directory.Exists(cuttingDir))
+            {
+                Directory.CreateDirectory(cuttingDir);
+            }
+            string file = cuttingDir + "/" + fd.FileName + curPointer + "." + EExcelType.Xlsx;
+            IWorkbook book = GetExcelWorkBook(file, EExcelType.Xlsx);
+            ISheet sheet= book.CreateSheet();
+            IRow head= sheet.CreateRow(0);
+            for (int i = 0; i < column.Count; i++)
+            {
+                ICell cell= head.CreateCell(i);
+                cell.SetCellValue(column[i]);
+            }
+            for (int i = 0; i < row.Count;i++ )
+            {
+                string item=row[i];
+                //csv 文件行数据内容以","分割
+                string[] columns = item.Split(',');
+                IRow r = sheet.CreateRow(i+1);
+                for (int c = 0; c < columns.Length; c++)
+                {
+                   ICell cell=  r.CreateCell(c);
+                   cell.SetCellValue(string.IsNullOrEmpty(columns[c]) ? string.Empty : columns[c]);
+                }
+            }
+            FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
+            fs.Flush();
+            SaveSheet(book, fs);
         }
     }
     public enum OperateStatue 
@@ -798,7 +827,7 @@ namespace CommonHelperEntity
             while (sr.Peek() > 0)
             {
                 string text = sr.ReadLine();
-                if (column.Count > 0)
+                if (column.Count <1)
                 {
                     foreach (var item in text.Split(','))
                     {
@@ -810,12 +839,11 @@ namespace CommonHelperEntity
                     //行数据入库
                     if(rows.Count>=pageSize)
                     {
+                        ExcelHelper.CSVDataIntoFile(column, rows, fd, fileCur); //数据写入到excel 
                         fileCur++;
                         rows.Clear();
                     }
                     rows.Add(text);
-                    //数据写入到excel
-                    ExcelHelper.CSVDataIntoFile(column, rows, fd, fileCur);
                 }
             }
             sr.Close();

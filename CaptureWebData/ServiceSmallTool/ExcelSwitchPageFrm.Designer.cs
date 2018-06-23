@@ -69,7 +69,7 @@
             this.txtNumber.Name = "txtNumber";
             this.txtNumber.Size = new System.Drawing.Size(100, 21);
             this.txtNumber.TabIndex = 4;
-            this.txtNumber.Text = "1000";
+            this.txtNumber.Text = "30000";
             // 
             // btnCut
             // 
