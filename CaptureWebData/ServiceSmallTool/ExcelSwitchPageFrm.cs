@@ -34,9 +34,10 @@ namespace ServiceSmallTool
             int size = 0;
             if (!int.TryParse(txtNumber.Text, out size))
             {
-                size = 500;
+                size = 30000;
             }
-            ExcelHelper.ExcelCuttingPage(selectFile.SelectFileFullName, 0, size, CallBack);
+            CSVHelper.ReadCSVFile(selectFile.SelectFileFullName,size);
+            //ExcelHelper.ExcelCuttingPage(selectFile.SelectFileFullName, 0, size, CallBack);
             //进行excel页分割动作
         }
         void CallBack(object data)

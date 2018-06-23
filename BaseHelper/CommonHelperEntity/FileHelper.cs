@@ -95,6 +95,15 @@ namespace CommonHelperEntity
             fs.Close();
             return line;;
         }
+        public static FileData GetFileInfo(string fileDir) 
+        {
+            FileInfo fi = new FileInfo(fileDir);
+            string fullDir = fi.Directory.FullName;
+            string ext = fi.Extension;//文件扩展名格式
+            string name = fi.Name.Replace(ext, string.Empty);
+            FileData fd = new FileData() { FileName = name, FileFullDir = fullDir };
+            return fd;
+        }
     }
     public  class FileFormatExt
     {
@@ -129,7 +138,6 @@ namespace CommonHelperEntity
             else if (ss[0] == Unicode[0] && ss[1] == Unicode[1] && ss[2] == Unicode[2])
                 reVal = Encoding.Unicode;
             br.Close();
-
             return reVal;
         }
         private static bool IsUTF8Bytes(byte[] data)
@@ -171,5 +179,11 @@ namespace CommonHelperEntity
             }
             return true;
         }
+    }
+    public class FileData
+    {
+        public string FileName { get; set; }
+        public string FileFullDir { get; set; }
+        public string FileParentDir { get; set; }
     }
 }

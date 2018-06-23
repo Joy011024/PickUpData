@@ -515,6 +515,11 @@ namespace CommonHelperEntity
             public OperateStatue Statue { get; set; }
             public string OriginExceleName { get; set; }
         }
+        public static void CSVDataIntoFile(List<string> column,List<string> row,FileData fd,int curPointer)
+        { 
+            //csv 文件数据写入到excel
+            string file = fd.FileFullDir + "/" + fd.FileName + curPointer +"."+ EExcelType.Xlsx;
+        }
     }
     public enum OperateStatue 
     {
@@ -777,42 +782,41 @@ namespace CommonHelperEntity
             }
             return true;
         } 
-        public static System.Text.Encoding GetType(System.IO.FileStream fs)
-        {
-            byte[] Unicode = new byte[] { 0xFF, 0xFE, 0x41 };
-            byte[] UnicodeBIG = new byte[] { 0xFE, 0xFF, 0x00 };
-            byte[] UTF8 = new byte[] { 0xEF, 0xBB, 0xBF }; //带BOM  
-            System.Text.Encoding reVal = System.Text.Encoding.Default;
+       
 
-            System.IO.BinaryReader r = new System.IO.BinaryReader(fs, System.Text.Encoding.Default);
-            int i;
-            int.TryParse(fs.Length.ToString(), out i);
-            byte[] ss = r.ReadBytes(i);
-            if (IsUTF8Bytes(ss) || (ss[0] == 0xEF && ss[1] == 0xBB && ss[2] == 0xBF))
-            {
-                reVal = System.Text.Encoding.UTF8;
-            }
-            else if (ss[0] == 0xFE && ss[1] == 0xFF && ss[2] == 0x00)
-            {
-                reVal = System.Text.Encoding.BigEndianUnicode;
-            }
-            else if (ss[0] == 0xFF && ss[1] == 0xFE && ss[2] == 0x41)
-            {
-                reVal = System.Text.Encoding.Unicode;
-            }
-            r.Close();
-            return reVal;
-        }  
-        public static void ReadCSVFile(string file) 
+        public static void ReadCSVFile(string file,int pageSize) 
         {
             FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            Encoding enc= GetType(fs);
+            Encoding enc = FileFormatExt.GetFileEncode(fs);
             fs.Close();
             fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             StreamReader sr = new StreamReader(fs,enc);
+            List<string> column = new List<string>();
+            List<string> rows = new List<string>();
+            FileData fd = FileHelper.GetFileInfo(file);
+            int fileCur = 0;
             while (sr.Peek() > 0)
             {
-                string tex = sr.ReadLine();
+                string text = sr.ReadLine();
+                if (column.Count > 0)
+                {
+                    foreach (var item in text.Split(','))
+                    {
+                        column.Add(item);
+                    }
+                }
+                else 
+                {
+                    //行数据入库
+                    if(rows.Count>=pageSize)
+                    {
+                        fileCur++;
+                        rows.Clear();
+                    }
+                    rows.Add(text);
+                    //数据写入到excel
+                    ExcelHelper.CSVDataIntoFile(column, rows, fd, fileCur);
+                }
             }
             sr.Close();
             fs.Close();
