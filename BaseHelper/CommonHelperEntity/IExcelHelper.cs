@@ -10,6 +10,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.ComponentModel;
 using DataHelp;
+using System.Runtime.InteropServices;
 namespace CommonHelperEntity
 {
     public class ExcelDataHelper : IExcelHelper { }
@@ -274,10 +275,14 @@ namespace CommonHelperEntity
         /// <param name="fileStream"></param>
         static void SaveSheet(IWorkbook book,FileStream fileStream) 
         {
-            book.Write(fileStream);
+            book.Write(fileStream);//出错位置
             fileStream.Close();
             book.Close();
             //这里要进行垃圾回收，不然多次调用会出现内存泄漏
+            /*
+             “System.OutOfMemoryException”类型的未经处理的异常在 mscorlib.dll 中发生
+{函数求值已禁用，因为出现内存不足异常。}
+             */
         }
         static void FillSheetHead(ISheet sheet)
         {
@@ -548,6 +553,7 @@ namespace CommonHelperEntity
             FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Write, FileShare.ReadWrite);
             fs.Flush();
             SaveSheet(book, fs);
+           // GC.Collect();
         }
     }
     public enum OperateStatue 
@@ -810,9 +816,24 @@ namespace CommonHelperEntity
                 return false;
             }
             return true;
-        } 
-       
+        }
 
+        #region 内存回收
+        [DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize")]
+        public static extern int SetProcessWorkingSetSize(IntPtr process, int minSize, int maxSize);
+        /// <summary>
+        /// 释放内存
+        /// </summary>
+        public static void ClearMemory()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+               SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+            }
+        }
+        #endregion
         public static void ReadCSVFile(string file,int pageSize) 
         {
             FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
@@ -839,8 +860,12 @@ namespace CommonHelperEntity
                     //行数据入库
                     if(rows.Count>=pageSize)
                     {
-                        ExcelHelper.CSVDataIntoFile(column, rows, fd, fileCur); //数据写入到excel 
                         fileCur++;
+                        ExcelHelper.CSVDataIntoFile(column, rows, fd, fileCur); //数据写入到excel 
+                        if (fileCur == 12)
+                        {//测试达到内存瓶颈值是否能是否内存
+                            ClearMemory();
+                        }
                         rows.Clear();
                     }
                     rows.Add(text);
