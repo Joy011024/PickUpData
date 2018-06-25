@@ -97,6 +97,7 @@ namespace HRApp.ApplicationService
         }
         public List<CategoryItems> QueryAll() 
         {
+            DateTime time = Domain.GlobalModel.AppRunData.RunTime;
             List<CategoryItems> items= appSettingRepository.QueryAll().ToList();
             //批量录入检索关键字
             Dictionary<int, string> dict = new Dictionary<int, string>();

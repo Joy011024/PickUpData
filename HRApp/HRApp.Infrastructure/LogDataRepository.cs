@@ -20,6 +20,7 @@ namespace HRApp.Infrastructure
 
         public bool WriteLog(ELogType type, string log, string title, bool isNormalLog)
         {
+            DateTime appTime = Domain.GlobalModel.AppRunData.RunTime;//程序启动时的时间
             LogData data = new LogData()
             {
                 CreateTime = DateTime.Now,

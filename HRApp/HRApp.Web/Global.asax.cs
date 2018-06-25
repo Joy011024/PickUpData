@@ -28,6 +28,8 @@ namespace HRApp.Web
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            Domain.GlobalModel.AppRunData.InitAppData();
+            Domain.GlobalModel.AppRunData.AppName = this.GetType().Name;
             IocMvcFactoryHelper.GetIocDict(true);
             InitAppSetting.AppSettingItemsInDB = RefreshAppSetting.QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
             RefreshAppSetting.RefreshFileVersion();

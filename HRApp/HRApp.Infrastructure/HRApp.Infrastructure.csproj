@@ -78,6 +78,10 @@
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.GlobalModel\Domain.GlobalModel.csproj">
+      <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
+      <Name>Domain.GlobalModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.MsSqlService.SqlHelper\Infrastructure.MsSqlService.SqlHelper.csproj">
       <Project>{43847d96-253a-4525-97ed-aca52340013b}</Project>
       <Name>Infrastructure.MsSqlService.SqlHelper</Name>

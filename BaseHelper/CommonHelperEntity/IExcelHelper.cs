@@ -862,8 +862,8 @@ namespace CommonHelperEntity
                     {
                         fileCur++;
                         ExcelHelper.CSVDataIntoFile(column, rows, fd, fileCur); //数据写入到excel 
-                        if (fileCur == 12)
-                        {//测试达到内存瓶颈值是否能是否内存
+                        if (fileCur %12==0)
+                        {//测试达到内存瓶颈值是否能是否内存[每次是否能实现该效果，但是每次是否对于出现虚拟内存和硬盘读写操作不利于硬盘的寿命]
                             ClearMemory();
                         }
                         rows.Clear();

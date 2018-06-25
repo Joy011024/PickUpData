@@ -45,6 +45,7 @@ namespace HRApp.ApplicationService
 
         public bool SendEmail(EmailSystemSetting setting, AppEmailData email, EnumSMTP smtpType)
         {
+            DateTime appTime = Domain.GlobalModel.AppRunData.RunTime;//程序启动时的时间
             if (email.EmailCreateTime.Equals(new DateTime()))
             {
                 email.EmailCreateTime = DateTime.Now;
@@ -120,6 +121,7 @@ namespace HRApp.ApplicationService
 
         public List<EmailAccount> QueryEmailAccountInDB()
         {
+            DateTime appTime = Domain.GlobalModel.AppRunData.RunTime;//程序启动时的时间
             List<EmailAccount> account = new List<EmailAccount>();
             foreach (var item in emailDataDal.QueryEmailAccounts())
             {
