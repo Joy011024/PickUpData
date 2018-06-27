@@ -169,5 +169,14 @@ namespace HRApp.Web.Controllers
 
             base.OnResultExecuting(filterContext);
         }
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            //视图方法执行之后触发
+            base.OnActionExecuted(filterContext);
+        }
+        public override void OnResultExecuted(ResultExecutedContext filterContext)
+        {
+            base.OnResultExecuted(filterContext);
+        }
     }
 }
