@@ -50,6 +50,10 @@ namespace Common.Data
         public string DateToMinuteFormatString = DateTime.Now.ToString(DateToMinuteIntFormat);
         public static string DateToHourIntFormat = "yyyyMMddHH";
         public string DateToHourIntFormatString = DateTime.Now.ToString(DateToHourIntFormat);
+        /// <summary>
+        /// 年月格式串
+        /// </summary>
+        public static string YearMonth = "yyyyMM";
     }
     public class DefaultSpecialSignAppConfig 
     {

@@ -50,7 +50,9 @@ namespace Domain.CommonData
         EmailBody=14,
         [Description("后台进程")]
         BackgroundProcess=15,
-        Account=16
+        Account=16,
+        [Description("心跳线检测")]
+        HeartBeatLine=17
     }
     /// <summary>
     /// 程序类型

@@ -77,6 +77,10 @@
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.GlobalModel\Domain.GlobalModel.csproj">
+      <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
+      <Name>Domain.GlobalModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\EmailHelper\EmailHelper.csproj">
       <Project>{0ba494a2-4acc-4277-8a68-b519d76a02b0}</Project>
       <Name>EmailHelper</Name>

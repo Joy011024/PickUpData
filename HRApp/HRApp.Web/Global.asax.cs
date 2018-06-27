@@ -15,6 +15,7 @@ using Domain.CommonData;
 using System.Diagnostics;
 using System.Text;
 using System.Configuration;
+using System.Threading.Tasks;
 namespace HRApp.Web
 {
     // 注意: 有关启用 IIS6 或 IIS7 经典模式的说明，
@@ -399,6 +400,19 @@ namespace HRApp.Web
             //读取xml配置
             UiCfgNode.NodeKeyValue = typeof(GlobalSetting).Name;
             GlobalSetting global = xmlDir.GetNodeSpecialeAttribute<GlobalSetting>(UiCfgNode, nodeCfgFormat);
+        }
+        async void AsyncExcuteLog() 
+        {/*
+          不能直接调用方法，否则异步无效
+          * 此异步方法缺少await运算符，将以同步方式运行。请考虑使用await运算符等待非阻止的API调用，或者使用await Task.Run(...)在后台线程上执行占用大量CPU的工作
+          
+          */
+            await Task.Run(() => KeepLog());
+        }
+        void KeepLog() 
+        {
+            string excute = DateTime.Now.ToString(" HHmmss");
+            LogExt.WriteLogProcess(excute,ELogType.HeartBeatLine);//心跳线检测日志痕迹
         }
     }
     public class AppEmailAccount

@@ -16,6 +16,7 @@ namespace HRApp.Web
         [Domain.CommonData.DescriptionSort("数据库版本号")]
         public static string DBVersion { get; set; }
         static string hrDbConnString;
+        public static string LogFileExtTimeFormat { get; set; }
         /// <summary>
         /// 数据库连接字符串
         /// </summary>
