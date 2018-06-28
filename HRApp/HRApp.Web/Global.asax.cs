@@ -37,6 +37,8 @@ namespace HRApp.Web
             AppProcess.GlobalXmlManage();
             AppProcess.CallTodo();
             //AppProcess.NowProcess();
+            TestClass tc = new TestClass();
+            tc.TestFun();
         }
         
     }
@@ -423,5 +425,56 @@ namespace HRApp.Web
         public string EmailTodayActiveIsSuccess { get; set; }
         public string EmailTodayActiveFailureNumber { get; set; }
         public string ExistsNoActiveEmailAccount { get; set; }
+    }
+    public class TestClass 
+    {
+        public void TestFun() 
+        {
+            B b = new B();
+            /*
+             //如果是使用子类声明
+             * 只调用子类的方法
+             */
+            b.ExcuteA();
+            b.ExcuteAFun();
+            /*
+             使用父类声明
+             */
+            A call = new B();
+            B cb = (B)call;
+            cb.ExcuteA();
+            cb.ExcuteAFun();
+            //子类调用：只触发子类方法
+            call.ExcuteA();
+            call.ExcuteAFun();
+            //父类调用：只调用父类
+            //子类调用：new只进入父类，override只调用父类
+        }
+    }
+    //new override 使用
+    public class A
+    {
+        public virtual void ExcuteA() 
+        {
+            Console.Write("Excute A");
+            //进入子函数
+        }
+        public virtual void ExcuteAFun() 
+        {
+            Console.Write("Excute A");
+        }
+    }
+    public class B : A 
+    {
+        public override void ExcuteA() 
+        {
+            //执行b的事件
+            Console.Write("Excute B");
+        }
+        public new void ExcuteAFun()
+        {
+            //执行b的事件
+            Console.Write("Excute B");
+        }
     }
 }
