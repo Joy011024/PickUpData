@@ -89,6 +89,12 @@ VALUES   ({Id},{PrimaryMsgId},{SendTime},{CreateTime},{IsDelete},{SendNumber}) "
         [DescriptionSort("重发次数")]
         public short TryAgain { get; set; }
         public EnumEmailBodyType BodyType { get; set; }
+        public string QueryWaitSendEmmails(int topNum) 
+        {//查询待发送的账号列表：结果为多个数据集，含有邮件内容信息，接收人列表
+            return @"select top {topNum} e.* from AppEmail e,AppEmailPlan p  
+where e.IsDelete=0 and e.Id=p.PrimaryMsgId and p.SendTime between {BeginSendTime} and {EndSendTime}
+and e.Id not exists(select count(1) from AppEmailData where e.id=EmailId)".Replace("{topNum}", topNum.ToString());
+        }
     }
     public class SampleEmailData 
     {

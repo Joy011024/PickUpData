@@ -25,6 +25,8 @@ namespace HRApp.Infrastructure
 
         public void QueryWaitSendEmailListDetail(int dayInt)
         {
+            //查询没有发送成功或者待发送的邮件
+
             throw new NotImplementedException();
         }
 
