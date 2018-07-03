@@ -347,15 +347,7 @@ namespace CaptureWebData
             ParameterizedThreadStart pth;
             if (!ckStartQuartz.Checked)
             {//不进行轮询
-                QQDataDA da = new QQDataDA();
-                da.QueryParam = param;
-                PickUpQQDoResponse response = da.QueryQQData(Cookie);
-                if (GatherFirstUin || !SystemConfig.OpenAutoQuertyDBTotal)
-                {//这里要改成在页面初始化时查询当前库数据量，其他情形交给另一线程查询
-                    QueryTodayPickUp();
-                    GatherFirstUin = false;
-                }
-                QuartzCallBack(response);
+                JustQuery(param);
             }
             else if (!ckBackGroundCall.Checked)
             {
@@ -405,6 +397,10 @@ namespace CaptureWebData
                     th.Start(p);
                     // job.CreateJobWithParam<JobAction<QQDataDA>>(new object[] { Cookie, param, del }, DateTime.Now, interval, repeact);
                 }
+                else
+                {
+                    JustQuery(param);
+                }
                 #endregion
             }
             else if (ckBackGroundCall.Checked&& ckStartQuartz.Checked)
@@ -413,6 +409,7 @@ namespace CaptureWebData
                 BackGrounForeachCallType(param);
                 #endregion
             }
+            #region 数据同步到核心库
             if (ckSyncUin.Checked)
             { //同步数据
                 string key=ForachCallEvent.SyncUinToCodeDB.ToString();
@@ -422,13 +419,24 @@ namespace CaptureWebData
                 }
                 DelegateData del=new DelegateData(){ BaseDel=BackGrounSyncUinToCoreDB,BaseDelegateParam=null};
                 BackGroundCallRunEvent.Add(key, del);
-                
             }
+            #endregion
             if (!backRun.IsBusy)
             {
-
                 backRun.RunWorkerAsync();
             }
+        }
+        private void JustQuery(QueryQQParam param) 
+        {
+            QQDataDA da = new QQDataDA();
+            da.QueryParam = param;
+            PickUpQQDoResponse response = da.QueryQQData(Cookie);
+            if (GatherFirstUin || !SystemConfig.OpenAutoQuertyDBTotal)
+            {//这里要改成在页面初始化时查询当前库数据量，其他情形交给另一线程查询
+                QueryTodayPickUp();
+                GatherFirstUin = false;
+            }
+            QuartzCallBack(response);
         }
         void BackstageRun<T>(object param) where T:Quartz.IJob
         {
@@ -840,6 +848,11 @@ namespace CaptureWebData
                 delete.BaseDel = QuartzCallBack;
                 BackGroundCallRunEvent.Add(key, delete);
                 //QuartzCallBack(param);
+            }
+            else 
+            {
+                //只查询一遍
+                JustQuery(param);
             }
         }
         private void cmbCity_SelectedIndexChanged(object sender, EventArgs e)
