@@ -293,6 +293,7 @@ ldw:1053723692";
     {
         public string SyncToCodeDB(int number,string waitSycnDBName) 
         {
+            //对于已经存在的id，也进行写入到同步数据表
             return @"insert into tecentdatada.dbo.tecentqqdata
 (ID,PickUpWhereId,age,city,country,distance,face,gender,nick,province,stat,uin,HeadImageUrl,CreateTime,ImgType)
 select top {number} 

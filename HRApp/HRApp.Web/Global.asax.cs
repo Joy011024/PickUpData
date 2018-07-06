@@ -450,6 +450,18 @@ namespace HRApp.Web
             //父类调用：只调用父类
             //子类调用：new只进入父类，override只调用父类
         }
+        static void CalculatePoint(int point)
+        {//菲波那切数列
+            int result = 0;
+            int temp = 0;
+            int param = 1;
+            for (int i = 1; i <= point; i++)
+            {
+                temp = result;
+                result = result + param;
+                param = temp;
+            }
+        }
     }
     //new override 使用
     public class A

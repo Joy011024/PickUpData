@@ -429,6 +429,8 @@
             // ckBackGroundCall
             // 
             this.ckBackGroundCall.AutoSize = true;
+            this.ckBackGroundCall.Checked = true;
+            this.ckBackGroundCall.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckBackGroundCall.Location = new System.Drawing.Point(851, 24);
             this.ckBackGroundCall.Name = "ckBackGroundCall";
             this.ckBackGroundCall.Size = new System.Drawing.Size(72, 16);
