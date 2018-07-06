@@ -32,4 +32,9 @@ namespace HRApp.Model
         [DescriptionSort("外键关联表RowValueType中主键id")]
         public int RowValueType { get; set; }
     }
+    [DescriptionSort("输出参数")]
+    public class OutputParam
+    {
+        public int Total { get; set; }
+    }
 }

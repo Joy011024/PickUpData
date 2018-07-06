@@ -182,11 +182,15 @@ namespace HRApp.Infrastructure
             DataSet ds = new SqlCmdHelper().ExcuteQuerySP(sql, sqlConnString, beginRow, endRow, typeof(T).Name, param);
             return DataHelp.DataReflection.DataSetConvert<T>(ds);
         }
-        public static List<T> QueryModels<T>(string sql, T entity, string sqlConnString) where T:class
+        public static List<R> QueryModels<R,T>(string sql, T entity, string sqlConnString) where T:class where  R:class
         {
             SqlCmdHelper help = new SqlCmdHelper() { SqlConnString=sqlConnString};
             DataSet ds= help.GenerateQuerySqlAndExcute<T>(sql, entity);
-            return DataHelp.DataReflection.ConvertModels<T>(ds);
+            if (ds == null)
+            { 
+                
+            }
+            return DataHelp.DataReflection.ConvertModels<R>(ds);
         }
     }
 }

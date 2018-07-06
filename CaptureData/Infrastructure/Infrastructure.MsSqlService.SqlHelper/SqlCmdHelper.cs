@@ -243,6 +243,8 @@ namespace Infrastructure.MsSqlService.SqlHelper
             {
                 return null;
             }
+            //判断sqlcmd中是否存在需要转换的备用属性映射
+
             Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
             List<SqlParameter> pms = new List<SqlParameter>();
             foreach (KeyValuePair<string, object> item in properties)

@@ -83,7 +83,7 @@ namespace HRApp.Infrastructure
             string[] col = columns.Keys.ToArray();
             EnumData ed = new EnumData() { Code = enumName };
             string sql = ed.QueryEnumMembersSqlFormat(col, isContainerDelete);
-            return CommonRepository.QueryModels<EnumData>(sql, ed, SqlConnString);
+            return CommonRepository.QueryModels<EnumData,EnumData>(sql, ed, SqlConnString);
         }
     }
 }

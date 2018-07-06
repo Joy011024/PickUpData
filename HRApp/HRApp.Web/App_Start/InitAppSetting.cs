@@ -116,6 +116,21 @@ namespace HRApp.Web
         /// 全局配置
         /// </summary>
         public static GlobalSetting Global { get; set; }
+        static string dateFormat;
+        /// <summary>
+        /// 日期格式
+        /// </summary>
+        public static string DateFormat
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(dateFormat))
+                {
+                    dateFormat = Common.Data.CommonFormat.DateFormat;
+                }
+                return dateFormat;
+            }
+        }
     }
     public class ParamNameTemplate
     {

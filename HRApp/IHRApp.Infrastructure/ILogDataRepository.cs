@@ -11,5 +11,6 @@ namespace IHRApp.Infrastructure
     {
         string SqlConnString { get; set; }
         bool WriteLog(ELogType type, string log, string title, bool isNormalLog);
+        List<LogData> QueryLogs(RequestParam param,out int total);
     }
 }

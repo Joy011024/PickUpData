@@ -1,13 +1,34 @@
-﻿@{
+﻿@using HRApp.Web;
+@using HRApp.Model;
+@using AppLanguage;
+@{
     Layout = null;
 }
-
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>LogDataList</title>
+    <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <script type="text/javascript">
+        var time = '@DateTime.Now.ToString(@InitAppSetting.DateFormat)';
+        $(function () {
+            bindPostAjax('/LogData/QueryDayLog', {
+                BeginTime: time
+            },
+            function (response, statue) {
+                var lay = layer;
+                if (response.Success) {
+                    lay.close(lay.index);
+                    lay.close($('body').data('dialog'));
+                    lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                    return;
+                }
+                lay.alert(response.Message, { title: '@Lang.LblTip' });
+                $('#btnQuery').trigger('click');
+            });
+        });
+    </script>
 </head>
 <body>
     <div>

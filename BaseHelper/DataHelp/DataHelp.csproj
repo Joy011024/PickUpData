@@ -48,6 +48,7 @@
     <Compile Include="DataReflection.cs" />
     <Compile Include="DictionaryExtension.cs" />
     <Compile Include="DistinctExtensions.cs" />
+    <Compile Include="EncryHelp.cs" />
     <Compile Include="EntityReflectionValidate.cs" />
     <Compile Include="EnumExtend.cs" />
     <Compile Include="ImageHelper.cs" />

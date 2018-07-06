@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using HRApp.Model;
 using HRApp.IApplicationService;
 using IHRApp.Infrastructure;
+using Domain.CommonData;
+using Common.Data;
 namespace HRApp.ApplicationService
 {
     public class LogDataService:ILogDataService
@@ -21,9 +23,33 @@ namespace HRApp.ApplicationService
             set;
         }
 
-        public List<LogData> QueryLogs(RequestParam param)
+        public JsonData QueryLogs(RequestParam param)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(param.BeginTime))
+            {
+                param.BeginTime = DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat);
+            }
+            JsonData json = new JsonData() { Result=true};
+            if (param.RowBeginIndex > param.RowEndIndex)
+            {
+                return json;
+            }
+            if (param.RowBeginIndex == param.RowEndIndex && param.RowBeginIndex == 0)
+            {
+                return json;
+            }
+            try
+            {
+                int total;
+                json.Data = LogDal.QueryLogs(param, out total);
+                json.Success = true;
+                json.Total = total;
+            }
+            catch (Exception ex)
+            {
+                json.Message = ex.Message;
+            }
+            return json;
         }
     }
 }
