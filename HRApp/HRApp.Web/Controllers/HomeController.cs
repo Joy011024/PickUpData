@@ -17,17 +17,23 @@ namespace HRApp.Web.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index(string Uid)
+        public ActionResult Index(string id)
         {
-            RouteValueDictionary route = RouteData.Values; // ViewContext.RouteData.Values;
-          
-            if (!route.ContainsKey("id"))
+            if (string.IsNullOrEmpty(id))
             {
-                string tocken = new TockenHelper().GenerateTocken();
-                route.Add("id", tocken);
+                RouteValueDictionary route = RouteData.Values;
+                if (!route.ContainsKey("id"))
+                {
+                    string tocken = new TockenHelper().GenerateTocken();
+                    route.Add("id", tocken);
+                }
+                ViewData["id"] = route["id"];
             }
-            //检测是否过期
-            ViewData["id"] = route["id"];
+            else
+            {
+                //检测是否过期
+                ViewData["id"] = id;
+            }
             return View();
         }
         public ActionResult UILayout() 

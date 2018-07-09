@@ -196,7 +196,7 @@ namespace HRApp.Web.Controllers
         public string GenerateTocken() 
         {
             Guid gid = Guid.NewGuid();
-            return gid.ToString();
+            return gid.ToString().ToLower();//url 会解析为小写
         }
     }
 }
