@@ -9,13 +9,13 @@ namespace DataHelp
     {
         public string publicKey { get; set; }
         public string privateKey { get; set; }
-        public string Encry(string origin, string publicKey)
+        public string Encry(string origin, string encry)
         {
             string enc = string.Empty;
 
             return enc;
         }
-        public string Decry()
+        public string Decry(string keyString,string decry)
         {
             string enc = string.Empty;
 

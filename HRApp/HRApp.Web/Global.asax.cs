@@ -466,6 +466,10 @@ namespace HRApp.Web
     //new override 使用
     public class A
     {
+        public A() 
+        {
+            ContructCall();
+        }
         public virtual void ExcuteA() 
         {
             Console.Write("Excute A");
@@ -475,9 +479,18 @@ namespace HRApp.Web
         {
             Console.Write("Excute A");
         }
+        public virtual void ContructCall() 
+        {
+        
+        }
     }
     public class B : A 
     {
+        int temp;
+        public B() 
+        {
+        
+        }
         public override void ExcuteA() 
         {
             //执行b的事件
@@ -488,5 +501,10 @@ namespace HRApp.Web
             //执行b的事件
             Console.Write("Excute B");
         }
+        public virtual void ContructCall() 
+        {
+            int y = temp;
+        }
     }
+     
 }

@@ -1,6 +1,7 @@
 ﻿@using HRApp.Web;
 @{
     Layout = null;
+    var tocken = ViewData["id"];
 }
 
 <!DOCTYPE html>
@@ -45,6 +46,7 @@
         }
     </style>
     <script type="text/javascript">
+        history.pushState({}, 'index', window.location.origin + '/home/index?id=' + '@tocken');
         $(function () {
             //$('#menus')
             bindPostAjax('/Menu/QueryAllMenuByFilter', {

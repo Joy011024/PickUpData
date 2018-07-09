@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Routing;
 using System.Web.Mvc;
 using Infrastructure.MsSqlService.SqlHelper;
 using EmailHelper;
@@ -18,8 +19,15 @@ namespace HRApp.Web.Controllers
 
         public ActionResult Index(string Uid)
         {
-            Test();
-            TestEmail();
+            RouteValueDictionary route = RouteData.Values; // ViewContext.RouteData.Values;
+          
+            if (!route.ContainsKey("id"))
+            {
+                string tocken = new TockenHelper().GenerateTocken();
+                route.Add("id", tocken);
+            }
+            //检测是否过期
+            ViewData["id"] = route["id"];
             return View();
         }
         public ActionResult UILayout() 

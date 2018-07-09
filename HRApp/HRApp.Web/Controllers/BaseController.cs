@@ -97,6 +97,16 @@ namespace HRApp.Web.Controllers
     }
     public class MvcActionResultHelperAttribute : System.Web.Mvc.ActionFilterAttribute
     {
+        string GetBrowserIp()
+        {
+            System.Collections.Specialized.NameValueCollection serverVariables = System.Web.HttpContext.Current.Request.ServerVariables;
+            string result= serverVariables["HTTP_X_FORWARDED_FOR"];
+            if (string.IsNullOrEmpty(result))
+            {
+                result = serverVariables["REMOTE_ADDR"];
+            }
+            return result;
+        }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {//此处理并非是客户端直接传递过来的参数，而是经过代码处理后的结果
             RequestContext request = filterContext.RequestContext;
@@ -153,7 +163,9 @@ namespace HRApp.Web.Controllers
                 sb.AppendLine("Platform=\t"+browserInfo.Platform);
                 string[] browserSupperMimeType = req.AcceptTypes;//HTTP预返回前端支持的文件格式
                 sb.AppendLine("\nAcceptTypes=\t" + string.Join(" ", browserSupperMimeType));
-                LoggerWriter.CreateLogFile(sb.ToString(), InitAppSetting.LogPath, ELogType.DebugData);
+                sb.AppendLine("Ip:"+GetBrowserIp());
+                string file = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
+                LoggerWriter.CreateLogFile(sb.ToString(), InitAppSetting.LogPath, ELogType.DebugData, file, true);
             }
             IDictionary<string, object> apiParamList = filterContext.ActionParameters;//进入接口传递的参数
             RouteData rd = filterContext.RouteData;
@@ -177,6 +189,14 @@ namespace HRApp.Web.Controllers
         public override void OnResultExecuted(ResultExecutedContext filterContext)
         {
             base.OnResultExecuted(filterContext);
+        }
+    }
+    public class TockenHelper 
+    {
+        public string GenerateTocken() 
+        {
+            Guid gid = Guid.NewGuid();
+            return gid.ToString();
         }
     }
 }
