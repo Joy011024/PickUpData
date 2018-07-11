@@ -36,9 +36,7 @@ namespace HRApp.Web
             RefreshAppSetting.RefreshFileVersion();
             AppProcess.GlobalXmlManage();
             AppProcess.CallTodo();
-            //AppProcess.NowProcess();
-            TestClass tc = new TestClass();
-            tc.TestFun();
+          
         }
         
     }
@@ -402,6 +400,7 @@ namespace HRApp.Web
             //读取xml配置
             UiCfgNode.NodeKeyValue = typeof(GlobalSetting).Name;
             GlobalSetting global = xmlDir.GetNodeSpecialeAttribute<GlobalSetting>(UiCfgNode, nodeCfgFormat);
+            InitAppSetting.Global = global;
         }
         async void AsyncExcuteLog() 
         {/*

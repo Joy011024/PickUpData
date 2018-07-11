@@ -38,6 +38,10 @@ namespace HRApp.ApplicationService
             {
                 return json;
             }
+            if (param.RowBeginIndex > param.RowEndIndex)
+            {
+                return json;
+            }
             try
             {
                 int total;

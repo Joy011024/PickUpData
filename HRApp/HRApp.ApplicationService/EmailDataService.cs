@@ -77,6 +77,9 @@ namespace HRApp.ApplicationService
                 //判断是否需要进行此刻邮件发送
                 if (email.SendTime.HasValue && email.SendTime.Value > DateTime.Now)
                 {//定时发送
+                    logDal.WriteLog(ELogType.EmailBody,
+                    string.Format("Save email to DB:【{0}】", mailTo)
+                , ELogType.EmailBody.ToString(), true);
                     return true;
                 }
                 EmailService es = new EmailService(setting.EmailHost, setting.EmailAccount, setting.EmailAuthortyCode, setting.EmailHostPort, true) { LogPath=LogPath};

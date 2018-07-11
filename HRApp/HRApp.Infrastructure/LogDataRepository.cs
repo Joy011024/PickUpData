@@ -52,7 +52,7 @@ namespace HRApp.Infrastructure
             DateTime qd= DateTime.ParseExact(day, Common.Data.CommonFormat.DateFormat, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None);
             int dayInt = int.Parse(qd.ToString(Common.Data.CommonFormat.DateIntFormat));
             //exec SP_QueryDayLog 20180705 ,1,200,@total out
-            string exec = string.Format("exec SP_QueryDayLog {0} ,{1},{2},@total out", dayInt, param.RowBeginIndex, param.RowEndIndex);
+            string exec = string.Format("exec SP_QueryDayLog {0} ,{1},{2} ", dayInt, param.RowBeginIndex, param.RowEndIndex) + ",{Total}";
             OutputParam p = new OutputParam();
             List<LogData> data= CommonRepository.QueryModels<LogData,OutputParam>(exec, p, SqlConnString);
             total = p.Total;
