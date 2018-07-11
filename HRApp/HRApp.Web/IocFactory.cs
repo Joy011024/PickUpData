@@ -11,9 +11,22 @@ namespace HRApp.Web
 {
     public class InterfaceIocHelper 
     {
+        static Dictionary<string, Assembly> loadAss = new Dictionary<string, Assembly>();
         public T IocConvert<T>(string assemblyDir, string assemblyName, string namespaceName, string className) where T : class
         {
-            Assembly target = Assembly.LoadFrom(assemblyDir + assemblyName);//加载dll
+            string assPath = assemblyDir + assemblyName;
+            Assembly target;
+            #region 避免多次加载
+            if (loadAss.ContainsKey(assPath))
+            {
+               target= loadAss[assPath];
+            }
+            else 
+            {
+                target = Assembly.LoadFrom(assPath);//加载dll
+                loadAss.Add(assPath, target);
+            }
+            #endregion
             // object create = target.CreateInstance(namespaceName + "." + className, true);
             Type t = target.GetType(namespaceName + "." + className, false, true);//name=命名空间.类名称
             if (t == null)
