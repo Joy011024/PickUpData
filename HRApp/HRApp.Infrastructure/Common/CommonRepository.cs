@@ -182,15 +182,28 @@ namespace HRApp.Infrastructure
             DataSet ds = new SqlCmdHelper().ExcuteQuerySP(sql, sqlConnString, beginRow, endRow, typeof(T).Name, param);
             return DataHelp.DataReflection.DataSetConvert<T>(ds);
         }
-        public static List<R> QueryModels<R,T>(string sql, T entity, string sqlConnString) where T:class where  R:class
+        public static List<R> QueryModels<R,T>(string sql, T entity, string sqlConnString,Dictionary<ParameterDirection,string[]> paramDirection=null) where T:class where  R:class
         {
             SqlCmdHelper help = new SqlCmdHelper() { SqlConnString=sqlConnString};
-            DataSet ds= help.GenerateQuerySqlAndExcute<T>(sql, entity);
+            DataSet ds = help.GenerateQuerySqlAndExcute<T>(sql, entity, paramDirection);
             if (ds == null)
             { 
                 
             }
             return DataHelp.DataReflection.ConvertModels<R>(ds);
+        }
+        /// <summary>
+        /// 查询存储过程，获取数据结构
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storedProcedure"></param>
+        /// <param name="sqlConnString"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static List<T> QueryProcedure<T>(string storedProcedure, string sqlConnString, SqlParameter[] param) where T : class
+        {
+            DataSet ds = new SqlCmdHelper().ExcuteQuerySP(storedProcedure, sqlConnString, null, null, typeof(T).Name, param);
+            return DataHelp.DataReflection.DataSetConvert<T>(ds);
         }
     }
 }

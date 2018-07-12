@@ -236,16 +236,29 @@ namespace Infrastructure.MsSqlService.SqlHelper
             conn.Close();
             return result;
         }
-
-        public DataSet GenerateQuerySqlAndExcute<T>(string sqlCmd, T entity) where T : class
+        /// <summary>
+        /// 生成查询命令并执行查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sqlCmd"></param>
+        /// <param name="entity"></param>
+        /// <param name="paramDirection">作为输出参数的属性集合</param>
+        /// <returns></returns>
+        public DataSet GenerateQuerySqlAndExcute<T>(string sqlCmd, T entity,Dictionary<ParameterDirection,string[]> paramDirection=null) where T : class
         {
             if (string.IsNullOrEmpty(SqlConnString))
             {
                 return null;
             }
             //判断sqlcmd中是否存在需要转换的备用属性映射
-
             Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
+            if (paramDirection == null||paramDirection.Count==0)
+            {
+                paramDirection.Add(ParameterDirection.Output, new string[0]);
+            }
+            string[] outputParam = paramDirection[ParameterDirection.Output];
+            //输出参数 -属性-- 参数列表索引 关系
+            Dictionary<int, string> outPutRely = new Dictionary<int, string>();
             List<SqlParameter> pms = new List<SqlParameter>();
             foreach (KeyValuePair<string, object> item in properties)
             {
@@ -255,11 +268,19 @@ namespace Infrastructure.MsSqlService.SqlHelper
                 {
                     sqlCmd = sqlCmd.Replace(field, paramName);
                     //获取参数的数据类型
-                    SqlParameter p = new SqlParameter(paramName, item.Value == null ? DBNull.Value : item.Value);
+                    SqlParameter p = new SqlParameter(paramName, item.Value == null ? DBNull.Value : item.Value) 
+                    { 
+                        DbType=(item.GetType().Name==typeof(int).Name)? DbType.Int32:DbType.String
+                    };
+                    //需要判断是否作为输出参数
+                    if (outputParam.Contains(field))
+                    {
+                        p.Direction = ParameterDirection.Output;
+                        outPutRely.Add(pms.Count, item.Key);
+                    }
                     pms.Add(p);
                 }
             }
-            
             SqlConnection conn = new SqlConnection(SqlConnString);
             conn.Open();
             SqlCommand comm = new SqlCommand(sqlCmd, conn);
@@ -272,6 +293,26 @@ namespace Infrastructure.MsSqlService.SqlHelper
             DataSet ds = new DataSet();
             dap.Fill(ds);
             conn.Close();
+            //将输出参数列表数据写入到参数中
+            if (outPutRely.Count == 0)
+            {
+                return ds;
+            }
+            Type pt = entity.GetType();
+            foreach (var item in outPutRely)
+            {
+                object obj = pms[item.Key].Value;
+                if (obj != null)
+                {
+                    string v = obj.ToString();
+                    if (!string.IsNullOrEmpty(v))
+                    {
+                        PropertyInfo p = pt.GetProperty(item.Value);//类型“System.String”的对象无法转换为类型“System.Int32”。
+                        p.SetValue(entity, Convert.ChangeType(v, p.PropertyType), null);
+                    }
+                }
+               
+            }
             return ds;
         }
         /// <summary>

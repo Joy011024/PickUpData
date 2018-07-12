@@ -117,4 +117,43 @@ namespace Infrastructure.EFMsSQL
             return obj;
         }
     }
+    public class MainDBContext<T> : DbContext where T:class
+    {
+        public MainDBContext(string connString)
+        {
+            SwitchDB(connString);
+        }
+        public void SwitchDB(string connString) 
+        {
+            this.Database.Connection.ConnectionString = connString;
+        }
+        private DbSet<T> Entity { get; set; }
+    }
+    public class InitDBContext : DbContext
+    {
+        public InitDBContext(string connString) :base(connString)
+        {
+            this.Database.CreateIfNotExists();//如果数据库没有则进行创建
+        }
+        //定义实体类列表
+
+    }
+    public class SwitchDB 
+    {
+        string[] dbList;
+        public SwitchDB() 
+        {
+             dbList = new string[2] ;
+
+        }
+        public void InitDBCase(int dbIndex) 
+        {
+            if (dbIndex >= dbList.Length)
+            {
+                return;
+            }
+            string db = dbList[dbIndex];
+
+        }
+    }
 }

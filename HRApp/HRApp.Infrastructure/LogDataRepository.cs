@@ -8,6 +8,8 @@ using IHRApp.Infrastructure;
 using Domain.CommonData;
 using Common.Data;
 using Infrastructure.MsSqlService.SqlHelper;
+using System.Data;
+using System.Data.SqlClient;
 namespace HRApp.Infrastructure
 {
     public class LogDataRepository:ILogDataRepository
@@ -51,11 +53,15 @@ namespace HRApp.Infrastructure
             //将这个日期转换为指定的日期串【兼容传递的值为 date或者datetime】
             DateTime qd= DateTime.ParseExact(day, Common.Data.CommonFormat.DateFormat, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None);
             int dayInt = int.Parse(qd.ToString(Common.Data.CommonFormat.DateIntFormat));
-            //exec SP_QueryDayLog 20180705 ,1,200,@total out
-            string exec = string.Format("exec SP_QueryDayLog {0} ,{1},{2} ", dayInt, param.RowBeginIndex, param.RowEndIndex) + ",{Total}";
-            OutputParam p = new OutputParam();
-            List<LogData> data= CommonRepository.QueryModels<LogData,OutputParam>(exec, p, SqlConnString);
-            total = p.Total;
+            //exec SP_QueryDayLog 20180705 ,1,200,@total out 使用这样的形式没法获取到输出参数，修改未调用存储过程
+            List<SqlParameter> ps = new List<SqlParameter>();
+            ps.Add(new SqlParameter() { ParameterName = "@day" ,Value=dayInt});
+            ps.Add(new SqlParameter() { ParameterName = "@beginRow", Value = param.RowBeginIndex });
+            ps.Add(new SqlParameter() { ParameterName = "@endRow", Value = param.RowEndIndex });
+            ps.Add(new SqlParameter() { ParameterName = "@total",Direction=ParameterDirection.Output,DbType=DbType.Int32});
+            List<LogData> data= CommonRepository.QueryProcedure<LogData>("SP_QueryDayLog",  SqlConnString,ps.ToArray());
+            object obj = ps[ps.Count - 1].Value;
+            total = (int)obj;
             return data;
         }
     }

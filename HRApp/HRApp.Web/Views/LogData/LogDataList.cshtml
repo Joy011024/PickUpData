@@ -15,7 +15,9 @@
         var time = '@DateTime.Now.ToString(@InitAppSetting.DateFormat)';
         $(function () {
             bindPostAjax('/LogData/QueryDayLog', {
-                BeginTime: time
+                BeginTime: time,
+                RowBeginIndex: 1,
+                RowEndIndex:30
             },
             function (response, statue) {
                 var lay = layer;
