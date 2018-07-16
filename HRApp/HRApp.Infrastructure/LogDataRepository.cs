@@ -55,13 +55,16 @@ namespace HRApp.Infrastructure
             int dayInt = int.Parse(qd.ToString(Common.Data.CommonFormat.DateIntFormat));
             //exec SP_QueryDayLog 20180705 ,1,200,@total out 使用这样的形式没法获取到输出参数，修改未调用存储过程
             List<SqlParameter> ps = new List<SqlParameter>();
-            ps.Add(new SqlParameter() { ParameterName = "@day" ,Value=dayInt});
-            ps.Add(new SqlParameter() { ParameterName = "@beginRow", Value = param.RowBeginIndex });
-            ps.Add(new SqlParameter() { ParameterName = "@endRow", Value = param.RowEndIndex });
-            ps.Add(new SqlParameter() { ParameterName = "@total",Direction=ParameterDirection.Output,DbType=DbType.Int32});
-            List<LogData> data= CommonRepository.QueryProcedure<LogData>("SP_QueryDayLog",  SqlConnString,ps.ToArray());
-            object obj = ps[ps.Count - 1].Value;
-            total = (int)obj;
+            string exec = "  exec SP_QueryDayLog {day},{beginRow},{endRow} ,{total} output";
+            /*
+             * 如果存在一个参数被赋值：
+             必须传递参数 4，并以 '@name = value' 的形式传递后续的参数。一旦使用了 '@name = value' 形式之后，所有后续的参数就必须以 '@name = value' 的形式传递。
+             */
+            LogQueryParam p = new LogQueryParam() { day=dayInt,beginRow=param.RowBeginIndex,endRow=param.RowEndIndex};
+            Dictionary<ParameterDirection, string[]> dict = new Dictionary<ParameterDirection, string[]>();
+            dict.Add(ParameterDirection.Output, new string[] { "total" });
+            List<LogData> data = CommonRepository.QueryModels<LogData, LogQueryParam>(exec, p, SqlConnString, dict);
+            total = p.total;
             return data;
         }
     }

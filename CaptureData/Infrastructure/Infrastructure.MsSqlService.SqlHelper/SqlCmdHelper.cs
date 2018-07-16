@@ -254,6 +254,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
             Dictionary<string, object> properties = entity.GetAllPorpertiesNameAndValues();
             if (paramDirection == null||paramDirection.Count==0)
             {
+                paramDirection = new Dictionary<ParameterDirection, string[]>();
                 paramDirection.Add(ParameterDirection.Output, new string[0]);
             }
             string[] outputParam = paramDirection[ParameterDirection.Output];
@@ -273,7 +274,7 @@ namespace Infrastructure.MsSqlService.SqlHelper
                         DbType=(item.GetType().Name==typeof(int).Name)? DbType.Int32:DbType.String
                     };
                     //需要判断是否作为输出参数
-                    if (outputParam.Contains(field))
+                    if (outputParam.Contains(item.Key))
                     {
                         p.Direction = ParameterDirection.Output;
                         outPutRely.Add(pms.Count, item.Key);

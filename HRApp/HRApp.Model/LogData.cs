@@ -35,6 +35,12 @@ namespace HRApp.Model
     [DescriptionSort("输出参数")]
     public class OutputParam
     {
-        public int Total { get; set; }
+        public int total { get; set; }
+    }
+    public class LogQueryParam:OutputParam
+    {
+        public int day { get; set; }
+        public int beginRow { get; set; }
+        public int endRow { get; set; }
     }
 }
