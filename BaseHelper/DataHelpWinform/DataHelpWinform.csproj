@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{421359CA-DB48-4A13-BB59-D29965258EE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataHelpWinform</RootNamespace>
+    <AssemblyName>DataHelpWinform</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Data">
+      <HintPath>..\bin\Debug\Common.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonHelperEntity">
+      <HintPath>..\bin\Debug\CommonHelperEntity.dll</HintPath>
+    </Reference>
+    <Reference Include="DataHelp">
+      <HintPath>..\bin\Debug\DataHelp.dll</HintPath>
+    </Reference>
+    <Reference Include="EmailHelper">
+      <HintPath>..\..\CaptureData\Infrastructure\Ext\bin\Debug\EmailHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ColorPickUp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ColorPickUp.Designer.cs">
+      <DependentUpon>ColorPickUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColorPickUpWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ColorPickUpWin.Designer.cs">
+      <DependentUpon>ColorPickUpWin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ColorRgbData.cs" />
+    <Compile Include="ComboBoxHelp.cs" />
+    <Compile Include="CommonClass.cs" />
+    <Compile Include="CustormAppConfig.cs" />
+    <Compile Include="DataGenerateHelper.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataGenerateHelper.Designer.cs">
+      <DependentUpon>DataGenerateHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataReflection.cs" />
+    <Compile Include="DateTimePickerExt.cs" />
+    <Compile Include="DelegateEvent.cs" />
+    <Compile Include="FileDialog.cs" />
+    <Compile Include="ListViewExtend.cs" />
+    <Compile Include="MessageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageDialog.Designer.cs">
+      <DependentUpon>MessageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PageDataHelp.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SelectFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SelectFile.Designer.cs">
+      <DependentUpon>SelectFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SetFilePath.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SetFilePath.Designer.cs">
+      <DependentUpon>SetFilePath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SetTimeInterval.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SetTimeInterval.Designer.cs">
+      <DependentUpon>SetTimeInterval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SetTimeIntrevalWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetTimeIntrevalWin.Designer.cs">
+      <DependentUpon>SetTimeIntrevalWin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextBoxHelper.cs" />
+    <Compile Include="TransparentPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TransparentPanel.Designer.cs">
+      <DependentUpon>TransparentPanel.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorPickUp.resx">
+      <DependentUpon>ColorPickUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColorPickUpWin.resx">
+      <DependentUpon>ColorPickUpWin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataGenerateHelper.resx">
+      <DependentUpon>DataGenerateHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MessageDialog.resx">
+      <DependentUpon>MessageDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectFile.resx">
+      <DependentUpon>SelectFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetFilePath.resx">
+      <DependentUpon>SetFilePath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetTimeInterval.resx">
+      <DependentUpon>SetTimeInterval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetTimeIntrevalWin.resx">
+      <DependentUpon>SetTimeIntrevalWin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransparentPanel.resx">
+      <DependentUpon>TransparentPanel.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -15,10 +15,9 @@ namespace ServiceSmallTool
         /// </summary>
         [STAThread]
         static void Main()
-        {
-            Application.EnableVisualStyles();
+        {   Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ExcelSwitchPageFrm());
+            Application.Run(new ParallelFrm());
         }
         static void Pick() 
         {
@@ -40,3 +39,4 @@ namespace ServiceSmallTool
         }
     }
 }
+ 

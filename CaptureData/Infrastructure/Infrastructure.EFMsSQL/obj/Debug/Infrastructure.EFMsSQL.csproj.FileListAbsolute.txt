@@ -58,6 +58,6 @@ F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\CaptureData
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\InfrastructureRepository.IMainContext.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\InfrastructureRepository.IMainContext.pdb
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\bin\Debug\EntityFramework.xml
+F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.csprojResolveAssemblyReference.cache
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.dll
 F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.pdb
-F:\SecurityData\GitCodeVerify\CaptureWebDataCode\TeamCode\PickUpData\CaptureData\Infrastructure\Infrastructure.EFMsSQL\obj\Debug\Infrastructure.EFMsSQL.csprojResolveAssemblyReference.cache

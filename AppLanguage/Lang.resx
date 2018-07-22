@@ -357,4 +357,10 @@
   <data name="Tip_EnumValueIsDigit" xml:space="preserve">
     <value>字典值应该使用数值</value>
   </data>
+  <data name="Tip_PleaseSelectDate" xml:space="preserve">
+    <value>请选择日期</value>
+  </data>
+  <data name="Tip_PleaseSelectTime" xml:space="preserve">
+    <value>请选择时间</value>
+  </data>
 </root>

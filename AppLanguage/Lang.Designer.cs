@@ -736,6 +736,15 @@ namespace AppLanguage {
         }
         
         /// <summary>
+        ///   查找类似 请选择日期 的本地化字符串。
+        /// </summary>
+        public static string Tip_PleaseSelectDate {
+            get {
+                return ResourceManager.GetString("Tip_PleaseSelectDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 请选择文件 的本地化字符串。
         /// </summary>
         public static string Tip_PleaseSelectFile {
@@ -750,6 +759,15 @@ namespace AppLanguage {
         public static string Tip_PleaseSelectParentNode {
             get {
                 return ResourceManager.GetString("Tip_PleaseSelectParentNode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请选择时间 的本地化字符串。
+        /// </summary>
+        public static string Tip_PleaseSelectTime {
+            get {
+                return ResourceManager.GetString("Tip_PleaseSelectTime", resourceCulture);
             }
         }
         

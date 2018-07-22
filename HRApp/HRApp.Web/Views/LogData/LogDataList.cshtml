@@ -9,33 +9,68 @@
     <meta name="viewport" content="width=device-width" />
     <title>LogDataList</title>
     <script src="~/Scripts/jquery-1.9.1.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Scripts/bootstrap-select/bootstrap.min.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <link href="~/Scripts/bootstrap-select/bootstrap-select.css?v=@InitAppSetting.Version" rel="stylesheet" />
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/layer3.0/layer.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-select/bootstrap.min.js?v=@InitAppSetting.Version"></script>
+    <script src="~/Scripts/bootstrap-select/bootstrap-select.js?v=@InitAppSetting.Version"></script>
     <script src="~/Scripts/Common/Common.js?v=@InitAppSetting.Version"></script>
+    <link href="~/Content/AppLayout.css?v=@InitAppSetting.Version" rel="stylesheet" />
     <script type="text/javascript">
-        var time = '@DateTime.Now.ToString(@InitAppSetting.DateFormat)';
+        var columns = [
+           { text: '@Lang.LblSortName', map: 'Index' },
+           { text: '@Lang.LblName', map: 'Title' },
+           { text: '@Lang.LblCode', map: 'Note' },
+           { text: '@Lang.Tip_Success', map: 'IsError' }
+        ];
         $(function () {
-            bindPostAjax('/LogData/QueryDayLog', {
-                BeginTime: time,
-                RowBeginIndex: 1,
-                RowEndIndex:30
-            },
-            function (response, statue) {
-                var lay = layer;
-                if (response.Success) {
-                    lay.close(lay.index);
-                    lay.close($('body').data('dialog'));
-                    lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
-                    return;
-                }
-                lay.alert(response.Message, { title: '@Lang.LblTip' });
-                $('#btnQuery').trigger('click');
-            });
+            $('#btnQuery').click(function () {
+                btnQueryEvent();
+            }).trigger('click');
+
         });
+        function btnQueryEvent() {
+            bindPostAjax('/LogData/QueryDayLog', {
+                BeginTime: $('#txtSendTimeDate').val(),
+                RowBeginIndex: 1,
+                RowEndIndex: 30
+            },
+           function (response, statue) {
+               var lay = layer;
+               if (response.Success) {
+                   lay.close(lay.index);
+                   lay.close($('body').data('dialog'));
+                   lay.alert(lang.tip.Success, { title: '@Lang.LblTip' });
+                   return;
+               }
+               lay.alert(response.Message, { title: '@Lang.LblTip' });
+           });
+        }
+        function loadData() {
+            $('#grid').bootstrapTable({
+
+            });
+        }
     </script>
 </head>
 <body>
     <div>
-        
+        <div id="btns">
+            <span>
+                <span>
+                    <label>@Lang.LblKeyWord</label>
+                    <input type="text" id="txtKeyWord" />
+                    <input type="text" id="txtSendTimeDate" onfocus="WdatePicker({ skin: 'whyGreen', dateFmt: 'yyyy-MM-dd' })" class="input-text Wdate columnLayout smallInput" value="@DateTime.Now.ToString(Common.Data.CommonFormat.DateFormat)" placeholder="@Lang.Tip_PleaseSelectDate" />
+                </span>
+                <span>
+                    <button id="btnQuery" class="button buttonSmall">@Lang.BtnQuery</button>
+                </span>
+            </span>
+        </div>
+        <div id="grid">
+
+        </div>
     </div>
 </body>
 </html>

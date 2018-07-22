@@ -73,6 +73,12 @@
     <Compile Include="ExcelSwitchPageFrm.Designer.cs">
       <DependentUpon>ExcelSwitchPageFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ParallelFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParallelFrm.Designer.cs">
+      <DependentUpon>ParallelFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ClearLogFrm.resx">
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExcelSwitchPageFrm.resx">
       <DependentUpon>ExcelSwitchPageFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParallelFrm.resx">
+      <DependentUpon>ParallelFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -122,6 +131,10 @@
     <ProjectReference Include="..\..\BaseHelper\CommonHelperEntity\CommonHelperEntity.csproj">
       <Project>{32c60c3a-c56e-457d-b553-be076218fd5a}</Project>
       <Name>CommonHelperEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BaseHelper\DataHelpWinform\DataHelpWinform.csproj">
+      <Project>{421359ca-db48-4a13-bb59-d29965258ee5}</Project>
+      <Name>DataHelpWinform</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>

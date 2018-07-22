@@ -29,9 +29,9 @@ namespace CaptureWebData
             DataLink dl = new DataLink();
             StringBuilder tip = new StringBuilder();
             tip.AppendLine("time:\t" + DateTime.Now.ToString(SystemConfig.DateTimeFormat));
-            tip.AppendLine("Guid:\t" + Guid.NewGuid());
+            tip.AppendLine("App :\t CaptureWebData");
+            tip.AppendLine("Event:run app");
             dl.SendDataToOtherPlatform(LanguageItem.Tip_PickUpErrorlockAccount, tip.ToString());//需要知道当前在进行采集的账户
-
             PickUpTianMaoHtml tm = new PickUpTianMaoHtml();
             string dir= new AppDirHelper().GetAppDir(AppCategory.WinApp);
             tm.DoHtmlFileAnalysis(dir + @"\HttpResponse\list.tmall.com\HttpResponse");
@@ -272,6 +272,27 @@ namespace CaptureWebData
                     dateTimeIntFormat = ConfigurationManager.AppSettings["DateTimeIntFormat"];
                 }
                 return dateTimeIntFormat;
+            }
+        }
+        static string divideNum;
+        /// <summary>
+        /// 消息数据的取余除数
+        /// </summary>
+        public static int DivideNum
+        {
+            get 
+            {
+                int num = 0;
+                if (string.IsNullOrEmpty(divideNum))
+                {
+                    divideNum = ConfigurationManager.AppSettings["DivideNum"];
+                }
+                int.TryParse(divideNum, out num);
+                if (num <1)
+                {
+                    num = 500;
+                }
+                return num;
             }
         }
     }

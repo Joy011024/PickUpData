@@ -38,6 +38,7 @@ namespace CaptureWebData
         int currentIndex = 1;
         string Uin;//当前进行爬虫时使用到的账户信息
         int intervalSec = 3;
+        int executeNum = 0;
         enum ForachCallEvent
         { 
             [Description("采集QQ数据")]
@@ -724,6 +725,7 @@ namespace CaptureWebData
         }
         void QueryResponseAction(PickUpQQDoResponse res)
         {
+            executeNum++;//当前执行次数
           //  GetContainerKeyOfCookie(res.cookie);//查询qq群组数据[qq群数据提取参数待确定]
             if (res != null && res.responseData != null)
             {
@@ -763,6 +765,8 @@ namespace CaptureWebData
                     DataLink dl = new DataLink();
                     StringBuilder tip = new StringBuilder();
                     tip.AppendLine("time:\t"+DateTime.Now.ToString(SystemConfig.DateTimeFormat));
+                    tip.AppendLine("App:\tCaptureWebData");
+                    tip.AppendLine("App Event:Pick up uin data [warm]");
                     tip.AppendLine("account:\t"+Uin);
                     dl.SendDataToOtherPlatform(LanguageItem.Tip_PickUpErrorlockAccount, tip.ToString());//需要知道当前在进行采集的账户
                 }
@@ -789,6 +793,17 @@ namespace CaptureWebData
                 //一旦出现数据异常（防止被腾讯检测导致封号），停止轮询
                 job.DeleteJob<JobDelegateFunction>();
                 job.DeleteJob<JobAction<QQDataDA>>();
+            }
+            if (executeNum% SystemConfig.DivideNum==0)
+            {//满足发送邮件的条件
+                DataLink dl = new DataLink();
+                StringBuilder tip = new StringBuilder();
+                tip.AppendLine("time:\t" + DateTime.Now.ToString(SystemConfig.DateTimeFormat));
+                tip.AppendLine("App:\tCaptureWebData");
+                tip.AppendLine("App Event:Pick up uin data [excute num]"+executeNum);
+                tip.AppendLine("account:\t" + Uin);
+                dl.SendDataToOtherPlatform(LanguageItem.Tip_PickUpErrorlockAccount, tip.ToString());//需要知道当前在进行采集的账户
+                
             }
         }
         private void btnExit_Click(object sender, EventArgs e)
