@@ -19,10 +19,13 @@ namespace CaptureWebData
             try 
             {
                 FindQQResponse find = findQQResponseJson.ConvertObject<FindQQResponse>();
-                List<FindQQ> qqs = find.result.buddy.info_list;
-                List<FindQQDataTable> table = qqs.Select(s=>s.ConvertMapModel<FindQQ, FindQQDataTable>(true)).ToList();
-                FindQQDataService service = new FindQQDataService(ConnString);
-                service.SaveFindQQ(table);
+                if (SystemConfig.UsingDB)
+                {//启用数据库功能
+                    List<FindQQ> qqs = find.result.buddy.info_list;
+                    List<FindQQDataTable> table = qqs.Select(s => s.ConvertMapModel<FindQQ, FindQQDataTable>(true)).ToList();
+                    FindQQDataService service = new FindQQDataService(ConnString);
+                    service.SaveFindQQ(table);
+                }
                 return find;
             }
             catch (Exception ex) 

@@ -295,6 +295,18 @@ namespace CaptureWebData
                 return num;
             }
         }
+        static string useDB;
+        public static bool UsingDB
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(useDB))
+                {
+                    useDB = ConfigurationManager.AppSettings["UsingDB"];
+                }
+                return useDB == "true";
+            }
+        }
     }
     public class DataLink
     {

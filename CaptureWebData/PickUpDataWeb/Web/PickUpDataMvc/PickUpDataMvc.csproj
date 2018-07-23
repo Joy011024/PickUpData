@@ -51,9 +51,6 @@
       <HintPath>..\..\..\bin\SelfDefine\HttpClientHelper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MsSqlHelper">
-      <HintPath>..\..\..\..\..\ExcuteHttp\BaseHelper\bin\Debug\MsSqlHelper.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -181,6 +178,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\PickUpStudent\ThirdPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\BaseHelper\SqlHelper\MsSqlHelper\MsSqlHelper.csproj">
+      <Project>{d8da05c4-0583-4357-ae64-0550da6ba48f}</Project>
+      <Name>MsSqlHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

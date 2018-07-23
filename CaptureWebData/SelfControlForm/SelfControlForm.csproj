@@ -49,6 +49,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CefSharpExt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CefSharpExt.Designer.cs">
+      <DependentUpon>CefSharpExt.cs</DependentUpon>
+    </Compile>
     <Compile Include="PickUpIEWebCookieData.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -70,6 +76,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CefSharpExt.resx">
+      <DependentUpon>CefSharpExt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PickUpIEWebCookieData.resx">
       <DependentUpon>PickUpIEWebCookieData.cs</DependentUpon>
     </EmbeddedResource>

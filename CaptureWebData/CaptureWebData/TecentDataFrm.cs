@@ -96,7 +96,10 @@ namespace CaptureWebData
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
-            CategoryData obj = cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();
+            CategoryData obj =SystemConfig.UsingDB?
+                cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault():
+                //没有数据时考虑读取文件json串
+                new  CategoryData();
             targetCountry = obj;//目标国家数据
             string defaultCountryNode = GetCagetoryDataFileNameOrRedisItem(obj, redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat));
             if (SystemConfig.OpenRedis) 
@@ -563,7 +566,15 @@ namespace CaptureWebData
         {
             try
             {
-                PickUpStatic pc = (new QQDataDA()).TodayStatic();
+                PickUpStatic pc;
+                if (SystemConfig.UsingDB)
+                {
+                    pc = (new QQDataDA()).TodayStatic();
+                }
+                else 
+                {
+                    pc = new PickUpStatic();
+                }
                 lsbStatic.Items.Clear();
                 lsbStatic.Items.Add("时间戳" + DateTime.Now.ToString());
                 lsbStatic.Items.Add("库\t" + pc.DBTotal);
