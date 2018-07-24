@@ -96,10 +96,13 @@ namespace CaptureWebData
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
-            CategoryData obj =SystemConfig.UsingDB?
-                cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault():
-                //没有数据时考虑读取文件json串
-                new  CategoryData();
+            CategoryData obj = SystemConfig.UsingDB ?
+                cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault() :
+                null;//没有数据时考虑读取文件json串
+            if (obj == null)
+            {
+               obj= ForeachCityInFile();
+            }
             targetCountry = obj;//目标国家数据
             string defaultCountryNode = GetCagetoryDataFileNameOrRedisItem(obj, redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat));
             if (SystemConfig.OpenRedis) 
@@ -288,7 +291,7 @@ namespace CaptureWebData
             return "/"+nameFormat + item.Root.Id ;
         }
         /// <summary>
-        /// 组装文件或者Redis缓存项的名名
+        /// 组装文件或者Redis缓存项的名称
         /// </summary>
         /// <param name="cate"></param>
         /// <param name="nameFormat"></param>
@@ -452,8 +455,7 @@ namespace CaptureWebData
 
         }
         void BindProvince()
-        {
-            //绑定中国的全部省会，自治区到控件上
+        {//绑定中国的全部省会，自治区到控件上
             BindComboBox(new CategoryData() { Code="1"}, cmbProvince, 2);
         }
 
@@ -885,7 +887,7 @@ namespace CaptureWebData
         {
             ComboBox cmb = sender as ComboBox;
             CategoryData node = (CategoryData)cmb.SelectedItem;
-            BindComboBox(new CategoryData() { Id = node.Id }, cmbDistinct, 4);
+            BindComboBox(new CategoryData() { Id = node.Id,Name=node.Name,Code=node.Code }, cmbDistinct, 4);
             return;
             //由于腾讯城市数据县级 的父节点使用
             CategoryData item = cityList.Where(c => c.Id == node.Id).FirstOrDefault();
@@ -957,6 +959,13 @@ namespace CaptureWebData
         {
             UinDataSyncHelp helper = new UinDataSyncHelp();
             helper.DoIntervalSync(ConfigurationItems.GetWaitSyncDBString);
+        }
+        CategoryData ForeachCityInFile() 
+        {
+            string file = SystemConfig.ExeDir + @"\Service\CategoryGroup\China.txt";
+            string text= FileHelper.ReadFile(file);
+            CategoryData cg = text.ConvertObject<CategoryData>();
+            return cg;
         }
     }
 }

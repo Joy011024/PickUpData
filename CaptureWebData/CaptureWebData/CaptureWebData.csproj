@@ -192,6 +192,9 @@
     <Content Include="DeveloperDocument\SystemDoc.txt" />
     <Content Include="Exeption\Error.txt" />
     <Content Include="Note\UinGroupDeveloper\Cookie.txt" />
+    <Content Include="Service\CategoryGroup\China.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Service\SpilderUrl.txt" />
     <Content Include="Service\TemplateQQGeoup.html" />
     <Content Include="Service\CategoryGroup\中国=1400189813\China.txt" />
@@ -254,7 +257,6 @@
     <Content Include="Service\CategoryGroup\中国=1400189813\上海=1275992132\黄浦=329018596\黄浦=329018596.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Service\CategoryGroup\中国=1400189813.txt" />
     <Content Include="Service\CategoryGroup\中国=1400189813\云南.txt" />
     <Content Include="Service\CategoryGroup\中国=1400189813\云南=1887965175\临沧=1980554771\临沧=1980554771.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
