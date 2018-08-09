@@ -91,12 +91,32 @@ namespace CaptureWebData
         {
         
         }
+        void InitSQLite() 
+        {
+            string sql = @"create table CategoryData
+(
+	[ID] [int] NOT NULL primary key,
+	[Name] [nvarchar](20) NULL,
+	[ParentID] [int] NULL,
+	[ParentCode] [varchar](10) NULL,
+	[Code] [varchar](10) NULL,
+	[Sort] [int] NULL,
+	[ItemType] [varchar](20) NULL,
+	[IsDelete] [bit] NULL,
+	[CreateTime] [datetime] NULL,
+	[NodeLevel] [int] NULL
+)";
+            UinDataService uis = new UinDataService();
+            //uis.Excute(sql);
+        }
         void InitBaseConfig()
         {
+
+            InitSQLite();
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
-            CategoryData obj = SystemConfig.UsingDB ?
+            CategoryData obj = SystemConfig.UsingDBSaveBaseData ?
                 cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault() :
                 null;//没有数据时考虑读取文件json串
             if (obj == null)
@@ -569,7 +589,7 @@ namespace CaptureWebData
             try
             {
                 PickUpStatic pc;
-                if (SystemConfig.UsingDB)
+                if (SystemConfig.UsingDBSaveBaseData)
                 {
                     pc = (new QQDataDA()).TodayStatic();
                 }

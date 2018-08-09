@@ -78,6 +78,7 @@
     <Content Include="SqlCmd\AccountDBSqlCmd\SqlCmd\3_LogicCmd\3_LogicSqlCmd.sql" />
     <Content Include="SqlCmd\AccountDBSqlCmd\SqlCmd\4_LogicData\4_0_LogicData.sql" />
     <Content Include="SqlCmd\CommonDBSqlCmd\1_Create\CommonAppSetting.sql" />
+    <Content Include="SqlCmd\SQLite\Create\0_Create.sql" />
     <Content Include="SqlCmd\TecentDataUinDASqlCmd\CreateSql\TecentDataUinDA.sql" />
     <Content Include="SqlCmd\TecentDataUinDASqlCmd\LogicData\CategoryData.sql" />
     <Content Include="SqlCmd\TecentDataUinDASqlCmd\UpdateSp\V1.1\SP_ErrorGatherImageList.sql" />

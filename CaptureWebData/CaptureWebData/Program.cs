@@ -295,18 +295,24 @@ namespace CaptureWebData
                 return num;
             }
         }
-        static string useDB;
-        public static bool UsingDB
+        static string useDBSaveComonData;
+        /// <summary>
+        /// 是否启用数据库存储基础数据
+        /// </summary>
+        public static bool UsingDBSaveBaseData
         {
             get 
             {
-                if (string.IsNullOrEmpty(useDB))
+                if (string.IsNullOrEmpty(useDBSaveComonData))
                 {
-                    useDB = ConfigurationManager.AppSettings["UsingDB"];
+                    useDBSaveComonData = ConfigurationManager.AppSettings["UsingDBSaveBaseData"];
                 }
-                return useDB == "true";
+                return useDBSaveComonData == "true";
             }
         }
+
+        static string dbType;
+
     }
     public class DataLink
     {

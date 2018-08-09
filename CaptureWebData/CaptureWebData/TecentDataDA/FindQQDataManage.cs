@@ -19,7 +19,7 @@ namespace CaptureWebData
             try 
             {
                 FindQQResponse find = findQQResponseJson.ConvertObject<FindQQResponse>();
-                if (SystemConfig.UsingDB)
+                if (SystemConfig.UsingDBSaveBaseData)
                 {//启用数据库功能
                     List<FindQQ> qqs = find.result.buddy.info_list;
                     List<FindQQDataTable> table = qqs.Select(s => s.ConvertMapModel<FindQQ, FindQQDataTable>(true)).ToList();

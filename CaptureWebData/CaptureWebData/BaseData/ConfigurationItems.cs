@@ -81,9 +81,33 @@ namespace CaptureWebData
         {
             get
             {
-                ConnectionStringSettings sec = ConfigurationManager.ConnectionStrings["TecentDA"];
+               
+                ConnectionStringSettings sec = ConfigurationManager.ConnectionStrings["TecentDA" ];
                 if (sec == null) { return string.Empty; }
                 return sec.ConnectionString;
+            }
+        }
+        /// <summary>
+        /// 数据库分类
+        /// </summary>
+        public string DBType
+        {
+            get 
+            {
+                string dbtype = ConfigurationManager.AppSettings["DBType"];
+                return dbtype;
+            }
+        }
+        /// <summary>
+        /// sqlite数据库连接串
+        /// </summary>
+        public string SqliteDbConnString
+        {
+            get 
+            {
+                ConnectionStringSettings sec = ConfigurationManager.ConnectionStrings["TecentDASQLite"];
+                if (sec == null) { return string.Empty; }
+                return sec.ConnectionString.Replace("{BaseDir}", AppDomain.CurrentDomain.BaseDirectory);
             }
         }
         public string LogPath 
