@@ -31,6 +31,7 @@ namespace Domain.CommonData
     public class CategoryData : NodeData
     {
         [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+        [Key] //新增为了兼容sqlite
         public int Id { get; set; }
 
         public int? ParentId { get; set; }

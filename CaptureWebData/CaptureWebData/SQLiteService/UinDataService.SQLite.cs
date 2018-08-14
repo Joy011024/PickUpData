@@ -33,4 +33,33 @@ namespace CaptureWebData
             }
         }
     }
+
+    public class SQLiteReporistory<T> :   System.Data.Entity.DbContext where T : class
+    {
+        public SQLiteReporistory(string connString)
+            : base(connString)
+        {
+
+        }
+        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+        }
+        public System.Data.Entity.IDbSet<T> Entity { get; set; }
+        public void BatchAdd(List<T> data) 
+        {
+            try
+            {
+                foreach (var item in data)
+                {
+                    Entity.Add(item);
+                }
+                int succ = SaveChanges();
+            }
+            catch (Exception ex)
+            { 
+            
+            }
+        }
+    }
 }

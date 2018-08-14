@@ -14,3 +14,12 @@
 
 其他信息: 未能加载文件或程序集“ServiceStack.Redis, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。
 解决办法：需要设置目标程序编译位数
+4.sqlite 与ef联合使用
+在创建模型时不能使用上下文。
+  如果在OnModelCreating方法中使用上下文，则可能抛出此异常
+  或者如果多个线程同时访问相同的上下文实例。
+请注意，DbContext和相关类的实例成员不保证是线程安全的。
+5.无法完成操作。 提供的SqlConnection不指定初始目录或AttachDBFileName。
+Unable to complete operation. The supplied SqlConnection does not specify an initial catalog or AttachDBFileName.
+数据库连接串错误： <add name="TecentDASQLite" connectionString="Data Source={BaseDir}DB\LocalDB.db;"/>
+改为：

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Domain.CommonData;
 using Infrastructure.EFMsSQL;
+using System.Configuration;
 namespace ApplicationService.IPDataService
 {
     public class CategoryDataService
@@ -39,8 +40,11 @@ namespace ApplicationService.IPDataService
         public IEnumerable<CategoryData> QueryCityCategory() 
         {
             MainRespority<CategoryData> main = new MainRespority<CategoryData>(ConnString);
-            IEnumerable<CategoryData> data= main.Query(t => !t.IsDelete && t.ItemType == "City" && !string.IsNullOrEmpty(t.Name));
+            IEnumerable<CategoryData> data = main.Query(t => !t.IsDelete && t.ItemType == "City" && !string.IsNullOrEmpty(t.Name));
+            //将数据同步到sqlite
+            ConnectionStringSettings sec = ConfigurationManager.ConnectionStrings["TecentDASQLite"];
             return data;
         }
     }
+    
 }

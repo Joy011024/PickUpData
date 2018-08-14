@@ -126,8 +126,9 @@ namespace Infrastructure.EFMsSQL
         public void SwitchDB(string connString) 
         {
             this.Database.Connection.ConnectionString = connString;
+            //this.Database.Initialize(false);//禁止上下文创建模型
         }
-        private DbSet<T> Entity { get; set; }
+        public DbSet<T> Entity { get; set; }
     }
     public class InitDBContext : DbContext
     {

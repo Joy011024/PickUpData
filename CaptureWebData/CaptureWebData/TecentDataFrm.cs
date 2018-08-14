@@ -93,31 +93,21 @@ namespace CaptureWebData
         }
         void InitSQLite() 
         {
-            string sql = @"create table CategoryData
-(
-	[ID] [int] NOT NULL primary key,
-	[Name] [nvarchar](20) NULL,
-	[ParentID] [int] NULL,
-	[ParentCode] [varchar](10) NULL,
-	[Code] [varchar](10) NULL,
-	[Sort] [int] NULL,
-	[ItemType] [varchar](20) NULL,
-	[IsDelete] [bit] NULL,
-	[CreateTime] [datetime] NULL,
-	[NodeLevel] [int] NULL
-)";
+            string sql = @"";
             UinDataService uis = new UinDataService();
             //uis.Excute(sql);
         }
         void InitBaseConfig()
         {
 
-            InitSQLite();
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
+            IEnumerable<CategoryData> list = cs.QueryCityCategory();
+            SQLiteReporistory<CategoryData> md = new SQLiteReporistory<CategoryData>(new ConfigurationItems().SqliteDbConnString);
+           // md.BatchAdd(list.ToList());
             CategoryData obj = SystemConfig.UsingDBSaveBaseData ?
-                cs.QueryCityCategory().Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault() :
+                list.Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault() :
                 null;//没有数据时考虑读取文件json串
             if (obj == null)
             {
