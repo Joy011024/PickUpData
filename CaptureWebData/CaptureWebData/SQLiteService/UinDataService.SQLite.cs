@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SQLite;
+using Infrastructure.EFSQLite;
+using Domain.CommonData;
 namespace CaptureWebData
 {
     public class UinDataService
@@ -33,28 +35,14 @@ namespace CaptureWebData
             }
         }
     }
-
-    public class SQLiteReporistory<T> :   System.Data.Entity.DbContext where T : class
+    public class SyncDataHelper 
     {
-        public SQLiteReporistory(string connString)
-            : base(connString)
-        {
-
-        }
-        protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
-        {
-            //base.OnModelCreating(modelBuilder);
-        }
-        public System.Data.Entity.IDbSet<T> Entity { get; set; }
-        public void BatchAdd(List<T> data) 
+        public static void SyncCategory(List<CategoryData> list) 
         {
             try
             {
-                foreach (var item in data)
-                {
-                    Entity.Add(item);
-                }
-                int succ = SaveChanges();
+                SQLiteReporistory<CategoryData> md = new SQLiteReporistory<CategoryData>(new ConfigurationItems().SqliteDbConnString);
+                md.BatchAdd(list);
             }
             catch (Exception ex)
             { 
@@ -62,4 +50,5 @@ namespace CaptureWebData
             }
         }
     }
+  
 }

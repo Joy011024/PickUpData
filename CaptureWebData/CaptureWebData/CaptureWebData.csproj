@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CaptureWebData</RootNamespace>
     <AssemblyName>CaptureWebData</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>6766f36c</NuGetPackageImportStamp>
@@ -3544,6 +3544,10 @@
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
       <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
       <Name>Infrastructure.ExtService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.EFSQLite\Infrastructure.EFSQLite.csproj">
+      <Project>{bc16843a-630b-47e7-b889-97612c8f35df}</Project>
+      <Name>Infrastructure.EFSQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.MsSqlService.SqlHelper\Infrastructure.MsSqlService.SqlHelper.csproj">
       <Project>{43847d96-253a-4525-97ed-aca52340013b}</Project>

@@ -104,8 +104,7 @@ namespace CaptureWebData
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
             IEnumerable<CategoryData> list = cs.QueryCityCategory();
-            SQLiteReporistory<CategoryData> md = new SQLiteReporistory<CategoryData>(new ConfigurationItems().SqliteDbConnString);
-           // md.BatchAdd(list.ToList());
+            SyncDataHelper.SyncCategory(list.ToList());
             CategoryData obj = SystemConfig.UsingDBSaveBaseData ?
                 list.Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault() :
                 null;//没有数据时考虑读取文件json串

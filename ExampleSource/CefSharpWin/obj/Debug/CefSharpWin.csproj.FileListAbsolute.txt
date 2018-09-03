@@ -1,0 +1,10 @@
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\bin\Debug\CefSharpWin.exe.config
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\bin\Debug\CefSharpWin.exe
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\bin\Debug\CefSharpWin.pdb
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\obj\Debug\CefSharpWin.csprojResolveAssemblyReference.cache
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\obj\Debug\CefSharpWin.Form1.resources
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\obj\Debug\CefSharpWin.Properties.Resources.resources
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\obj\Debug\CefSharpWin.csproj.GenerateResource.Cache
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\obj\Debug\CefSharpWin.csproj.CoreCompileInputs.cache
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\obj\Debug\CefSharpWin.exe
+F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\CefSharpWin\obj\Debug\CefSharpWin.pdb

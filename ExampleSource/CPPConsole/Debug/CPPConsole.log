@@ -1,0 +1,8 @@
+﻿  stdafx.cpp
+f:\securitydata\gitcodeverify\cefsharp\examplesource\cppconsole\stdafx.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+f:\securitydata\gitcodeverify\cefsharp\examplesource\cppconsole\stdafx.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+f:\securitydata\gitcodeverify\cefsharp\examplesource\cppconsole\targetver.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  CPPConsole.cpp
+f:\securitydata\gitcodeverify\cefsharp\examplesource\cppconsole\cppconsole.cpp : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  CPPConsole.vcxproj -> F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\Debug\CPPConsole.exe
+  CPPConsole.vcxproj -> F:\SecurityData\GitCodeVerify\CefSharp\ExampleSource\Debug\CPPConsole.pdb (Partial PDB)
