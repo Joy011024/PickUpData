@@ -10,10 +10,12 @@ namespace CefSharpWin
     #region  测试在执行网页完毕之后触发
     public class CookieVisitor : CefSharp.ICookieVisitor
     {
-        public static Dictionary<string, List<System.Net.Cookie>> CookieDict = new Dictionary<string, List<System.Net.Cookie>>();
+        public static Dictionary<string, Dictionary<string, System.Net.Cookie>> CookieDict = new Dictionary<string, Dictionary<string, System.Net.Cookie>>();
+       
         public event Action<CefSharp.Cookie> SendCookie;
         public bool Visit(CefSharp.Cookie cookie, int count, int total, ref bool deleteCookie)
         {
+            //https://kyfw.12306.cn/passport/web/login  提取cookie，但是该请求的URL是啥
             //此处调用前需要先过滤URL
             visitor_SendCookie(cookie);
             deleteCookie = false;
@@ -28,23 +30,60 @@ namespace CefSharpWin
         public void visitor_SendCookie(CefSharp.Cookie obj)
         {
             string domain = obj.Domain;
-            
-            if (!CookieDict.ContainsKey(domain))
-            {
-                CookieDict.Add(domain, new List<System.Net.Cookie>());
-            }
+             
+            #region  cookie 替换
             System.Net.Cookie ck = new System.Net.Cookie(obj.Name, obj.Value, obj.Path, obj.Domain);
 
-            CookieDict[domain].Add(ck);
+            if (!CookieDict.ContainsKey(domain))
+            {
+                Dictionary<string, System.Net.Cookie> cookies = new Dictionary<string, System.Net.Cookie>();
+                CookieDict.Add(domain, cookies);
+            }
+            if (!CookieDict[domain].ContainsKey(obj.Name))
+            {
+                CookieDict[domain].Add(obj.Name, ck);
+            }
+            CookieDict[domain][obj.Name]= ck;
+            Dictionary<string, string> dict = SystemConfig.SampleCookieItem;
+            if (dict.ContainsKey(obj.Name))
+            {
+                string newItem = dict[obj.Name];
+                //判断是否增加新项
+                System.Net.Cookie generate = new System.Net.Cookie(newItem, obj.Value, obj.Path, obj.Domain);
+                if (!CookieDict[domain].ContainsKey(newItem))
+                {
+                    CookieDict[domain].Add(newItem, generate);
+                }
+                CookieDict[domain][newItem]= generate;
+            }
             if (!obj.Domain.Contains(SystemConfig.CookieDomain))
             {
                 return;
             }
+            #endregion
             string cookie = "Domain:" + obj.Domain.TrimStart('.') + "\r\n" + obj.Name + ":" + obj.Value;
         }
         public void Dispose()
         {
 
+        }
+        /// <summary>
+        /// 进行cookie输出
+        /// </summary>
+        /// <returns></returns>
+        public static StringBuilder OutputCookie(Dictionary<string, Dictionary<string, System.Net.Cookie>> CookieDict)
+        {
+            StringBuilder cookieHead = new StringBuilder();
+            foreach (var item in CookieDict)
+            {
+
+                cookieHead.AppendLine("Domain:" + item.Key);
+                foreach (KeyValuePair<string, System.Net.Cookie> ck in item.Value)
+                {
+                    cookieHead.AppendLine(ck.Value.Name + ":" + ck.Value.Value);
+                }
+            }
+            return cookieHead;
         }
     }
     /// <summary>
@@ -130,15 +169,13 @@ namespace CefSharpWin
             {
                 return;
             }
-            string[] keys = response.ResponseHeaders.AllKeys;
-            string key = "Set-Cookie";
-            if ((!SystemConfig.AnywhereGetCookie && extension != SystemConfig.InitCookeKey) || !keys.Contains(key))
+            if ((!SystemConfig.AnywhereGetCookie && extension != SystemConfig.InitCookeKey)  )
             {
-                return;
+               // return;
             }
             //这是请求响应头
             ICookieManager cookie = Cef.GetGlobalCookieManager();
-            CookieVisitor.CookieDict = new Dictionary<string, List<System.Net.Cookie>>();
+            CookieVisitor.CookieDict = new Dictionary<string,  Dictionary<string, System.Net.Cookie>>();
             if (SystemConfig.AnywhereGetCookie)
             {//无限制提取cookie
                 cookie.VisitAllCookies(new CookieVisitor());
@@ -147,24 +184,20 @@ namespace CefSharpWin
             {
                 foreach (var urlFrom in SystemConfig.CookieFrom)
                 {
-                    cookie.VisitUrlCookies(urlFrom, true, new CookieVisitor());
+                    cookie.VisitUrlCookies(urlFrom, false, new CookieVisitor());
                 }
             }
-            foreach (var item in CookieVisitor.CookieDict)
-            {
-                StringBuilder cookieHead = new StringBuilder();
-                cookieHead.AppendLine("Domain:" + item.Key);
-                cookieHead.AppendLine(string.Join("\r\n", item.Value));
-                cookieHead.ToString().WriteLog(ELogType.SessionOrCookieLog, true);
-            }
-            if (GetCookieResponse != null)
-            {
+            CookieVisitor.OutputCookie(CookieVisitor.CookieDict).ToString().WriteLog(ELogType.SessionOrCookieLog, true);
+            if (SystemConfig.InitCookeKey==extension&&  GetCookieResponse != null)
+            {//提取到了完整的cookie
                 //CookieContainer
                 GetCookieResponse(CookieVisitor.CookieDict);
             }
             return;
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(extension);
+            string[] keys = response.ResponseHeaders.AllKeys;
+            string key = SystemConfig.CookieDomain;
             sb.AppendLine(key + ":" + response.ResponseHeaders[key]);
             //这是请求头
             string[] headKey = request.Headers.AllKeys;

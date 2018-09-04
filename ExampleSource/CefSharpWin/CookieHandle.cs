@@ -16,20 +16,24 @@ namespace CefSharpWin
         public static void FillCookieContainer(object cookie)
         {
             CookiePool = new CookieContainer();
-            Dictionary<string, List<System.Net.Cookie>> cis = cookie as Dictionary<string, List<System.Net.Cookie>>;
+            Dictionary<string, Dictionary<string, System.Net.Cookie>> cis = cookie as Dictionary<string, Dictionary<string, System.Net.Cookie>>;
+            CookieVisitor.OutputCookie(cis).ToString().DebugLog(ELogType.SessionOrCookieLog, true);
             if (cis.Count == 0)
             {
                 return  ;
             }
             foreach (var item in cis)
-            {
-                for (int i = 0; i < item.Value.Count; i++)
-                { //RAIL_EXPIRATION:1535825068536 
-                    CookiePool.Add(item.Value[i]);
+            { //RAIL_EXPIRATION:1535825068536 
+                foreach (var ck in item.Value)
+                {
+                    CookiePool.Add(item.Value[ck.Key]);
                 }
             }
+
+            //此处需要判断是否获取了全部的cookie
+
             string contacter= HttpHelper.GetResponse(SystemConfig.ContacterUrl, CookiePool);
-            contacter.WriteLog(ELogType.HttpResponse, true);
+            contacter.DebugLog(ELogType.HttpResponse, true);
             return  ;
         }
         

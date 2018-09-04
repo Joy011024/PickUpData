@@ -147,6 +147,12 @@ namespace CefSharpWin
         {
             LoggerWriter.CreateLogFile(text, DllDir + GetYearWeekIndex(), title, GetNowDayIndex(), insert);
         }
+
+        public static void DebugLog(this string text, ELogType title, bool insert)
+        {
+            //根据配置来决定是否启用
+            LoggerWriter.CreateLogFile(text, DllDir + GetYearWeekIndex(), title,ELogType.DebugData.ToString()+  GetNowDayIndex(), insert);
+        }
         /// <summary>
         /// 获取当前天所属的周
         /// </summary>

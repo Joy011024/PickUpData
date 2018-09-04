@@ -15,6 +15,9 @@ RAIL_DEVICEID
 
 需要补充的项：
 tk
+BIGipServerpassport
 ten_key
 ten_js_key
 RAIL_OkLJUJ	
+
+tk<=> uamtk https://kyfw.12306.cn/passport/web/login

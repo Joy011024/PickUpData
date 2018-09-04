@@ -66,5 +66,28 @@ namespace CefSharpWin
                 return from.Split('|');
             }
         }
+        static string _NewCookieItem;
+        static Dictionary<string, string> _SampleCookieItem;
+        /// <summary>
+        /// 自动补充相似cookie项
+        /// </summary>
+        public static Dictionary<string, string> SampleCookieItem
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_NewCookieItem))
+                {
+                    _NewCookieItem = GetAppSettingValue("NewCookieItem");
+                }
+                _SampleCookieItem = new Dictionary<string, string>();
+                foreach (var item in _NewCookieItem.Split('|'))
+                {
+                    string[] cv = item.Split('=');
+                    if (!string.IsNullOrEmpty(cv[0]))
+                        _SampleCookieItem.Add(cv[0], cv[1]);
+                }
+                return _SampleCookieItem;
+            }
+        }
     }
 }

@@ -34,6 +34,7 @@
             this.lblUrl = new System.Windows.Forms.Label();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.btnBrowser = new System.Windows.Forms.Button();
+            this.btnGetCookie = new System.Windows.Forms.Button();
             this.table.SuspendLayout();
             this.headPanel.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +64,7 @@
             // 
             // headPanel
             // 
+            this.headPanel.Controls.Add(this.btnGetCookie);
             this.headPanel.Controls.Add(this.lblUrl);
             this.headPanel.Controls.Add(this.txtUrl);
             this.headPanel.Controls.Add(this.btnBrowser);
@@ -86,12 +88,12 @@
             this.txtUrl.Location = new System.Drawing.Point(76, 3);
             this.txtUrl.Multiline = true;
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(772, 35);
+            this.txtUrl.Size = new System.Drawing.Size(696, 35);
             this.txtUrl.TabIndex = 1;
             // 
             // btnBrowser
             // 
-            this.btnBrowser.Location = new System.Drawing.Point(875, 14);
+            this.btnBrowser.Location = new System.Drawing.Point(788, 9);
             this.btnBrowser.Name = "btnBrowser";
             this.btnBrowser.Size = new System.Drawing.Size(75, 23);
             this.btnBrowser.TabIndex = 0;
@@ -99,13 +101,23 @@
             this.btnBrowser.UseVisualStyleBackColor = true;
             this.btnBrowser.Click += new System.EventHandler(this.btnBrowser_Click);
             // 
-            // webFrm
+            // btnGetCookie
+            // 
+            this.btnGetCookie.Location = new System.Drawing.Point(879, 9);
+            this.btnGetCookie.Name = "btnGetCookie";
+            this.btnGetCookie.Size = new System.Drawing.Size(75, 23);
+            this.btnGetCookie.TabIndex = 3;
+            this.btnGetCookie.Text = "意外";
+            this.btnGetCookie.UseVisualStyleBackColor = true;
+            this.btnGetCookie.Click += new System.EventHandler(this.btnGetCookie_Click);
+            // 
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 634);
             this.Controls.Add(this.table);
-            this.Name = "webFrm";
+            this.Name = "Form1";
             this.Text = "webFrm";
             this.table.ResumeLayout(false);
             this.headPanel.ResumeLayout(false);
@@ -122,6 +134,7 @@
         private System.Windows.Forms.Label lblUrl;
         private System.Windows.Forms.TextBox txtUrl;
         private System.Windows.Forms.Button btnBrowser;
+        private System.Windows.Forms.Button btnGetCookie;
     }
 }
 
