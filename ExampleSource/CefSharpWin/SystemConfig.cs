@@ -89,5 +89,20 @@ namespace CefSharpWin
                 return _SampleCookieItem;
             }
         }
+        static string _IgnoreHeadItem;
+        /// <summary>
+        /// 忽略的请求头
+        /// </summary>
+        public static string[] IgnoreHeadItem
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_IgnoreHeadItem))
+                {
+                    _IgnoreHeadItem = GetAppSettingValue("IgnoreHeadItem");
+                }
+                return _IgnoreHeadItem.Split('|');
+            }
+        }
     }
 }

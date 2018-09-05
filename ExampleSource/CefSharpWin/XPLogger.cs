@@ -128,7 +128,7 @@ namespace CefSharpWin
   
     public static class Logger
     {
-        static string DllDir;
+       public static string DllDir;
         static Logger()
         {
             if (string.IsNullOrEmpty(DllDir))
