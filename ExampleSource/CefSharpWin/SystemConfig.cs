@@ -104,5 +104,12 @@ namespace CefSharpWin
                 return _IgnoreHeadItem.Split('|');
             }
         }
+        public static string GetUserTockenUrl
+        {
+            get
+            {
+                return GetAppSettingValue("GetUserTocken");
+            }
+        }
     }
 }

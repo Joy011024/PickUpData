@@ -163,7 +163,7 @@ namespace Domain.CommonData
             StringBuilder sb = new StringBuilder();
             while (rs.Peek() > 0)
             {
-                sb.Append(rs.ReadLine());
+                sb.AppendLine(rs.ReadLine());
             }
             file.Close();
             rs.Close();

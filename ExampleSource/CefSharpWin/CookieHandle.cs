@@ -29,9 +29,8 @@ namespace CefSharpWin
                     CookiePool.Add(item.Value[ck.Key]);
                 }
             }
-
             //此处需要判断是否获取了全部的cookie
-            string contacter= HttpHelper.GetResponse(SystemConfig.ContacterUrl, CookiePool);
+            string contacter= HttpHelper.GetResponse(SystemConfig.GetUserTockenUrl, CookiePool);
             contacter.DebugLog(ELogType.HttpResponse, true);
             return  ;
         }
