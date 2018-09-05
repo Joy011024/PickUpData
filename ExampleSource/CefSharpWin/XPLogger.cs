@@ -182,7 +182,10 @@ namespace CefSharpWin
         {
             return DateTime.Now.ToString("yyyyMMddHHmmss");
         }
-        
+        private static void DownLoadFile()
+        {//进行文件下载
+
+        }
     }
     class AppDir
     {
