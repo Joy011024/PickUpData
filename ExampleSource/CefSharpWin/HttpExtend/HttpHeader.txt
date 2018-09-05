@@ -1,0 +1,9 @@
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: JSESSIONID=D18644C30E12EB25D50CFCBCCEE0CC3F; tk=tHtrVjN15ZRTNTeH5jPI3jk4IT6TrKesbBvZpSQWthFp5XVXjn1110; route=9036359bb8a8a461c164a04f8f50b252; BIGipServerotn=2581004554.50210.0000; BIGipServerpassport=854065418.50215.0000; RAIL_EXPIRATION=1536420789491; RAIL_DEVICEID=HXgTz3nUg7sHc0BE-YMnAuPsrUGndxefGxL2lhiPzauKQjIIfDnMANONL5vY7U25L2MF-fxPY5DZ_SryLR-AqKa2ATRq3UGJcjC920TefMJ46R17K4XAl35PxgcXLDBxq66-D58s9t816mQnlFSDXwYu-NIQdxou
+Host: kyfw.12306.cn
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36

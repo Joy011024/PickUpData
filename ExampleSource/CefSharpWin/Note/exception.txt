@@ -1,3 +1,6 @@
 exception 1:
 未能加载文件或程序集“CefSharp.WinForms, Version=67.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138”或它的某一个依赖项。
 试图加载格式不正确的程序。
+exception2:
+ 	MSB8036	找不到 Windows SDK 版本10.0.15063.0。请安装所需的版本的 Windows SDK 或者在项目属性页中或通过右键单击解决方案并选择“重定解决方案目标”来更改 SDK 版本。	CPPConsole 
+	参考https://social.msdn.microsoft.com/Forums/zh-TW/eaf37415-3e21-455e-b0d0-883234dbf83f/3836426044201729256-252141998121040-windows-sdk-2925626412?forum=230 解决问题
