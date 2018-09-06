@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.IO.Compression;
 using Domain.CommonData;
 namespace CefSharpWin
 {
@@ -27,15 +28,30 @@ namespace CefSharpWin
                 if (!SystemConfig.IgnoreHeadItem.Contains( h[0] ))
                     request.Headers.Add(h[0], h[1]);
             }
+            request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
             request.KeepAlive = true;
             request.Host = "kyfw.12306.cn";
             request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
             request.Referer = "https://kyfw.12306.cn/otn/passport?redirect=/otn/";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream responseStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-            string content = reader.ReadToEnd();
-            reader.Close();
+            string content = string.Empty;
+            if (SystemConfig.ResponseIsZip)
+            {
+                //返回响应中进行编码集压缩处理
+                GZipStream gzip = new GZipStream(responseStream, CompressionMode.Decompress);//解压缩
+                Encoding enc = Encoding.GetEncoding(SystemConfig.HttpResponseZip);// .GetEncoding("gb2312");
+                StreamReader sr = new StreamReader(gzip, enc);
+                content = sr.ReadToEnd();//System.IO.InvalidDataException:“GZip 头中的幻数不正确。请确保正在传入 GZip 流。”
+                sr.Close();
+                gzip.Close();
+            }
+            else
+            {
+                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                content = reader.ReadToEnd();
+                reader.Close();
+            }
             responseStream.Close();
             return content;
         }

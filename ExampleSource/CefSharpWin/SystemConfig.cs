@@ -111,5 +111,22 @@ namespace CefSharpWin
                 return GetAppSettingValue("GetUserTocken");
             }
         }
+        /// <summary>
+        /// http响应被字符集加密
+        /// </summary>
+        public static bool ResponseIsZip
+        {
+            get
+            {
+                return GetAppSettingValue("ResponseIsZip") == "true";
+            }
+        }
+        public static string HttpResponseZip
+        {
+            get
+            {
+                return GetAppSettingValue("HttpResponseZip");
+            }
+        }
     }
 }
