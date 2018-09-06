@@ -13,8 +13,8 @@ namespace GatherIdCard
             DirectoryInfo di = new DirectoryInfo(htmlDir);
             FileInfo[] fis= di.GetFiles("*.txt");
             if (fis.Length == 0)
-            { 
-            
+            {
+                return;
             }
             FileInfo htmlFile = fis[0];
             string fullName= htmlFile.FullName;

@@ -16,14 +16,9 @@ namespace GatherIdCard
     {
         static void Main(string[] args)
         {
-            //Thread[] th = new Thread[2];
-            //th[0] = new Thread(QueryUserRemarkLossId);
-            //th[0].Start();
-            GetEduList();
-           // RegexSpilder();
-            //GatherMoMoHoster();
-            Console.ReadLine();
-            //QueryUserRemarkLossId();
+            GatherUserIdCard();
+            
+            Console.ReadLine(); 
         }
         static void GatherUserInfo()
         {
@@ -272,12 +267,13 @@ X-Requested-With:XMLHttpRequest";
                 if (string.IsNullOrEmpty(fileSaveDir))
                 {
                     fileSaveDir = ConfigurationManager.AppSettings["FileSaveDir"];
-                }
-                if (string.IsNullOrEmpty(fileSaveDir))
-                {
                     AssemblyDataExt ass = new AssemblyDataExt();
-                    fileSaveDir = ass.ForeachDir(ass.GetAssemblyDir(), 3);
-                }
+                    string dir = ass.ForeachDir(ass.GetAssemblyDir(), 3);
+                    //进行盘目录检查，当目录不存在则使用程序运行目录 
+                    DirectoryInfo di = new DirectoryInfo(fileSaveDir);
+                    bool havaRoot = di.Root.Exists;
+                    fileSaveDir = havaRoot ? fileSaveDir : dir;
+                } 
                 return fileSaveDir;
             }
         }
