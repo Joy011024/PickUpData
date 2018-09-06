@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatherIdCard", "GatherIdCard\GatherIdCard.csproj", "{3548E5F0-CA45-414E-ABC0-2137053C07D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.CommonData", "..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj", "{9CEF7F17-E35B-4AF0-BFAF-DA0F7B3D9EF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientHelper", "..\..\BaseHelper\ExtHelper\HttpClientHelper\HttpClientHelper.csproj", "{D182918A-32DC-4B35-A998-DAC7CADC2369}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{9CEF7F17-E35B-4AF0-BFAF-DA0F7B3D9EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CEF7F17-E35B-4AF0-BFAF-DA0F7B3D9EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CEF7F17-E35B-4AF0-BFAF-DA0F7B3D9EF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D182918A-32DC-4B35-A998-DAC7CADC2369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D182918A-32DC-4B35-A998-DAC7CADC2369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D182918A-32DC-4B35-A998-DAC7CADC2369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D182918A-32DC-4B35-A998-DAC7CADC2369}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {615DFC9F-BB4E-4535-96AB-4D3E08F7EA8E}
 	EndGlobalSection
 EndGlobal

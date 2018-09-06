@@ -56,7 +56,6 @@
     <Compile Include="DelegateData.cs" />
     <Compile Include="BaeModel\ModelFieldContainTime.cs" />
     <Compile Include="BaeModel\DescriptionSortAttribute.cs" />
-    <Compile Include="HttpHelper.cs" />
     <Compile Include="PickUpStatic.cs" />
     <Compile Include="BaeModel\SpellChineseWord.cs" />
     <Compile Include="TecentData\FindQQData.cs" />
