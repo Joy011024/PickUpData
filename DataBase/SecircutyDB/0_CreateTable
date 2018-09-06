@@ -1,0 +1,13 @@
+create table IdCard
+(
+    Id varchar(18) primary key,
+    Name varchar(32) not null,
+    CreateTime date not null,
+    Desc varchar(1024)
+);
+Create table Names
+(
+    CreateTime date not null,
+    Name varchar(32) not null,
+    InDbDay int not null
+)
