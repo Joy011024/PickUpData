@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 using System.Net;
 namespace CefSharpWin
 {
+    public class HttpRequestFlag
+    {
+        /// <summary>
+        /// 是否获取到请求所需的cookie
+        /// </summary>
+        public static bool ContainerFullCookie { get; set; }
+    }
     public class CookieHandle
     {
         public static CookieContainer CookiePool;
@@ -22,15 +29,28 @@ namespace CefSharpWin
             {
                 return  ;
             }
+            bool flag = false;
             foreach (var item in cis)
             { //RAIL_EXPIRATION:1535825068536 
                 foreach (var ck in item.Value)
                 {
+                    if (item.Value[ck.Key].Name == "tk")
+                    {
+                        flag = true;
+                    }
                     CookiePool.Add(item.Value[ck.Key]);
                 }
             }
+            HttpRequestFlag.ContainerFullCookie = flag;
+            if (!HttpRequestFlag.ContainerFullCookie)
+            {//请求所使用的cookie没有全部获取到
+               
+                return;
+            }
             //此处需要判断是否获取了全部的cookie
-            string contacter= HttpHelper.GetResponse(SystemConfig.ContacterUrl, CookiePool);
+            string url = SystemConfig.ContacterUrl;
+            string contacter= HttpHelper.GetResponse(url, CookiePool);
+            url.DebugLog(ELogType.HttpResponse, true);
             contacter.DebugLog(ELogType.HttpResponse, true);
             return  ;
         }

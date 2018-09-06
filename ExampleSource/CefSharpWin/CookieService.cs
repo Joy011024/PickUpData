@@ -164,7 +164,7 @@ namespace CefSharpWin
             }
             var url = new Uri(request.Url);
             var extension = url.ToString().ToLower();
-            extension.WriteLog(ELogType.Account, true);
+            extension.DebugLog(ELogType.Account, true);
             if (!extension.Contains(SystemConfig.CookieDomain))
             {
                 return;
@@ -188,7 +188,6 @@ namespace CefSharpWin
                 }
             }
             CookieVisitor.OutputCookie(CookieVisitor.CookieDict).ToString().WriteLog(ELogType.SessionOrCookieLog, true);
-
             GetCookieResponse(CookieVisitor.CookieDict);
             return;
             if (SystemConfig.InitCookeKey == extension && GetCookieResponse != null)//
