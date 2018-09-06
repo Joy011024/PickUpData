@@ -79,6 +79,10 @@ namespace CefSharpWin
                 {
                     _NewCookieItem = GetAppSettingValue("NewCookieItem");
                 }
+                if (string.IsNullOrEmpty(_NewCookieItem))
+                {
+                    return new Dictionary<string, string>();
+                }
                 _SampleCookieItem = new Dictionary<string, string>();
                 foreach (var item in _NewCookieItem.Split('|'))
                 {

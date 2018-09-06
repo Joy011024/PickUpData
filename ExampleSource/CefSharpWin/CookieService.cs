@@ -188,7 +188,10 @@ namespace CefSharpWin
                 }
             }
             CookieVisitor.OutputCookie(CookieVisitor.CookieDict).ToString().WriteLog(ELogType.SessionOrCookieLog, true);
-            if (SystemConfig.InitCookeKey==extension&&  GetCookieResponse != null)
+
+            GetCookieResponse(CookieVisitor.CookieDict);
+            return;
+            if (SystemConfig.InitCookeKey == extension && GetCookieResponse != null)//
             {//提取到了完整的cookie
                 //CookieContainer
                 GetCookieResponse(CookieVisitor.CookieDict);
