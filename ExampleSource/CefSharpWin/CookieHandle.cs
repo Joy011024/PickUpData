@@ -22,12 +22,22 @@ namespace CefSharpWin
             {
                 return  ;
             }
+            bool isTocken = false;
             foreach (var item in cis)
             { //RAIL_EXPIRATION:1535825068536 
                 foreach (var ck in item.Value)
                 {
+                    if (item.Value[ck.Key].Name == "tk")
+                    {
+                        isTocken = true;
+                    }
                     CookiePool.Add(item.Value[ck.Key]);
                 }
+            }
+
+            if (!isTocken)
+            {
+                return;
             }
             //此处需要判断是否获取了全部的cookie
             string contacter= HttpHelper.GetResponse(SystemConfig.ContacterUrl, CookiePool);

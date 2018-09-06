@@ -80,6 +80,10 @@ namespace CefSharpWin
                     _NewCookieItem = GetAppSettingValue("NewCookieItem");
                 }
                 _SampleCookieItem = new Dictionary<string, string>();
+                if (string.IsNullOrEmpty(_NewCookieItem))
+                {
+                    return _SampleCookieItem;
+                }
                 foreach (var item in _NewCookieItem.Split('|'))
                 {
                     string[] cv = item.Split('=');
@@ -126,6 +130,20 @@ namespace CefSharpWin
             get
             {
                 return GetAppSettingValue("HttpResponseZip");
+            }
+        }
+        public static string DebugDir
+        {
+            get
+            {
+                return new AppDir().Dir();
+            }
+        }
+        public static bool DownloadResource
+        {
+            get
+            {
+                return GetAppSettingValue("DownloadResource") == "true";
             }
         }
     }
