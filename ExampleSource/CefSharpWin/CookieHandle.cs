@@ -24,7 +24,7 @@ namespace CefSharpWin
         {
             CookiePool = new CookieContainer();
             Dictionary<string, Dictionary<string, System.Net.Cookie>> cis = cookie as Dictionary<string, Dictionary<string, System.Net.Cookie>>;
-            CookieVisitor.OutputCookie(cis).ToString().DebugLog(ELogType.SessionOrCookieLog, true);
+            CookieVisitor.OutputCookie(cis).ToString().WriteLog(ELogType.SessionOrCookieLog, true);
             if (cis.Count == 0)
             {
                 return  ;
@@ -48,8 +48,8 @@ namespace CefSharpWin
             } 		 //此处需要判断是否获取了全部的cookie
             string url = SystemConfig.ContacterUrl;
             string contacter= HttpHelper.GetResponse(url, CookiePool);
-            url.DebugLog(ELogType.HttpResponse, true);
-            contacter.DebugLog(ELogType.HttpResponse, true);
+            url.WriteLog(ELogType.HttpResponse, true);
+            contacter.WriteLog(ELogType.HttpResponse, true);
             return  ;
         }
         

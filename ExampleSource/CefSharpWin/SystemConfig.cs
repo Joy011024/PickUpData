@@ -150,5 +150,15 @@ namespace CefSharpWin
                 return GetAppSettingValue("DownloadResource") == "true";
             }
         }
+        /// <summary>
+        /// 返回tocken 的请求项
+        /// </summary>
+        public static string TockenAfterUrl
+        {
+            get
+            {
+                return GetAppSettingValue("TockenAfterUrl");
+            }
+        }
     }
 }

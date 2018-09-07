@@ -91,6 +91,7 @@ namespace CefSharpWin
     /// </summary>
     public class RequestHandler_new : CefSharp.Handler.DefaultRequestHandler //CefSharp.Example.Handlers
     {
+        public static bool ExistsTocken = false;
         public string _directory = "/log/DownloadFile/";
         public GetCookieTodo GetCookieResponse { get; set; }
 
@@ -164,14 +165,14 @@ namespace CefSharpWin
             }
             var url = new Uri(request.Url);
             var extension = url.ToString().ToLower();
-            extension.DebugLog(ELogType.Account, true);
+            extension.WriteLog(ELogType.Account, true);
             if (!extension.Contains(SystemConfig.CookieDomain))
             {
                 return;
             }
             if ((!SystemConfig.AnywhereGetCookie && extension != SystemConfig.InitCookeKey))
             {
-               // return;
+                return;
             }
             //这是请求响应头
             ICookieManager cookie = Cef.GetGlobalCookieManager();
@@ -187,14 +188,15 @@ namespace CefSharpWin
                     cookie.VisitUrlCookies(urlFrom, false, new CookieVisitor());
                 }
             }
-            StringBuilder cook = new StringBuilder();
-            cook.AppendLine(extension);
-            cook.AppendLine(CookieVisitor.OutputCookie(CookieVisitor.CookieDict).ToString());
-            cook.ToString().WriteLog(ELogType.SessionOrCookieLog, true);
-            GetCookieResponse(CookieVisitor.CookieDict);
-            return;
-			if (SystemConfig.InitCookeKey == extension && GetCookieResponse != null)
+            if (extension == SystemConfig.TockenAfterUrl)
+            {//是否已经获取到了tocken
+                ExistsTocken = true;
+            }
+            if (ExistsTocken)
             {//提取到了完整的cookie
+                StringBuilder cook = new StringBuilder();
+                cook.AppendLine(CookieVisitor.OutputCookie(CookieVisitor.CookieDict).ToString());
+                cook.ToString().WriteLog(ELogType.SessionOrCookieLog, true); 
                 //CookieContainer
                 GetCookieResponse(CookieVisitor.CookieDict);
             }

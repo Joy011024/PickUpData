@@ -40,3 +40,6 @@ route=9036359bb8a8a461c164a04f8f50b252;
 BIGipServerpool_passport=300745226.50215.0000; 
 BIGipServerpassport=988283146.50215.0000; 
 BIGipServerotn=467927562.38945.0000
+
+
+返回tocken项的请求URL：https://kyfw.12306.cn/otn/uamauthclient
