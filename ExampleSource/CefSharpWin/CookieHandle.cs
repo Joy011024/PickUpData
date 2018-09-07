@@ -29,25 +29,23 @@ namespace CefSharpWin
             {
                 return  ;
             }
-            bool flag = false;
+
+ 			bool isTocken = false;
             foreach (var item in cis)
             { //RAIL_EXPIRATION:1535825068536 
                 foreach (var ck in item.Value)
                 {
                     if (item.Value[ck.Key].Name == "tk")
                     {
-                        flag = true;
+                        isTocken = true;
                     }
                     CookiePool.Add(item.Value[ck.Key]);
                 }
             }
-            HttpRequestFlag.ContainerFullCookie = flag;
-            if (!HttpRequestFlag.ContainerFullCookie)
-            {//请求所使用的cookie没有全部获取到
-               
+            if (!isTocken)
+            {
                 return;
-            }
-            //此处需要判断是否获取了全部的cookie
+            } 		 //此处需要判断是否获取了全部的cookie
             string url = SystemConfig.ContacterUrl;
             string contacter= HttpHelper.GetResponse(url, CookiePool);
             url.DebugLog(ELogType.HttpResponse, true);

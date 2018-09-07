@@ -11,7 +11,7 @@ namespace CefSharpWin
     public class CookieVisitor : CefSharp.ICookieVisitor
     {
         public static Dictionary<string, Dictionary<string, System.Net.Cookie>> CookieDict = new Dictionary<string, Dictionary<string, System.Net.Cookie>>();
-       
+
         public event Action<CefSharp.Cookie> SendCookie;
         public bool Visit(CefSharp.Cookie cookie, int count, int total, ref bool deleteCookie)
         {
@@ -30,7 +30,7 @@ namespace CefSharpWin
         public void visitor_SendCookie(CefSharp.Cookie obj)
         {
             string domain = obj.Domain;
-             
+
             #region  cookie 替换
             System.Net.Cookie ck = new System.Net.Cookie(obj.Name, obj.Value, obj.Path, obj.Domain);
 
@@ -43,7 +43,7 @@ namespace CefSharpWin
             {
                 CookieDict[domain].Add(obj.Name, ck);
             }
-            CookieDict[domain][obj.Name]= ck;
+            CookieDict[domain][obj.Name] = ck;
             Dictionary<string, string> dict = SystemConfig.SampleCookieItem;
             if (dict.ContainsKey(obj.Name))
             {
@@ -54,7 +54,7 @@ namespace CefSharpWin
                 {
                     CookieDict[domain].Add(newItem, generate);
                 }
-                CookieDict[domain][newItem]= generate;
+                CookieDict[domain][newItem] = generate;
             }
             if (!obj.Domain.Contains(SystemConfig.CookieDomain))
             {
@@ -169,13 +169,13 @@ namespace CefSharpWin
             {
                 return;
             }
-            if ((!SystemConfig.AnywhereGetCookie && extension != SystemConfig.InitCookeKey)  )
+            if ((!SystemConfig.AnywhereGetCookie && extension != SystemConfig.InitCookeKey))
             {
                // return;
             }
             //这是请求响应头
             ICookieManager cookie = Cef.GetGlobalCookieManager();
-            CookieVisitor.CookieDict = new Dictionary<string,  Dictionary<string, System.Net.Cookie>>();
+            CookieVisitor.CookieDict = new Dictionary<string, Dictionary<string, System.Net.Cookie>>();
             if (SystemConfig.AnywhereGetCookie)
             {//无限制提取cookie
                 cookie.VisitAllCookies(new CookieVisitor());
@@ -187,75 +187,26 @@ namespace CefSharpWin
                     cookie.VisitUrlCookies(urlFrom, false, new CookieVisitor());
                 }
             }
-            CookieVisitor.OutputCookie(CookieVisitor.CookieDict).ToString().WriteLog(ELogType.SessionOrCookieLog, true);
+            StringBuilder cook = new StringBuilder();
+            cook.AppendLine(extension);
+            cook.AppendLine(CookieVisitor.OutputCookie(CookieVisitor.CookieDict).ToString());
+            cook.ToString().WriteLog(ELogType.SessionOrCookieLog, true);
             GetCookieResponse(CookieVisitor.CookieDict);
             return;
-            if (SystemConfig.InitCookeKey == extension && GetCookieResponse != null)//
+			if (SystemConfig.InitCookeKey == extension && GetCookieResponse != null)
             {//提取到了完整的cookie
                 //CookieContainer
                 GetCookieResponse(CookieVisitor.CookieDict);
-            }
-            return;
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(extension);
-            string[] keys = response.ResponseHeaders.AllKeys;
-            string key = SystemConfig.CookieDomain;
-            sb.AppendLine(key + ":" + response.ResponseHeaders[key]);
-            //这是请求头
-            string[] headKey = request.Headers.AllKeys;
-            StringBuilder head = new StringBuilder();
-            foreach (var item in headKey)
-            {
-                head.AppendLine(item + ":" + request.Headers[item]);
-            }
-            "Response End".WriteLog(ELogType.HttpResponse, true);
-
-            if (request.ResourceType == ResourceType.Image || extension.EndsWith(".jpg") || extension.EndsWith(".png") || extension.EndsWith(".gif") || extension.EndsWith(".jpeg"))
-            {
-                MemoryStreamResponseFilter filter;
-                if (responseDictionary.TryGetValue(request.Identifier, out filter))
-                {
-                    if (!Directory.Exists(_directory))
-                    {
-                        Directory.CreateDirectory(_directory);
-                    }
-
-                    System.Diagnostics.Debug.WriteLine("responseDictionary.Count:" + responseDictionary.Count);
-
-                    //TODO: Do something with the data here
-                    var data = filter.Data;
-                    var dataLength = filter.Data.Length;
-                    //NOTE: You may need to use a different encoding depending on the request
-                    //var dataAsUtf8String = Encoding.UTF8.GetString(data);
-
-                    if (dataLength > 0)
-                    {
-                        string fileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-fff-") + _rand.Next(99999, 999999) + ".png";
-                        string path = _directory + fileName;
-                        try
-                        {
-                            fileName = Path.GetFileName(url.ToString());
-
-                            File.WriteAllBytes(path, data);
-                            return;
-                        }
-                        catch (Exception e)
-                        {
-                            //throw;
-                        }
-
-                        fileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-fff-") + _rand.Next(99999, 999999) + ".png";
-                        path = _directory + fileName;
-                        File.WriteAllBytes(path, data);//保存数据
-                    }
-                }
-                return;
             }
             if (_requestHeandler != null)
             {
                 _requestHeandler.OnResourceLoadComplete(browserControl, browser, frame, request, response, status, receivedContentLength);
             }
-        }
+
+            if (SystemConfig.DownloadResource)
+                DownloadService.DownloadResource(extension, responseDictionary, request, response);
+            return;
+        } 
 
     }
 
@@ -297,6 +248,71 @@ namespace CefSharpWin
         public byte[] Data
         {
             get { return memoryStream.ToArray(); }
+        }
+    }
+
+    public class DownloadService
+    {
+        public static void DownloadResource(string requestUrl, Dictionary<UInt64, MemoryStreamResponseFilter> responseDictionary,IRequest request, IResponse response)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(requestUrl);
+            string[] keys = response.ResponseHeaders.AllKeys;
+            string key = SystemConfig.CookieDomain;
+            sb.AppendLine(key + ":" + response.ResponseHeaders[key]);
+            //这是请求头
+            string[] headKey = request.Headers.AllKeys;
+            StringBuilder head = new StringBuilder();
+            foreach (var item in headKey)
+            {
+                head.AppendLine(item + ":" + request.Headers[item]);
+            }
+            "Response End".WriteLog(ELogType.HttpResponse, true);
+
+            if (request.ResourceType == ResourceType.Image || requestUrl.EndsWith(".jpg") || requestUrl.EndsWith(".png") || requestUrl.EndsWith(".gif") || requestUrl.EndsWith(".jpeg"))
+            {
+                string dir = SystemConfig.DebugDir;
+                MemoryStreamResponseFilter filter;
+                if (responseDictionary.TryGetValue(request.Identifier, out filter))
+                {
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+
+                    System.Diagnostics.Debug.WriteLine("responseDictionary.Count:" + responseDictionary.Count);
+
+                    //TODO: Do something with the data here
+                    var data = filter.Data;
+                    var dataLength = filter.Data.Length;
+                    //NOTE: You may need to use a different encoding depending on the request
+                    //var dataAsUtf8String = Encoding.UTF8.GetString(data);
+                   
+                    Random ran = new Random(Guid.NewGuid().GetHashCode());
+                    if (dataLength > 0)
+                    {
+                        string fileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-fff-") + ran.Next(99999, 999999) + ".png";
+                        string path = dir + fileName;
+                        try
+                        {
+                            fileName = Path.GetFileName(requestUrl);
+
+                            File.WriteAllBytes(path, data);
+                            return;
+                        }
+                        catch (Exception e)
+                        {
+                            //throw;
+                        }
+
+                        fileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-fff-") + ran.Next(99999, 999999) + ".png";
+                        path = dir + fileName;
+                        File.WriteAllBytes(path, data);//保存数据
+                    }
+                }
+                return;
+            }
+            
         }
     }
     #endregion
