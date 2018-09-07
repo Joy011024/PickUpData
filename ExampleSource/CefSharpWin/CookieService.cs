@@ -92,6 +92,15 @@ namespace CefSharpWin
     public class RequestHandler_new : CefSharp.Handler.DefaultRequestHandler //CefSharp.Example.Handlers
     {
         public static bool ExistsTocken = false;
+        /// <summary>
+        /// 已成功访问联系人请求URL
+        /// </summary>
+        public static bool SuccessVisitedContractUrl = false;
+        public static void ClearHistory()
+        {
+            ExistsTocken = false;
+            SuccessVisitedContractUrl = false;
+        }
         public string _directory = "/log/DownloadFile/";
         public GetCookieTodo GetCookieResponse { get; set; }
 
@@ -104,7 +113,7 @@ namespace CefSharpWin
         {
             _requestHeandler = rh;
         }
-
+        #region overide
         public override CefReturnValue OnBeforeResourceLoad(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IRequestCallback callback)
         {
 
@@ -146,6 +155,7 @@ namespace CefSharpWin
             }
             return null;
         }
+        #endregion
         Random _rand = new Random();
         /// <summary>
         /// 【setup2】提取cookie
