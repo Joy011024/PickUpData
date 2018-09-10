@@ -23,13 +23,20 @@ namespace CefSharpWin
             {
                 case NotifyList.Notify_Refresh_Contacter://接收联系人列表
                     object data = notification.Body;
+                    //Notify_Close_Account
+                    SendNotification(NotifyList.Notify_Close_Account);
+                    ShowDialog();
+                    break;
+                case NotifyList.Notify_ToFront_Contacter:
+
                     break;
             }
         }
         public override IList<string> ListNotificationInterests()
         {
             return new string[] {
-               NotifyList.Notify_Refresh_Contacter
+               NotifyList.Notify_Refresh_Contacter,
+               NotifyList.Notify_ToFront_Contacter
            };
         }
         #endregion

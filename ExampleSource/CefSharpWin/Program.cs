@@ -21,7 +21,11 @@ namespace CefSharpWin
             Application.Run(acc);//cef 只能单进程
 
             /*
-             System.Exception:“CEF can only be initialized once per process. This is a limitation of the underlying CEF/Chromium framework. You can change many (not all) settings at runtime through RequestContext.SetPreference. See https://github.com/cefsharp/CefSharp/wiki/General-Usage#request-context-browser-isolation Use Cef.IsInitialized to guard against this exception. If you are seeing this unexpectedly then you are likely calling Cef.Initialize after you've created an instance of ChromiumWebBrowser, it must be before the first instance is created.”
+             System.Exception:“CEF can only be initialized once per process. This is a limitation of the underlying CEF/Chromium framework.
+             You can change many (not all) settings at runtime through RequestContext.SetPreference. 
+             See https://github.com/cefsharp/CefSharp/wiki/General-Usage#request-context-browser-isolation Use Cef.IsInitialized to guard against this exception. 
+             If you are seeing this unexpectedly then you are likely calling Cef.Initialize after you've created an instance of ChromiumWebBrowser,
+             it must be before the first instance is created.”
 
              */
         }

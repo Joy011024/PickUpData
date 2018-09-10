@@ -98,6 +98,7 @@
     <Compile Include="12306\TicketService.cs" />
     <Compile Include="12306\NotifyList.cs" />
     <Compile Include="PureHelper\MediatorHelper.cs" />
+    <Compile Include="PureHelper\PageNotifyCommand.cs" />
     <Compile Include="webFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,9 +151,7 @@
       <Name>Domain.CommonData</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NotifyHelper\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

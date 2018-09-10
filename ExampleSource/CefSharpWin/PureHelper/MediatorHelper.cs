@@ -238,7 +238,7 @@ namespace CefSharpWin
         #endregion
     }
 
-    public class FormMediatorService :Form,  IMediator
+    public class FormMediatorService :Form,  IMediator,INotifier
     {
         string mediatoir;
         public string  MediatorName { get { return mediatoir; }  }
@@ -253,7 +253,7 @@ namespace CefSharpWin
         }
         public virtual  void  HandleNotification(INotification notification)
         {
-             
+            
         }
 
         public virtual IList<string>  ListNotificationInterests()
@@ -269,6 +269,21 @@ namespace CefSharpWin
         void IMediator.OnRemove()
         {
             
+        }
+
+        public void  SendNotification(string notificationName)
+        {
+            SendNotification(notificationName, null, string.Empty);
+        }
+
+        public void  SendNotification(string notificationName, object body)
+        {
+            SendNotification(notificationName, body, string.Empty);
+        }
+
+        public void  SendNotification(string notificationName, object body, string type)
+        {
+            FacadeFactory.Instance.SendNotification(notificationName, body, type);
         }
     }
 

@@ -55,6 +55,7 @@ namespace CefSharpWin
 
             Ticket12306Resonse t123306= contacter.ConvertData<Ticket12306Resonse>();
             new CommandService().SendNotify(NotifyList.Notify_Refresh_Contacter, t123306, string.Empty);
+
             return  ;
         }
         

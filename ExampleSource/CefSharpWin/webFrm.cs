@@ -25,7 +25,7 @@ namespace CefSharpWin
         }
         void Init()
         {
-           
+
             CefSettings setting = new CefSettings()
             {
                 Locale = "zh-cn",
@@ -37,7 +37,7 @@ namespace CefSharpWin
             //第一步进行登录
             txtUrl.Text = SystemConfig.MainUrl;// "https://www.cnblogs.com/ZuoJinLiang/p/7490497.html";
             layoutPanel.Controls.Add(browser);
-            RequestHandler_new handle  = new RequestHandler_new(browser.RequestHandler);//登录成功之后进行cookie提取
+            RequestHandler_new handle = new RequestHandler_new(browser.RequestHandler);//登录成功之后进行cookie提取
             handle.GetCookieResponse = CookieHandle.FillCookieContainer;
             browser.RequestHandler = handle;
             browser.Dock = DockStyle.Fill;
@@ -58,11 +58,40 @@ namespace CefSharpWin
         private void btnGetCookie_Click(object sender, EventArgs e)
         {
             //提取cookie
-            IFrame frame= browser.GetMainFrame();
-           
+            IFrame frame = browser.GetMainFrame();
+
+        }
+        public override IList<string> ListNotificationInterests()
+        {
+            return new string[] {
+                NotifyList.Notify_Close_Account
+            };
+        }
+        public override void HandleNotification(INotification notification)
+        {
+            switch (notification.Name)
+            {
+                case NotifyList.Notify_Close_Account:
+                    /*
+                     System.InvalidOperationException:“线程间操作无效: 从不是创建控件“Form1”的线程访问它。”
+
+                     */
+
+                    CloseFrom();
+                    break;
+            }
+        }
+        private void CloseFrom()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() =>
+                {
+                    CloseFrom();
+                }));
+                return;
+            }
+            Close();
         }
     }
-
-    
-
 }
