@@ -7,9 +7,10 @@ using System.Net;
 using System.IO;
 using System.IO.Compression;
 using Domain.CommonData;
+using PureMVC.Interfaces;
 namespace CefSharpWin
 {
-    public class HttpHelper
+    public class HttpHelper: CommandService
     {
         public static string GetResponse(string url, CookieContainer cookies = null)
         {

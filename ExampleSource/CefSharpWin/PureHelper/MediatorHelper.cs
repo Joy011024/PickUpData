@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using PureMVC.Patterns;
 using PureMVC.Interfaces;
+using System.Windows.Forms; 
 namespace CefSharpWin
 {
     public class  FacadeFactory : Facade
     {
         private static FacadeFactory mInstance = null;
 
-        public static FacadeFactory XPFacadeInstance
+        public static FacadeFactory Instance
         {
             get
             {
@@ -43,10 +44,11 @@ namespace CefSharpWin
                 
             }
         }
+         
     }
 
     #region Extend
-    public class MediatorHelper :   IMediator, INotifier
+    public class MediatorService :   IMediator, INotifier
     {
         #region Constants
         /// <summary>
@@ -71,7 +73,7 @@ namespace CefSharpWin
         /// <summary>
         /// Constructs a new mediator with the default name and no view component
         /// </summary>
-        public MediatorHelper()
+        public MediatorService()
             : this(NAME, null)
         {
         }
@@ -80,7 +82,7 @@ namespace CefSharpWin
         /// Constructs a new mediator with the specified name and no view component
         /// </summary>
         /// <param name="mediatorName">The name of the mediator</param>
-        public MediatorHelper(string mediatorName)
+        public MediatorService(string mediatorName)
             : this(mediatorName, null)
         {
         }
@@ -90,7 +92,7 @@ namespace CefSharpWin
         /// </summary>
         /// <param name="mediatorName">The name of the mediator</param>
         /// <param name="viewComponent">The view component to be mediated</param>
-		public MediatorHelper(string mediatorName, object viewComponent)
+		public MediatorService(string mediatorName, object viewComponent)
         {
             m_mediatorName = (mediatorName != null) ? mediatorName : NAME;
             m_viewComponent = viewComponent;
@@ -141,7 +143,7 @@ namespace CefSharpWin
         /// <summary>
         /// Local reference to the Facade Singleton
         /// </summary>
-        private IFacade m_facade = FacadeFactory.XPFacadeInstance;
+        private IFacade m_facade = FacadeFactory.Instance;
 
         #endregion
 
@@ -234,6 +236,53 @@ namespace CefSharpWin
         }
         #endregion
         #endregion
+    }
+
+    public class FormMediatorService :Form,  IMediator
+    {
+        public string  MediatorName { get;  }
+
+        public object  ViewComponent
+        { get; set; }
+        public FormMediatorService()
+        {
+            string mediatoir = GetType().Name;
+            FacadeFactory.Instance.RegisterMediator(this);
+        }
+        public virtual  void  HandleNotification(INotification notification)
+        {
+             
+        }
+
+        public virtual IList<string>  ListNotificationInterests()
+        {
+            return new string[0] { };
+        }
+
+        void IMediator.OnRegister()
+        {
+           
+        }
+
+        void IMediator.OnRemove()
+        {
+            
+        }
+    }
+
+    public class CommandService : SimpleCommand
+    {
+        public virtual void  Execute(INotification notification)
+        {
+            try
+            {
+                SendNotification(notification.Name, notification.Body, notification.Type);//作为桥梁进行消息发送
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
     #endregion
 }
