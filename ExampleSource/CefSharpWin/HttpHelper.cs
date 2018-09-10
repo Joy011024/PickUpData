@@ -41,7 +41,7 @@ namespace CefSharpWin
                 //返回响应中进行编码集压缩处理
                 GZipStream gzip = new GZipStream(responseStream, CompressionMode.Decompress);//解压缩
                 Encoding enc = Encoding.GetEncoding(SystemConfig.HttpResponseZip);// .GetEncoding("gb2312");
-                StreamReader sr = new StreamReader(gzip, enc);
+                StreamReader sr = new StreamReader(gzip, Encoding.UTF8);
                 content = sr.ReadToEnd();//System.IO.InvalidDataException:“GZip 头中的幻数不正确。请确保正在传入 GZip 流。”
                 sr.Close();
                 gzip.Close();
