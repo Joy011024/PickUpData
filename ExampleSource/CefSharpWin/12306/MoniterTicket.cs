@@ -14,7 +14,7 @@ namespace CefSharpWin
     {
         public MoniterTicket()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
         #region 消息传递
         public override void HandleNotification(INotification notification)
@@ -22,7 +22,7 @@ namespace CefSharpWin
             switch (notification.Name)
             {
                 case NotifyList.Notify_Refresh_Contacter://接收联系人列表
-
+                    object data = notification.Body;
                     break;
             }
         }

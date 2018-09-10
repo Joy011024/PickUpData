@@ -10,7 +10,7 @@ using Domain.CommonData;
 using PureMVC.Interfaces;
 namespace CefSharpWin
 {
-    public class HttpHelper: CommandService
+    public class HttpHelper
     {
         public static string GetResponse(string url, CookieContainer cookies = null)
         {
@@ -37,6 +37,7 @@ namespace CefSharpWin
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream responseStream = response.GetResponseStream();
             string content = string.Empty;
+            
             if (SystemConfig.ResponseIsZip)
             {
                 //返回响应中进行编码集压缩处理
@@ -54,6 +55,8 @@ namespace CefSharpWin
                 reader.Close();
             }
             responseStream.Close();
+
+            //解析联系人数据 
             return content;
         }
     }

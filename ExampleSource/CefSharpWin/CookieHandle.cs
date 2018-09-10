@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+
+using PureMVC.Patterns;
 namespace CefSharpWin
 {
     public class HttpRequestFlag
@@ -13,7 +15,7 @@ namespace CefSharpWin
         /// </summary>
         public static bool ContainerFullCookie { get; set; }
     }
-    public class CookieHandle
+    public class CookieHandle 
     {
         public static CookieContainer CookiePool;
         /// <summary>
@@ -50,6 +52,9 @@ namespace CefSharpWin
             string contacter= HttpHelper.GetResponse(url, CookiePool);
             url.WriteLog(ELogType.HttpResponse, true);
             contacter.WriteLog(ELogType.HttpResponse, true);
+
+            Ticket12306Resonse t123306= contacter.ConvertData<Ticket12306Resonse>();
+            new CommandService().SendNotify(NotifyList.Notify_Refresh_Contacter, t123306, string.Empty);
             return  ;
         }
         

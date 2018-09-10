@@ -12,9 +12,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
+using PureMVC.Interfaces;
 namespace CefSharpWin
 {
-    public partial class Form1 : Form
+    public partial class Form1 : FormMediatorService
     {
         ChromiumWebBrowser browser = null;
         public Form1()
@@ -24,6 +25,7 @@ namespace CefSharpWin
         }
         void Init()
         {
+           
             CefSettings setting = new CefSettings()
             {
                 Locale = "zh-cn",

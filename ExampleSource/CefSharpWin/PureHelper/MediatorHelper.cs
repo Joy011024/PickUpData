@@ -240,13 +240,15 @@ namespace CefSharpWin
 
     public class FormMediatorService :Form,  IMediator
     {
-        public string  MediatorName { get;  }
+        string mediatoir;
+        public string  MediatorName { get { return mediatoir; }  }
 
         public object  ViewComponent
         { get; set; }
         public FormMediatorService()
         {
-            string mediatoir = GetType().Name;
+            mediatoir = GetType().Name;
+            ViewComponent = this;
             FacadeFactory.Instance.RegisterMediator(this);
         }
         public virtual  void  HandleNotification(INotification notification)
@@ -272,7 +274,7 @@ namespace CefSharpWin
 
     public class CommandService : SimpleCommand
     {
-        public virtual void  Execute(INotification notification)
+        private void Execute(INotification notification)
         {
             try
             {
@@ -282,6 +284,16 @@ namespace CefSharpWin
             {
 
             }
+        }
+        /// <summary>
+        /// 进行消息发送
+        /// </summary>
+        /// <param name="notify"></param>
+        /// <param name="data"></param>
+        /// <param name="notifyType"></param>
+        public void SendNotify(string notify, object data, string notifyType)
+        {
+            SendNotification(notify, data, notifyType);
         }
     }
     #endregion
