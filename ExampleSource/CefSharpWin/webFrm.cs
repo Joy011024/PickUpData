@@ -34,6 +34,7 @@ namespace CefSharpWin
             };
             Cef.Initialize(setting);
             browser = new ChromiumWebBrowser("https://kyfw.12306.cn/otn/login/init");
+            HttpRequestFlag.Preparelogin();
             //第一步进行登录
             txtUrl.Text = SystemConfig.MainUrl;// "https://www.cnblogs.com/ZuoJinLiang/p/7490497.html";
             layoutPanel.Controls.Add(browser);
@@ -41,6 +42,7 @@ namespace CefSharpWin
             handle.GetCookieResponse = CookieHandle.FillCookieContainer;
             browser.RequestHandler = handle;
             browser.Dock = DockStyle.Fill;
+            
         }
 
         private void btnBrowser_Click(object sender, EventArgs e)

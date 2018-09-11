@@ -24,6 +24,11 @@ namespace CefSharpWin
                 case NotifyList.Notify_Refresh_Contacter://接收联系人列表
                     object data = notification.Body;
                     //Notify_Close_Account
+                    /*
+                     System.InvalidOperationException:“在创建窗口句柄之前，不能在控件上调用 Invoke 或 BeginInvoke。”
+                     */
+                    
+                    //发送消息去关闭登陆窗体
                     SendNotification(NotifyList.Notify_Close_Account);
                     ShowDialog();
                     break;
