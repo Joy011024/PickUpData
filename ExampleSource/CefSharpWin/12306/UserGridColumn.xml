@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid>
+  <Columns name="Contacter"> <!--联系人的表格列-->
+      <Header Name="Index" Text="序号" Width="30" Hidden="false"></Header>
+      <Header Name="Name" Text="姓名" Width="30" Hidden="false"></Header>
+  </Columns>
+  <Columns name="CarSchedule"> <!--刷票计划-->
+    <Header Name="Nme" Text="姓名" Width="30" Hidden="false"></Header>
+    <Header Name="Date" Text="日期" Width="30" Hidden="false"></Header>
+    <Header Name="From" Text="起始站" Width="30" Hidden="false"></Header>
+    <Header Name="To" Text="目的地" Width="30" Hidden="false"></Header>
+  </Columns>
+</Grid>
