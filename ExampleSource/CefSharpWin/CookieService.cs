@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using CefSharp;
+using Domain.CommonData;
 namespace CefSharpWin
 {
     #region  测试在执行网页完毕之后触发

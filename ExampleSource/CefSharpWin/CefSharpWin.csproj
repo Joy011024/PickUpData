@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="12306\GridColumn.cs" />
     <Compile Include="BaseDelegate.cs" />
     <Compile Include="CookieHandle.cs" />
     <Compile Include="CookieService.cs" />
@@ -139,6 +140,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="12306\ConstGridColumn.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="HttpExtend\HttpHeader.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

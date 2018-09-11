@@ -6,50 +6,10 @@ using System.Threading.Tasks;
 using System.IO;
 using System.ComponentModel;
 using System.Globalization;
+using Domain.CommonData;
 namespace CefSharpWin
 { 
-    /// <summary>
-    /// 日志分类
-    /// </summary>
-    public enum ELogType
-    {
-        [Description("错误日志")]
-        ErrorLog = 1,
-        [Description("数据日志")]
-        DataLog = 2,
-        [Description("运行逻辑日志")]
-        LogicLog = 3,
-        [Description("参数日志")]
-        ParamLog = 4,
-        [Description("缓存数据日志")]
-        SessionOrCookieLog = 5,
-        [Description("数据存入数据库日志")]
-        DataInDBLog = 6,
-        [Description("Debug调试日志数据")]
-        DebugData = 7,
-        [Description("性能日志")]
-        PerformanceLog = 8,
-        [Description("爬虫数据日志")]
-        SpliderDataLog = 9,
-        [Description("爬取的组数据")]
-        SpliderGroupDataLog = 10,
-        [Description("Http请求响应")]
-        HttpResponse = 11,
-        [Description("压缩日志")]
-        ZipLog = 12,
-        [Description("邮件日志")]
-        EmailLog = 13,
-        [Description("邮件正文")]
-        EmailBody = 14,
-        [Description("后台进程")]
-        BackgroundProcess = 15,
-        Account = 16,
-        [Description("心跳线检测")]
-        HeartBeatLine = 17
-    }
-    
    
-     
     public class LoggerWriter
     {
         /// <summary>

@@ -34,6 +34,7 @@ namespace CefSharpWin
             request.Host = "kyfw.12306.cn";
             request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
             request.Referer = "https://kyfw.12306.cn/otn/passport?redirect=/otn/";
+            request.ContentType = "text/plain;charset=UTF-8";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream responseStream = response.GetResponseStream();
             string content = string.Empty;

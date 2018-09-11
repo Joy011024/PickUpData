@@ -45,6 +45,11 @@ namespace CefSharpWin
         }
         private void LoadContacters(Ticket12306Resonse conts)
         {
+            string tip = conts.data.exMsg;
+            if (!string.IsNullOrEmpty(tip))
+            {
+                return;
+            }
             List<Rider> cons = conts.data.normal_passengers;
             for (int i = 0; i < cons.Count; i++)
             {
@@ -83,6 +88,45 @@ namespace CefSharpWin
                NotifyList.Notify_Refresh_Contacter,
                NotifyList.Notify_ToFront_Contacter
            };
+        }
+        private void CheckBox_Click(object sender,EventArgs e)
+        {
+            CheckBox ck = sender as CheckBox;
+            if (!ck.Checked)
+            {
+                ckAll.Checked = false;
+                return;
+            }
+            foreach (var item in ck.Parent.Controls)
+            {
+                CheckBox sibling = item as CheckBox;
+                if (sibling == null)
+                {
+                    continue;
+                }
+                if (!sibling.Checked)
+                {
+                    return;
+                }
+            }
+            ckAll.Checked = true;
+        }
+        private void CheckAll_Click(object sender,EventArgs e)
+        {
+            CheckBox ck = sender as CheckBox;
+            if (!ck.Checked)
+            {
+                return;
+            }
+            foreach (var item in carTypePanel.Controls)
+            {
+                CheckBox type = item as CheckBox;
+                if (type == null)
+                {
+                    continue;
+                }
+                type.Checked = true;
+            }
         }
         #endregion
     }
