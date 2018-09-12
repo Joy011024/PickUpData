@@ -80,7 +80,7 @@ namespace CefSharpWin
         }
         private void DownloadStation()
         {
-            string url = XmlService.GetAppSetting().SystemSetting.KeepStatic.StationUrl;
+            string url = XmlService.GetAppSetting().SystemSetting.KeepStatic.StationAPI;
             string station= HttpHelper.GetResponse(url);
            // station.WriteLog(ELogType.DebugData, false);
            //进行解析

@@ -34,10 +34,11 @@ namespace CefSharpWin
         public bool CreatePatientAutoClose { get; set; }
         public string DateFormatInUI { get; set; } 
         [System.ComponentModel.Description("车站URL")]
-        public string StationUrl { get; set; }
+        public string StationAPI { get; set; }
         public string StationUrlRegexFormat { get; set; }
         public string StationJsonFile { get; set; }
         public int StationField { get; set; }
+        public string TicketQueryAPI { get; set; }
     }
     [Serializable]
     [XmlRoot(ElementName = "RealTime")]

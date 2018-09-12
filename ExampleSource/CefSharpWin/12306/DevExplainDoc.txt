@@ -1,0 +1,55 @@
+﻿1.确认订单
+API：https://kyfw.12306.cn/otn/confirmPassenger/checkOrderInfo
+Method:Post
+Form Data:
+
+cancel_flag: 2
+bed_level_order_num: 000000000000000000000000000000
+passengerTicketStr: 9,0,1,胡x林,1,36233019xx03011391,18270x26195,N
+oldPassengerStr: 胡x林,1,36233019xx03011391,1_
+tour_flag: dc
+randCode: 
+whatsSelect: 1
+_json_att: 
+REPEAT_SUBMIT_TOKEN: 7fc609e968de58c3d17747ac34c204c8
+
+Response:
+
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"ifShowPassCode":"N","canChooseBeds":"N","canChooseSeats":"N","choose_Seats":" ","isCanChooseMid":"N","ifShowPassCodeTime":"1","submitStatus":true,"smokeStr":""},"messages":[],"validateMessages":{}}
+2.返回排队数目
+API：https://kyfw.12306.cn/otn/confirmPassenger/getQueueCount
+Method:Post
+Form Data:
+
+train_date: Thu Sep 13 2018 00:00:00 GMT+0800 (中国标准时间)
+train_no: 24000000G706
+stationTrainCode: G7
+seatType: 9
+fromStationTelecode: VNP
+toStationTelecode: AOH
+leftTicket: 79xz5aJHxLbap2j4HbM34L7V5hmB4%2FX1TIT2cppV%2B4Q3Bban
+purpose_codes: 00
+train_location: P3
+_json_att: 
+3.提交订票
+API：https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue
+Method：Post
+Form Data：
+
+passengerTicketStr: 9,0,1,胡x林,1,36233019xx03011391,18270x26195,N
+oldPassengerStr: 胡x林,1,36233019xx03011391,1_
+randCode: 
+purpose_codes: 00
+key_check_isChange: 491676BBB00D59C17FBF794373EBAD789EB58E6DE53CDD2C4E994288
+leftTicketStr: 79xz5aJHxLbap2j4HbM34L7V5hmB4%2FX1TIT2cppV%2B4Q3Bban
+train_location: P3
+choose_seats: 
+seatDetailType: 000
+whatsSelect: 1
+roomType: 00
+dwAll: N
+_json_att: 
+REPEAT_SUBMIT_TOKEN: 7fc609e968de58c3d17747ac34c204c8
+
+Response:
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"errMsg":"余票不足！","submitStatus":false},"messages":[],"validateMessages":{}}
