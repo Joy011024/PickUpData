@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PureMVC.Interfaces;
+using Domain.CommonData;
 namespace CefSharpWin
 {
     public partial class MoniterTicket : FormMediatorService
     {
 
         #region private member 
+        private bool mExistsStation = false;
         #endregion
         #region contructor 
         public MoniterTicket()
@@ -38,6 +40,17 @@ namespace CefSharpWin
             BindGridColumn(lstContact, contactCols.Columns);
             Grid carScheCols = XmlService.GetGridSetting()["CarSchedule"];
             BindGridColumn( lstSchedule, carScheCols.Columns);
+            //是否存在车站信息
+            AppSetting appSetting = XmlService.GetAppSetting();
+            string file = FileHelper.ReadFile(SystemConfig.DebugDir + appSetting.SystemSetting.KeepStatic.StationJsonFile);
+            if (!string.IsNullOrEmpty(file) && !string.IsNullOrEmpty(file.Trim()))
+            {
+                //是否能解析为json串
+
+            }
+            else {
+                DownloadStation();
+            }
         }
         private void BindGridColumn(ListView grid, Columns gridColumn)
         {
@@ -64,6 +77,13 @@ namespace CefSharpWin
 
                 lstContact.Items.Add(row);
             }
+        }
+        private void DownloadStation()
+        {
+            string url = XmlService.GetAppSetting().SystemSetting.KeepStatic.StationUrl;
+            string station= HttpHelper.GetResponse(url);
+           // station.WriteLog(ELogType.DebugData, false);
+           //进行解析
         }
         #endregion
         #region 消息传递

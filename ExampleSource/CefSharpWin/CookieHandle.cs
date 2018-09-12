@@ -63,7 +63,7 @@ namespace CefSharpWin
             {
                 return;
             }
-            string contacter= HttpHelper.GetResponse(url, CookiePool);
+            string contacter= HttpHelper.GetZipResponse(url, CookiePool);
             url.WriteLog(ELogType.HttpResponse, true);
             contacter.WriteLog(ELogType.HttpResponse, true);
             //判断是否需要进行发送

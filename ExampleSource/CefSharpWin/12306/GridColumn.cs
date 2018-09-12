@@ -15,4 +15,10 @@ namespace CefSharpWin
         public string Text { get; set; }
         public int Width { get; set; }
     }
+
+    public class Station
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
+    }
 }
