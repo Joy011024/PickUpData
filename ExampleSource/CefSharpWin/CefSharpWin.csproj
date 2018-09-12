@@ -89,6 +89,9 @@
     <Compile Include="BaseDelegate.cs" />
     <Compile Include="CookieHandle.cs" />
     <Compile Include="CookieService.cs" />
+    <Compile Include="Helper\Grids.cs" />
+    <Compile Include="Helper\XmlSerializerHelper.cs" />
+    <Compile Include="Helper\XmlSetting.cs" />
     <Compile Include="HttpHelper.cs" />
     <Compile Include="12306\MoniterTicket.cs">
       <SubType>Form</SubType>
@@ -109,6 +112,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemConfig.cs" />
+    <Compile Include="XmlService.cs" />
     <Compile Include="XPLogger.cs" />
     <EmbeddedResource Include="12306\MoniterTicket.resx">
       <DependentUpon>MoniterTicket.cs</DependentUpon>
@@ -144,6 +148,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="12306\UserGridColumn.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="12306\AppSetting.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="HttpExtend\HttpHeader.txt">

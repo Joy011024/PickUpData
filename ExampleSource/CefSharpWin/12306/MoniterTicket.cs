@@ -34,13 +34,19 @@ namespace CefSharpWin
         {
             lstContact.Scrollable = true;
             lstSchedule.Scrollable = true;
-            Dictionary<string, string> contact = new Dictionary<string, string>();
-            contact.Add("passenger_name", "姓名");
-            lstContact.Columns.Clear();
-            lstContact.View = View.Details;
-            foreach (var item in contact)
+            Grid contactCols = XmlService.GetGridSetting()["Contacter"];
+            BindGridColumn(lstContact, contactCols.Columns);
+            Grid carScheCols = XmlService.GetGridSetting()["CarSchedule"];
+            BindGridColumn( lstSchedule, carScheCols.Columns);
+        }
+        private void BindGridColumn(ListView grid, Columns gridColumn)
+        {
+            grid.Columns.Clear();
+            grid.View = View.Details;
+            grid.GridLines = true;
+            foreach (var item in gridColumn.Heads)
             {
-                lstContact.Columns.Add(new ColumnHeader() { Name = item.Key, Text = item.Value });
+                grid.Columns.Add(new ColumnHeader() { Name = item.Name, Text = item.Text, Width = item.Width });
             }
         }
         private void LoadContacters(Ticket12306Resonse conts)

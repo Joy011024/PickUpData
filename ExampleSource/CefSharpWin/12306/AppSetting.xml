@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AppSetting>
+  <SystemSetting>
+    <!--保持相对稳定的-->
+      <Keep> 
+          <!--参数视图参数 mas，aes点击一次变化数值-->
+          <OneClickValue>5</OneClickValue>
+          <!--创建就诊信息之后自动关闭就诊人员维护窗体-->
+          <CreatePatientAutoClose>true</CreatePatientAutoClose>
+          <!--边框的色彩-->
+          <BorderRGB>00|00|00</BorderRGB>
+          <!--影像series控件显示的背景色-->
+          <ImageEleBackgroundRGB>00|00|00</ImageEleBackgroundRGB>
+          <!--画笔占用的像素-->
+          <PenMargin>5</PenMargin>
+          <!--默认情况下元素高度-->
+          <NormalEleHeight>21</NormalEleHeight>
+          <SeriesFontColor></SeriesFontColor>
+      </Keep>
+       <!--实时变化的-->
+      <RealTime>
+            <!--当日已预约登记就诊数量-->
+            <VisiterIndex>1</VisiterIndex>
+            <!--当日进行预约登记的时间戳-->
+            <VisterDayInt>20180912</VisterDayInt>
+            <!--在UI上显示日期的格式-->
+            <DateFormatInUI>yyyyMMddHHmm</DateFormatInUI>
+      </RealTime>
+  </SystemSetting>
+  <UseSetting name="admin">
+      <!--按钮高亮色-->
+      <EleFlagRGB>255|00|00</EleFlagRGB>
+      <!--表格数据行高亮背景色-->
+      <GridRowFlagRGB>154|205|50</GridRowFlagRGB>
+      
+  </UseSetting>
+</AppSetting>

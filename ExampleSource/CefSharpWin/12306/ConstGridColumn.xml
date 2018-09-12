@@ -1,17 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Grid>
-  <Columns name="Contacter"> <!--联系人的表格列-->
-      <Header Name="Index" Text="序号" Width="30" Hidden="false"></Header>
-      <Header Name="Name" Text="姓名" Width="30" Hidden="false"></Header>
-      <Header Name="Email" Text="邮箱" Width="30" Hidden="false"></Header>
-      <Header Name="CardIdType" Text="证件分类" Width="30" Hidden="true"></Header>
-      <Header Name="CardId" Text="证件" Width="30" Hidden="true"></Header>
-  </Columns>
-  <Columns name="CarSchedule"> <!--刷票计划-->
-      <Header Name="Nme" Text="姓名" Width="30" Hidden="false"></Header>
-      <Header Name="Date" Text="日期" Width="30" Hidden="false"></Header>
-      <Header Name="From" Text="起始站" Width="30" Hidden="false"></Header>
-      <Header Name="To" Text="目的地" Width="30" Hidden="false"></Header>
-      <Header Name="ScheduleDate" Text="计划创建日" Width="30" Hidden="false"></Header>
-  </Columns>
-</Grid>
+<Grids>
+  <Grid name="Contacter">
+    <!--联系人的表格列-->
+    <Columns>
+      <!--这是checkbox Name 为数据源中的属性列，Text为显示的表头列文本 Hidden 是否隐藏该列，CodeGenerate该列是否为代码生成【序号】，--> 
+      <Column Name="Index" Text="序号" Width="30" Hidden="false" CodeGenerate="false"></Column>
+      <Column Name="Name" Text="姓名" Width="80" Hidden="false" CodeGenerate="false"></Column>
+      <Column Name="Email" Text="邮箱" Width="180" Hidden="false" CodeGenerate="false"></Column>
+      <Column Name="CardIdType" Text="证件分类" Width="60" Hidden="true" CodeGenerate="false"></Column>
+      <Column Name="CardId" Text="证件" Width="150" Hidden="true" CodeGenerate="false"></Column>
+    </Columns>
+    <!--设置的表格列高度-->
+    <HeadHeight>50</HeadHeight>
+  </Grid>
+  <Grid name="CarSchedule"> 
+    <Columns>
+      <!--刷票计划-->
+      <Column Name="Nme" Text="姓名" Width="80" Hidden="false" CodeGenerate="false"></Column>
+      <Column Name="Date" Text="日期" Width="120" Hidden="false" CodeGenerate="false"></Column>
+      <Column Name="From" Text="起始站" Width="120" Hidden="false" CodeGenerate="false"></Column>
+      <Column Name="To" Text="目的地" Width="120" Hidden="false" CodeGenerate="false"></Column>
+      <Column Name="ScheduleDate" Text="计划创建日" Width="120" Hidden="false" CodeGenerate="false"></Column>
+    </Columns>
+  </Grid>
+</Grids> 

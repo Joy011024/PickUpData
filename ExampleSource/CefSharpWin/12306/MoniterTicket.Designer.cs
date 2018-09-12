@@ -70,9 +70,9 @@
             // 
             // lstContact
             // 
-            this.lstContact.Location = new System.Drawing.Point(82, 55);
+            this.lstContact.Location = new System.Drawing.Point(12, 59);
             this.lstContact.Name = "lstContact";
-            this.lstContact.Size = new System.Drawing.Size(121, 153);
+            this.lstContact.Size = new System.Drawing.Size(480, 153);
             this.lstContact.TabIndex = 2;
             this.lstContact.UseCompatibleStateImageBehavior = false;
             // 
@@ -105,7 +105,7 @@
             // lblUser
             // 
             this.lblUser.AutoSize = true;
-            this.lblUser.Location = new System.Drawing.Point(10, 68);
+            this.lblUser.Location = new System.Drawing.Point(12, 44);
             this.lblUser.Name = "lblUser";
             this.lblUser.Size = new System.Drawing.Size(41, 12);
             this.lblUser.TabIndex = 6;
