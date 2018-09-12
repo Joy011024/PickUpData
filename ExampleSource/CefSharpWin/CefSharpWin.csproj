@@ -153,6 +153,7 @@
     <EmbeddedResource Include="12306\AppSetting.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Content Include="12306\DevExplainDoc.txt" />
     <Content Include="12306\Station.txt" />
     <Content Include="HttpExtend\HttpHeader.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
