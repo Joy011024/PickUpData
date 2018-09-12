@@ -49,3 +49,9 @@ BIGipServerotn=467927562.38945.0000
 
 
 返回tocken项的请求URL：https://kyfw.12306.cn/otn/uamauthclient
+
+
+代理IP：
+https://www.cnblogs.com/benbenfishfish/p/5830149.html
+https://blog.csdn.net/zky0901/article/details/49305207
+http://www.iphai.com/free/ng

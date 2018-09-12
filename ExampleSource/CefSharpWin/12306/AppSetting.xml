@@ -16,6 +16,7 @@
           <!--默认情况下元素高度-->
           <NormalEleHeight>21</NormalEleHeight>
           <SeriesFontColor></SeriesFontColor>
+          <StationUrl>https://kyfw.12306.cn/otn/resources/js/framework/favorite_name.js</StationUrl>
       </Keep>
        <!--实时变化的-->
       <RealTime>

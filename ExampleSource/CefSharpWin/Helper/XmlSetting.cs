@@ -33,6 +33,8 @@ namespace CefSharpWin
         public int OneClickValue { get; set; }
         public bool CreatePatientAutoClose { get; set; }
         public string DateFormatInUI { get; set; } 
+        [System.ComponentModel.Description("车站URL")]
+        public string StationUrl { get; set; }
     }
     [Serializable]
     [XmlRoot(ElementName = "RealTime")]
