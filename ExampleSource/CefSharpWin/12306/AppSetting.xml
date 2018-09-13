@@ -20,7 +20,8 @@
   <StationJsonFile>12306\Station.txt</StationJsonFile>
   <!--一个车站包含多少个车站-->
   <StationFieldNum>6</StationFieldNum>
-  <StationSplitRegex>(.*?)@</StationSplitRegex> <!--(.*?)@--> <!--(.*?)@  第一个元素为空元素-->
+  <StationSplitRegex>(?@[\w|-]*)</StationSplitRegex> <!--(.*?)@--> <!--(.*?)@  第一个元素为空元素-->
   <!--余票查询接口-->
   <TicketQueryAPI>https://kyfw.12306.cn/otn/leftTicket/queryA?leftTicketDTO.train_date=2018-09-13&amp;leftTicketDTO.from_station=BJP&amp;leftTicketDTO.to_station=SHH&amp;purpose_codes=ADULT</TicketQueryAPI>
+  <SplitFlag>|</SplitFlag>
 </SystemSetting>

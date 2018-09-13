@@ -15,7 +15,7 @@ namespace CefSharpWin
     {
 
         #region private member 
-        private bool mExistsStation = false;
+        private List<Station> station;
         #endregion
         #region contructor 
         public MoniterTicket()
@@ -41,12 +41,10 @@ namespace CefSharpWin
             Grid carScheCols = XmlService.GetGridSetting()["CarSchedule"];
             BindGridColumn( lstSchedule, carScheCols.Columns);
             //是否存在车站信息 
-            if (true)
+            Ticket12306Servies ticket = new Ticket12306Servies();
+            station = ticket.GetStationFromFile();
+            if(station.Count==0)
             {//是否能解析为json串
-                Ticket12306Servies ticket = new Ticket12306Servies();
-                ticket.GroupStation();
-            }
-            else {
                 DownloadStation();
             }
         }
@@ -84,7 +82,7 @@ namespace CefSharpWin
         {
             string url =  SystemSetting.SystemSettingDict["StationAPI"];
             string station= HttpHelper.GetResponse(url);
-           // station.WriteLog(ELogType.DebugData, false);
+            new Ticket12306Servies().GroupStation(station);
            //进行解析
         }
         #endregion
