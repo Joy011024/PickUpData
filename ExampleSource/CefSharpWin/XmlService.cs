@@ -22,16 +22,13 @@ namespace CefSharpWin
             gridSetting= XmlSerializerHelper.LoadFromXML<Grids>(xml);
             return gridSetting;
         }
-        static AppSetting appSetting;
-        public static AppSetting GetAppSetting()
+        
+        public static void GetAppSetting()
         {
-            if (appSetting != null)
-            {
-                return appSetting;
-            }
+             
             string xml = SystemConfig.DebugDir + "12306\\AppSetting.xml";
-            appSetting = XmlSerializerHelper.LoadFromXML<AppSetting>(xml);
-            return appSetting;
+            Dictionary<string,string> sett= XmlXPathSeries.GetSystemSetting(xml);
+            SystemSetting.SystemSettingDict = sett;
         }
     }
    

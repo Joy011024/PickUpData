@@ -40,13 +40,11 @@ namespace CefSharpWin
             BindGridColumn(lstContact, contactCols.Columns);
             Grid carScheCols = XmlService.GetGridSetting()["CarSchedule"];
             BindGridColumn( lstSchedule, carScheCols.Columns);
-            //是否存在车站信息
-            AppSetting appSetting = XmlService.GetAppSetting();
-            string file = FileHelper.ReadFile(SystemConfig.DebugDir + appSetting.SystemSetting.KeepStatic.StationJsonFile);
-            if (!string.IsNullOrEmpty(file) && !string.IsNullOrEmpty(file.Trim()))
-            {
-                //是否能解析为json串
-                RegexHelper.GetMatchValue(file, "");
+            //是否存在车站信息 
+            if (TicketStation.Stations.Count==0)
+            {//是否能解析为json串
+                Ticket12306Servies ticket = new Ticket12306Servies();
+                ticket.GroupStation();
             }
             else {
                 DownloadStation();
@@ -84,7 +82,7 @@ namespace CefSharpWin
         }
         private void DownloadStation()
         {
-            string url = XmlService.GetAppSetting().SystemSetting.KeepStatic.StationAPI;
+            string url =  SystemSetting.SystemSettingDict["StationAPI"];
             string station= HttpHelper.GetResponse(url);
            // station.WriteLog(ELogType.DebugData, false);
            //进行解析

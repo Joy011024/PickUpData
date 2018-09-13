@@ -6,40 +6,11 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 namespace CefSharpWin
 {
-    [Serializable]
-    [XmlRoot(ElementName = "AppSetting")]
-    public class AppSetting
+    public class SystemSetting
     {
-        public SystemAppSetting SystemSetting { get; set; }
-        public UseAppSetting UseSetting { get; set; }
+         public static Dictionary<string, string> SystemSettingDict { get; set; }
     }
     
-    [Serializable]
-    [XmlRoot(ElementName = "SystemSetting")]
-    public class SystemAppSetting
-    {
-        [System.ComponentModel.Description("相对稳定的")]
-        [XmlElement(ElementName = "Keep")]
-        public Keep KeepStatic { get; set; }
-        [System.ComponentModel.Description("随时会变化的")]
-        [XmlElement(ElementName = "RealTime")]
-        public RealTime AnyTimeValue { get; set; }
-
-    }
-    [Serializable]
-    [XmlRoot(ElementName = "Keep")]
-    public class Keep
-    {
-        public int OneClickValue { get; set; }
-        public bool CreatePatientAutoClose { get; set; }
-        public string DateFormatInUI { get; set; } 
-        [System.ComponentModel.Description("车站URL")]
-        public string StationAPI { get; set; }
-        public string StationUrlRegexFormat { get; set; }
-        public string StationJsonFile { get; set; }
-        public int StationField { get; set; }
-        public string TicketQueryAPI { get; set; }
-    }
     [Serializable]
     [XmlRoot(ElementName = "RealTime")]
     public class RealTime

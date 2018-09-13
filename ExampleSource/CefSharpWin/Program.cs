@@ -16,8 +16,9 @@ namespace CefSharpWin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            XmlService.GetAppSetting();
             InitRegisterForm();
-            Form1 acc= FacadeFactory.Instance.RetrieveMediator(typeof(Form1).Name) as Form1;
+            Form acc = FacadeFactory.Instance.RetrieveMediator(typeof(MoniterTicket).Name) as Form;
             Application.Run(acc);//cef 只能单进程
 
             /*
@@ -31,7 +32,7 @@ namespace CefSharpWin
         }
         static void InitRegisterForm()
         {
-            Form1 acc = new Form1();
+            WebFrm acc = new WebFrm();
             MoniterTicket mt = new MoniterTicket();
         }
     }

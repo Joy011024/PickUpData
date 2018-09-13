@@ -1,46 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<AppSetting>
-  <SystemSetting>
-    <!--保持相对稳定的-->
-      <Keep> 
-          <!--参数视图参数 mas，aes点击一次变化数值-->
-          <OneClickValue>5</OneClickValue>
-          <!--创建就诊信息之后自动关闭就诊人员维护窗体-->
-          <CreatePatientAutoClose>true</CreatePatientAutoClose>
-          <!--边框的色彩-->
-          <BorderRGB>00|00|00</BorderRGB>
-          <!--影像series控件显示的背景色-->
-          <ImageEleBackgroundRGB>00|00|00</ImageEleBackgroundRGB>
-          <!--画笔占用的像素-->
-          <PenMargin>5</PenMargin>
-          <!--默认情况下元素高度-->
-          <NormalEleHeight>21</NormalEleHeight>
-          <SeriesFontColor></SeriesFontColor>
-          <!--车站数据来源URL-->
-          <StationAPI>https://kyfw.12306.cn/otn/resources/js/framework/favorite_name.js</StationAPI>
-          <!--正则解析车站-->
-          <StationUrlRegexFormat>var station_names ='(.*?)'</StationUrlRegexFormat>
-          <StationJsonFile>12306\Station.txt</StationJsonFile>
-          <!--一个车站包含多少个车站-->
-          <StationField>6</StationField>
-          <!--余票查询接口-->
-          <TicketQueryAPI>https://kyfw.12306.cn/otn/leftTicket/queryA?leftTicketDTO.train_date=2018-09-13&amp;leftTicketDTO.from_station=BJP&amp;leftTicketDTO.to_station=SHH&amp;purpose_codes=ADULT</TicketQueryAPI>
-      </Keep>
-       <!--实时变化的-->
-      <RealTime>
-            <!--当日已预约登记就诊数量-->
-            <VisiterIndex>1</VisiterIndex>
-            <!--当日进行预约登记的时间戳-->
-            <VisterDayInt>20180912</VisterDayInt>
-            <!--在UI上显示日期的格式-->
-            <DateFormatInUI>yyyyMMddHHmm</DateFormatInUI>
-      </RealTime>
-  </SystemSetting>
-  <UseSetting name="admin">
-      <!--按钮高亮色-->
-      <EleFlagRGB>255|00|00</EleFlagRGB>
-      <!--表格数据行高亮背景色-->
-      <GridRowFlagRGB>154|205|50</GridRowFlagRGB>
-      
-  </UseSetting>
-</AppSetting>
+<SystemSetting>
+  <!--参数视图参数 mas，aes点击一次变化数值-->
+  <OneClickValue>5</OneClickValue>
+  <!--创建就诊信息之后自动关闭就诊人员维护窗体-->
+  <CreatePatientAutoClose>true</CreatePatientAutoClose>
+  <!--边框的色彩-->
+  <BorderRGB>00|00|00</BorderRGB>
+  <!--影像series控件显示的背景色-->
+  <ImageEleBackgroundRGB>00|00|00</ImageEleBackgroundRGB>
+  <!--画笔占用的像素-->
+  <PenMargin>5</PenMargin>
+  <!--默认情况下元素高度-->
+  <NormalEleHeight>21</NormalEleHeight>
+  <SeriesFontColor></SeriesFontColor>
+  <!--车站数据来源URL-->
+  <StationAPI>https://kyfw.12306.cn/otn/resources/js/framework/favorite_name.js</StationAPI>
+  <!--正则解析车站-->
+  <StationUrlRegexFormat>='(.*?)'</StationUrlRegexFormat>
+  <StationJsonFile>12306\Station.txt</StationJsonFile>
+  <!--一个车站包含多少个车站-->
+  <StationFieldNum>6</StationFieldNum>
+  <StationSplitRegex>(.*?)@</StationSplitRegex> <!--(.*?)@--> <!--(.*?)@  第一个元素为空元素-->
+  <!--余票查询接口-->
+  <TicketQueryAPI>https://kyfw.12306.cn/otn/leftTicket/queryA?leftTicketDTO.train_date=2018-09-13&amp;leftTicketDTO.from_station=BJP&amp;leftTicketDTO.to_station=SHH&amp;purpose_codes=ADULT</TicketQueryAPI>
+</SystemSetting>

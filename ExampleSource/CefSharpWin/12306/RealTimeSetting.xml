@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RealTime>
+    <!--当日已预约登记就诊数量-->
+    <VisiterIndex>1</VisiterIndex>
+    <!--当日进行预约登记的时间戳-->
+    <VisterDayInt>20180912</VisterDayInt>
+    <!--在UI上显示日期的格式-->
+    <DateFormatInUI>yyyyMMddHHmm</DateFormatInUI>
+</RealTime>

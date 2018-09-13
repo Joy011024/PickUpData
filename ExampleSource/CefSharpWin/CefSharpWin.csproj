@@ -86,10 +86,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="12306\GridColumn.cs" />
+    <Content Include="12306\RealTimeSetting.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Compile Include="12306\Ticket12306Servies.cs" />
     <Compile Include="BaseDelegate.cs" />
     <Compile Include="CookieHandle.cs" />
     <Compile Include="CookieService.cs" />
     <Compile Include="Helper\Grids.cs" />
+    <Compile Include="Helper\RegexHelper.cs" />
     <Compile Include="Helper\XmlSerializerHelper.cs" />
     <Compile Include="Helper\XmlSetting.cs" />
     <Compile Include="HttpHelper.cs" />
@@ -103,6 +108,7 @@
     <Compile Include="12306\NotifyList.cs" />
     <Compile Include="PureHelper\MediatorHelper.cs" />
     <Compile Include="PureHelper\PageNotifyCommand.cs" />
+    <Compile Include="12306\TicketStation.cs" />
     <Compile Include="webFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,7 +160,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="12306\DevExplainDoc.txt" />
-    <Content Include="12306\Station.txt" />
+    <Content Include="12306\Station.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="HttpExtend\HttpHeader.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

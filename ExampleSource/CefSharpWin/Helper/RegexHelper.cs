@@ -8,11 +8,20 @@ namespace CefSharpWin
 {
     public class RegexHelper
     {
-        public static string GetMatchValue(string input,string format)
+        public static List<string> GetMatchValue(string input,string format)
         {
             Regex reg = new Regex(format);
             MatchCollection mc = reg.Matches(input);
-            return string.Empty;
+            List<string> stas = new List<string>();
+            foreach (Match item in mc)
+            {
+                if (item.Groups.Count < 2)
+                {
+                    continue;
+                }
+                stas.Add(item.Groups[1].Value);
+            }
+            return stas;
         }
     }
 }

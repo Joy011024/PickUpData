@@ -15,10 +15,10 @@ using CefSharp.WinForms;
 using PureMVC.Interfaces;
 namespace CefSharpWin
 {
-    public partial class Form1 : FormMediatorService
+    public partial class WebFrm : FormMediatorService
     {
         ChromiumWebBrowser browser = null;
-        public Form1()
+        public WebFrm()
         {
             InitializeComponent();
             Init();

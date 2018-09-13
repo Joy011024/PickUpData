@@ -125,4 +125,29 @@ namespace CefSharpWin
             return obj;
         }
     }
+
+    public class XmlXPathSeries
+    {
+        public static Dictionary<string, string> GetSystemSetting(string xmlFullName)
+        {//查询系统公共配置
+            //节点解析为字典
+            Dictionary<string, string> settingDict = new Dictionary<string, string>();
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlFullName);
+            XmlElement ele = doc.DocumentElement;
+            XmlNode root = ele.SelectSingleNode("//SystemSetting");// xpath 
+            foreach (XmlNode item in root.ChildNodes)
+            {
+                if ((new XmlNodeType[] { XmlNodeType.Comment, XmlNodeType.Text }).Contains(item.NodeType))
+                {//国立掉文本和注释
+                    continue;
+                }
+                if (!settingDict.ContainsKey(item.Name))
+                {
+                    settingDict.Add(item.Name.Trim(), item.InnerText.Trim());
+                }
+            }
+            return settingDict;
+        }
+    }
 }
