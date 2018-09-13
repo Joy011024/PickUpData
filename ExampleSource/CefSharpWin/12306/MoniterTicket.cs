@@ -41,7 +41,7 @@ namespace CefSharpWin
             Grid carScheCols = XmlService.GetGridSetting()["CarSchedule"];
             BindGridColumn( lstSchedule, carScheCols.Columns);
             //是否存在车站信息 
-            if (TicketStation.Stations.Count==0)
+            if (true)
             {//是否能解析为json串
                 Ticket12306Servies ticket = new Ticket12306Servies();
                 ticket.GroupStation();
