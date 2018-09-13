@@ -19,7 +19,7 @@
           <!--车站数据来源URL-->
           <StationAPI>https://kyfw.12306.cn/otn/resources/js/framework/favorite_name.js</StationAPI>
           <!--正则解析车站-->
-          <StationUrlRegexFormat>var station_names ='{0}'</StationUrlRegexFormat>
+          <StationUrlRegexFormat>var station_names ='(.*?)'</StationUrlRegexFormat>
           <StationJsonFile>12306\Station.txt</StationJsonFile>
           <!--一个车站包含多少个车站-->
           <StationField>6</StationField>

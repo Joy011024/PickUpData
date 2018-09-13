@@ -46,7 +46,7 @@ namespace CefSharpWin
             if (!string.IsNullOrEmpty(file) && !string.IsNullOrEmpty(file.Trim()))
             {
                 //是否能解析为json串
-
+                RegexHelper.GetMatchValue(file, "");
             }
             else {
                 DownloadStation();
@@ -55,6 +55,10 @@ namespace CefSharpWin
         private void BindGridColumn(ListView grid, Columns gridColumn)
         {
             grid.Columns.Clear();
+            if (gridColumn == null)
+            {
+                return;
+            }
             grid.View = View.Details;
             grid.GridLines = true;
             foreach (var item in gridColumn.Heads)
