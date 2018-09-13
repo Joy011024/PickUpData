@@ -12,7 +12,7 @@ namespace CefSharpWin
         {
             string file = FileHelper.ReadFile(SystemConfig.DebugDir + SystemSetting.SystemSettingDict["StationJsonFile"]);
             List<string> stationList= RegexHelper.GetMatchValue(file, SystemSetting.SystemSettingDict["StationUrlRegexFormat"]);
-            List<string> coll = RegexHelper.GetMatchValue(stationList[0], @"(?<test>@[\w|-]*)");//  SystemSetting.SystemSettingDict["StationSplitRegex"]);
+            List<string> coll = RegexHelper.GetMatchValue(stationList[0], @"(?<test>@[\w|-| ]*)");//  SystemSetting.SystemSettingDict["StationSplitRegex"]);
             if (string.IsNullOrEmpty(coll[0]))
             {
                 coll.RemoveAt(0);
