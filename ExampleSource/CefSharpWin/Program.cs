@@ -18,7 +18,7 @@ namespace CefSharpWin
             Application.SetCompatibleTextRenderingDefault(false);
             XmlService.GetAppSetting();
             InitRegisterForm();
-            Form acc = FacadeFactory.Instance.RetrieveMediator(typeof(MoniterTicket).Name) as Form;
+            Form acc = FacadeFactory.Instance.RetrieveMediator(typeof(Form).Name) as Form;
             Application.Run(acc);//cef 只能单进程
 
             /*

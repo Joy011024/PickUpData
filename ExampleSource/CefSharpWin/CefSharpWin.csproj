@@ -93,6 +93,7 @@
     <Compile Include="BaseDelegate.cs" />
     <Compile Include="CookieHandle.cs" />
     <Compile Include="CookieService.cs" />
+    <Compile Include="Helper\FakeIPService.cs" />
     <Compile Include="Helper\Grids.cs" />
     <Compile Include="Helper\RegexHelper.cs" />
     <Compile Include="Helper\XmlSerializerHelper.cs" />
@@ -108,7 +109,6 @@
     <Compile Include="12306\NotifyList.cs" />
     <Compile Include="PureHelper\MediatorHelper.cs" />
     <Compile Include="PureHelper\PageNotifyCommand.cs" />
-    <Compile Include="12306\TicketStation.cs" />
     <Compile Include="webFrm.cs">
       <SubType>Form</SubType>
     </Compile>
