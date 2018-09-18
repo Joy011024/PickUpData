@@ -93,15 +93,17 @@ namespace CefSharpWin
             return content;
         }
 
-        public static string  GetProxyResponse(string url,string proxyIP)
+        public static string  GetProxyResponse(string url,string proxyIP,int port)
         {
             string unicode = url;//这里需要进行URL处理
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-            request.Method = "Get";
+            request.Method = "GET";
+            request.AllowAutoRedirect = true;
+            request.Timeout = 1000 * 30;
             if (!string.IsNullOrEmpty(proxyIP))
             {
-                request.UseDefaultCredentials = true;
-                request.Proxy = new WebProxy() {  Address=new Uri(proxyIP) };
+                var proxy= new WebProxy(proxyIP, port);
+                request.Proxy = proxy;
             }
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream responseStream = response.GetResponseStream();
