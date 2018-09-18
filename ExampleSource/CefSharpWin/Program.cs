@@ -17,6 +17,7 @@ namespace CefSharpWin
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             XmlService.GetAppSetting();
+            FakeIPService.GetFakeIPs();
             InitRegisterForm();
             Form acc = FacadeFactory.Instance.RetrieveMediator(typeof(Form).Name) as Form;
             Application.Run(acc);//cef 只能单进程

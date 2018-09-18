@@ -107,6 +107,11 @@ namespace CefSharpWin
         {
             LoggerWriter.CreateLogFile(text, DllDir + GetYearWeekIndex(), title, GetNowDayIndex(), insert);
         }
+        [System.ComponentModel.Description("每日唯一")]
+        public static void WriteLogForEverDay(this string text,ELogType type)
+        {
+            LoggerWriter.CreateLogFile(text, DllDir + GetYearWeekIndex()+"/"+DateTime.Now.ToString("yyyyMMdd"), type, type.ToString(), false);
+        }
         /// <summary>
         /// 获取当前天所属的周
         /// </summary>

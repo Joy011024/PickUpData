@@ -23,5 +23,9 @@
   <StationSplitRegex>(?@[\w|-]*)</StationSplitRegex> <!--(.*?)@--> <!--(.*?)@  第一个元素为空元素-->
   <!--余票查询接口-->
   <TicketQueryAPI>https://kyfw.12306.cn/otn/leftTicket/queryA?leftTicketDTO.train_date=2018-09-13&amp;leftTicketDTO.from_station=BJP&amp;leftTicketDTO.to_station=SHH&amp;purpose_codes=ADULT</TicketQueryAPI>
+  <FakeIPHaiAPI>http://www.iphai.com/free/wg</FakeIPHaiAPI>
+  <FakeIPAPIXiciaili>http://www.xicidaili.com/nn/1</FakeIPAPIXiciaili>
+  <!--使用哪个ip代理来源-->
+  <FakeIPAPISwitchInPool>FakeIPHaiAPI</FakeIPAPISwitchInPool>
   <SplitFlag>|</SplitFlag>
 </SystemSetting>
