@@ -9,6 +9,12 @@ namespace CefSharpWin
 {
     public class FakeIPService
     {
+        public static void SwitcHttphPrxoy()
+        {
+            string url = "http://www.iphai.com/free/ng";
+            string text=  HttpHelper.GetProxyResponse(url, "http://222.95.23.93:808");
+            text.WriteLog(ELogType.HeartBeatLine, true);
+        }
         public static void GetFakeIPs()
         {
             string ipDataSource = SystemSetting.SystemSettingDict["FakeIPAPISwitchInPool"];

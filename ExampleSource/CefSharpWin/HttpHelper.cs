@@ -92,6 +92,26 @@ namespace CefSharpWin
             //解析联系人数据 
             return content;
         }
+
+        public static string  GetProxyResponse(string url,string proxyIP)
+        {
+            string unicode = url;//这里需要进行URL处理
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            request.Method = "Get";
+            if (!string.IsNullOrEmpty(proxyIP))
+            {
+                request.UseDefaultCredentials = true;
+                request.Proxy = new WebProxy() {  Address=new Uri(proxyIP) };
+            }
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream responseStream = response.GetResponseStream();
+            string content = string.Empty;
+            StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+            content = reader.ReadToEnd();
+            reader.Close();
+            responseStream.Close();
+            return content;
+        }
     }
     public class RequestHeadHelper
     {
