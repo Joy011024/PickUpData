@@ -20,6 +20,13 @@ namespace CefSharpWin
                 DllDir = new AppDir().Dir();
             }
         }
+        public static string Logdir
+        {
+            get
+            {
+                return DllDir + "Log/";
+            }
+        }
         /// <summary>
         /// 添加日志
         /// </summary>
@@ -28,12 +35,12 @@ namespace CefSharpWin
         /// <param name="insert"></param>
         public static void WriteLog(this string text, ELogType title,bool insert)
         {
-            LoggerWriter.CreateLogFile(text, DllDir + GetYearWeekIndex(), title, GetNowDayIndex(), insert);
+            LoggerWriter.CreateLogFile(text, Logdir + GetYearWeekIndex(), title, GetNowDayIndex(), insert);
         }
         [System.ComponentModel.Description("每日唯一")]
         public static void WriteLogForEverDay(this string text,ELogType type)
         {
-            LoggerWriter.CreateLogFile(text, DllDir + GetYearWeekIndex()+"/"+DateTime.Now.ToString("yyyyMMdd"), type, type.ToString(), false);
+            FileHelper.ReplaceTxt(Logdir + GetYearWeekIndex()+ DateTime.Now.ToString("yyyyMMdd")+"/", type.ToString(), text);
         }
         /// <summary>
         /// 获取当前天所属的周
