@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="12306\GridColumn.cs" />
+    <None Include="12306\DataBase\AppSetting.db" />
     <Content Include="12306\RealTimeSetting.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -178,7 +179,9 @@
       <Name>Domain.CommonData</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="12306\DataBase\SqlCmd\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
