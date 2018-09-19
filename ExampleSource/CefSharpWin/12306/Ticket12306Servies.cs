@@ -34,7 +34,9 @@ namespace CefSharpWin
             }
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(station);
             if (!string.IsNullOrEmpty(json))
-                FileHelper.ReplaceTxt(file, json);
+            {
+                //FileHelper.ReplaceTxt(file, json);
+            }
         }
         [System.ComponentModel.Description("从文件中获取车站列表")]
         public List<Station> GetStationFromFile()

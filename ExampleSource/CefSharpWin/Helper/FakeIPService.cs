@@ -12,7 +12,7 @@ namespace CefSharpWin
         public static void SwitcHttphPrxoy()
         {
             string url = "http://www.iphai.com/free/ng";
-            string text=  HttpHelper.GetProxyResponse("http://127.0.0.1:803/", "http://222.95.23.93",808);
+            string text=  HttpHelper.GetProxyResponse(url, "211.159.171.58", 80);
             text.WriteLog(ELogType.HeartBeatLine, true);
         }
         public static void GetFakeIPs()

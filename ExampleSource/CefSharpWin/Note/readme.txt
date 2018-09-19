@@ -59,3 +59,4 @@ http://www.ip181.com
 https://blog.csdn.net/wuma0q1an/article/details/51312983
 代理ip使用资料：
 https://bbs.csdn.net/topics/391026270
+https://github.com/janpoo/VoteCracker/blob/master/VoteCracker/Form1.cs github
