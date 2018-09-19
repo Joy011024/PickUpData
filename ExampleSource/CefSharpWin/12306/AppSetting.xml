@@ -17,7 +17,8 @@
   <StationAPI>https://kyfw.12306.cn/otn/resources/js/framework/favorite_name.js</StationAPI>
   <!--正则解析车站-->
   <StationUrlRegexFormat>='(.*?)'</StationUrlRegexFormat>
-  <StationJsonFile>12306\Station.txt</StationJsonFile>
+  <ResourceDir>12306\</ResourceDir>
+  <StationJsonFile>Station.txt</StationJsonFile>
   <!--一个车站包含多少个车站-->
   <StationFieldNum>6</StationFieldNum>
   <StationSplitRegex>(?@[\w|-]*)</StationSplitRegex> <!--(.*?)@--> <!--(.*?)@  第一个元素为空元素-->

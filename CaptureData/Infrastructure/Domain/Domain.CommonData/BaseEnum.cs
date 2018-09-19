@@ -101,12 +101,12 @@ namespace Domain.CommonData
                 Directory.CreateDirectory(path);
             }
             DateTime now = DateTime.Now;
-            string file = path + "/" + log.ToString();
+            string file = path;
             if (!Directory.Exists(file))
                 Directory.CreateDirectory(file);
             string filetype = ".txt";
             if (string.IsNullOrEmpty(fileName))
-                file += "/" + log + now.ToString(CommonFormat.DateTimeIntFormat) + filetype;
+                file += "/" + now.ToString(CommonFormat.DateTimeIntFormat) + filetype;
             else
             {//需要判断是否增加后缀
                 if (!fileName.Contains("."))
@@ -139,9 +139,22 @@ namespace Domain.CommonData
                 encode = Encoding.UTF8;
             }
             StreamWriter sw = new StreamWriter(fs, encode);
-            sw.Write(text);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(CreateSign());
+            sb.AppendLine(log.ToString());
+            sb.AppendLine(text);
+            sw.Write(sb.ToString());
             sw.Close();
             fs.Close();
+        }
+        static string CreateSign()
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 32; i++)
+            {
+                sb.Append("-");
+            }
+            return sb.ToString();
         }
     }
     public class FileHelper
@@ -198,6 +211,21 @@ namespace Domain.CommonData
             {
                 Directory.CreateDirectory(path);
             }
+        }
+
+        public static void ReplaceTxt(string dir,string fileName,string text)
+        {
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            FileStream file = new FileStream(dir+"/"+fileName, FileMode.OpenOrCreate, FileAccess.Write,FileShare.ReadWrite);
+            //待写入的内容过大是否能分段写入
+            byte[] bytes = Encoding.UTF8.GetBytes(text);
+            int len = bytes.Length;
+            file.Write(bytes, 0, bytes.Length);
+            file.Flush();
+            file.Close();
         }
     }
     public static class Logger 
