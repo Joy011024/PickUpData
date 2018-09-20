@@ -10,7 +10,7 @@ namespace CefSharpWin
     {
         public void GroupStation(string stationString)
         {
-            string file = SystemConfig.DebugDir + SystemSetting.SystemSettingDict["StationJsonFile"];
+            string dir = SystemConfig.DebugDir+SystemSetting.SystemSettingDict["ResourceDir"] ;
             List<string> stationList= RegexHelper.GetMatchValue(stationString, SystemSetting.SystemSettingDict["StationUrlRegexFormat"]);
             List<string> coll = RegexHelper.GetMatchValue(stationList[0], @"(?<test>@[\w|-| ]*)");//  SystemSetting.SystemSettingDict["StationSplitRegex"]);
             if (string.IsNullOrEmpty(coll[0]))
@@ -35,7 +35,7 @@ namespace CefSharpWin
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(station);
             if (!string.IsNullOrEmpty(json))
             {
-                //FileHelper.ReplaceTxt(file, json);
+                FileHelper.ReplaceTxt(dir, SystemSetting.SystemSettingDict["StationJsonFile"], json);
             }
         }
         [System.ComponentModel.Description("从文件中获取车站列表")]
