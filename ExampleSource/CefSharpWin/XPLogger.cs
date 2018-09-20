@@ -40,7 +40,7 @@ namespace CefSharpWin
         [System.ComponentModel.Description("每日唯一")]
         public static void WriteLogForEverDay(this string text,ELogType type)
         {
-            FileHelper.ReplaceTxt(Logdir + GetYearWeekIndex()+ DateTime.Now.ToString("yyyyMMdd")+"/", type.ToString(), text);
+            LoggerWriter.CreateLogFile(text,Logdir + GetYearWeekIndex()+"/"+ DateTime.Now.ToString("yyyyMMdd")+"/", type,type.ToString(),true);
         }
         /// <summary>
         /// 获取当前天所属的周

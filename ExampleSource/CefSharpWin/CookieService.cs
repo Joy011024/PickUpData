@@ -174,6 +174,19 @@ namespace CefSharpWin
             {
                 return;
             }
+            //输入请求日志
+            IPostData data = request.PostData;
+            if (data != null)
+            {
+
+            }
+
+            StringBuilder requestHead = new StringBuilder();
+            foreach (var item in request.Headers.AllKeys)
+            {
+                requestHead.Append(string.Format("{0} : {1};", item, request.Headers[item]));
+            }
+            requestHead.ToString().WriteLog(ELogType.HttpRequest,true);
             var url = new Uri(request.Url);
             var extension = url.ToString().ToLower();
             extension.WriteLog(ELogType.Account, true);
