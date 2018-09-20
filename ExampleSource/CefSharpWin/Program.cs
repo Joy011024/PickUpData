@@ -17,10 +17,9 @@ namespace CefSharpWin
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             XmlService.GetAppSetting();
-            //FakeIPService.SwitcHttphPrxoy();
-            //FakeIPService.GetFakeIPs();
             InitRegisterForm();
             Form acc = FacadeFactory.Instance.RetrieveMediator(typeof(Form).Name) as Form;
+            InitFakeServices();
             Application.Run(acc);//cef 只能单进程
 
             /*
@@ -36,6 +35,11 @@ namespace CefSharpWin
         {
             WebFrm acc = new WebFrm();
             MoniterTicket mt = new MoniterTicket();
+        }
+        static void InitFakeServices()
+        {
+            //FakeIPService.SwitcHttphPrxoy();
+            //FakeIPService.GetFakeIPs();
         }
     }
 }

@@ -11,18 +11,32 @@ namespace CefSharpWin
     {
         public static void SwitcHttphPrxoy()
         {
-            string url = "http://www.iphai.com/free/ng";
-            string text=  HttpHelper.GetProxyResponse(url, "211.159.171.58", 80);
-            text.WriteLog(ELogType.HeartBeatLine, true);
+            try
+            {
+                string url = "http://www.iphai.com/free/ng";
+                string text = HttpHelper.GetProxyResponse(url, "211.159.171.58", 80);
+                text.WriteLog(ELogType.HeartBeatLine, true);
+            }
+            catch (Exception ex)
+            {
+                ex.ToString().WriteLogForEverDay(ELogType.ErrorLog);
+            }
         }
         public static void GetFakeIPs()
         {
-            string ipDataSource = SystemSetting.SystemSettingDict["FakeIPAPISwitchInPool"];
-            string url = SystemSetting.SystemSettingDict[ipDataSource];//选择使用什么ip代理项
-            string ipPool = HttpClientHelper.HttpClientExtend.HttpClientGet(url);
-            if (!string.IsNullOrEmpty(ipPool))
+            try
             {
-                ipPool.WriteLogForEverDay(ELogType.HeartBeatLine);
+                string ipDataSource = SystemSetting.SystemSettingDict["FakeIPAPISwitchInPool"];
+                string url = SystemSetting.SystemSettingDict[ipDataSource];//选择使用什么ip代理项
+                string ipPool = HttpClientHelper.HttpClientExtend.HttpClientGet(url);
+                if (!string.IsNullOrEmpty(ipPool))
+                {
+                    ipPool.WriteLogForEverDay(ELogType.HeartBeatLine);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString().WriteLogForEverDay(ELogType.ErrorLog);
             }
         }
     }
