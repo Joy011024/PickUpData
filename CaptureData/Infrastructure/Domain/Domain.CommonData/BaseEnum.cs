@@ -52,7 +52,9 @@ namespace Domain.CommonData
         BackgroundProcess=15,
         Account=16,
         [Description("心跳线检测")]
-        HeartBeatLine=17
+        HeartBeatLine=17,
+        [Description("http请求")]
+        HttpRequest=18
     }
     /// <summary>
     /// 程序类型
