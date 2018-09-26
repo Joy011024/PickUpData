@@ -221,6 +221,12 @@ namespace Domain.CommonData
             {
                 Directory.CreateDirectory(dir);
             }
+            string filetype = ".txt";
+            //需要判断是否增加后缀
+            if (!fileName.Contains("."))
+            {
+                fileName = fileName + filetype;
+            }
             FileStream file = new FileStream(dir+"/"+fileName, FileMode.OpenOrCreate, FileAccess.Write,FileShare.ReadWrite);
             //待写入的内容过大是否能分段写入
             byte[] bytes = Encoding.UTF8.GetBytes(text);
