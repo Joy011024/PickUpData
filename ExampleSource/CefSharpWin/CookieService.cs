@@ -176,22 +176,24 @@ namespace CefSharpWin
             }
             var url = new Uri(request.Url);
             var extension = url.ToString().ToLower();
-            extension.WriteLog(ELogType.Account, true);
-            //输入写入到请求日志
-            IPostData data = request.PostData;
-            if (data != null)
-            {
-                //请求内容被转换为了文件流
-                //输出有请求参数的URL
-                StringBuilder requestHead = new StringBuilder();
-                requestHead.AppendLine(string.Format("url hava request param-> {0} " ,extension));
-                foreach (var item in request.Headers.AllKeys)
+            if (SystemSetting.SystemSettingDict["OpenDebug"] == "true")
+            {//开启debug模式
+                extension.WriteLog(ELogType.Account, true);
+                //输入写入到请求日志
+                IPostData data = request.PostData;
+                if (data != null)
                 {
-                    requestHead.Append(string.Format("{0} : {1};", item, request.Headers[item]));
+                    //请求内容被转换为了文件流
+                    //输出有请求参数的URL
+                    StringBuilder requestHead = new StringBuilder();
+                    requestHead.AppendLine(string.Format("url hava request param-> {0} ", extension));
+                    foreach (var item in request.Headers.AllKeys)
+                    {
+                        requestHead.Append(string.Format("{0} : {1};", item, request.Headers[item]));
+                    }
+                    requestHead.ToString().WriteLog(ELogType.HttpRequest, true);
                 }
-                requestHead.ToString().WriteLog(ELogType.HttpRequest, true);
             }
-            
             if (!extension.Contains(SystemConfig.CookieDomain))
             {
                 return;

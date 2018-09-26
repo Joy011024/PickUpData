@@ -15,7 +15,7 @@ namespace CefSharpWin
             {
                 string url = "http://www.iphai.com/free/ng";
                 string text = HttpHelper.GetProxyResponse(url, "211.159.171.58", 80);
-                text.WriteLog(ELogType.HeartBeatLine, true);
+                text.WriteLogForEverDay(ELogType.HeartBeatLine);
             }
             catch (Exception ex)
             {

@@ -40,10 +40,14 @@ namespace CefSharpWin
             BindGridColumn(lstContact, contactCols.Columns);
             Grid carScheCols = XmlService.GetGridSetting()["CarSchedule"];
             BindGridColumn( lstSchedule, carScheCols.Columns);
+           
+        }
+        void InitStation()
+        {
             //是否存在车站信息 
             Ticket12306Servies ticket = new Ticket12306Servies();
             station = ticket.GetStationFromFile();
-            if(station.Count==0)
+            if (station.Count == 0)
             {//是否能解析为json串
                 DownloadStation();
             }
@@ -101,7 +105,9 @@ namespace CefSharpWin
                     //发送消息去关闭登陆窗体
                     SendNotification(NotifyList.Notify_Close_Account);
                     LoadContacters(data);
+                    InitStation();
                     ShowDialog();
+                    
                     break;
                 case NotifyList.Notify_ToFront_Contacter:
 

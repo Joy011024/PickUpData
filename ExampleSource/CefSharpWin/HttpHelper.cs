@@ -120,7 +120,7 @@ namespace CefSharpWin
         public string ReadHeadFromText()
         {
             //读取请求头
-            string headDir = Logger.DllDir + "HttpExtend/HttpHeader.txt";
+            string headDir = LoggerManage.DllDir + "HttpExtend/HttpHeader.txt";
             return FileHelper.ReadFile(headDir);
         }
     }

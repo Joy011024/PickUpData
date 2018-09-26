@@ -29,4 +29,5 @@
   <!--使用哪个ip代理来源-->
   <FakeIPAPISwitchInPool>FakeIPHaiAPI</FakeIPAPISwitchInPool>
   <SplitFlag>|</SplitFlag>
+  <OpenDebug>false</OpenDebug>
 </SystemSetting>

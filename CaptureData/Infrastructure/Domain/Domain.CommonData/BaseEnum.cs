@@ -292,6 +292,11 @@ namespace Domain.CommonData
         {
           return  DateTime.Now.ToString(CommonFormat.DateTimeIntFormat);
         }
+        public static string GetYearMonth()
+        {
+            DateTime now = DateTime.Now;
+            return now.Year + now.Month.ToString().PadLeft(2,'0');
+        }
     }
     public  class AssemblyDataExt 
     {
