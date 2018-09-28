@@ -194,17 +194,16 @@ namespace CefSharpWin
                     requestHead.ToString().WriteLog(ELogType.HttpRequest, true);
                 }
             }
-            if (!extension.Contains(SystemConfig.CookieDomain))
-            {
-                return;
-            }
+            //if (!extension.Contains(SystemConfig.CookieDomain))
+            //{
+            //    return;
+            //}
             if ((!SystemConfig.AnywhereGetCookie && extension != SystemConfig.InitCookeKey))
             {
                 return;
             }
             //这是请求响应头
             ICookieManager cookie = Cef.GetGlobalCookieManager();
-            CookieVisitor.CookieDict = new Dictionary<string, Dictionary<string, System.Net.Cookie>>();
             if (SystemConfig.AnywhereGetCookie)
             {//无限制提取cookie
                 cookie.VisitAllCookies(new CookieVisitor());
@@ -218,6 +217,10 @@ namespace CefSharpWin
             }
             if (extension == SystemConfig.TockenAfterUrl)
             {//是否已经获取到了tocken
+                ExistsTocken = true;
+            }
+            if (CookieHandle.GetCoreCookie(CookieVisitor.CookieDict))
+            {  //从其他应用中获取到了cookie
                 ExistsTocken = true;
             }
             if (ExistsTocken)

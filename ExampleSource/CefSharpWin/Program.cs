@@ -38,8 +38,13 @@ namespace CefSharpWin
         }
         static void InitFakeServices()
         {
-            FakeIPService.SwitcHttphPrxoy();
-            FakeIPService.GetFakeIPs();
+            new System.Threading.Thread(() =>
+            {
+                FakeIPService.SwitcHttphPrxoy();
+                FakeIPService.GetFakeIPs();
+            }).Start();
+
+            
         }
     }
 }

@@ -80,5 +80,20 @@ namespace CefSharpWin
             }
             return  ;
         }
+        public static bool GetCoreCookie(Dictionary<string, Dictionary<string, System.Net.Cookie>> cis)
+        {
+            bool isTocken = false;
+            foreach (var item in cis)
+            { //RAIL_EXPIRATION:1535825068536 
+                foreach (var ck in item.Value)
+                {
+                    if (item.Value[ck.Key].Name == "tk")
+                    {
+                        isTocken = true;
+                    }
+                }
+            }
+            return isTocken;
+        }
     }
 }
