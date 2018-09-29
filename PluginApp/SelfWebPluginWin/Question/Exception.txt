@@ -17,3 +17,6 @@ No Entity Framework provider found for the ADO.NET provider with invariant name 
   Make sure the provider is registered in the 'entityFramework' section of the application config file. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
   4)将数据库连接串修改到配置文件connectionStrings节点中，设置数据提供驱动为System.Data.SQLite.EF6
   The entity type AppSetting is not part of the model for the current context. [ef已经可用但是没有成功连接]
+
+5)
+CreateDatabase is not supported by the provider.

@@ -62,6 +62,12 @@
     <Compile Include="ClearLogFrm.designer.cs">
       <DependentUpon>ClearLogFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CodeSearchFileFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodeSearchFileFrm.Designer.cs">
+      <DependentUpon>CodeSearchFileFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExcelCompareToolFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ClearLogFrm.resx">
       <DependentUpon>ClearLogFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CodeSearchFileFrm.resx">
+      <DependentUpon>CodeSearchFileFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExcelCompareToolFrm.resx">
       <DependentUpon>ExcelCompareToolFrm.cs</DependentUpon>
