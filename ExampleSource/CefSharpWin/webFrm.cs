@@ -33,6 +33,7 @@ namespace CefSharpWin
                 MultiThreadedMessageLoop = true
             };
             Cef.Initialize(setting);
+            CookieVisitor.CookieDict = new Dictionary<string, Dictionary<string, System.Net.Cookie>>();
             browser = new ChromiumWebBrowser("https://kyfw.12306.cn/otn/login/init");
             HttpRequestFlag.Preparelogin();
             //第一步进行登录
