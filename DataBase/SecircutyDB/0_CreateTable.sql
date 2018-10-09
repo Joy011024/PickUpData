@@ -12,7 +12,7 @@ Create table Names
     InDbDay int not null
 )
 );
-create table AppSetting
+create table AppSettingData
 (
     Id int primary key,
     Name varchar(32) not null,
