@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 namespace DataService.LocalData.SQLite
 {
-    public class DataContext:DbContext
+    public class DataContext<T>:DbContext where T:class
     {
         public DataContext(string dbConnString) : base(dbConnString)
         {
@@ -16,19 +16,21 @@ namespace DataService.LocalData.SQLite
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();//去除表名的复数形式
         }
+        public IDbSet<T> Entity { get; set; }
     }
     /// <summary>
     /// 封装单个数据表的简单操作/外键约束表的增加[db-first]
     /// </summary>
-    public class DBReporistory
+    public class DBReporistory<T> where T:class
     {
-        static DataContext dbcontext = null;
+        static DataContext<T> dbcontext = null;
         public DBReporistory()//string dbConnString)
         {
             if (dbcontext == null)
             {
-                dbcontext = new DataContext("SQLite");//dbConnString);
+                dbcontext = new DataContext<T>("SQLite");//dbConnString);
             }
         }
         /// <summary>

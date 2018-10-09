@@ -1,4 +1,11 @@
 ﻿遇到的问题
+=========2018-10-09
+1.上下文不匹配
+The entity type AppSetting is not part of the model for the current context.
+在定义的上下文DbContext中声明数据集public IDbSet<T> Entity { get; set; } 属性
+2.An error occurred while updating the entries. See the inner exception for details.
+表名被加上了复数形式 在上下文中加上语句 modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();//去除表名的复数形式
+3.A null store-generated value was returned for a non-nullable member 'Id' of type 'DataService.LocalData.SQLite.AppSettingData'.
 =========2018-09-29
 1.在配置文件中没有设置
 No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'.

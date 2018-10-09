@@ -65,11 +65,11 @@ namespace SelfWebPluginWin
         }
         private void Test()
         {
-            AppSetting db = new AppSetting()
+            AppSettingData db = new AppSettingData()
             {
                 Name = "AppVersion",
                 CreateTime = DateTime.Now,
-                Id = 1,
+                Id = 2,
                 Statues = 0,
                 Value = "1.0",
                 Desc = "程序版本"
@@ -81,8 +81,8 @@ namespace SelfWebPluginWin
             string connString =string.Format( "data source={0}",dbPath);
             try
             {
-                DBReporistory dbReporistory = new DBReporistory();
-                dbReporistory.AddList(new AppSetting[] { db });
+                DBReporistory<AppSettingData> dbReporistory = new DBReporistory<AppSettingData>();
+                dbReporistory.AddList(new AppSettingData[] { db });
                 /*
                  No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'. Make sure the provider is registered in the 'entityFramework' section of the application config file. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
                  */
@@ -108,10 +108,15 @@ namespace SelfWebPluginWin
         }
         #endregion
     }
-    [System.Data.Linq.Mapping.Table(Name = "AppSetting")]
-    public class AppSetting
+    [System.Data.Linq.Mapping.Table(Name = "AppSettingData")]
+    public class AppSettingData
     {
         [System.ComponentModel.DataAnnotations.Key]
+        /*
+         *         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Computed)]
+         Modifications to tables where a primary key column has property 'StoreGeneratedPattern' set to 'Computed' are not supported. Use 'Identity' pattern instead. Key column: 'Id'. Table: 'CodeFirstDatabaseSchema.AppSettingData'.
+         */
+        [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
         public virtual string Value { get; set; }
