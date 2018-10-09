@@ -74,15 +74,15 @@ namespace SelfWebPluginWin
             try
             {
                 DBReporistory<AppSettingData> dbReporistory = new DBReporistory<AppSettingData>();
-                int index= dbReporistory.DoQuery<AppSettingData>().Count();
+                int index = dbReporistory.DoQuery<AppSettingData>().Max(s => s.Id);
                 AppSettingData db = new AppSettingData()
                 {
-                    Name = "AppVersion",
+                    Name = "AppReleaseDate",
                     CreateTime = DateTime.Now,
                     Id = index+1,
                     Statues = 0,
                     Value = "1.0",
-                    Desc = "程序版本"
+                    Desc = "发布日期"
                 };
                
                 dbReporistory.AddList(new AppSettingData[] { db });
