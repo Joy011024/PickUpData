@@ -21,12 +21,6 @@ create table AppSettingData
     Statues int not null, 
     Desc varchar(1024)
 );
-CREATE TABLE IdCard (
-    Id         VARCHAR (18)   PRIMARY KEY,
-    Name       VARCHAR (32)   NOT NULL,
-    CreateTime DATE           NOT NULL,
-    [Desc]     VARCHAR (1024) 
-);
 CREATE TABLE Proxy (
     Id         VARCHAR (32)   PRIMARY KEY,
     IP         VARCHAR (15)   NOT NULL,

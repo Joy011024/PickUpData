@@ -65,15 +65,7 @@ namespace SelfWebPluginWin
         }
         private void Test()
         {
-            AppSettingData db = new AppSettingData()
-            {
-                Name = "AppVersion",
-                CreateTime = DateTime.Now,
-                Id = 2,
-                Statues = 0,
-                Value = "1.0",
-                Desc = "程序版本"
-            };
+           
             string appPath = AppDomain.CurrentDomain.BaseDirectory;//当前程序目录
             // @"PluginApp\SelfWebPluginWin\bin\Debug";
             string dbPath= CycleParent(4, appPath) + @"\LocalData.SQLite\AppSetting.db" ;
@@ -82,6 +74,17 @@ namespace SelfWebPluginWin
             try
             {
                 DBReporistory<AppSettingData> dbReporistory = new DBReporistory<AppSettingData>();
+                int index= dbReporistory.DoQuery<AppSettingData>().Count();
+                AppSettingData db = new AppSettingData()
+                {
+                    Name = "AppVersion",
+                    CreateTime = DateTime.Now,
+                    Id = index+1,
+                    Statues = 0,
+                    Value = "1.0",
+                    Desc = "程序版本"
+                };
+               
                 dbReporistory.AddList(new AppSettingData[] { db });
                 /*
                  No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'. Make sure the provider is registered in the 'entityFramework' section of the application config file. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
