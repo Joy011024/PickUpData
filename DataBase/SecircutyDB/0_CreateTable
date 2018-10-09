@@ -10,4 +10,27 @@ Create table Names
     CreateTime date not null,
     Name varchar(32) not null,
     InDbDay int not null
-)
+);
+Create table AppSetting
+(
+    Name varchar(32) not null,
+    Id int primary key,
+    Value varchar(128) not null,
+    Desc varchar(1024),
+    CreateTime datetime not null,
+    Statues int not null
+);
+CREATE TABLE Proxy (
+    Id         VARCHAR (32)   PRIMARY KEY,
+    IP         VARCHAR (15)   NOT NULL,
+    Port       INT            NOT NULL,
+    CreateTime DATE,
+    [Desc]     VARCHAR (1024),
+    Status     INT            DEFAULT (0) 
+);
+CREATE TABLE RunProxy (
+    ProxyId    VARCHAR (32),
+    Id         VARCHAR (32) PRIMARY KEY,
+    Result     BIT          NOT NULL,
+    CreateTime DATE         NOT NULL
+);
