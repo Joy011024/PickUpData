@@ -10,15 +10,22 @@ Create table Names
     CreateTime date not null,
     Name varchar(32) not null,
     InDbDay int not null
+)
 );
-Create table AppSetting
+create table AppSetting
 (
-    Name varchar(32) not null,
     Id int primary key,
+    Name varchar(32) not null,
     Value varchar(128) not null,
-    Desc varchar(1024),
     CreateTime datetime not null,
-    Statues int not null
+    Statues int not null, 
+    Desc varchar(1024)
+);
+CREATE TABLE IdCard (
+    Id         VARCHAR (18)   PRIMARY KEY,
+    Name       VARCHAR (32)   NOT NULL,
+    CreateTime DATE           NOT NULL,
+    [Desc]     VARCHAR (1024) 
 );
 CREATE TABLE Proxy (
     Id         VARCHAR (32)   PRIMARY KEY,
