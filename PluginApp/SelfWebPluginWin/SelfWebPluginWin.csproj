@@ -122,6 +122,7 @@
     <Content Include="AppSettingCofnig\AppSetting.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="AppSettingCofnig\AppSettings.txt" />
     <Content Include="AppSettingCofnig\BrowserHeadSetting.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

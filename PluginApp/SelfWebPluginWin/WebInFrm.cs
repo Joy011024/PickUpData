@@ -75,6 +75,8 @@ namespace SelfWebPluginWin
             {
                 DBReporistory<AppSettingData> dbReporistory = new DBReporistory<AppSettingData>();
                 int index = dbReporistory.DoQuery<AppSettingData>().Max(s => s.Id);
+
+
                 AppSettingData db = new AppSettingData()
                 {
                     Name = "AppReleaseDate",
