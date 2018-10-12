@@ -16,7 +16,7 @@ namespace HRApp.ApplicationService
             get;
             set;
         }
-        IContactDataRepository appRepostory;
+        public IContactDataRepository appRepostory;
         public ContactDataService(IContactDataRepository _appReposiory) 
         {
             appRepostory = _appReposiory;
