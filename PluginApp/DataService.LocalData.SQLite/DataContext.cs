@@ -8,9 +8,9 @@ namespace DataService.LocalData.SQLite
 {
     public class DataContext<T>:DbContext where T:class
     {
-        public DataContext(string dbConnString) : base(dbConnString)
+        public DataContext(string connString) : base(connString)
         {
-            
+             
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace DataService.LocalData.SQLite
     public class DBReporistory<T> where T:class
     {
         static DataContext<T> dbcontext = null;
-        public DBReporistory()//string dbConnString)
+        public DBReporistory(string connString)
         {
             if (dbcontext == null)
             {
-                dbcontext = new DataContext<T>("SQLite");//dbConnString);
+                dbcontext = new DataContext<T>(connString);
             }
         }
         /// <summary>

@@ -1,1 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AppConfg>
+  <!--是否开启代码添加配置到数据库-->
+  <OpenCodeAddSettingData2DB>false</OpenCodeAddSettingData2DB>
+  <!--是否开启sqlite数据库-->
+  <OpenSQLite>true</OpenSQLite>
+</AppConfg>
