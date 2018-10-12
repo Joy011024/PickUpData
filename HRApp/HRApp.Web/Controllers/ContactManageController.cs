@@ -13,6 +13,11 @@ namespace HRApp.Web.Controllers
 {
     public class ContactManageController : Controller
     {
+        [Domain.CommonData.DescriptionSort("联系人列表")]
+        public ActionResult ContactersList()
+        {
+            return View();
+        }
         //
         // GET: /ContactManage/
         [Domain.CommonData.DescriptionSort("添加联系人对话框")]
