@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using DataService.LocalData.SQLite;
 using System.IO;
 using System.Data.SQLite;
+using Newtonsoft.Json;
+using Domain.CommonData;
 namespace SelfWebPluginWin
 {
     public partial class WebInFrm : Form
@@ -70,22 +72,21 @@ namespace SelfWebPluginWin
             // @"PluginApp\SelfWebPluginWin\bin\Debug";
             string dbPath= CycleParent(4, appPath) + @"\LocalData.SQLite\AppSetting.db" ;
             //检测是否存在
-            string connString =string.Format( "data source={0}",dbPath);
+            string connString =string.Format("data source={0};Version=3;", dbPath);
             try
             {
-                DBReporistory<AppSettingData> dbReporistory = new DBReporistory<AppSettingData>();
+                DBReporistory<AppSettingData> dbReporistory = new DBReporistory<AppSettingData>("SQLite");
                 int index = dbReporistory.DoQuery<AppSettingData>().Max(s => s.Id);
-                AppSettingData db = new AppSettingData()
+                //从文本文件中读取
+                string path = string.Format(@"{0}AppSettingCofnig\AppSettings.txt", appPath);
+                string json= FileHelper.ReadFile(path);
+                List<AppSettingData> datas=  JsonConvert.DeserializeObject<List<AppSettingData>>(json);
+                for (int i = 0; i < datas.Count; i++)
                 {
-                    Name = "AppReleaseDate",
-                    CreateTime = DateTime.Now,
-                    Id = index+1,
-                    Statues = 0,
-                    Value = "1.0",
-                    Desc = "发布日期"
-                };
-               
-                dbReporistory.AddList(new AppSettingData[] { db });
+                    datas[i].CreateTime = DateTime.Now;
+                    datas[i].Id = index + i;
+                }
+                 
                 /*
                  No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'. Make sure the provider is registered in the 'entityFramework' section of the application config file. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
                  */

@@ -59,6 +59,10 @@
     <Reference Include="EntityFramework">
       <HintPath>..\bin\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -122,6 +126,9 @@
     <Content Include="AppSettingCofnig\AppSetting.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="AppSettingCofnig\AppSettings.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="AppSettingCofnig\BrowserHeadSetting.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -133,6 +140,10 @@
     <Content Include="Question\Exception.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
+      <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
+      <Name>Domain.CommonData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CefHandleService.Common\CefHandleService.Common.csproj">
       <Project>{3ceac6dd-7d12-492e-8cab-f01fd17a988a}</Project>
       <Name>CefHandleService.Common</Name>
