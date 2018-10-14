@@ -105,5 +105,10 @@ namespace HRApp.Web.Controllers
             long l = 0xE0 | 0x0D;
             string result= Convert.ToString(l, 16);
         }
+
+        public ActionResult TreeTemplateView() 
+        {
+            return View();
+        }
     }
 }

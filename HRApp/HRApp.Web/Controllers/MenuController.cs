@@ -10,6 +10,7 @@ using HRApp.IApplicationService;
 using HRApp.ApplicationService;
 using HRApp.Model;
 using Infrastructure.ExtService;
+using DataHelp;
 namespace HRApp.Web.Controllers
 {
     public class MenuController : BaseController
@@ -124,6 +125,9 @@ namespace HRApp.Web.Controllers
                  ((!param.ContainerDelete && s.IsEnable)||(param.ContainerDelete)) //对于是否查询已启用项进行处理
                  &&(!ids.Contains(s.Id)) //是否过滤指定的项
                 ).ToList();
+
+            //json 串
+            string jsonString = ms.ConvertJson<List<UinMenuObjcet>>();
             json.Data = ms;
             json.Total = ms.Count;
             json.Success = true;

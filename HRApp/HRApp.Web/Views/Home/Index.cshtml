@@ -65,19 +65,6 @@
                 DrawMenu(data);
                 //初始化触发第一项
                 $('#myMenu .active>[data-toggle=tab]').trigger('click');
-                return;
-                $(response.Data).each(function (i, ele) {//跟节点
-                    var active = '';
-                    if (i == 0) {
-                        active = ' class="active" ';
-                    }
-                    var tmplLi = ' <li  ' + active + '><a href="#menu{Code}" data-toggle="tab" url="{url}"> {title} </a> </li>';
-                    tmplLi = tmplLi.replace(/{Code}/g, ele.Code.replace('.','_')).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
-                    $('#myMenu').append(tmplLi);
-                    var tmpl = '<div class="block" url="{1}" id="{2}" title="{3}">{0}</div>';
-                   var html=  tmpl.format(ele.Name, ele.Url, ele.Id, ele.Remark);
-                });
-                
             });
 
             function MergeNode(dataSource, nodeData) { //数据合并为 父-子 节点形式结构
@@ -94,20 +81,32 @@
                 }
                 MergeChildren(childrens, nodeData); //node:根据跟节点加载子节点数据
             }
+
             function MergeChildren(dataSource, nodeData) {
-                var hasParent = false;
+                //多级节点合并
                 for (var i = 0; i < dataSource.length; i++) { //判断父节点是否已经入档
                     var rec = dataSource[i];
-                    for (var j = 0; j < nodeData.length; j++) {
-                        if (nodeData[j].Id == rec.ParentId) {
-                            nodeData[j].Childerns.push(rec);
-                        }
-                    }
-                }
-                if (!hasParent) {//找不到父节点的直接作为更节点使用
+                    nodeIntoRoot(rec, nodeData, false);
                     
                 }
             }
+            function nodeIntoRoot(node,tree,complate) {
+                for (var i = 0; i < tree.length; i++) {
+                    var ch = tree[i];
+                    if (ch.Id == node.ParentId) {
+                        complate = true;
+                        ch.Childerns.push(node);
+                        return;
+                    }
+                    if (ch.Childerns == null)
+                    {
+                        ch.Childerns = [];
+                        return;
+                    }
+                    nodeIntoRoot(node, ch.Childerns, complate);
+                }
+            }
+
             $('#AccountMenuMenu li a').click(function () {
                 //是否存在链接
                 var a = $(this);
@@ -132,7 +131,7 @@
                 }
                 if (ele.Childerns && ele.Childerns.length > 0) { //如果存在子节点进行子节点的渲染
                     //渲染节点
-                    var items = '<li class="dropdown" >' 
+                    var items = '<li class="dropdown dropdown-submenu" >'
                         + ' <a href="#" id="{Code}" class="dropdown-toggle"  data-toggle="dropdown">{title} [{Count}]</a>'
                         +' <ul class="dropdown-menu" id="menu{Code}" role="menu" aria-labelledby="{title}"> </ul><li>';
                     items = items.replace(/{Code}/g, ele.Code.replace('.', '_')).replace(/{url}/g, ele.Url).replace(/{title}/g, ele.Name);
@@ -205,7 +204,6 @@
             var layoutHtml = ' <div class="tab-pane fade in active" id="{layoutId}"> <iframe src="{url}" width="99%" height="580"></iframe> </div>';
             layoutHtml = layoutHtml.replace(/{layoutId}/g, layoutId).replace(/{url}/g, url);
             $('#myTabContent').append(layoutHtml);
-
         }
         function btnClosePanel(obj) {
             var panelF = $(obj).parents('li');
@@ -233,7 +231,7 @@
     <div id="toolMenu">
         <ul id="myMenu" class="nav nav-tabs" style=" width: 95%;">
         </ul>
-        <ul id="AccountMenu" class="accountUl nav nav-tabs">
+        <ul id="AccountMenu" class="accountUl nav nav-tabs navbar-inverse">
             <li class="dropdown">
                 <a href="#" id="myTabDrop1" class="dropdown-toggle"
                    data-toggle="dropdown">
