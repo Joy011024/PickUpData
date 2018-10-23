@@ -67,3 +67,15 @@ CREATE TABLE RunProxy (
     Result     BIT          NOT NULL,
     CreateTime DATE         NOT NULL
 );
+CREATE TABLE CategoryData (
+    Id         INT            PRIMARY KEY,
+    ParentId  int,
+    ItemType varchar(128),
+    IsDelete bit not null,
+    CreateTime DATETIME       NOT NULL,
+    Sort       int not null,
+    ParentCode varchar(128)  ,
+    NodeLevel  int not null,
+    Name       VARCHAR (32)   NOT NULL,
+    Code  varchar(32) not null
+);

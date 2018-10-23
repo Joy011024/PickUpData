@@ -15,6 +15,7 @@ using System.Threading;
 using SelfControlForm;
 using DataHelpWinform;
 using Infrastructure.ExtService;
+using Infrastructure.EFSQLite;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : Form
@@ -103,7 +104,7 @@ namespace CaptureWebData
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
-            IEnumerable<CategoryData> list = cs.QueryCityCategory();
+            IEnumerable<CategoryData> list =ConfigurationItems.OpenSQLServer? cs.QueryCityCategory():new List<CategoryData>();
             //开启数据同步
             //SyncDataHelper.SyncCategory(list.ToList());
             CategoryData obj = SystemConfig.UsingDBSaveBaseData ?
@@ -209,7 +210,31 @@ namespace CaptureWebData
             }
             #endregion
             CategoryGroup group = text.ConvertObject<CategoryGroup>();
+
+            //转换为城市数据列表
+            List<CategoryData> cities = GetCityDatas(group);
+            try
+            {
+                DBReporistory<CategoryData> db = new DBReporistory<CategoryData>("TecentDASQLite");
+               // db.AddList(cities.ToArray());
+            }
+            catch (Exception ex)
+            {
+
+            }
             cityList.AddRange(group.Childrens.Select(s => s.Root).OrderBy(s=>s.Code).ToArray());
+        }
+
+        private List<CategoryData> GetCityDatas(CategoryGroup ct)
+        {
+            List<CategoryGroup> cg = ct.Childrens;
+            List<CategoryData> cities = new List<CategoryData>();
+            cities.Add(ct.Root);
+            foreach (CategoryGroup item in cg)
+            {
+                cities.AddRange( GetCityDatas(item));
+            }
+            return cities;
         }
         /// <summary>
         /// 对于从数据库中读取的城市数据进行处理写入到文本文件中作为基础数据使用
@@ -899,14 +924,6 @@ namespace CaptureWebData
             CategoryData node = (CategoryData)cmb.SelectedItem;
             BindComboBox(new CategoryData() { Id = node.Id,Name=node.Name,Code=node.Code }, cmbDistinct, 4);
             return;
-            //由于腾讯城市数据县级 的父节点使用
-            CategoryData item = cityList.Where(c => c.Id == node.Id).FirstOrDefault();
-            List<CategoryData> items = new List<CategoryData>();
-            items.Add(noLimitAddress);
-            if (item.ParentId.HasValue)
-            {
-
-            }
         }
         void GetRedisCacheItem() 
         {
