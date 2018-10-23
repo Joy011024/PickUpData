@@ -33,21 +33,21 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework.SQLite">
-      <HintPath>..\..\..\Bin\SQLite\EntityFramework.SQLite.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\PluginApp\bin\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.82.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Bin\bit86\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\..\..\PluginApp\bin\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SQLite.EF6">
-      <HintPath>..\..\..\Bin\bit86\System.Data.SQLite.EF6.dll</HintPath>
+      <HintPath>..\..\..\PluginApp\bin\System.Data.SQLite.EF6.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.82.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Bin\bit86\System.Data.SQLite.Linq.dll</HintPath>
+      <HintPath>..\..\..\PluginApp\bin\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
