@@ -20,14 +20,15 @@ namespace CaptureWebData
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Test();
+            SyncCityData2SQLite();
            // Application.Run(new Main());
             Application.Run(new TecentDataFrm());
         }
         static void SyncCityData2SQLite()
         {
             //1:同步城市数据到sqlite
-
+            SyncDataHelper sync = new SyncDataHelper();
+            
         }
         static void Test() 
         {

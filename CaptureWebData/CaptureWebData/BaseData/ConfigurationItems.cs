@@ -170,5 +170,21 @@ namespace CaptureWebData
                 return ConfigurationManager.AppSettings["OupputSql"]=="1";
             }
         }
+        private static string _OpenSQLServer;
+        /// <summary>
+        /// 是否启用sqlserve数据库
+        /// </summary>
+        public static bool OpenSQLServer
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_OpenSQLServer))
+                {
+                    _OpenSQLServer = ConfigurationManager.AppSettings["OpenSQLServer"];
+                }
+
+                return _OpenSQLServer=="true";
+            }
+        }
     }
 }
