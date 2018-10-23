@@ -34,3 +34,36 @@ CREATE TABLE TecentQQData (
     DayInt               INT           DEFAULT (0),
     ImgType              INT           DEFAULT (0) 
 );
+CREATE TABLE AppSettingData (
+    Id         INT            PRIMARY KEY,
+    Name       VARCHAR (32)   NOT NULL,
+    Value      VARCHAR (128)  NOT NULL,
+    CreateTime DATETIME       NOT NULL,
+    Statues    INT            NOT NULL,
+    [Desc]     VARCHAR (1024) 
+);
+CREATE TABLE IdCard (
+    Id         VARCHAR (18)   PRIMARY KEY,
+    Name       VARCHAR (32)   NOT NULL,
+    CreateTime DATE           NOT NULL,
+    [Desc]     VARCHAR (1024) 
+);
+CREATE TABLE Names (
+    CreateTime DATE         NOT NULL,
+    Name       VARCHAR (32) NOT NULL,
+    InDbDay    INT          NOT NULL
+);
+CREATE TABLE Proxy (
+    Id         VARCHAR (32)   PRIMARY KEY,
+    IP         VARCHAR (15)   NOT NULL,
+    Port       INT            NOT NULL,
+    CreateTime DATE,
+    [Desc]     VARCHAR (1024),
+    Status     INT            DEFAULT (0) 
+);
+CREATE TABLE RunProxy (
+    ProxyId    VARCHAR (32),
+    Id         VARCHAR (32) PRIMARY KEY,
+    Result     BIT          NOT NULL,
+    CreateTime DATE         NOT NULL
+);

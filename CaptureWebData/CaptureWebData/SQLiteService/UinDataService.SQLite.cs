@@ -41,8 +41,9 @@ namespace CaptureWebData
         {
             try
             {
-                SQLiteReporistory<CategoryData> md = new SQLiteReporistory<CategoryData>(new ConfigurationItems().SqliteDbConnString);
-                md.BatchAdd(list);
+
+                DBReporistory<CategoryData> md = new DBReporistory<CategoryData>(new ConfigurationItems().SqliteDbConnString);
+                md.AddList(list.ToArray());
             }
             catch (Exception ex)
             { 

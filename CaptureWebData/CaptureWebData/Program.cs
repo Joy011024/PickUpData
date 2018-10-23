@@ -24,8 +24,16 @@ namespace CaptureWebData
            // Application.Run(new Main());
             Application.Run(new TecentDataFrm());
         }
+        static void SyncCityData2SQLite()
+        {
+            //1:同步城市数据到sqlite
+
+        }
         static void Test() 
         {
+
+           
+
             DataLink dl = new DataLink();
             StringBuilder tip = new StringBuilder();
             tip.AppendLine("time:\t" + DateTime.Now.ToString(SystemConfig.DateTimeFormat));

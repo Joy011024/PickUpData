@@ -21,11 +21,6 @@ namespace ApplicationService.IPDataService
                 DateTime now = DateTime.Now;
                 foreach (CategoryData item in data)
                 {
-                    //item.Id = Guid.NewGuid().GetHashCode();
-                    //if (item.Id < 0) 
-                    //{
-                    //    item.Id = 0 - item.Id;
-                    //}
                     item.IsDelete = false;
                     item.CreateTime = now;
                 }
@@ -41,8 +36,8 @@ namespace ApplicationService.IPDataService
         {
             MainRespority<CategoryData> main = new MainRespority<CategoryData>(ConnString);
             IEnumerable<CategoryData> data = main.Query(t => !t.IsDelete && t.ItemType == "City" && !string.IsNullOrEmpty(t.Name));
-            //将数据同步到sqlite
-            ConnectionStringSettings sec = ConfigurationManager.ConnectionStrings["TecentDASQLite"];
+            //将数据同步到sqlite  :TecentDASQLite
+
             return data;
         }
     }
