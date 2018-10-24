@@ -41,6 +41,11 @@ namespace CaptureWebData
         {
             try
             {
+                //string json = Newtonsoft.Json.JsonConvert.SerializeObject(list);
+                /*
+                 Unable to complete operation. The supplied SqlConnection does not specify an initial catalog or AttachDBFileName.
+                 */
+                
                 DBReporistory<CategoryData> md = new DBReporistory<CategoryData>(new ConfigurationItems().SqliteDbConnString);
                 md.AddList(list.ToArray());
             }

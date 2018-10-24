@@ -105,6 +105,7 @@ namespace CaptureWebData
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
             IEnumerable<CategoryData> list =ConfigurationItems.OpenSQLServer? cs.QueryCityCategory():new List<CategoryData>();
+            SyncDataHelper.SyncCategory(list.ToList());
             //开启数据同步
             //SyncDataHelper.SyncCategory(list.ToList());
             CategoryData obj = SystemConfig.UsingDBSaveBaseData ?
