@@ -104,7 +104,13 @@ namespace CaptureWebData
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
-            IEnumerable<CategoryData> list =ConfigurationItems.OpenSQLServer? cs.QueryCityCategory():new List<CategoryData>();
+            string json = FileHelper.ReadFile(@"E:\Code\CodeDev\Learn.GitCore\Spilder\PickUpData\CaptureWebData\CaptureWebData\DB\City.log");
+            IEnumerable<CategoryData> list = ConfigurationItems.OpenSQLServer ? cs.QueryCityCategory() :
+                (
+                Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(
+                    json
+                    )
+                );
             SyncDataHelper.SyncCategory(list.ToList());
             //开启数据同步
             //SyncDataHelper.SyncCategory(list.ToList());
@@ -199,8 +205,6 @@ namespace CaptureWebData
                 //省会，城市，区域
                 AnalyCity(city, targetCountry);//创建相关文件
             }
-            //将文件中的数据
-            string text = FileHelper.ReadFile(dir+ "/" + cityFile);
             //将数据写入redis 
             #region --这里需要增加一个判断是否将数据缓存到Redis缓存库
             //在Redis数据库中增加一个版本号来记录当前存储的城市数据版本
@@ -209,7 +213,9 @@ namespace CaptureWebData
                 rcm.SetPropertyValue("A_"+SystemConfig.DateTimeIntFormat, DateTime.Now.ToString(SystemConfig.DateTimeIntFormat));
                 rcm.SetCityCacheFromFile(dir, rcm, SystemConfig.RedisValueIsJsonFormat);
             }
-            #endregion
+            #endregion 
+            //将文件中的数据
+            string text = FileHelper.ReadFile(dir+ "/" + cityFile);
             CategoryGroup group = text.ConvertObject<CategoryGroup>();
 
             //转换为城市数据列表

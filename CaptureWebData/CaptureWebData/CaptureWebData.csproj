@@ -3493,6 +3493,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Content\羽绒服20180119.zip" />
+    <None Include="DB\City.log" />
     <None Include="DB\LocalDB.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
