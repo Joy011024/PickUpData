@@ -84,7 +84,9 @@ namespace CaptureWebData
                 Init();
             }
             catch (Exception ex)
-            { 
+            { /*
+                未能加载文件或程序集“EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089”或它的某一个依赖项。系统找不到指定的文件。
+                 */
                 LogHelperExt.WriteLog(ex.ToString());
             }
         }
@@ -105,12 +107,15 @@ namespace CaptureWebData
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
             string json = FileHelper.ReadFile(@"E:\Code\CodeDev\Learn.GitCore\Spilder\PickUpData\CaptureWebData\CaptureWebData\DB\City.log");
-            IEnumerable<CategoryData> list = ConfigurationItems.OpenSQLServer ? cs.QueryCityCategory() :
-                (
-                Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(
-                    json
-                    )
-                );
+            IEnumerable<CategoryData> list = new List<CategoryData>();
+            if (ConfigurationItems.OpenSQLServer)
+                list = cs.QueryCityCategory();
+            else
+            {
+                //list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(
+                //   json
+                //   );
+            }
             SyncDataHelper.SyncCategory(list.ToList());
             //开启数据同步
             //SyncDataHelper.SyncCategory(list.ToList());

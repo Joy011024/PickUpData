@@ -47,6 +47,7 @@ namespace CaptureWebData
                  */
                 
                 DBReporistory<CategoryData> md = new DBReporistory<CategoryData>(new ConfigurationItems().SqliteDbConnString);
+                List<CategoryData> dstas=  md.DoQuery<CategoryData>().ToList();
                 //一次操作数据量过大需要分批次
                 List<CategoryData> group = new List<CategoryData>();
                 for (int i = 0; i < list.Count; i++)
