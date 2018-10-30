@@ -106,15 +106,15 @@ namespace CaptureWebData
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
-            string json = FileHelper.ReadFile(@"E:\Code\CodeDev\Learn.GitCore\Spilder\PickUpData\CaptureWebData\CaptureWebData\DB\City.log");
+            string json = FileHelper.ReadFile(@"..\..\DB\City.log");
             IEnumerable<CategoryData> list = new List<CategoryData>();
             if (ConfigurationItems.OpenSQLServer)
                 list = cs.QueryCityCategory();
             else
             {
-                //list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(
-                //   json
-                //   );
+                list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(
+                   json
+                   );
             }
             SyncDataHelper.SyncCategory(list.ToList());
             //开启数据同步

@@ -30,7 +30,7 @@ namespace Domain.CommonData
     /// </summary>
     public class CategoryData : NodeData
     {
-        [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+       // [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)] //防止序列化时需要引用ef
         [Key] //新增为了兼容sqlite
         public int Id { get; set; }
 
