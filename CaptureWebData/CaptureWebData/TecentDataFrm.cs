@@ -84,7 +84,9 @@ namespace CaptureWebData
                 Init();
             }
             catch (Exception ex)
-            { 
+            { /*
+                未能加载文件或程序集“EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089”或它的某一个依赖项。系统找不到指定的文件。
+                 */
                 LogHelperExt.WriteLog(ex.ToString());
             }
         }
@@ -104,7 +106,16 @@ namespace CaptureWebData
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
             CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
-            IEnumerable<CategoryData> list =ConfigurationItems.OpenSQLServer? cs.QueryCityCategory():new List<CategoryData>();
+            string json = FileHelper.ReadFile(@"..\..\DB\City.log");
+            IEnumerable<CategoryData> list = new List<CategoryData>();
+            if (ConfigurationItems.OpenSQLServer)
+                list = cs.QueryCityCategory();
+            else
+            {
+                list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(
+                   json
+                   );
+            }
             SyncDataHelper.SyncCategory(list.ToList());
             //开启数据同步
             //SyncDataHelper.SyncCategory(list.ToList());
@@ -199,8 +210,6 @@ namespace CaptureWebData
                 //省会，城市，区域
                 AnalyCity(city, targetCountry);//创建相关文件
             }
-            //将文件中的数据
-            string text = FileHelper.ReadFile(dir+ "/" + cityFile);
             //将数据写入redis 
             #region --这里需要增加一个判断是否将数据缓存到Redis缓存库
             //在Redis数据库中增加一个版本号来记录当前存储的城市数据版本
@@ -209,7 +218,9 @@ namespace CaptureWebData
                 rcm.SetPropertyValue("A_"+SystemConfig.DateTimeIntFormat, DateTime.Now.ToString(SystemConfig.DateTimeIntFormat));
                 rcm.SetCityCacheFromFile(dir, rcm, SystemConfig.RedisValueIsJsonFormat);
             }
-            #endregion
+            #endregion 
+            //将文件中的数据
+            string text = FileHelper.ReadFile(dir+ "/" + cityFile);
             CategoryGroup group = text.ConvertObject<CategoryGroup>();
 
             //转换为城市数据列表

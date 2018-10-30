@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptureWebData", "CaptureWebData\CaptureWebData.csproj", "{A3F54BBB-F751-4660-AA9A-FED9D94281D1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{421359CA-DB48-4A13-BB59-D29965258EE5} = {421359CA-DB48-4A13-BB59-D29965258EE5}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PickUpDataMvc", "PickUpDataWeb\Web\PickUpDataMvc\PickUpDataMvc.csproj", "{AC058931-8720-43EF-B7D5-A4F0CC648462}"
 EndProject
@@ -117,6 +120,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSmallTool", "ServiceSmallTool\ServiceSmallTool.csproj", "{C1636431-277A-47AF-965D-1DE68AE0361C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHelpWinform", "..\BaseHelper\DataHelpWinform\DataHelpWinform.csproj", "{421359CA-DB48-4A13-BB59-D29965258EE5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{32C60C3A-C56E-457D-B553-BE076218FD5A} = {32C60C3A-C56E-457D-B553-BE076218FD5A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.EFSQLite", "..\CaptureData\Infrastructure\Infrastructure.EFSQLite\Infrastructure.EFSQLite.csproj", "{BC16843A-630B-47E7-B889-97612C8F35DF}"
 EndProject
@@ -332,5 +338,8 @@ Global
 		{D182918A-32DC-4B35-A998-DAC7CADC2369} = {E3D724CF-ED9D-461B-8796-D7846E5D7F17}
 		{C1636431-277A-47AF-965D-1DE68AE0361C} = {A6454CE8-AC13-4840-B473-8D3234D62EBB}
 		{BC16843A-630B-47E7-B889-97612C8F35DF} = {4CC1115A-0CC8-4BEB-B2CC-0ED8D706E75F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AD6CAE8-D2E8-43A6-A958-974421DC2858}
 	EndGlobalSection
 EndGlobal
