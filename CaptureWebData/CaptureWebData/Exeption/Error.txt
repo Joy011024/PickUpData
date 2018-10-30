@@ -23,3 +23,42 @@
 Unable to complete operation. The supplied SqlConnection does not specify an initial catalog or AttachDBFileName.
 数据库连接串错误： <add name="TecentDASQLite" connectionString="Data Source={BaseDir}DB\LocalDB.db;"/>
 改为：
+
+遇到的问题
+=========2018-10-09
+1.上下文不匹配
+The entity type AppSetting is not part of the model for the current context.
+在定义的上下文DbContext中声明数据集public IDbSet<T> Entity { get; set; } 属性
+2.An error occurred while updating the entries. See the inner exception for details.
+表名被加上了复数形式 在上下文中加上语句 modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();//去除表名的复数形式
+3.A null store-generated value was returned for a non-nullable member 'Id' of type 'DataService.LocalData.SQLite.AppSettingData'.
+=========2018-09-29
+1.在配置文件中没有设置
+No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'.
+ Make sure the provider is registered in the 'entityFramework' section of the application config file.
+ See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+
+1）当在配置文件中加载entityFramework节点之后出现问题
+ The Entity Framework provider type 'System.Data.SQLite.EF6.SQLiteProviderServices, 
+ System.Data.SQLite.EF6' registered in the application config file for the ADO.NET provider with invariant name 'System.Data.SQLite' could not be loaded.
+ Make sure that the assembly-qualified name is used and that the assembly is available to the running application. 
+ See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+2）在程序中引入文件System.Data.SQLite.EF6之后出现 
+ 未能加载文件或程序集“System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”或它的某一个依赖项。试图加载格式不正确的程序。
+ 3)当把程序平台修改为64bit不出现2）的问题
+ No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'.
+  Make sure the provider is registered in the 'entityFramework' section of the application config file. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+  4)将数据库连接串修改到配置文件connectionStrings节点中，设置数据提供驱动为System.Data.SQLite.EF6
+  The entity type AppSetting is not part of the model for the current context. [ef已经可用但是没有成功连接]
+
+5)
+CreateDatabase is not supported by the provider.
+6)移除dllSystem.Data.SQLite.EF6
+The Entity Framework provider type 'System.Data.SQLite.EF6.SQLiteProviderServices, 
+System.Data.SQLite.EF6' registered in the application config file for the ADO.NET provider with invariant 
+name 'System.Data.SQLite' could not be loaded. Make sure that the assembly-qualified name is used and that the assembly is available to the running application.
+See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+7）目前错误：
+No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'.
+Make sure the provider is registered in the 'entityFramework' section of the application config file. 
+See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
