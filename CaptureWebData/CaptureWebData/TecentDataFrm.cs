@@ -33,7 +33,7 @@ namespace CaptureWebData
             return typeof(CategoryGroup).Name + ".Objcet=";
         }
         QuartzJob job = new QuartzJob();
-        RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp, SystemConfig.RedisPsw, SystemConfig.RedisPort);
+        //RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp, SystemConfig.RedisPsw, SystemConfig.RedisPort);
         CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
         RedisCacheService redis;
         int currentIndex = 1;
@@ -145,7 +145,7 @@ namespace CaptureWebData
                 }
                 else
                 {
-                    CategoryGroup group = rcm.GetCacheItem<CategoryGroup>(defaultCountryNode);
+                  //  CategoryGroup group = rcm.GetCacheItem<CategoryGroup>(defaultCountryNode);
                 }
             }
             if (cityList.Count==1)
@@ -215,8 +215,8 @@ namespace CaptureWebData
             //在Redis数据库中增加一个版本号来记录当前存储的城市数据版本
             if (SystemConfig.OpenRedis)
             {//启用Redis功能(数据写入到Redis缓存中)
-                rcm.SetPropertyValue("A_"+SystemConfig.DateTimeIntFormat, DateTime.Now.ToString(SystemConfig.DateTimeIntFormat));
-                rcm.SetCityCacheFromFile(dir, rcm, SystemConfig.RedisValueIsJsonFormat);
+                //rcm.SetPropertyValue("A_"+SystemConfig.DateTimeIntFormat, DateTime.Now.ToString(SystemConfig.DateTimeIntFormat));
+               // rcm.SetCityCacheFromFile(dir, rcm, SystemConfig.RedisValueIsJsonFormat);
             }
             #endregion 
             //将文件中的数据

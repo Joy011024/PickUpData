@@ -45,7 +45,7 @@ namespace CaptureWebData
                 /*
                  Unable to complete operation. The supplied SqlConnection does not specify an initial catalog or AttachDBFileName.
                  */
-                
+
                 DBReporistory<CategoryData> md = new DBReporistory<CategoryData>(new ConfigurationItems().SqliteDbConnString);
                 List<CategoryData> dstas=  md.DoQuery<CategoryData>().ToList();
                 //一次操作数据量过大需要分批次

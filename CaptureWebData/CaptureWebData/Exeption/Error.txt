@@ -62,3 +62,11 @@ See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
 No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'.
 Make sure the provider is registered in the 'entityFramework' section of the application config file. 
 See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+无法为具有固定名称“System.Data.SqlClient”的 ADO.NET 提供程序加载在应用程序配置文件中注册的实体框架提供程序
+博客上说缺少依赖EntityFramework.SqlServer.dll
+将项目生产平台修改为x64
+出现新问题：
+System.BadImageFormatException:“未能加载文件或程序集“ServiceStack.Redis, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。试图加载格式不正确的程序。”
+8）添加EntityFramework.SqlServer.dll出现问题
+提供的SqlConnection不指定初始目录或AttachDBFileName。
+Unable to complete operation. The supplied SqlConnection does not specify an initial catalog or AttachDBFileName.
