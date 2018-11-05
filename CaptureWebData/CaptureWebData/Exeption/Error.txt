@@ -70,3 +70,6 @@ System.BadImageFormatException:“未能加载文件或程序集“ServiceStack.
 8）添加EntityFramework.SqlServer.dll出现问题
 提供的SqlConnection不指定初始目录或AttachDBFileName。
 Unable to complete operation. The supplied SqlConnection does not specify an initial catalog or AttachDBFileName.
+10）
+未能加载文件或程序集“System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”或它的某一个依赖项。
+找到的程序集清单定义与程序集引用不匹配。 (异常来自 HRESULT:0x80131040)
