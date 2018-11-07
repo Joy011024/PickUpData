@@ -16,6 +16,7 @@ namespace CefSharpWin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            TestSQLite.Query();
             XmlService.GetAppSetting();
             InitRegisterForm();
             Form acc = FacadeFactory.Instance.RetrieveMediator(typeof(WebFrm).Name) as Form;
