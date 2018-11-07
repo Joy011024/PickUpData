@@ -34,6 +34,7 @@ namespace CefSharpWin
         }
         static void InitRegisterForm()
         {
+            string dir = AppDomain.CurrentDomain.BaseDirectory;
             WebFrm acc = new WebFrm();
             MoniterTicket mt = new MoniterTicket();
         }

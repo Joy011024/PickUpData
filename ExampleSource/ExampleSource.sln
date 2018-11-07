@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPPConsole", "CPPConsole\CPPConsole.vcxproj", "{DF92C53B-61BB-4431-959F-6DF6911EAA6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CefSharpWin", "CefSharpWin\CefSharpWin.csproj", "{FC8EAEC1-512E-4F93-9D6D-CF031358DBA8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D182918A-32DC-4B35-A998-DAC7CADC2369} = {D182918A-32DC-4B35-A998-DAC7CADC2369}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.CommonData", "..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj", "{9CEF7F17-E35B-4AF0-BFAF-DA0F7B3D9EF4}"
 EndProject
