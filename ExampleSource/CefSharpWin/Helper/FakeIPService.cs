@@ -32,12 +32,18 @@ namespace CefSharpWin
                 if (!string.IsNullOrEmpty(ipPool))
                 {
                     ipPool.WriteLogForEverDay(ELogType.HeartBeatLine);
+                    //进行代理ip数据分析
+                    SplitIPs(ipPool, SystemSetting.SystemSettingDict["IPsProxyRegex"]);
                 }
             }
             catch (Exception ex)
             {
                 ex.ToString().WriteLogForEverDay(ELogType.ErrorLog);
             }
+        }
+        private static void SplitIPs(string input,string pattern)
+        {
+            RegexHelper.GetMatchValue(input, pattern);
         }
     }
       
