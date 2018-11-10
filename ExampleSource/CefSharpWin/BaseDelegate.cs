@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Data.Entity;
+using Domain.CommonData;
 namespace CefSharpWin
 {
     [Description("回调事件")]
@@ -157,6 +158,8 @@ namespace CefSharpWin
             {
                 DBReporistory<CategoryData> qt = new DBReporistory<CategoryData>("TecentDASQLite");
                 List<CategoryData> list = qt.DoQuery<CategoryData>().ToList();
+                string json = FileHelper.ReadFile("City.txt");
+
             }
             catch (Exception ex)
             {
