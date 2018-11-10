@@ -50,6 +50,9 @@
     <OutputPath>bin\x64\Debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ApplicationService.IPDataService">
+      <HintPath>..\..\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\ApplicationService.IPDataService.dll</HintPath>
+    </Reference>
     <Reference Include="CefSharp, Version=67.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\x64\CefSharp.dll</HintPath>
@@ -73,6 +76,9 @@
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Bin\SQLite\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\Bin\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="HttpClientHelper">
       <HintPath>..\..\Bin\HttpClientHelper.dll</HintPath>

@@ -159,11 +159,23 @@ namespace CefSharpWin
                 DBReporistory<CategoryData> qt = new DBReporistory<CategoryData>("TecentDASQLite");
                 List<CategoryData> list = qt.DoQuery<CategoryData>().ToList();
                 string json = FileHelper.ReadFile("City.txt");
-
+                // Infrastructure.EFMsSQL.MainRespority<Domain.CommonData.CategoryData> rep = new Infrastructure.EFMsSQL.MainRespority<Domain.CommonData.CategoryData>("TecentDA");
+                ApplicationService.IPDataService.CategoryDataService css = new ApplicationService.IPDataService.CategoryDataService("TecentDA");
+                List<Domain.CommonData.CategoryData> data= css.QueryCityCategory().ToList();
             }
             catch (Exception ex)
             {
-
+                /*增加SQL server 连接串出现异常：
+                 No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'. Make sure the provider is registered in the 'entityFramework' section of the application config file. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+                 */
+                /*
+                删除节点的属性出现错误：
+                The connection string 'TecentDA' in the application's configuration file does not contain the required providerName attribute."
+                */
+                /*
+                 配置文件中中增加节点出现异常：
+                 The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer' registered in the application config file for the ADO.NET provider with invariant name 'System.Data.SqlClient' could not be loaded. Make sure that the assembly-qualified name is used and that the assembly is available to the running application. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+                 */
             }
         }
     }
