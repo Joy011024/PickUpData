@@ -50,28 +50,25 @@
     <OutputPath>bin\x64\Debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ApplicationService.IPDataService">
-      <HintPath>..\..\CaptureData\Infrastructure\Application\Application.IPDataService\bin\Debug\ApplicationService.IPDataService.dll</HintPath>
-    </Reference>
     <Reference Include="CefSharp, Version=67.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\x64\CefSharp.dll</HintPath>
+      <HintPath>..\bin\x86\CefSharp.dll</HintPath>
     </Reference>
     <Reference Include="CefSharp.BrowserSubprocess, Version=67.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\x64\CefSharp.BrowserSubprocess.exe</HintPath>
+      <HintPath>..\bin\x86\CefSharp.BrowserSubprocess.exe</HintPath>
     </Reference>
     <Reference Include="CefSharp.BrowserSubprocess.Core, Version=67.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\x64\CefSharp.BrowserSubprocess.Core.dll</HintPath>
+      <HintPath>..\bin\x86\CefSharp.BrowserSubprocess.Core.dll</HintPath>
     </Reference>
     <Reference Include="CefSharp.Core, Version=67.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\x64\CefSharp.Core.dll</HintPath>
+      <HintPath>..\bin\x86\CefSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="CefSharp.WinForms, Version=67.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\x64\CefSharp.WinForms.dll</HintPath>
+      <HintPath>..\bin\x86\CefSharp.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -91,6 +88,9 @@
       <HintPath>..\..\Bin\PureMVC.DotNET.46.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
@@ -191,12 +191,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="12306\AppSetting.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="12306\DevExplainDoc.txt" />
     <Content Include="12306\Station.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="AppSetting.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="City.txt">
@@ -209,6 +207,10 @@
     <Content Include="Note\readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj">
+      <Project>{ce6b1f9a-1df7-4e35-adcc-b527206f2b98}</Project>
+      <Name>Application.IPDataService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>

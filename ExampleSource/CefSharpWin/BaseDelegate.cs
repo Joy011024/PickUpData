@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Data.Entity;
 using Domain.CommonData;
+using Newtonsoft.Json;
 namespace CefSharpWin
 {
     [Description("回调事件")]
@@ -56,6 +57,25 @@ namespace CefSharpWin
                 ds.Add(data);
             }
             return Submit();
+        }
+        public void BatchAddList<R>(List<R> coll,int batchNum2DB) where R:class
+        {
+            int batch = coll.Count / batchNum2DB + (coll.Count % batchNum2DB > 0 ? 1 : 0);
+            int cur = 0;
+            List<R> once = new List<R>();
+            DbSet<R> ds = dbcontext.Set<R>();
+            for (int i = 0; i < coll.Count; i++)
+            {
+                if (cur == batchNum2DB)
+                {
+                    dbcontext.SaveChanges();
+                    cur = 0;
+                }
+                ds.Add(coll[i]);
+                cur++;
+
+            }
+            dbcontext.SaveChanges();
         }
         /// <summary>
         /// 主键删除
@@ -131,7 +151,7 @@ namespace CefSharpWin
 
     public class CategoryData// : NodeData
     {
-        // [DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)] //防止序列化时需要引用ef
+        [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)] //防止序列化时需要引用ef
         //[Key] //新增为了兼容sqlite
         public int Id { get; set; }
 
@@ -159,9 +179,17 @@ namespace CefSharpWin
                 DBReporistory<CategoryData> qt = new DBReporistory<CategoryData>("TecentDASQLite");
                 List<CategoryData> list = qt.DoQuery<CategoryData>().ToList();
                 string json = FileHelper.ReadFile("City.txt");
-                // Infrastructure.EFMsSQL.MainRespority<Domain.CommonData.CategoryData> rep = new Infrastructure.EFMsSQL.MainRespority<Domain.CommonData.CategoryData>("TecentDA");
-                ApplicationService.IPDataService.CategoryDataService css = new ApplicationService.IPDataService.CategoryDataService("TecentDA");
-                List<Domain.CommonData.CategoryData> data= css.QueryCityCategory().ToList();
+                List<CategoryData> datas = new List<CategoryData>();
+                if (string.IsNullOrEmpty(json))
+                {
+                    ApplicationService.IPDataService.CategoryDataService css = new ApplicationService.IPDataService.CategoryDataService("TecentDA");
+                    List<Domain.CommonData.CategoryData> data = css.QueryCityCategory().ToList();
+                    json = JsonConvert.SerializeObject(data);
+                }
+                datas = JsonConvert.DeserializeObject<List<CategoryData>>(json);
+                //数据入库
+               
+                qt.BatchAddList(datas, 100);
             }
             catch (Exception ex)
             {
@@ -176,7 +204,11 @@ namespace CefSharpWin
                  配置文件中中增加节点出现异常：
                  The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer' registered in the application config file for the ADO.NET provider with invariant name 'System.Data.SqlClient' could not be loaded. Make sure that the assembly-qualified name is used and that the assembly is available to the running application. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
                  */
+                /*
+                A null store-generated value was returned for a non-nullable member 'Id' of type 'CefSharpWin.CategoryData'. 
+                */
             }
         }
+        
     }
 }
