@@ -32,6 +32,9 @@ namespace CefSharpWin
                 if (!string.IsNullOrEmpty(ipPool))
                 {
                     ipPool.WriteLogForEverDay(ELogType.HeartBeatLine);
+                    //进行分离提取
+                    string reg = "<tbody>(.*?)</tbody>";
+                    string xmlReg = "<tbody>(.*?)</tbody>";
                 }
             }
             catch (Exception ex)
