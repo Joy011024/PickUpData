@@ -30,4 +30,7 @@
   <FakeIPAPISwitchInPool>FakeIPHaiAPI</FakeIPAPISwitchInPool>
   <SplitFlag>|</SplitFlag>
   <OpenDebug>false</OpenDebug>
+  <!--ip地址列表分离正则表达式  tbody>?? </tbody -->
+  <IPsProxyRegex>tbody&gt;(.*?)&lt;/tbody</IPsProxyRegex>
+  <IPEntityRegex></IPEntityRegex>
 </SystemSetting>

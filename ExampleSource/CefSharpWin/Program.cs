@@ -43,8 +43,15 @@ namespace CefSharpWin
         {
             new System.Threading.Thread(() =>
             {
-                FakeIPService.SwitcHttphPrxoy();
-                FakeIPService.GetFakeIPs();
+                try
+                {
+                    FakeIPService.SwitcHttphPrxoy();
+                    FakeIPService.GetFakeIPs();
+                }
+                catch (Exception ex)
+                {
+
+                }
             }).Start();
 
             
