@@ -16,8 +16,10 @@ namespace CefSharpWin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            TestSQLite.Query();
+            //InitSQLiteManage.SyncCityData2SQLite();
             XmlService.GetAppSetting();
+
+            TestRegex();
             InitFakeServices();
             InitRegisterForm();
             Form acc = FacadeFactory.Instance.RetrieveMediator(typeof(WebFrm).Name) as Form;
@@ -32,6 +34,13 @@ namespace CefSharpWin
              it must be before the first instance is created.”
 
              */
+        }
+        static void TestRegex()
+        {
+            string reg = "<table class=\"table table-bordered table-striped table-hover\">(.*?)</table";
+            string input = "<table><tr>测试数据</tr></table>";
+            string file = Domain.CommonData.FileHelper.ReadFile("Dev\\IPProxyTemplate.txt");
+            RegexHelper.GetMatchValue(file, reg);
         }
         static void InitRegisterForm()
         {

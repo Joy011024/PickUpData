@@ -170,9 +170,9 @@ namespace CefSharpWin
         public string Code { get; set; }
     }
 
-    public class TestSQLite
+    public class InitSQLiteManage
     {
-        public static void Query()
+        public static void SyncCityData2SQLite()
         {
             try
             {
