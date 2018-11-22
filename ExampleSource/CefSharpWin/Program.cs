@@ -40,7 +40,7 @@ namespace CefSharpWin
             string[] test = new string[]{
                 " <table class=\"table table-bordered table-striped table-hover\">192.168.43.32</table>",
                 "<table><tr>测试数据</tr></table>","" };
-            string reg= "\">(.*?)<";
+            string reg= "table-hover\">(.*?)</table";
             foreach (var item in test)
             {
                 RegexHelper.GetMatchValue(item, reg);
