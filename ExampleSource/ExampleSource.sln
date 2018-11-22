@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientHelper", "..\Base
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSmallTool", "..\CaptureWebData\ServiceSmallTool\ServiceSmallTool.csproj", "{C1636431-277A-47AF-965D-1DE68AE0361C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.IPDataService", "..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj", "{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Cefx64|Any CPU = Cefx64|Any CPU
@@ -136,6 +138,24 @@ Global
 		{C1636431-277A-47AF-965D-1DE68AE0361C}.Release|x64.Build.0 = Release|Any CPU
 		{C1636431-277A-47AF-965D-1DE68AE0361C}.Release|x86.ActiveCfg = Release|Any CPU
 		{C1636431-277A-47AF-965D-1DE68AE0361C}.Release|x86.Build.0 = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Cefx64|Any CPU.ActiveCfg = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Cefx64|Any CPU.Build.0 = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Cefx64|x64.ActiveCfg = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Cefx64|x64.Build.0 = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Cefx64|x86.ActiveCfg = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Cefx64|x86.Build.0 = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Debug|x64.Build.0 = Debug|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Debug|x86.Build.0 = Debug|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Release|x64.ActiveCfg = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Release|x64.Build.0 = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Release|x86.ActiveCfg = Release|Any CPU
+		{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

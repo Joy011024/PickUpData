@@ -37,10 +37,16 @@ namespace CefSharpWin
         }
         static void TestRegex()
         {
-            string reg = " <table class=\"table table-bordered table-striped table-hover\">(.*?)</table>";
-            string input = "<table><tr>测试数据</tr></table>";
-            string file = Domain.CommonData.FileHelper.ReadFile("Dev\\IPProxyTemplate.txt");
-            RegexHelper.GetMatchValue(file, reg);
+            string[] test = new string[]{
+                " <table class=\"table table-bordered table-striped table-hover\">192.168.43.32</table>",
+                "<table><tr>测试数据</tr></table>","" };
+            string reg= "\">(.*?)<";
+            foreach (var item in test)
+            {
+                RegexHelper.GetMatchValue(item, reg);
+            }
+           // string file = Domain.CommonData.FileHelper.ReadFile("Dev\\IPProxyTemplate.txt");
+           
         }
         static void InitRegisterForm()
         {
