@@ -31,7 +31,7 @@
   <SplitFlag>|</SplitFlag>
   <OpenDebug>false</OpenDebug>
   <!--ip地址列表分离正则表达式  <table ?? </tbody  < &lt; > &gt;-->
-  <IPsProxyRegex>&lt;table(.*?)&lt;\/table</IPsProxyRegex>
+  <IPsProxyRegex>table-hover\>(.*?)&lt;\/table</IPsProxyRegex>
   <!--IP代理详细信息分类-->
   <IPDataRegex></IPDataRegex>
   <IPEntityRegex></IPEntityRegex>

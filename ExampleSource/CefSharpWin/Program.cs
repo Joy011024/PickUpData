@@ -38,16 +38,12 @@ namespace CefSharpWin
         static void TestRegex()
         {
             string file = Domain.CommonData.FileHelper.ReadFile("Dev\\IPProxyTemplate.txt");
-            string[] test = new string[]{
-               // " <table class=\"table table-bordered table-striped table-hover\">192.168.43.32</table>",
-               file.Replace("\r\n",string.Empty) };
-            string reg= "table-hover\">(.*?)</table>";
-            foreach (var item in test)
-            {
-                RegexHelper.GetMatchValue(item, reg);
-            }
-           // 
-           
+            file = file.Replace("\r\n", string.Empty);
+            string reg = SystemSetting.SystemSettingDict["IPsProxyRegex"];//xml中对于转义字符\如何声明 
+            //  table-hover\">(.*?)</table
+            //<tr>(.*?)</tr
+            List<string> ips = RegexHelper.GetMatchValue(file, reg);
+
         }
         static void InitRegisterForm()
         {
