@@ -81,6 +81,7 @@ namespace CaptureWebData
             try
             {
                 //InitBaseConfig();
+                InitSQLite();
                 Init();
             }
             catch (Exception ex)
@@ -96,9 +97,8 @@ namespace CaptureWebData
         }
         void InitSQLite() 
         {
-            string sql = @"";
-            //UinDataService uis = new UinDataService();
-            //uis.Excute(sql);
+            UinDataService uis = new UinDataService();
+            uis.GetCityDatas();
         }
         void InitBaseConfig()
         {
