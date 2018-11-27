@@ -11,6 +11,9 @@ namespace CaptureWebData
 {
     public class UinDataService
     {
+        /// <summary>
+        /// 使用System.Data.SQLite 访问sqlite数据库
+        /// </summary>
         public void GetCityDatas() 
         {
             try
@@ -25,6 +28,21 @@ namespace CaptureWebData
                 DataSet ds = new DataSet();
                 dap.Fill(ds);
                 conn.Clone();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        public void QueryCityDataByExt()
+        {
+           
+            try
+            {
+                ConfigurationItems cfg = new ConfigurationItems();
+                DBReporistory<Domain.CommonData.CategoryData> cds = new DBReporistory<CategoryData>(cfg.SqliteDbConnString);
+                List< Domain.CommonData.CategoryData> ds= cds.DoQuery< Domain.CommonData.CategoryData>().ToList();
+
             }
             catch (Exception ex)
             {

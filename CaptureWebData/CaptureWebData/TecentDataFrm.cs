@@ -98,7 +98,7 @@ namespace CaptureWebData
         void InitSQLite() 
         {
             UinDataService uis = new UinDataService();
-            uis.GetCityDatas();
+            uis.QueryCityDataByExt();
         }
         void InitBaseConfig()
         {
