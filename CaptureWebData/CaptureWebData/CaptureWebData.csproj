@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>6766f36c</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -35,6 +35,24 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Logging">
       <HintPath>..\bin\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
@@ -51,8 +69,12 @@
     <Reference Include="DataHelpWinform">
       <HintPath>..\..\Bin\DataHelpWinform.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\SQLite\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -65,15 +87,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Quartz.2.5.0\lib\net40\Quartz.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Client">
-      <HintPath>..\bin\Redis\ServiceStack.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Redis\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Redis, Version=4.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="ServiceStack.Redis">
       <HintPath>..\bin\Redis\ServiceStack.Redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -81,17 +95,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.109.0\lib\net45\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.109.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.109.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="System.IO">
       <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
     </Reference>
@@ -103,23 +106,13 @@
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime">
       <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.0.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -3517,10 +3510,6 @@
       <Project>{d182918a-32dc-4b35-a998-dac7cadc2369}</Project>
       <Name>HttpClientHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj">
-      <Project>{ce6b1f9a-1df7-4e35-adcc-b527206f2b98}</Project>
-      <Name>Application.IPDataService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\AppService.RedisService\AppService.RedisService.csproj">
       <Project>{4381d531-c89c-486d-bada-b94d022f665e}</Project>
       <Name>AppService.RedisService</Name>
@@ -3533,10 +3522,6 @@
       <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
       <Name>Domain.GlobalModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\EmailHelper\EmailHelper.csproj">
-      <Project>{0ba494a2-4acc-4277-8a68-b519d76a02b0}</Project>
-      <Name>EmailHelper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
       <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
       <Name>Infrastructure.ExtService</Name>
@@ -3544,10 +3529,6 @@
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.EFSQLite\Infrastructure.EFSQLite.csproj">
       <Project>{bc16843a-630b-47e7-b889-97612c8f35df}</Project>
       <Name>Infrastructure.EFSQLite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.MsSqlService.SqlHelper\Infrastructure.MsSqlService.SqlHelper.csproj">
-      <Project>{43847d96-253a-4525-97ed-aca52340013b}</Project>
-      <Name>Infrastructure.MsSqlService.SqlHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\CaptureManage.AppWin\CaptureManage.AppWin.csproj">
       <Project>{11861a4e-e136-4395-9abd-31637e3dae9a}</Project>

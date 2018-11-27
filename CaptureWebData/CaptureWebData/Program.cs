@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Configuration;
-using EmailHelper;
+//using EmailHelper;
 using Domain.CommonData;
 using CaptureManage.AppWin;
 using Infrastructure.ExtService;
@@ -328,6 +328,7 @@ namespace CaptureWebData
         }  
         void SendEmail(string subject, string body)
         {
+            /*
             string dir = SystemConfig.ExeDir + "\\" + typeof(ELogType).Name;
             string file = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
             string msg = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat) + "\r\n";
@@ -347,6 +348,7 @@ namespace CaptureWebData
                  msg += ex.Message;
                 LoggerWriter.CreateLogFile(msg, dir, ELogType.EmailLog, file, true);
             }
+            */
         }
     }
 }

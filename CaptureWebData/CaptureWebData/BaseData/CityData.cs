@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Domain.CommonData;
 using DataHelp;
-using ApplicationService.IPDataService;
+//using ApplicationService.IPDataService;
 namespace CaptureWebData
 {
     public class CityData:ItemData
@@ -84,8 +84,8 @@ namespace CaptureWebData
                     n.ItemType = "City";
                     return true;
                 }).ToList();
-            CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
-            cds.SaveCategoryNode(nodes);
+            //CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
+            //cds.SaveCategoryNode(nodes);
         }
         private CityData PickUpNode(string item) 
         {

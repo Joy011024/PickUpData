@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DataHelp;
 using Domain.CommonData;
-using ApplicationService;
+//using ApplicationService;
 namespace CaptureWebData
 {
     public class FindQQDataManage
@@ -23,8 +23,8 @@ namespace CaptureWebData
                 {//启用数据库功能
                     List<FindQQ> qqs = find.result.buddy.info_list;
                     List<FindQQDataTable> table = qqs.Select(s => s.ConvertMapModel<FindQQ, FindQQDataTable>(true)).ToList();
-                    FindQQDataService service = new FindQQDataService(ConnString);
-                    service.SaveFindQQ(table);
+                   // FindQQDataService service = new FindQQDataService(ConnString);
+                   // service.SaveFindQQ(table);
                 }
                 return find;
             }
@@ -35,11 +35,11 @@ namespace CaptureWebData
         }
         public int CountTodayPickUp() 
         {
-           return new FindQQDataService(ConnString).CountTodayPickUp();
+            return 0;// new FindQQDataService(ConnString).CountTodayPickUp();
         }
         public PickUpStatic TodayStatic() 
         {
-            return new FindQQDataService(ConnString).TodayStaticData();
+            return new PickUpStatic();// new FindQQDataService(ConnString).TodayStaticData();
         }
         public void GatherHeadImage(string uin,string imgDir) 
         {

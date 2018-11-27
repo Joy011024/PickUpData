@@ -9,7 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DataHelp;
 using Domain.CommonData;
-using ApplicationService.IPDataService;
+//using ApplicationService.IPDataService;
 
 namespace CaptureWebData
 {
@@ -149,8 +149,8 @@ namespace CaptureWebData
             List<IpDataMapTable> target = list.Select(qqz => qqz.ConvertMapModel<QQZengResponseData, IpDataMapTable>(true))
                 .Where(ip => { ip.InitData(); return true; }).ToList();
             ConfigurationItems config = new ConfigurationItems();
-            IPService ps = new IPService(config.SaveIpAddressConnString);
-            bool succ = ps.SaveList(target); ;
+            //IPService ps = new IPService(config.SaveIpAddressConnString);
+            bool succ = false;// ps.SaveList(target); ;
             if (succ) 
             {
                 list = new List<QQZengResponseData>();

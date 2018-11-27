@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Domain.CommonData;
-using ApplicationService.IPDataService;
+//using ApplicationService.IPDataService;
 using DataHelp;
 using System.IO;
 using AppService.RedisService;
@@ -73,14 +73,14 @@ namespace CaptureWebData
         public TecentDataFrm()
         {
             InitializeComponent();
-            backRun.DoWork += new DoWorkEventHandler(BackGroundDoWork);
+             // backRun.DoWork += new DoWorkEventHandler(BackGroundDoWork);
 
         }
         private void TecentDataFrm_Load(object sender, EventArgs e)
         {
             try
             {
-                InitBaseConfig();
+                //InitBaseConfig();
                 Init();
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace CaptureWebData
         void InitSQLite() 
         {
             string sql = @"";
-            UinDataService uis = new UinDataService();
+            //UinDataService uis = new UinDataService();
             //uis.Excute(sql);
         }
         void InitBaseConfig()
@@ -105,11 +105,11 @@ namespace CaptureWebData
 
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
-            CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
+            //CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
             string json = FileHelper.ReadFile(@"..\..\DB\City.log");
             IEnumerable<CategoryData> list = new List<CategoryData>();
             if (ConfigurationItems.OpenSQLServer)
-                list = cs.QueryCityCategory();
+                list = new List<CategoryData>();// cs.QueryCityCategory();
             else
             {
                 list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(
@@ -205,8 +205,8 @@ namespace CaptureWebData
             string cityFile = GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat)) + ".txt";
             if (SystemConfig.CfgFileExistsIsDoReplace|| !File.Exists(dir + "/" + cityFile))
             {//没有数据文件时先从数据库中进行读取，在写入到文件中，最后写入到redis中
-                CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
-                List<CategoryData> city = cds.QueryCityCategory().ToList();
+                //CategoryDataService cds = new CategoryDataService(new ConfigurationItems().TecentDA);
+                List<CategoryData> city = new List<CategoryData>();// cds.QueryCityCategory().ToList();
                 //省会，城市，区域
                 AnalyCity(city, targetCountry);//创建相关文件
             }

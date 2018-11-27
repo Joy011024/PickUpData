@@ -10,7 +10,7 @@ using Domain.CommonData;
 using System.ComponentModel;
 using Common.Data;
 using System.Globalization;
-using Infrastructure.MsSqlService.SqlHelper;
+//using Infrastructure.MsSqlService.SqlHelper;
 using DataHelp;
 using CommonHelperEntity;
 using Common.Data;
@@ -311,7 +311,7 @@ and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id)"
         }
         public void DoIntervalSync(string connDBString) 
         {
-            SqlCmdHelper help = new SqlCmdHelper() { SqlConnString = connDBString };
+            //SqlCmdHelper help = new SqlCmdHelper() { SqlConnString = connDBString };
             string[] dbArr = connDBString.Split(';');
             string waitSyncDB = string.Empty;
             foreach (var item in dbArr)
@@ -330,7 +330,7 @@ and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id)"
                 {
                     LogHelperExt.WriteLog("will exucte sql= " + sql);
                 }
-                help.ExcuteNoQuery(sql, null);
+                //help.ExcuteNoQuery(sql, null);
                 string endTime = DateTime.Now.ToString(CommonFormat.DateTimeFormat);
                 LogHelperExt.WriteLog("end Sync  uin data,time=" + endTime);
             }

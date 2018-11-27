@@ -73,3 +73,6 @@ Unable to complete operation. The supplied SqlConnection does not specify an ini
 10）
 未能加载文件或程序集“System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139”或它的某一个依赖项。
 找到的程序集清单定义与程序集引用不匹配。 (异常来自 HRESULT:0x80131040)
+11）
+System.ArgumentException:“The ADO.NET provider with invariant name 'System.Data.SQLite.EF6' is either not registered in the machine or application config file,
+or could not be loaded. See the inner exception for details.”
