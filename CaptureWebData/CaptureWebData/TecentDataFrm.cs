@@ -12,7 +12,7 @@ using DataHelp;
 using System.IO;
 using AppService.RedisService;
 using System.Threading;
-using SelfControlForm;
+//using SelfControlForm;
 using DataHelpWinform;
 using Infrastructure.ExtService;
 using Infrastructure.EFSQLite;

@@ -11,9 +11,7 @@ using System.ComponentModel;
 using Common.Data;
 using System.Globalization;
 //using Infrastructure.MsSqlService.SqlHelper;
-using DataHelp;
-using CommonHelperEntity;
-using Common.Data;
+//using CommonHelperEntity;
 using Infrastructure.ExtService;
 namespace CaptureWebData
 {

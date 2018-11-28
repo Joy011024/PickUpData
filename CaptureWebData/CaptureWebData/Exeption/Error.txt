@@ -76,3 +76,9 @@ Unable to complete operation. The supplied SqlConnection does not specify an ini
 11）
 System.ArgumentException:“The ADO.NET provider with invariant name 'System.Data.SQLite.EF6' is either not registered in the machine or application config file,
 or could not be loaded. See the inner exception for details.”
+12)
+Unable to complete operation. The supplied SqlConnection does not specify an initial catalog or AttachDBFileName.
+13)
+No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'.
+Make sure the provider is registered in the 'entityFramework' section of the application config file.
+See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
