@@ -82,3 +82,8 @@ Unable to complete operation. The supplied SqlConnection does not specify an ini
 No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'.
 Make sure the provider is registered in the 'entityFramework' section of the application config file.
 See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+14)
+The Entity Framework provider type 'System.Data.SQLite.EF6.SQLiteProviderServices, 
+System.Data.SQLite.EF6' registered in the application config file for the ADO.NET provider with invariant name 'System.Data.SQLite' could not be loaded. 
+Make sure that the assembly-qualified name is used and that the assembly is available to the running application. 
+See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
