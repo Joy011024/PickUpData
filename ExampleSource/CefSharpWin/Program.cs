@@ -16,7 +16,7 @@ namespace CefSharpWin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //InitSQLiteManage.SyncCityData2SQLite();
+            InitSQLiteManage.QueryCityDataFromSQLite();
             XmlService.GetAppSetting();
 
             TestRegex();

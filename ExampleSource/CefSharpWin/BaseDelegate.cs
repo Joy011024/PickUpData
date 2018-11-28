@@ -172,6 +172,18 @@ namespace CefSharpWin
 
     public class InitSQLiteManage
     {
+        public static void QueryCityDataFromSQLite()
+        {
+            try
+            {
+                DBReporistory<CategoryData> qt = new DBReporistory<CategoryData>("TecentDASQLite");
+                List<CategoryData> list = qt.DoQuery<CategoryData>().ToList();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
         public static void SyncCityData2SQLite()
         {
             try
