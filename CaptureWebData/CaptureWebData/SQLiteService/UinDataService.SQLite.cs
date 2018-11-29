@@ -40,7 +40,7 @@ namespace CaptureWebData
             try
             {
                 ConfigurationItems cfg = new ConfigurationItems();
-                DBReporistory<Domain.CommonData.CategoryData> cds = new DBReporistory<CategoryData>(cfg.SqliteDbConnString);
+                DBReporistory<Domain.CommonData.CategoryData> cds = new DBReporistory<CategoryData>("TecentDASQLite");
                 List< Domain.CommonData.CategoryData> ds= cds.DoQuery< Domain.CommonData.CategoryData>().ToList();
 
             }
