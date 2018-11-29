@@ -1,0 +1,6 @@
+﻿1)No Entity Framework provider found for the ADO.NET provider with invariant name 'System.Data.SqlClient'. 
+Make sure the provider is registered in the 'entityFramework' section of the application config file. 
+See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+2) 在节点 entityFramework>providers下声明System.Data.SqlClient
+
+总结：ef连接sqlite，使用的dbcontext上下文传递节点名，而不是数据库连接串内容
