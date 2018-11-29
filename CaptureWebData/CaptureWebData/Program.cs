@@ -312,8 +312,18 @@ namespace CaptureWebData
             }
         }
 
-        static string dbType;
-
+        static string mainDbType;
+        public static string MainDBType
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(mainDbType))
+                {
+                    mainDbType = ConfigurationManager.AppSettings["MainDBType"];
+                }
+                return mainDbType;
+            }
+        }
     }
     public class DataLink
     {

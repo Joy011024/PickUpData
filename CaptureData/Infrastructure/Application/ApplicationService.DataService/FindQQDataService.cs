@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text; 
 using Domain.CommonData;
 using Infrastructure.EFMsSQL;
-namespace CaptureWebData
+namespace ApplicationService.DataService
 {
     public class FindQQDataService
     {

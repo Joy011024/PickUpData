@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Domain.CommonData;
-//using ApplicationService.IPDataService;
+using ApplicationService.DataService;
 using DataHelp;
 using System.IO;
 using AppService.RedisService;
@@ -104,7 +104,7 @@ namespace CaptureWebData
 
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
-            //CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
+           
             string json = FileHelper.ReadFile(@"..\..\DB\City.log");
             IEnumerable<CategoryData> list = new List<CategoryData>();
             if (ConfigurationItems.OpenSQLServer)
@@ -115,7 +115,7 @@ namespace CaptureWebData
                    json
                    );
             }
-            SyncDataHelper.SyncCategory(list.ToList());
+            //SyncDataHelper.SyncCategory(list.ToList());
             //开启数据同步
             //SyncDataHelper.SyncCategory(list.ToList());
             CategoryData obj = SystemConfig.UsingDBSaveBaseData ?

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DataHelp;
 using Domain.CommonData;
-//using ApplicationService;
+using ApplicationService.DataService;
 namespace CaptureWebData
 {
     public class FindQQDataManage
@@ -45,6 +45,32 @@ namespace CaptureWebData
         {
             
         }
+    }
+
+    public class DataFromManage
+    {
+        //进行数据库的适配
+        public void CityData()
+        {
+            //当前数据库
+            switch (SystemConfig.MainDBType)
+            {
+                case DBType.SQLite:
+                    break;
+                case DBType.MySQL:
+                    break;
+                case DBType.SQLServer:
+                    CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
+                    break;
+            }
+
+        }
+    }
+    public class DBType
+    {
+        public const string SQLite = "SQLite";
+        public const string SQLServer = "SQLServer";
+        public const string MySQL = "MySQL";
     }
     
 }

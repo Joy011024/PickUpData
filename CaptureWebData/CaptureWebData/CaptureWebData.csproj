@@ -3488,6 +3488,10 @@
       <Project>{d182918a-32dc-4b35-a998-dac7cadc2369}</Project>
       <Name>HttpClientHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\ApplicationService.DataService\ApplicationService.DataService.csproj">
+      <Project>{ce6b1f9a-1df7-4e35-adcc-b527206f2b98}</Project>
+      <Name>ApplicationService.DataService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\AppService.RedisService\AppService.RedisService.csproj">
       <Project>{4381d531-c89c-486d-bada-b94d022f665e}</Project>
       <Name>AppService.RedisService</Name>

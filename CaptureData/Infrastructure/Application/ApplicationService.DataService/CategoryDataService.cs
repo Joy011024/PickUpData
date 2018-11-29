@@ -5,7 +5,7 @@ using System.Text;
 using Domain.CommonData;
 using Infrastructure.EFMsSQL;
 using System.Configuration;
-namespace ApplicationService.IPDataService
+namespace ApplicationService.DataService
 {
     public class CategoryDataService
     {
