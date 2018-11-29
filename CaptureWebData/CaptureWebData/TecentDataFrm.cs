@@ -80,8 +80,7 @@ namespace CaptureWebData
         {
             try
             {
-                //InitBaseConfig();
-                InitSQLite();
+                InitBaseConfig(); 
                 Init();
             }
             catch (Exception ex)
@@ -98,7 +97,7 @@ namespace CaptureWebData
         void InitSQLite() 
         {
             UinDataService uis = new UinDataService();
-            uis.QueryCityDataByExt();
+            cityList = uis.QueryCityDataByExt();
         }
         void InitBaseConfig()
         {

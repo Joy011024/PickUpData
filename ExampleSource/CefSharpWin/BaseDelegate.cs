@@ -176,6 +176,8 @@ namespace CefSharpWin
         {
             try
             {
+                //Infrastructure.EFSQLite.DBReporistory<CategoryData> call = new Infrastructure.EFSQLite.DBReporistory<CategoryData>("TecentDASQLite");
+                //List<CategoryData> ccdatas = call.DoQuery<CategoryData>().ToList();
                 DBReporistory<CategoryData> qt = new DBReporistory<CategoryData>("TecentDASQLite");
                 List<CategoryData> list = qt.DoQuery<CategoryData>().ToList();
             }

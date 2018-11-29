@@ -7,8 +7,8 @@
     <ProjectGuid>{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ApplicationService.IPDataService</RootNamespace>
-    <AssemblyName>ApplicationService.IPDataService</AssemblyName>
+    <RootNamespace>ApplicationService.DataService</RootNamespace>
+    <AssemblyName>ApplicationService.DataService</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

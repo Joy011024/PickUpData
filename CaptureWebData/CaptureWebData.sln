@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bin", "bin", "{0C4953B0-9E5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.EFMsSQL", "..\CaptureData\Infrastructure\Infrastructure.EFMsSQL\Infrastructure.EFMsSQL.csproj", "{20F7EF8C-D882-498A-9D4E-2E1F1A6EC2F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.IPDataService", "..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj", "{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationService.DataService", "..\CaptureData\Infrastructure\Application\ApplicationService.DataService\ApplicationService.DataService.csproj", "{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.CommonData", "..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj", "{9CEF7F17-E35B-4AF0-BFAF-DA0F7B3D9EF4}"
 EndProject

@@ -34,19 +34,18 @@ namespace CaptureWebData
 
             }
         }
-        public void QueryCityDataByExt()
+        public List<Domain.CommonData.CategoryData> QueryCityDataByExt()
         {
-           
+            List<Domain.CommonData.CategoryData> list = new List<CategoryData>();
             try
             {
-                ConfigurationItems cfg = new ConfigurationItems();
                 DBReporistory<Domain.CommonData.CategoryData> cds = new DBReporistory<CategoryData>("TecentDASQLite");
-                List< Domain.CommonData.CategoryData> ds= cds.DoQuery< Domain.CommonData.CategoryData>().ToList();
-
+               list= cds.DoQuery< Domain.CommonData.CategoryData>().ToList();
+                return list;
             }
             catch (Exception ex)
             {
-
+                return list;
             }
         }
     }
