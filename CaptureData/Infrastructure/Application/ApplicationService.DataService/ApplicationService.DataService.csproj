@@ -34,6 +34,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\CaptureWebData\bin\EF\net40\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -50,6 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\CaptureWebData\ApplicationService.IDataService\ApplicationService.IDataService.csproj">
+      <Project>{241007bc-d476-42db-ad30-1f76721c81d1}</Project>
+      <Name>ApplicationService.IDataService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>

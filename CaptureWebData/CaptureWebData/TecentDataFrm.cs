@@ -35,7 +35,7 @@ namespace CaptureWebData
         QuartzJob job = new QuartzJob();
         //RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp, SystemConfig.RedisPsw, SystemConfig.RedisPort);
         CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
-        RedisCacheService redis;
+        RedisCacheDBContext redis;
         int currentIndex = 1;
         string Uin;//当前进行爬虫时使用到的账户信息
         int intervalSec = 3;
@@ -104,18 +104,7 @@ namespace CaptureWebData
 
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
-           
-            string json = FileHelper.ReadFile(@"..\..\DB\City.log");
-            IEnumerable<CategoryData> list = new List<CategoryData>();
-            if (ConfigurationItems.OpenSQLServer)
-                list = new List<CategoryData>();// cs.QueryCityCategory();
-            else
-            {
-                list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(
-                   json
-                   );
-            }
-            //SyncDataHelper.SyncCategory(list.ToList());
+            IEnumerable<CategoryData> list = new DataFromManage().QueryCities();
             //开启数据同步
             //SyncDataHelper.SyncCategory(list.ToList());
             CategoryData obj = SystemConfig.UsingDBSaveBaseData ?
@@ -129,7 +118,7 @@ namespace CaptureWebData
             string defaultCountryNode = GetCagetoryDataFileNameOrRedisItem(obj, redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat));
             if (SystemConfig.OpenRedis) 
             {
-                redis = new RedisCacheService(SystemConfig.RedisIp, SystemConfig.RedisPort, SystemConfig.RedisPsw);
+                redis = new RedisCacheDBContext(SystemConfig.RedisIp, SystemConfig.RedisPort, SystemConfig.RedisPsw);
                // citys = redis.GetRedisCacheItem<CategoryGroup>(defaultCountryNode);
                 //GetRedisCacheItem
                // CategoryGroup r = redis.GetRedisCacheItem<CategoryGroup>(defaultCountryNode);

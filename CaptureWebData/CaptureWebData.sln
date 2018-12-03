@@ -128,6 +128,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.EFSQLite", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFSwitchDBApp", "EFSwitchDBApp\EFSwitchDBApp.csproj", "{837AFDDC-17D0-4E63-A67C-9032BACAD810}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationService.IDataService", "ApplicationService.IDataService\ApplicationService.IDataService.csproj", "{241007BC-D476-42DB-AD30-1F76721C81D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -654,6 +656,18 @@ Global
 		{837AFDDC-17D0-4E63-A67C-9032BACAD810}.Release|x64.Build.0 = Release|x64
 		{837AFDDC-17D0-4E63-A67C-9032BACAD810}.Release|x86.ActiveCfg = Release|Any CPU
 		{837AFDDC-17D0-4E63-A67C-9032BACAD810}.Release|x86.Build.0 = Release|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Debug|x64.Build.0 = Debug|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Debug|x86.Build.0 = Debug|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Release|x64.ActiveCfg = Release|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Release|x64.Build.0 = Release|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Release|x86.ActiveCfg = Release|Any CPU
+		{241007BC-D476-42DB-AD30-1F76721C81D1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -692,6 +706,7 @@ Global
 		{D182918A-32DC-4B35-A998-DAC7CADC2369} = {E3D724CF-ED9D-461B-8796-D7846E5D7F17}
 		{C1636431-277A-47AF-965D-1DE68AE0361C} = {A6454CE8-AC13-4840-B473-8D3234D62EBB}
 		{BC16843A-630B-47E7-B889-97612C8F35DF} = {4CC1115A-0CC8-4BEB-B2CC-0ED8D706E75F}
+		{241007BC-D476-42DB-AD30-1F76721C81D1} = {1A823B42-381B-410D-AF42-DD9A68E1F61E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7AD6CAE8-D2E8-43A6-A958-974421DC2858}

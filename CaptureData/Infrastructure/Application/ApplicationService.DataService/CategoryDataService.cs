@@ -5,9 +5,10 @@ using System.Text;
 using Domain.CommonData;
 using Infrastructure.EFMsSQL;
 using System.Configuration;
+using ApplicationService.IDataService;
 namespace ApplicationService.DataService
 {
-    public class CategoryDataService
+    public class CategoryDataService: ICategroyService
     {
         public string ConnString { get; set; }
         public CategoryDataService(string connString) 
@@ -41,5 +42,16 @@ namespace ApplicationService.DataService
             return data;
         }
     }
-    
+
+    public class CategoryDataServiceInIOFile : ICategroyService
+    {
+        public string ConnString { get; set; }
+        public IEnumerable<CategoryData> QueryCityCategory()
+        {
+            string json = FileHelper.ReadFile(@"..\..\DB\City.log");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(json);
+        }
+    }
+
+
 }

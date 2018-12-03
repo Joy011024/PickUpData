@@ -5,6 +5,7 @@ using System.Text;
 using DataHelp;
 using Domain.CommonData;
 using ApplicationService.DataService;
+using ApplicationService.IDataService;
 namespace CaptureWebData
 {
     public class FindQQDataManage
@@ -46,24 +47,41 @@ namespace CaptureWebData
             
         }
     }
-
+    #region 数据库切换
     public class DataFromManage
     {
         //进行数据库的适配
-        public void CityData()
+        private  ICategroyService SwitchDataSource(string dbType)
         {
+            ICategroyService cs = null;
             //当前数据库
-            switch (SystemConfig.MainDBType)
+            switch (dbType)
             {
                 case DBType.SQLite:
                     break;
                 case DBType.MySQL:
                     break;
                 case DBType.SQLServer:
-                    CategoryDataService cs = new CategoryDataService(new ConfigurationItems().TecentDA);
+                    cs = new CategoryDataService(new ConfigurationItems().TecentDA);
+                    break;
+                case DBType.Redis:
+                    break;
+                case DBType.IOFile:
+                    cs = new CategoryDataServiceInIOFile();
                     break;
             }
-
+            return cs;
+        }
+        /// <summary>
+        /// 获取城市数据
+        /// </summary>
+        /// <returns>城市数据列表【null情况出现则是数据库切换没有成功】</returns>
+        public List<CategoryData> QueryCities()
+        {
+            ICategroyService cs = SwitchDataSource(SystemConfig.MainDBType);
+            if(cs!=null)
+            return cs.QueryCityCategory().ToList();
+            return null;
         }
     }
     public class DBType
@@ -71,6 +89,9 @@ namespace CaptureWebData
         public const string SQLite = "SQLite";
         public const string SQLServer = "SQLServer";
         public const string MySQL = "MySQL";
+        public const string Redis = "Redis";
+        public const string IOFile = "IOFile";
     }
-    
+    #endregion
+
 }

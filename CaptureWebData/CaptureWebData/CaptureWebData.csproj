@@ -3447,7 +3447,7 @@
     </None>
     <None Include="Content\羽绒服20180119.zip" />
     <None Include="DB\City.log" />
-    <None Include="DB\LocalDB.db">
+    <None Include="DB\AppSetting.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -3511,6 +3511,10 @@
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.EFSQLite\Infrastructure.EFSQLite.csproj">
       <Project>{bc16843a-630b-47e7-b889-97612c8f35df}</Project>
       <Name>Infrastructure.EFSQLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationService.IDataService\ApplicationService.IDataService.csproj">
+      <Project>{241007bc-d476-42db-ad30-1f76721c81d1}</Project>
+      <Name>ApplicationService.IDataService</Name>
     </ProjectReference>
     <ProjectReference Include="..\CaptureManage.AppWin\CaptureManage.AppWin.csproj">
       <Project>{11861a4e-e136-4395-9abd-31637e3dae9a}</Project>

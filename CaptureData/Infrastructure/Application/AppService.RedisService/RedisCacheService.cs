@@ -5,7 +5,7 @@ using System.Text;
 using ServiceStack.Redis;
 namespace AppService.RedisService
 {
-    public class RedisCacheService
+    public class RedisCacheDBContext
     {
         string RedisIp;
         int RedisPort;
@@ -13,7 +13,7 @@ namespace AppService.RedisService
         RedisClient Client;
         bool CanConnection;
         public bool HavaCacheItem;
-        public RedisCacheService(string ip,int port,string psw) 
+        public RedisCacheDBContext(string ip,int port,string psw) 
         {
             RedisIp = ip;
             RedisPort = port;
