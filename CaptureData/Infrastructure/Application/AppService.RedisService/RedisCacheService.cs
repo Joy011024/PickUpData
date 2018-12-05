@@ -2,61 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ServiceStack.Redis;
+using Infrastructure.RedisRespority;
+using ApplicationService.IDataService;
+using Domain.CommonData;
+using Infrastructure.ExtService;
 namespace AppService.RedisService
 {
-    public class RedisCacheDBContext
+    public class RedisService : ICategroyService
     {
-        string RedisIp;
-        int RedisPort;
-        string RedisPsw;
-        RedisClient Client;
-        bool CanConnection;
-        public bool HavaCacheItem;
-        public RedisCacheDBContext(string ip,int port,string psw) 
+        public string ConnString { get; set; }
+
+        public IEnumerable<CategoryData> QueryCityCategory(string key)
         {
-            RedisIp = ip;
-            RedisPort = port;
-            RedisPsw = psw;
-            if (string.IsNullOrEmpty(psw))
-            {
-                Client = new RedisClient(ip, port);
-            }
-            else
-            {
-                Client = new RedisClient(ip, port, psw);
-            }
-            CanConnection = Client.IsSocketConnected();//是否连接成功
+            List<CategoryGroup> objectItems = redis.GetRedisCacheItem<List<CategoryGroup>>(key);
+            return new List<CategoryData>();
         }
-        public void SetRedisItem(string cacheItem,object obj) 
+        RedisCacheDBContext redis;
+        public RedisService(string connString)
         {
-            if (!CanConnection)
-            { }
-            DateTime exprise = DateTime.Now.AddDays(1);
-            Client.Set(cacheItem, obj, exprise);
+            ConnString=connString;
+            redis = new RedisCacheDBContext(connString);
+            //string defaultCountryNode = GetCagetoryDataFileNameOrRedisItem(obj, redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat));
+
+            //redis.SetRedisItem(GetCagetoryDataFileNameOrRedisItem(item.Root,
+            //               redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat)), jsonNode);
         }
-        public string GetRedisItemString(string cacheItem)
-        {
-            HavaCacheItem = false;
-            if (!CanConnection)
-            { }
-            byte[] bts= Client.Get(cacheItem);
-            if (bts == null)
-            { //数据库中没有该项缓存数据
-                return null;
-            }
-            HavaCacheItem = true;
-            return Encoding.UTF8.GetString(bts);
-        }
-        public string GetCacheByKey(string key)
-        {
-            byte[] bs = Client.Get(key);
-            //将存储的数据转换为字符内容
-            return string.Empty;
-        }
-        public T GetRedisCacheItem<T>(string key)
-        {
-            return  Client.Get<T>(key);
-        }
+        
+        
     }
 }

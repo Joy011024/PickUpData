@@ -33,10 +33,15 @@ namespace ApplicationService.DataService
             
             }
         }
-        public IEnumerable<CategoryData> QueryCityCategory() 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"> "City"</param>
+        /// <returns></returns>
+        public IEnumerable<CategoryData> QueryCityCategory(string key) 
         {
             MainRespority<CategoryData> main = new MainRespority<CategoryData>(ConnString);
-            IEnumerable<CategoryData> data = main.Query(t => !t.IsDelete && t.ItemType == "City" && !string.IsNullOrEmpty(t.Name));
+            IEnumerable<CategoryData> data = main.Query(t => !t.IsDelete && t.ItemType == key && !string.IsNullOrEmpty(t.Name));
             //将数据同步到sqlite  :TecentDASQLite
 
             return data;
@@ -46,9 +51,14 @@ namespace ApplicationService.DataService
     public class CategoryDataServiceInIOFile : ICategroyService
     {
         public string ConnString { get; set; }
-        public IEnumerable<CategoryData> QueryCityCategory()
+        /// <summary>
+        /// 查找文件
+        /// </summary>
+        /// <param name="file">@"..\..\DB\City.log"</param>
+        /// <returns></returns>
+        public IEnumerable<CategoryData> QueryCityCategory(string file)
         {
-            string json = FileHelper.ReadFile(@"..\..\DB\City.log");
+            string json = FileHelper.ReadFile(file);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(json);
         }
     }

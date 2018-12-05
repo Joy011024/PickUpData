@@ -6,6 +6,7 @@ using DataHelp;
 using Domain.CommonData;
 using ApplicationService.DataService;
 using ApplicationService.IDataService;
+using AppService.RedisService;
 namespace CaptureWebData
 {
     public class FindQQDataManage
@@ -58,6 +59,7 @@ namespace CaptureWebData
             switch (dbType)
             {
                 case DBType.SQLite:
+
                     break;
                 case DBType.MySQL:
                     break;
@@ -65,6 +67,7 @@ namespace CaptureWebData
                     cs = new CategoryDataService(new ConfigurationItems().TecentDA);
                     break;
                 case DBType.Redis:
+                    cs = new RedisService(string.Format( "IP={0};Port={1};Psw={2}", SystemConfig.RedisIp, SystemConfig.RedisPort, SystemConfig.RedisPsw));
                     break;
                 case DBType.IOFile:
                     cs = new CategoryDataServiceInIOFile();
@@ -76,11 +79,11 @@ namespace CaptureWebData
         /// 获取城市数据
         /// </summary>
         /// <returns>城市数据列表【null情况出现则是数据库切换没有成功】</returns>
-        public List<CategoryData> QueryCities()
+        public List<CategoryData> QueryCities(string key)
         {
             ICategroyService cs = SwitchDataSource(SystemConfig.MainDBType);
-            if(cs!=null)
-            return cs.QueryCityCategory().ToList();
+            if (cs != null)
+                return cs.QueryCityCategory(key).ToList();
             return null;
         }
     }
