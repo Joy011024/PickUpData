@@ -57,11 +57,11 @@ namespace CaptureWebData
             ICategroyService cs = null;
             //当前数据库
             switch (dbType)
-            {
-                case DBType.SQLite:
-
-                    break;
+            { 
                 case DBType.MySQL:
+                    break;
+                case DBType.SQLite:
+                    cs = new CategoryDataService("TecentDASQLite");
                     break;
                 case DBType.SQLServer:
                     cs = new CategoryDataService(new ConfigurationItems().TecentDA);
