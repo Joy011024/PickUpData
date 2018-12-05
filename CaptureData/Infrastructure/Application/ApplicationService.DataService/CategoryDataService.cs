@@ -61,6 +61,10 @@ namespace ApplicationService.DataService
             string json = FileHelper.ReadFile(file);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<CategoryData>>(json);
         }
+        public void SaveQQ(List<FindQQDataTable> data)
+        {
+            //写入文件
+        }
     }
 
 

@@ -94,31 +94,14 @@ namespace CaptureWebData
         {
         
         }
-        void InitSQLite() 
-        {
-            UinDataService uis = new UinDataService();
-            cityList = uis.QueryCityDataByExt();
-        }
+        
         void InitBaseConfig()
         {
-
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
             IEnumerable<CategoryData> list = new DataFromManage().QueryCities();
-
             targetCountry = list.Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();//目标国家数据
-            
-            if (cityList.Count==1)
-            {//没有缓存数据，此时将数据库中的城市地址数据进行读取写入到redis
-                NotRedisCacheCase();
-                //读取节点项
-                //数据项是否已经缓存
-            }
-            if (SystemConfig.OpenAutoQuertyDBTotal) 
-            {//是否开启定时自动查询数据库采集的数据量信息
-                DelegateData.BaseDelegate del = IntervalDisplay;
-                job.CreateJobWithParam<JobDelegate<Common.Data.EISOSex>>(new object[] { del, null }, DateTime.Now.AddSeconds(5), 30, 0);//
-            }
+            cityList.AddRange( list.Where(c => c.ParentId == targetCountry.Id).ToArray());
         }
        
         void Init()

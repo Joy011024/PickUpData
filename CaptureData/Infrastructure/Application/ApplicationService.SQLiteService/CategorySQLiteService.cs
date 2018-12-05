@@ -27,4 +27,38 @@ namespace ApplicationService.SQLiteService
             return data;
         }
     }
+    public class SQLiteQQDataService : IQQDataService
+    {
+        public string ConnString { get; set; }
+        public SQLiteQQDataService(string connString)
+        {
+            ConnString = connString;
+        }
+        public void SaveQQ<T>(List<T> data) where T: FindQQDataTable
+        {
+            try
+            {
+                DBReporistory<TecentQQData> main = new DBReporistory<TecentQQData>(ConnString);
+                DateTime now = DateTime.Now;
+                foreach (FindQQDataTable item in data)
+                {
+                    item.ID = Guid.NewGuid();
+                    item.CreateTime = now;
+                    if (string.IsNullOrEmpty(item.Url))//没有采集到该账户的头像数据
+                        item.ImgType = -1;
+                    item.DayInt = int.Parse(now.ToString("yyyyMMdd"));
+                }
+                main.AddList(data.ToArray());//id在数据库中显示为乱码
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        public class TecentQQData : FindQQDataTable
+        {
+
+        }
+    }
+   
 }

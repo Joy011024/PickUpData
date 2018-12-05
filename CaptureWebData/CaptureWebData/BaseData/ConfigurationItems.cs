@@ -462,6 +462,9 @@ namespace CaptureWebData
         }
 
         static string mainDbType;
+        /// <summary>
+        /// 业务数据库
+        /// </summary>
         public static string MainDBType
         {
             get
@@ -471,6 +474,21 @@ namespace CaptureWebData
                     mainDbType = ConfigurationManager.AppSettings["MainDBType"];
                 }
                 return mainDbType;
+            }
+        }
+        static string logicDBType;
+        /// <summary>
+        /// 基础数据库
+        /// </summary>
+        public static string BasicDBType
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(logicDBType))
+                {
+                    logicDBType = ConfigurationManager.AppSettings["BasicDBType"];
+                }
+                return logicDBType;
             }
         }
     }

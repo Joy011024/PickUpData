@@ -22,13 +22,9 @@ namespace CaptureWebData
             try 
             {
                 FindQQResponse find = findQQResponseJson.ConvertObject<FindQQResponse>();
-                if (SystemConfig.UsingDBSaveBaseData)
-                {//启用数据库功能
-                    List<FindQQ> qqs = find.result.buddy.info_list;
-                    List<FindQQDataTable> table = qqs.Select(s => s.ConvertMapModel<FindQQ, FindQQDataTable>(true)).ToList();
-                   // FindQQDataService service = new FindQQDataService(ConnString);
-                   // service.SaveFindQQ(table);
-                }
+                List<FindQQ> qqs = find.result.buddy.info_list;
+                new DataFromManage().SaveQQData(qqs);
+                 
                 return find;
             }
             catch (Exception ex) 
@@ -52,8 +48,12 @@ namespace CaptureWebData
     #region 数据库切换
     public class DataFromManage
     {
-        //进行数据库的适配
-        private  ICategroyService SwitchDataSource(string dbType)
+        /// <summary>
+        /// 进行数据库的适配
+        /// </summary>
+        /// <param name="dbType"></param>
+        /// <returns></returns>
+        private ICategroyService SwitchBasicDataSource(string dbType)
         {
             ICategroyService cs = null;
             //当前数据库
@@ -76,13 +76,33 @@ namespace CaptureWebData
             }
             return cs;
         }
+        public void SaveQQData(List<FindQQ> datas )
+        {
+            IQQDataService cs = null;
+            //当前数据库
+            switch (SystemConfig.MainDBType)
+            {
+                case DBType.MySQL:
+                    break;
+                case DBType.SQLite:
+                    cs = new SQLiteQQDataService("TecentDASQLite");
+                    List< SQLiteQQDataService.TecentQQData> tables = datas.Select(s => s.ConvertMapModel<FindQQ, SQLiteQQDataService.TecentQQData>(true)).ToList();
+                    cs.SaveQQ(tables);
+                    break;
+                case DBType.SQLServer:
+                    cs = new  QQDataService(new ConfigurationItems().TecentDA);
+                    List< FindQQDataTable> fins= datas.Select(s => s.ConvertMapModel<FindQQ, FindQQDataTable>(true)).ToList();
+                    cs.SaveQQ(fins);
+                    break;
+            } 
+        }
         /// <summary>
         /// 获取城市数据
         /// </summary>
         /// <returns>城市数据列表【null情况出现则是数据库切换没有成功】</returns>
         public List<CategoryData> QueryCities()
         {
-            ICategroyService cs = SwitchDataSource(SystemConfig.MainDBType);
+            ICategroyService cs = SwitchBasicDataSource(SystemConfig.BasicDBType);
             string key = string.Empty;
             if (cs != null)
                 return cs.QueryCityCategory(key).ToList();

@@ -10,5 +10,11 @@ namespace ApplicationService.IDataService
     {
         string ConnString { get; set; }
         IEnumerable<CategoryData> QueryCityCategory(string key);
+        
+    }
+    public interface IQQDataService
+    {
+        string ConnString { get; set; }
+        void SaveQQ<T>(List<T> data) where T : Domain.CommonData.FindQQDataTable;
     }
 }

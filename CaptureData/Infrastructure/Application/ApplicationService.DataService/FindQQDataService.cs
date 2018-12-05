@@ -4,22 +4,23 @@ using System.Linq;
 using System.Text; 
 using Domain.CommonData;
 using Infrastructure.EFMsSQL;
+using ApplicationService.IDataService;
 namespace ApplicationService.DataService
 {
-    public class FindQQDataService
+    public class QQDataService: IQQDataService
     {
         public string ConnString { get; set; }
-        public FindQQDataService(string connString) 
+        public QQDataService(string connString) 
         {
             ConnString = connString;
         }
-        public void SaveFindQQ( List<FindQQDataTable> data) 
+        public void SaveQQ<T>( List<T> data) where T: FindQQDataTable
         {
             try 
             {
-                //此处功能修正：使用SQL 
-
-                DateTime now = DateTime.Now;
+                //此处功能修正：使用SQL  
+                MainRespority<FindQQDataTable> mr = new MainRespority<FindQQDataTable>(ConnString); DateTime now = DateTime.Now;
+                List<FindQQDataTable> ds = new List<FindQQDataTable>();
                 foreach (FindQQDataTable item in data)
                 {
                     item.ID = Guid.NewGuid();
@@ -27,9 +28,9 @@ namespace ApplicationService.DataService
                     if (string.IsNullOrEmpty(item.Url))//没有采集到该账户的头像数据
                         item.ImgType = -1;
                     item.DayInt = int.Parse(now.ToString("yyyyMMdd"));
+                    ds.Add(item);
                 }
-                MainRespority<FindQQDataTable> mr = new MainRespority<FindQQDataTable>(ConnString);
-                mr.InsertList(data);
+                mr.InsertList(ds);
 
             }
             catch (Exception ex) { }

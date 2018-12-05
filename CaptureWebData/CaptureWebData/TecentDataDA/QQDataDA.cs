@@ -151,7 +151,9 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
             string logPath  = new ConfigurationItems().LogPath + GeneratePathTimeSpan(cookie);
             LoggerWriter.CreateLogFile(json, logPath, ELogType.ParamLog);
             string response = HttpClientExtend.HttpWebRequestPost(findQQAccountUrl, json, cookie);
-            LoggerWriter.CreateLogFile(response, logPath, ELogType.DataLog);
+            //将查询反馈的数据写入到数据库中
+
+           // LoggerWriter.CreateLogFile(response, logPath, ELogType.DataLog);
             ConfigurationItems c = new ConfigurationItems();
             FindQQDataManage manage = new FindQQDataManage(c.TecentDA);
             JsonData jsondata = new JsonData();
