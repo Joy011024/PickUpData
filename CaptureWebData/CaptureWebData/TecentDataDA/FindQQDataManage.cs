@@ -7,6 +7,7 @@ using Domain.CommonData;
 using ApplicationService.DataService;
 using ApplicationService.IDataService;
 using AppService.RedisService;
+using ApplicationService.SQLiteService;
 namespace CaptureWebData
 {
     public class FindQQDataManage
@@ -61,7 +62,7 @@ namespace CaptureWebData
                 case DBType.MySQL:
                     break;
                 case DBType.SQLite:
-                    cs = new CategoryDataService("TecentDASQLite");
+                    cs = new CategorySQLiteService ("TecentDASQLite");
                     break;
                 case DBType.SQLServer:
                     cs = new CategoryDataService(new ConfigurationItems().TecentDA);
@@ -79,12 +80,22 @@ namespace CaptureWebData
         /// 获取城市数据
         /// </summary>
         /// <returns>城市数据列表【null情况出现则是数据库切换没有成功】</returns>
-        public List<CategoryData> QueryCities(string key)
+        public List<CategoryData> QueryCities()
         {
             ICategroyService cs = SwitchDataSource(SystemConfig.MainDBType);
+            string key = string.Empty;
             if (cs != null)
                 return cs.QueryCityCategory(key).ToList();
             return null;
+        }
+        Dictionary<string, string> dbTypeSwitchCityKey = new Dictionary<string, string>();
+        private void InitCityKey()
+        {
+            // string file = SystemConfig.ExeDir + @"\Service\CategoryGroup\China.txt";
+            dbTypeSwitchCityKey.Add(DBType.IOFile, SystemConfig.ExeDir + @"\Service\CategoryGroup\China.txt");
+            dbTypeSwitchCityKey.Add(DBType.SQLite, "City");
+            dbTypeSwitchCityKey.Add(DBType.SQLServer, "City");
+            dbTypeSwitchCityKey.Add(DBType.Redis, "City");
         }
     }
     public class DBType

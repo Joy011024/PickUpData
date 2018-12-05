@@ -3492,6 +3492,10 @@
       <Project>{ce6b1f9a-1df7-4e35-adcc-b527206f2b98}</Project>
       <Name>ApplicationService.DataService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\ApplicationService.SQLiteService\ApplicationService.SQLiteService.csproj">
+      <Project>{eb218051-a0fe-43ee-b96c-1cb5ca3ce1e2}</Project>
+      <Name>ApplicationService.SQLiteService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\AppService.RedisService\AppService.RedisService.csproj">
       <Project>{4381d531-c89c-486d-bada-b94d022f665e}</Project>
       <Name>AppService.RedisService</Name>

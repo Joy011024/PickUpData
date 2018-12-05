@@ -19,7 +19,6 @@ namespace Infrastructure.EFSQLite
             modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();//去除表名的复数形式
         }
         public System.Data.Entity.IDbSet<T> Entity { get; set; }
-       
     }
 
     /// <summary>

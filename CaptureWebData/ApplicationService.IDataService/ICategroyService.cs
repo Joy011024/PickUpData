@@ -9,6 +9,6 @@ namespace ApplicationService.IDataService
     public interface  ICategroyService
     {
         string ConnString { get; set; }
-        IEnumerable<CategoryData> QueryCityCategory(string rootId);
+        IEnumerable<CategoryData> QueryCityCategory(string key);
     }
 }

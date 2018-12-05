@@ -104,37 +104,10 @@ namespace CaptureWebData
 
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
-            IEnumerable<CategoryData> list = new DataFromManage().QueryCities("City");
-            //开启数据同步
-            //SyncDataHelper.SyncCategory(list.ToList());
-            CategoryData obj = SystemConfig.UsingDBSaveBaseData ?
-                list.Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault() :
-                null;//没有数据时考虑读取文件json串
-            if (obj == null)
-            {
-               obj= ForeachCityInFile();
-            }
-            targetCountry = obj;//目标国家数据
-           
-            if (SystemConfig.OpenRedis) 
-            {
-               
-               // citys = redis.GetRedisCacheItem<CategoryGroup>(defaultCountryNode);
-                //GetRedisCacheItem
-               // CategoryGroup r = redis.GetRedisCacheItem<CategoryGroup>(defaultCountryNode);
-                //数据存储形式：json字符串或者实体对象字节流
-                if (!SystemConfig.RedisValueIsJsonFormat)
-                {
-                   
-                    //string redisItem = redis.GetRedisItemString(defaultCountryNode);//读取出来含有json串格式形式[ \"key\":\"value\" ]
-                    //List<CategoryGroup> objectItems = redisItem.ConvertObject<List<CategoryGroup>>();
-                  
-                }
-                else
-                {
-                  //  CategoryGroup group = rcm.GetCacheItem<CategoryGroup>(defaultCountryNode);
-                }
-            }
+            IEnumerable<CategoryData> list = new DataFromManage().QueryCities();
+
+            targetCountry = list.Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();//目标国家数据
+            
             if (cityList.Count==1)
             {//没有缓存数据，此时将数据库中的城市地址数据进行读取写入到redis
                 NotRedisCacheCase();
@@ -524,7 +497,7 @@ namespace CaptureWebData
                         // typeof(CategoryGroup).Name + ".Objcet=" + parentCode.Id;
                         if (!SystemConfig.RedisValueIsJsonFormat)
                         {//json  or object
-                            List<CategoryData> items =new DataFromManage().QueryCities(itemName);
+                            List<CategoryData> items =new DataFromManage().QueryCities();
                             if (items != null)
                             {
 
@@ -988,13 +961,6 @@ namespace CaptureWebData
         {
             UinDataSyncHelp helper = new UinDataSyncHelp();
             helper.DoIntervalSync(ConfigurationItems.GetWaitSyncDBString);
-        }
-        CategoryData ForeachCityInFile() 
-        {
-            string file = SystemConfig.ExeDir + @"\Service\CategoryGroup\China.txt";
-            string text= FileHelper.ReadFile(file);
-            CategoryData cg = text.ConvertObject<CategoryData>();
-            return cg;
         }
     }
 }
