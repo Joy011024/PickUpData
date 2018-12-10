@@ -5,6 +5,7 @@ using System.Text;
 using ApplicationService.IDataService;
 using Domain.CommonData;
 using Infrastructure.EFSQLite;
+using DataHelp;
 namespace ApplicationService.SQLiteService
 {
     public class CategorySQLiteService : ICategroyService
@@ -34,30 +35,72 @@ namespace ApplicationService.SQLiteService
         {
             ConnString = connString;
         }
-        public void SaveQQ<T>(List<T> data) where T: FindQQDataTable
+        public void SaveQQ (List<FindQQDataTable> data) 
         {
             try
             {
+                //由于sqlite不支持guid数据存储：直接存储会变成乱码
+
                 DBReporistory<TecentQQData> main = new DBReporistory<TecentQQData>(ConnString);
                 DateTime now = DateTime.Now;
+                List<TecentQQData> tcs = new List<TecentQQData>();
                 foreach (FindQQDataTable item in data)
                 {
-                    item.ID = Guid.NewGuid();
-                    item.CreateTime = now;
-                    if (string.IsNullOrEmpty(item.Url))//没有采集到该账户的头像数据
-                        item.ImgType = -1;
-                    item.DayInt = int.Parse(now.ToString("yyyyMMdd"));
+                    NoIDQQData noKey = item.ConvertMapModel<FindQQDataTable, NoIDQQData>();
+                    TecentQQData tc = noKey.ConvertMapModel<NoIDQQData, TecentQQData>();
+                    tc.ID = GenerateId();
+                    tc.CreateTime = now;
+                    if (string.IsNullOrEmpty(tc.Url))//没有采集到该账户的头像数据
+                        tc.ImgType = -1;
+                    tc.DayInt = int.Parse(now.ToString("yyyyMMdd"));
+                    tcs.Add(tc);
                 }
-                main.AddList(data.ToArray());//id在数据库中显示为乱码
+                main.AddList(tcs.ToArray());
             }
             catch (Exception ex)
             {
+                /*  原因：sqlite不支持实体列数据类型为Guid的情形
+                 One or more validation errors were detected during model generation:
 
+Infrastructure.EFSQLite.TecentQQData: : EntityType 'TecentQQData' has no key defined. Define the key for this EntityType.
+Entity: EntityType: EntitySet 'Entity' is based on type 'TecentQQData' that has no keys defined.
+
+                 */
             }
         }
-        public class TecentQQData : FindQQDataTable
+        public string GenerateId()
         {
-
+            return Guid.NewGuid().ToString().ToUpper();
+        }
+        public class NoIDQQData
+        {
+            public DateTime CreateTime { get; set; }
+            public int Age { get; set; }
+            public string City { get; set; }
+            public string Country { get; set; }
+            public int Distance { get; set; }
+            public int Face { get; set; }
+            public int Gender { get; set; }
+            public string Nick { get; set; }
+            public string Province { get; set; }
+            public int Stat { get; set; }
+            public string Uin { get; set; }
+            [System.ComponentModel.DataAnnotations.Schema.Column("HeadImageUrl")]
+            public string Url { get; set; }
+            /// <summary>
+            /// 头像类型【默认0 当没有采集到头像数据时设置该值为-1】
+            /// </summary>
+            public int ImgType { get; set; }
+            #region 增加这字段是为了兼容数据库表创建的形式不符合采集数据
+            public int GatherImageErrorNum { get; set; }
+            public int IsGatherImage { get; set; }
+            [DescriptionSort("数据采集日期数值（精确到天），这个字段在数据量大的时候很有用")]
+            public int DayInt { get; set; }
+            #endregion
+        }
+        public class TecentQQData : NoIDQQData
+        {
+            public string ID { get; set; } //使用guid出现乱码
         }
     }
    

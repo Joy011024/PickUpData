@@ -33,7 +33,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\SQLite\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +51,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\BaseHelper\DataHelp\DataHelp.csproj">
+      <Project>{f2af7a2a-3c36-4979-b10e-997d20a42dbc}</Project>
+      <Name>DataHelp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\CaptureWebData\ApplicationService.IDataService\ApplicationService.IDataService.csproj">
       <Project>{241007bc-d476-42db-ad30-1f76721c81d1}</Project>
       <Name>ApplicationService.IDataService</Name>

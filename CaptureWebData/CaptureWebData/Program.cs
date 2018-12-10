@@ -20,6 +20,7 @@ namespace CaptureWebData
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
             Application.Run(new TecentDataFrm());
         }
         static void Test() 

@@ -15,6 +15,6 @@ namespace ApplicationService.IDataService
     public interface IQQDataService
     {
         string ConnString { get; set; }
-        void SaveQQ<T>(List<T> data) where T : Domain.CommonData.FindQQDataTable;
+        void SaveQQ(List<FindQQDataTable> data);
     }
 }

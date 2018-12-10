@@ -132,6 +132,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationService.IDataSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.RedisRespority", "..\CaptureData\Infrastructure\InfrastructureRepository\Infrastructure.RedisRespority\Infrastructure.RedisRespority.csproj", "{F2A8B68D-AAF5-4DCF-9E73-79F1E8ABFD12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationService.SQLiteService", "..\CaptureData\Infrastructure\Application\ApplicationService.SQLiteService\ApplicationService.SQLiteService.csproj", "{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -682,6 +684,18 @@ Global
 		{F2A8B68D-AAF5-4DCF-9E73-79F1E8ABFD12}.Release|x64.Build.0 = Release|Any CPU
 		{F2A8B68D-AAF5-4DCF-9E73-79F1E8ABFD12}.Release|x86.ActiveCfg = Release|Any CPU
 		{F2A8B68D-AAF5-4DCF-9E73-79F1E8ABFD12}.Release|x86.Build.0 = Release|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Debug|x64.Build.0 = Debug|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Debug|x86.Build.0 = Debug|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Release|x64.ActiveCfg = Release|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Release|x64.Build.0 = Release|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Release|x86.ActiveCfg = Release|Any CPU
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -722,6 +736,7 @@ Global
 		{BC16843A-630B-47E7-B889-97612C8F35DF} = {4CC1115A-0CC8-4BEB-B2CC-0ED8D706E75F}
 		{241007BC-D476-42DB-AD30-1F76721C81D1} = {1A823B42-381B-410D-AF42-DD9A68E1F61E}
 		{F2A8B68D-AAF5-4DCF-9E73-79F1E8ABFD12} = {4CC1115A-0CC8-4BEB-B2CC-0ED8D706E75F}
+		{EB218051-A0FE-43EE-B96C-1CB5CA3CE1E2} = {1A823B42-381B-410D-AF42-DD9A68E1F61E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7AD6CAE8-D2E8-43A6-A958-974421DC2858}

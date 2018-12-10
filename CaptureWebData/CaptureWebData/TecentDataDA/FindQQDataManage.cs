@@ -76,21 +76,21 @@ namespace CaptureWebData
             }
             return cs;
         }
-        public void SaveQQData(List<FindQQ> datas )
+        public void SaveQQData(List<FindQQ> datas)
         {
-            IQQDataService cs = null;
+            IQQDataService cs = SwitchQQDataService();
             //当前数据库
             switch (SystemConfig.MainDBType)
             {
                 case DBType.MySQL:
                     break;
                 case DBType.SQLite:
-                    cs = new SQLiteQQDataService("TecentDASQLite");
-                    List< SQLiteQQDataService.TecentQQData> tables = datas.Select(s => s.ConvertMapModel<FindQQ, SQLiteQQDataService.TecentQQData>(true)).ToList();
+                    //cs = new SQLiteQQDataService("TecentDASQLite");
+                    List<FindQQDataTable> tables = datas.Select(s => s.ConvertMapModel<FindQQ, FindQQDataTable>(true)).ToList();
                     cs.SaveQQ(tables);
                     break;
                 case DBType.SQLServer:
-                    cs = new  QQDataService(new ConfigurationItems().TecentDA);
+                   // cs = new  QQDataService(new ConfigurationItems().TecentDA);
                     List< FindQQDataTable> fins= datas.Select(s => s.ConvertMapModel<FindQQ, FindQQDataTable>(true)).ToList();
                     cs.SaveQQ(fins);
                     break;
@@ -116,6 +116,22 @@ namespace CaptureWebData
             dbTypeSwitchCityKey.Add(DBType.SQLite, "City");
             dbTypeSwitchCityKey.Add(DBType.SQLServer, "City");
             dbTypeSwitchCityKey.Add(DBType.Redis, "City");
+        }
+        public IQQDataService SwitchQQDataService()
+        {
+            IQQDataService cs = null;
+            switch (SystemConfig.MainDBType)
+            {
+                case DBType.MySQL:
+                    break;
+                case DBType.SQLite:
+                    cs = new SQLiteQQDataService("TecentDASQLite");
+                    break;
+                case DBType.SQLServer:
+                     cs = new  QQDataService(new ConfigurationItems().TecentDA);
+                    break;
+            }
+            return cs;
         }
     }
     public class DBType

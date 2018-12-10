@@ -14,7 +14,7 @@ namespace ApplicationService.DataService
         {
             ConnString = connString;
         }
-        public void SaveQQ<T>( List<T> data) where T: FindQQDataTable
+        public void SaveQQ( List<FindQQDataTable> data)
         {
             try 
             {
