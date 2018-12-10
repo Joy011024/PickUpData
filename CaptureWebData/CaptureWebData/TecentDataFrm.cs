@@ -24,7 +24,7 @@ namespace CaptureWebData
             规定： 存储城市数据的json串日志文件或者Redis存储项命名规则 Name= "CategoryGroup.CategoryData."+Id
          
          */
-        string redisItemOrFileNameFormat(bool isJsonString=true) 
+        private string redisItemOrFileNameFormat(bool isJsonString=true) 
         {
             if (isJsonString)
             {
@@ -33,7 +33,6 @@ namespace CaptureWebData
             return typeof(CategoryGroup).Name + ".Objcet=";
         }
         QuartzJob job = new QuartzJob();
-        //RedisCacheManage rcm = new RedisCacheManage(SystemConfig.RedisIp, SystemConfig.RedisPsw, SystemConfig.RedisPort);
         CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
        
         int currentIndex = 1;
@@ -73,7 +72,7 @@ namespace CaptureWebData
         public TecentDataFrm()
         {
             InitializeComponent();
-             // backRun.DoWork += new DoWorkEventHandler(BackGroundDoWork);
+            backRun.DoWork += new DoWorkEventHandler(BackGroundDoWork);
 
         }
         private void TecentDataFrm_Load(object sender, EventArgs e)
@@ -90,12 +89,12 @@ namespace CaptureWebData
                 LogHelperExt.WriteLog(ex.ToString());
             }
         }
-        void ReadCountryCity() 
+        private void ReadCountryCity() 
         {
         
         }
-        
-        void InitBaseConfig()
+
+        private void InitBaseConfig()
         {
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
@@ -103,8 +102,8 @@ namespace CaptureWebData
             targetCountry = list.Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();//目标国家数据
             cityList.AddRange( list.Where(c => c.ParentId == targetCountry.Id).ToArray());
         }
-       
-        void Init()
+
+        private void Init()
         {
             Dictionary<string, object> fields = EGender.Men.GetEnumFieldAttributeDict("DescriptionAttribute", "Description");
             BindComboBoxDict(fields, cmbGender);
@@ -120,7 +119,7 @@ namespace CaptureWebData
             this.FormClosing += new FormClosingEventHandler(Form_FormBeforeClosed);
             QueryTodayPickUp();
         }
-        void InitProvinceData() 
+        private void InitProvinceData() 
         {
             if (cityList.Count > 0)
             {
@@ -132,7 +131,7 @@ namespace CaptureWebData
         /// Redis缓存依赖的文件路径
         /// </summary>
         /// <returns></returns>
-        string GetRedisRelyFileDir()
+        private string GetRedisRelyFileDir()
         {
             AssemblyDataExt ass = new AssemblyDataExt();
             string debugDir = ass.GetAssemblyDir();
@@ -152,7 +151,7 @@ namespace CaptureWebData
         /// <summary>
         /// redis 中没有匹配的数据时基础数据加载形式
         /// </summary>
-        void NotRedisCacheCase() 
+        private void NotRedisCacheCase() 
         {
             string dir = GetRedisRelyFileDir();
             string cityFile = GetCagetoryDataFileNameOrRedisItem(targetCountry, redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat)) + ".txt";
@@ -206,7 +205,7 @@ namespace CaptureWebData
         /// </summary>
         /// <param name="data"></param>
         /// <param name="root"></param>
-        void AnalyCity(List<CategoryData> data, CategoryData root)
+        private void AnalyCity(List<CategoryData> data, CategoryData root)
         {
             AssemblyDataExt ass = new AssemblyDataExt();
             string debugDir = ass.GetAssemblyDir() + "/" + SystemConfig.RedisCacheFromFileReleative;
@@ -285,26 +284,26 @@ namespace CaptureWebData
                 }
             }
         }
-        string GetNodeItemName(CategoryGroup item,string nameFormat) 
+        private string GetNodeItemName(CategoryGroup item,string nameFormat) 
         {
             return "/"+nameFormat + item.Root.Id ;
         }
-        
-        string GetNodeItemFileName(CategoryGroup item, string nameFormat) 
+
+        private string GetNodeItemFileName(CategoryGroup item, string nameFormat) 
         {
             return nameFormat +item.Root.Name.TextConvertChar(true)+ item.Root.Id + ".txt";
         }
-        void GetProcessPath()
+        private void GetProcessPath()
         {
             ConfigurationItems config = new ConfigurationItems();
             rtbTip.Text = config.GetNowAssembly();//config.GetProcessPath();
             this.Text += config.JoinProcessPath();
         }
-        void CallBack(object cookie)
+        private  void CallBack(object cookie)
         {
             Cookie = cookie as string;
         }
-        void BindComboBoxDict(Dictionary<string, object> fields, ComboBox cmb)
+        private void BindComboBoxDict(Dictionary<string, object> fields, ComboBox cmb)
         {
             foreach (KeyValuePair<string, object> item in fields)
             {
@@ -444,7 +443,7 @@ namespace CaptureWebData
         {
 
         }
-        void BindProvince()
+        private void BindProvince()
         {//绑定中国的全部省会，自治区到控件上
             BindComboBox(new CategoryData() { Code="1"}, cmbProvince, 2);
         }
@@ -458,7 +457,7 @@ namespace CaptureWebData
             CategoryData node = (CategoryData)cmb.SelectedItem;
             BindComboBox(node, cmbCity, 3);
         }
-        void BindComboBox(CategoryData parentCode, ComboBox cmb, int level)
+        private void BindComboBox(CategoryData parentCode, ComboBox cmb, int level)
         {
             List<CategoryData> nodes = new List<CategoryData>();
             try
@@ -583,7 +582,7 @@ namespace CaptureWebData
                 LogHelperExt.WriteLog("Query pick up number\r\n"+ex.Message);
             }
         }
-        void QuartzGuidForach(object quartzParam)
+        private void QuartzGuidForach(object quartzParam)
         {
             if (this.InvokeRequired)
             {//是否通过其他形式调用
@@ -611,7 +610,7 @@ namespace CaptureWebData
         /// 提取查询qq数据使用的参数
         /// </summary>
         /// <returns></returns>
-        QueryQQParam GetBaseQueryParam()
+        private QueryQQParam GetBaseQueryParam()
         {
             int interval = 0;
             string inter = txtTimeSpan.Text;
@@ -670,7 +669,7 @@ namespace CaptureWebData
                 gbPollingType.Enabled = false;
             }
         }
-        void QuartzForeachPage(object data)
+        private void QuartzForeachPage(object data)
         {
             if (this.InvokeRequired)
             {//是否通过其他形式调用
@@ -703,7 +702,7 @@ namespace CaptureWebData
             if (!SystemConfig.OpenAutoQuertyDBTotal)
                 QueryTodayPickUp();
         }
-        void GetContainerKeyOfCookie(string  cookie)
+        private void GetContainerKeyOfCookie(string  cookie)
         {
             //此处调用cookie
             QQDataDA common = new QQDataDA();
@@ -729,7 +728,7 @@ namespace CaptureWebData
             };
             common.QQGroupGather(Cookie, puin);
         }
-        void QueryResponseAction(PickUpQQDoResponse res)
+        private void QueryResponseAction(PickUpQQDoResponse res)
         {
             executeNum++;//当前执行次数
           //  GetContainerKeyOfCookie(res.cookie);//查询qq群组数据[qq群数据提取参数待确定]
@@ -816,17 +815,17 @@ namespace CaptureWebData
         {
             StopRunApp();
         }
-        void StopRunApp() 
+        private void StopRunApp() 
         {
             Application.ExitThread();
             Application.Exit();
             Environment.Exit(0);//次步骤会将新启动的进程一起进行关闭【符合关闭程序的要求限定】
         }
-        void GatherErrorSendEmail(string responseJson)
+        private void GatherErrorSendEmail(string responseJson)
         {
 
         }
-        void ProtectJob()
+        private void ProtectJob()
         {
             //更换查询条件 防止被检测为攻击
             Guid gid = Guid.NewGuid();
@@ -843,7 +842,7 @@ namespace CaptureWebData
             }
 
         }
-        void BackGrounForeachCallType(QueryQQParam param)
+        private void BackGrounForeachCallType(QueryQQParam param)
         {//backGroundwork
             string key = ForachCallEvent.PickUpUin.ToString();
             DelegateData delete = new DelegateData() { BaseDelegateParam=param};
@@ -883,7 +882,7 @@ namespace CaptureWebData
             BindComboBox(new CategoryData() { Id = node.Id,Name=node.Name,Code=node.Code }, cmbDistinct, 4);
             return;
         }
-        void GetRedisCacheItem() 
+        private void GetRedisCacheItem() 
         {
             
         }
@@ -920,11 +919,11 @@ namespace CaptureWebData
             //窗体关闭前，关闭异步线程
             StopOtherThread();
         }
-        void StopOtherThread() 
+        private void StopOtherThread() 
         {
             job.DeleteJob<JobDelegate<Common.Data.EISOSex>>();
         }
-        void BackGroundDoWork(object sender,DoWorkEventArgs e) 
+        private void BackGroundDoWork(object sender,DoWorkEventArgs e) 
         {
             BackgroundWorker bg = sender as BackgroundWorker;
             while (true)
@@ -940,7 +939,7 @@ namespace CaptureWebData
                 Thread.Sleep(intervalSec * 1000);//20秒执行一次
             }
         }
-        void BackGrounSyncUinToCoreDB(object param) 
+        private void BackGrounSyncUinToCoreDB(object param) 
         {
             UinDataSyncHelp helper = new UinDataSyncHelp();
             helper.DoIntervalSync(ConfigurationItems.GetWaitSyncDBString);

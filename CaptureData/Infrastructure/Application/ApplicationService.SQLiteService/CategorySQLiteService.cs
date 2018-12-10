@@ -24,7 +24,7 @@ namespace ApplicationService.SQLiteService
         public IEnumerable<CategoryData> QueryCityCategory(string key)
         {
             DBReporistory<CategoryData> main = new DBReporistory<CategoryData>(ConnString);
-            IEnumerable<CategoryData> data = main.DoQuery<CategoryData>().Where(t => !t.IsDelete && t.ItemType == key && !string.IsNullOrEmpty(t.Name));
+            IEnumerable<CategoryData> data = main.DoQuery<CategoryData>().Where(t => !t.IsDelete && (!string.IsNullOrEmpty(key)? t.ItemType == key:true) && !string.IsNullOrEmpty(t.Name));
             return data;
         }
     }

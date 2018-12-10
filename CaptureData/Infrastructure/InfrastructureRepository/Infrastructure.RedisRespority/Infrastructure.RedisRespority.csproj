@@ -35,19 +35,19 @@
       <HintPath>..\..\..\..\Bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Client">
-      <HintPath>..\..\..\..\..\..\PickUpData\Bin\Redis\ServiceStack.Client.dll</HintPath>
+      <HintPath>..\..\..\..\Bin\Redis\ServiceStack.Client.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common">
-      <HintPath>..\..\..\..\..\..\PickUpData\Bin\Redis\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\..\..\..\Bin\Redis\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\..\..\..\..\PickUpData\Bin\Redis\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\..\..\..\Bin\Redis\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Redis">
-      <HintPath>..\..\..\..\..\..\PickUpData\Bin\Redis\ServiceStack.Redis.dll</HintPath>
+      <HintPath>..\..\..\..\Bin\Redis\ServiceStack.Redis.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\..\..\..\..\PickUpData\Bin\Redis\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\..\..\..\Bin\Redis\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

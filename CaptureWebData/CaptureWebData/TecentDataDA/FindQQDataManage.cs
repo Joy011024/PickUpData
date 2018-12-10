@@ -103,7 +103,7 @@ namespace CaptureWebData
         public List<CategoryData> QueryCities()
         {
             ICategroyService cs = SwitchBasicDataSource(SystemConfig.BasicDBType);
-            string key = string.Empty;
+            string key = "City";
             if (cs != null)
                 return cs.QueryCityCategory(key).ToList();
             return null;
