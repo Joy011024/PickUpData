@@ -80,7 +80,7 @@ Entity: EntityType: EntitySet 'Entity' is based on type 'TecentQQData' that has 
             public string Country { get; set; }
             public int Distance { get; set; }
             public int Face { get; set; }
-            public int Gender { get; set; }
+            public string  Gender { get; set; }
             public string Nick { get; set; }
             public string Province { get; set; }
             public int Stat { get; set; }

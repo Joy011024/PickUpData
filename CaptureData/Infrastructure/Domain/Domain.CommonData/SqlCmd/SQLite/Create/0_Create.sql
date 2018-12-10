@@ -19,7 +19,7 @@ CREATE TABLE TecentQQData (
     country              VARCHAR (50),
     distance             INT,
     face                 INT,
-    gender               INT,
+    gender               char(3) not null,
     nick                 VARCHAR (50),
     province             VARCHAR (50),
     stat                 INT,
