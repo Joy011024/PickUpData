@@ -118,5 +118,15 @@ namespace Infrastructure.EFSQLite
             DbSet<R> ds = dbcontext.Set<R>();
             return ds.AsNoTracking().AsEnumerable();
         }
+        /// <summary>
+        /// 执行查询的SQL语句
+        /// </summary>
+        /// <typeparam name="R"></typeparam>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public IEnumerable<R> ExecuteSQL<R>(string sql) where R:class
+        {
+            return dbcontext.Database.SqlQuery<R>(sql);
+        }
     }
 }

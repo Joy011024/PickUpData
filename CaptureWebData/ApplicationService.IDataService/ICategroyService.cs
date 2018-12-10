@@ -16,5 +16,6 @@ namespace ApplicationService.IDataService
     {
         string ConnString { get; set; }
         void SaveQQ(List<FindQQDataTable> data);
+        PickUpStatic TodayStaticData();
     }
 }

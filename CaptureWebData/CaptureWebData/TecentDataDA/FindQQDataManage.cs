@@ -38,6 +38,8 @@ namespace CaptureWebData
         }
         public PickUpStatic TodayStatic() 
         {
+
+
             return new PickUpStatic();// new FindQQDataService(ConnString).TodayStaticData();
         }
         public void GatherHeadImage(string uin,string imgDir) 
@@ -132,6 +134,11 @@ namespace CaptureWebData
                     break;
             }
             return cs;
+        }
+        public PickUpStatic TodayStatic()
+        {
+            IQQDataService ds = SwitchQQDataService();
+            return ds.TodayStaticData();
         }
     }
     public class DBType

@@ -102,6 +102,31 @@ Entity: EntityType: EntitySet 'Entity' is based on type 'TecentQQData' that has 
         {
             public string ID { get; set; } //使用guid出现乱码
         }
+
+        public PickUpStatic TodayStaticData()
+        {
+            string sql = @"select 
+( SELECT  count(Id)   FROM TecentQQData)  as DBTotal,
+(select count( distinct(uin))    FROM TecentQQData) as DBPrimaryTotal,
+(select count(Id)   from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int)) as IdTotal ,
+(select count(distinct(uin)) from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int))  as Total,
+(select cast( strftime('%Y%m%d', 'now')  as int) ) as StaticDay";
+            DBReporistory<PickUpStatic> sync = new DBReporistory<PickUpStatic>(ConnString);
+            PickUpStatic[] data= sync.ExecuteSQL<PickUpStatic>(sql).ToArray();
+            PickUpStatic ps = new PickUpStatic();
+            /*
+             One or more validation errors were detected during model generation:
+
+Infrastructure.EFSQLite.PickUpStatic: : EntityType 'PickUpStatic' has no key defined. Define the key for this EntityType.
+Entity: EntityType: EntitySet 'Entity' is based on type 'PickUpStatic' that has no keys defined.
+
+             */
+            if (data.Length > 0)
+            {
+                ps= data[0];
+            }
+            return ps;
+        }
     }
    
 }

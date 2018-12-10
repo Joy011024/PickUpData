@@ -560,15 +560,7 @@ namespace CaptureWebData
         {
             try
             {
-                PickUpStatic pc;
-                if (SystemConfig.UsingDBSaveBaseData)
-                {
-                    pc = (new QQDataDA()).TodayStatic();
-                }
-                else 
-                {
-                    pc = new PickUpStatic();
-                }
+                PickUpStatic pc= (new QQDataDA()).TodayStatic();
                 lsbStatic.Items.Clear();
                 lsbStatic.Items.Add("时间戳" + DateTime.Now.ToString());
                 lsbStatic.Items.Add("库\t" + pc.DBTotal);

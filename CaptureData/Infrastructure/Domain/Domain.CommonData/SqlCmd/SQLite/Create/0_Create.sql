@@ -79,3 +79,14 @@ CREATE TABLE CategoryData (
     Name       VARCHAR (32)   NOT NULL,
     Code  varchar(32) not null
 );
+
+
+go
+
+select 
+( SELECT  count(Id)   FROM TecentQQData)  as DBTotal,
+(select count( distinct(uin))    FROM TecentQQData) as DBPrimaryTotal,
+(select count(Id)   from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int)) as IdTotal ,
+(select count(distinct(uin)) from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int))  as Total,
+(select cast( strftime('%Y%m%d', 'now')  as int) ) as StaticDay
+ 
