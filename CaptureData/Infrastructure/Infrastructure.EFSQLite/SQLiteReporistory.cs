@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Reflection;
+using System.Linq.Expressions;
 namespace Infrastructure.EFSQLite
 {
     internal class SQLiteDataContext<T> : System.Data.Entity.DbContext where T : class
@@ -124,9 +127,58 @@ namespace Infrastructure.EFSQLite
         /// <typeparam name="R"></typeparam>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public IEnumerable<R> ExecuteSQL<R>(string sql) where R:class
+        public IEnumerable<R> ExecuteSQL<R>(string sql,string keyName) where R : class
         {
-            return dbcontext.Database.SqlQuery<R>(sql);
+            object[] obj = new object[] { };
+            return dbcontext.Database.SqlQuery<R>(sql, obj).Distinct(new FastPropertyComparer<R>(keyName)).ToList();
         }
+    }
+    public class FastPropertyComparer<T> : IEqualityComparer<T>
+    {
+        private Func<T, Object> getPropertyValueFunc = null;
+
+        /// <summary>
+        /// 通过propertyName 获取PropertyInfo对象
+        /// </summary>
+        /// <param name="propertyName"></param>
+        public FastPropertyComparer(string propertyName)
+        {
+            PropertyInfo _PropertyInfo = typeof(T).GetProperty(propertyName,
+            BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.Public);
+            if (_PropertyInfo == null)
+            {
+                throw new ArgumentException(string.Format("{0} is not a property of type {1}.",
+                    propertyName, typeof(T)));
+            }
+
+            ParameterExpression expPara = Expression.Parameter(typeof(T), "obj");
+            MemberExpression me = Expression.Property(expPara, _PropertyInfo);
+            getPropertyValueFunc = Expression.Lambda<Func<T, object>>(me, expPara).Compile();
+        }
+
+        #region IEqualityComparer<T> Members
+
+        public bool Equals(T x, T y)
+        {
+            object xValue = getPropertyValueFunc(x);
+            object yValue = getPropertyValueFunc(y);
+
+            if (xValue == null)
+                return yValue == null;
+
+            return xValue.Equals(yValue);
+        }
+
+        public int GetHashCode(T obj)
+        {
+            object propertyValue = getPropertyValueFunc(obj);
+
+            if (propertyValue == null)
+                return 0;
+            else
+                return propertyValue.GetHashCode();
+        }
+
+        #endregion
     }
 }

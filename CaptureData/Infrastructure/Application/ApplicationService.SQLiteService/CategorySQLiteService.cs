@@ -105,27 +105,68 @@ Entity: EntityType: EntitySet 'Entity' is based on type 'TecentQQData' that has 
 
         public PickUpStatic TodayStaticData()
         {
-            string sql = @"select 
+            PickUpStatic ps = new PickUpStatic();
+            try
+            {
+                string sql = @"select 
 ( SELECT  count(Id)   FROM TecentQQData)  as DBTotal,
 (select count( distinct(uin))    FROM TecentQQData) as DBPrimaryTotal,
 (select count(Id)   from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int)) as IdTotal ,
 (select count(distinct(uin)) from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int))  as Total,
 (select cast( strftime('%Y%m%d', 'now')  as int) ) as StaticDay";
-            DBReporistory<PickUpStatic> sync = new DBReporistory<PickUpStatic>(ConnString);
-            PickUpStatic[] data= sync.ExecuteSQL<PickUpStatic>(sql).ToArray();
-            PickUpStatic ps = new PickUpStatic();
-            /*
-             One or more validation errors were detected during model generation:
+                DBReporistory<PickUpStaticSQLite> sync = new DBReporistory<PickUpStaticSQLite>(ConnString);
+                IEnumerable<PickUpStaticSQLite> arr = sync.ExecuteSQL<PickUpStaticSQLite> (sql, "StaticDay");
+                PickUpStatic[] data = new PickUpStatic[] { };// arr.ToArray();
+               
+                /*
+                 One or more validation errors were detected during model generation:
 
-Infrastructure.EFSQLite.PickUpStatic: : EntityType 'PickUpStatic' has no key defined. Define the key for this EntityType.
-Entity: EntityType: EntitySet 'Entity' is based on type 'PickUpStatic' that has no keys defined.
+    Infrastructure.EFSQLite.PickUpStatic: : EntityType 'PickUpStatic' has no key defined. Define the key for this EntityType.
+    Entity: EntityType: EntitySet 'Entity' is based on type 'PickUpStatic' that has no keys defined.
 
-             */
-            if (data.Length > 0)
+                 */
+                if (data.Length > 0)
+                {
+                    ps = data[0];
+                }
+            }
+            catch (Exception ex)
             {
-                ps= data[0];
+                /*
+                 *1.设置一个属性为 实体主键之后出现错误：
+                 The 'StaticDay' property on 'PickUpStatic' could not be set to a 'System.Int64' value. You must set this property to a non-null value of type 'System.String'. 
+                 2.更改属性数据类型为int 出现新错误：
+                 类型为“System.Int32”的表达式不能用于返回类型“System.Object
+                 */
             }
             return ps;
+        }
+        /// <summary>
+        /// 数据采集统计
+        /// </summary>
+        public class PickUpStaticSQLite
+        {
+            /// <summary>
+            /// 统计日期
+            /// </summary>
+            public int StaticDay { get; set; }
+            [System.ComponentModel.DataAnnotations.KeyAttribute]
+            /// <summary>
+            /// 有效数目
+            /// </summary>
+            public int IdTotal { get; set; }
+            /// <summary>
+            /// 总数目
+            /// </summary>
+            public int Total { get; set; }
+            /// <summary>
+            /// 表中全部数量
+            /// </summary>
+            public int DBTotal { get; set; }
+            /// <summary>
+            /// 表中有效数量
+            /// </summary>
+            public int DBPrimaryTotal { get; set; }
         }
     }
    
