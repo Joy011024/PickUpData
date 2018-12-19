@@ -31,6 +31,10 @@ namespace CaptureWebData
             else
             {
                 ISchedulerFactory schedf = new StdSchedulerFactory();
+                /*
+                 Message	"未能加载文件或程序集“Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e”或它的某一个依赖项。系统找不到指定的文件。"	string
+
+                 */
                 IScheduler sched = schedf.GetScheduler();
                 return sched;
             }
