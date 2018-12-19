@@ -152,8 +152,9 @@ namespace Infrastructure.EFSQLite
             }
 
             ParameterExpression expPara = Expression.Parameter(typeof(T), "obj");
-            MemberExpression me = Expression.Property(expPara, _PropertyInfo);
-            getPropertyValueFunc = Expression.Lambda<Func<T, object>>(me, expPara).Compile();
+            MemberExpression me = Expression.Property(expPara, _PropertyInfo); 
+            //Type pt = _PropertyInfo.GetType();
+            getPropertyValueFunc = Expression.Lambda<Func<T, object>>(Expression.Convert(Expression.Property(expPara, _PropertyInfo), typeof(object)),expPara).Compile();//这里传递的属性会导致异常错误
         }
 
         #region IEqualityComparer<T> Members

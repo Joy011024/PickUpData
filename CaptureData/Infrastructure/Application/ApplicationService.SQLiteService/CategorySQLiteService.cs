@@ -116,19 +116,24 @@ Entity: EntityType: EntitySet 'Entity' is based on type 'TecentQQData' that has 
 (select cast( strftime('%Y%m%d', 'now')  as int) ) as StaticDay";
                 DBReporistory<PickUpStaticSQLite> sync = new DBReporistory<PickUpStaticSQLite>(ConnString);
                 IEnumerable<PickUpStaticSQLite> arr = sync.ExecuteSQL<PickUpStaticSQLite> (sql, "StaticDay");
-                PickUpStatic[] data = new PickUpStatic[] { };// arr.ToArray();
-               
+                PickUpStaticSQLite[] detail = arr.ToArray();
+                PickUpStatic data = new PickUpStatic()
+                {
+                    DBPrimaryTotal = detail[0].DBPrimaryTotal,
+                    DBTotal = detail[0].DBTotal,
+                    IdTotal = detail[0].IdTotal,
+                    StaticDay = detail[0].StaticDay.ToString(),
+                    Total = detail[0].Total
+                };
+
                 /*
                  One or more validation errors were detected during model generation:
 
     Infrastructure.EFSQLite.PickUpStatic: : EntityType 'PickUpStatic' has no key defined. Define the key for this EntityType.
     Entity: EntityType: EntitySet 'Entity' is based on type 'PickUpStatic' that has no keys defined.
-
+      
                  */
-                if (data.Length > 0)
-                {
-                    ps = data[0];
-                }
+                return data;
             }
             catch (Exception ex)
             {
@@ -136,7 +141,8 @@ Entity: EntityType: EntitySet 'Entity' is based on type 'TecentQQData' that has 
                  *1.设置一个属性为 实体主键之后出现错误：
                  The 'StaticDay' property on 'PickUpStatic' could not be set to a 'System.Int64' value. You must set this property to a non-null value of type 'System.String'. 
                  2.更改属性数据类型为int 出现新错误：
-                 类型为“System.Int32”的表达式不能用于返回类型“System.Object
+                 类型为“System.Int32”的表达式不能用于返回类型“System.Object 该问题是由于去重排序表达式导致
+                 3.没有在类型“System.Int32”和“ApplicationService.SQLiteService.SQLiteQQDataService+PickUpStaticSQLite”之间定义强制运算符。
                  */
             }
             return ps;
