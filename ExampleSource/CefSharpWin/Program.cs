@@ -44,7 +44,15 @@ namespace CefSharpWin
             //<tr>(.*?)</tr
             // reg = "table-hover\">(.*?)</table>";
             List<string> ips = RegexHelper.GetMatchValue(file, reg); //找出全部的列表
-
+            if (ips.Count > 0)
+            {
+                string pool = ips[0].Trim();
+                //  <tr>                                    <th>IP</th>                                    <th>端口号</th>                                    <th>匿名度</th>                                    <th>IP类型</th>                                    <th>位置</th>                                    <th>响应速度</th>                                    <th>更新时间</th>                            </tr>  
+                string regexIp = "<tr>(.*?)</tr>";
+                List<string> ipsData= RegexHelper.GetMatchValue(pool, regexIp);
+                // 列名：   <th>IP</th>                                    <th>端口号</th>                                    <th>匿名度</th>                                    <th>IP类型</th>                                    <th>位置</th>                                    <th>响应速度</th>                                    <th>更新时间</th> 
+                //行数据：  <td>                            222.88.149.32                        </td>                                            <td>                            8060                        </td>                                            <td>                            高匿                        </td>                                            <td>                            HTTP                        </td>                                            <td>                            中国河南安阳                        </td>                                            <td>                            0.15s                        </td>                                            <td>                            43分钟前                        </td> 
+            }
         }
         static void InitRegisterForm()
         {
