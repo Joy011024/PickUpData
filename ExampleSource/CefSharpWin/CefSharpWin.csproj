@@ -212,9 +212,9 @@
     <Content Include="Note\readme.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj">
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\ApplicationService.DataService\ApplicationService.DataService.csproj">
       <Project>{ce6b1f9a-1df7-4e35-adcc-b527206f2b98}</Project>
-      <Name>Application.IPDataService</Name>
+      <Name>ApplicationService.DataService</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>

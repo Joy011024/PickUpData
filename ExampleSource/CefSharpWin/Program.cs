@@ -42,7 +42,8 @@ namespace CefSharpWin
             string reg = SystemSetting.SystemSettingDict["IPsProxyRegex"];//xml中对于转义字符\如何声明 
             //  table-hover\">(.*?)</table
             //<tr>(.*?)</tr
-            List<string> ips = RegexHelper.GetMatchValue(file, reg);
+            // reg = "table-hover\">(.*?)</table>";
+            List<string> ips = RegexHelper.GetMatchValue(file, reg); //找出全部的列表
 
         }
         static void InitRegisterForm()

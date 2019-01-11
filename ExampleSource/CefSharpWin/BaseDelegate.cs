@@ -196,8 +196,8 @@ namespace CefSharpWin
                 List<CategoryData> datas = new List<CategoryData>();
                 if (string.IsNullOrEmpty(json))
                 {
-                    ApplicationService.IPDataService.CategoryDataService css = new ApplicationService.IPDataService.CategoryDataService("TecentDA");
-                    List<Domain.CommonData.CategoryData> data = css.QueryCityCategory().ToList();
+                    ApplicationService.DataService.CategoryDataService css = new ApplicationService.DataService.CategoryDataService("TecentDA");
+                    List<Domain.CommonData.CategoryData> data = css.QueryCityCategory("City").ToList();
                     json = JsonConvert.SerializeObject(data);
                 }
                 datas = JsonConvert.DeserializeObject<List<CategoryData>>(json);
