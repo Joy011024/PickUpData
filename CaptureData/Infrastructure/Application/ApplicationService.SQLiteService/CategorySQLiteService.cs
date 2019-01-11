@@ -111,8 +111,8 @@ Entity: EntityType: EntitySet 'Entity' is based on type 'TecentQQData' that has 
                 string sql = @"select 
 ( SELECT  count(Id)   FROM TecentQQData)  as DBTotal,
 (select count( distinct(uin))    FROM TecentQQData) as DBPrimaryTotal,
-(select count(Id)   from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int)) as IdTotal ,
-(select count(distinct(uin)) from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int))  as Total,
+(select count(Id)   from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int)) as  Total  ,
+(select count(distinct(uin)) from TecentQQData where dayint=cast( strftime('%Y%m%d', 'now')  as int))  as IdTotal,
 (select cast( strftime('%Y%m%d', 'now')  as int) ) as StaticDay";
                 DBReporistory<PickUpStaticSQLite> sync = new DBReporistory<PickUpStaticSQLite>(ConnString);
                 IEnumerable<PickUpStaticSQLite> arr = sync.ExecuteSQL<PickUpStaticSQLite> (sql, "StaticDay");
