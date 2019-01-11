@@ -16,6 +16,7 @@ using System.Threading;
 using DataHelpWinform;
 using Infrastructure.ExtService;
 using Infrastructure.EFSQLite;
+using System.Threading;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : Form
@@ -922,13 +923,20 @@ namespace CaptureWebData
             {
                 if (BackGroundCallRunEvent.Count > 0)
                 {
-                    foreach (KeyValuePair<string,DelegateData> item in BackGroundCallRunEvent)
+                    foreach (KeyValuePair<string, DelegateData> item in BackGroundCallRunEvent)
                     {
-                        DelegateData delete = item.Value;
-                        delete.BaseDel(delete.BaseDelegateParam);
+                        System.Threading.Tasks.Task.Factory.StartNew(() =>
+                        {
+                            DelegateData delete = item.Value;
+                            delete.BaseDel(delete.BaseDelegateParam);
+                        });
                     }
+                    Thread.Sleep(intervalSec * 1000);//20秒执行一次
                 }
-                Thread.Sleep(intervalSec * 1000);//20秒执行一次
+                else {
+                    return;
+                }
+                
             }
         }
         private void BackGrounSyncUinToCoreDB(object param) 
