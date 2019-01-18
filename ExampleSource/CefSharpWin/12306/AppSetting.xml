@@ -35,4 +35,5 @@
   <!--IP代理详细信息分类-->
   <IPDataRegex></IPDataRegex>
   <IPEntityRegex></IPEntityRegex>
+  <IPPoolMapData>IP=IP|端口号=Port|匿名度=Cryptonym|IP类型=IPHttpType|位置=IPAddress|响应速度=IPResponseSpleed|更新时间=IPPoolUpdateTimeDesc</IPPoolMapData>
 </SystemSetting>

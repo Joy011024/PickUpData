@@ -52,7 +52,15 @@ namespace CefSharpWin
                 List<string> ipsData= RegexHelper.GetMatchValue(pool, regexIp);
                 // 列名：   <th>IP</th>                                    <th>端口号</th>                                    <th>匿名度</th>                                    <th>IP类型</th>                                    <th>位置</th>                                    <th>响应速度</th>                                    <th>更新时间</th> 
                 //行数据：  <td>                            222.88.149.32                        </td>                                            <td>                            8060                        </td>                                            <td>                            高匿                        </td>                                            <td>                            HTTP                        </td>                                            <td>                            中国河南安阳                        </td>                                            <td>                            0.15s                        </td>                                            <td>                            43分钟前                        </td> 
+                string rowOrder= SystemSetting.SystemSettingDict["IPPoolMapData"];
+                //此处进行正则匹配，然后将数据串安装排序的规则填充到实体中
+                RowFillData(rowOrder, ipsData.ToArray());
             }
+        }
+        static ProxyIP RowFillData(string rowOrderFormat,string[] rows)
+        {
+            ProxyIP ip = new ProxyIP();
+            return ip;
         }
         static void InitRegisterForm()
         {
