@@ -41,10 +41,10 @@
       <HintPath>..\..\..\..\Bin\Redis\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\..\..\Bin\Redis\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\..\..\..\CaptureWebData\bin\Redis\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Redis">
-      <HintPath>..\..\..\..\Bin\Redis\ServiceStack.Redis.dll</HintPath>
+      <HintPath>..\..\..\..\CaptureWebData\bin\Redis\ServiceStack.Redis.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\..\..\..\Bin\Redis\ServiceStack.Text.dll</HintPath>

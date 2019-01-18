@@ -60,6 +60,22 @@ namespace CefSharpWin
         static ProxyIP RowFillData(string rowOrderFormat,string[] rows)
         {
             ProxyIP ip = new ProxyIP();
+            string[] columnsMap = rowOrderFormat.Split('|');//这是每一行匹配的列【当列不需要处理是则设置=后面的值为空即可】
+            Dictionary<int, string> valueOrderInRow = new Dictionary<int, string>();//字符串中各个列的序号
+            Dictionary<int, string> columnOrderInRow = new Dictionary<int, string>();//字符串中行的排序
+            foreach (string head in columnsMap)
+            {
+                string[] property = head.Split('=');
+                int index = valueOrderInRow.Count;
+                valueOrderInRow.Add( index, property[0]);
+                if (property.Length < 2 || string.IsNullOrEmpty(property[1]))
+                {
+                    columnOrderInRow.Add(index, property[1]);
+                }
+            }
+            //进行正则提取
+            string headRex = SystemSetting.SystemSettingDict["ColumnMapInHead"];
+
             return ip;
         }
         static void InitRegisterForm()

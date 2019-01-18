@@ -36,4 +36,7 @@
   <IPDataRegex></IPDataRegex>
   <IPEntityRegex></IPEntityRegex>
   <IPPoolMapData>IP=IP|端口号=Port|匿名度=Cryptonym|IP类型=IPHttpType|位置=IPAddress|响应速度=IPResponseSpleed|更新时间=IPPoolUpdateTimeDesc</IPPoolMapData>
+<!--解析  <th>(.*?)</th>-->  
+  <ColumnMapInHead desc="表格列解析">&lt;th>&gt;(.*?)&lt;/th>&gt;</ColumnMapInHead>
+  <ValueMapInHead desc="数据解析">&lt;th>&gt;(.*?)&lt;/th>&gt;</ValueMapInHead>
 </SystemSetting>
