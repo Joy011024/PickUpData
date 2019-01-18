@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientHelper", "..\Base
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceSmallTool", "..\CaptureWebData\ServiceSmallTool\ServiceSmallTool.csproj", "{C1636431-277A-47AF-965D-1DE68AE0361C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.IPDataService", "..\CaptureData\Infrastructure\Application\Application.IPDataService\Application.IPDataService.csproj", "{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationService.DataService", "..\CaptureData\Infrastructure\Application\ApplicationService.DataService\ApplicationService.DataService.csproj", "{CE6B1F9A-1DF7-4E35-ADCC-B527206F2B98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
