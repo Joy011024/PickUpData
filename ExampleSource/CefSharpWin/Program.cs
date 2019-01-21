@@ -63,6 +63,9 @@ namespace CefSharpWin
             string[] columnsMap = rowOrderFormat.Split('|');//这是每一行匹配的列【当列不需要处理是则设置=后面的值为空即可】
             Dictionary<int, string> valueOrderInRow = new Dictionary<int, string>();//字符串中各个列的序号
             Dictionary<int, string> columnOrderInRow = new Dictionary<int, string>();//字符串中行的排序
+           
+            string headRex = SystemSetting.SystemSettingDict["ColumnMapInHead"]; //进行正则提取
+            string csFormat = SystemSetting.SystemSettingDict["ValueMapInHead"];///数据正则提取
             foreach (string head in columnsMap)
             {
                 string[] property = head.Split('=');
@@ -72,10 +75,16 @@ namespace CefSharpWin
                 {
                     columnOrderInRow.Add(index, property[1]);
                 }
+               
             }
-            //进行正则提取
-            string headRex = SystemSetting.SystemSettingDict["ColumnMapInHead"];
-
+            if (rows.Length > 0)
+            {
+                List<string> heads = RegexHelper.GetMatchValue(rows[0].Trim(), headRex);
+            }
+            for (int i = 1; i < rows.Length; i++)
+            {
+                List<string> cols = RegexHelper.GetMatchValue(rows[i].Trim(), csFormat);
+            }
             return ip;
         }
         static void InitRegisterForm()
