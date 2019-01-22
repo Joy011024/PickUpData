@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Reflection;
 namespace CefSharpWin
 {
     static class Program
@@ -23,7 +23,7 @@ namespace CefSharpWin
             InitFakeServices();
             InitRegisterForm();
             Form acc = FacadeFactory.Instance.RetrieveMediator(typeof(WebFrm).Name) as Form;
-           
+
             Application.Run(acc);//cef 只能单进程
 
             /*
@@ -49,43 +49,61 @@ namespace CefSharpWin
                 string pool = ips[0].Trim();
                 //  <tr>                                    <th>IP</th>                                    <th>端口号</th>                                    <th>匿名度</th>                                    <th>IP类型</th>                                    <th>位置</th>                                    <th>响应速度</th>                                    <th>更新时间</th>                            </tr>  
                 string regexIp = "<tr>(.*?)</tr>";
-                List<string> ipsData= RegexHelper.GetMatchValue(pool, regexIp);
+                List<string> ipsData = RegexHelper.GetMatchValue(pool, regexIp);
                 // 列名：   <th>IP</th>                                    <th>端口号</th>                                    <th>匿名度</th>                                    <th>IP类型</th>                                    <th>位置</th>                                    <th>响应速度</th>                                    <th>更新时间</th> 
                 //行数据：  <td>                            222.88.149.32                        </td>                                            <td>                            8060                        </td>                                            <td>                            高匿                        </td>                                            <td>                            HTTP                        </td>                                            <td>                            中国河南安阳                        </td>                                            <td>                            0.15s                        </td>                                            <td>                            43分钟前                        </td> 
-                string rowOrder= SystemSetting.SystemSettingDict["IPPoolMapData"];
+                string rowOrder = SystemSetting.SystemSettingDict["IPPoolMapData"];
                 //此处进行正则匹配，然后将数据串安装排序的规则填充到实体中
-                RowFillData(rowOrder, ipsData.ToArray());
+                List<ProxyIP> result = RowFillData(rowOrder, ipsData.ToArray());//提取到的IP集合
+                InitSQLiteManage db = new InitSQLiteManage();
+                db.Inserts(result);
             }
         }
-        static ProxyIP RowFillData(string rowOrderFormat,string[] rows)
+        static List<ProxyIP> RowFillData(string rowOrderFormat, string[] rows)
         {
             ProxyIP ip = new ProxyIP();
             string[] columnsMap = rowOrderFormat.Split('|');//这是每一行匹配的列【当列不需要处理是则设置=后面的值为空即可】
-            Dictionary<int, string> valueOrderInRow = new Dictionary<int, string>();//字符串中各个列的序号
-            Dictionary<int, string> columnOrderInRow = new Dictionary<int, string>();//字符串中行的排序
-           
-            string headRex = SystemSetting.SystemSettingDict["ColumnMapInHead"]; //进行正则提取
-            string csFormat = SystemSetting.SystemSettingDict["ValueMapInHead"];///数据正则提取
+            Dictionary<string, string> headMapProperty = new Dictionary<string, string>();//字符串中行的排序
             foreach (string head in columnsMap)
             {
                 string[] property = head.Split('=');
-                int index = valueOrderInRow.Count;
-                valueOrderInRow.Add( index, property[0]);
-                if (property.Length < 2 || string.IsNullOrEmpty(property[1]))
+                if (property.Length >= 2 && !string.IsNullOrEmpty(property[1]))
                 {
-                    columnOrderInRow.Add(index, property[1]);
+                    headMapProperty.Add(property[0], property[1]);
                 }
-               
+
             }
+            string headRex = SystemSetting.SystemSettingDict["ColumnMapInHead"]; //进行正则提取
+            List<string> heads = new List<string>();
             if (rows.Length > 0)
             {
-                List<string> heads = RegexHelper.GetMatchValue(rows[0].Trim(), headRex);
+                heads = RegexHelper.GetMatchValue(rows[0].Trim(), headRex);
             }
+            List<string> datas = new List<string>();
+            DateTime now = DateTime.Now;
+            string csFormat = SystemSetting.SystemSettingDict["ValueMapInHead"];///数据正则提取
+            List<ProxyIP> ips = new List<ProxyIP>();
             for (int i = 1; i < rows.Length; i++)
             {
-                List<string> cols = RegexHelper.GetMatchValue(rows[i].Trim(), csFormat);
+                datas = RegexHelper.GetMatchValue(rows[i].Trim(), csFormat);
+                //转换为实体
+                ProxyIP pi = new ProxyIP()
+                {
+                    DownloadTime = now,
+                    CreateTime = now
+                };
+                for (int c = 0; c < datas.Count; c++)
+                {
+                    string name = heads[c];//这是那一列=>转换到属性
+                    if (headMapProperty.ContainsKey(name))
+                    {
+                        string property = headMapProperty[name];
+                        SetEntityValue(pi, property, datas[c]); //填充属性
+                    }
+                }
+                ips.Add(pi);
             }
-            return ip;
+            return ips;
         }
         static void InitRegisterForm()
         {
@@ -108,7 +126,18 @@ namespace CefSharpWin
                 }
             }).Start();
 
-            
+
+        }
+        static void SetEntityValue<T>(T data, string property, object value) where T : class
+        {
+            Type t = data.GetType();
+            PropertyInfo pi = t.GetProperty(property);
+            if (pi == null)
+            {
+                return;
+            }
+            pi.SetValue(data, value);
+
         }
     }
 }

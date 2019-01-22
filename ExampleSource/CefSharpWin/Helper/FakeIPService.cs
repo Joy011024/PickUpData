@@ -53,6 +53,7 @@ namespace CefSharpWin
     }
     public class ProxyIP
     {
+        public string Id { get; set; }
         public string IP { get; set; }
         public string Port { get; set; }
         public string Cryptonym { get; set; }
@@ -60,6 +61,8 @@ namespace CefSharpWin
         public string IPAddress { get; set; }
         public string IPResponseSpleed { get; set; }
         public string IPPoolUpdateTimeDesc { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime DownloadTime { get; set; }
     }
       
 }
