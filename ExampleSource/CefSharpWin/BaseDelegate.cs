@@ -223,6 +223,10 @@ namespace CefSharpWin
                 */
             }
         }
-        
+        public void Inserts<T>(List<T> datas) where T:class
+        {
+            DBReporistory<T> qt = new DBReporistory<T>("TecentDASQLite");
+            qt.AddList(datas.ToArray());
+        }
     }
 }

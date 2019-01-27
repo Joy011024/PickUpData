@@ -19,7 +19,7 @@ namespace CefSharpWin
                 {
                     continue;
                 }
-                stas.Add(item.Groups[1].Value);
+                stas.Add(item.Groups[1].Value.Trim());
             }
             return stas;
         }
