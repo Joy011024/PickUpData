@@ -53,7 +53,7 @@ namespace CefSharpWin
     }
     public class ProxyIP
     {
-        public string IP { get; set; }
+        public long IP { get; set; }
         public string Port { get; set; }
         public string Cryptonym { get; set; }
         public string IPHttpType { get; set; }//http https

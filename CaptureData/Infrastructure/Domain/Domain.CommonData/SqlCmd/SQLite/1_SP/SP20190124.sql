@@ -1,7 +1,6 @@
 Drop table ProxyIP;
-
 CREATE TABLE ProxyIP (
-    Id         VARCHAR (32)   PRIMARY KEY,
+    Id         bigint   PRIMARY KEY,
     IP         VARCHAR (15)   NOT NULL,
     Port       INT            NOT NULL,
     CreateTime DATE,
