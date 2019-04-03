@@ -35,6 +35,8 @@ namespace SelfControlForm
             btnClearCookie.Click += btnClick;
             btnPickUp.Click += btnClick;
             btnRemoveCookie.Click += btnClick;
+            mLayoutTable.Dock = DockStyle.Fill;
+            web.Dock = DockStyle.Fill;
         }
         public void SetGoWeb(string url) 
         {
@@ -100,6 +102,11 @@ namespace SelfControlForm
             {
                 CallBack(Cookie);
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

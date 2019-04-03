@@ -16,7 +16,6 @@ using System.Threading;
 using DataHelpWinform;
 using Infrastructure.ExtService;
 using Infrastructure.EFSQLite;
-using System.Threading;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : Form
@@ -74,7 +73,7 @@ namespace CaptureWebData
         {
             InitializeComponent();
             backRun.DoWork += new DoWorkEventHandler(BackGroundDoWork);
-
+            InitUI();
         }
         private void TecentDataFrm_Load(object sender, EventArgs e)
         {
@@ -943,6 +942,14 @@ namespace CaptureWebData
         {
             UinDataSyncHelp helper = new UinDataSyncHelp();
             helper.DoIntervalSync(ConfigurationItems.GetWaitSyncDBString);
+        }
+        private void InitUI()
+        {
+            mLayoutTable.Dock = DockStyle.Fill;
+            workPanel.Dock = DockStyle.Fill;
+            mBodyPanel.Dock = DockStyle.Fill;
+            pickUpIEWebCookie.Dock = DockStyle.Fill;
+
         }
     }
 }
