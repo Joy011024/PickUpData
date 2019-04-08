@@ -18,12 +18,13 @@ using Infrastructure.ExtService;
 using Infrastructure.EFSQLite;
 namespace CaptureWebData
 {
-    public partial class TecentDataFrm : Form
+    public partial class TecentDataFrm : FormMediatorHelper
     {
         /*
             规定： 存储城市数据的json串日志文件或者Redis存储项命名规则 Name= "CategoryGroup.CategoryData."+Id
          
          */
+        #region private 
         private string redisItemOrFileNameFormat(bool isJsonString=true) 
         {
             if (isJsonString)
@@ -68,13 +69,15 @@ namespace CaptureWebData
         bool GatherFirstUin = true;
         BackgroundWorker backRun = new BackgroundWorker();//开启的后台进程
         Dictionary<string, DelegateData> BackGroundCallRunEvent = new Dictionary<string, DelegateData>();//后台进程触发事件
-
-        public TecentDataFrm()
+        #endregion
+        #region construct
+        public TecentDataFrm()//:base("TecentDataFrm")
         {
             InitializeComponent();
             backRun.DoWork += new DoWorkEventHandler(BackGroundDoWork);
             InitUI();
         }
+        #endregion
         private void TecentDataFrm_Load(object sender, EventArgs e)
         {
             try

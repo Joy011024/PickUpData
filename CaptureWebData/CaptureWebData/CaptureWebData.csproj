@@ -118,6 +118,11 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Manage\FacadeFactory.cs" />
+    <Compile Include="Manage\FormMediatorHelper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manage\ProxyFactory.cs" />
     <Compile Include="NetWorkData\Toutiao.cs" />
     <Compile Include="NoParamHttpGetFrm.cs">
       <SubType>Form</SubType>
@@ -3427,6 +3432,9 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Manage\FormMediatorHelper.resx">
+      <DependentUpon>FormMediatorHelper.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NoParamHttpGetFrm.resx">
       <DependentUpon>NoParamHttpGetFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -3468,9 +3476,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Manage\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\BaseHelper\Common.Data\Common.Data.csproj">
       <Project>{22b5a7b7-9809-4927-8538-6f7680701c5b}</Project>
