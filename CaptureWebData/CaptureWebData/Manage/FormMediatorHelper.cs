@@ -10,8 +10,8 @@ namespace CaptureWebData
     public class FormMediatorHelper : Form, IMediator, INotifier
     {
         #region private member
-        private object compontent;
-        private string mediatorName;
+        protected object compontent;
+        protected string mediatorName;
         #endregion
         public FormMediatorHelper() : this("mediator")
         {
@@ -24,8 +24,9 @@ namespace CaptureWebData
             FormBorderStyle = FormBorderStyle.None;
         }
         #region override
+        private IFacade facade = CommonFacade.FacadeInstance;
         public virtual string MediatorName => this.mediatorName;
-        protected IFacade Facade { get => CommonFacade.FacadeInstance; }
+        protected IFacade Facade { get => facade; }
 
         public virtual object ViewComponent { get => compontent; set => compontent=value; }
 
@@ -33,10 +34,9 @@ namespace CaptureWebData
         {
             
         }
-
         public virtual void InitializeNotifier(string key)
         {
-           
+
         }
 
         public virtual string[] ListNotificationInterests()
@@ -56,10 +56,53 @@ namespace CaptureWebData
 
         public virtual void SendNotification(string notificationName, object body = null, string type = null)
         {
-           
+            facade.SendNotification(notificationName, body, type);
         }
         #endregion
 
+
+
+        #region Constants
+        #endregion
+ 
+
+        #region Constructors
        
+
+       
+        #endregion
+
+        #region Accessors
+       
+
+        
+
+        
+        #endregion
+
+        
+
+        #region Public Methods
+        #region IMediator Members
+         
+
+        
+
+       
+
+        
+        #endregion
+
+        #region INotifier Members
+
+       
+
+       
+
+       
+       
+        #endregion
+        #endregion
+
     }
 }
