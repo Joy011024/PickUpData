@@ -16,9 +16,10 @@ using System.Threading;
 using DataHelpWinform;
 using Infrastructure.ExtService;
 using Infrastructure.EFSQLite;
+using PureMvcExt.AppFactory;
 namespace CaptureWebData
 {
-    public partial class TecentDataFrm : Form
+    public partial class TecentDataFrm : FrmBase
     {
         /*
             规定： 存储城市数据的json串日志文件或者Redis存储项命名规则 Name= "CategoryGroup.CategoryData."+Id
