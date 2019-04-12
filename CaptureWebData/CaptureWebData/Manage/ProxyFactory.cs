@@ -40,36 +40,5 @@ namespace CaptureWebData
         }
     }
 
-    public class CommonFacade : PureMVC.Patterns.Facade.Facade
-    {
-        private static CommonFacade mInstacne = null;
-        public static CommonFacade FacadeInstance
-        {
-            get
-            {
-                if (mInstacne == null)
-                {
-                    mInstacne = new CommonFacade("Facade");
-                }
-                return mInstacne;
-            }
-        }
-        public CommonFacade(string key) : base(key)
-        { }
-        protected override void InitializeController()
-        {
-            base.InitializeController();
-        }
-        protected override void InitializeModel()
-        {
-            base.InitializeModel();
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-    }
+    
 }

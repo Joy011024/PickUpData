@@ -1,1 +1,3 @@
+===2019-04-03 database read ,write operate split
+ConnString: TecentDA_Write,TecentDA_Read
 代码作用：本代码使用Quartz.net ，EF，进进行Tecent数据爬取

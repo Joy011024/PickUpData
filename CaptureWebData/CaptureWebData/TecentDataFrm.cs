@@ -18,7 +18,7 @@ using Infrastructure.ExtService;
 using Infrastructure.EFSQLite;
 namespace CaptureWebData
 {
-    public partial class TecentDataFrm : FormMediatorHelper
+    public partial class TecentDataFrm : Form
     {
         /*
             规定： 存储城市数据的json串日志文件或者Redis存储项命名规则 Name= "CategoryGroup.CategoryData."+Id
