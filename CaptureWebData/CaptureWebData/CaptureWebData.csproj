@@ -55,12 +55,33 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Data">
+      <HintPath>..\..\Bin\AppExtend\Common.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonHelperEntity">
+      <HintPath>..\..\Bin\AppExtend\CommonHelperEntity.dll</HintPath>
+    </Reference>
+    <Reference Include="DataHelp">
+      <HintPath>..\..\Bin\AppExtend\DataHelp.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Bin\SQLite\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\Bin\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HttpClientHelper">
+      <HintPath>..\..\Bin\AppExtend\HttpClientHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Infrastructure.EFMsSQL">
+      <HintPath>..\..\Bin\AppExtend\Infrastructure.EFMsSQL.dll</HintPath>
+    </Reference>
+    <Reference Include="Infrastructure.EFSQLite">
+      <HintPath>..\..\Bin\AppExtend\Infrastructure.EFSQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="Infrastructure.ExtService">
+      <HintPath>..\..\Bin\AppExtend\Infrastructure.ExtService.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -95,6 +116,9 @@
     <Compile Include="ActionTimeOut.cs" />
     <Compile Include="BaseData\ConfigurationItems.cs" />
     <Compile Include="BaseData\CityData.cs" />
+    <Compile Include="DockContextMediator.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LanguageItem.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,25 +197,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\BaseHelper\Common.Data\Common.Data.csproj">
-      <Project>{22b5a7b7-9809-4927-8538-6f7680701c5b}</Project>
-      <Name>Common.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BaseHelper\CommonHelperEntity\CommonHelperEntity.csproj">
-      <Project>{32c60c3a-c56e-457d-b553-be076218fd5a}</Project>
-      <Name>CommonHelperEntity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\BaseHelper\DataHelpWinform\DataHelpWinform.csproj">
       <Project>{421359ca-db48-4a13-bb59-d29965258ee5}</Project>
       <Name>DataHelpWinform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BaseHelper\DataHelp\DataHelp.csproj">
-      <Project>{f2af7a2a-3c36-4979-b10e-997d20a42dbc}</Project>
-      <Name>DataHelp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BaseHelper\ExtHelper\HttpClientHelper\HttpClientHelper.csproj">
-      <Project>{d182918a-32dc-4b35-a998-dac7cadc2369}</Project>
-      <Name>HttpClientHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\BaseHelper\PureMvcExt.AppFactory\PureMvcExt.AppFactory.csproj">
       <Project>{a2ca1b25-7dee-42de-888c-6046ea57be7b}</Project>
@@ -216,14 +224,6 @@
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.GlobalModel\Domain.GlobalModel.csproj">
       <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
       <Name>Domain.GlobalModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
-      <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
-      <Name>Infrastructure.ExtService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.EFSQLite\Infrastructure.EFSQLite.csproj">
-      <Project>{bc16843a-630b-47e7-b889-97612c8f35df}</Project>
-      <Name>Infrastructure.EFSQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\ApplicationService.IDataService\ApplicationService.IDataService.csproj">
       <Project>{241007bc-d476-42db-ad30-1f76721c81d1}</Project>

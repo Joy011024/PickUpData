@@ -61,6 +61,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\Bin\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Infrastructure.EFSQLite">
+      <HintPath>..\..\Bin\AppExtend\Infrastructure.EFSQLite.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Bin\Newtonsoft.Json.dll</HintPath>
@@ -133,10 +136,6 @@
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.EFSQLite\Infrastructure.EFSQLite.csproj">
-      <Project>{bc16843a-630b-47e7-b889-97612c8f35df}</Project>
-      <Name>Infrastructure.EFSQLite</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -34,6 +34,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\CaptureWebData\bin\EF\net40\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Infrastructure.EFMsSQL">
+      <HintPath>..\..\..\..\Bin\AppExtend\Infrastructure.EFMsSQL.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Bin\Newtonsoft.Json.dll</HintPath>
@@ -61,14 +64,6 @@
     <ProjectReference Include="..\..\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure.EFMsSQL\Infrastructure.EFMsSQL.csproj">
-      <Project>{20f7ef8c-d882-498a-9d4e-2e1f1a6ec2f2}</Project>
-      <Name>Infrastructure.EFMsSQL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\InfrastructureRepository\InfrastructureRepository.IMainContext\InfrastructureRepository.IMainContext.csproj">
-      <Project>{a790a117-b949-47f8-8a62-9a22e996fcc8}</Project>
-      <Name>InfrastructureRepository.IMainContext</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

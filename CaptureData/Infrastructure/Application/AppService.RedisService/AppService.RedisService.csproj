@@ -38,6 +38,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Infrastructure.ExtService">
+      <HintPath>..\..\..\..\Bin\AppExtend\Infrastructure.ExtService.dll</HintPath>
+    </Reference>
+    <Reference Include="Infrastructure.RedisRespority">
+      <HintPath>..\..\..\..\Bin\AppExtend\Infrastructure.RedisRespority.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Client">
       <HintPath>..\..\..\..\CaptureWebData\bin\Redis\ServiceStack.Client.dll</HintPath>
     </Reference>
@@ -75,14 +81,6 @@
     <ProjectReference Include="..\..\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
-      <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
-      <Name>Infrastructure.ExtService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\InfrastructureRepository\Infrastructure.RedisRespority\Infrastructure.RedisRespority.csproj">
-      <Project>{f2a8b68d-aaf5-4dcf-9e73-79f1e8abfd12}</Project>
-      <Name>Infrastructure.RedisRespority</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,4 @@
-﻿using HttpClientHelper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +23,7 @@ using System.Net;
 using QuartzJobService;
 using CaptureManage.AppWin.TicketData.Model.Request;
 using FeatureFrmList;
+using HttpClientHelper;
 namespace CaptureManage.AppWin
 {
     public partial class WebDataCaptureForm : Form

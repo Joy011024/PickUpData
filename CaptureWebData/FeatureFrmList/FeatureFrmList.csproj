@@ -36,6 +36,9 @@
     <Reference Include="DataHelp">
       <HintPath>..\bin\SelfDefine\DataHelp.dll</HintPath>
     </Reference>
+    <Reference Include="Infrastructure.ExtService">
+      <HintPath>..\..\Bin\AppExtend\Infrastructure.ExtService.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -99,12 +102,6 @@
     <EmbeddedResource Include="UserContact.resx">
       <DependentUpon>UserContact.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
-      <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
-      <Name>Infrastructure.ExtService</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

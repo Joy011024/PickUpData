@@ -31,13 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Data">
-      <HintPath>..\bin\SelfDefine\Common.Data.dll</HintPath>
+      <HintPath>..\..\..\Bin\AppExtend\Common.Data.dll</HintPath>
     </Reference>
     <Reference Include="DataHelp">
-      <HintPath>..\bin\SelfDefine\DataHelp.dll</HintPath>
+      <HintPath>..\..\..\Bin\AppExtend\DataHelp.dll</HintPath>
     </Reference>
     <Reference Include="Infrastructure.ExtService">
-      <HintPath>..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\bin\Debug\Infrastructure.ExtService.dll</HintPath>
+      <HintPath>..\..\..\Bin\AppExtend\Infrastructure.ExtService.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

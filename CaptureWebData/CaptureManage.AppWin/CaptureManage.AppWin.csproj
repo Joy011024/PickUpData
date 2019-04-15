@@ -42,6 +42,12 @@
     <Reference Include="DataHelp">
       <HintPath>..\bin\SelfDefine\DataHelp.dll</HintPath>
     </Reference>
+    <Reference Include="HttpClientHelper">
+      <HintPath>..\..\Bin\AppExtend\HttpClientHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Infrastructure.ExtService">
+      <HintPath>..\..\Bin\AppExtend\Infrastructure.ExtService.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Newtonsoft.Json.dll</HintPath>
@@ -54,6 +60,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\Bin\System.Net.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -117,10 +126,6 @@
       <Project>{3da2bb21-14a7-49ca-9bb4-7eb8f26c415a}</Project>
       <Name>AppLanguage</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\BaseHelper\ExtHelper\HttpClientHelper\HttpClientHelper.csproj">
-      <Project>{d182918a-32dc-4b35-a998-dac7cadc2369}</Project>
-      <Name>HttpClientHelper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
@@ -128,10 +133,6 @@
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.GlobalModel\Domain.GlobalModel.csproj">
       <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
       <Name>Domain.GlobalModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
-      <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
-      <Name>Infrastructure.ExtService</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\QuartzJobService\QuartzJobService.csproj">
       <Project>{32dbc3b8-3b1a-4450-8293-a43f643db83c}</Project>

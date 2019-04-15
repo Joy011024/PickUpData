@@ -33,6 +33,9 @@
     <Reference Include="Common.Data">
       <HintPath>..\..\..\..\CaptureWebData\bin\SelfDefine\Common.Data.dll</HintPath>
     </Reference>
+    <Reference Include="InfrastructureRepository.IMainContext">
+      <HintPath>..\..\..\..\Bin\AppExtend\InfrastructureRepository.IMainContext.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,10 +53,6 @@
     <ProjectReference Include="..\..\Domain\Domain.MainContextData\Domain.MainContextData.csproj">
       <Project>{b8760609-17d0-4f0a-913f-dba3092d212d}</Project>
       <Name>Domain.MainContextData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\InfrastructureRepository\InfrastructureRepository.IMainContext\InfrastructureRepository.IMainContext.csproj">
-      <Project>{a790a117-b949-47f8-8a62-9a22e996fcc8}</Project>
-      <Name>InfrastructureRepository.IMainContext</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
