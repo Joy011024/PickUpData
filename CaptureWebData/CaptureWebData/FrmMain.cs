@@ -13,11 +13,11 @@ using Infrastructure.ExtService;
 using System.IO;
 namespace CaptureWebData
 {
-    public partial class Main : Form
+    public partial class FrmMain : Form
     {
         Assembly appAssembly;//当前程序运行的程序集
         string asseblyDir;
-        public Main()
+        public FrmMain()
         {
             InitializeComponent();
             LoadOtherAssemblyWin();

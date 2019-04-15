@@ -1,6 +1,6 @@
 ﻿namespace CaptureWebData
 {
-    partial class Main
+    partial class FrmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.tspHeadTool = new System.Windows.Forms.ToolStrip();
             this.tspHeadBtnSplider = new System.Windows.Forms.ToolStripSplitButton();
             this.tspMiUin = new System.Windows.Forms.ToolStripMenuItem();

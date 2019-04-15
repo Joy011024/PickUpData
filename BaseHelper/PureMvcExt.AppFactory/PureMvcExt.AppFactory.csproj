@@ -57,5 +57,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PureMvcExt.Factory\PureMvcExt.Factory.csproj">
+      <Project>{cad6fe8a-f321-4ab3-a675-7447a36b4ac4}</Project>
+      <Name>PureMvcExt.Factory</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

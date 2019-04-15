@@ -116,9 +116,6 @@
     <Compile Include="ActionTimeOut.cs" />
     <Compile Include="BaseData\ConfigurationItems.cs" />
     <Compile Include="BaseData\CityData.cs" />
-    <Compile Include="DockContextMediator.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="LanguageItem.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,11 +127,11 @@
     <Compile Include="MaimaiFrm.Designer.cs">
       <DependentUpon>MaimaiFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseData\QuartzJob.cs" />
     <Compile Include="ProcessHelp.cs" />
@@ -165,8 +162,8 @@
     <EmbeddedResource Include="MaimaiFrm.resx">
       <DependentUpon>MaimaiFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
