@@ -36,7 +36,7 @@ namespace CaptureWebData
             return typeof(CategoryGroup).Name + ".Objcet=";
         }
         QuartzJob job = new QuartzJob();
-        CategoryData noLimitAddress = new CategoryData() { Name = "不限" };
+        CategoryData noLimitAddress = new CategoryData() { Name = "不限",Sort=-1 };
        
         int currentIndex = 1;
         string Uin;//当前进行爬虫时使用到的账户信息
@@ -84,8 +84,7 @@ namespace CaptureWebData
         {
             try
             {
-                InitBaseConfig(); 
-                Init();
+                InitBaseConfig();
             }
             catch (Exception ex)
             { /*
@@ -103,9 +102,7 @@ namespace CaptureWebData
         {
             cityList = new List<CategoryData>();
             cityList.Add(noLimitAddress);
-            IEnumerable<CategoryData> list = new DataFromManage().QueryCities();
-            targetCountry = list.Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();//目标国家数据
-            cityList.AddRange( list.Where(c => c.ParentId == targetCountry.Id).ToArray());
+            SyncQueryCity();
             SyncUinStatics();
         }
 
@@ -580,9 +577,12 @@ namespace CaptureWebData
               
             }
         }
+        private void SyncQueryCity()
+        {
+            SendNotification(AppNotify.Name_Backstage, "", AppNotify.Get_CityData);
+        }
         private void SyncUinStatics()
         {
-            
             SendNotification(AppNotify.Name_Backstage, null, AppNotify.Get_UinTotal);
         }
         private void QueryTodayPickUp(object data)
@@ -608,6 +608,19 @@ namespace CaptureWebData
             {
                 LogHelperExt.WriteLog("Query pick up number\r\n"+ex.Message);
             }
+        }
+        private void SyncGetCityData(object data)
+        {
+            if (this.InvokeRequired)
+            {
+                DelegateData.BaseDelegate bd = new DelegateData.BaseDelegate(SyncGetCityData);
+                this.Invoke(bd, data);
+                return;
+            }
+            List<CategoryData> list = data as List<CategoryData>;
+            targetCountry = list.Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();//目标国家数据
+            cityList.AddRange(list.Where(c => c.ParentId == targetCountry.Id).OrderBy(s=>s.Name).ToArray());
+            Init();
         }
         private void QuartzGuidForach(object quartzParam)
         {
@@ -994,12 +1007,16 @@ namespace CaptureWebData
                 case AppNotify.Back_UinTotal:
                     QueryTodayPickUp(notification.Body);
                     break;
+                case AppNotify.Back_CityData:
+                    SyncGetCityData(notification.Body);
+                    break;
             }
         }
         public override string[] ListNotificationInterests()
         {
             return new string[] {
-                AppNotify.Back_UinTotal
+                AppNotify.Back_UinTotal,
+                AppNotify.Back_CityData
             };
         }
     }

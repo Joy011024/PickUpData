@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Net.Sockets;
 using PureMVC.Interfaces;
 using System.Threading.Tasks;
+using Domain.CommonData;
 namespace CaptureWebData
 {
     /// <summary>
@@ -164,7 +165,13 @@ namespace CaptureWebData
                         Domain.CommonData.PickUpStatic pc = (new QQDataDA()).TodayStatic();
                         SendNotification(AppNotify.Back_UinTotal, pc);
                     });
-                   
+                    break;
+                case AppNotify.Get_CityData:
+                    Task.Factory.StartNew(() =>
+                    {
+                        List<CategoryData> list = new DataFromManage().QueryCities();
+                        SendNotification(AppNotify.Back_CityData, list);
+                    });
                     break;
             }
             //base.Execute(notification);
@@ -214,5 +221,7 @@ namespace CaptureWebData
         public const string Name_Backstage = "Name_Backstage";
         public const string Get_UinTotal = "Get_UinTotal";
         public const string Back_UinTotal = "Back_UinTotal";
+        public const string Get_CityData = "Get_CityData";
+        public const string Back_CityData = "Back_CityData";
     }
 }
