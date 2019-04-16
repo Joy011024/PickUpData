@@ -77,12 +77,22 @@ namespace CaptureWebData
                 return sec.ConnectionString;
             }
         }
-        public string TecentDA 
+        public string TecentDA_Read
         {
             get
             {
                
-                ConnectionStringSettings sec = ConfigurationManager.ConnectionStrings["TecentDA" ];
+                ConnectionStringSettings sec = ConfigurationManager.ConnectionStrings["TecentDA_Read"];
+                if (sec == null) { return string.Empty; }
+                return sec.ConnectionString;
+            }
+        }
+        public string TecentDA_Write
+        {
+            get
+            {
+
+                ConnectionStringSettings sec = ConfigurationManager.ConnectionStrings["TecentDA_Write"];
                 if (sec == null) { return string.Empty; }
                 return sec.ConnectionString;
             }

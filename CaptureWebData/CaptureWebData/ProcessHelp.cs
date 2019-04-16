@@ -7,6 +7,8 @@ using System.Threading;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Net.Sockets;
+using PureMVC.Interfaces;
+using System.Threading.Tasks;
 namespace CaptureWebData
 {
     /// <summary>
@@ -139,5 +141,78 @@ namespace CaptureWebData
         {
             ShutDown();
         }
+    }
+
+
+
+    /// <summary>
+    /// 后台程序
+    /// </summary>
+    public class BackstageCommandFactory:PureMvcExt.Factory.CommandFactory
+    {
+        public BackstageCommandFactory():base()
+        {
+
+        }
+        public override void Execute(INotification notification)
+        {
+            switch (notification.Type)
+            {
+                case AppNotify.Get_UinTotal:
+                    Task.Factory.StartNew(() =>
+                    {
+                        Domain.CommonData.PickUpStatic pc = (new QQDataDA()).TodayStatic();
+                        SendNotification(AppNotify.Back_UinTotal, pc);
+                    });
+                   
+                    break;
+            }
+            //base.Execute(notification);
+        }
+        public override void SendNotification(string notificationName, object body = null, string type = null)
+        {
+            base.SendNotification(notificationName, body, type);
+        }
+ 
+    }
+    public class BackstageFacade : PureMvcExt.Factory.FacadeFactory
+    {
+        public BackstageFacade():base("BackstageFacade")
+        {
+            
+        }
+
+        #region supply register
+        public override void RegisterCommand(string notificationName, Func<ICommand> commandFunc)
+        {
+            base.RegisterCommand(notificationName, commandFunc);
+        }
+        public override void RegisterMediator(IMediator mediator)
+        {
+            base.RegisterMediator(mediator);
+        }
+        public override void RegisterProxy(IProxy proxy)
+        {
+            base.RegisterProxy(proxy);
+        }
+        #endregion
+        #region self register
+        protected override void InitializeController()
+        {//Command
+            base.InitializeController();
+            RegisterCommand(AppNotify.Name_Backstage, ()=>new BackstageCommandFactory());
+        }
+        protected override void InitializeModel()
+        {//Proxy
+            base.InitializeModel();
+        }
+        #endregion
+    }
+
+    public class AppNotify
+    {
+        public const string Name_Backstage = "Name_Backstage";
+        public const string Get_UinTotal = "Get_UinTotal";
+        public const string Back_UinTotal = "Back_UinTotal";
     }
 }

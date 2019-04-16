@@ -20,7 +20,7 @@ namespace CaptureWebData
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+            BackstageFacade bs = new BackstageFacade();
             Application.Run(new TecentDataFrm());
         }
         static void Test() 

@@ -16,6 +16,8 @@ using System.Threading;
 using DataHelpWinform;
 using Infrastructure.ExtService;
 using Infrastructure.EFSQLite;
+using PureMVC.Interfaces;
+using PureMvcExt.Factory;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : PureMvcExt.AppFactory.FrmBase
@@ -71,7 +73,7 @@ namespace CaptureWebData
         Dictionary<string, DelegateData> BackGroundCallRunEvent = new Dictionary<string, DelegateData>();//后台进程触发事件
         #endregion
         #region construct
-        public TecentDataFrm()//:base("TecentDataFrm")
+        public TecentDataFrm():base("TecentDataFrm")
         {
             InitializeComponent();
             backRun.DoWork += new DoWorkEventHandler(BackGroundDoWork);
@@ -104,6 +106,7 @@ namespace CaptureWebData
             IEnumerable<CategoryData> list = new DataFromManage().QueryCities();
             targetCountry = list.Where(c => c.Code == "1" && c.ParentCode == null).FirstOrDefault();//目标国家数据
             cityList.AddRange( list.Where(c => c.ParentId == targetCountry.Id).ToArray());
+            SyncUinStatics();
         }
 
         private void Init()
@@ -120,7 +123,6 @@ namespace CaptureWebData
             rbtWebPanel.Click += new EventHandler(RadioButton_Click);
             rbtWebPanel.Tag = pickUpIEWebCookie.Name;
             this.FormClosing += new FormClosingEventHandler(Form_FormBeforeClosed);
-            QueryTodayPickUp();
         }
         private void InitProvinceData() 
         {
@@ -432,7 +434,7 @@ namespace CaptureWebData
             PickUpQQDoResponse response = da.QueryQQData(Cookie);
             if (GatherFirstUin || !SystemConfig.OpenAutoQuertyDBTotal)
             {//这里要改成在页面初始化时查询当前库数据量，其他情形交给另一线程查询
-                QueryTodayPickUp();
+                SyncUinStatics();
                 GatherFirstUin = false;
             }
             QuartzCallBack(response);
@@ -539,7 +541,7 @@ namespace CaptureWebData
             //如果此时检测返回集合为空，但是返回状态码不是错误，需要更改检测条件【腾讯防攻击检测】
             QueryResponseAction(res);
             if(!SystemConfig.OpenAutoQuertyDBTotal)
-                 QueryTodayPickUp();
+                SyncUinStatics();
         }
 
         private void btnDeleteQuartz_Click(object sender, EventArgs e)
@@ -556,14 +558,25 @@ namespace CaptureWebData
                 return;
             }
             else {
-                QueryTodayPickUp();
+              
             }
         }
-        private void QueryTodayPickUp()
+        private void SyncUinStatics()
+        {
+            
+            SendNotification(AppNotify.Name_Backstage, null, AppNotify.Get_UinTotal);
+        }
+        private void QueryTodayPickUp(object data)
         {
             try
             {
-                PickUpStatic pc= (new QQDataDA()).TodayStatic();
+                if (this.InvokeRequired)
+                {
+                    DelegateData.BaseDelegate bd = new DelegateData.BaseDelegate(QueryTodayPickUp);
+                    this.Invoke(bd, bd);
+                    return;
+                }
+                PickUpStatic pc = data as PickUpStatic;
                 lsbStatic.Items.Clear();
                 lsbStatic.Items.Add("时间戳" + DateTime.Now.ToString());
                 lsbStatic.Items.Add("库\t" + pc.DBTotal);
@@ -695,7 +708,7 @@ namespace CaptureWebData
             }
             QueryResponseAction(response);
             if (!SystemConfig.OpenAutoQuertyDBTotal)
-                QueryTodayPickUp();
+                SyncUinStatics();
         }
         private void GetContainerKeyOfCookie(string  cookie)
         {
@@ -952,7 +965,23 @@ namespace CaptureWebData
             workPanel.Dock = DockStyle.Fill;
             mBodyPanel.Dock = DockStyle.Fill;
             pickUpIEWebCookie.Dock = DockStyle.Fill;
+            FacadeFactory.FacadeInstance.RegisterMediator(this);
 
+        }
+        public override void HandleNotification(INotification notification)
+        {
+            switch (notification.Name)
+            {
+                case AppNotify.Back_UinTotal:
+                    QueryTodayPickUp(notification.Body);
+                    break;
+            }
+        }
+        public override string[] ListNotificationInterests()
+        {
+            return new string[] {
+                AppNotify.Back_UinTotal
+            };
         }
     }
 }

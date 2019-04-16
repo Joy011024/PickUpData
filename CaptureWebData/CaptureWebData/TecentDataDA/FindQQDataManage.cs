@@ -67,7 +67,7 @@ namespace CaptureWebData
                     cs = new CategorySQLiteService ("TecentDASQLite");
                     break;
                 case DBType.SQLServer:
-                    cs = new CategoryDataService(new ConfigurationItems().TecentDA);
+                    cs = new CategoryDataService(new ConfigurationItems().TecentDA_Read);
                     break;
                 case DBType.Redis:
                     cs = new RedisService(string.Format( "IP={0};Port={1};Psw={2}", SystemConfig.RedisIp, SystemConfig.RedisPort, SystemConfig.RedisPsw));
@@ -130,7 +130,7 @@ namespace CaptureWebData
                     cs = new SQLiteQQDataService("TecentDASQLite");
                     break;
                 case DBType.SQLServer:
-                     cs = new  QQDataService(new ConfigurationItems().TecentDA);
+                     cs = new  QQDataService(new ConfigurationItems().TecentDA_Read);
                     break;
             }
             return cs;

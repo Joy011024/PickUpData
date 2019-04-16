@@ -202,6 +202,10 @@
       <Project>{a2ca1b25-7dee-42de-888c-6046ea57be7b}</Project>
       <Name>PureMvcExt.AppFactory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BaseHelper\PureMvcExt.Factory\PureMvcExt.Factory.csproj">
+      <Project>{cad6fe8a-f321-4ab3-a675-7447a36b4ac4}</Project>
+      <Name>PureMvcExt.Factory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CaptureData\Infrastructure\Application\ApplicationService.DataService\ApplicationService.DataService.csproj">
       <Project>{ce6b1f9a-1df7-4e35-adcc-b527206f2b98}</Project>
       <Name>ApplicationService.DataService</Name>

@@ -16,7 +16,7 @@ namespace PureMvcExt.AppFactory
         }
         public FrmBase(string key) : base()
         {
-
+            mediatorName = key;
         }
 
         #region Constants
@@ -60,7 +60,7 @@ namespace PureMvcExt.AppFactory
         #region Private Members
 
 
-        private IFacade m_facade = FacadeFactory.XPFacadeInstance;
+        private IFacade m_facade = FacadeFactory.FacadeInstance;
 
         #endregion
 

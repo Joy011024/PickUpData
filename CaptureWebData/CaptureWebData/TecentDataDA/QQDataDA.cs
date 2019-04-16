@@ -155,7 +155,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
 
            // LoggerWriter.CreateLogFile(response, logPath, ELogType.DataLog);
             ConfigurationItems c = new ConfigurationItems();
-            FindQQDataManage manage = new FindQQDataManage(c.TecentDA);
+            FindQQDataManage manage = new FindQQDataManage(c.TecentDA_Read);
             JsonData jsondata = new JsonData();
             PickUpQQDoResponse pickup = new PickUpQQDoResponse();
             pickup.responseData= manage.SaveFindQQ(response);
@@ -211,7 +211,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
         }
         public int TodayCountStatic() 
         {
-            FindQQDataManage manage = new FindQQDataManage(new ConfigurationItems().TecentDA);
+            FindQQDataManage manage = new FindQQDataManage(new ConfigurationItems().TecentDA_Read);
             return manage.CountTodayPickUp();
         }
         public PickUpStatic TodayStatic() 
