@@ -47,5 +47,9 @@ namespace PureMvcExt.Factory
             {
             }
         }
+        public override void SendNotification(string notificationName, object body = null, string type = null)
+        {
+            base.SendNotification(notificationName, body, type);
+        }
     }
 }

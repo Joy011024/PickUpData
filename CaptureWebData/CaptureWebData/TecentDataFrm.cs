@@ -592,7 +592,7 @@ namespace CaptureWebData
                 if (this.InvokeRequired)
                 {
                     DelegateData.BaseDelegate bd = new DelegateData.BaseDelegate(QueryTodayPickUp);
-                    this.Invoke(bd, bd);
+                    this.Invoke(bd, data);
                     return;
                 }
                 PickUpStatic pc = data as PickUpStatic;

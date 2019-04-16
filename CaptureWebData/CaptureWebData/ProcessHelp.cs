@@ -200,7 +200,7 @@ namespace CaptureWebData
         protected override void InitializeController()
         {//Command
             base.InitializeController();
-            RegisterCommand(AppNotify.Name_Backstage, ()=>new BackstageCommandFactory());
+            FacadeInstance.RegisterCommand(AppNotify.Name_Backstage, ()=>new BackstageCommandFactory());
         }
         protected override void InitializeModel()
         {//Proxy
