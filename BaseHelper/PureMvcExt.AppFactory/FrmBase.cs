@@ -10,12 +10,13 @@ namespace PureMvcExt.AppFactory
 {
     public class FrmBase:Form,IMediator,INotifier
     {
-        public FrmBase()
+        public FrmBase():this("")
         {
-            FormBorderStyle = FormBorderStyle.None;
+           
         }
         public FrmBase(string key) : base()
         {
+            FormBorderStyle = FormBorderStyle.None;
             mediatorName = key;
         }
 

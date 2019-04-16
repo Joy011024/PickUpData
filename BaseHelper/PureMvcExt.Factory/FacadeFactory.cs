@@ -16,11 +16,15 @@ namespace PureMvcExt.Factory
             {
                 if (mInstance == null)
                 {
-                    mInstance = new FacadeFactory("Facade");
+                    mInstance = new FacadeFactory();
                 }
 
                 return mInstance;
             }
+        }
+        public FacadeFactory() :this("")
+        {
+
         }
         public FacadeFactory(string key) : base(key)
         {

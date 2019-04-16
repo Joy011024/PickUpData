@@ -58,6 +58,12 @@
     <Reference Include="Common.Data">
       <HintPath>..\..\Bin\AppExtend\Common.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\..\Bin\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\..\Bin\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="CommonHelperEntity">
       <HintPath>..\..\Bin\AppExtend\CommonHelperEntity.dll</HintPath>
     </Reference>

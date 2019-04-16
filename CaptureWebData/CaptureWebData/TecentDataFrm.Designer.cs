@@ -63,23 +63,27 @@
             this.rbtWorkPanel = new System.Windows.Forms.RadioButton();
             this.switchPanel = new System.Windows.Forms.Panel();
             this.lblSwitchShow = new System.Windows.Forms.Label();
-            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
             this.ckSyncUin = new System.Windows.Forms.CheckBox();
             this.ckBackGroundCall = new System.Windows.Forms.CheckBox();
             this.mLayoutTable = new System.Windows.Forms.TableLayoutPanel();
-            this.mTipPanel = new System.Windows.Forms.Panel();
-            this.mTabPanel = new System.Windows.Forms.Panel();
-            this.mBodyPanel = new System.Windows.Forms.Panel();
             this.mOperatePanel = new System.Windows.Forms.Panel();
+            this.mBodyPanel = new System.Windows.Forms.Panel();
+            this.mTabPanel = new System.Windows.Forms.Panel();
+            this.mTipPanel = new System.Windows.Forms.Panel();
+            this.pickUpIEWebCookie = new SelfControlForm.PickUpIEWebCookieData();
+            this.mSizePanel = new System.Windows.Forms.Panel();
+            this.btnMax = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbPollingType.SuspendLayout();
             this.workPanel.SuspendLayout();
             this.switchPanel.SuspendLayout();
             this.mLayoutTable.SuspendLayout();
-            this.mTipPanel.SuspendLayout();
-            this.mTabPanel.SuspendLayout();
-            this.mBodyPanel.SuspendLayout();
             this.mOperatePanel.SuspendLayout();
+            this.mBodyPanel.SuspendLayout();
+            this.mTabPanel.SuspendLayout();
+            this.mTipPanel.SuspendLayout();
+            this.mSizePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnQuery
@@ -418,14 +422,6 @@
             this.lblSwitchShow.TabIndex = 31;
             this.lblSwitchShow.Text = "切换显示";
             // 
-            // pickUpIEWebCookie
-            // 
-            this.pickUpIEWebCookie.CallBack = null;
-            this.pickUpIEWebCookie.Location = new System.Drawing.Point(23, 10);
-            this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
-            this.pickUpIEWebCookie.Size = new System.Drawing.Size(636, 555);
-            this.pickUpIEWebCookie.TabIndex = 19;
-            // 
             // ckSyncUin
             // 
             this.ckSyncUin.AutoSize = true;
@@ -453,46 +449,20 @@
             this.mLayoutTable.ColumnCount = 2;
             this.mLayoutTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.mLayoutTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 235F));
-            this.mLayoutTable.Controls.Add(this.mOperatePanel, 1, 1);
-            this.mLayoutTable.Controls.Add(this.mBodyPanel, 0, 1);
-            this.mLayoutTable.Controls.Add(this.mTabPanel, 0, 0);
-            this.mLayoutTable.Controls.Add(this.mTipPanel, 1, 0);
-            this.mLayoutTable.Location = new System.Drawing.Point(6, 7);
+            this.mLayoutTable.Controls.Add(this.mOperatePanel, 1, 2);
+            this.mLayoutTable.Controls.Add(this.mBodyPanel, 0, 2);
+            this.mLayoutTable.Controls.Add(this.mTabPanel, 0, 1);
+            this.mLayoutTable.Controls.Add(this.mTipPanel, 1, 1);
+            this.mLayoutTable.Controls.Add(this.mSizePanel, 0, 0);
+            this.mLayoutTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mLayoutTable.Location = new System.Drawing.Point(0, 0);
             this.mLayoutTable.Name = "mLayoutTable";
-            this.mLayoutTable.RowCount = 2;
+            this.mLayoutTable.RowCount = 3;
+            this.mLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.mLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.mLayoutTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.mLayoutTable.Size = new System.Drawing.Size(923, 629);
+            this.mLayoutTable.Size = new System.Drawing.Size(944, 694);
             this.mLayoutTable.TabIndex = 33;
-            // 
-            // mTipPanel
-            // 
-            this.mTipPanel.Controls.Add(this.ckBackGroundCall);
-            this.mTipPanel.Controls.Add(this.lblTodayPickUp);
-            this.mTipPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mTipPanel.Location = new System.Drawing.Point(691, 3);
-            this.mTipPanel.Name = "mTipPanel";
-            this.mTipPanel.Size = new System.Drawing.Size(229, 44);
-            this.mTipPanel.TabIndex = 0;
-            // 
-            // mTabPanel
-            // 
-            this.mTabPanel.Controls.Add(this.switchPanel);
-            this.mTabPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mTabPanel.Location = new System.Drawing.Point(3, 3);
-            this.mTabPanel.Name = "mTabPanel";
-            this.mTabPanel.Size = new System.Drawing.Size(682, 44);
-            this.mTabPanel.TabIndex = 1;
-            // 
-            // mBodyPanel
-            // 
-            this.mBodyPanel.Controls.Add(this.workPanel);
-            this.mBodyPanel.Controls.Add(this.pickUpIEWebCookie);
-            this.mBodyPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mBodyPanel.Location = new System.Drawing.Point(3, 53);
-            this.mBodyPanel.Name = "mBodyPanel";
-            this.mBodyPanel.Size = new System.Drawing.Size(682, 573);
-            this.mBodyPanel.TabIndex = 2;
             // 
             // mOperatePanel
             // 
@@ -516,16 +486,82 @@
             this.mOperatePanel.Controls.Add(this.txtRepeact);
             this.mOperatePanel.Controls.Add(this.txtCurrentLimit);
             this.mOperatePanel.Controls.Add(this.label3);
-            this.mOperatePanel.Location = new System.Drawing.Point(691, 53);
+            this.mOperatePanel.Location = new System.Drawing.Point(712, 103);
             this.mOperatePanel.Name = "mOperatePanel";
             this.mOperatePanel.Size = new System.Drawing.Size(229, 571);
             this.mOperatePanel.TabIndex = 3;
+            // 
+            // mBodyPanel
+            // 
+            this.mBodyPanel.Controls.Add(this.workPanel);
+            this.mBodyPanel.Controls.Add(this.pickUpIEWebCookie);
+            this.mBodyPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mBodyPanel.Location = new System.Drawing.Point(3, 103);
+            this.mBodyPanel.Name = "mBodyPanel";
+            this.mBodyPanel.Size = new System.Drawing.Size(703, 588);
+            this.mBodyPanel.TabIndex = 2;
+            // 
+            // mTabPanel
+            // 
+            this.mTabPanel.Controls.Add(this.switchPanel);
+            this.mTabPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mTabPanel.Location = new System.Drawing.Point(3, 53);
+            this.mTabPanel.Name = "mTabPanel";
+            this.mTabPanel.Size = new System.Drawing.Size(703, 44);
+            this.mTabPanel.TabIndex = 1;
+            // 
+            // mTipPanel
+            // 
+            this.mTipPanel.Controls.Add(this.ckBackGroundCall);
+            this.mTipPanel.Controls.Add(this.lblTodayPickUp);
+            this.mTipPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mTipPanel.Location = new System.Drawing.Point(712, 53);
+            this.mTipPanel.Name = "mTipPanel";
+            this.mTipPanel.Size = new System.Drawing.Size(229, 44);
+            this.mTipPanel.TabIndex = 0;
+            // 
+            // pickUpIEWebCookie
+            // 
+            this.pickUpIEWebCookie.CallBack = null;
+            this.pickUpIEWebCookie.Location = new System.Drawing.Point(23, 10);
+            this.pickUpIEWebCookie.Name = "pickUpIEWebCookie";
+            this.pickUpIEWebCookie.Size = new System.Drawing.Size(636, 555);
+            this.pickUpIEWebCookie.TabIndex = 19;
+            // 
+            // mSizePanel
+            // 
+            this.mLayoutTable.SetColumnSpan(this.mSizePanel, 2);
+            this.mSizePanel.Controls.Add(this.btnClose);
+            this.mSizePanel.Controls.Add(this.btnMax);
+            this.mSizePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mSizePanel.Location = new System.Drawing.Point(3, 3);
+            this.mSizePanel.Name = "mSizePanel";
+            this.mSizePanel.Size = new System.Drawing.Size(938, 44);
+            this.mSizePanel.TabIndex = 4;
+            // 
+            // btnMax
+            // 
+            this.btnMax.Location = new System.Drawing.Point(716, 4);
+            this.btnMax.Name = "btnMax";
+            this.btnMax.Size = new System.Drawing.Size(77, 38);
+            this.btnMax.TabIndex = 0;
+            this.btnMax.Text = "max";
+            this.btnMax.UseVisualStyleBackColor = true;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(855, 4);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(77, 38);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
             // 
             // TecentDataFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(935, 638);
+            this.ClientSize = new System.Drawing.Size(944, 694);
             this.Controls.Add(this.mLayoutTable);
             this.Name = "TecentDataFrm";
             this.Text = "TecentDataFrm";
@@ -538,12 +574,13 @@
             this.switchPanel.ResumeLayout(false);
             this.switchPanel.PerformLayout();
             this.mLayoutTable.ResumeLayout(false);
-            this.mTipPanel.ResumeLayout(false);
-            this.mTipPanel.PerformLayout();
-            this.mTabPanel.ResumeLayout(false);
-            this.mBodyPanel.ResumeLayout(false);
             this.mOperatePanel.ResumeLayout(false);
             this.mOperatePanel.PerformLayout();
+            this.mBodyPanel.ResumeLayout(false);
+            this.mTabPanel.ResumeLayout(false);
+            this.mTipPanel.ResumeLayout(false);
+            this.mTipPanel.PerformLayout();
+            this.mSizePanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -593,5 +630,8 @@
         private System.Windows.Forms.Panel mBodyPanel;
         private System.Windows.Forms.Panel mTabPanel;
         private System.Windows.Forms.Panel mTipPanel;
+        private System.Windows.Forms.Panel mSizePanel;
+        private System.Windows.Forms.Button btnMax;
+        private System.Windows.Forms.Button btnClose;
     }
 }

@@ -122,8 +122,27 @@ namespace CaptureWebData
             rbtWorkPanel.Tag = workPanel.Name;
             rbtWebPanel.Click += new EventHandler(RadioButton_Click);
             rbtWebPanel.Tag = pickUpIEWebCookie.Name;
+            btnClose.Click += BtnClose_Click;
+            btnMax.Click += BtnMax_Click;
             this.FormClosing += new FormClosingEventHandler(Form_FormBeforeClosed);
         }
+
+        private void BtnMax_Click(object sender, EventArgs e)
+        {
+            Control ctl = sender as Control;
+            bool setMax = true;
+            if (ctl.Tag == null)
+            {
+                ctl.Tag = true;
+            }
+
+        }
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void InitProvinceData() 
         {
             if (cityList.Count > 0)
