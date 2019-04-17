@@ -251,6 +251,22 @@
       <Project>{43847d96-253a-4525-97ed-aca52340013b}</Project>
       <Name>Infrastructure.MsSqlService.SqlHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HRApp.ApplicationService\HRApp.ApplicationService.csproj">
+      <Project>{0f4f36cc-572b-44f1-a1b7-f2ca95afd9d6}</Project>
+      <Name>HRApp.ApplicationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HRApp.IApplicationService\HRApp.IApplicationService.csproj">
+      <Project>{64cadac1-0042-48d0-a25f-9bc78df1df00}</Project>
+      <Name>HRApp.IApplicationService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HRApp.Infrastructure\HRApp.Infrastructure.csproj">
+      <Project>{7e136e38-7db8-4e4e-9da8-f3f0faecdfa2}</Project>
+      <Name>HRApp.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HRApp.Model\HRApp.Model.csproj">
+      <Project>{5a4b1f0f-1b3c-4313-9a15-3c55316aa3d5}</Project>
+      <Name>HRApp.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IHRApp.Infrastructure\IHRApp.Infrastructure.csproj">
       <Project>{138002ec-0a16-4c91-bc84-9f76a71dd6fc}</Project>
       <Name>IHRApp.Infrastructure</Name>

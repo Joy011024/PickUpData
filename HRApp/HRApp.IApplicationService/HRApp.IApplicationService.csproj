@@ -69,6 +69,10 @@
       <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
       <Name>Domain.CommonData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HRApp.Model\HRApp.Model.csproj">
+      <Project>{5a4b1f0f-1b3c-4313-9a15-3c55316aa3d5}</Project>
+      <Name>HRApp.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IHRApp.Infrastructure\IHRApp.Infrastructure.csproj">
       <Project>{138002ec-0a16-4c91-bc84-9f76a71dd6fc}</Project>
       <Name>IHRApp.Infrastructure</Name>
