@@ -998,6 +998,8 @@ namespace CaptureWebData
             mBodyPanel.Dock = DockStyle.Fill;
             pickUpIEWebCookie.Dock = DockStyle.Fill;
             FacadeFactory.FacadeInstance.RegisterMediator(this);
+            mLayoutTable.RowStyles[mLayoutTable.GetRow(mSizePanel)].Height = 0;
+            
 
         }
         public override void HandleNotification(INotification notification)

@@ -16,7 +16,7 @@ namespace PureMvcExt.AppFactory
         }
         public FrmBase(string key) : base()
         {
-            FormBorderStyle = FormBorderStyle.None;
+            //FormBorderStyle = FormBorderStyle.None;
             mediatorName = key;
         }
 
