@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Configuration;
 using System.Threading.Tasks;
+using HRApp.Web.Controllers;
 namespace HRApp.Web
 {
     // 注意: 有关启用 IIS6 或 IIS7 经典模式的说明，
@@ -29,6 +30,7 @@ namespace HRApp.Web
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            GlobalNotifyHandle handle = new GlobalNotifyHandle();
             Domain.GlobalModel.AppRunData.InitAppData();
             Domain.GlobalModel.AppRunData.AppName = this.GetType().Name;
             IocMvcFactoryHelper.GetIocDict(true);
@@ -228,55 +230,7 @@ namespace HRApp.Web
             InitAppSetting.Version = DateTime.Now.ToString(version);
             InitAppSetting.CodeVersion = InitAppSetting.CodeVersionFromCfg();
         }
-        public static void EverydayActiveEmailAccount(IEmailDataService emailService)
-        {//每日激活邮件账户
-            //查询邮件账户列表
-            List<EmailAccount> accs = emailService.QueryEmailAccountInDB();
-            string dir = InitAppSetting.LogPath;
-            string file = InitAppSetting.TodayLogFileName;
-            foreach (var item in accs)
-            {
-                string title = "[每日激活]";
-                string time = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat);
-                try
-                {
-                    //使用邮件账户进行邮件发送
-                    short smtp = item.Smtp;
-                    //拼接发送的邮件内容
-                    EmailSystemSetting ess = new EmailSystemSetting()
-                    {
-                        EmailAccount = item.Account,
-                        EmailAuthortyCode = item.AuthortyCode,
-                        EmailHost = item.SmtpHost,
-                        EmailHostPort = EmailSystemSetting.GetHostPortSmtp(smtp)
-                    };
-                    ess.Smtp = (EnumSMTP)smtp;
-                    string text = title;
-                    title += " " + item.Account;
-                    text += "<br/>邮件创建时间 ：" + time;
-                    for (int i = 0; i < 10; i++)
-                    {
-                        text += string.Format("<br/> Guid{0}={1}", (i + 1), Guid.NewGuid().ToString().ToUpper());
-                    }
-                    string receive= InitAppSetting.Global.ReceiverInEmailActive;
-                    AppEmailData emailData = new AppEmailData()
-                    {
-                        EmailCreateTime = DateTime.Now,
-                        To = string.IsNullOrEmpty(receive) ? "158055983@qq.com" : receive,
-                        Subject = "激活Email_"+DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat),
-                        From = item.Account,
-                        Body = text
-                    };
-                    emailService.SendEmail(ess, emailData, ess.Smtp);
-                    LoggerWriter.CreateLogFile(title + "[Success]" + time, dir, ELogType.EmailLog, file, true);
-                }
-                catch (Exception ex)
-                {
-                    title += ex.Message;
-                    LoggerWriter.CreateLogFile(title + "[Error]" + time, dir, ELogType.EmailLog, file, true);
-                }
-            }
-        }
+       
         public static EmailSystemSetting GetSystemEmailAccount()
         {
             string type = InitAppSetting.AppSettingItemsInDB[EAppSetting.SMTP.ToString()];
@@ -324,12 +278,14 @@ namespace HRApp.Web
         }
         static void EveryDayDo() 
         {
-            StringBuilder text = new StringBuilder();
+           
             try
             {
+                StringBuilder text = new StringBuilder();
                 text.AppendFormat("Background process【{0}】,index={1} ,time ={2}", GetStartWebOfProcess(), BackRunNumber, DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat));
                 LoggerWriter.CreateLogFile(text.ToString(), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
-                RefreshAppSetting.EverydayActiveEmailAccount(IocMvcFactoryHelper.GetInterface<IEmailDataService>());
+                DoSomeInitEventFacadeFactory dosome = new DoSomeInitEventFacadeFactory();
+                dosome.ActiveEmailSmtp();
                 //读取xml配置
                 string xmlFile = InitAppSetting.DefaultLogPath + "/XmlConfig/AppConfig.xml";
                 //执行成功时间写入到xml中

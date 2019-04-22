@@ -13,7 +13,7 @@ using Infrastructure.ExtService;
 using DataHelp;
 namespace HRApp.Web.Controllers
 {
-    public class MenuController : BaseController
+    public class MenuController : MVCMediatorControl
     {
         //
         // GET: /Menu/

@@ -15,6 +15,8 @@ using IHRApp.Infrastructure;
 using HRApp.IApplicationService;
 using HRApp.ApplicationService;
 using System.ComponentModel;
+using PureMVC.Interfaces;
+using PureMvcExt.Factory;
 namespace HRApp.Web.Controllers
 {
     [MvcActionResultHelper]
@@ -30,17 +32,17 @@ namespace HRApp.Web.Controllers
             return items;
         }
         [DescriptionSort("查询全部配置")]
-        public List<CategoryItems> QueryAllAppSetting() 
+        public List<CategoryItems> QueryAllAppSetting()
         {
             IAppSettingService appSetService = IocMvcFactoryHelper.GetInterface<IAppSettingService>();
             List<CategoryItems> items = appSetService.QueryAll();
             return items;
         }
-        public BaseController() 
+        public BaseController()
         {
 
         }
-        public List<UinMenuObjcet> QueryAllMenuData() 
+        public List<UinMenuObjcet> QueryAllMenuData()
         {
             IMenuService ms = IocMvcFactoryHelper.GetInterface<IMenuService>();
             List<UinMenuObjcet> menus = ms.QueryMenusByAuthor(string.Empty)
@@ -59,7 +61,7 @@ namespace HRApp.Web.Controllers
                 {
                     menus[i].Tip = string.Format("Lose isEnable of parent[id={0}]", menus[i].ParentId);
                 }
-                else 
+                else
                 {
                     menus[i].ParentName = p.Name;
                     menus[i].ParentCode = p.Code;
@@ -87,7 +89,7 @@ namespace HRApp.Web.Controllers
                         copy.ParentCode = uin.Code;
                         copy.Code = uin.Code + "." + item.Code.ToString();
                         copy.ParentId = copy.Id;
-                       // ui.Childerns.Add(copy);
+                        // ui.Childerns.Add(copy);
                         menus.Add(copy);
                     }
                 }
@@ -100,7 +102,7 @@ namespace HRApp.Web.Controllers
         string GetBrowserIp()
         {
             System.Collections.Specialized.NameValueCollection serverVariables = System.Web.HttpContext.Current.Request.ServerVariables;
-            string result= serverVariables["HTTP_X_FORWARDED_FOR"];
+            string result = serverVariables["HTTP_X_FORWARDED_FOR"];
             if (string.IsNullOrEmpty(result))
             {
                 result = serverVariables["REMOTE_ADDR"];
@@ -117,14 +119,14 @@ namespace HRApp.Web.Controllers
                 StringBuilder sb = new StringBuilder();
                 HttpRequestBase req = hcb.Request;//包含请求头相关信息的实体
                 string webBrowser = req.UserAgent;
-                sb.AppendLine("UserAgent=\t"+webBrowser);
+                sb.AppendLine("UserAgent=\t" + webBrowser);
                 string[] userLanguage = req.UserLanguages;//用户使用的语言
                 sb.AppendLine("UserLanguages =\t" + string.Join("|", userLanguage));
-                string url= req.Url.ToString();
+                string url = req.Url.ToString();
                 sb.AppendLine("Url=\t" + url);
-                string method= req.RequestType;//HTTP请求形式
+                string method = req.RequestType;//HTTP请求形式
                 sb.AppendLine("RequestType=\t" + method);
-                string httpMethod= req.HttpMethod;
+                string httpMethod = req.HttpMethod;
                 sb.AppendLine("HttpMethod=\t" + httpMethod);
                 //req.Form //请求的表单
                 //req.Headers //请求头
@@ -151,19 +153,19 @@ namespace HRApp.Web.Controllers
                 }
                 string mimeType = req.ContentType;//文件传输类型
                 sb.AppendLine("ContentType=\t" + mimeType);
-                System.Text.Encoding userEncoding= req.ContentEncoding;
+                System.Text.Encoding userEncoding = req.ContentEncoding;
                 sb.AppendLine("ContentEncoding=\t" + userEncoding.ToString());
                 HttpBrowserCapabilitiesBase browserInfo = req.Browser;
-                sb.AppendLine("Browser=\t" + browserInfo.Browser + "\t" );
+                sb.AppendLine("Browser=\t" + browserInfo.Browser + "\t");
                 for (int i = 0; i < browserInfo.Browsers.Count; i++)
                 {
-                    sb.Append(browserInfo.Browsers[i].ToString()+"\t");
+                    sb.Append(browserInfo.Browsers[i].ToString() + "\t");
                 }
                 sb.AppendLine("\r\nMobileDeviceModel=\t" + browserInfo.MobileDeviceModel);
-                sb.AppendLine("Platform=\t"+browserInfo.Platform);
+                sb.AppendLine("Platform=\t" + browserInfo.Platform);
                 string[] browserSupperMimeType = req.AcceptTypes;//HTTP预返回前端支持的文件格式
                 sb.AppendLine("\nAcceptTypes=\t" + string.Join(" ", browserSupperMimeType));
-                sb.AppendLine("Ip:"+GetBrowserIp());
+                sb.AppendLine("Ip:" + GetBrowserIp());
                 string file = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
                 LoggerWriter.CreateLogFile(sb.ToString(), InitAppSetting.LogPath, ELogType.DebugData, file, true);
             }
@@ -191,12 +193,13 @@ namespace HRApp.Web.Controllers
             base.OnResultExecuted(filterContext);
         }
     }
-    public class TockenHelper 
+    public class TockenHelper
     {
-        public string GenerateTocken() 
+        public string GenerateTocken()
         {
             Guid gid = Guid.NewGuid();
             return gid.ToString().ToLower();//url 会解析为小写
         }
     }
+    
 }

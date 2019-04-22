@@ -13,7 +13,7 @@ using System.EnterpriseServices;
 namespace HRApp.Web.Controllers
 {
     [MvcActionResultHelper]
-    public class AppSettingManageController : BaseController
+    public class AppSettingManageController : MVCMediatorControl
     {
         //
         // GET: /AppSettingManage/

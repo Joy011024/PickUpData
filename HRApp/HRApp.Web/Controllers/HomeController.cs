@@ -12,7 +12,7 @@ using HRApp.Model;
 using HRApp.IApplicationService;
 namespace HRApp.Web.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : MVCMediatorControl
     {
         //
         // GET: /Home/
@@ -40,7 +40,7 @@ namespace HRApp.Web.Controllers
         {
             return View();
         }
-        void TestEmail() 
+        private void TestEmail(string title) 
         {
             string text = "使用代码进行邮箱测试功能";
             string time = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat);
@@ -64,7 +64,7 @@ namespace HRApp.Web.Controllers
                 {
                     EmailCreateTime = DateTime.Now,
                     To = "158055983@qq.com",
-                    Subject = "HrApp主题_测试163邮件",
+                    Subject = title,
                     From = sendBy,
                     Body = text
                 };

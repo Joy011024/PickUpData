@@ -15,7 +15,7 @@ using CommonHelperEntity;
 namespace HRApp.Web.Controllers
 {
     [Description("拼音维护")]
-    public class SpellNameController : BaseController
+    public class SpellNameController : MVCMediatorControl
     {
         //
         // GET: /SpellName/

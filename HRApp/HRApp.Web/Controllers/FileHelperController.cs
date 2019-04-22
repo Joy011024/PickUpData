@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace HRApp.Web.Controllers
 {
-    public class FileHelperController : BaseController
+    public class FileHelperController : MVCMediatorControl
     {
         //
         // GET: /FileHelper/

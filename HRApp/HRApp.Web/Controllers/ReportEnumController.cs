@@ -8,7 +8,7 @@ using HRApp.IApplicationService;
 using HRApp.Model;
 namespace HRApp.Web.Controllers
 {
-    public class ReportEnumController : BaseController
+    public class ReportEnumController : MVCMediatorControl
     {
         //
         // GET: /ReportEnum/

@@ -7,7 +7,7 @@ using HRApp.Model;
 using HRApp.IApplicationService;
 namespace HRApp.Web.Controllers
 {
-    public class EmailDataController : BaseController
+    public class EmailDataController : MVCMediatorControl
     {
         //
         // GET: /EmailData/
