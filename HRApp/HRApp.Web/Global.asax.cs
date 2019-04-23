@@ -31,7 +31,13 @@ namespace HRApp.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             GlobalNotifyHandle handle = new GlobalNotifyHandle();
+            string format = "yyyy-MM-dd HH:mm:ss fff";
+            string time = DateTime.Now.ToString(format);
+            string path = InitAppSetting.LogPath;
+            LoggerWriter.CreateLogFile(time + "begin init Data ", path, ELogType.HeartBeatLine);
             Domain.GlobalModel.AppRunData.InitAppData();
+            time = DateTime.Now.ToString(format);
+            LoggerWriter.CreateLogFile(time + "begin init Data", path, ELogType.HeartBeatLine);
             Domain.GlobalModel.AppRunData.AppName = this.GetType().Name;
             IocMvcFactoryHelper.GetIocDict(true);
             InitAppSetting.AppSettingItemsInDB = RefreshAppSetting.QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());

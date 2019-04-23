@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HRApp.Web</RootNamespace>
     <AssemblyName>HRApp.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +42,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Data, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\AppExtend\Common.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonHelperEntity">
+      <HintPath>..\..\Bin\AppExtend\CommonHelperEntity.dll</HintPath>
+    </Reference>
+    <Reference Include="DataHelp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\AppExtend\DataHelp.dll</HintPath>
+    </Reference>
+    <Reference Include="Domain.CommonData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\AppExtend\Domain.CommonData.dll</HintPath>
+    </Reference>
+    <Reference Include="Domain.GlobalModel">
+      <HintPath>..\..\Bin\AppExtend\Domain.GlobalModel.dll</HintPath>
+    </Reference>
+    <Reference Include="EmailHelper">
+      <HintPath>..\..\Bin\AppExtend\EmailHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Infrastructure.ExtService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\AppExtend\Infrastructure.ExtService.dll</HintPath>
+    </Reference>
+    <Reference Include="Infrastructure.MsSqlService.SqlHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\AppExtend\Infrastructure.MsSqlService.SqlHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -56,16 +86,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -117,6 +145,7 @@
       <Private>True</Private>
       <HintPath>..\..\CaptureWebData\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\InitAppSetting.cs" />
@@ -227,38 +256,6 @@
     <ProjectReference Include="..\..\AppLanguage\AppLanguage.csproj">
       <Project>{3da2bb21-14a7-49ca-9bb4-7eb8f26c415a}</Project>
       <Name>AppLanguage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BaseHelper\Common.Data\Common.Data.csproj">
-      <Project>{22b5a7b7-9809-4927-8538-6f7680701c5b}</Project>
-      <Name>Common.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BaseHelper\CommonHelperEntity\CommonHelperEntity.csproj">
-      <Project>{32c60c3a-c56e-457d-b553-be076218fd5a}</Project>
-      <Name>CommonHelperEntity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BaseHelper\DataHelp\DataHelp.csproj">
-      <Project>{f2af7a2a-3c36-4979-b10e-997d20a42dbc}</Project>
-      <Name>DataHelp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
-      <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
-      <Name>Domain.CommonData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.GlobalModel\Domain.GlobalModel.csproj">
-      <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
-      <Name>Domain.GlobalModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\EmailHelper\EmailHelper.csproj">
-      <Project>{0ba494a2-4acc-4277-8a68-b519d76a02b0}</Project>
-      <Name>EmailHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\Infrastructure.ExtService\Infrastructure.ExtService.csproj">
-      <Project>{97a9ce89-2781-483d-b300-63ed4cc61252}</Project>
-      <Name>Infrastructure.ExtService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Infrastructure.MsSqlService.SqlHelper\Infrastructure.MsSqlService.SqlHelper.csproj">
-      <Project>{43847d96-253a-4525-97ed-aca52340013b}</Project>
-      <Name>Infrastructure.MsSqlService.SqlHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\HRApp.ApplicationService\HRApp.ApplicationService.csproj">
       <Project>{0f4f36cc-572b-44f1-a1b7-f2ca95afd9d6}</Project>

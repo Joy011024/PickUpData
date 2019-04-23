@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Data\Common.Data.csproj">
-      <Project>{22B5A7B7-9809-4927-8538-6F7680701C5B}</Project>
+      <Project>{22b5a7b7-9809-4927-8538-6f7680701c5b}</Project>
       <Name>Common.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataHelp\DataHelp.csproj">
