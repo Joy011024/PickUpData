@@ -117,7 +117,7 @@ namespace HRApp.Web.Controllers
         }
         public void ActiveEmailSmtp()
         {
-            SendNotification(AppNotify.GlobalLicense, null, AppNotify.Get_AllEmailSMTP);
+            FacadeFactory.FacadeInstance.SendNotification(AppNotify.GlobalLicense, null, AppNotify.Get_AllEmailSMTP);
             
         }
         private void SendActiveEmail(List<EmailAccount> accs)
@@ -141,7 +141,7 @@ namespace HRApp.Web.Controllers
                     {
                         IEmailDataService email = IocMvcFactoryHelper.GetInterface<IEmailDataService>();
                         List<EmailAccount> accs = email.QueryEmailAccountInDB();
-                        SendNotification(AppNotify.GlobalExecuteEvent, accs, AppNotify.Back_AllEmailSMTP);
+                        FacadeFactory.FacadeInstance.SendNotification(AppNotify.GlobalExecuteEvent, accs, AppNotify.Back_AllEmailSMTP);
                     });
                     break;
             }
