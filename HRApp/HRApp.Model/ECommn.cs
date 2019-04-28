@@ -57,6 +57,7 @@ namespace HRApp.Model
         [Domain.GlobalModel.PropertyIgnoreField]
         public string ReceiverInEmailActive { get; set; }//进行邮件系统激活时邮件接收人
         public string MailInEmailActive { get; set; } //激活邮件时抄送人
+        public string ActiveSmtpSubjectFormat { get; set; }
     }
     public enum EAppSetting 
     {

@@ -346,22 +346,10 @@ namespace HRApp.Web
     {
         public  static  bool WriteLogProcess(string log,ELogType logType)
         {
-            string logDir = InitAppSetting.LogPath;
+            string logDir = LogPrepare.GetLogPath();
             DateTime time = DateTime.Now;
-            string logFormat = Common.Data.CommonFormat.DateToHourIntFormat;//这里会切换使用的日志文件存储大小
-            //如果不是当天作为文件名，需要在键一个目录
-            if (!string.IsNullOrEmpty(InitAppSetting.LogFileExtTimeFormat) && logFormat != InitAppSetting.LogFileExtTimeFormat)
-            {//每一天的日志进行汇总
-                logDir += "/" + time.ToString(logFormat);
-                logFormat = InitAppSetting.LogFileExtTimeFormat;
-            }
-            else 
-            {
-                logDir += "/" + time.ToString(Common.Data.CommonFormat.YearMonth);
-            }
-            string file = time.ToString(logFormat) + ".log";
-            LoggerWriter.CreateLogFile(log + time.ToString(Common.Data.CommonFormat.DateTimeMilFormat), logDir,
-                (logType == null ? ELogType.HeartBeatLine : logType), file, true);
+            string file = LogPrepare.GetLogName(logType);
+            LoggerWriter.CreateLogFile(log + time.ToString(Common.Data.CommonFormat.DateTimeMilFormat), logDir, logType, file, true);
             if (logType == ELogType.HeartBeatLine)
             {//心跳线检测不计入数据库
                 return true;

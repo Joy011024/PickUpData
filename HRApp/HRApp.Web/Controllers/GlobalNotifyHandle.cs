@@ -127,7 +127,8 @@ namespace HRApp.Web.Controllers
                 return;
             }
             BaseBackstageThing baseBackstageThing = new BaseBackstageThing();
-            baseBackstageThing.LoopSendEmali(accs);
+            string subject = string.Format(InitAppSetting.Global.ActiveSmtpSubjectFormat, DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat));
+            baseBackstageThing.LoopSendEmali(accs, subject);
         }
     }
     public class DoSomethinFacadeFactory : PureMvcExt.Factory.CommandFactory
@@ -155,16 +156,17 @@ namespace HRApp.Web.Controllers
 
     public class BaseBackstageThing
     {
-        public void LoopSendEmali(List<EmailAccount> accs)
+        public void LoopSendEmali(List<EmailAccount> accs,string subject)
         {//每日激活邮件账户
          //查询邮件账户列表 
-            string dir = InitAppSetting.LogPath;
-            string file = InitAppSetting.TodayLogFileName;
+            string dir = LogPrepare.GetLogPath();
+            ELogType el = ELogType.EmailLog;
+            string file = LogPrepare.GetLogName(el);
             IEmailDataService emailService = IocMvcFactoryHelper.GetInterface<IEmailDataService>();
             foreach (var item in accs)
             {
-                string title = "[HrApp 每日激活]";
                 string time = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat);
+                string title = "[HrApp Everyday active]";
                 try
                 {
                     //使用邮件账户进行邮件发送
@@ -179,27 +181,28 @@ namespace HRApp.Web.Controllers
                     };
                     ess.Smtp = (EnumSMTP)smtp;
                     StringBuilder body = new StringBuilder();
+                    body.AppendLine(" Guid:<br/> ");
                     for (int i = 0; i < 10; i++)
                     {
-                        body.AppendLine(string.Format("<br/> Guid: {1}", (i + 1), Guid.NewGuid().ToString().ToUpper()));
+                        body.AppendLine(string.Format(" {0}<br/> ", Guid.NewGuid().ToString().ToUpper()));
                     }
-                    string text = string.Format("{0} <br/> time= {1} <br/> {1} ", title, time, item.Account, body.ToString());
+                    string text = string.Format("{0} <br/>  smtp= {1}<br/> time= {2} <br/>{3}  ", title,  item.Account, time, body.ToString());
                     string receive = InitAppSetting.Global.ReceiverInEmailActive;
                     AppEmailData emailData = new AppEmailData()
                     {
                         EmailCreateTime = DateTime.Now,
                         To = string.IsNullOrEmpty(receive) ? "158055983@qq.com" : receive,
-                        Subject = "[Subject]激活Email_" + DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat),
+                        Subject =subject,
                         From = item.Account,
                         Body = text
                     };
                     emailService.SendEmail(ess, emailData, ess.Smtp);
-                    LoggerWriter.CreateLogFile(title + "[Success]" + time, dir, ELogType.EmailLog, file, true);
+                    LoggerWriter.CreateLogFile(title + "[Success]" + time, dir, el, file, true);
                 }
                 catch (Exception ex)
                 {
                     title += ex.Message;
-                    LoggerWriter.CreateLogFile(title + "[Error]" + time, dir, ELogType.EmailLog, file, true);
+                    LoggerWriter.CreateLogFile(title + "[Error]" + time, dir, el, file, true);
                 }
             }
         }

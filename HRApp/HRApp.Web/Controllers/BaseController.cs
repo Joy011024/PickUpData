@@ -166,8 +166,9 @@ namespace HRApp.Web.Controllers
                 string[] browserSupperMimeType = req.AcceptTypes;//HTTP预返回前端支持的文件格式
                 sb.AppendLine("\nAcceptTypes=\t" + string.Join(" ", browserSupperMimeType));
                 sb.AppendLine("Ip:" + GetBrowserIp());
-                string file = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
-                LoggerWriter.CreateLogFile(sb.ToString(), InitAppSetting.LogPath, ELogType.DebugData, file, true);
+                ELogType el = ELogType.DebugData;
+                string file = LogPrepare.GetLogName(el);
+                LoggerWriter.CreateLogFile(sb.ToString(), LogPrepare.GetLogPath(),el, file, true);
             }
             IDictionary<string, object> apiParamList = filterContext.ActionParameters;//进入接口传递的参数
             RouteData rd = filterContext.RouteData;

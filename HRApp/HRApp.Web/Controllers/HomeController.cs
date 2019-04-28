@@ -49,8 +49,9 @@ namespace HRApp.Web.Controllers
             {
                 text += string.Format("<br/> Guid{0}={1}", (i+1) , Guid.NewGuid().ToString().ToUpper());
             }
-            string logDir = InitAppSetting.LogPath;
-            string day = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log"; 
+            string logDir = LogPrepare.GetLogPath();
+            ELogType el = ELogType.EmailLog;
+            string day = LogPrepare.GetLogName(el);
             try 
             {
                 Dictionary<string, string> emailSetting = InitAppSetting.AppSettingItemsInDB;
@@ -63,7 +64,7 @@ namespace HRApp.Web.Controllers
                 AppEmailData emailData = new AppEmailData()
                 {
                     EmailCreateTime = DateTime.Now,
-                    To = "158055983@qq.com",
+                    To =InitAppSetting.Global.ReceiverInEmailActive,// "158055983@qq.com",
                     Subject = title,
                     From = sendBy,
                     Body = text
@@ -75,13 +76,13 @@ namespace HRApp.Web.Controllers
                     EmailAccount = sendBy,
                     EmailHost = smtpClient
                 };
-                
+
                 #region 直接发送，不存储【测试可用】
                 /*
                 EmailData email = new EmailData()
                 {
-                    EmailTo = "158055983@qq.com",
-                    EmailSubject = "主题_测试163邮件",
+                    EmailTo =InitAppSetting.Global.ReceiverInEmailActive,
+                    EmailSubject = title,
                     EmailBody = text,
                     CreateTime = DateTime.Now,
                     EmailFrom = sendBy
@@ -92,12 +93,12 @@ namespace HRApp.Web.Controllers
                 #endregion
                 IEmailDataService eds = IocMvcFactoryHelper.GetInterface<IEmailDataService>();
                 eds.SendEmail(setting, emailData, smtp);
-                LoggerWriter.CreateLogFile(time + "\t[OK]进行163发送邮件", logDir, ELogType.EmailLog, day, true);
+                LoggerWriter.CreateLogFile(time + "\t[OK]进行邮件测试", logDir, el, day, true);
             }
             catch (Exception ex)
             {
                 string msg = time + "\t[ Error]" + ex.Message;
-                LoggerWriter.CreateLogFile(msg, logDir, ELogType.EmailLog, day,true);
+                LoggerWriter.CreateLogFile(msg, logDir, el, day,true);
             }
         }
         public void Test()

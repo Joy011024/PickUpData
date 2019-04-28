@@ -33,11 +33,13 @@ namespace HRApp.Web
             GlobalNotifyHandle handle = new GlobalNotifyHandle();
             string format = "yyyy-MM-dd HH:mm:ss fff";
             string time = DateTime.Now.ToString(format);
-            string path = InitAppSetting.LogPath;
-            LoggerWriter.CreateLogFile(time + "begin init Data ", path, ELogType.HeartBeatLine);
+            string path = LogPrepare.GetLogPath();
+            ELogType heart = ELogType.HeartBeatLine;
+            string file = LogPrepare.GetLogName(heart);
+            LoggerWriter.CreateLogFile(time + "begin init Data ", path, heart,file, true);
             Domain.GlobalModel.AppRunData.InitAppData();
             time = DateTime.Now.ToString(format);
-            LoggerWriter.CreateLogFile(time + "begin init Data", path, ELogType.HeartBeatLine);
+            LoggerWriter.CreateLogFile(time + "begin init Data", path,heart, file, true);
             Domain.GlobalModel.AppRunData.AppName = this.GetType().Name;
             IocMvcFactoryHelper.GetIocDict(true);
             InitAppSetting.AppSettingItemsInDB = RefreshAppSetting.QueryAllAppSetting(IocMvcFactoryHelper.GetInterface<IAppSettingService>());
@@ -263,17 +265,19 @@ namespace HRApp.Web
         {
             if (!bindProcess)
             {
-                appProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(BackProcessDoWork);
+               // appProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(BackProcessDoWork);
             }
            
         }
         static void BackProcessDoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            ELogType el = ELogType.BackgroundProcess;
             while (true)
             {
+                string path = LogPrepare.GetLogPath();
                 if (StopBackProcess)
                 {
-                    LoggerWriter.CreateLogFile("Stop Background process =" + DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
+                    LoggerWriter.CreateLogFile("Stop Background process =" + DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat), path, el, LogPrepare.GetLogName(el), true);
                     return;
                 }
                 BackRunNumber++;
@@ -284,12 +288,13 @@ namespace HRApp.Web
         }
         static void EveryDayDo() 
         {
-           
+            string path = LogPrepare.GetLogPath();
             try
             {
                 StringBuilder text = new StringBuilder();
                 text.AppendFormat("Background process【{0}】,index={1} ,time ={2}", GetStartWebOfProcess(), BackRunNumber, DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat));
-                LoggerWriter.CreateLogFile(text.ToString(), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
+                ELogType el = ELogType.BackgroundProcess;
+                LoggerWriter.CreateLogFile(text.ToString(), path, el, LogPrepare.GetLogName(el), true);
                 DoSomeInitEventFacadeFactory dosome = new DoSomeInitEventFacadeFactory();
                 dosome.ActiveEmailSmtp();
                 //读取xml配置
@@ -300,11 +305,12 @@ namespace HRApp.Web
                 appEmail.EmailLastActiveTime = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat);
                 appEmail.EmailAccount = InitAppSetting.AppSettingItemsInDB[EAppSetting.SystemEmailSendBy.ToString()];
                 xmlFile.UpdateXmlNode(appEmail, UiCfgNode, nodeCfgFormat);
-                LoggerWriter.CreateLogFile(Newtonsoft.Json.JsonConvert.SerializeObject(appEmail), InitAppSetting.LogPath, ELogType.DebugData, InitAppSetting.TodayLogFileName, false);
+                LoggerWriter.CreateLogFile(Newtonsoft.Json.JsonConvert.SerializeObject(appEmail), path,el, LogPrepare.GetLogName(el), false);
             }
             catch (Exception ex)
             {
-                LoggerWriter.CreateLogFile("【Error】"+ex.Message.ToString(), InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
+                ELogType el = ELogType.BackgroundProcess;
+                LoggerWriter.CreateLogFile("【Error】"+ex.Message.ToString(), path, el, LogPrepare.GetLogName(el), true);
             }
         }
        static XmlNodeDataAttribute UiCfgNode = new XmlNodeDataAttribute()
@@ -335,6 +341,7 @@ namespace HRApp.Web
         public static void NowProcess() 
         {
             //获取当前进程
+            string path = LogPrepare.GetLogPath();
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             Process cur = Process.GetCurrentProcess();
             string pn = cur.ProcessName;//当前运行进程 w3wp/iisexpress
@@ -348,8 +355,8 @@ namespace HRApp.Web
             string poolName = Environment.GetEnvironmentVariable("APP_POOL_ID", EnvironmentVariableTarget.Process);//应用程序池名称 HrApp/Clr4IntegratedAppPool
             sb.AppendLine("APP_POOL_ID=" + poolName);
             // string json = Newtonsoft.Json.JsonConvert.SerializeObject(cur);
-            LoggerWriter.CreateLogFile(sb.ToString(),
-                InitAppSetting.LogPath, ELogType.BackgroundProcess, InitAppSetting.TodayLogFileName, true);
+            ELogType lt = ELogType.BackgroundProcess;
+            LoggerWriter.CreateLogFile(sb.ToString(), path, lt, LogPrepare.GetLogName(lt), true);
         }
         public static string GetStartWebOfProcess() 
         {
@@ -465,6 +472,19 @@ namespace HRApp.Web
         public virtual void ContructCall() 
         {
             int y = temp;
+        }
+    }
+
+    public class LogPrepare
+    {
+        public static string GetLogPath()
+        {
+            return string.Format("{0}\\{1}", InitAppSetting.LogPath , DateTime.Now.ToString(Common.Data.CommonFormat.YearMonth));
+        }
+        public static string GetLogName(ELogType log)
+        {
+            DateTime now = DateTime.Now;
+            return string.Format("{0}.log", now.ToString(Common.Data.CommonFormat.DateIntFormat));
         }
     }
      

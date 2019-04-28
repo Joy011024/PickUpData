@@ -12,6 +12,7 @@
       <add key="GlobalVersion" value="20180615"/> <!--全局变量版本-->
       <add key="ReceiverInEmailActive" value="158055983@qq.com"/> <!--邮件账户激活时接收邮件的人员-->
       <add key="MailInEmailActive" value="hukuolin@outlook.com|1195312793@qq.com"/> <!--激活邮件抄送人-->
+      <add key="ActiveSmtpSubjectFormat" value="[hrapp] Active Smtp Subject:{0}" desc="Active the smtp send email subject text"/>
   </appSettings>
   <appSettings name="EncryHelp"> <!--使用的非对称加密算法-->
     <add key="publicKey" value=""/>
