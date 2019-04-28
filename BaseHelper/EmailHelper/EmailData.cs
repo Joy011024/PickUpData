@@ -39,6 +39,6 @@ namespace EmailHelper
         /// 附件
         /// </summary>
         public List<byte[]> File { get; set; }
-       
+       public List<string> Mailer { get; set; }
     }
 }

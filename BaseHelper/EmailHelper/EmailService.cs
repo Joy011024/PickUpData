@@ -129,5 +129,44 @@ namespace EmailHelper
                 mail.Attachments.Add(attach);
             }
         }
+
+        public void SendEmailBy163(EmailData text)
+        {
+            SmtpClient client = new SmtpClient(this.EmailClient)
+            {
+                Port = 0x19
+            };
+            if (this.EmailClientPort.HasValue)
+            {
+                client.Port = this.EmailClientPort.Value;
+            }
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential(this.EmailId, this.EmailKey);
+            MailMessage message = new MailMessage
+            {
+                From = new MailAddress(this.EmailId)
+            };
+            message.To.Add(text.EmailTo);
+            if (text.Mailer != null)
+            {
+                foreach (string str in text.Mailer)
+                {
+                    message.To.Add(str);
+                }
+            }
+            message.Subject = text.EmailSubject;
+            message.SubjectEncoding = Encoding.UTF8;
+            message.Body = text.EmailBody;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            message.Priority = MailPriority.High;
+            Guid guid = Guid.NewGuid();
+            client.Send(message);
+        }
+
+
+
+        
+
     }
 }

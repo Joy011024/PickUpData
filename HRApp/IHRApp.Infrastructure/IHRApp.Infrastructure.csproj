@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Domain.CommonData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\AppExtend\Domain.CommonData.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -60,10 +64,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CaptureData\Infrastructure\Domain\Domain.CommonData\Domain.CommonData.csproj">
-      <Project>{9cef7f17-e35b-4af0-bfaf-da0f7b3d9ef4}</Project>
-      <Name>Domain.CommonData</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HRApp.Model\HRApp.Model.csproj">
       <Project>{5a4b1f0f-1b3c-4313-9a15-3c55316aa3d5}</Project>
       <Name>HRApp.Model</Name>
