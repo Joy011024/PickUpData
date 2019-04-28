@@ -232,6 +232,10 @@
       <Project>{ba4be399-d5a0-49eb-8c57-8458d74e9803}</Project>
       <Name>Domain.GlobalModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CaptureData\Infrastructure\Ext\EmailHelper\EmailHelper.csproj">
+      <Project>{0ba494a2-4acc-4277-8a68-b519d76a02b0}</Project>
+      <Name>EmailHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationService.IDataService\ApplicationService.IDataService.csproj">
       <Project>{241007bc-d476-42db-ad30-1f76721c81d1}</Project>
       <Name>ApplicationService.IDataService</Name>

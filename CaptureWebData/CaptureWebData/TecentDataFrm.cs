@@ -18,6 +18,7 @@ using Infrastructure.ExtService;
 using Infrastructure.EFSQLite;
 using PureMVC.Interfaces;
 using PureMvcExt.Factory;
+using Common.Data;
 namespace CaptureWebData
 {
     public partial class TecentDataFrm : PureMvcExt.AppFactory.FrmBase
@@ -260,7 +261,8 @@ namespace CaptureWebData
             //各个省会的市区列表
             foreach (var item in china.Childrens)
             {
-                LoggerWriter.CreateLogFile(item.Root.Name, SystemConfig.ExeDir + ELogType.DebugData.ToString(),
+                string path = LogPrepare.GetLogPath();
+                LoggerWriter.CreateLogFile(item.Root.Name, path,
                  ELogType.DebugData, DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat) + ".log", true);
                 //提取省会列表到市
                 CategoryGroup level = new CategoryGroup()
@@ -284,7 +286,7 @@ namespace CaptureWebData
                     Root = item.Root,
                     Childrens = item.Childrens
                 };
-                LoggerWriter.CreateLogFile(cg.Root.Name, SystemConfig.ExeDir + ELogType.DebugData.ToString(),
+                LoggerWriter.CreateLogFile(cg.Root.Name, path,
                  ELogType.DebugData, DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat) + ".log", true);
                 foreach (CategoryGroup c in item.Childrens)
                 {//省直辖市的子节点
@@ -298,7 +300,7 @@ namespace CaptureWebData
                     {
                         nodeJson = cn.ConvertJson();
                     }
-                    LoggerWriter.CreateLogFile(cn.Root.Name, SystemConfig.ExeDir + ELogType.DebugData.ToString(),
+                    LoggerWriter.CreateLogFile(cn.Root.Name, path,
                   ELogType.DebugData, DateTime.Now.ToString(Common.Data.CommonFormat.DateToHourIntFormat) + ".log", true);
                     Logger.CreateNewAppData(nodeJson, GetNodeItemFileName(c,
                         redisItemOrFileNameFormat(SystemConfig.RedisValueIsJsonFormat)), GetRedisRelyFileDir());
@@ -357,7 +359,8 @@ namespace CaptureWebData
             string rep = txtRepeact.Text;
             int.TryParse(rep, out repeact);
             QQDataDA das=new QQDataDA();
-            LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath + das.GeneratePathTimeSpan(Cookie), ELogType.SessionOrCookieLog);
+            string path = LogPrepare.GetLogPath();
+            LoggerWriter.CreateLogFile(Cookie,  das.GeneratePathTimeSpan(Cookie), ELogType.SessionOrCookieLog);
             Uin = das.GetUinFromCookie(Cookie);//当前登录的账户
             //useralias  这是提取账户名称的元素
             QueryQQParam param = GetBaseQueryParam();
@@ -630,7 +633,7 @@ namespace CaptureWebData
                 this.Invoke(bd, quartzParam);
                 return;
             }
-            LoggerWriter.CreateLogFile(Cookie, (new ConfigurationItems()).LogPath + (new QQDataDA().GeneratePathTimeSpan(Cookie)), ELogType.SessionOrCookieLog);
+            LoggerWriter.CreateLogFile(Cookie,  (new QQDataDA().GeneratePathTimeSpan(Cookie)), ELogType.SessionOrCookieLog);
             QueryQQParam param = GetBaseQueryParam();
             QQDataDA da = new QQDataDA();
             da.QueryParam = param;
@@ -813,7 +816,8 @@ namespace CaptureWebData
                     tip.AppendLine("App:\tCaptureWebData");
                     tip.AppendLine("App Event:Pick up uin data [warm]");
                     tip.AppendLine("account:\t"+Uin);
-                    dl.SendDataToOtherPlatform(LanguageItem.Tip_PickUpErrorlockAccount, tip.ToString());//需要知道当前在进行采集的账户
+                    string subject = string.Format(ConfigurationItems.ErrorSubjetFormat, " Uin" + DateTime.Now.ToString(CommonFormat.DateIntFormat));
+                    dl.SendDataToOtherPlatform(subject, tip.ToString());//需要知道当前在进行采集的账户
                 }
             }
             else
@@ -847,7 +851,8 @@ namespace CaptureWebData
                 tip.AppendLine("App:\tCaptureWebData");
                 tip.AppendLine("App Event:Pick up uin data [excute num]"+executeNum);
                 tip.AppendLine("account:\t" + Uin);
-                dl.SendDataToOtherPlatform(LanguageItem.Tip_PickUpErrorlockAccount, tip.ToString());//需要知道当前在进行采集的账户
+                string subject = string.Format(ConfigurationItems.ErrorSubjetFormat, " Uin" + DateTime.Now.ToString(CommonFormat.DateIntFormat));
+                dl.SendDataToOtherPlatform(subject, tip.ToString());//需要知道当前在进行采集的账户
                 
             }
         }

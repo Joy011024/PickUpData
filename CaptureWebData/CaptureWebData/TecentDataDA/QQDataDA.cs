@@ -148,7 +148,7 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
         private PickUpQQDoResponse ForeachFindQQ(QueryQQParam param, string cookie)
         {
             string json = param.UrlParam();
-            string logPath  = new ConfigurationItems().LogPath + GeneratePathTimeSpan(cookie);
+            string logPath  = LogPrepare.GetLogPath();
             LoggerWriter.CreateLogFile(json, logPath, ELogType.ParamLog);
             string response = HttpClientExtend.HttpWebRequestPost(findQQAccountUrl, json, cookie);
             //将查询反馈的数据写入到数据库中
@@ -197,17 +197,8 @@ User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like G
         /// <returns></returns>
         public string GeneratePathTimeSpan(string cookie) 
         {
-            string logPath = "\\" + DateTime.Now.ToString(CommonFormat.DateIntFormat);
             string tag = GetUinFromCookie(cookie);
-            //当前周次
-            GregorianCalendar gc = new GregorianCalendar(GregorianCalendarTypes.TransliteratedEnglish);
-            int week = gc.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Friday);
-            tag +="\\"+ week;
-            if (!string.IsNullOrEmpty(tag))
-            {//这是当前登录人的qq号
-                logPath = "\\" + tag + logPath;
-            }
-            return logPath;
+            return LogPrepare.GetLogPath(tag);
         }
         public int TodayCountStatic() 
         {
@@ -276,7 +267,8 @@ ldw:1053723692";
             param.CalculateUinJsParam(cookie);
             string ps = param.ConvertJson();
             string result = HttpClientExtend.HttpWebRequestPost(url, ps, cookie);
-            LoggerWriter.CreateLogFile(result, GetDefaultLogDir(cookie), ELogType.SpliderGroupDataLog);
+            string path = GeneratePathTimeSpan(cookie);
+            LoggerWriter.CreateLogFile(result, path, ELogType.SpliderGroupDataLog);
             return result;
         }
     }
@@ -348,8 +340,8 @@ and not exists (select id from tecentdatada.dbo.tecentqqdata where id=t.id)"
     {
         public static void WriteLog(string text)
         {
-            LoggerWriter.CreateLogFile(text,
-                new AppDirHelper().GetAppDir(AppCategory.WinApp) + "/" + typeof(ELogType).Name,
+            string path = LogPrepare.GetLogPath();
+            LoggerWriter.CreateLogFile(text,path,
                 ELogType.DebugData, DateTime.Now.ToString(CommonFormat.DateIntFormat) + ".log", true);
         }
     }

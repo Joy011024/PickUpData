@@ -5,6 +5,8 @@ using System.Text;
 using System.Configuration;
 using Common.Data;
 using System.Reflection;
+using EmailHelper;
+using Domain.CommonData;
 namespace CaptureWebData
 {
     public class ConfigurationItems
@@ -194,6 +196,18 @@ namespace CaptureWebData
                 }
 
                 return _OpenSQLServer=="true";
+            }
+        }
+        private static string errorEmailSubject;
+        public static string ErrorSubjetFormat
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(errorEmailSubject))
+                {
+                   errorEmailSubject= ConfigurationManager.AppSettings["ErrorEmailSubjetFormat"];
+                }
+                return errorEmailSubject;
             }
         }
     }
@@ -515,8 +529,8 @@ namespace CaptureWebData
         }
         void SendEmail(string subject, string body)
         {
-            /*
-            string dir = SystemConfig.ExeDir + "\\" + typeof(ELogType).Name;
+
+            string dir = LogPrepare.GetLogPath();
             string file = DateTime.Now.ToString(Common.Data.CommonFormat.DateIntFormat) + ".log";
             string msg = DateTime.Now.ToString(Common.Data.CommonFormat.DateTimeFormat) + "\r\n";
             try
@@ -528,14 +542,31 @@ namespace CaptureWebData
                 //此处需要验证 发信人和发件人的区别
                 email.SendEmail(subject, body, from, from, SystemConfig.DefaultEmailTo, null, false, System.Net.Mail.MailPriority.High, null);
                 msg +="EmailSend Success";
-                LoggerWriter.CreateLogFile(msg, dir, ELogType.EmailLog, file, true);
+                
             }
             catch (Exception ex)
             {
                  msg += ex.Message;
                 LoggerWriter.CreateLogFile(msg, dir, ELogType.EmailLog, file, true);
             }
-            */
+            
+        }
+    }
+    public class LogPrepare
+    {
+        public static string GetLogPath(string extFolderName=null)
+        {
+            DateTime now = DateTime.Now;
+            string dir = string.Format("{0}\\{1}\\{2}\\{3}", SystemConfig.ExeDir, typeof(ELogType).Name, now.Year,now.ToString(CommonFormat.DateIntFormat));
+            if (!string.IsNullOrEmpty(extFolderName))
+            {
+                dir = string.Format("{0}\\{1}", dir, extFolderName);
+            }
+            return dir;
+        }
+        public static string GetLogName(ELogType log)
+        {
+            return string.Empty;
         }
     }
 }

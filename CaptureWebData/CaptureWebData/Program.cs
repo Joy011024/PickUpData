@@ -8,6 +8,7 @@ using Domain.CommonData;
 using CaptureManage.AppWin;
 using Infrastructure.ExtService;
 using System.Text;
+using Common.Data;
 namespace CaptureWebData
 {
     static class Program
@@ -31,7 +32,7 @@ namespace CaptureWebData
             tip.AppendLine("time:\t" + DateTime.Now.ToString(SystemConfig.DateTimeFormat));
             tip.AppendLine("App :\t CaptureWebData");
             tip.AppendLine("Event:run app");
-            dl.SendDataToOtherPlatform(LanguageItem.Tip_PickUpErrorlockAccount, tip.ToString());//需要知道当前在进行采集的账户
+            dl.SendDataToOtherPlatform(string.Format(ConfigurationItems.ErrorSubjetFormat," Uin"+DateTime.Now.ToString(CommonFormat.DateIntFormat)), tip.ToString());//需要知道当前在进行采集的账户
             PickUpTianMaoHtml tm = new PickUpTianMaoHtml();
             string dir= new AppDirHelper().GetAppDir(AppCategory.WinApp);
             tm.DoHtmlFileAnalysis(dir + @"\HttpResponse\list.tmall.com\HttpResponse");

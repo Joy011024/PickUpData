@@ -63,7 +63,7 @@ namespace ApplicationService.DataService
             }
             catch (Exception ex)
             {
-                string logPath = (new AssemblyDataExt()).GetAssemblyDir()+"\\"+ELogType.ErrorLog; // new ConfigurationItems().LogPath + GeneratePathTimeSpan(cookie);
+                string logPath = (new AssemblyDataExt()).GetAssemblyDir() + "\\" + ELogType.ErrorLog; //new ConfigurationItems().LogPath + GeneratePathTimeSpan(cookie);
                 LoggerWriter.CreateLogFile(ex.Message, logPath, ELogType.ErrorLog);
                 return new PickUpStatic();
             }

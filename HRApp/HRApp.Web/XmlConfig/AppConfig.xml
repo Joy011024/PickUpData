@@ -4,7 +4,7 @@
     <!--email配置-->
     <add key="EmailAccount" value="joy011024@163.com" />
     <!--上一次邮件发送时间-->
-    <add key="EmailLastActiveTime" value="2019-04-04 18:59:48" />
+    <add key="EmailLastActiveTime" value="2019-04-28 22:42:21" />
     <!--上一次成功发送时间-->
     <add key="EmailLastActiveSuccessTime" value="" />
     <!--今日邮件是否激活成功-->
