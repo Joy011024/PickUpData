@@ -37,6 +37,23 @@ create table if not exists `spilder_uin_data`.`Category_data`
 	`node_level` int not null,
 	constraint `fk_type_cfg` foreign key(`item_type`)  references `app_config`(`id`)
 );
- 
+create table if not exists  `spilder_uin_data`.`database_npk_version` 
+(
+	`id` int   primary key auto_increment,
+	`name` varchar(2) not null,
+	`npk_effect_version` varchar(20) not null,
+	`npg_svn` varchar(10) not null,
+	`npg_submit_time` datetime not null,
+	`npk_path` varchar(200) ,
+	`npk_type` smallint not null,
+	`note` varchar(100) not null,
+	`in_db_time` datetime not null,
+	`is_delete` tinyint not null,
+	`is_release` tinyint ,
+	`npk_author` varchar(20) not null,
+	`npk_submiter` varchar(20) not null,
+	`npg_database` varchar(30),
+	constraint `fk_svntype_cfg` foreign key(`npk_type`)  references `app_config`(`id`)
+);
 
  
