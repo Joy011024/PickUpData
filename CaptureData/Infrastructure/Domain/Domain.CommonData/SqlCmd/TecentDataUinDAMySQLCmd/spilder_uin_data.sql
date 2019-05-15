@@ -23,6 +23,18 @@ create table if not exists `spilder_uin_data`.`app_ver`
 	`create_time` datetime ,
 	constraint `fk_id` foreign key (`app_id`) references `app` (`id`)
 );
-
+create table if not exists `spilder_uin_data`.`Category_data`
+(
+	`id` int primary key,
+	`name` varchar(20) not null,
+	`parent_id` int ,
+	`parent_code` varchar(10) ,
+	`code` varchar(10) not null,
+	`sort` int not null,
+	`item_type`	varchar(20) ,
+	`is_delete` tinyint not null,
+	`create_time` datetime not null,
+	`node_level` int not null
+);
 
  
