@@ -31,10 +31,12 @@ create table if not exists `spilder_uin_data`.`Category_data`
 	`parent_code` varchar(10) ,
 	`code` varchar(10) not null,
 	`sort` int not null,
-	`item_type`	varchar(20) ,
+	`item_type`	smallint not null,
 	`is_delete` tinyint not null,
 	`create_time` datetime not null,
-	`node_level` int not null
+	`node_level` int not null,
+	constraint `fk_type_cfg` foreign key(`item_type`)  references `app_config`(`id`)
 );
+ 
 
  
