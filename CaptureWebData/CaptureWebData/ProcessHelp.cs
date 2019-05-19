@@ -173,6 +173,15 @@ namespace CaptureWebData
                         SendNotification(AppNotify.Back_CityData, list);
                     });
                     break;
+                case AppNotify.Get_UsableProxy:
+                    Task.Factory.StartNew(() =>
+                    {
+                        string connString = new ConfigurationItems().GetConnString("Proxy_Read");
+                        ProxyDataService api = new ProxyDataService(connString);
+                        List<ProxyDataService.Proxy> proxy= api.GetUsageProxy();
+
+                    });
+                    break;
             }
             //base.Execute(notification);
         }
@@ -223,5 +232,8 @@ namespace CaptureWebData
         public const string Back_UinTotal = "Back_UinTotal";
         public const string Get_CityData = "Get_CityData";
         public const string Back_CityData = "Back_CityData";
+        public const string Get_UsableProxy = "Get_UsableProxy";
+        public const string Back_UsableProxy = "Back_UsableProxy";
+
     }
 }

@@ -122,6 +122,16 @@ namespace CaptureWebData
                 return sec.ConnectionString.Replace("{BaseDir}", AppDomain.CurrentDomain.BaseDirectory);
             }
         }
+        public string GetConnString(string connItemName)
+        {
+            string str = string.Empty;
+            ConnectionStringSettings sec = ConfigurationManager.ConnectionStrings[connItemName];
+            if (sec != null)
+            {
+                return sec.ConnectionString;
+            }
+            return str;
+        }
         public string LogPath 
         {
             get

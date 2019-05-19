@@ -64,7 +64,7 @@ namespace CaptureWebData
                 case DBType.MySQL:
                     break;
                 case DBType.SQLite:
-                    cs = new CategorySQLiteService ("TecentDASQLite");
+                    cs = new CategorySQLiteService ("TecentDA_Write");
                     break;
                 case DBType.SQLServer:
                     cs = new CategoryDataService(new ConfigurationItems().TecentDA_Read);
@@ -104,11 +104,19 @@ namespace CaptureWebData
         /// <returns>城市数据列表【null情况出现则是数据库切换没有成功】</returns>
         public List<CategoryData> QueryCities()
         {
-            ICategroyService cs = SwitchBasicDataSource(SystemConfig.BasicDBType);
-            string key = "City";
-            if (cs != null)
-                return cs.QueryCityCategory(key).ToList();
-            return null;
+            try
+            {
+                ICategroyService cs = SwitchBasicDataSource(SystemConfig.BasicDBType);
+                string key = "City";
+                if (cs != null)
+                    return cs.QueryCityCategory(key).ToList();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            
         }
         Dictionary<string, string> dbTypeSwitchCityKey = new Dictionary<string, string>();
         private void InitCityKey()

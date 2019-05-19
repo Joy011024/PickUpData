@@ -450,6 +450,8 @@ namespace CaptureWebData
         {
             QQDataDA da = new QQDataDA();
             da.QueryParam = param;
+            SendNotification(AppNotify.Name_Backstage, null, AppNotify.Get_UsableProxy);
+
             PickUpQQDoResponse response = da.QueryQQData(Cookie);
             if (GatherFirstUin || !SystemConfig.OpenAutoQuertyDBTotal)
             {//这里要改成在页面初始化时查询当前库数据量，其他情形交给另一线程查询
